@@ -1,11 +1,20 @@
 import React from 'react';
 import {
     InputItem, Toast,
-    Modal
+    Modal, Picker, List, WhiteSpace
 } from 'antd-mobile';
+
 import '../css/addWatchInfo.less'
+
 const alert = Modal.alert;
 const prompt = Modal.prompt;
+const sexData = [{
+    value: '男',
+    label: '男'
+}, {
+    value: '女',
+    label: '女'
+}]
 export default class addWatchInfo extends React.Component {
 
     constructor(props) {
@@ -17,23 +26,28 @@ export default class addWatchInfo extends React.Component {
             showSexBox: false,
             relationBox: false,
             relationValue: "",
+            flag:true,
             relationData: [
                 {
-                    value: "父亲"
+                    value: "父亲",
+                    label: '父亲'
                 },
                 {
-                    value: "母亲"
+                    value: "母亲",
+                    label: "母亲"
                 },
                 {
-                    value: "祖父"
+                    value: "祖父",
+                    label: "祖父"
                 },
                 {
-                    value: "祖母"
+                    value: "祖母",
+                    label: "祖母"
                 },
                 {
-                    value: "自定义"
+                    value: "自定义",
+                    label: "自定义"
                 },
-
             ]
         };
     }
@@ -119,11 +133,21 @@ export default class addWatchInfo extends React.Component {
     }
     //自定义关系
     showModal () {
+        this.setState({
+            flag:false
+        })
         prompt('请输入关系', '', [
             { text: '取消' },
             {
                 text: '确定', onPress: value => {
                     console.log(`输入的内容:${value}`);
+                    console.log(value,"value");
+                    this.setState({
+                        relationValue: [value],
+                        
+                    },()=>{
+                        console.log(this.state.relationValue)
+                    });
                 }
             },
         ], 'default', "")
@@ -131,32 +155,32 @@ export default class addWatchInfo extends React.Component {
     //跳转下一页
     nextPage = () => {
         if (this.state.loginType == 1) {
-            if(this.state.macId == ""){
+            if (this.state.macId == "") {
                 Toast.info("请扫描手表")
                 return
             }
-            if(this.state.sexValue == ""){
+            if (this.state.sexValue == "") {
                 Toast.info("请选择孩子性别")
                 return
             }
-            if(this.state.relationValue == ""){
+            if (this.state.relationValue == "") {
                 Toast.info("请选择您与孩子的关系")
                 return
             }
             var param = {
                 "method": 'bindWatchGuardian',
-                "childSex": this.state.sexValue,
+                "childSex": this.state.sexValue[0],
                 "macAddress": this.state.macId,
-                "familyRelate": this.state.relationValue,
-                "actionName":"watchAction",
+                "familyRelate": this.state.relationValue[0],
+                "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
-            console.log(param,"param")
+            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
-                    console.log(result,"rerere")
+                    console.log(result, "rerere")
                     if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType+"&macAddr="+this.state.macId;
+                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId;
                         var data = {
                             method: 'openNewPage',
                             url: url
@@ -174,12 +198,12 @@ export default class addWatchInfo extends React.Component {
             });
 
         } else {
-            console.log(this.state.relationValue,"this.state.familyRelate")
-            if(this.state.macId == ""){
+            console.log(this.state.relationValue, "this.state.familyRelate")
+            if (this.state.macId == "") {
                 Toast.info("请扫描手表")
                 return
             }
-            if(this.state.relationValue == ""){
+            if (this.state.relationValue == "") {
                 Toast.info("请选择您与孩子的关系")
                 return
             }
@@ -188,10 +212,10 @@ export default class addWatchInfo extends React.Component {
                 "method": 'bindWatchGuardian',
                 "macAddress": this.state.macId,
                 "familyRelate": this.state.relationValue,
-                "actionName":"watchAction",
+                "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
-            console.log(param,"param")
+            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
                     if (result.success && result.response) {
@@ -217,6 +241,50 @@ export default class addWatchInfo extends React.Component {
 
 
     }
+
+    //选择器改变事件
+    onPickerChange = (val) => {
+        console.log(val, "val")
+        this.setState({
+            sexValue: val,
+        });
+    };
+   
+
+    clickSure = (val) => {
+        console.log(val, "val")
+        this.setState({
+            sexValue: val,
+        });
+    }
+   
+    onCancel = () => {
+        this.setState({
+            sexValue: "",
+        });
+    }
+    onRelationChange = (val) => {
+        console.log(val, "val")
+        this.setState({
+            relationValue: val,
+        });
+    };
+    clickRelationSure = (val) => {
+        console.log(val, "val")
+        if (val[0] == "自定义") {
+            this.showModal();
+        }else {
+            this.setState({
+                relationValue: val,
+            });
+        }
+       
+    }
+    onRelationCancel = () => {
+        this.setState({
+            relationValue: "",
+        });
+    }
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
@@ -230,31 +298,35 @@ export default class addWatchInfo extends React.Component {
                 {
                     this.state.loginType == 1 ?
                         <div>
-
-                            <div>
-                                <span>请选择孩子的性别</span>
-                                <span onClick={this.showSexBox}>箭头</span>
-                                <div style={{ display: this.state.showSexBox ? "block" : "none" }}>
-                                    <div onClick={this.hideSexBox.bind(this, "男")}>男</div>
-                                    <div onClick={this.hideSexBox.bind(this, "女")}>女</div>
-                                </div>
-                            </div>
+                            <Picker
+                                data={sexData}
+                                value={this.state.sexValue}
+                                cols={1}
+                                className="forss"
+                                extra="请选择"
+                                onChange={this.onPickerChange}
+                                onOk={this.clickSure}
+                                onDismiss={this.onCancel}
+                            >
+                                <List.Item arrow="horizontal">请选择孩子的性别</List.Item>
+                            </Picker>
                         </div>
                         :
                         ""
                 }
                 <div>
-                    <span>请选择你与孩子的关系</span>
-                    <span onClick={this.showRelationBox}>箭头</span>
-                    <div style={{ display: this.state.relationBox ? "block" : "none" }}>
-                        {
-                            this.state.relationData.map((v, i) => {
-                                return (
-                                    <div onClick={this.clickRelation.bind(this, v.value)}>{v.value}</div>
-                                )
-                            })
-                        }
-                    </div>
+                    <Picker
+                        data={this.state.relationData}
+                        value={this.state.relationValue}
+                        cols={1}
+                        className="forss"
+                        extra={this.state.flag ? "请选择":this.state.relationValue}
+                        onChange={this.onRelationChange}
+                        onOk={this.clickRelationSure}
+                        onDismiss={this.onRelationCancel}
+                    >
+                        <List.Item arrow="horizontal">请选择你与孩子的关系</List.Item>
+                    </Picker>
                 </div>
                 <div onClick={this.nextPage}>下一步</div>
             </div>
