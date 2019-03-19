@@ -27,6 +27,12 @@ const bindStudentInfo = (location, cb) => {
     }, 'bindStudentInfo')
 };
 
+const validationMes = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
+    }, 'bindStudentInfo')
+};
+
 import './index.less';
 
 class Index extends React.Component {
@@ -66,6 +72,7 @@ ReactDOM.render(
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
             <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
             <Route path="stuAccountRegist" getComponent={stuAccountRegist}/>
+            <Route path="validationMes" getComponent={validationMes}/>
         </Route>
     </Router>, document.getElementById('example')
 );
