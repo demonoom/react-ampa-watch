@@ -90,7 +90,7 @@ export default class bindStudentInfo extends React.Component {
 
     //跳注册页面
     toRegPage=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex;
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex+"&macAddr="+this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
