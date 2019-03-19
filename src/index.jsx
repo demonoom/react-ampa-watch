@@ -4,17 +4,29 @@ import {Router, Route, hashHistory, IndexRoute, Link} from 'react-router';
 import App from './components/App';
 import "./helpers/webServiceUtil";
 
+/**
+ * 注册学生账号
+ * @param location
+ * @param cb
+ */
+const stuAccountRegist = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/stuAccountRegist/js/stuAccountRegist').default)
+    }, 'stuAccountRegist')
+};
 
 const addWatchInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/addWatchInfo').default)
     }, 'addWatchInfo')
 };
+
 const bindStudentInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/bindStudentInfo').default)
     }, 'bindStudentInfo')
 };
+
 import './index.less';
 
 class Index extends React.Component {
@@ -27,10 +39,17 @@ class Index extends React.Component {
                             to="/addWatchInfo?logigType=1"
                             style={{fontSize: '24px'}}>添加手表信息</Link>
                     </li>
+
                     <li>
                         <Link
                             to="/bindStudentInfo?logigType=1"
                             style={{fontSize: '24px'}}>bindStudentInfo</Link>
+                    </li>
+
+                    <li>
+                        <Link
+                            to="/stuAccountRegist"
+                            style={{fontSize: '24px'}}>注册学生账号</Link>
                     </li>
                 </ul>
             </div>
@@ -46,6 +65,7 @@ ReactDOM.render(
             }
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
             <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
+            <Route path="stuAccountRegist" getComponent={stuAccountRegist}/>
         </Route>
     </Router>, document.getElementById('example')
 );
