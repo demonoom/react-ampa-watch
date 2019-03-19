@@ -14,9 +14,13 @@ export default class verifyStuInfo extends React.Component {
 
     componentWillMount() {
         document.title = '验证学生账号';
-        var locationHref = window.location.href;
+        var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var q = locationSearch.split("&")[0].split('=')[1];
+        var searchArray = locationSearch.split("&");
+        var loginType = searchArray[0].split('=')[1];
+        this.setState({
+            loginType
+        })
     }
     componentDidMount(){
         Bridge.setShareAble("false");
@@ -34,6 +38,7 @@ export default class verifyStuInfo extends React.Component {
             })
         }, 100)
     }
+    //输入学生姓名
     stuOnChange = (value) => {
         console.log(value, "p")
         this.setState({
@@ -41,6 +46,7 @@ export default class verifyStuInfo extends React.Component {
 
         });
     }
+    //输入学校
     schoolOnChange=(value)=>{
         console.log(value, "schoolName")
         this.setState({
@@ -48,8 +54,10 @@ export default class verifyStuInfo extends React.Component {
 
         });
     }
+
+    //点击提交按钮
     submmit=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "loginSuccess";
+        var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType="+this.state.loginType;
         var data = {
             method: 'openNewPage',
             url: url

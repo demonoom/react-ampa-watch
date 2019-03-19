@@ -46,6 +46,7 @@ export default class addWatchInfo extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
+        // loginType==1  代表主账号
         this.setState({
             loginType
         })
@@ -86,13 +87,13 @@ export default class addWatchInfo extends React.Component {
     }
 
   
-
+    //显示性别
     showSexBox = () => {
         this.setState({
             showSexBox: true
         })
     }
-
+    //隐藏性别
     hideSexBox = (num) => {
         console.log(num, "num")
         this.setState({
@@ -101,13 +102,13 @@ export default class addWatchInfo extends React.Component {
         })
     }
 
-
+    //显示关系
     showRelationBox = () => {
         this.setState({
             relationBox: true
         })
     }
-
+    //点击关系选项
     clickRelation = (relation) => {
         this.setState({
             relationBox:false
@@ -117,7 +118,7 @@ export default class addWatchInfo extends React.Component {
             this.showModal()
         }
     }
-
+    //自定义关系
     showModal () {
         prompt('请输入关系', '', [
             { text: '取消' },
@@ -128,16 +129,30 @@ export default class addWatchInfo extends React.Component {
             },
         ], 'default', "")
     }
-
+    //跳转下一页
     nextPage=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo";
-        var data = {
-            method: 'openNewPage',
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
+        if(this.state.loginType == 1){
+            var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType="+this.state.loginType;
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        }else {
+            var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType="+this.state.loginType;
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        }
+
+      
+      
     }
     render () {
         return (
