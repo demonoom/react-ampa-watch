@@ -24,12 +24,6 @@ class Index extends React.Component {
                 <ul role="nav">
                     <li>
                         <Link
-                            to="/clazzOfRingBinding"
-                            style={{fontSize: '24px'}}>统计</Link>
-                      
-                    </li>
-                    <li>
-                        <Link
                             to="/addWatchInfo?logigType=1"
                             style={{fontSize: '24px'}}>添加手表信息</Link>
                     </li>
@@ -50,7 +44,6 @@ ReactDOM.render(
             {
                 <IndexRoute component={Index}/>
             }
-            <Route path="clazzOfRingBinding" getComponent={clazzOfRingBinding}/>
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
             <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
         </Route>
