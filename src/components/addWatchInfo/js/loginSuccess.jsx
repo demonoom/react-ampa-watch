@@ -17,7 +17,7 @@ export default class loginSuccess extends React.Component {
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
         this.setState({
-            loginType
+            loginType,
         })
     }
     componentDidMount(){
