@@ -20,6 +20,11 @@ const verifyStuInfo = (location, cb) => {
         cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
     }, 'verifyStuInfo')
 };
+const loginSuccess = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/addWatchInfo/js/loginSuccess').default)
+    }, 'verifyStuInfo')
+};
 import './index.less';
 
 class Index extends React.Component {
@@ -31,11 +36,6 @@ class Index extends React.Component {
                         <Link
                             to="/addWatchInfo?logigType=1"
                             style={{fontSize: '24px'}}>添加手表信息</Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/bindStudentInfo?logigType=1"
-                            style={{fontSize: '24px'}}>bindStudentInfo</Link>
                     </li>
                 </ul>
             </div>
@@ -52,6 +52,7 @@ ReactDOM.render(
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
             <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
             <Route path="verifyStuInfo" getComponent={verifyStuInfo}/>
+            <Route path="loginSuccess" getComponent={loginSuccess}/>
         </Route>
     </Router>, document.getElementById('example')
 );
