@@ -1,0 +1,15 @@
+2018-3-22 17:30:14:into run
+Open http://localhost:8091/
+Open https://localhost:9091/
+./LittleantMobileGuard.sh: 行 8:  5040 已杀死               node LittleAntWatchServer.js
+LittleantMobileServer stopped unexpected, restarting
+Open http://localhost:8091/
+./LittleantMobileHttpsGuard.sh: 行 8:  5077 已杀死               node LittleAntWatchHttpsServer.js
+LittleantMobileHttpsServer stopped unexpected, restarting
+Open https://localhost:9091/
+./LittleantMobileGuard.sh: 行 8:  5137 已杀死               node LittleAntWatchServer.js
+LittleantMobileServer stopped unexpected, restarting
+Open http://localhost:8091/
+./LittleantMobileHttpsGuard.sh: 行 8:  5145 已杀死               node LittleAntWatchHttpsServer.js
+LittleantMobileHttpsServer stopped unexpected, restarting
+Open https://localhost:9091/
