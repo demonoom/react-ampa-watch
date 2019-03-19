@@ -51,6 +51,10 @@ export default class bindStudentInfo extends React.Component {
     }
     //下一页
     nextPage=()=>{
+        if(this.state.littleAntName == ""){
+            Toast.info("请输入小蚂蚁账号")
+            return;
+        }
         var param = {
             "method": 'getUserByAccount',
             "account": this.state.littleAntName,
@@ -105,7 +109,7 @@ export default class bindStudentInfo extends React.Component {
                     value={this.state.littleAntName}
                     onChange={this.littAntOnChange}
                 ></InputItem>
-                <div><span>没有学生账号？</span><span onClick={this.toRegPage}>注册学生账号</span></div>
+                <div><span onClick={this.toRegPage}>申请新账号</span></div>
                 <div onClick={this.nextPage}>下一步</div>
             </div>
         );
