@@ -12,9 +12,13 @@ export default class loginSuccess extends React.Component {
 
     componentWillMount() {
         document.title = '注册成功';
-        var locationHref = window.location.href;
-        var 1 = locationHref.substr(locationHref.indexOf("?") + 1);
-        var 2 = locationSearch.split("&")[0].split('=')[1];
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var loginType = searchArray[0].split('=')[1];
+        this.setState({
+            loginType
+        })
     }
     componentDidMount(){
         Bridge.setShareAble("false");
@@ -27,7 +31,7 @@ export default class loginSuccess extends React.Component {
     onWindwoResize() {
         // this
         setTimeout(() => {
-            teacherV.setState({
+            this.setState({
                 clientHeight: document.body.clientHeight,
             })
         }, 100)
@@ -37,7 +41,19 @@ export default class loginSuccess extends React.Component {
     render() {
         return (
             <div id="loginSuccess" style={{height: this.state.clientHeight}}>
-               
+               {/* {
+                   this.state.loginType == 1 ?
+                   <div>
+                       <span>注册成功</span>
+                       <span>开启守护之旅</span>
+                       <span>马上进入</span>
+                   </div>
+                   :
+                   <div>
+                       <span>注册成功</span>
+                       <span>等待管理员验证</span>
+                   </div>
+               } */}
             </div>
         );
     }

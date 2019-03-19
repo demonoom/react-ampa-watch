@@ -43,6 +43,16 @@ export default class bindStudentInfo extends React.Component {
         });
     }
 
+    nextPage=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo";
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
 
     render () {
         return (
@@ -54,6 +64,8 @@ export default class bindStudentInfo extends React.Component {
                     value={this.state.littleAntName}
                     onChange={this.stuOnChange}
                 ></InputItem>
+                <div><span>没有学生账号？</span><span>注册学生账号</span></div>
+                <div onClick={this.nextPage}>下一步</div>
             </div>
         );
     }

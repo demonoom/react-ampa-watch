@@ -85,13 +85,7 @@ export default class addWatchInfo extends React.Component {
         });
     }
 
-    stuOnChange = (value) => {
-        console.log(value, "p")
-        this.setState({
-            stuName: value,
-
-        });
-    }
+  
 
     showSexBox = () => {
         this.setState({
@@ -158,12 +152,7 @@ export default class addWatchInfo extends React.Component {
                 {
                     this.state.loginType == 1 ?
                         <div>
-                            {/* <InputItem
-                                className=""
-                                placeholder="请输入孩子姓名"
-                                value={this.state.stuName}
-                                onChange={this.stuOnChange}
-                            ></InputItem> */}
+                           
                             <div>
                                 <span>请选择孩子的性别</span>
                                 <span onClick={this.showSexBox}>箭头</span>
