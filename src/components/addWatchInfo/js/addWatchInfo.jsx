@@ -3,6 +3,7 @@ import {
     InputItem, Toast,
     Modal
 } from 'antd-mobile';
+import '../css/addWatchInfo.less'
 const alert = Modal.alert;
 const prompt = Modal.prompt;
 export default class addWatchInfo extends React.Component {
