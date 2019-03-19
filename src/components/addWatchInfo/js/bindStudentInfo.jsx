@@ -1,13 +1,14 @@
 import React from 'react';
 import {
-    InputItem,
+    InputItem,Toast,Modal
 } from 'antd-mobile';
-
+const alert = Modal.alert;
 export default class bindStudentInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             littleAntName: "",
+            stuInfoData:null
         };
     }
 
@@ -17,8 +18,10 @@ export default class bindStudentInfo extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
+        var macAddr = searchArray[1].split('=')[1];
         this.setState({
-            loginType
+            loginType,
+            macAddr
         })
     }
     componentDidMount () {
@@ -48,18 +51,40 @@ export default class bindStudentInfo extends React.Component {
     }
     //下一页
     nextPage=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType="+this.state.loginType;
-        var data = {
-            method: 'openNewPage',
-            url: url
+        var param = {
+            "method": 'getUserByAccount',
+            "account": this.state.littleAntName,
         };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
+        console.log(param,"param")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"rerere")
+                if (result.success && result.response) {
+                    this.setState({
+                        stuInfoData:result.response
+                    })
+                    var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType="+this.state.loginType+"&schoolName="+result.response.schoolName+"&uName="+result.response.userName+"&stuId="+result.response.colUid+"&macAddr="+this.state.macAddr;
+                    var data = {
+                        method: 'openNewPage',
+                        url: url
+                    };
+                    Bridge.callHandler(data, null, function (error) {
+                        window.location.href = url;
+                    });
+                } else {
+                    Toast.info('请注册学生账号');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
         });
+       
     }
 
     //跳注册页面
     toRegPage=()=>{
+      
         var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist";
         var data = {
             method: 'openNewPage',
