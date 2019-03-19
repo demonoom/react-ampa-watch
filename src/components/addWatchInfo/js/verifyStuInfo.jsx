@@ -13,8 +13,8 @@ export default class verifyStuInfo extends React.Component {
     componentWillMount() {
         document.title = '验证学生账号';
         var locationHref = window.location.href;
-        var 1 = locationHref.substr(locationHref.indexOf("?") + 1);
-        var 2 = locationSearch.split("&")[0].split('=')[1];
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var q = locationSearch.split("&")[0].split('=')[1];
     }
     componentDidMount(){
         Bridge.setShareAble("false");
@@ -27,7 +27,7 @@ export default class verifyStuInfo extends React.Component {
     onWindwoResize() {
         // this
         setTimeout(() => {
-            teacherV.setState({
+            this.setState({
                 clientHeight: document.body.clientHeight,
             })
         }, 100)
@@ -37,7 +37,7 @@ export default class verifyStuInfo extends React.Component {
     render() {
         return (
             <div id="verifyStuInfo" style={{height: this.state.clientHeight}}>
-               
+               555
             </div>
         );
     }
