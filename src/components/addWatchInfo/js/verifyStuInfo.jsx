@@ -143,7 +143,6 @@ export default class verifyStuInfo extends React.Component {
                     value={this.state.stuName}
                     onChange={this.stuOnChange}
                 ></InputItem>
-                <h5>小蚂蚁账号</h5>
                 <InputItem
                     className=""
                     placeholder="输入此账号所在的学校名称"

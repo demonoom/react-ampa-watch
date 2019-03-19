@@ -18,11 +18,9 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "9",
+            macId: "",
             stuName: "",
             sexValue: "",
-            showSexBox: false,
-            relationBox: false,
             showSexDiv:false,
             showRelationiDiv:false,
             relationValue: "",
@@ -67,7 +65,7 @@ export default class addWatchInfo extends React.Component {
         Bridge.setShareAble("false");
         document.title = '手环绑定学生班级列表';
     }
-
+    //*根据mac地址获取是第几次登录 */
     getWatch2gByMacAddress = (macAdd) => {
         var param = {
             "method": 'getWatch2gByMacAddress',
@@ -104,64 +102,18 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(1000)
         var data = {
             method: 'watchBinding'
         };
-        Bridge.callHandler(data, function (mes) {
-            //获取二维码MAC地址
-            // var string = mes.replace(/:/g, '');
-            // if (string.length > 16) {
-            //     Toast.fail('mac地址超过最大字节数', 2)
-            //     return
-            // }
-            //判断返回的ｍａｃ地址是否是以MAC:开头的,如果是,则将原内容的MAC:截掉
-            var compareMes = mes.toUpperCase();
-            if (compareMes.indexOf("MAC:") == 0) {
-                mes = mes.substr(4, mes.length - 1);
-            }
-            if (mes.indexOf(":") == -1) {
-                var string = splitStrTo2(mes).join(":");
-                mes = string.substr(0, string.length - 1)
-            }
+        Bridge.callHandler(data, (mes)=> {
+            this.getWatch2gByMacAddress(mes)
             this.setState({ macId: mes.toUpperCase() });
         }, function (error) {
             console.log(error);
         });
     }
 
-
-    //显示性别
-    showSexBox = () => {
-        this.setState({
-            showSexBox: true
-        })
-    }
-    //隐藏性别
-    hideSexBox = (value) => {
-        this.setState({
-            showSexBox: false,
-            sexValue: value
-        })
-    }
-
-    //显示关系
-    showRelationBox = () => {
-        this.setState({
-            relationBox: true
-        })
-    }
-    //点击关系选项
-    clickRelation = (relation) => {
-        this.setState({
-            relationBox: false,
-            relationValue: relation
-        })
-        console.log(relation, "q")
-        if (relation == "自定义") {
-            this.showModal()
-        }
-    }
+   
     //自定义关系
     showModal () {
         this.setState({
