@@ -104,7 +104,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(3)
+        this.getWatch2gByMacAddress(1000)
         var data = {
             method: 'watchBinding'
         };
@@ -211,7 +211,7 @@ export default class addWatchInfo extends React.Component {
                 onResponse: (result) => {
                     console.log(result, "rerere")
                     if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId;
+                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId+"&sex="+this.state.sexValue[0];
                         var data = {
                             method: 'openNewPage',
                             url: url
@@ -322,7 +322,7 @@ export default class addWatchInfo extends React.Component {
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
                 <h5 style={{ display: this.state.loginType == 1 ? "block" : "none" }}>沟通从心开始</h5>
                 <h5 style={{ display: this.state.loginType == 0 ? "block" : "none" }}>守护关注一生</h5>
-                <div><span>{this.state.macId}</span><span onClick={this.scanCode}>扫描</span></div>
+                <div><span>{this.state.macId}</span><span style={{fontSize: '48px'}} onClick={this.scanCode}>扫描</span></div>
                 <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                     <Picker
                         data={sexData}

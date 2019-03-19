@@ -19,9 +19,11 @@ export default class bindStudentInfo extends React.Component {
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
         var macAddr = searchArray[1].split('=')[1];
+        var sex = searchArray[2].split('=')[1];
         this.setState({
             loginType,
-            macAddr
+            macAddr,
+            sex
         })
     }
     componentDidMount () {
@@ -88,8 +90,7 @@ export default class bindStudentInfo extends React.Component {
 
     //跳注册页面
     toRegPage=()=>{
-      
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist";
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex;
         var data = {
             method: 'openNewPage',
             url: url
