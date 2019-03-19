@@ -19,7 +19,11 @@ export default class stuAccountRegist extends React.Component {
     }
 
     componentDidMount() {
-
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var sex = locationSearch.split("&")[0].split('=')[1];
+        var macAddr = locationSearch.split("&")[1].split('=')[1];
+        this.setState({sex, macAddr});
     }
 
     /**
@@ -215,9 +219,15 @@ export default class stuAccountRegist extends React.Component {
             Toast.fail('请选择学生所在班级');
             return
         }
-        console.log(this.state.classId);
-        console.log(this.state.schoolId);
-        console.log(this.state.stuName);
+
+        var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName);
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     };
 
     render() {
