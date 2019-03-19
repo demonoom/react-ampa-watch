@@ -1,21 +1,30 @@
 import React from 'react';
 import {
-    InputItem,
+    InputItem,Toast,Modal
 } from 'antd-mobile';
-
+const alert = Modal.alert;
 export default class bindStudentInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             littleAntName: "",
+            stuInfoData:null
         };
     }
 
     componentWillMount () {
         document.title = '绑定学生账号';
-        var locationHref = window.location.href;
+        var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var f = locationSearch.split("&")[0].split('=')[1];
+        var searchArray = locationSearch.split("&");
+        var loginType = searchArray[0].split('=')[1];
+        var macAddr = searchArray[1].split('=')[1];
+        var sex = searchArray[2].split('=')[1];
+        this.setState({
+            loginType,
+            macAddr,
+            sex
+        })
     }
     componentDidMount () {
         Bridge.setShareAble("false");
@@ -34,17 +43,54 @@ export default class bindStudentInfo extends React.Component {
         }, 100)
     }
 
-
-    stuOnChange = (value) => {
+    //输入小蚂蚁账号
+    littAntOnChange = (value) => {
         console.log(value, "p")
         this.setState({
             littleAntName: value,
 
         });
     }
-
+    //下一页
     nextPage=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo";
+        if(this.state.littleAntName == ""){
+            Toast.info("请输入小蚂蚁账号")
+            return;
+        }
+        var param = {
+            "method": 'getUserByAccount',
+            "account": this.state.littleAntName,
+        };
+        console.log(param,"param")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"rerere")
+                if (result.success && result.response) {
+                    this.setState({
+                        stuInfoData:result.response
+                    })
+                    var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType="+this.state.loginType+"&schoolName="+result.response.schoolName+"&uName="+result.response.userName+"&stuId="+result.response.colUid+"&macAddr="+this.state.macAddr;
+                    var data = {
+                        method: 'openNewPage',
+                        url: url
+                    };
+                    Bridge.callHandler(data, null, function (error) {
+                        window.location.href = url;
+                    });
+                } else {
+                    Toast.info('请注册学生账号');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+       
+    }
+
+    //跳注册页面
+    toRegPage=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex;
         var data = {
             method: 'openNewPage',
             url: url
@@ -60,11 +106,11 @@ export default class bindStudentInfo extends React.Component {
                 <h5>绑定学生账号</h5>
                 <InputItem
                     className=""
-                    placeholder="请输入小蚂蚁"
+                    placeholder="请输入小蚂蚁账号"
                     value={this.state.littleAntName}
-                    onChange={this.stuOnChange}
+                    onChange={this.littAntOnChange}
                 ></InputItem>
-                <div><span>没有学生账号？</span><span>注册学生账号</span></div>
+                <div><span onClick={this.toRegPage}>申请新账号</span></div>
                 <div onClick={this.nextPage}>下一步</div>
             </div>
         );

@@ -17,7 +17,7 @@ export default class loginSuccess extends React.Component {
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
         this.setState({
-            loginType
+            loginType,
         })
     }
     componentDidMount(){
@@ -37,23 +37,27 @@ export default class loginSuccess extends React.Component {
         }, 100)
     }
 
+    //进入主页
+    toHomePge=()=>{
+        console.log("ok")
+    }
 
     render() {
         return (
             <div id="loginSuccess" style={{height: this.state.clientHeight}}>
-               {/* {
+               {
                    this.state.loginType == 1 ?
                    <div>
                        <span>注册成功</span>
                        <span>开启守护之旅</span>
-                       <span>马上进入</span>
+                       <span onClick={this.toHomePge}>马上进入</span>
                    </div>
                    :
                    <div>
                        <span>注册成功</span>
                        <span>等待管理员验证</span>
                    </div>
-               } */}
+               }
             </div>
         );
     }

@@ -55,7 +55,7 @@ class Index extends React.Component {
                 <ul role="nav">
                     <li>
                         <Link
-                            to="/addWatchInfo?logigType=1"
+                            to="/addWatchInfo?userId=23836"
                             style={{fontSize: '24px'}}>添加手表信息</Link>
                     </li>
                     <li>
