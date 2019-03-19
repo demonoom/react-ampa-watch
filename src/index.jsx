@@ -15,8 +15,6 @@ const stuAccountRegist = (location, cb) => {
     }, 'stuAccountRegist')
 };
 
-
-
 /**添加手表信息 */
 const addWatchInfo = (location, cb) => {
     require.ensure([], require => {
@@ -29,11 +27,13 @@ const bindStudentInfo = (location, cb) => {
         cb(null, require('./components/addWatchInfo/js/bindStudentInfo').default)
     }, 'bindStudentInfo')
 };
+
 const verifyStuInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
     }, 'verifyStuInfo')
 };
+
 const loginSuccess = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/loginSuccess').default)
@@ -42,7 +42,7 @@ const loginSuccess = (location, cb) => {
 
 const validationMes = (location, cb) => {
     require.ensure([], require => {
-        cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
+        cb(null, require('./components/stuAccountRegist/js/validationMes').default)
     }, 'bindStudentInfo')
 };
 

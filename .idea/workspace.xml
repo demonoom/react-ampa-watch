@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="93615d59-b993-442f-a434-c83ce7585218" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/webServiceUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/webServiceUtil.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,11 +21,52 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
+            <state relative-caret-position="414">
+              <caret line="219" column="40" selection-start-line="219" selection-start-column="40" selection-end-line="219" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#680#721#0" />
+                <element signature="e#741#784#0" />
+                <element signature="e#945#961#0" />
+                <element signature="e#1086#1115#0" />
+                <element signature="e#1141#1149#0" />
+                <element signature="e#2058#2074#0" />
+                <element signature="e#2553#2569#0" />
+                <element signature="e#1184#1243#0" />
+                <element signature="e#1274#1385#0" />
+                <element signature="e#4164#4280#0" />
+                <element signature="e#5003#5052#0" />
+                <element signature="e#5425#6020#0" />
+                <element signature="e#2735#3249#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/helpers/webServiceUtil.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="30">
+              <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
+              <folding>
+                <element signature="e#95#2113#0" />
+                <element signature="e#271#916#0" />
+                <element signature="e#931#1215#0" />
+                <element signature="e#1235#2107#0" />
+                <element signature="e#1638#1817#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -32,7 +75,7 @@
         <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="4" column="34" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="34" />
+              <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#188#242#0" />
@@ -42,14 +85,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="31" column="68" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="68" />
+            <state relative-caret-position="160">
+              <caret line="79" column="67" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="67" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#208#257#0" />
+                <element signature="e#301#454#0" />
+                <element signature="e#511#652#0" />
+                <element signature="e#697#844#0" />
+                <element signature="e#886#1029#0" />
+                <element signature="e#1070#1212#0" />
+                <element signature="e#1255#1400#0" />
               </folding>
             </state>
           </provider>
@@ -66,14 +115,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>backArrow</find>
-      <find>classCardSystem</find>
-      <find>mobileChat</find>
-      <find>hashHistory</find>
-      <find>Index</find>
       <find>clazzOfRingBinding</find>
       <find>HEAD</find>
       <find>stuAccountRegist</find>
+      <find>InputItem</find>
+      <find>district</find>
+      <find>Picker</find>
+      <find>validationMes</find>
+      <find>className</find>
+      <find>classOnChange</find>
+      <find>schoolNameOnChange</find>
+      <find>updateModel</find>
+      <find>exitSchoolInput</find>
+      <find>tagAddPanel_bg</find>
+      <find>getSchoolsBySchoolName</find>
+      <find>buildSchoolList</find>
+      <find>_this</find>
+      <find>addRoomName</find>
+      <find>schoolName</find>
+      <find>Button</find>
+      <find>classOnOK</find>
+      <find>clazzName</find>
+      <find>onClick</find>
+      <find>provinceLite</find>
+      <find>data</find>
+      <find>getClazzesByGradeId</find>
+      <find>resolve</find>
+      <find>onPickerChange</find>
+      <find>classId</find>
+      <find>inputValue</find>
+      <find>stuName</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -91,20 +162,21 @@
         <option value="$PROJECT_DIR$/LittleantMobileHttpsGuard.sh" />
         <option value="$PROJECT_DIR$/LittleantMobileGuard.sh" />
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.js" />
-        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" />
         <option value="$PROJECT_DIR$/src/index.less" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" />
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMessage.jsx" />
-        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" />
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" />
         <option value="$PROJECT_DIR$/src/index.jsx" />
+        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" />
+        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" />
+        <option value="$PROJECT_DIR$/src/helpers/webServiceUtil.js" />
+        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="462" />
-    <option name="y" value="52" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="55" />
+    <option name="y" value="69" />
     <option name="width" value="1221" />
     <option name="height" value="699" />
   </component>
@@ -126,6 +198,12 @@
               <item name="littleAntWatch" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="littleAntWatch" type="b2602c69:ProjectViewProjectNode" />
+              <item name="littleAntWatch" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -138,6 +216,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -166,21 +245,22 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1552898764734</updated>
-      <workItem from="1552898766041" duration="8195000" />
+      <workItem from="1552898766041" duration="25525000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8195000" />
+    <option name="totallyTimeSpent" value="25525000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="25" width="1366" height="743" extended-state="7" />
+    <frame x="0" y="25" width="1366" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="npm" side_tool="true" />
       <window_info id="Favorites" side_tool="true" weight="0.32999164" />
-      <window_info content_ui="combo" id="Project" order="0" weight="0.3152012" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.31445605" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -225,16 +305,6 @@
         <state relative-caret-position="-1220">
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/webpack.config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1386">
-          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
-          <folding>
-            <element signature="e#3369#4139#0" />
           </folding>
         </state>
       </provider>
@@ -300,13 +370,6 @@
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -409,20 +472,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/webServiceUtil.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMessage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="6" selection-start-column="6" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" lean-forward="true" selection-start-column="22" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -433,10 +486,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1080">
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="65" column="13" selection-start-line="65" selection-start-column="13" selection-end-line="70" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="79" column="67" selection-start-line="79" selection-start-column="54" selection-end-line="79" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#208#257#0" />
+            <element signature="e#301#454#0" />
+            <element signature="e#511#652#0" />
+            <element signature="e#697#844#0" />
+            <element signature="e#886#1029#0" />
+            <element signature="e#1070#1212#0" />
+            <element signature="e#1255#1400#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
-          <caret line="4" column="34" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="34" />
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
             <element signature="e#188#242#0" />
@@ -445,13 +534,56 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="31" column="68" selection-start-line="31" selection-start-column="55" selection-end-line="31" selection-end-column="68" />
+        <state relative-caret-position="180">
+          <caret line="85" column="3" selection-start-line="85" selection-start-column="3" selection-end-line="85" selection-end-column="3" />
+          <folding>
+            <element signature="e#95#2113#0" />
+            <element signature="e#271#916#0" />
+            <element signature="e#931#1215#0" />
+            <element signature="e#1235#2107#0" />
+            <element signature="e#1638#1817#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webpack.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#3369#4139#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/helpers/webServiceUtil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="219" column="40" selection-start-line="219" selection-start-column="40" selection-end-line="219" selection-end-column="40" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <element signature="e#208#257#0" />
+            <element signature="e#680#721#0" />
+            <element signature="e#741#784#0" />
+            <element signature="e#945#961#0" />
+            <element signature="e#1086#1115#0" />
+            <element signature="e#1141#1149#0" />
+            <element signature="e#2058#2074#0" />
+            <element signature="e#2553#2569#0" />
+            <element signature="e#1184#1243#0" />
+            <element signature="e#1274#1385#0" />
+            <element signature="e#4164#4280#0" />
+            <element signature="e#5003#5052#0" />
+            <element signature="e#5425#6020#0" />
+            <element signature="e#2735#3249#0" />
           </folding>
         </state>
       </provider>
