@@ -1,0 +1,366 @@
+#classroomManage {
+  font-size: 17px;
+}
+#classroomManage .textOver {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+}
+#classroomManage .redStar {
+  color: red;
+  font-size: 22px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+#classroomManage .am-list-line {
+  border: 0;
+}
+#classroomManage .am-list-view-scrollview-content {
+  width: 100%;
+}
+#classroomManage .am-button-small {
+  background-color: #fff;
+  height: 44px;
+  line-height: 44px;
+  border: none !important;
+}
+#classroomManage .am-button-small:before {
+  border: 0;
+}
+#classroomManage .whiteBack {
+  background-color: #fff;
+}
+#classroomManage .am-pull-to-refresh-content-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+#classroomManage .am-pull-to-refresh-indicator {
+  font-size: 1rem !important;
+}
+#classroomManage .am-list-body {
+  border: 0;
+}
+#classroomManage .am-list-body::before {
+  background: none;
+}
+#classroomManage .tableDiv {
+  position: relative;
+}
+#classroomManage .tableDiv .am-card-body {
+  min-height: 1.5rem !important;
+  color: #888 !important;
+}
+#classroomManage .tableDiv .am-card-footer {
+  margin-bottom: 1rem;
+}
+#classroomManage .tableDiv .calmCardUnbind {
+  background: #f55d45;
+  color: #fff !important;
+  padding: 0 15px;
+  text-align: center;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 14px;
+  line-height: 24px;
+}
+#classroomManage .tableDiv .classInfo {
+  position: relative;
+  padding-top: 15px;
+  margin: 0 15px 2px 15px;
+  line-height: 24px;
+}
+#classroomManage .tableDiv .classInfo .textOver {
+  width: 100%;
+  color: #a9a9a9;
+  font-size: 16px;
+}
+#classroomManage .tableDiv .classroom {
+  color: #333;
+}
+#classroomManage .tableDiv .grade {
+  color: #a9a9a9;
+  font-size: 15px;
+  display: inline-block;
+  margin-top: 8px;
+}
+#classroomManage .tableDiv .floor {
+  font-size: 15px;
+  padding-left: 10px;
+}
+#classroomManage .tableDiv .noomCardUnbind {
+  color: #ff144e;
+}
+#classroomManage .tableDiv .liName {
+  font-size: 30px;
+}
+#classroomManage .tableDiv .delClassroom {
+  font-size: 14px;
+  color: #F56A55;
+  margin-left: 20px;
+  border: 1px #F56A55 solid;
+  border-radius: 2px;
+  position: absolute;
+  right: 15px;
+  top: 46px;
+  line-height: 22px;
+  padding: 0 14px;
+  box-sizing: border-box;
+}
+#classroomManage .tableDiv .creatTime {
+  margin-right: 20px;
+  font-size: 15px;
+  color: #a9a9a9;
+  display: inline-block;
+  width: calc(100% - 85px) !important;
+}
+#classroomManage .addModel {
+  box-sizing: border-box;
+  position: relative;
+  height: 100%;
+}
+#classroomManage .addModel .bindGrade {
+  padding: 4px 0;
+}
+#classroomManage .addModel .am-checkbox-inner {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+#classroomManage .addModel .am-checkbox-agree .am-checkbox-agree-label {
+  line-height: 1.7;
+}
+#classroomManage .addModel .am-list .am-list-body::before {
+  display: none !important;
+}
+#classroomManage .addModel .am-list .am-list-body::after {
+  display: none !important;
+}
+#classroomManage .addModel .am-list .am-list-body {
+  background: transparent;
+}
+#classroomManage .addModel .am-list .am-list-body .macAddress {
+  margin-bottom: 1rem;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item {
+  background: #e4e4e4;
+  padding: 0;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line {
+  padding: 0 20px;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-content {
+  font-size: 15px;
+  padding: 1rem 1rem;
+  border-top: 1px solid #d5d5d5;
+  color: #676767;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-content .am-list-brief {
+  font-size: 1.4rem;
+  color: #a2a2a2;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-extra .am-radio.am-radio-checked {
+  height: 100%;
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-extra .am-radio-inner {
+  top: 45%;
+  transform: translateY(-50%);
+}
+#classroomManage .addModel .am-list .am-list-body .chooseResult .am-list-item:first-child .am-list-content {
+  border-top: none;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-item .am-input-label {
+  color: #333;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-item .am-input-control {
+  line-height: 25px;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-item .am-input-control input {
+  color: #333;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-line::after {
+  height: 0px;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-line .am-input-label.am-input-label-5 {
+  width: auto !important;
+  position: relative;
+  padding-right: 15px;
+}
+#classroomManage .addModel .am-list .am-list-body .am-list-line .am-input-control input {
+  width: 88% !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;
+}
+#classroomManage .addModel .chooseResult {
+  max-height: 200px;
+  overflow: auto;
+}
+#classroomManage .addModel .close {
+  font-size: 1.5em;
+  background: #fff;
+  color: #F56A55;
+}
+#classroomManage .addModel > h1 {
+  margin-bottom: 50px;
+}
+#classroomManage .addModel .macAddress {
+  position: relative;
+}
+#classroomManage .addModel .macAddress .scanIcon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#classroomManage .addModel .classroomName,
+#classroomManage .addModel .gradeName {
+  position: relative;
+}
+#classroomManage .addModel .classroomName .stIcon,
+#classroomManage .addModel .gradeName .stIcon {
+  width: 15px;
+  height: 19px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+#classroomManage .addModel .classroomName .stIcon img,
+#classroomManage .addModel .gradeName .stIcon img {
+  width: 100%;
+}
+#classroomManage .addModel .chooseResult {
+  background: #e4e4e4;
+}
+#classroomManage .addModel .chooseResult .cont {
+  overflow: hidden;
+  border-bottom: 1px #d5d5d5 solid;
+  margin: 0 1rem;
+  color: #666;
+  line-height: 22px;
+  padding: 1rem;
+  font-size: 15px;
+}
+#classroomManage .addModel .mainCont {
+  height: calc(100% - 77px);
+  overflow-y: auto;
+}
+#classroomManage .addModel .bottomBox {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 15px;
+  width: 100%;
+}
+#classroomManage .addModel .bottomBox span {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  padding: 0;
+  line-height: 47px;
+  height: 47px;
+  display: inline-block;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+#classroomManage .addModel .bottomBox .bind {
+  background: #F56A55;
+  color: #fff;
+}
+#classroomManage .addModel .bottomBox .bind:active {
+  color: rgba(255, 255, 255, 0.3);
+  background-color: #F56A55;
+}
+#classroomManage .div_creatTime {
+  height: 44px;
+  line-height: 44px;
+}
+#classroomManage .addFloor {
+  font-size: 16px;
+  color: #333;
+  padding-left: 23px;
+  margin-left: 15px;
+  background: url("../imgs/addFloorIcon.png") no-repeat left center;
+  background-size: 17px;
+  height: 17px;
+  line-height: 17px;
+  margin-top: 14px;
+}
+#classroomManage .edit_coordinateLi {
+  background: #fff;
+  padding: 15px 0 13px 15px;
+}
+#classroomManage .edit_coordinate {
+  border-radius: 4px;
+  padding: 0 10px;
+  color: #3672ed;
+  text-align: center;
+  font-size: 16px;
+  display: inline-block;
+  background: url("../imgs/edit_coordinate.png") no-repeat;
+  background-size: 18px ;
+  text-indent: 15px;
+}
+#classroomManage .search-nav {
+  background: #fff;
+  border-top: 9px #efeff4 solid;
+  border-right: 15px solid #efeff4;
+  border-bottom: 9px solid #efeff4;
+  border-left: 15px solid #efeff4;
+  position: relative;
+}
+#classroomManage .search-nav i {
+  background: url("../imgs/search-icon.png") no-repeat center center #fff;
+  font-size: 0;
+  width: 20px;
+  height: 34px;
+  background-size: 15px 19px;
+  float: left;
+  padding-left: 8px;
+}
+#classroomManage .search-nav input {
+  z-index: 2;
+  width: calc(100% - 58px);
+  text-align: left;
+  display: block;
+  color: #000;
+  font-size: 15px;
+  background-color: #fff;
+  border: 0;
+  padding: 8px 30px 6px 0px;
+  height: 20px;
+  line-height: 20px;
+  border-radius: 0 !important;
+}
+#classroomManage .search-nav .close {
+  position: absolute;
+  background: url("../imgs/icon-close.png") no-repeat;
+  width: 16px;
+  height: 16px;
+  right: 4px;
+  top: 9px;
+  background-size: 16px;
+}
+#classroomManage ::-moz-placeholder {
+  color: #bfbfbf;
+}
+#classroomManage input:-ms-input-placeholder {
+  color: #bfbfbf;
+}
+#classroomManage input::-webkit-input-placeholder {
+  color: #bfbfbf;
+}

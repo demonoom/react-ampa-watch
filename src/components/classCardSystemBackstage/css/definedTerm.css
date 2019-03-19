@@ -1,0 +1,6 @@
+(node) util.print is deprecated. Use console.log instead.
+#definedTerm .addCourseButton {
+  position: absolute;
+  bottom: 1.5rem;
+  width: 100%;
+}

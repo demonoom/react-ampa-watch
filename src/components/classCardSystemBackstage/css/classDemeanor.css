@@ -1,0 +1,99 @@
+#classDemeanor .calmImg,
+#schoolPlan .calmImg {
+  position: relative;
+}
+#classDemeanor .Img_cont,
+#schoolPlan .Img_cont {
+  height: calc(100% - 77px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#classDemeanor .calmShowImg,
+#schoolPlan .calmShowImg {
+  min-height: 17rem;
+  background-color: #fff;
+  padding: 10px;
+}
+#classDemeanor .calmShowImg .uploadImgBtn,
+#schoolPlan .calmShowImg .uploadImgBtn {
+  max-width: 100%;
+  max-height: 100%;
+}
+#classDemeanor .calmShowImg .delImgBtn,
+#schoolPlan .calmShowImg .delImgBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+#classDemeanor .showImg,
+#schoolPlan .showImg {
+  min-height: 17rem;
+  background: #fff;
+  padding: 0 15px 15px 5px;
+}
+#classDemeanor .uploadImg,
+#schoolPlan .uploadImg {
+  min-height: 7.5rem;
+  background-color: #fff;
+  padding: 0px 15px 15px 5px;
+}
+#classDemeanor .uploadImg .uploadImgBtn,
+#schoolPlan .uploadImg .uploadImgBtn {
+  width: 7.5rem;
+  height: 7.5rem;
+  margin-left: 10px;
+}
+#classDemeanor .uploadImg .delImgBtn,
+#schoolPlan .uploadImg .delImgBtn {
+  width: 1rem;
+  height: 1rem;
+}
+#classDemeanor .flex_addElement div,
+#schoolPlan .flex_addElement div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 8px;
+  min-width: 10px;
+}
+#classDemeanor .listImg,
+#schoolPlan .listImg {
+  width: 7.5rem;
+  height: 7.5rem;
+  text-align: center;
+  position: relative;
+  border: 1px solid #e5e5e5;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  display: flex;
+}
+#classDemeanor .listImg img,
+#schoolPlan .listImg img {
+  max-height: 100%;
+  max-width: 100%;
+}
+#classDemeanor .listImg img.delImgBtn,
+#schoolPlan .listImg img.delImgBtn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+#classDemeanor .classDemeanor_title,
+#schoolPlan .classDemeanor_title {
+  background: #fff;
+  line-height: 44px;
+  padding-left: 15px;
+  font-size: 17px;
+  color: #333;
+}
+#classDemeanor .addCourseButton,
+#schoolPlan .addCourseButton {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}

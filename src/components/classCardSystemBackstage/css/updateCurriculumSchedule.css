@@ -1,0 +1,97 @@
+(node) util.print is deprecated. Use console.log instead.
+#updateCurriculumSchedule {
+  overflow-y: auto;
+}
+#updateCurriculumSchedule .CourseTableArea {
+  min-height: calc(100% - 77px);
+  background-color: #fff;
+}
+#updateCurriculumSchedule .CourseTableArea .addClassTable {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 1.07rem;
+  margin-left: 1.07rem;
+  margin-bottom: 1.07rem;
+}
+#updateCurriculumSchedule .addCourseButton {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+#updateCurriculumSchedule .add_element {
+  background-color: #f6f6f6;
+  color: #333;
+  text-align: left;
+  height: 44px;
+  line-height: 44px;
+  width: 100%;
+  display: inline-block;
+  text-indent: 8px;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+}
+#updateCurriculumSchedule .flex_addElement,
+#updateCurriculumSchedule .teacher_list {
+  padding-top: 15px;
+}
+#updateCurriculumSchedule .flex_addElement div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 8px;
+  min-width: 10px;
+}
+#updateCurriculumSchedule .flex_addElement div:first-child {
+  margin-left: 0;
+}
+#updateCurriculumSchedule .addElement_teacher div:nth-child(2) {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+#updateCurriculumSchedule .flex_addElement .am-list-item .am-list-line,
+#updateCurriculumSchedule .flex_addElement .am-list-item.am-input-item {
+  padding-right: 0 !important;
+  padding-left: 0;
+}
+#updateCurriculumSchedule .am-list-body,
+#updateCurriculumSchedule .am-list-body::before {
+  border: none;
+  background: #fff;
+}
+#updateCurriculumSchedule .addCurriculum_cont {
+  height: calc(100% - 77px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#updateCurriculumSchedule .icon_triangle {
+  width: 0;
+  height: 0;
+  border-width: 7px 5px;
+  border-style: solid;
+  border-color: #a9a9a9 transparent transparent transparent;
+  position: absolute;
+  right: 10px;
+  top: 19px;
+}
+#updateCurriculumSchedule .overflow_width {
+  width: calc(100% - 30px);
+  float: left;
+}
+#updateCurriculumSchedule .teacher_list div {
+  margin-left: 8px;
+  min-width: 10px;
+}
+#updateCurriculumSchedule .teacher_list div:first-child {
+  margin-left: 0;
+}
+#updateCurriculumSchedule .teacher_list div:first-child,
+#updateCurriculumSchedule .teacher_list div:nth-child(2) {
+  width: 30%;
+}
+#updateCurriculumSchedule .teacher_list div:nth-child(3) {
+  width: 40%;
+}

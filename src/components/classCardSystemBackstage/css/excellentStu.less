@@ -1,0 +1,124 @@
+#excellentStu{
+  .cont{
+    .left{
+      width: 31.83rem;
+      background: url("../imgs/backPic.png") no-repeat;
+      background-size: 100% 9.11rem;
+      margin-top: 0.22rem;
+      position: relative;
+      padding-top: 9.55rem;
+      &>div{
+        height: 2.25rem;
+        background-color: #eaeeff;
+        margin-bottom: .44rem;
+        align-items: center;
+        text-align: center;
+        color: #2a3350;
+        font-size: .78rem;
+        .num{
+          width: 29%;
+          font-size: .83rem;
+        }
+        .info{
+          width: 38%;
+          text-align: left;
+          padding-left: 1.8rem;
+          box-sizing: border-box;
+          .userName{
+            display: inline-block;
+            line-height: 2.25rem;
+            width: calc(~"100% - 2.75rem");
+          }
+          img{
+            width: 1.94rem;
+            height: 1.94rem;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            margin-right: .81rem;
+            overflow: hidden;
+            vertical-align: top;
+            margin-top: 0.23rem;
+          }
+        }
+        .time{
+          width: 32%;
+          color: #367aed;
+          img{
+            width: .78rem;
+            height: .78rem;
+            margin-right: .38rem;
+            vertical-align: middle;
+            margin-top: -.15rem;
+          }
+        }
+      }
+
+      &>div:nth-child(1),&>div:nth-child(2),&>div:nth-child(3){
+        height: 7.39rem;
+        width:10.53rem;
+        display: block;
+        background:none;
+        position: absolute;
+        text-align: center;
+        top:1.94rem;
+        margin-bottom: 0;
+        .num{
+          display: none;
+        }
+        .info{
+          width: 100%;
+          color: #fff;
+          text-align: center;
+          padding-left: 0;
+          img{
+            border: .16rem #fff solid;
+            width: 3.17rem;
+            height: 3.17rem;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            border-radius: 50%;
+            margin-right: 0;
+            overflow: hidden;
+          }
+          .userName{
+            display: block;
+            font-size:.83rem ;
+            line-height: 1.2;
+            width: 90%;
+            margin: .28rem auto .3rem;
+          }
+        }
+        .time{
+          width: 100%;
+          display: block;
+          margin: 0 auto;
+        }
+
+      }
+      &>div:nth-child(1){
+        left: 10.4rem;
+      }
+      &>div:nth-child(2){
+        left: -.15rem;
+        .info{
+          margin-top: .4rem;
+        }
+      }
+      &>div:nth-child(3){
+        left: 21.17rem;
+        .info{
+          margin-top: .8rem;
+        }
+      }
+
+    }
+    .right{
+      width: calc(~"100% - 31.83rem");
+      img{
+        width: 100%;
+      }
+    }
+  }
+
+}

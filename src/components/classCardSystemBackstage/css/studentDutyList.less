@@ -1,0 +1,105 @@
+#studentDutyList{
+  .content{
+    height: 100%;
+    overflow-y: auto;
+  }
+  .am-button-small{
+    background-color: #fff;
+    height: 44px;
+    line-height: 44px;
+    border: none !important;
+    &:before{
+      border: 0;
+    }
+  }
+  .am-grid-line::before,.am-grid-line::after,.am-flexbox-item::before,.am-flexbox-item::after,.am-flexbox::after{
+    background-color: #fff;
+
+  }
+  .am-icon-md {
+    width: 1.8rem;
+    height: 1.8rem;
+    vertical-align: middle;
+  }
+  .am-grid.am-grid-line:not(.am-grid-carousel),.am-grid.am-grid-line .am-flexbox,.am-grid.am-grid-line .am-flexbox .am-flexbox-item:not(:last-child),.am-grid.am-grid-line .am-flexbox .am-flexbox-item:first-child{
+    border: 0;
+    height: auto;
+  }
+  .dutyList{
+    background-color: #fff;
+    height: calc(~"100% - 148px");
+    .planTitle{
+      position: relative;
+      font-size: 17px;
+      line-height: 24px;
+      padding: 10px 15px;
+    }
+  }
+  .am-grid{
+    height: calc(~"100% - 44px") !important;
+    overflow-y: auto;
+
+  }
+  .am-grid .am-flexbox .am-flexbox-item .am-grid-item-content .am-grid-item-inner-content{
+    height: auto;
+    justify-content: left;
+  }
+  .am-grid.am-grid-square .am-grid-item{
+    &:before{
+      padding-bottom: 0;
+    }
+    .am-grid-item-content{
+      height: auto;
+      transform: translateY(0);
+      padding: 0;
+    }
+    .am-grid-item-inner-content{
+      height: auto;
+      padding-bottom: 20px;
+
+      .am-grid-icon{
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        width: 50px!important;
+        height: 50px!important;
+      }
+    }
+
+  }
+  .am-grid-text{
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 14px;
+    font-size: 13px;
+    color: #666;
+  }
+  .am-grid.am-grid-line .am-flexbox,.am-grid .am-flexbox .am-flexbox-item.am-grid-item,.am-grid.am-grid-square .am-grid-item .am-grid-item-content{
+    position: static;
+  }
+  @media only screen and (min-width: 600px) {
+    .am-grid.am-grid-square .am-grid-item .am-grid-item-inner-content
+    {
+      .am-grid-icon{
+        width: 70px !important;
+        height: 70px !important;
+      }
+    }
+
+  }
+
+  .planTitle{
+    position: relative;
+    font-size: 17px;
+    line-height: 24px;
+    padding: 6px 15px 5px;
+    background-color: #fff;
+    .top{
+      line-height: 44px;
+
+    }
+  }
+
+}

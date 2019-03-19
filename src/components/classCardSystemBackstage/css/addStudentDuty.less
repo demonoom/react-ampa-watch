@@ -1,0 +1,64 @@
+#addStudentDuty{
+  .redStar{
+    color: red;
+    font-size: 22px;
+    position: absolute;
+    left: 73px;
+    top: 7px;
+
+  }
+  .bg_white{
+    height: calc(~"100% - 151px");
+    box-sizing: border-box;
+    position: relative;
+    .am-list-content{
+      color: #666!important;
+    }
+  }
+  .am-list{
+    height: 100%;
+  }
+  .am-list-body{
+    overflow-y: auto;
+    height: calc(~"100% - 55px");
+  }
+  .am-list-content{
+    position: relative;
+  }
+  .am-checkbox-inner{
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+  }
+  .am-list-header{
+    font-size: 17px;
+    color: #333;
+    padding-bottom: 5px;
+  }
+
+  .am-list-body{
+    border: 0;
+    padding: 0 30px 0 72px;
+    &::before,&::after{
+      background:none !important;
+    }
+    .am-list-item{
+      border-bottom: .5px #eee solid;
+    }
+    .am-list-line::after{
+      background-color: #fff;
+    }
+  }
+  .am-list-body div:not(:last-child) .am-list-line{
+    border-bottom:0;
+  }
+  .dutyTime{
+    height: 44px;
+    line-height: 44px;
+    padding:  0 15px;
+    background-color: #fff;
+    font-size: 17px;
+    color: #333;
+  }
+
+}

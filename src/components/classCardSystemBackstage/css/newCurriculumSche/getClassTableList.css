@@ -1,0 +1,287 @@
+#getClassTableList {
+  font-size: 17px;
+}
+#getClassTableList .whiteBack {
+  background-color: #fff;
+}
+#getClassTableList .am-pull-to-refresh-content-wrapper {
+  height: 100%;
+  overflow-y: auto;
+}
+#getClassTableList .am-pull-to-refresh-indicator {
+  font-size: 1rem !important;
+}
+#getClassTableList .am-list-body {
+  border: 0;
+}
+#getClassTableList .tableDiv {
+  position: relative;
+}
+#getClassTableList .tableDiv .am-card-body {
+  min-height: 1.5rem !important;
+  color: #888 !important;
+}
+#getClassTableList .tableDiv .am-card-footer {
+  margin-bottom: 1rem;
+}
+#getClassTableList .tableDiv .calmCardUnbind {
+  background: #f55d45;
+  color: #fff !important;
+  padding: 0 15px;
+  text-align: center;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 14px;
+  line-height: 24px;
+}
+#getClassTableList .tableDiv .classInfo {
+  position: relative;
+  padding: 10px 0;
+  line-height: 24px;
+}
+#getClassTableList .tableDiv .classInfo .textOver {
+  font-size: 16px;
+}
+#getClassTableList .tableDiv .classroom {
+  color: #666;
+}
+#getClassTableList .tableDiv .grade {
+  color: #a9a9a9;
+  padding-left: 10px;
+  font-size: 15px;
+}
+#getClassTableList .tableDiv .noomCardUnbind {
+  color: #ff144e;
+}
+#getClassTableList .tableDiv .liName {
+  font-size: 30px;
+}
+#getClassTableList .addModel {
+  box-sizing: border-box;
+  padding: 20px 0px;
+  position: relative;
+}
+#getClassTableList .addModel .bindGrade {
+  padding: 4px 0;
+}
+#getClassTableList .addModel .am-checkbox-inner {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+#getClassTableList .addModel .am-checkbox-agree .am-checkbox-agree-label {
+  line-height: 1.7;
+}
+#getClassTableList .addModel .am-list .am-list-body::before {
+  display: none !important;
+}
+#getClassTableList .addModel .am-list .am-list-body::after {
+  display: none !important;
+}
+#getClassTableList .addModel .am-list .am-list-body {
+  background: transparent;
+}
+#getClassTableList .addModel .am-list .am-list-body .macAddress {
+  margin-bottom: 1rem;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item {
+  background: #e4e4e4;
+  padding: 0;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line {
+  padding: 0 20px;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-content {
+  font-size: 17px;
+  padding: 1.5rem 1.5rem;
+  border-bottom: 1px solid #d5d5d5;
+  color: #676767;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-content .am-list-brief {
+  font-size: 1.4rem;
+  color: #a2a2a2;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-extra .am-radio.am-radio-checked {
+  height: 100%;
+}
+#getClassTableList .addModel .am-list .am-list-body .chooseResult .am-list-item .am-list-line .am-list-extra .am-radio-inner {
+  top: 45%;
+  transform: translateY(-50%);
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-item .am-input-label {
+  color: #3c3c3c;
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-item .am-input-control {
+  line-height: 25px;
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-item .am-input-control input {
+  color: #3c3c3c;
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-line::after {
+  height: 0px;
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-line .am-input-label.am-input-label-5 {
+  width: auto !important;
+  position: relative;
+  padding-right: 15px;
+}
+#getClassTableList .addModel .am-list .am-list-body .am-list-line .am-input-control input {
+  width: 88% !important;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#getClassTableList .addModel .chooseResult {
+  height: 300px;
+  overflow: auto;
+}
+#getClassTableList .addModel .close {
+  font-size: 1.5em;
+  background: #fff;
+  color: #e94f4f;
+}
+#getClassTableList .addModel > h1 {
+  margin-bottom: 50px;
+}
+#getClassTableList .addModel .macAddress {
+  position: relative;
+}
+#getClassTableList .addModel .macAddress .scanIcon {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#getClassTableList .addModel .classroomName,
+#getClassTableList .addModel .gradeName {
+  position: relative;
+}
+#getClassTableList .addModel .classroomName .redStar,
+#getClassTableList .addModel .gradeName .redStar {
+  color: red;
+  font-size: 22px;
+  position: absolute;
+  right: 2px;
+  top: 2px;
+}
+#getClassTableList .addModel .classroomName .stIcon,
+#getClassTableList .addModel .gradeName .stIcon {
+  width: 18px;
+  height: 28px;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -12px;
+}
+#getClassTableList .addModel .classroomName .stIcon img,
+#getClassTableList .addModel .gradeName .stIcon img {
+  width: 100%;
+}
+#getClassTableList .addModel .bottomBox {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+#getClassTableList .addModel .bottomBox span {
+  flex: 1;
+  text-align: center;
+  font-size: 17px;
+  padding: 1rem;
+  display: inline-block;
+}
+#getClassTableList .addModel .bottomBox .bind {
+  background: #e94f4f;
+  color: #fff;
+}
+#getClassTableList .addModel .bottomBox .bind:active {
+  color: rgba(255, 255, 255, 0.3);
+  background-color: #d24747;
+}
+#getClassTableList .amList_cont {
+  height: 44px;
+  line-height: 44px;
+  padding-right: 15px;
+}
+#getClassTableList .amList {
+  width: 170px;
+  display: inline-block;
+}
+#getClassTableList .amList .am-list-item .am-list-line .am-list-extra {
+  text-align: left;
+}
+#getClassTableList .amList .am-list-item .am-list-line .am-list-content {
+  color: #666 !important;
+}
+#getClassTableList .am-list-line::after {
+  background: transparent;
+}
+#getClassTableList .tableListDate {
+  color: #666;
+  padding-left: 15px;
+  width: 100%;
+  box-sizing: border-box;
+}
+#getClassTableList .tableListDate span {
+  margin-top: 8px;
+}
+#getClassTableList .am-button-small {
+  background-color: #fff;
+  height: 44px;
+  line-height: 44px;
+  border: none !important;
+}
+#getClassTableList .am-button-small:before {
+  border: 0;
+}
+#getClassTableList .am-list-body::before,
+#getClassTableList .am-list-body::after {
+  background: transparent;
+}
+#getClassTableList .am-switch .checkbox {
+  height: 23px;
+  width: 46px;
+}
+#getClassTableList .am-switch .checkbox:after {
+  width: 21px ;
+  height: 21px;
+  top: 1px;
+}
+#getClassTableList .am-switch .checkbox:before {
+  background: #e5e5e5;
+  height: 23px;
+  width: 44px;
+  top: 0;
+}
+#getClassTableList .am-list-body div:not(:last-child) .am-list-line {
+  border-bottom: 1px solid transparent;
+}
+#getClassTableList .open_text {
+  font-size: 16px;
+}
+#getClassTableList .classroom_span {
+  width: 89px;
+  display: inline-block;
+}
+#getClassTableList .am-list-view-scrollview-content {
+  width: 100%;
+}
+#getClassTableList .attendanceCont .title {
+  color: #333;
+  font-size: 17px;
+  padding: 5px 15px 0;
+  box-sizing: border-box;
+}
+#getClassTableList .attendanceCont .am-list-item {
+  min-height: 38px;
+}
+#getClassTableList .attendanceCont .time span {
+  margin-top: 8px;
+}

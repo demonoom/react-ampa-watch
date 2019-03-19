@@ -1,0 +1,59 @@
+(node) util.print is deprecated. Use console.log instead.
+#assessMoralEducation .textOver {
+  line-height: 20px;
+}
+#assessMoralEducation .am-list-body::before {
+  background: none !important;
+}
+#assessMoralEducation .am-list-body {
+  border: none !important;
+}
+#assessMoralEducation .classInfo {
+  padding: 23px 15px 13px;
+  font-size: 15px;
+  color: #666;
+}
+#assessMoralEducation .classInfo .createTime {
+  line-height: 40px;
+}
+#assessMoralEducation .classInfo .modifyBtn_common,
+#assessMoralEducation .classInfo .deleteBtn_common {
+  height: 40px;
+}
+#assessMoralEducation .classInfo .healthScore,
+#assessMoralEducation .classInfo .politenessScore {
+  color: #333;
+  font-weight: bold;
+  margin-left: 10px;
+  display: inline-block;
+  width: 25px;
+  text-align: right;
+  overflow-x: hidden;
+  vertical-align: bottom;
+  margin-right: 1px;
+}
+#assessMoralEducation .classInfo .topDiv {
+  margin-bottom: 5px;
+}
+#assessMoralEducation .btnDiv,
+#assessMoralEducation .topDiv {
+  overflow: hidden;
+}
+#assessMoralEducation .fl {
+  float: left;
+}
+#assessMoralEducation .fr {
+  float: right;
+}
+#assessMoralEducation .bold {
+  font-weight: bold;
+}
+#assessMoralEducation .nodata {
+  color: #999;
+  background-color: #fff;
+  text-align: center;
+  line-height: 98px;
+}
+#assessMoralEducation .am-list-body::after {
+  background-color: #eee ;
+}

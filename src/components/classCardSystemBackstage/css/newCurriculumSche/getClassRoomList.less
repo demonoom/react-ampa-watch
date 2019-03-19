@@ -1,0 +1,326 @@
+#getClassRoomList {
+  .search-nav{
+    background: #fff;
+    border-top: 9px #efeff4 solid;
+    border-right: 15px solid #efeff4;
+    border-bottom: 9px solid #efeff4;
+    border-left: 15px solid #efeff4;
+    position: relative;
+      & i{
+        background: url("../../imgs/search-icon.png") no-repeat center center #fff;
+        font-size: 0;
+        width: 20px;
+        height: 34px;
+        background-size: 15px 19px;
+        float: left;
+        padding-left: 8px;
+      }
+      & input{
+        z-index: 2;
+        width: calc(~"100% - 58px");
+        text-align: left;
+        display: block;
+        color: #000;
+        font-size: 15px;
+        background-color: #fff;
+        border: 0;
+        padding: 8px 30px 6px 0px;
+        height: 20px;
+        line-height: 20px;
+        border-radius: 0 !important;
+      }
+      & .close{
+        position: absolute;
+        background: url("../../imgs/icon-close.png") no-repeat;
+        width: 16px;
+        height: 16px;
+        right: 4px;
+        top: 9px;
+        background-size: 16px;
+      }
+  }
+  .textOver {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+
+  }
+  .whiteBack {
+    background-color: #fff;
+  }
+  .am-list-body::before, .am-list-body::after {
+    background: none;
+  }
+  .am-pull-to-refresh-content-wrapper {
+    height: 100%;
+    overflow-y: auto;
+  }
+  //.am-list-view-scrollview-content {
+  //  /*height: calc(~"100% - 70px");*/
+  //  height: 100%;
+  //  overflow-y: auto;
+  //  width: 100%;
+  //}
+  .am-pull-to-refresh-indicator {
+    font-size: 1rem !important;
+  }
+  .am-list-body {
+    border: 0;
+  }
+  font-size: 17px;
+
+  .tableDiv {
+    position: relative;
+    .am-card-body {
+      min-height: 1.5rem !important;
+      color: #888 !important;
+    }
+    .am-card-footer {
+      margin-bottom: 1rem;
+    }
+    .calmCardUnbind {
+      background: #f55d45;
+      color: #fff !important;
+      padding: 0 15px;
+      text-align: center;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+      border-radius: 2px;
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      font-size: 14px;
+      line-height: 24px;
+    }
+    .classInfo {
+      position: relative;
+      padding: 0;
+      line-height: 24px;
+      .textOver {
+        width: calc(~"100% - 70px");
+        color: #a9a9a9;
+        font-size: 16px;
+      }
+    }
+    .classroom {
+      color: #464646;
+    }
+    .grade {
+      color: #a9a9a9;
+      font-size: 15px;
+      padding-left: 15px;
+    }
+    .noomCardUnbind {
+      color: #ff144e;
+    }
+    .liName {
+      font-size: 30px;
+    }
+  }
+  .addModel {
+    box-sizing: border-box;
+    padding: 20px 0px;
+    // display: flex;
+    // flex-direction: column;
+    // background-color: #fff;
+    position: relative;
+    .bindGrade {
+      padding: 4px 0;
+    }
+    .am-checkbox-inner {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+    }
+    .am-checkbox-agree {
+      .am-checkbox-agree-label {
+        line-height: 1.7;
+      }
+    }
+    .am-list {
+      .am-list-body::before {
+        display: none !important;
+      }
+      .am-list-body::after {
+        display: none !important;
+      }
+      .am-list-body {
+        background: transparent;
+
+        .macAddress {
+          margin-bottom: 1rem;
+        }
+        .chooseResult {
+          .am-list-item {
+            background: #e4e4e4;
+            padding: 0;
+            .am-list-line {
+              padding: 0 20px;
+              .am-list-content {
+                font-size: 17px;
+                padding: 1.5rem 1.5rem;
+                border-bottom: 1px solid #d5d5d5;
+                color: #676767;
+                .am-list-brief {
+                  font-size: 1.4rem;
+                  color: #a2a2a2;
+                }
+              }
+              .am-list-extra {
+                .am-radio.am-radio-checked {
+                  height: 100%;
+                }
+                .am-radio-inner {
+                  top: 45%;
+                  transform: translateY(-50%);
+
+                }
+              }
+            }
+          }
+        }
+        .am-list-item {
+          // padding: 2rem 2rem;
+          .am-input-label {
+            color: #3c3c3c;
+          }
+          .am-input-control {
+            line-height: 25px;
+          }
+          .am-input-control input {
+            color: #3c3c3c;
+          }
+        }
+
+        .am-list-line::after {
+          height: 0px;
+        }
+        .am-list-line {
+          .am-input-label.am-input-label-5 {
+            width: auto !important;
+            position: relative;
+            padding-right: 15px;
+          }
+          .am-input-control {
+            input {
+              width: 88% !important;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+            }
+          }
+        }
+      }
+    }
+    .chooseResult {
+      height: 300px;
+      overflow: auto;
+    }
+    .close {
+      font-size: 1.5em;
+      background: #fff;
+      color: #e94f4f;
+    }
+    > h1 {
+      margin-bottom: 50px;
+    }
+    .macAddress {
+      position: relative;
+      .scanIcon {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    .classroomName,
+    .gradeName {
+      position: relative;
+      .redStar {
+        color: red;
+        font-size: 22px;
+        position: absolute;
+        right: 2px;
+        top: 2px;
+
+      }
+      .stIcon {
+        width: 18px;
+        height: 28px;
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        margin-top: -12px;
+        img {
+          width: 100%
+        }
+      }
+    }
+
+    .bottomBox {
+      display: flex;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      span {
+        flex: 1;
+        text-align: center;
+        font-size: 17px;
+        padding: 1rem;
+        display: inline-block;
+      }
+      .bind {
+        background: #e94f4f;
+        color: #fff;
+        &:active {
+          color: rgba(255, 255, 255, 0.3);
+          background-color: #d24747;
+        }
+      }
+
+    }
+
+  }
+  .am-list-line::after{
+    background: transparent;
+  }
+  .classroom_subject{
+    padding-bottom: 10px;
+  }
+  .am-list-body div:not(:last-child) .am-list-line{
+    border-bottom:transparent;
+  }
+  .edit_coordinateLi{
+    background: #F5F5F5;
+    padding: 15px 0 13px 15px;
+  }
+  .edit_coordinate{
+    border-radius: 4px;
+    padding: 0 10px;
+    color: #3672ed;
+    text-align: center;
+    font-size:16px;
+    display: inline-block;
+    background: url("../../imgs/edit_coordinate.png") no-repeat;
+    background-size: 18px ;
+    text-indent: 15px;
+  }
+  .grade-left{
+    width: 72px;
+    display: inline-block;
+    color: #666 !important;
+  }
+  .grade-right{
+    width: calc(~"100% - 72px");
+    display: inline-block;
+    color: #666 !important;
+  }
+  .grade-letter1{
+    letter-spacing: 4px;
+  }
+
+}

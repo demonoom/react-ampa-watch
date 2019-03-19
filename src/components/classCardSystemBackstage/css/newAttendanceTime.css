@@ -1,0 +1,36 @@
+#newAttendanceTime .redStar {
+  color: red;
+  font-size: 22px;
+  position: absolute;
+  left: 72px;
+  top: 10px;
+}
+#newAttendanceTime .CourseTableArea {
+  min-height: calc(100% - 60px);
+  background-color: #fff;
+}
+#newAttendanceTime .CourseTableArea .addClassTable {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 1.07rem;
+  margin-left: 1.07rem;
+  margin-bottom: 1.07rem;
+}
+#newAttendanceTime .addCourseButton {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+#newAttendanceTime .teachBuild .redStar {
+  left: 106px;
+  top: 2px;
+}
+#newAttendanceTime .teachBuild .am-list-item .am-input-label.am-input-label-5 {
+  width: 120px;
+  margin-right: 2px;
+  position: relative;
+}
+#newAttendanceTime .teachBuild .am-list-item .am-input-control input {
+  font-size: 16px;
+  color: #333;
+}

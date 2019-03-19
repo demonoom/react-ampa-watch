@@ -1,0 +1,234 @@
+#notify .headPic {
+  position: absolute;
+  top: 34%;
+  transform: translateY(-34%);
+  left: 15px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  margin-top: 0;
+}
+#notify .deleteNoifty {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  height: 25px;
+}
+#notify .am-list-line {
+  border-bottom: 0;
+}
+#notify .am-list-line::after {
+  right: 15px !important;
+  width: calc(100% - 15px);
+  background: none;
+}
+#notify .am-input-control {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+#notify .am-input-control input {
+  font-size: 16px;
+  color: #333 !important;
+}
+#notify .am-textarea-control textarea {
+  font-size: 16px;
+  color: #333 !important;
+}
+#notify .listCont {
+  position: relative;
+  overflow: hidden;
+}
+#notify .listCont .am-list-item {
+  padding-left: 75px;
+  padding-right: 0;
+}
+#notify .notifyList .am-list-view-scrollview-content {
+  width: 100% !important;
+}
+#notify .am-list-body {
+  background: #f4f4f4;
+  border: none;
+}
+#notify .am-list-body::before,
+#notify .am-list-body::after {
+  background: none;
+}
+#notify .notifyList .am-list-footer {
+  height: 75px;
+}
+#notify .am-list-brief {
+  line-height: 24px;
+  margin-top: 0;
+}
+#notify .brief_text {
+  line-height: 24px;
+  max-height: 24px;
+  margin-top: 0;
+  /* height: 24px; */
+  /* overflow-y: hidden; */
+  width: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: normal;
+  color: #888;
+  font-size: 15px;
+}
+#notify .brief_text .previewEditArea {
+  font-weight: normal !important;
+  color: #888;
+  font-size: 15px;
+  border: none !important;
+  line-height: 24px !important;
+  height: 24px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#notify .am-list-item .am-list-line-multiple {
+  padding: 15px 15px 15px 0;
+}
+#notify .am-list-item .am-list-line-multiple:before {
+  content: '';
+  position: absolute;
+  background-color: #eeeeee;
+  display: block;
+  z-index: 1;
+  top: auto;
+  right: 15px;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 15px);
+  height: 1PX;
+  -webkit-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transform: scaleY(0.5);
+  -ms-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+#notify .listCont:last-child .am-list-item .am-list-line-multiple:before {
+  background-color: transparent;
+}
+#notify .time {
+  float: right;
+  color: #999;
+  font-size: 14px;
+}
+#notify .title {
+  width: calc(100% - 90px);
+  line-height: 25px;
+}
+#notify .am-list-content {
+  margin-right: 45px;
+}
+#notify .am-icon-md {
+  width: 18px;
+  height: 18px;
+}
+#notify .am-textarea-count {
+  right: 15px;
+}
+#notify .import_title {
+  padding-left: 15px;
+  background: #fff;
+  font-size: 17px;
+  padding: 15px 0 0 15px;
+  color: #333;
+}
+#notify .classroom_label {
+  color: #73B6F5;
+  font-size: 14px;
+  line-height: 22px;
+}
+#notify .clear {
+  overflow: hidden;
+  height: 25px;
+}
+#notify .updateModel {
+  position: absolute;
+  width: 100%;
+  height: 70%;
+  left: 0;
+  bottom: 0;
+  background: white;
+  z-index: 101;
+}
+#notify .updateModel .searchDiv {
+  height: 28px;
+  padding: 8px;
+  background-color: #F1F1F1;
+  overflow: hidden;
+  line-height: 28px;
+}
+#notify .updateModel .searchDiv input {
+  height: 28px;
+  background-color: white;
+  border-radius: 2px;
+  padding: 0 9px;
+  box-sizing: border-box;
+  width: calc(100% - 50px);
+  border: 0;
+}
+#notify .updateModel .searchDiv span {
+  color: #108ee9;
+  font-size: 16px;
+  float: right;
+  padding-right: 4px;
+  cursor: pointer;
+}
+#notify .updateModel .cont {
+  padding: 0 8px;
+  overflow-y: auto;
+  height: calc(100% - 44px);
+}
+#notify .updateModel .cont .noomPowerList {
+  line-height: 42px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+#notify .updateModel .bottomBox {
+  display: flex;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+#notify .updateModel .bottomBox span {
+  flex: 1;
+  text-align: center;
+  font-size: 15px;
+  padding: 0;
+  line-height: 40px;
+  height: 40px;
+  display: inline-block;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  border: 1px #F56A55 solid;
+  color: #F56A55;
+}
+#notify .updateModel .bottomBox span.bind {
+  background: #F56A55;
+  color: #fff;
+}
+#notify .updateModel .bottomBox span.bind:active {
+  color: rgba(255, 255, 255, 0.3);
+  background-color: #F56A55;
+}
+#notify .active {
+  color: red;
+}
+#notify .mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+#notify .editor_image {
+  display: none;
+}

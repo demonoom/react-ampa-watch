@@ -1,0 +1,18 @@
+CACHE MANIFEST
+# version v1.5.6
+
+CACHE:
+/index.css?v=1.5.6
+/shared.js?v=1.5.6
+/index.js?v=1.5.6
+/teachingSpaceStudent_chunk.js?v=1.5.6
+/teachingSpaceTeacher_chunk.js?v=1.5.6
+/index.html
+/src/helpers/jquery.min.js
+/src/helpers/webServiceUtil.js
+/src/jsBridge.js
+
+NETWORK:
+*
+
+FALLBACK:

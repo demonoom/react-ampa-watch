@@ -1,0 +1,235 @@
+(node) util.print is deprecated. Use console.log instead.
+#addCurriculumSchedule {
+  overflow-y: auto;
+  /*创建动画*/
+}
+#addCurriculumSchedule .CourseTableArea {
+  min-height: 280px;
+  background-color: #fff;
+}
+#addCurriculumSchedule .CourseTableArea .addClassTable {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 1.07rem;
+  margin-left: 1.07rem;
+  margin-bottom: 1.07rem;
+}
+#addCurriculumSchedule .CourseTableArea .am-list-item .am-input-control input,
+#addCurriculumSchedule .CourseTableArea .am-textarea-control textarea {
+  color: #333;
+}
+#addCurriculumSchedule .addCourseButton {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+}
+#addCurriculumSchedule .add_element {
+  background-color: #f6f6f6;
+  color: #333;
+  text-align: left;
+  height: 44px;
+  line-height: 44px;
+  width: 100%;
+  display: inline-block;
+  text-indent: 8px;
+  font-size: 17px;
+  position: relative;
+  overflow: hidden;
+}
+#addCurriculumSchedule .flex_addElement,
+#addCurriculumSchedule .teacher_list {
+  padding-top: 15px;
+}
+#addCurriculumSchedule .flex_addElement div {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  margin-left: 8px;
+  min-width: 10px;
+}
+#addCurriculumSchedule .flex_addElement div:first-child {
+  margin-left: 0;
+}
+#addCurriculumSchedule .addElement_teacher div:nth-child(2) {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+}
+#addCurriculumSchedule .flex_addElement .am-list-item .am-list-line,
+#addCurriculumSchedule .flex_addElement .am-list-item.am-input-item {
+  padding-right: 0 !important;
+  padding-left: 0;
+}
+#addCurriculumSchedule .am-list-body,
+#addCurriculumSchedule .am-list-body::before {
+  border: none;
+  background: #fff;
+}
+#addCurriculumSchedule .addCurriculum_cont {
+  height: calc(100% - 77px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+#addCurriculumSchedule .icon_triangle {
+  width: 0;
+  height: 0;
+  border-width: 7px 5px;
+  border-style: solid;
+  border-color: #a9a9a9 transparent transparent transparent;
+  position: absolute;
+  right: 10px;
+  top: 19px;
+}
+#addCurriculumSchedule .overflow_width {
+  width: calc(100% - 30px);
+  float: left;
+}
+#addCurriculumSchedule .teacher_list div {
+  margin-left: 8px;
+  min-width: 10px;
+}
+#addCurriculumSchedule .teacher_list div:first-child {
+  margin-left: 0;
+}
+#addCurriculumSchedule .teacher_list div:first-child,
+#addCurriculumSchedule .teacher_list div:nth-child(2) {
+  width: 50%;
+}
+#addCurriculumSchedule .teacher_list div:nth-child(3) {
+  width: 40%;
+}
+#addCurriculumSchedule .search_list {
+  margin: 15px 15px 0 15px;
+  padding-top: 0;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 0;
+  background: #f6f6f6;
+}
+#addCurriculumSchedule .search_list input {
+  width: calc(100% - 30px);
+  background: #f6f6f6;
+  border: none;
+  text-indent: 8px;
+  font-size: 17px;
+  color: #333;
+}
+#addCurriculumSchedule .search_list input::-webkit-input-placeholder {
+  color: #bbbbbe;
+}
+#addCurriculumSchedule .search_list input::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: #bbbbbe;
+}
+#addCurriculumSchedule .search_list input:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: #bbbbbe;
+}
+#addCurriculumSchedule .search_list input:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #bbbbbe;
+}
+#addCurriculumSchedule .search_list img {
+  width: 15px;
+  height: 19px;
+  margin-top: 12px;
+  margin-right: 15px;
+}
+#addCurriculumSchedule .searchTerRes {
+  z-index: 99999;
+  background-color: #fff;
+  width: 100%;
+  height: 280px;
+  position: absolute;
+  bottom: -280px;
+  z-index: 1000;
+}
+#addCurriculumSchedule .ding_enter {
+  animation-name: moveLeave;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  /*设置动画的播放状态  paused:暂停   running:播放*/
+  animation-play-state: running;
+}
+@keyframes moveTest {
+  from {
+    transform: translate(0, -280px);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+#addCurriculumSchedule .ding_leave {
+  animation-name: moveTest;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+@keyframes moveLeave {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -280px);
+  }
+}
+#addCurriculumSchedule .search_btn {
+  width: 100%;
+  height: 41px;
+  text-align: right;
+  background: #fff;
+}
+#addCurriculumSchedule .search_btn :after {
+  content: "";
+  pointer-events: none;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  height: 1px;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+#addCurriculumSchedule .search_btn span {
+  color: #108ee9;
+  font-size: 17px;
+  padding: 11px 15px;
+  display: inline-block;
+}
+#addCurriculumSchedule .search_wraplist {
+  height: 238px;
+  overflow-y: auto;
+}
+#addCurriculumSchedule .search_wraplist .am-list-item:after {
+  content: "";
+  pointer-events: none;
+  box-sizing: border-box;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  height: 1px;
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  -webkit-transform-origin: 0 0;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+#addCurriculumSchedule .teacher_list_p {
+  padding-top: 0;
+}
+#addCurriculumSchedule .search_bg {
+  background: rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+}

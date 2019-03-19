@@ -1,0 +1,83 @@
+#addMoralEducation {
+  overflow-y: auto;
+  height: 100%;
+  .redStar{
+    color: red;
+    font-size: 22px;
+    position: absolute;
+    left: 73px;
+    top: 7px;
+  }
+  .CourseTableArea {
+    height:calc(~"100% - 77px");
+    background-color: #fff;
+    overflow-y: auto;
+    .addClassTable {
+      width: 3rem;
+      height: 3rem;
+      margin-top: 1.07rem;
+      margin-left: 1.07rem;
+    }
+  }
+  .addCourseButton {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+  }
+  .add_element{
+    background-color: #f6f6f6;
+    color: #333;
+    text-align: left;
+    height: 44px;
+    line-height: 44px;
+    width: 100%;
+    display: inline-block;
+    text-indent: 8px;
+    font-size: 17px;
+  }
+  .flex_addElement{
+    padding-top: 15px;
+  }
+  .flex_addElement div{
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    margin-left: 8px;
+    min-width: 10px;
+  }
+  .flex_addElement div:first-child {
+    margin-left: 0;
+  }
+  .flex_addElement .am-list-item .am-list-line, .flex_addElement .am-list-item.am-input-item{
+    padding-right: 0 !important;
+    padding-left:0;
+  }
+
+  .am-list-body, .am-list-body::before, .am-list-body::after{
+    border:none;
+    background: none;
+  }
+  .am-list-line::after{
+    display: none !important;
+
+  }
+  .am-list-line{
+    border-bottom: .5px #eee solid;
+    padding-right: 0;
+    margin-right: 15px;
+  }
+  .am-list-content{
+    width:20px !important;
+    position: relative;
+  }
+  .am-list-item .am-input-control input{
+    float: right;
+    width: 88px;
+    font-size: 16px;
+    text-align: right;
+  }
+  .am-list-item .am-input-label.am-input-label-5{
+    width: auto !important;
+  }
+}

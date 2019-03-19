@@ -1,0 +1,37 @@
+(node) util.print is deprecated. Use console.log instead.
+#studentSelectCourse {
+  color: #fff;
+  overflow-y: auto;
+  font-size: .72rem;
+}
+#studentSelectCourse.home_content .inner_bg {
+  padding: 0;
+  background: none;
+}
+#studentSelectCourse.home_content .inner_bg .navBar {
+  background-color: #fff;
+}
+#studentSelectCourse .black_bg {
+  background-color: #323336;
+  padding: 1.9rem;
+  height: calc(100% - 2.22rem);
+  box-sizing: border-box;
+}
+#studentSelectCourse .tableItem {
+  border-collapse: collapse;
+  text-align: center;
+  width: 100%;
+}
+#studentSelectCourse .tableItem td {
+  border: 0.06rem #55575d solid;
+  padding: .5rem 0;
+}
+#studentSelectCourse .tableItem td span {
+  font-size: .56rem;
+  padding-top: .28rem;
+}
+#studentSelectCourse .tableItem td span.class_name {
+  font-size: .72rem;
+  padding-top: 0;
+  padding-bottom: .39rem;
+}

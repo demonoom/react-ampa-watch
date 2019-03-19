@@ -1,0 +1,45 @@
+#moralEducation{
+    position: relative;
+    .tableDiv {
+        overflow: auto;
+    }
+    .addBunton {
+        img {
+            width: 100%;
+        }
+    }
+    .classSearchResult {
+        //height:100%;
+        height: calc(~"100% - 148px");
+        background-color: #fff;
+        overflow-y: auto;
+        .classSearchResultInfo{
+            padding: 5px 15px;
+            &>div{
+                padding: 12px 0;
+                font-size: 17px;
+
+                border-bottom: 1px #eee solid;
+            }
+        }
+
+
+    }
+    .classHealth,.classPoliteness{
+        overflow: hidden;
+        .resultGrade{
+            float:right;
+
+        }
+    }
+    .choiceData{
+        font-size: 16px;
+
+    }
+    .am-list-item .am-list-line .am-list-content{
+        padding: 15px 0;
+    }
+    .am-list-line::after{
+        background-color: #eee;
+    }
+}

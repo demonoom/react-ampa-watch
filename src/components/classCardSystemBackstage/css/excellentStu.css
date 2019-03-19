@@ -1,0 +1,128 @@
+#excellentStu .cont .left {
+  width: 31.83rem;
+  background: url("../imgs/backPic.png") no-repeat;
+  background-size: 100% 9.11rem;
+  margin-top: 0.22rem;
+  position: relative;
+  padding-top: 9.55rem;
+}
+#excellentStu .cont .left > div {
+  height: 2.25rem;
+  background-color: #eaeeff;
+  margin-bottom: 0.44rem;
+  align-items: center;
+  text-align: center;
+  color: #2a3350;
+  font-size: 0.78rem;
+}
+#excellentStu .cont .left > div .num {
+  width: 29%;
+  font-size: 0.83rem;
+}
+#excellentStu .cont .left > div .info {
+  width: 38%;
+  text-align: left;
+  padding-left: 1.8rem;
+  box-sizing: border-box;
+}
+#excellentStu .cont .left > div .info .userName {
+  display: inline-block;
+  line-height: 2.25rem;
+  width: calc(100% - 2.75rem);
+}
+#excellentStu .cont .left > div .info img {
+  width: 1.94rem;
+  height: 1.94rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin-right: 0.81rem;
+  overflow: hidden;
+  vertical-align: top;
+  margin-top: 0.23rem;
+}
+#excellentStu .cont .left > div .time {
+  width: 32%;
+  color: #367aed;
+}
+#excellentStu .cont .left > div .time img {
+  width: 0.78rem;
+  height: 0.78rem;
+  margin-right: 0.38rem;
+  vertical-align: middle;
+  margin-top: -0.15rem;
+}
+#excellentStu .cont .left > div:nth-child(1),
+#excellentStu .cont .left > div:nth-child(2),
+#excellentStu .cont .left > div:nth-child(3) {
+  height: 7.39rem;
+  width: 10.53rem;
+  display: block;
+  background: none;
+  position: absolute;
+  text-align: center;
+  top: 1.94rem;
+  margin-bottom: 0;
+}
+#excellentStu .cont .left > div:nth-child(1) .num,
+#excellentStu .cont .left > div:nth-child(2) .num,
+#excellentStu .cont .left > div:nth-child(3) .num {
+  display: none;
+}
+#excellentStu .cont .left > div:nth-child(1) .info,
+#excellentStu .cont .left > div:nth-child(2) .info,
+#excellentStu .cont .left > div:nth-child(3) .info {
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  padding-left: 0;
+}
+#excellentStu .cont .left > div:nth-child(1) .info img,
+#excellentStu .cont .left > div:nth-child(2) .info img,
+#excellentStu .cont .left > div:nth-child(3) .info img {
+  border: 0.16rem #fff solid;
+  width: 3.17rem;
+  height: 3.17rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin-right: 0;
+  overflow: hidden;
+}
+#excellentStu .cont .left > div:nth-child(1) .info .userName,
+#excellentStu .cont .left > div:nth-child(2) .info .userName,
+#excellentStu .cont .left > div:nth-child(3) .info .userName {
+  display: block;
+  font-size: 0.83rem;
+  line-height: 1.2;
+  width: 90%;
+  margin: 0.28rem auto 0.3rem;
+}
+#excellentStu .cont .left > div:nth-child(1) .time,
+#excellentStu .cont .left > div:nth-child(2) .time,
+#excellentStu .cont .left > div:nth-child(3) .time {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+}
+#excellentStu .cont .left > div:nth-child(1) {
+  left: 10.4rem;
+}
+#excellentStu .cont .left > div:nth-child(2) {
+  left: -0.15rem;
+}
+#excellentStu .cont .left > div:nth-child(2) .info {
+  margin-top: 0.4rem;
+}
+#excellentStu .cont .left > div:nth-child(3) {
+  left: 21.17rem;
+}
+#excellentStu .cont .left > div:nth-child(3) .info {
+  margin-top: 0.8rem;
+}
+#excellentStu .cont .right {
+  width: calc(100% - 31.83rem);
+}
+#excellentStu .cont .right img {
+  width: 100%;
+}
