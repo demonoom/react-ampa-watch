@@ -280,7 +280,7 @@ export default class addWatchInfo extends React.Component {
                 <div className="p38">
                     <div className="infoContent selectDown">
                         <div className='bindPic' style={{ display: this.state.loginType == 1 ? "block" : "none" }}><img
-                            src={{require:('../../images/bindPic.png')}} alt=""/></div>
+                            src={require('../../images/bindPic.png')} alt=""/></div>
                         <div className='guardPic' style={{ display: this.state.loginType == 0 ? "block" : "none" }}>守护关注一生</div>
                         <div className='line_public'><span>{this.state.macId}</span><span onClick={this.scanCode}>扫描</span></div>
                         <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
