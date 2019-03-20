@@ -71,7 +71,7 @@ export default class morePage extends React.Component {
             window.location.href = url;
         });
     }
-
+    //推送监护人
     pushContacts = () =>{
         var commandJson = {
             "command": "watch2gPushContacts", data: {
@@ -82,7 +82,7 @@ export default class morePage extends React.Component {
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
     }
-
+    //推送天气
     pushWeather = () =>{
         var commandJson = {
             "command": "pushWeather", data: {
