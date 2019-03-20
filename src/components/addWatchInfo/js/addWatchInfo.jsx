@@ -278,10 +278,11 @@ export default class addWatchInfo extends React.Component {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
                 <div className="p38">
-                    <div className="content">
-                        <h5 style={{ display: this.state.loginType == 1 ? "block" : "none" }}>沟通从心开始</h5>
-                        <h5 style={{ display: this.state.loginType == 0 ? "block" : "none" }}>守护关注一生</h5>
-                        <div><span>{this.state.macId}</span><span style={{fontSize: '48px'}} onClick={this.scanCode}>扫描</span></div>
+                    <div className="infoContent selectDown">
+                        <div className='bindPic' style={{ display: this.state.loginType == 1 ? "block" : "none" }}><img
+                            src={{require:('../../images/bindPic.png')}} alt=""/></div>
+                        <div className='guardPic' style={{ display: this.state.loginType == 0 ? "block" : "none" }}>守护关注一生</div>
+                        <div className='line_public'><span>{this.state.macId}</span><span onClick={this.scanCode}>扫描</span></div>
                         <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <Picker
                                 data={sexData}

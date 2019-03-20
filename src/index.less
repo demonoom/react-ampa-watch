@@ -2,7 +2,7 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 html, body {
-  background-color: white;
+  background-color: white !important;
   height: 100%;
   font-size: 14px;
   font-family: "Helvetica Neue", "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial;
@@ -156,12 +156,45 @@ ul, li {
 .p38{
   padding: 0 38px;
 }
+.line_public{
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #DDDDDD;
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    -o-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
+/*下拉框下箭头*/
+.selectDown{
+  .am-list-item .am-list-line .am-list-extra{
+    display: none;
+  }
+  .am-list-item .am-list-line .am-list-arrow{
+    background-image:url("components/images/icon_selectDown.png") !important;
+    width: 23px;
+    height: 13px;
+  }
+  .am-list-item .am-list-line .am-list-content{
+    color: #999;
+    font-size: 15px;
+  }
+}
+/*保存按钮*/
 .submitBtn {
   width: 100%;
   box-sizing: border-box;
   border-radius: 25px;
   cursor: pointer;
-  line-height: 50px;
+  line-height: 49px;
   color: white;
   background-color: #17ACF7;
   text-align: center;
