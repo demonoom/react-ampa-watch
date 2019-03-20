@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/images/bindStuPic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/images/stuAccountPic.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/images/successPic.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/images/bindPic.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/images/bindPic.png" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +22,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-6">
-              <caret line="283" column="51" lean-forward="true" selection-start-line="283" selection-start-column="51" selection-end-line="283" selection-end-column="51" />
+            <state relative-caret-position="122">
+              <caret line="59" column="20" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="20" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -29,11 +34,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.less" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="205" column="27" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="27" />
+            <state relative-caret-position="-136">
+              <caret line="179" column="12" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="179" selection-end-column="12" />
               <folding>
                 <element signature="e#1004#1022#0" />
                 <element signature="e#1035#1087#0" />
@@ -58,11 +63,32 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="bindStudentInfo.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="113" column="55" selection-start-line="113" selection-start-column="48" selection-end-line="113" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="verifyStuInfo.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="142" column="53" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="53" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+            <state relative-caret-position="290">
+              <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -83,9 +109,12 @@
       <find>ghjkldfghjk</find>
       <find>.am-list-extra</find>
       <find>am-list-line</find>
-      <find>scanDiv</find>
       <find>submitBtn</find>
+      <find>请注册</find>
       <find>submit</find>
+      <find>scanDiv</find>
+      <find>主账号</find>
+      <find>loginType</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -96,8 +125,10 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
         <option value="$PROJECT_DIR$/src/index.less" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" />
       </list>
     </option>
   </component>
@@ -157,6 +188,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="addWatchInfo" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="addWatchInfo" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -165,6 +204,21 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="stuAccountRegist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="stuAccountRegist" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -204,16 +258,15 @@
       <option name="presentableId" value="Default" />
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
-      <workItem from="1553047156778" duration="10927000" />
+      <workItem from="1553047156778" duration="15816000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8390000" />
+    <option name="totallyTimeSpent" value="13279000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -224,7 +277,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.140625" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3765625" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -509,13 +562,6 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
@@ -523,27 +569,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6">
-          <caret line="283" column="51" lean-forward="true" selection-start-line="283" selection-start-column="51" selection-end-line="283" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="205" column="27" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="27" />
+        <state relative-caret-position="-136">
+          <caret line="179" column="12" lean-forward="true" selection-start-line="179" selection-start-column="12" selection-end-line="179" selection-end-column="12" />
           <folding>
             <element signature="e#1004#1022#0" />
             <element signature="e#1035#1087#0" />
@@ -563,6 +592,46 @@
             <element signature="e#2343#2368#0" />
             <element signature="e#2756#2829#0" />
             <element signature="e#3344#3367#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/images/bindPic.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="113" column="55" selection-start-line="113" selection-start-column="48" selection-end-line="113" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="290">
+          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/images/bindStuPic.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="142" column="53" selection-start-line="142" selection-start-column="48" selection-end-line="142" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="59" column="20" selection-start-line="59" selection-start-column="11" selection-end-line="59" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>

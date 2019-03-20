@@ -1,18 +1,19 @@
 import React from 'react';
 import {
-    InputItem,Toast,Modal
+    InputItem, Toast, Modal
 } from 'antd-mobile';
+
 const alert = Modal.alert;
 export default class bindStudentInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             littleAntName: "",
-            stuInfoData:null
+            stuInfoData: null
         };
     }
 
-    componentWillMount () {
+    componentWillMount() {
         document.title = '绑定学生账号';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
@@ -26,15 +27,17 @@ export default class bindStudentInfo extends React.Component {
             sex
         })
     }
-    componentDidMount () {
+
+    componentDidMount() {
         Bridge.setShareAble("false");
     }
-    componentWillUnmount () {
+
+    componentWillUnmount() {
         window.removeEventListener('resize', this.onWindwoResize);
     }
 
     //监听窗口改变时间
-    onWindwoResize () {
+    onWindwoResize() {
         // this
         setTimeout(() => {
             this.setState({
@@ -52,8 +55,8 @@ export default class bindStudentInfo extends React.Component {
         });
     }
     //下一页
-    nextPage=()=>{
-        if(this.state.littleAntName == ""){
+    nextPage = () => {
+        if (this.state.littleAntName == "") {
             Toast.info("请输入小蚂蚁账号")
             return;
         }
@@ -61,15 +64,15 @@ export default class bindStudentInfo extends React.Component {
             "method": 'getUserByAccount',
             "account": this.state.littleAntName,
         };
-        console.log(param,"param")
+        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result,"rerere")
+                console.log(result, "rerere")
                 if (result.success && result.response) {
                     this.setState({
-                        stuInfoData:result.response
+                        stuInfoData: result.response
                     })
-                    var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType="+this.state.loginType+"&schoolName="+result.response.schoolName+"&uName="+result.response.userName+"&stuId="+result.response.colUid+"&macAddr="+this.state.macAddr;
+                    var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType=" + this.state.loginType + "&schoolName=" + result.response.schoolName + "&uName=" + result.response.userName + "&stuId=" + result.response.colUid + "&macAddr=" + this.state.macAddr;
                     var data = {
                         method: 'openNewPage',
                         url: url
@@ -85,12 +88,12 @@ export default class bindStudentInfo extends React.Component {
                 Toast.info('请求失败');
             }
         });
-       
+
     }
 
     //跳注册页面
-    toRegPage=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex+"&macAddr="+this.state.macAddr;
+    toRegPage = () => {
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
@@ -100,18 +103,26 @@ export default class bindStudentInfo extends React.Component {
         });
     }
 
-    render () {
+    render() {
         return (
-            <div id="bindStudentInfo" style={{ height: this.state.clientHeight }}>
-                <h5>绑定学生账号</h5>
-                <InputItem
-                    className=""
-                    placeholder="请输入小蚂蚁账号"
-                    value={this.state.littleAntName}
-                    onChange={this.littAntOnChange}
-                ></InputItem>
-                <div><span onClick={this.toRegPage}>申请新账号</span></div>
-                <div onClick={this.nextPage}>下一步</div>
+            <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
+                <div className="p38 bindStu">
+                    <div className="picDiv">
+                        <img
+                            src={require('../../images/bindStuPic.png')} alt=""/>
+                    </div>
+                    <div className="line_public stuCont">
+                        <InputItem
+                            className=""
+                            placeholder="请输入小蚂蚁账号"
+                            value={this.state.littleAntName}
+                            onChange={this.littAntOnChange}
+                        ></InputItem>
+                    </div>
+                    <div className='applyAccount'><span onClick={this.toRegPage}>*申请新账号</span></div>
+                    <div className='submitBtn' onClick={this.nextPage}>下一步</div>
+                </div>
+
             </div>
         );
     }
