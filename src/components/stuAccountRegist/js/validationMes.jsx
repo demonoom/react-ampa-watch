@@ -115,7 +115,7 @@ export default class validationMes extends React.Component {
                 <div className="p38">
                     <div className="infoContent selectDown">
                         <div className="bindStudent">
-                            <img src={require('../../images/bindStudent.png')} alt=""/>
+                            <img src={require('../../images/bindTeacher.png')} alt=""/>
                         </div>
                         <div className="line_public">
                             <InputItem
