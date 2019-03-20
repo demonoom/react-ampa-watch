@@ -22,7 +22,7 @@ export default class addWatchInfo extends React.Component {
             stuName: "",
             sexValue: "",
             showSexDiv:false,
-            showRelationiDiv:false,
+            showRelationiDiv:true,
             relationValue: "",
             flag: true,
             relationData: [
@@ -134,7 +134,7 @@ export default class addWatchInfo extends React.Component {
                     });
                 }
             },
-        ], 'default', "")
+        ], 'default', '')
     }
     //跳转下一页
     nextPage = () => {
@@ -256,7 +256,7 @@ export default class addWatchInfo extends React.Component {
     clickRelationSure = (val) => {
         console.log(val, "val")
         if (val[0] == "自定义") {
-            this.showModal();
+            $(".am-modal-input input").focus();
         } else {
             this.setState({
                 relationValue: val,
