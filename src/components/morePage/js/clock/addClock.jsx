@@ -10,14 +10,14 @@ const AgreeItem = Checkbox.AgreeItem;
 const alert = Modal.alert;
 const prompt = Modal.prompt;
 const clockType = [{
-    value: '1',
+    value: '震动',
     label: '震动'
 }, {
-    value: '2',
+    value: '响铃',
     label: '响铃'
 },
 {
-    value: '3',
+    value: '震动+响铃',
     label: '震动+响铃'
 }]
 const alarmType = [
@@ -52,12 +52,6 @@ const checkedData = [
     { value: 7, label: '星期日',extra:"周日"},
 ];
 
-function compare() {
-    for (var i = 0; i < arguments.length; i++) {
-        return arguments[i].toString() == arguments[i + 1] ? true : false;
-    }
-}
-
 export default class addClock extends React.Component {
     constructor(props) {
         super(props);
@@ -75,6 +69,10 @@ export default class addClock extends React.Component {
     componentWillMount () {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var watchId = 1;
+        this.setState({
+            watchId
+        })
     }
     componentDidMount () {
 
@@ -91,7 +89,6 @@ export default class addClock extends React.Component {
     //时间改变
     timeChange = (time) => {
         var tempTime = time + ""
-        console.log(tempTime.split(" ")[4], "fff")
         this.setState({
             time: time
         })
@@ -146,10 +143,8 @@ export default class addClock extends React.Component {
         });
     }
 
-
     //星期的选择
     onSelectChange = (e) => {
-        console.log($(e.target).val(), "cc")
         if ($(e.target).is(":checked")) {
             var arr = [];
             arr.push($(e.target).val())
@@ -191,33 +186,23 @@ export default class addClock extends React.Component {
             repeatDefault: true
         })
     }
-
     //保存
     toSave = ()=>{
         var param = {
             "method": 'addWatch2gClock',
-            "clockType": macAdd,
-            "noticeTime": "watchAction",
-            "repeatType": "watchAction",
-            "noticeType": "watchAction",
-            "watchId": "1",
+            "clockType": this.state.alarmValue[0],
+            "noticeTime": (this.state.time+"").split(" ")[4],
+            "repeatType": JSON.stringify(this.state.timeArr),
+            "noticeType": this.state.typeValue[0],
+            "watchId": this.state.watchId,
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.response == null) {
-                    this.setState({
-                        loginType: 1,
-                        showSexDiv:true,
-                        showRelationiDiv:true
-                    })
+                    
                 }
                 if (result.success && result.response) {
-                    this.setState({
-                        loginType: 0,
-                        showRelationiDiv:true
-                    })
+                   
                 } else {
 
                 }

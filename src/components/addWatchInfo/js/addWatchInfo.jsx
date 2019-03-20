@@ -108,16 +108,16 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(159)
-        // var data = {
-        //     method: 'watchBinding'
-        // };
-        // Bridge.callHandler(data, (mes)=> {
-        //     this.getWatch2gByMacAddress(mes)
-        //     this.setState({ macId: mes.toUpperCase() });
-        // }, function (error) {
-        //     console.log(error);
-        // });
+        // this.getWatch2gByMacAddress(159)
+        var data = {
+            method: 'watchBinding'
+        };
+        Bridge.callHandler(data, (mes)=> {
+            this.setState({ macId: mes.toUpperCase() });
+            this.getWatch2gByMacAddress(mes)
+        }, function (error) {
+            console.log(error);
+        });
     }
 
    

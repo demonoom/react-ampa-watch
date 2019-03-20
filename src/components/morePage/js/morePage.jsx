@@ -14,13 +14,17 @@ export default class morePage extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
+        var userId = 23836;
+        var macAddr = 1;
+        this.setState({
+            macAddr
+        })
         var pro = {
             "command": "guardianLogin",
             "data": {
-                "userId": 23836,
+                "userId": userId,
                 "machineType": "0",
                 "version": '1.0',
-                // "webDevice": WebServiceUtil.createUUID()
             }
         };
         ms = new WatchWebsocketConnection();
@@ -31,6 +35,7 @@ export default class morePage extends React.Component {
         this.watchListener();
 
     }
+    
 
     //消息监听
     watchListener () {
@@ -48,7 +53,7 @@ export default class morePage extends React.Component {
     toFindWatch = () => {
         var commandJson = {
             "command": "searchWatch2GAction", data: {
-                "macAddress": "1"
+                "macAddress": this.state.macAddr
             }
         };
         console.log(commandJson, "commandJson")
