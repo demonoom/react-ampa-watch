@@ -14,6 +14,8 @@ export default class stuAccountRegist extends React.Component {
             responseList: [],
             data: [],
             cols: 1,
+            stuClassName:'',
+            schoolClassName:''
         };
     }
 
@@ -86,7 +88,7 @@ export default class stuAccountRegist extends React.Component {
 
     schoolItemOnClick = (data) => {
         this.exitSchoolInput();
-        this.setState({schoolName: data.name, schoolId: data.id})
+        this.setState({schoolName: data.name, schoolId: data.id,schoolClassName:'color_3'})
     };
 
     schoolNameOnChange = (e) => {
@@ -237,17 +239,17 @@ export default class stuAccountRegist extends React.Component {
                         <div className='am-list-item am-list-item-middle line_public' onClick={this.schoolOnClick}>
                             <div className="am-list-line">
                                 <div className="am-list-content"> </div>
-                                <div className="am-list-extra">{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
+                                <div className={'am-list-extra '+ this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
                                 <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
-                        <div className="line_public">
+                        <div className={'line_public '+ this.state.stuClassName}>
                             <Picker
                                 data={this.state.data}
                                 cols={this.state.cols}
                                 value={this.state.asyncValue}
                                 onPickerChange={this.onPickerChange}
-                                onOk={v => this.setState({classId: this.state.asyncValue[1]})}
+                                onOk={v => this.setState({classId: this.state.asyncValue[1],stuClassName:'color_3'})}
                                 extra='学生所在班级'
                             >
                                 <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>

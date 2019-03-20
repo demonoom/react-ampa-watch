@@ -20,9 +20,11 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "ghjkldfghjk",
+            macId: "",
             stuName: "",
             sexValue: "",
+            extraClassName:"",
+            RelationClassName:"",
             showSexDiv:false,
             showRelationiDiv:false,
             relationValue: "",
@@ -241,12 +243,14 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         this.setState({
             sexValue: val,
+            extraClassName:'color_3'
         });
     }
     //点击取消按钮
     onCancel = () => {
         this.setState({
             sexValue: "",
+            extraClassName:''
         });
     }
     //关系改变
@@ -264,6 +268,7 @@ export default class addWatchInfo extends React.Component {
         } else {
             this.setState({
                 relationValue: val,
+                RelationClassName:'color_3'
             });
         }
 
@@ -272,6 +277,7 @@ export default class addWatchInfo extends React.Component {
     onRelationCancel = () => {
         this.setState({
             relationValue: "",
+            RelationClassName:"",
         });
     }
     render () {
@@ -283,16 +289,16 @@ export default class addWatchInfo extends React.Component {
                             src={require('../../images/bindPic.png')} alt=""/></div>
                         <div className='line_public'>
                             <div className="p10 scanDiv">
-                                 <span className='text_hidden'>{this.state.macId}</span>
+                                <span className='text_hidden color_c' style={{display: this.state.macId ? "none" : "inline-block"}}>请扫描手表二维码</span>
+                                 <span className='text_hidden' style={{display: this.state.macId ? "inline-block" : "none"}}>{this.state.macId}</span>
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div>
-                        <div className='line_public' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        <div className={'line_public '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
                                 cols={1}
-                                className="forss"
                                 extra="请选择孩子的性别"
                                 onChange={this.onPickerChange}
                                 onOk={this.clickSure}
@@ -301,12 +307,11 @@ export default class addWatchInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div className='line_public' style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        <div className={'line_public '+ this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}
                                 cols={1}
-                                className="forss"
                                 extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
                                 onChange={this.onRelationChange}
                                 onOk={this.clickRelationSure}
