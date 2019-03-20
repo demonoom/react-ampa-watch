@@ -5,12 +5,14 @@ html, body {
   background-color: white !important;
   height: 100%;
   font-size: 14px;
+  position: relative;
   font-family: "Helvetica Neue", "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial;
 }
 
 body {
   overflow: hidden;
   height: 100%;
+  color: #333 !important;
 }
 
 ul, li {
@@ -35,7 +37,9 @@ ul, li {
   padding: 20px 0 10px 15px;
   background: #fff;
 }
-
+.color_c{
+  color: #ccc;
+}
 .flex_1 {
   flex: 1;
 }
@@ -152,7 +156,9 @@ ul, li {
 .float_l {
   float: left;
 }
-
+.p10{
+  padding: 0 10px;
+}
 .p38{
   padding: 0 38px;
 }
@@ -175,8 +181,20 @@ ul, li {
 }
 /*下拉框下箭头*/
 .selectDown{
+  .am-list-item{
+    padding-left: 10px;
+  }
+  .am-list-item .am-list-line{
+    padding-bottom: 6px;
+    padding-top: 15px;
+    padding-right: 10px;
+}
   .am-list-item .am-list-line .am-list-extra{
-    display: none;
+    flex-basis: auto;
+    text-align: left;
+    width: calc(~"100% - 23px");
+    font-size: 15px !important;
+    color: #ccc !important;
   }
   .am-list-item .am-list-line .am-list-arrow{
     background-image:url("components/images/icon_selectDown.png") !important;
@@ -184,13 +202,13 @@ ul, li {
     height: 13px;
   }
   .am-list-item .am-list-line .am-list-content{
-    color: #999;
+    color: #ccc;
     font-size: 15px;
   }
 }
 /*保存按钮*/
 .submitBtn {
-  width: 100%;
+  width: calc(~"100% - 76px");
   box-sizing: border-box;
   border-radius: 25px;
   cursor: pointer;
@@ -201,5 +219,29 @@ ul, li {
   font-size: 16px;
   letter-spacing: 5px;
   box-shadow: 0 9px 9px #0d8cd82b;
+  position: absolute;
+  bottom: 65px;
+  left: 38px;
 }
-
+.am-list-item .am-list-line::after{
+  background: transparent !important;
+}
+.am-list-item .am-input-control input::placeholder{
+  color: #ccc !important;
+  font-size: 15px !important;
+}
+.am-list-item.am-input-item{
+  padding-left: 10px !important;
+  height: auto !important;
+  min-height: auto !important;
+}
+.am-list-item .am-input-control input{
+  padding: 7px 0 !important;
+}
+.am-list-item .am-input-control input{
+  color: #333 !important;
+  font-size: 15px !important;
+}
+.color_3  .am-list-item .am-list-line .am-list-extra,.am-list-item .am-list-line .am-list-extra.color_3{
+  color: #333 !important;
+}
