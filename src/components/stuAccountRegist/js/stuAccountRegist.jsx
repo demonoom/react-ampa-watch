@@ -234,7 +234,7 @@ export default class stuAccountRegist extends React.Component {
                         <div className="bindStudent">
                             <img src={require('../../images/bindStudent.png')} alt=""/>
                         </div>
-                        <div className='am-list-item am-list-item-middle' onClick={this.schoolOnClick}>
+                        <div className='am-list-item am-list-item-middle line_public' onClick={this.schoolOnClick}>
                             <div className="am-list-line">
                                 <div className="am-list-content">学生所在学校</div>
                                 <div
@@ -242,23 +242,25 @@ export default class stuAccountRegist extends React.Component {
                                 <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
-                        <Picker
-                            data={this.state.data}
-                            cols={this.state.cols}
-                            value={this.state.asyncValue}
-                            onPickerChange={this.onPickerChange}
-                            onOk={v => this.setState({classId: this.state.asyncValue[1]})}
-                        >
-                            <List.Item arrow="horizontal" onClick={this.classOnClick}>学生所在班级</List.Item>
-                        </Picker>
-
-                        <InputItem
-                            className=""
-                            placeholder="请输入学生姓名"
-                            value={this.state.stuName}
-                            onChange={this.stuOnChange}
-                        ></InputItem>
-
+                        <div className="line_public">
+                            <Picker
+                                data={this.state.data}
+                                cols={this.state.cols}
+                                value={this.state.asyncValue}
+                                onPickerChange={this.onPickerChange}
+                                onOk={v => this.setState({classId: this.state.asyncValue[1]})}
+                            >
+                                <List.Item arrow="horizontal" onClick={this.classOnClick}>学生所在班级</List.Item>
+                            </Picker>
+                        </div>
+                        <div className="line_public">
+                            <InputItem
+                                className=""
+                                placeholder="请输入学生姓名"
+                                value={this.state.stuName}
+                                onChange={this.stuOnChange}
+                            ></InputItem>
+                        </div>
                         <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
                         <div className='updateModel' style={{display: 'none'}}>
                             <div className='searchDiv'>
