@@ -236,25 +236,27 @@ export default class addWatchInfo extends React.Component {
         });
     };
 
-
+    //点击picker确定按钮
     clickSure = (val) => {
         console.log(val, "val")
         this.setState({
             sexValue: val,
         });
     }
-
+    //点击取消按钮
     onCancel = () => {
         this.setState({
             sexValue: "",
         });
     }
+    //关系改变
     onRelationChange = (val) => {
         console.log(val, "val")
         this.setState({
             relationValue: val,
         });
     };
+    //关系点击确定
     clickRelationSure = (val) => {
         console.log(val, "val")
         if (val[0] == "自定义") {
@@ -266,13 +268,13 @@ export default class addWatchInfo extends React.Component {
         }
 
     }
+    //关系取消
     onRelationCancel = () => {
         this.setState({
             relationValue: "",
         });
     }
     render () {
-        console.log(this.state.loginType)
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
                 <h5 style={{ display: this.state.loginType == 1 ? "block" : "none" }}>沟通从心开始</h5>
