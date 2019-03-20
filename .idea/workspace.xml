@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/loginSuccess.jsx" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/loginSuccess.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -36,8 +40,13 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="loginSuccess.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less">
+=======
+      <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/index.less">
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
               <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
@@ -68,12 +77,20 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="stuAccountRegist.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="212">
               <caret line="42" column="21" lean-forward="false" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
               <folding />
+=======
+      <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
             </state>
           </provider>
         </entry>
@@ -119,13 +136,16 @@
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
         <option value="$PROJECT_DIR$/src/index.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/loginSuccess.jsx" />
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" />
+=======
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
       </list>
     </option>
   </component>
@@ -411,18 +431,27 @@
       <option name="presentableId" value="Default" />
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
+<<<<<<< HEAD
       <workItem from="1553047156778" duration="15966000" />
       <workItem from="1553073545027" duration="1973000" />
+=======
+      <workItem from="1553047156778" duration="16882000" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="2095000" />
+=======
+    <option name="totallyTimeSpent" value="1038000" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="985" extended-state="6" />
     <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
@@ -440,6 +469,26 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.28046745" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.121875" />
+      <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,6 +779,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="495">
@@ -747,6 +797,10 @@
           <folding />
         </state>
       </provider>
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/images/bindStuPic.png">
+      <provider selected="true" editor-type-id="images" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -766,6 +820,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -775,6 +830,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+=======
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="2" lean-forward="false" selection-start-line="1" selection-start-column="2" selection-end-line="3" selection-end-column="3" />
@@ -792,11 +853,18 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
           <caret line="42" column="21" lean-forward="false" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
           <folding />
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+>>>>>>> 2d0259beabbc2ca7967b19ccef82a6a9522d23f5
         </state>
       </provider>
     </entry>
