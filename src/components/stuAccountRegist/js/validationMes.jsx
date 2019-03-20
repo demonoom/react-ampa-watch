@@ -83,7 +83,7 @@ export default class validationMes extends React.Component {
             "teacherPhoneNumber": this.state.teNumOnChange,
             "actionName": "watchAction"
         };
-        
+
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
