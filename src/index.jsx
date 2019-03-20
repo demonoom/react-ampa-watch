@@ -40,6 +40,13 @@ const loginSuccess = (location, cb) => {
     }, 'verifyStuInfo')
 };
 
+//更多页面
+const morePage =(location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/morePage').default)
+    }, 'morePage')
+};
+
 const validationMes = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/stuAccountRegist/js/validationMes').default)
@@ -63,6 +70,11 @@ class Index extends React.Component {
                             to="/stuAccountRegist"
                             style={{fontSize: '24px'}}>注册学生账号</Link>
                     </li>
+                    <li>
+                        <Link
+                            to="/morePage"
+                            style={{fontSize: '24px'}}>morePage</Link>
+                    </li>
                 </ul>
             </div>
         );
@@ -81,6 +93,7 @@ ReactDOM.render(
             <Route path="loginSuccess" getComponent={loginSuccess}/>
             <Route path="stuAccountRegist" getComponent={stuAccountRegist}/>
             <Route path="validationMes" getComponent={validationMes}/>
+            <Route path="morePage" getComponent={morePage}/>
         </Route>
     </Router>, document.getElementById('example')
 );

@@ -24,7 +24,7 @@ export default class addWatchInfo extends React.Component {
             stuName: "",
             sexValue: "",
             showSexDiv:false,
-            showRelationiDiv:true,
+            showRelationiDiv:false,
             relationValue: "",
             flag: true,
             relationData: [
