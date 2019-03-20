@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-   
-} from 'antd-mobile';
 
+} from 'antd-mobile';
+import '../css/loginSuccess.less'
 export default class loginSuccess extends React.Component {
     constructor(props) {
         super(props);
@@ -47,15 +47,26 @@ export default class loginSuccess extends React.Component {
             <div id="loginSuccess" style={{height: this.state.clientHeight}}>
                {
                    this.state.loginType == 1 ?
-                   <div>
-                       <span>注册成功</span>
-                       <span>开启守护之旅</span>
-                       <span onClick={this.toHomePge}>马上进入</span>
+                   <div className="p38">
+                       <div className="picDiv">
+                           <img src={require('../../images/successPic.png')} alt=""/>
+                       </div>
+                       <div className="success-cont">
+                           <div className="success-prompt">注册成功</div>
+                           <div className="success-validation">开启守护之旅</div>
+                       </div>
+                       <div className="submitBtn" onClick={this.toHomePge}>立即开启</div>
                    </div>
                    :
-                   <div>
-                       <span>注册成功</span>
-                       <span>等待管理员验证</span>
+                   <div className="p38">
+                       <div className="picDiv">
+                           <img src={require('../../images/successPic.png')} alt=""/>
+                       </div>
+                       <div className="success-cont">
+                           <div className="success-prompt">注册成功</div>
+                           <div className="success-validation">等待管理员验证</div>
+                       </div>
+                       <div className="submitBtn" onClick={this.toHomePge}>完成</div>
                    </div>
                }
             </div>
