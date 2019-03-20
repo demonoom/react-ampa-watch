@@ -4,6 +4,8 @@ import {
     Modal, Picker, List, WhiteSpace
 } from 'antd-mobile';
 
+import '../css/addWatchInfo.less'
+
 const alert = Modal.alert;
 const prompt = Modal.prompt;
 const sexData = [{
@@ -18,11 +20,11 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "10000",
+            macId: "",
             stuName: "",
             sexValue: "",
             showSexDiv:false,
-            showRelationiDiv:false,
+            showRelationiDiv:true,
             relationValue: "",
             flag: true,
             relationData: [
@@ -102,7 +104,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(100000)
+        // this.getWatch2gByMacAddress(10)
         var data = {
             method: 'watchBinding'
         };
@@ -134,7 +136,7 @@ export default class addWatchInfo extends React.Component {
                     });
                 }
             },
-        ], 'default', "")
+        ], 'default', '')
     }
     //跳转下一页
     nextPage = () => {
@@ -234,29 +236,31 @@ export default class addWatchInfo extends React.Component {
         });
     };
 
-
+    //点击picker确定按钮
     clickSure = (val) => {
         console.log(val, "val")
         this.setState({
             sexValue: val,
         });
     }
-
+    //点击取消按钮
     onCancel = () => {
         this.setState({
             sexValue: "",
         });
     }
+    //关系改变
     onRelationChange = (val) => {
         console.log(val, "val")
         this.setState({
             relationValue: val,
         });
     };
+    //关系点击确定
     clickRelationSure = (val) => {
         console.log(val, "val")
         if (val[0] == "自定义") {
-            this.showModal();
+            $(".am-modal-input input").focus();
         } else {
             this.setState({
                 relationValue: val,
@@ -264,13 +268,13 @@ export default class addWatchInfo extends React.Component {
         }
 
     }
+    //关系取消
     onRelationCancel = () => {
         this.setState({
             relationValue: "",
         });
     }
     render () {
-        console.log(this.state.loginType)
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
                 <h5 style={{ display: this.state.loginType == 1 ? "block" : "none" }}>沟通从心开始</h5>
@@ -304,7 +308,11 @@ export default class addWatchInfo extends React.Component {
                         <List.Item arrow="horizontal">请选择你与孩子的关系</List.Item>
                     </Picker>
                 </div>
-                <div onClick={this.nextPage}>下一步</div>
+                <div className="p15">
+                    <div className='submitBtn' onClick={this.nextPage}>
+                        下一步
+                    </div>
+                </div>
             </div>
         );
     }
