@@ -1,5 +1,5 @@
 import React from "react";
-import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
+import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
 
 //消息通信js
@@ -7,10 +7,10 @@ window.ms = null;
 export default class morePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
+        this.state = {};
     }
-    componentWillMount () {
+
+    componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
@@ -27,13 +27,14 @@ export default class morePage extends React.Component {
         console.log(pro, "pro")
         ms.connect(pro);
     }
-    componentDidMount () {
+
+    componentDidMount() {
         this.watchListener();
 
     }
 
     //消息监听
-    watchListener () {
+    watchListener() {
         ms.msgWsListener = {
             onError: function (errorMsg) {
 
@@ -44,6 +45,7 @@ export default class morePage extends React.Component {
             }
         };
     }
+
     //找手表
     toFindWatch = () => {
         var commandJson = {
@@ -67,28 +69,35 @@ export default class morePage extends React.Component {
         });
     }
 
-    pushContacts = () =>{
+    /**
+     * 推送监护人
+     */
+    pushContacts = () => {
         var commandJson = {
             "command": "watch2gPushContacts", data: {
-                "studentId": "",
-                "watch2gId": ""
+                "studentId": "3433",
+                "watch2gId": "29"
             }
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
     }
 
-    pushWeather = () =>{
+    /**
+     * 推送天气
+     */
+    pushWeather = () => {
         var commandJson = {
-            "command": "pushWeather", data: {
-                "watch2gId": ""
+            "command": "watch2gPushWeather",
+            data: {
+                "watch2gId": "29"
             }
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
     }
 
-    render () {
+    render() {
         return (
             <div id="morePage">
                 <p onClick={this.toFindWatch}>找手表</p>

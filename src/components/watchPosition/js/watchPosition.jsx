@@ -84,6 +84,11 @@ export default class watchPosition extends React.Component {
                 if (info.command === 'sendWatch2GLocaltionData') {
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         console.log(info.data);
+                        if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
+                            Toast.fail('获取定位失败');
+                            return
+                        }
+
                         var position = {
                             "longitude": info.data.longitude,
                             "latitude": info.data.latitude,
