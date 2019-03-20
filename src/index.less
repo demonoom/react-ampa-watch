@@ -152,7 +152,9 @@ ul, li {
 .float_l {
   float: left;
 }
-
+.p10{
+  padding: 0 10px;
+}
 .p38{
   padding: 0 38px;
 }
@@ -175,8 +177,18 @@ ul, li {
 }
 /*下拉框下箭头*/
 .selectDown{
+  .am-list-item{
+    padding-left: 10px;
+  }
+  .am-list-item .am-list-line{
+    padding-bottom: 6px;
+    padding-top: 15px;
+    padding-right: 10px;
+}
   .am-list-item .am-list-line .am-list-extra{
-    display: none;
+    flex-basis: auto;
+    text-align: left;
+    width: calc(~"100% - 23px");
   }
   .am-list-item .am-list-line .am-list-arrow{
     background-image:url("components/images/icon_selectDown.png") !important;

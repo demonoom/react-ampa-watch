@@ -20,11 +20,11 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "",
+            macId: "ghjkldfghjk",
             stuName: "",
             sexValue: "",
             showSexDiv:false,
-            showRelationiDiv:true,
+            showRelationiDiv:false,
             relationValue: "",
             flag: true,
             relationData: [
@@ -104,16 +104,16 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress(10)
-        var data = {
-            method: 'watchBinding'
-        };
-        Bridge.callHandler(data, (mes)=> {
-            this.getWatch2gByMacAddress(mes)
-            this.setState({ macId: mes.toUpperCase() });
-        }, function (error) {
-            console.log(error);
-        });
+        this.getWatch2gByMacAddress(159)
+        // var data = {
+        //     method: 'watchBinding'
+        // };
+        // Bridge.callHandler(data, (mes)=> {
+        //     this.getWatch2gByMacAddress(mes)
+        //     this.setState({ macId: mes.toUpperCase() });
+        // }, function (error) {
+        //     console.log(error);
+        // });
     }
 
    
@@ -281,33 +281,38 @@ export default class addWatchInfo extends React.Component {
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt=""/></div>
-                        <div className='line_public'><span>{this.state.macId}</span><span onClick={this.scanCode}>扫描</span></div>
-                        <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        <div className='line_public scanDiv'>
+                            <div className="p10">
+                                 <span>{this.state.macId}</span>
+                                <span className='scanBtn' onClick={this.scanCode}>扫描</span>
+                            </div>
+                        </div>
+                        <div className='line_public' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
                                 cols={1}
                                 className="forss"
-                                extra="请选择"
+                                extra="请选择孩子的性别"
                                 onChange={this.onPickerChange}
                                 onOk={this.clickSure}
                                 onDismiss={this.onCancel}
                             >
-                                <List.Item arrow="horizontal">请选择孩子的性别</List.Item>
+                                <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        <div className='line_public' style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}
                                 cols={1}
                                 className="forss"
-                                extra={this.state.flag ? "请选择" : this.state.relationValue}
+                                extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
                                 onChange={this.onRelationChange}
                                 onOk={this.clickRelationSure}
                                 onDismiss={this.onRelationCancel}
                             >
-                                <List.Item arrow="horizontal">请选择你与孩子的关系</List.Item>
+                                <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
                     </div>
