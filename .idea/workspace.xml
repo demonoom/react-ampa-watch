@@ -13,7 +13,6 @@
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
 =======
     <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.less" afterDir="false" />
@@ -60,9 +59,14 @@
       <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="379">
               <caret line="314" column="61" selection-start-line="314" selection-start-column="43" selection-end-line="314" selection-end-column="61" />
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
+=======
+            <state relative-caret-position="-6">
+              <caret line="283" column="51" lean-forward="true" selection-start-line="283" selection-start-column="51" selection-end-line="283" selection-end-column="51" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -70,6 +74,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -95,10 +100,13 @@
 =======
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
       <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
+=======
+      <file leaf-file-name="index.less" pinned="false" current-in-tab="true">
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="182" column="17" selection-start-line="182" selection-start-column="17" selection-end-line="182" selection-end-column="29" />
+            <state relative-caret-position="108">
+              <caret line="205" column="27" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="27" />
               <folding>
                 <element signature="e#1004#1022#0" />
                 <element signature="e#1035#1087#0" />
@@ -118,6 +126,7 @@
                 <element signature="e#2343#2368#0" />
                 <element signature="e#2756#2829#0" />
                 <element signature="e#3344#3367#0" />
+<<<<<<< HEAD
                 <element signature="e#3450#3548#0" />
 <<<<<<< HEAD
                 <element signature="e#3561#3582#0" />
@@ -128,11 +137,14 @@
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
 =======
 >>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
+=======
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -207,6 +219,13 @@
             <state relative-caret-position="312">
               <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
+=======
+      <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
             </state>
           </provider>
         </entry>
@@ -224,7 +243,12 @@
       <find>p10</find>
       <find>dis</find>
       <find>扫描</find>
+      <find>ghjkldfghjk</find>
       <find>.am-list-extra</find>
+      <find>am-list-line</find>
+      <find>scanDiv</find>
+      <find>submitBtn</find>
+      <find>submit</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -235,8 +259,8 @@
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/index.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
+        <option value="$PROJECT_DIR$/src/index.less" />
       </list>
     </option>
   </component>
@@ -508,15 +532,20 @@
 =======
       <workItem from="1552898766041" duration="7687000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1553047156778" duration="6600000" />
 >>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
 =======
       <workItem from="1553047156778" duration="9557000" />
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
+=======
+      <workItem from="1553047156778" duration="10927000" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -572,12 +601,15 @@
 =======
     <option name="totallyTimeSpent" value="7020000" />
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
+=======
+    <option name="totallyTimeSpent" value="8390000" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -586,7 +618,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1875" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.140625" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -694,7 +726,6 @@
             <element signature="e#2343#2368#0" />
             <element signature="e#2756#2829#0" />
             <element signature="e#3344#3367#0" />
-            <element signature="e#3450#3548#0" />
           </folding>
         </state>
       </provider>
@@ -922,6 +953,7 @@
             <element signature="e#2343#2368#0" />
             <element signature="e#2756#2829#0" />
             <element signature="e#3344#3367#0" />
+<<<<<<< HEAD
             <element signature="e#3450#3548#0" />
 <<<<<<< HEAD
             <element signature="e#3561#3582#0" />
@@ -932,6 +964,8 @@
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
 =======
 >>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
+=======
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
           </folding>
         </state>
       </provider>
@@ -1181,6 +1215,7 @@
       <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <state relative-caret-position="5544">
           <caret line="308" column="35" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="35" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
@@ -1194,6 +1229,10 @@
 =======
         <state relative-caret-position="379">
           <caret line="314" column="61" selection-start-line="314" selection-start-column="43" selection-end-line="314" selection-end-column="61" />
+=======
+        <state relative-caret-position="-6">
+          <caret line="283" column="51" lean-forward="true" selection-start-line="283" selection-start-column="51" selection-end-line="283" selection-end-column="51" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -1201,8 +1240,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="2" selection-start-line="4" selection-start-column="2" selection-end-line="4" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1226,6 +1273,10 @@
         <state relative-caret-position="20">
           <caret line="182" column="17" selection-start-line="182" selection-start-column="17" selection-end-line="182" selection-end-column="29" />
 >>>>>>> 4d73b01c95e7725a2ffdc06b74fc431d38703907
+=======
+        <state relative-caret-position="108">
+          <caret line="205" column="27" selection-start-line="205" selection-start-column="27" selection-end-line="205" selection-end-column="27" />
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
           <folding>
             <element signature="e#1004#1022#0" />
             <element signature="e#1035#1087#0" />
@@ -1245,6 +1296,7 @@
             <element signature="e#2343#2368#0" />
             <element signature="e#2756#2829#0" />
             <element signature="e#3344#3367#0" />
+<<<<<<< HEAD
             <element signature="e#3450#3548#0" />
 <<<<<<< HEAD
             <element signature="e#3561#3582#0" />
@@ -1255,10 +1307,13 @@
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
 =======
 >>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
+=======
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1285,5 +1340,7 @@
       </provider>
 >>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
     </entry>
+=======
+>>>>>>> 6e24f20191104aca293f999d27280efb38bd7920
   </component>
 </project>

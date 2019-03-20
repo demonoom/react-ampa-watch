@@ -236,9 +236,8 @@ export default class stuAccountRegist extends React.Component {
                         </div>
                         <div className='am-list-item am-list-item-middle line_public' onClick={this.schoolOnClick}>
                             <div className="am-list-line">
-                                <div className="am-list-content">学生所在学校</div>
-                                <div
-                                    className="am-list-extra">{this.state.schoolName == '' ? '请选择' : this.state.schoolName}</div>
+                                <div className="am-list-content"> </div>
+                                <div className="am-list-extra">{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
                                 <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
@@ -249,8 +248,9 @@ export default class stuAccountRegist extends React.Component {
                                 value={this.state.asyncValue}
                                 onPickerChange={this.onPickerChange}
                                 onOk={v => this.setState({classId: this.state.asyncValue[1]})}
+                                extra='学生所在班级'
                             >
-                                <List.Item arrow="horizontal" onClick={this.classOnClick}>学生所在班级</List.Item>
+                                <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
                             </Picker>
                         </div>
                         <div className="line_public">
@@ -273,7 +273,7 @@ export default class stuAccountRegist extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <Button type='primary' onClick={this.nextStep}>下一步</Button>
+                    <div className="submitBtn" onClick={this.nextStep}>下一步</div>
                 </div>
             </div>
         )

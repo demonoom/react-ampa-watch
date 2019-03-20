@@ -112,20 +112,30 @@ export default class validationMes extends React.Component {
     render() {
         return (
             <div id="validationMes">
-                <h1>验证信息</h1>
-                <InputItem
-                    className=""
-                    placeholder="请输入班级教师姓名"
-                    value={this.state.teName}
-                    onChange={this.teNameOnChange}
-                ></InputItem>
-                <InputItem
-                    className=""
-                    placeholder="请输入该教师电话号码"
-                    value={this.state.teNumOnChange}
-                    onChange={this.teNumOnChange}
-                ></InputItem>
-                <Button type='primary' onClick={this.nextStep}>下一步</Button>
+                <div className="p38">
+                    <div className="infoContent selectDown">
+                        <div className="bindStudent">
+                            <img src={require('../../images/bindStudent.png')} alt=""/>
+                        </div>
+                        <div className="line_public">
+                            <InputItem
+                                className=""
+                                placeholder="请输入班级教师姓名"
+                                value={this.state.teName}
+                                onChange={this.teNameOnChange}
+                            ></InputItem>
+                        </div>
+                        <div className="line_public">
+                            <InputItem
+                                className=""
+                                placeholder="请输入该教师电话号码"
+                                value={this.state.teNumOnChange}
+                                onChange={this.teNumOnChange}
+                            ></InputItem>
+                        </div>
+                    </div>
+                </div>
+                <div className="submitBtn" onClick={this.nextStep}>下一步</div>
             </div>
         )
     }
