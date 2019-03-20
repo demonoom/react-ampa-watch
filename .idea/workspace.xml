@@ -13,18 +13,7 @@
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
 =======
     <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
       <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
->>>>>>> a9b50b203efbe6ac617ccf61a32a48c8968bb1c4
     </list>
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
     <option name="TRACKING_ENABLED" value="true" />
@@ -43,6 +32,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <file leaf-file-name="stuAccountRegist.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx">
           <provider selected="true" editor-type-id="text-editor">
@@ -55,6 +45,13 @@
             <state relative-caret-position="5544">
               <caret line="308" column="35" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="35" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="186">
+              <caret line="282" column="40" selection-start-line="282" selection-start-column="40" selection-end-line="282" selection-end-column="40" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -62,6 +59,7 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="validationMes.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx">
@@ -71,28 +69,23 @@
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
 =======
+=======
+      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package-lock.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
       <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-<<<<<<< HEAD
-            <state relative-caret-position="-72">
-              <caret line="85" selection-start-line="85" selection-end-line="85" />
-=======
-            <state relative-caret-position="180">
-              <caret line="313" column="24" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
->>>>>>> a9b50b203efbe6ac617ccf61a32a48c8968bb1c4
+            <state relative-caret-position="58">
+              <caret line="181" column="63" selection-start-line="181" selection-start-column="63" selection-end-line="181" selection-end-column="63" />
               <folding>
-                <element signature="e#104#232#0" />
-                <element signature="e#239#324#0" />
-                <element signature="e#333#383#0" />
-                <element signature="e#406#425#0" />
-                <element signature="e#433#524#0" />
-                <element signature="e#540#643#0" />
-                <element signature="e#648#672#0" />
-                <element signature="e#705#744#0" />
-                <element signature="e#770#797#0" />
-                <element signature="e#930#964#0" />
-                <element signature="e#975#993#0" />
                 <element signature="e#1004#1022#0" />
                 <element signature="e#1035#1087#0" />
                 <element signature="e#1097#1111#0" />
@@ -106,39 +99,27 @@
                 <element signature="e#1386#1519#0" />
                 <element signature="e#1529#1600#0" />
                 <element signature="e#1613#1630#0" />
-                <element signature="e#1648#1759#0" />
-                <element signature="e#1780#1891#0" />
-                <element signature="e#1908#2019#0" />
-                <element signature="e#2038#2149#0" />
-                <element signature="e#2162#2204#0" />
                 <element signature="e#2215#2267#0" />
                 <element signature="e#2278#2330#0" />
                 <element signature="e#2343#2368#0" />
-                <element signature="e#2386#2520#0" />
-                <element signature="e#2536#2593#0" />
-                <element signature="e#2609#2658#0" />
-                <element signature="e#2679#2702#0" />
                 <element signature="e#2756#2829#0" />
-                <element signature="e#2850#2870#0" />
-                <element signature="e#2888#2909#0" />
-                <element signature="e#2924#3151#0" />
-                <element signature="e#3168#3244#0" />
-                <element signature="e#3257#3294#0" />
-                <element signature="e#3310#3332#0" />
                 <element signature="e#3344#3367#0" />
-                <element signature="e#3380#3435#0" />
                 <element signature="e#3450#3548#0" />
+<<<<<<< HEAD
                 <element signature="e#3561#3582#0" />
                 <element signature="e#3595#3635#0" />
                 <element signature="e#3647#3666#0" />
                 <element signature="e#3677#3695#0" />
                 <element signature="e#3708#4030#0" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
 <<<<<<< HEAD
       <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package-lock.json">
@@ -197,11 +178,27 @@
             <state>
               <caret column="13" selection-start-column="13" selection-end-column="13" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+      <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="45" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="45" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>#f5f5f9</find>
+      <find>f5f5</find>
+      <find>heartPic</find>
+      <find>require</find>
+      <find>body</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -210,6 +207,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
+        <option value="$PROJECT_DIR$/src/index.less" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
       </list>
     </option>
   </component>
@@ -235,6 +235,12 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="161" />
+    <option name="y" value="27" />
+    <option name="width" value="1221" />
+    <option name="height" value="699" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -332,7 +338,8 @@
               <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
               <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="helpers" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -362,7 +369,16 @@
     </key>
 =======
     <property name="SearchEverywhereHistoryKey" value="workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
+<<<<<<< HEAD
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/images" />
+    </key>
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -451,6 +467,7 @@
       <option name="presentableId" value="Default" />
       <updated>1552898764734</updated>
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1552898766041" duration="29900000" />
       <workItem from="1553062894536" duration="36000" />
 =======
@@ -461,10 +478,15 @@
       <workItem from="1553047156778" duration="651000" />
 >>>>>>> a9b50b203efbe6ac617ccf61a32a48c8968bb1c4
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+      <workItem from="1552898766041" duration="7687000" />
+      <workItem from="1553047156778" duration="6600000" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
 <<<<<<< HEAD
     <option name="totallyTimeSpent" value="31137000" />
   </component>
@@ -512,6 +534,9 @@
 =======
     <option name="totallyTimeSpent" value="13356000" />
 >>>>>>> a9b50b203efbe6ac617ccf61a32a48c8968bb1c4
+=======
+    <option name="totallyTimeSpent" value="4063000" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
@@ -521,11 +546,12 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.28046745" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.396875" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.26875" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -534,7 +560,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.28046745" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -616,17 +641,6 @@
           <caret line="304" column="25" lean-forward="true" selection-start-line="304" selection-start-column="25" selection-end-line="304" selection-end-column="25" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
           <folding>
-            <element signature="e#104#232#0" />
-            <element signature="e#239#324#0" />
-            <element signature="e#333#383#0" />
-            <element signature="e#406#425#0" />
-            <element signature="e#433#524#0" />
-            <element signature="e#540#643#0" />
-            <element signature="e#648#672#0" />
-            <element signature="e#705#744#0" />
-            <element signature="e#770#797#0" />
-            <element signature="e#930#964#0" />
-            <element signature="e#975#993#0" />
             <element signature="e#1004#1022#0" />
             <element signature="e#1035#1087#0" />
             <element signature="e#1097#1111#0" />
@@ -640,33 +654,12 @@
             <element signature="e#1386#1519#0" />
             <element signature="e#1529#1600#0" />
             <element signature="e#1613#1630#0" />
-            <element signature="e#1648#1759#0" />
-            <element signature="e#1780#1891#0" />
-            <element signature="e#1908#2019#0" />
-            <element signature="e#2038#2149#0" />
-            <element signature="e#2162#2204#0" />
             <element signature="e#2215#2267#0" />
             <element signature="e#2278#2330#0" />
             <element signature="e#2343#2368#0" />
-            <element signature="e#2386#2520#0" />
-            <element signature="e#2536#2593#0" />
-            <element signature="e#2609#2658#0" />
-            <element signature="e#2679#2702#0" />
             <element signature="e#2756#2829#0" />
-            <element signature="e#2850#2870#0" />
-            <element signature="e#2888#2909#0" />
-            <element signature="e#2924#3151#0" />
-            <element signature="e#3168#3244#0" />
-            <element signature="e#3257#3294#0" />
-            <element signature="e#3310#3332#0" />
             <element signature="e#3344#3367#0" />
-            <element signature="e#3380#3435#0" />
             <element signature="e#3450#3548#0" />
-            <element signature="e#3561#3582#0" />
-            <element signature="e#3595#3635#0" />
-            <element signature="e#3647#3666#0" />
-            <element signature="e#3677#3695#0" />
-            <element signature="e#3708#4030#0" />
           </folding>
         </state>
       </provider>
@@ -710,7 +703,13 @@
 =======
         <state relative-caret-position="126">
           <caret line="11" column="2" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+<<<<<<< HEAD
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
         </state>
       </provider>
     </entry>
@@ -854,6 +853,7 @@
           <caret line="222" column="8" lean-forward="false" selection-start-line="222" selection-start-column="8" selection-end-line="229" selection-end-column="11" />
           <folding>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <element signature="e#0#26#0" expanded="true" />
 =======
             <element signature="e#104#232#0" />
@@ -867,6 +867,8 @@
             <element signature="e#770#797#0" />
             <element signature="e#930#964#0" />
             <element signature="e#975#993#0" />
+=======
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
             <element signature="e#1004#1022#0" />
             <element signature="e#1035#1087#0" />
             <element signature="e#1097#1111#0" />
@@ -880,34 +882,21 @@
             <element signature="e#1386#1519#0" />
             <element signature="e#1529#1600#0" />
             <element signature="e#1613#1630#0" />
-            <element signature="e#1648#1759#0" />
-            <element signature="e#1780#1891#0" />
-            <element signature="e#1908#2019#0" />
-            <element signature="e#2038#2149#0" />
-            <element signature="e#2162#2204#0" />
             <element signature="e#2215#2267#0" />
             <element signature="e#2278#2330#0" />
             <element signature="e#2343#2368#0" />
-            <element signature="e#2386#2520#0" />
-            <element signature="e#2536#2593#0" />
-            <element signature="e#2609#2658#0" />
-            <element signature="e#2679#2702#0" />
             <element signature="e#2756#2829#0" />
-            <element signature="e#2850#2870#0" />
-            <element signature="e#2888#2909#0" />
-            <element signature="e#2924#3151#0" />
-            <element signature="e#3168#3244#0" />
-            <element signature="e#3257#3294#0" />
-            <element signature="e#3310#3332#0" />
             <element signature="e#3344#3367#0" />
-            <element signature="e#3380#3435#0" />
             <element signature="e#3450#3548#0" />
+<<<<<<< HEAD
             <element signature="e#3561#3582#0" />
             <element signature="e#3595#3635#0" />
             <element signature="e#3647#3666#0" />
             <element signature="e#3677#3695#0" />
             <element signature="e#3708#4030#0" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
           </folding>
         </state>
       </provider>
@@ -997,6 +986,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="11" column="43" selection-start-line="11" selection-start-column="43" selection-end-line="11" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1100,7 +1092,13 @@
 =======
         <state relative-caret-position="264">
           <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+<<<<<<< HEAD
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
         </state>
       </provider>
     </entry>
@@ -1127,33 +1125,42 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
+        <state relative-caret-position="18">
           <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="11" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="5544">
           <caret line="308" column="35" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="35" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="36">
+          <caret line="2" column="45" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="45" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <state relative-caret-position="488">
           <caret line="105" column="39" lean-forward="false" selection-start-line="105" selection-start-column="39" selection-end-line="105" selection-end-column="39" />
@@ -1167,18 +1174,11 @@
         <state relative-caret-position="180">
           <caret line="313" column="24" selection-start-line="313" selection-start-column="24" selection-end-line="313" selection-end-column="24" />
 >>>>>>> a9b50b203efbe6ac617ccf61a32a48c8968bb1c4
+=======
+        <state relative-caret-position="58">
+          <caret line="181" column="63" selection-start-line="181" selection-start-column="63" selection-end-line="181" selection-end-column="63" />
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
           <folding>
-            <element signature="e#104#232#0" />
-            <element signature="e#239#324#0" />
-            <element signature="e#333#383#0" />
-            <element signature="e#406#425#0" />
-            <element signature="e#433#524#0" />
-            <element signature="e#540#643#0" />
-            <element signature="e#648#672#0" />
-            <element signature="e#705#744#0" />
-            <element signature="e#770#797#0" />
-            <element signature="e#930#964#0" />
-            <element signature="e#975#993#0" />
             <element signature="e#1004#1022#0" />
             <element signature="e#1035#1087#0" />
             <element signature="e#1097#1111#0" />
@@ -1192,38 +1192,26 @@
             <element signature="e#1386#1519#0" />
             <element signature="e#1529#1600#0" />
             <element signature="e#1613#1630#0" />
-            <element signature="e#1648#1759#0" />
-            <element signature="e#1780#1891#0" />
-            <element signature="e#1908#2019#0" />
-            <element signature="e#2038#2149#0" />
-            <element signature="e#2162#2204#0" />
             <element signature="e#2215#2267#0" />
             <element signature="e#2278#2330#0" />
             <element signature="e#2343#2368#0" />
-            <element signature="e#2386#2520#0" />
-            <element signature="e#2536#2593#0" />
-            <element signature="e#2609#2658#0" />
-            <element signature="e#2679#2702#0" />
             <element signature="e#2756#2829#0" />
-            <element signature="e#2850#2870#0" />
-            <element signature="e#2888#2909#0" />
-            <element signature="e#2924#3151#0" />
-            <element signature="e#3168#3244#0" />
-            <element signature="e#3257#3294#0" />
-            <element signature="e#3310#3332#0" />
             <element signature="e#3344#3367#0" />
-            <element signature="e#3380#3435#0" />
             <element signature="e#3450#3548#0" />
+<<<<<<< HEAD
             <element signature="e#3561#3582#0" />
             <element signature="e#3595#3635#0" />
             <element signature="e#3647#3666#0" />
             <element signature="e#3677#3695#0" />
             <element signature="e#3708#4030#0" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
           </folding>
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -1236,6 +1224,17 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
 >>>>>>> 1ed31d1363607e2b806298318e49f7da7d0eab83
+=======
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="282" column="40" selection-start-line="282" selection-start-column="40" selection-end-line="282" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+>>>>>>> b8f06e36843a90599088c292678cc69f9092e9a7
     </entry>
   </component>
 </project>

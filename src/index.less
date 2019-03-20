@@ -2,14 +2,14 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 html, body {
+  background-color: white !important;
   height: 100%;
   font-size: 14px;
   font-family: "Helvetica Neue", "Hiragino Sans GB", Helvetica, "Microsoft YaHei", Arial;
 }
 
 body {
-  overflow: auto !important;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   height: 100%;
 }
 
@@ -21,45 +21,6 @@ ul, li {
 
 #example, .container {
   height: 100%;
-}
-
-.body {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: scroll;
-}
-
-.fixed-bottom {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background-color: #ddd;
-}
-
-hr {
-  margin: 70px 10px;
-}
-
-// fix style
-.am-modal-content {
-  height: auto;
-  min-height: 100%;
-}
-
-.am-card, .am-list-body {
-  border: 0 !important;
-}
-
-// .am-popup-mask, .am-popup-wrap, .am-popup {
-//   position: absolute;
-// }
-.am-refresh-control-pull, .am-refresh-control-release {
-  justify-content: flex-start;
 }
 
 .color_9 {
@@ -129,38 +90,6 @@ hr {
   flex: auto;
 }
 
-.h_blue_btn, .J {
-  color: #4990E2;
-  border-radius: 2px;
-  border: 1px solid #4990E2;
-  padding: 2px 4px;
-  font-size: 14px;
-}
-
-.h_orange_btn, .MC {
-  color: #F6A623;
-  border-radius: 2px;
-  border: 1px solid #F6A623;
-  padding: 2px 4px;
-  font-size: 14px;
-}
-
-.h_red_btn, .S {
-  color: #F56A55;
-  border-radius: 2px;
-  border: 1px solid #F56A55;
-  padding: 2px 4px;
-  font-size: 14px;
-}
-
-.h_green_btn, .C {
-  color: #6BA52B;
-  border-radius: 2px;
-  border: 1px solid #6BA52B;
-  padding: 2px 4px;
-  font-size: 14px;
-}
-
 .padding_8 {
   padding: 8px 0;
   line-height: 20px;
@@ -180,40 +109,14 @@ hr {
   margin: -5px 0 0 0;
 }
 
-.tags_blue span {
-  border: 1px solid #a3ceff;
-  border-radius: 2px;
-  padding: 4px 6px;
-  color: #4a90e2;
-  margin-right: 10px;
-  margin-top: 10px;
-}
-
-.list_padding {
-  padding: 15px;
-  border-bottom: 10px solid #f4f4f4;
-}
-
 .my_flex_wrap {
   flex-wrap: wrap;
   -webkit-flex-wrap: wrap;
 }
 
-.list_padding_no_b {
-  border-bottom: 0;
-}
-
 .am-checkbox.am-checkbox-checked .am-checkbox-inner {
   border-color: #f46a55 !important;
   background: #f46a55 !important;
-}
-
-.list_wrap_padding {
-  padding: 15px;
-}
-
-.flex_container {
-  margin: 0 15px;
 }
 
 .flex_center {
@@ -227,30 +130,8 @@ hr {
   align-items: center;
 }
 
-.cont_communal {
-  color: #333;
-  font-size: 17px;
-  padding: 0 15px;
-  background: #fff;
-}
-
-.cont_font {
-  color: #333;
-  font-size: 17px;
-}
-
-.cont_padding {
-  padding: 0 15px;
-}
-
 .bg_white {
   background: #fff;
-}
-
-.list_high {
-  height: 44px;
-  line-height: 44px;
-  width: 100%;
 }
 
 .text_hidden {
@@ -264,11 +145,6 @@ hr {
   color: #5f5f5f;
 }
 
-.add_title {
-  height: 44px;
-  line-height: 44px;
-}
-
 .float_ri {
   float: right;
 }
@@ -277,49 +153,50 @@ hr {
   float: left;
 }
 
-.addBunton {
-  width: 3rem;
-  height: 3rem;
-  position: absolute;
-  right: 2.5rem;
-  bottom: 2.5rem;
-  background-color: #F56A55;
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  color: #fff;
-  line-height: 2.8rem;
-  text-align: center;
-  z-index: 10;
-  cursor: pointer;
-  img {
+.p38{
+  padding: 0 38px;
+}
+.line_public{
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
     width: 100%;
+    background-color: #DDDDDD;
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    -o-transform: scaleY(0.5);
+    transform: scaleY(0.5);
   }
 }
-
-.p15{
-  padding: 0 15px;
+/*下拉框下箭头*/
+.selectDown{
+  .am-list-item .am-list-line .am-list-arrow{
+    background-image:url("components/images/icon_selectDown.png") !important;
+    width: 23px;
+    height: 13px;
+  }
+  .am-list-item .am-list-line .am-list-content{
+    color: #999;
+    font-size: 15px;
+  }
 }
+/*保存按钮*/
 .submitBtn {
   width: 100%;
   box-sizing: border-box;
-  border-radius: 2px;
+  border-radius: 25px;
   cursor: pointer;
-  line-height: 47px;
+  line-height: 49px;
   color: white;
-  background-color: #4a90e2;
+  background-color: #17ACF7;
   text-align: center;
   font-size: 16px;
-  .am-button-primary {
-    background-color: #F56A55;
-    border: 1PX solid #F56A55;
-    &::before {
-      border: 1PX solid #F56A55 !important;
-    }
-    &.am-button-active {
-      background-color: #F56A55;
-      opcity: 0.3;
-    }
-  }
+  letter-spacing: 5px;
+  box-shadow: 0 9px 9px #0d8cd82b;
 }
 

@@ -229,45 +229,50 @@ export default class stuAccountRegist extends React.Component {
     render() {
         return (
             <div id="stuAccountRegist">
-                <h1>注册学生账号</h1>
-                <div className='am-list-item am-list-item-middle' onClick={this.schoolOnClick}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">学生所在学校</div>
-                        <div
-                            className="am-list-extra">{this.state.schoolName == '' ? '请选择' : this.state.schoolName}</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                <div className="p38">
+                    <div className="infoContent selectDown">
+                        <div className="bindStudent">
+                            <img src={require('../../images/bindStudent.png')} alt=""/>
+                        </div>
+                        <div className='am-list-item am-list-item-middle' onClick={this.schoolOnClick}>
+                            <div className="am-list-line">
+                                <div className="am-list-content">学生所在学校</div>
+                                <div
+                                    className="am-list-extra">{this.state.schoolName == '' ? '请选择' : this.state.schoolName}</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
+                        </div>
+                        <Picker
+                            data={this.state.data}
+                            cols={this.state.cols}
+                            value={this.state.asyncValue}
+                            onPickerChange={this.onPickerChange}
+                            onOk={v => this.setState({classId: this.state.asyncValue[1]})}
+                        >
+                            <List.Item arrow="horizontal" onClick={this.classOnClick}>学生所在班级</List.Item>
+                        </Picker>
+
+                        <InputItem
+                            className=""
+                            placeholder="请输入学生姓名"
+                            value={this.state.stuName}
+                            onChange={this.stuOnChange}
+                        ></InputItem>
+
+                        <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
+                        <div className='updateModel' style={{display: 'none'}}>
+                            <div className='searchDiv'>
+                                <input type="text" value={this.state.inputValue} onChange={this.schoolNameOnChange}
+                                       placeholder='请输入搜索内容'/>
+                                <span onClick={this.getSchoolsBySchoolName}>搜索</span>
+                            </div>
+                            <div className='cont'>
+                                {this.state.responseList}
+                            </div>
+                        </div>
                     </div>
+                    <Button type='primary' onClick={this.nextStep}>下一步</Button>
                 </div>
-
-                <Picker
-                    data={this.state.data}
-                    cols={this.state.cols}
-                    value={this.state.asyncValue}
-                    onPickerChange={this.onPickerChange}
-                    onOk={v => this.setState({classId: this.state.asyncValue[1]})}
-                >
-                    <List.Item arrow="horizontal" onClick={this.classOnClick}>学生所在班级</List.Item>
-                </Picker>
-
-                <InputItem
-                    className=""
-                    placeholder="请输入学生姓名"
-                    value={this.state.stuName}
-                    onChange={this.stuOnChange}
-                ></InputItem>
-
-                <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
-                <div className='updateModel' style={{display: 'none'}}>
-                    <div className='searchDiv'>
-                        <input type="text" value={this.state.inputValue} onChange={this.schoolNameOnChange}
-                               placeholder='请输入搜索内容'/>
-                        <span onClick={this.getSchoolsBySchoolName}>搜索</span>
-                    </div>
-                    <div className='cont'>
-                        {this.state.responseList}
-                    </div>
-                </div>
-                <Button type='primary' onClick={this.nextStep}>下一步</Button>
             </div>
         )
     }
