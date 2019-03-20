@@ -15,8 +15,6 @@ const stuAccountRegist = (location, cb) => {
     }, 'stuAccountRegist')
 };
 
-
-
 /**添加手表信息 */
 const addWatchInfo = (location, cb) => {
     require.ensure([], require => {
@@ -29,15 +27,23 @@ const bindStudentInfo = (location, cb) => {
         cb(null, require('./components/addWatchInfo/js/bindStudentInfo').default)
     }, 'bindStudentInfo')
 };
+
 const verifyStuInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
     }, 'verifyStuInfo')
 };
+
 const loginSuccess = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/loginSuccess').default)
     }, 'verifyStuInfo')
+};
+
+const validationMes = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/stuAccountRegist/js/validationMes').default)
+    }, 'bindStudentInfo')
 };
 
 import './index.less';
@@ -49,7 +55,7 @@ class Index extends React.Component {
                 <ul role="nav">
                     <li>
                         <Link
-                            to="/addWatchInfo?logigType=1&userId=23836"
+                            to="/addWatchInfo?userId=23836"
                             style={{fontSize: '24px'}}>添加手表信息</Link>
                     </li>
                     <li>
@@ -74,6 +80,7 @@ ReactDOM.render(
             <Route path="verifyStuInfo" getComponent={verifyStuInfo}/>
             <Route path="loginSuccess" getComponent={loginSuccess}/>
             <Route path="stuAccountRegist" getComponent={stuAccountRegist}/>
+            <Route path="validationMes" getComponent={validationMes}/>
         </Route>
     </Router>, document.getElementById('example')
 );

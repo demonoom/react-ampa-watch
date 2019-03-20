@@ -19,9 +19,11 @@ export default class bindStudentInfo extends React.Component {
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
         var macAddr = searchArray[1].split('=')[1];
+        var sex = searchArray[2].split('=')[1];
         this.setState({
             loginType,
-            macAddr
+            macAddr,
+            sex
         })
     }
     componentDidMount () {
@@ -51,6 +53,10 @@ export default class bindStudentInfo extends React.Component {
     }
     //下一页
     nextPage=()=>{
+        if(this.state.littleAntName == ""){
+            Toast.info("请输入小蚂蚁账号")
+            return;
+        }
         var param = {
             "method": 'getUserByAccount',
             "account": this.state.littleAntName,
@@ -84,8 +90,7 @@ export default class bindStudentInfo extends React.Component {
 
     //跳注册页面
     toRegPage=()=>{
-      
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist";
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex="+this.state.sex+"&macAddr="+this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
@@ -105,7 +110,7 @@ export default class bindStudentInfo extends React.Component {
                     value={this.state.littleAntName}
                     onChange={this.littAntOnChange}
                 ></InputItem>
-                <div><span>没有学生账号？</span><span onClick={this.toRegPage}>注册学生账号</span></div>
+                <div><span onClick={this.toRegPage}>申请新账号</span></div>
                 <div onClick={this.nextPage}>下一步</div>
             </div>
         );

@@ -20,13 +20,13 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "1",
+            macId: "",
             stuName: "",
             sexValue: "",
-            showSexBox: false,
-            relationBox: false,
+            showSexDiv:false,
+            showRelationiDiv:false,
             relationValue: "",
-            flag:true,
+            flag: true,
             relationData: [
                 {
                     value: "父亲",
@@ -56,11 +56,9 @@ export default class addWatchInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
-        var loginType = searchArray[0].split('=')[1];
-        var ident = searchArray[1].split('=')[1];
+        var ident = searchArray[0].split('=')[1];
         // loginType==1  代表主账号
         this.setState({
-            loginType,
             ident
         })
     }
@@ -69,83 +67,71 @@ export default class addWatchInfo extends React.Component {
         Bridge.setShareAble("false");
         document.title = '手环绑定学生班级列表';
     }
+    //*根据mac地址获取是第几次登录 */
+    getWatch2gByMacAddress = (macAdd) => {
+        var param = {
+            "method": 'getWatch2gByMacAddress',
+            "macAddress": macAdd,
+            "actionName": "watchAction",
+        };
+        console.log(param, "param")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "rerere")
+                if (result.response == null) {
+                    this.setState({
+                        loginType: 1,
+                        showSexDiv:true,
+                        showRelationiDiv:true
+                    })
+                }
+                if (result.success && result.response) {
+                    this.setState({
+                        loginType: 0,
+                        showRelationiDiv:true
+                    })
+                } else {
+
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
 
     /**
      * 调用客户端
      */
     scanCode = () => {
+        // this.getWatch2gByMacAddress(10)
         var data = {
             method: 'watchBinding'
         };
-        Bridge.callHandler(data, function (mes) {
-            //获取二维码MAC地址
-            // var string = mes.replace(/:/g, '');
-            // if (string.length > 16) {
-            //     Toast.fail('mac地址超过最大字节数', 2)
-            //     return
-            // }
-            //判断返回的ｍａｃ地址是否是以MAC:开头的,如果是,则将原内容的MAC:截掉
-            var compareMes = mes.toUpperCase();
-            if (compareMes.indexOf("MAC:") == 0) {
-                mes = mes.substr(4, mes.length - 1);
-            }
-            if (mes.indexOf(":") == -1) {
-                var string = splitStrTo2(mes).join(":");
-                mes = string.substr(0, string.length - 1)
-            }
+        Bridge.callHandler(data, (mes)=> {
+            this.getWatch2gByMacAddress(mes)
             this.setState({ macId: mes.toUpperCase() });
         }, function (error) {
             console.log(error);
         });
     }
 
-
-    //显示性别
-    showSexBox = () => {
-        this.setState({
-            showSexBox: true
-        })
-    }
-    //隐藏性别
-    hideSexBox = (value) => {
-        this.setState({
-            showSexBox: false,
-            sexValue: value
-        })
-    }
-
-    //显示关系
-    showRelationBox = () => {
-        this.setState({
-            relationBox: true
-        })
-    }
-    //点击关系选项
-    clickRelation = (relation) => {
-        this.setState({
-            relationBox: false,
-            relationValue: relation
-        })
-        console.log(relation, "q")
-        if (relation == "自定义") {
-            this.showModal()
-        }
-    }
+   
     //自定义关系
     showModal () {
         this.setState({
-            flag:false
+            flag: false
         })
         prompt('请输入关系', '', [
             { text: '取消' },
             {
                 text: '确定', onPress: value => {
                     console.log(`输入的内容:${value}`);
-                    console.log(value,"value");
+                    console.log(value, "value");
                     this.setState({
                         relationValue: [value],
-                        
-                    },()=>{
+
+                    }, () => {
                         console.log(this.state.relationValue)
                     });
                 }
@@ -180,7 +166,7 @@ export default class addWatchInfo extends React.Component {
                 onResponse: (result) => {
                     console.log(result, "rerere")
                     if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId;
+                        var url = WebServiceUtil.mobileServiceURL + "bindStudentInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId+"&sex="+this.state.sexValue[0];
                         var data = {
                             method: 'openNewPage',
                             url: url
@@ -211,7 +197,7 @@ export default class addWatchInfo extends React.Component {
             var param = {
                 "method": 'bindWatchGuardian',
                 "macAddress": this.state.macId,
-                "familyRelate": this.state.relationValue,
+                "familyRelate": this.state.relationValue[0],
                 "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
@@ -249,7 +235,7 @@ export default class addWatchInfo extends React.Component {
             sexValue: val,
         });
     };
-   
+
 
     clickSure = (val) => {
         console.log(val, "val")
@@ -257,7 +243,7 @@ export default class addWatchInfo extends React.Component {
             sexValue: val,
         });
     }
-   
+
     onCancel = () => {
         this.setState({
             sexValue: "",
@@ -273,12 +259,12 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         if (val[0] == "自定义") {
             this.showModal();
-        }else {
+        } else {
             this.setState({
                 relationValue: val,
             });
         }
-       
+
     }
     onRelationCancel = () => {
         this.setState({
@@ -286,41 +272,33 @@ export default class addWatchInfo extends React.Component {
         });
     }
     render () {
+        console.log(this.state.loginType)
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                {
-                    this.state.loginType == 1 ?
-                        <h5>添加学生信息</h5>
-                        :
-                        ""
-                }
-                <div><span>{this.state.macId}</span><span onClick={this.scanCode}>扫描</span></div>
-                {
-                    this.state.loginType == 1 ?
-                        <div>
-                            <Picker
-                                data={sexData}
-                                value={this.state.sexValue}
-                                cols={1}
-                                className="forss"
-                                extra="请选择"
-                                onChange={this.onPickerChange}
-                                onOk={this.clickSure}
-                                onDismiss={this.onCancel}
-                            >
-                                <List.Item arrow="horizontal">请选择孩子的性别</List.Item>
-                            </Picker>
-                        </div>
-                        :
-                        ""
-                }
-                <div>
+                <h5 style={{ display: this.state.loginType == 1 ? "block" : "none" }}>沟通从心开始</h5>
+                <h5 style={{ display: this.state.loginType == 0 ? "block" : "none" }}>守护关注一生</h5>
+                <div><span>{this.state.macId}</span><span style={{fontSize: '48px'}} onClick={this.scanCode}>扫描</span></div>
+                <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                    <Picker
+                        data={sexData}
+                        value={this.state.sexValue}
+                        cols={1}
+                        className="forss"
+                        extra="请选择"
+                        onChange={this.onPickerChange}
+                        onOk={this.clickSure}
+                        onDismiss={this.onCancel}
+                    >
+                        <List.Item arrow="horizontal">请选择孩子的性别</List.Item>
+                    </Picker>
+                </div>
+                <div style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                     <Picker
                         data={this.state.relationData}
                         value={this.state.relationValue}
                         cols={1}
                         className="forss"
-                        extra={this.state.flag ? "请选择":this.state.relationValue}
+                        extra={this.state.flag ? "请选择" : this.state.relationValue}
                         onChange={this.onRelationChange}
                         onOk={this.clickRelationSure}
                         onDismiss={this.onRelationCancel}
