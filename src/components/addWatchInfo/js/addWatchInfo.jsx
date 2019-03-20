@@ -328,7 +328,11 @@ export default class addWatchInfo extends React.Component {
                         <List.Item arrow="horizontal">请选择你与孩子的关系</List.Item>
                     </Picker>
                 </div>
-                <div onClick={this.nextPage}>下一步</div>
+                <div className="p15">
+                    <div className='submitBtn' onClick={this.nextPage}>
+                        下一步
+                    </div>
+                </div>
             </div>
         );
     }
