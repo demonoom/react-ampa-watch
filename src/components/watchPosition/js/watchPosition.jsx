@@ -1,6 +1,7 @@
 import React from "react";
 import {Map, Marker} from "react-amap";
 import {Toast} from 'antd-mobile';
+import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection'
 
 import '../css/watchPosition.less'
 
@@ -15,30 +16,100 @@ const loadingStyle = {
 
 const Loading = <div style={loadingStyle}>正在生成地图...</div>;
 
+//消息通信js
+window.ms = null;
+
 export default class watchPosition extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            position: {longitude: 108.963007, latitude: 34.190036},
+            position: {longitude: '116.397477', latitude: '39.908692'},
+            zoom: 10,
+            map: null
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
+        var mac = locationSearch.split("&")[1].split('=')[1];
+        this.setState({userId, mac});
 
+        var phone;
+        if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+
+        var pro = {
+            "command": "guardianLogin",
+            "data": {
+                "userId": userId,
+                "machineType": phone,
+                "version": '1.0',
+            }
+        };
+        ms = new WatchWebsocketConnection();
+        ms.connect(pro);
+        this.msListener();
     }
 
+    componentDidMount() {
+        setTimeout(() => {
+            this.watch2GLocaltionRequest()
+        }, 300)
+    }
+
+    /**
+     * 获取手表位置
+     */
+    watch2GLocaltionRequest = () => {
+        var obj = {
+            "command": "watch2GLocaltionRequest",
+            "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
+        };
+        ms.send(obj);
+    };
+
+    msListener() {
+        var _this = this;
+        ms.msgWsListener = {
+            onError: function (errorMsg) {
+                // Toast.fail(errorMsg)
+            }, onWarn: function (warnMsg) {
+                // Toast.fail(warnMsg)
+            }, onMessage: function (info) {
+                if (info.command === 'sendWatch2GLocaltionData') {
+                    if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
+                        console.log(info.data);
+                        var position = {
+                            "longitude": info.data.longitude,
+                            "latitude": info.data.latitude,
+                        };
+                        _this.setState({position})
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * 设置坐标点样式
+     * @returns {*}
+     */
     renderMarker() {
         return <img style={{width: '40px', height: '40px', borderRadius: '50%'}}
                     src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
     }
 
+    /**
+     * 手动获取位置
+     */
     getPosition = () => {
-        this.setState({
-            position: {
-                longitude: 120 + Math.random() * 10 ,
-                latitude: 35 + Math.random() * 10
-            }
-        });
+        this.state.map.setZoom(17);
+        this.watch2GLocaltionRequest();
     };
 
     render() {
@@ -47,14 +118,16 @@ export default class watchPosition extends React.Component {
             {
                 name: 'ToolBar', //地图工具条插件，可以用来控制地图的缩放和平移
                 options: {
-                    onCreated(ins) {
-                        // 地图的每个控件都是插件的形式提供，这里可以获得插件的实例
-                        console.log(ins);
-                    },
                     locate: false
                 },
             }
         ];
+
+        const events = {
+            created: (ins) => {
+                this.setState({map: ins})
+            }
+        };
 
         return (
             <div id="watchPosition" style={{height: '100%'}}>
@@ -64,7 +137,11 @@ export default class watchPosition extends React.Component {
                     loading={Loading}
                     plugins={plugins}
                     center={this.state.position}
-                    zoom={10}
+                    zoom={this.state.zoom}
+                    showBuildingBlock={true}
+                    buildingAnimation={true}
+                    viewMode='3D'
+                    events={events}
                 >
                     <Marker
                         position={this.state.position}
