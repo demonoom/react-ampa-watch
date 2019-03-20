@@ -1,7 +1,6 @@
 import React from "react";
 import {InputItem, List, Picker, Toast, Button} from 'antd-mobile';
 import '../css/stuAccountRegist.less'
-import {provinceLite} from 'antd-mobile-demo-data';
 
 export default class stuAccountRegist extends React.Component {
     constructor(props) {
@@ -134,9 +133,6 @@ export default class stuAccountRegist extends React.Component {
                     }, () => {
                         _this.onPickerChange([arr[0].value])
                     });
-                    // this.setState({
-                    //     data: provinceLite,
-                    // });
                 } else {
                     Toast.fail(result.msg, 1);
                 }
