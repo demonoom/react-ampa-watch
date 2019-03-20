@@ -281,9 +281,9 @@ export default class addWatchInfo extends React.Component {
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt=""/></div>
-                        <div className='line_public scanDiv'>
-                            <div className="p10">
-                                 <span>{this.state.macId}</span>
+                        <div className='line_public'>
+                            <div className="p10 scanDiv">
+                                 <span className='text_hidden'>{this.state.macId}</span>
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div>

@@ -2,20 +2,21 @@
   .picDiv img{
     width: 100%;
   }
-  .submitBtn{
-    margin-top: 40px;
-  }
   .scanDiv{
     font-size: 15px;
-    line-height: 59px;
-    overflow: hidden;
+    padding: 20px 10px 13px;
+    .text_hidden{
+      width: calc(~"100% - 23px");
+      line-height: 23px;
+    }
     .scanBtn{
       background: url("../../images/icon_scan.png") no-repeat center center;
       background-size: 23px;
       width: 23px;
-      height: 100%;
-      float: right;
+      height: 23px;
       font-size: 0;
+      display: inline-block;
+      vertical-align: top;
     }
   }
 }
