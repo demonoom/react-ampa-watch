@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/images/bindStudent.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/images/bindTeacher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,11 +25,6 @@
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
@@ -71,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
+            <state relative-caret-position="232">
+              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -113,9 +99,9 @@
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
         <option value="$PROJECT_DIR$/src/index.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
       </list>
     </option>
   </component>
@@ -239,18 +225,18 @@
       <option name="presentableId" value="Default" />
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
-      <workItem from="1553047156778" duration="15966000" />
+      <workItem from="1553047156778" duration="16882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122000" />
+    <option name="totallyTimeSpent" value="1038000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -259,7 +245,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.3765625" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.121875" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -525,13 +511,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="52" column="25" selection-start-line="52" selection-start-column="25" selection-end-line="52" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/images/bindStuPic.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -548,6 +527,9 @@
     <entry file="file://$PROJECT_DIR$/src/components/images/bindStudent.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
@@ -558,8 +540,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
