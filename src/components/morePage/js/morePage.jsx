@@ -71,13 +71,35 @@ export default class morePage extends React.Component {
             window.location.href = url;
         });
     }
+
+    pushContacts = () =>{
+        var commandJson = {
+            "command": "watch2gPushContacts", data: {
+                "studentId": "",
+                "watch2gId": ""
+            }
+        };
+        console.log(commandJson, "commandJson")
+        ms.send(commandJson);
+    }
+
+    pushWeather = () =>{
+        var commandJson = {
+            "command": "pushWeather", data: {
+                "watch2gId": ""
+            }
+        };
+        console.log(commandJson, "commandJson")
+        ms.send(commandJson);
+    }
+
     render () {
         return (
             <div id="morePage">
                 <p onClick={this.toFindWatch}>找手表</p>
-                <p>推送天气</p>
+                <p onClick={this.pushWeather}>推送天气</p>
                 <p onClick={this.toPushClock}>推送闹钟</p>
-                <p>推送监护人</p>
+                <p onClick={this.pushContacts}>推送监护人</p>
             </div>
         )
     }
