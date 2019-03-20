@@ -6,6 +6,8 @@ import {
 
 import '../css/addWatchInfo.less'
 
+
+
 const alert = Modal.alert;
 const prompt = Modal.prompt;
 const sexData = [{
@@ -251,7 +253,7 @@ export default class addWatchInfo extends React.Component {
     }
     //关系改变
     onRelationChange = (val) => {
-        console.log(val, "val")
+     
         this.setState({
             relationValue: val,
         });
@@ -261,6 +263,7 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         if (val[0] == "自定义") {
             $(".am-modal-input input").focus();
+            this.showModal()
         } else {
             this.setState({
                 relationValue: val,

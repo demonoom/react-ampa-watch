@@ -24,13 +24,12 @@ export default class morePage extends React.Component {
             }
         };
         ms = new WatchWebsocketConnection();
-        console.log(pro,"pro")
+        console.log(pro, "pro")
         ms.connect(pro);
     }
     componentDidMount () {
         this.watchListener();
-        // var commandJson = {"command": "message", "data": {"message": messageJson}};
-        // ms.send(commandJson);
+
     }
 
     //消息监听
@@ -45,12 +44,34 @@ export default class morePage extends React.Component {
             }
         };
     }
+    //找手表
+    toFindWatch = () => {
+        var commandJson = {
+            "command": "searchWatch2GAction", data: {
+                "macAddress": "1"
+            }
+        };
+        console.log(commandJson, "commandJson")
+        ms.send(commandJson);
+    }
+
+    //推送闹钟
+    toPushClock = () => {
+        var url = WebServiceUtil.mobileServiceURL + "clockList";
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
     render () {
         return (
             <div id="morePage">
-                <p>找手表</p>
+                <p onClick={this.toFindWatch}>找手表</p>
                 <p>推送天气</p>
-                <p>推送闹钟</p>
+                <p onClick={this.toPushClock}>推送闹钟</p>
                 <p>推送监护人</p>
             </div>
         )
