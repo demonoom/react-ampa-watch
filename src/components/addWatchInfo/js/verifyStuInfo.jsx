@@ -134,22 +134,34 @@ export default class verifyStuInfo extends React.Component {
     }
     render () {
         return (
-            <div id="verifyStuInfo" style={{ height: this.state.clientHeight }}>
-                <h5>验证学生账号</h5>
-                <h5>小蚂蚁账号</h5>
-                <InputItem
-                    className=""
-                    placeholder="请输入孩子姓名"
-                    value={this.state.stuName}
-                    onChange={this.stuOnChange}
-                ></InputItem>
-                <InputItem
-                    className=""
-                    placeholder="输入此账号所在的学校名称"
-                    value={this.state.schoolName}
-                    onChange={this.schoolOnChange}
-                ></InputItem>
-                <div onClick={this.submmit}>确定</div>
+            <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="p38 bindStu">
+                    <div className="picDiv">
+                        <img
+                            src={require('../../images/stuAccountPic.png')} alt=""/>
+                    </div>
+                    <div className='stuAccount'>小蚂蚁账号</div>
+                    <div className="line_public">
+                        <InputItem
+                            className=""
+                            placeholder="请输入孩子姓名"
+                            value={this.state.stuName}
+                            onChange={this.stuOnChange}
+                        ></InputItem>
+                    </div>
+                   <div className="line_public">
+                       <InputItem
+                           className=""
+                           placeholder="输入此账号所在的学校名称"
+                           value={this.state.schoolName}
+                           onChange={this.schoolOnChange}
+                       ></InputItem>
+                   </div>
+
+                </div>
+
+                <div className='submitBtn' onClick={this.submmit}>确定</div>
+
             </div>
         );
     }
