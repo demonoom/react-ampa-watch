@@ -90,12 +90,12 @@ export default class morePage extends React.Component {
         var commandJson = {
             "command": "watch2gPushWeather",
             data: {
-                "watch2gId": "29"
+                "macAddress": "6666"
             }
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
-    }
+    };
 
     render() {
         return (
