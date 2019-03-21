@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e7e3417-53b8-425f-a1a5-60b2b810c0b6" name="Default" comment="">
+    <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/watchPosition/js/watchTrail.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/js/validationMes.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/watchPosition/css/watchPosition.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/watchPosition/css/watchPosition.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/watchPosition/js/watchPosition.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/watchPosition/js/watchPosition.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/watch_websocket_connection.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/watch_websocket_connection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/helpers/webServiceUtil.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/helpers/webServiceUtil.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.jsx" afterDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/.tmp/" />
-    <ignored path="$PROJECT_DIR$/temp/" />
-    <ignored path="$PROJECT_DIR$/tmp/" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +26,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="121">
@@ -53,10 +58,15 @@
       <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+            <state relative-caret-position="162">
+              <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file leaf-file-name="addWatchInfo.less" pinned="false" current-in-tab="false">
@@ -72,8 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.selectDown</find>
-      <find>scanDiv</find>
       <find>.am-list-item.am-input-item</find>
     </findStrings>
   </component>
@@ -83,14 +91,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/stuAccountRegist/js/stuAccountRegist.jsx" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" />
-        <option value="$PROJECT_DIR$/src/index.less" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/loginSuccess.jsx" />
-        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
       </list>
     </option>
   </component>
@@ -102,19 +103,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="161" />
-    <option name="y" value="27" />
-    <option name="width" value="1221" />
-    <option name="height" value="699" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -193,14 +185,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="workspace&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml&#10;workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="nodejs_package_manager_path" value="npm" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/images" />
-    </key>
+    <property name="SearchEverywhereHistoryKey" value="workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -226,18 +211,18 @@
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
       <workItem from="1553047156778" duration="20663000" />
-      <workItem from="1553134165534" duration="7051000" />
+      <workItem from="1553134165534" duration="7678000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7017000" />
+    <option name="totallyTimeSpent" value="7644000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -245,7 +230,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.05625" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.465625" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -256,9 +241,6 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.28046745" />
     </layout>
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -480,9 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/images/bindTeacher.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
@@ -551,13 +530,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -567,6 +539,16 @@
           </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
 </project>
