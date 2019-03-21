@@ -117,7 +117,7 @@ export default class validationMes extends React.Component {
                         <div className="bindStudent">
                             <img src={require('../../images/bindTeacher.png')} alt=""/>
                         </div>
-                        <div className="line_public icon-grayTeacher">
+                        <div className="line_public login-input icon-grayTeacher">
                             <InputItem
                                 className=""
                                 placeholder="请输入班级教师姓名"
@@ -125,7 +125,7 @@ export default class validationMes extends React.Component {
                                 onChange={this.teNameOnChange}
                             ></InputItem>
                         </div>
-                        <div className="line_public icon-grayPhone">
+                        <div className="line_public login-input icon-grayPhone">
                             <InputItem
                                 className=""
                                 placeholder="请输入该教师电话号码"
