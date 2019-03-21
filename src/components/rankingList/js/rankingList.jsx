@@ -30,9 +30,7 @@ const tabs = [
         var weekDay=myWeekDate.getDate();
         var timeWeek=weekYear +'-' + weekMonth + '-' + weekDay;
         var  weekStart = timeWeek+' 00:00:00';
-        console.log(weekStart,"weekStart")
-        console.log(start,"start")
-        console.log(end,"end")
+        
 export default class rankingList extends React.Component {
     constructor(props) {
         super(props);
@@ -46,13 +44,18 @@ export default class rankingList extends React.Component {
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
-            flag:1
+            flag:1,
+            ownData:{},
+            num:""
         };
     }
     componentDidMount() {
         Bridge.setShareAble("false");
         document.title = '运动排行列表';
-        var userId = 23836;
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var userId = searchArray[0].split('=')[1];
         this.setState({
             userId
         })
@@ -95,9 +98,19 @@ export default class rankingList extends React.Component {
             "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: function (result) {
+            onResponse:  (result)=> {
                 console.log(result,"ioio")
                 if (result.msg == '调用成功' && result.success == true) {
+                    result.response.forEach((v,i)=>{
+                        if(this.state.userId ==v.col_uid){
+                            this.setState({
+                                ownData:v,
+                                num:i
+                            },()=>{
+                                console.log(this.state.ownData,"oopop")
+                            })
+                        }
+                    })
                     var arr = result.response;
                     var pager = result.pager;
                     for (let i = 0; i < arr.length; i++) {
@@ -170,7 +183,7 @@ export default class rankingList extends React.Component {
 
     //toDetail
     toDetail=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=23836";
+        var url = WebServiceUtil.mobileServiceURL + "detailPage?userid="+this.state.userId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -182,8 +195,10 @@ export default class rankingList extends React.Component {
     render(){
         const row = (rowData, sectionID, rowID) => {
             console.log(rowData,"rowData")
+           
             return (
                 <div>
+                    <img style={{display:rowID < 3 ? "block":"none"}} src={rowData.user.avatar}/>
                     <div>{Number(rowID)+1}</div>
                     <div>{rowData.user.userName}</div>
                     <span>{rowData.count}</span>
@@ -221,7 +236,12 @@ export default class rankingList extends React.Component {
                                     height: this.state.clientHeight,
                                 }}
                             />
-                            <div onClick={this.toDetail}>自己孩子</div>
+                            <div onClick={this.toDetail}>
+                                <img src={this.state.ownData.user ? this.state.ownData.user.avatar:""}/>
+                                <span>{Number(this.state.num)+1}</span>
+                                <span>{this.state.ownData.user ? this.state.ownData.user.userName:""}</span>
+                                <span>{this.state.ownData.count ? this.state.ownData.count:""}</span>
+                            </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
                         2
