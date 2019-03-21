@@ -57,7 +57,6 @@ export default class updateClock extends React.Component {
         super(props);
         this.state = {
             time: "",
-            typeValue: "",
             flag: true,
             checked: false,
             repeatDefault: true,
@@ -79,9 +78,40 @@ export default class updateClock extends React.Component {
             clockId,
             watchId
         })
+        this.getInitData(clockId)
     }
     componentDidMount () {
 
+    }
+
+
+    getInitData=(clockId)=>{
+        var param = {
+            "method": 'getWatch2gClocksById',
+            "watchClockId": clockId,
+            "actionName": "watchAction",
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result)
+                if (result.success && result.response) {
+                   this.setState({
+                    defaleSelect:JSON.parse(result.response.repeatType).length == 0 ? "永不":JSON.parse(result.response.repeatType).join(""),
+                    alarmValue:[result.response.clockType],
+                    notciceTime:result.response.noticeTime,
+                    timeArr:JSON.parse(result.response.repeatType),
+                    typeValue:[result.response.noticeType],
+                   },()=>{
+                       console.log(this.state.typeValue)
+                   })
+                } else {
+
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
 
     //选择器改变事件
@@ -192,7 +222,7 @@ export default class updateClock extends React.Component {
     //星期的确定选择
     sureSelect = () => {
         this.setState({
-            defaleSelect: this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.length == 0 ? "永不 ":this.state.timeArr.join(" ")
         })
         this.setState({
             repeatDefault: true
@@ -207,10 +237,8 @@ export default class updateClock extends React.Component {
             "noticeTime": this.state.flag ? WebServiceUtil.formatHMS(this.state.notciceTime) : (this.state.time + "").split(" ")[4],
             "repeatType": JSON.stringify(this.state.timeArr),
             "noticeType": this.state.typeValue[0],
-            "watchId": this.state.watchId,
             "actionName": "watchAction",
         };
-        console.log(param, "eee")
         return
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
@@ -339,12 +367,12 @@ export default class updateClock extends React.Component {
                 >
                     <List.Item arrow="horizontal">提醒方式</List.Item>
                 </Picker>
-                <List.Item
+                {/* <List.Item
                     extra={<Switch
                         checked={this.state.checked}
                         onChange={this.offChange}
                     />}
-                >Off</List.Item>
+                >Off</List.Item> */}
                 <div onClick={this.toSave}>保存</div>
                 <div onClick={this.showAlert}>删除</div>
             </div>

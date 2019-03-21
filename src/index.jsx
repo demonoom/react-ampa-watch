@@ -77,6 +77,19 @@ const updateClock= (location, cb) => {
     }, 'updateClock')
 };
 
+
+//排行榜
+const rankingList= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/rankingList').default)
+    }, 'rankingList')
+};
+const detailPage= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/detailPage').default)
+    }, 'detailPage')
+};
+
 import './index.less';
 
 class Index extends React.Component {
@@ -98,6 +111,11 @@ class Index extends React.Component {
                         <Link
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/rankingList"
+                            style={{fontSize: '24px'}}>排行榜</Link>
                     </li>
                 </ul>
             </div>
@@ -122,6 +140,8 @@ ReactDOM.render(
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
+            <Route path="rankingList" getComponent={rankingList}/>
+            <Route path="detailPage" getComponent={detailPage}/>
         </Route>
     </Router>, document.getElementById('example')
 );
