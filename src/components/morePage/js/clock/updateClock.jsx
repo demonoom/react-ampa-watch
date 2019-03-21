@@ -43,13 +43,13 @@ const alarmType = [
 ]
 
 const checkedData = [
-    { value: 1, label: '星期一',extra:"周一" },
-    { value: 2, label: '星期二',extra:"周二" },
-    { value: 3, label: '星期三',extra:"周三"},
-    { value: 4, label: '星期四',extra:"周四"},
-    { value: 5, label: '星期五',extra:"周五"},
-    { value: 6, label: '星期六',extra:"周六"},
-    { value: 7, label: '星期日',extra:"周日"},
+    { value: 1, label: '星期一', extra: "周一" },
+    { value: 2, label: '星期二', extra: "周二" },
+    { value: 3, label: '星期三', extra: "周三" },
+    { value: 4, label: '星期四', extra: "周四" },
+    { value: 5, label: '星期五', extra: "周五" },
+    { value: 6, label: '星期六', extra: "周六" },
+    { value: 7, label: '星期日', extra: "周日" },
 ];
 
 export default class updateClock extends React.Component {
@@ -61,9 +61,12 @@ export default class updateClock extends React.Component {
             flag: true,
             checked: false,
             repeatDefault: true,
-            defaleSelect: "请选择",
-            timeArr: [],
-            sendData:[]
+            defaleSelect: ["周三", "周四", "周五"].join(""),
+            alarmValue: ["yuiouio"],
+            typeValue: ["震动"],
+            notciceTime: 46762000,
+            timeArr: ["周三", "周四", "周五"],
+            sendData: []
         };
     }
     componentWillMount () {
@@ -71,7 +74,9 @@ export default class updateClock extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var watchId = searchArray[0].split('=')[1];
+        var clockId = searchArray[1].split('=')[1];
         this.setState({
+            clockId,
             watchId
         })
     }
@@ -94,10 +99,16 @@ export default class updateClock extends React.Component {
             time: time
         })
     }
-    //取消时间
-    onCancel = () => {
+     //点击时间确定
+     timeSure = () => {
         this.setState({
-            time: ""
+            flag: false
+        })
+    }
+    //取消时间
+    onCancelTime = () => {
+        this.setState({
+            time: this.state.time
         })
     }
 
@@ -118,9 +129,6 @@ export default class updateClock extends React.Component {
 
     //自定义关系
     showModal () {
-        this.setState({
-            flag: false
-        })
         prompt('请输入关系', '', [
             { text: '取消' },
             {
@@ -136,31 +144,34 @@ export default class updateClock extends React.Component {
             },
         ], 'default', '')
     }
-
     //开关项
     offChange = (val) => {
         this.setState({
             checked: !this.state.checked,
         });
     }
-
     //星期的选择
-    onSelectChange = (e) => {
-        if ($(e.target).is(":checked")) {
+    onSelectChange = (e,data) => {
+        if (e.target.checked) {
             var arr = [];
-            arr.push($(e.target).val())
+            var tempArr = [];
+            arr.push(data.extra);
+            tempArr.push(data.value)
             this.setState({
-                timeArr: this.state.timeArr.concat(arr)
+                timeArr: this.state.timeArr.concat(arr),
+                sendData:this.state.sendData.concat(tempArr)
             }, () => {
                 console.log(this.state.timeArr, "ppp")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
-                if (v == $(e.target).val()) {
-                    this.state.timeArr.splice(i,1)
+                if (v == data.extra) {
+                    this.state.timeArr.splice(i,1);
+                    this.state.sendData.splice(i,1);
                 }
                 this.setState({
-                    timeArr:this.state.timeArr
+                    timeArr:this.state.timeArr,
+                    sendData:this.state.sendData
                 })
             })
         }
@@ -181,30 +192,38 @@ export default class updateClock extends React.Component {
     //星期的确定选择
     sureSelect = () => {
         this.setState({
-            defaleSelect:this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.join(" ")
         })
         this.setState({
             repeatDefault: true
         })
     }
     //保存
-    toSave = ()=>{
+    toSave = () => {
         var param = {
-            "method": 'addWatch2gClock',
+            "method": 'updateWatch2gClock',
+            "clockId": this.state.clockId,
             "clockType": this.state.alarmValue[0],
-            "noticeTime": (this.state.time+"").split(" ")[4],
+            "noticeTime": this.state.flag ? WebServiceUtil.formatHMS(this.state.notciceTime) : (this.state.time + "").split(" ")[4],
             "repeatType": JSON.stringify(this.state.timeArr),
             "noticeType": this.state.typeValue[0],
             "watchId": this.state.watchId,
             "actionName": "watchAction",
         };
+        console.log(param, "eee")
+        return
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.response == null) {
-                    
-                }
                 if (result.success && result.response) {
-                   
+                    Toast.info("修改成功",1);
+                    setTimeout(function () {
+                        var data = {
+                            method: 'finishForRefresh',
+                        };
+                        Bridge.callHandler(data, null, function (error) {
+                            console.log(error);
+                        });
+                    }, 1000)
                 } else {
 
                 }
@@ -214,6 +233,59 @@ export default class updateClock extends React.Component {
             }
         });
     }
+
+
+    //删除闹钟
+    todelete = () => {
+        var param = {
+            "method": 'deleteWatch2gClock',
+            "clockId": this.state.clockId,
+            "actionName": "watchAction",
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "re")
+                if (result.success && result.response) {
+                    Toast.info("删除成功",1)
+                    //关闭当前窗口，并刷新上一个页面
+                    setTimeout(function () {
+                        var data = {
+                            method: 'finishForRefresh',
+                        };
+                        Bridge.callHandler(data, null, function (error) {
+                            console.log(error);
+                        });
+                    }, 1000)
+                } else {
+
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+   
+
+
+    /**
+     * 删除弹出框
+     */
+    showAlert = (event) => {
+        event.stopPropagation();
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+        const alertInstance = alert('您确定要删除该闹钟吗?', '', [
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            { text: '确定', onPress: () => this.todelete()},
+        ], phone);
+    };
     render () {
         return (
             <div id="updateClock">
@@ -222,46 +294,48 @@ export default class updateClock extends React.Component {
                     value={this.state.alarmValue}
                     cols={1}
                     className="forss"
-                    extra={this.state.flag ? "请选择" : this.state.alarmValue}
+                    extra={this.state.alarmValue}
                     onChange={this.onAlarmChange}
                     onOk={this.alarmSure}
-                    onDismiss={this.onCancel}
+                    onDismiss={this.onCancelClock}
                 >
                     <List.Item arrow="horizontal">闹钟类型</List.Item>
                 </Picker>
                 <DatePicker
                     mode="time"
+                    extra={WebServiceUtil.formatHM(this.state.notciceTime)}
                     value={this.state.time}
                     onChange={this.timeChange}
-                    onDismiss={this.onCancel}
+                    onOk={this.timeSure}
+                    onDismiss={this.onCancelTime}
                 >
                     <List.Item arrow="horizontal">提醒时间</List.Item>
                 </DatePicker>
                 <div onClick={this.onRepeat}>重复 <span>{this.state.defaleSelect}</span></div>
                 <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
-                    {/* <List>
+                    <List>
                         {checkedData.map(i => (
-                            <CheckboxItem key={i.value} onChange={() => this.onSelectChange(i.value)}>
+                            <CheckboxItem key={i.value} checked = {this.state.timeArr.indexOf(i.extra) == -1 ? "":"checked"} onChange={(checked) => this.onSelectChange(checked,i)}>
                                 {i.label}
                             </CheckboxItem>
                         ))}
-                    </List> */}
-                    {
+                    </List>
+                    {/* {
                         checkedData.map((v, i) => {
-                            return <div><input onChange={this.onSelectChange} type="checkbox" value={v.extra} />{v.label}</div>
+                            return <label><input onChange={this.onSelectChange} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "":"checked"} type="checkbox" value={v.extra} />{v.label}</label>
                         })
-                    }
+                    } */}
                 </div>
                 <Picker
                     data={clockType}
                     value={this.state.typeValue}
                     cols={1}
                     className="forss"
-                    extra="请选择"
+                    extra={this.state.typeValue}
                     onChange={this.onPickerChange}
                     onOk={this.typeSure}
-                    onDismiss={this.onCancel}
+                    onDismiss={this.onCancelType}
                 >
                     <List.Item arrow="horizontal">提醒方式</List.Item>
                 </Picker>
@@ -272,6 +346,7 @@ export default class updateClock extends React.Component {
                     />}
                 >Off</List.Item>
                 <div onClick={this.toSave}>保存</div>
+                <div onClick={this.showAlert}>删除</div>
             </div>
         )
     }
