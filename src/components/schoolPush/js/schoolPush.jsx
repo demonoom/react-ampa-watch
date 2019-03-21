@@ -1,6 +1,7 @@
 import React from "react";
-import {Toast, ListView, Tabs} from "antd-mobile";
+import {Toast, ListView, Tabs, Modal} from "antd-mobile";
 
+const alert = Modal.alert;
 export default class schoolPush extends React.Component {
     constructor(props) {
         super(props);
@@ -31,14 +32,13 @@ export default class schoolPush extends React.Component {
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
-
+                if(result.success){
                     var  resArray = result.response;
-
-
-                } else {
+                }else {
                     Toast.info(result);
                 }
+
+
             },
             onError: function (error) {
                 Toast.info('请求失败');
@@ -67,7 +67,8 @@ export default class schoolPush extends React.Component {
         //     );
         // };
         return (
-            <div>dsfds
+            <div>
+                ooo
             </div>
         )
     }

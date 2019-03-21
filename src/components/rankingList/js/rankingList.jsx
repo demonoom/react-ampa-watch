@@ -1,36 +1,34 @@
 import React from "react";
-import { Tabs, WhiteSpace,ListView} from 'antd-mobile';
+import { Tabs, WhiteSpace, ListView } from 'antd-mobile';
 
 const tabs = [
     { title: '答题排行榜' },
     { title: '运动排行榜' },
     { title: '爱心排行榜' },
-  ];
+];
 
-  var myDate = new Date();
-        //获取当前年
-        var year=myDate.getFullYear();
-        //获取当前月
-        var month=myDate.getMonth()+1;
-        //获取当前日
-        var day=myDate.getDate();
+var myDate = new Date();
+//获取当前年
+var year = myDate.getFullYear();
+//获取当前月
+var month = myDate.getMonth() + 1;
+//获取当前日
+var day = myDate.getDate();
 
-        var time=year +'-' + month + '-' + day;
-        var  start = time+' 00:00:00'
-        var  end = time+' 23:59:59';
+var time = year + '-' + month + '-' + day;
+var start = time + ' 00:00:00'
+var end = time + ' 23:59:59';
 
-
-        var myWeekDate = new Date(); //获取七天前日期；
-        myWeekDate.setDate(myDate.getDate() - 365);
-         //获取当前年
-         var weekYear=myWeekDate.getFullYear();
-          //获取当前月
-        var weekMonth=myWeekDate.getMonth()+1;
-        //获取当前日
-        var weekDay=myWeekDate.getDate();
-        var timeWeek=weekYear +'-' + weekMonth + '-' + weekDay;
-        var  weekStart = timeWeek+' 00:00:00';
-        
+var myWeekDate = new Date(); //获取七天前日期；
+myWeekDate.setDate(myDate.getDate() - 365);
+//获取当前年
+var weekYear = myWeekDate.getFullYear();
+//获取当前月
+var weekMonth = myWeekDate.getMonth() + 1;
+//获取当前日
+var weekDay = myWeekDate.getDate();
+var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
+var weekStart = timeWeek + ' 00:00:00';
 export default class rankingList extends React.Component {
     constructor(props) {
         super(props);
@@ -44,12 +42,12 @@ export default class rankingList extends React.Component {
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
-            flag:1,
-            ownData:{},
-            num:""
+            flag: 1,
+            ownData: {},
+            num: ""
         };
     }
-    componentDidMount() {
+    componentDidMount () {
         Bridge.setShareAble("false");
         document.title = '运动排行列表';
         var locationHref = decodeURI(window.location.href);
@@ -59,28 +57,28 @@ export default class rankingList extends React.Component {
         this.setState({
             userId
         })
-        this.getStudentAnswerRightCountTop(userId,start,end);
+        this.getStudentAnswerRightCountTop(userId, start, end);
         //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
         window.addEventListener('resize', this.onWindowResize)
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         //解除监听
         window.removeEventListener('resize', this.onWindowResize)
     }
-  /**
-     * 视窗改变时改变高度
-     */
-    onWindowResize() {
+    /**
+       * 视窗改变时改变高度
+       */
+    onWindowResize () {
         setTimeout(function () {
-            this.setState({clientHeight: document.body.clientHeight});
+            this.setState({ clientHeight: document.body.clientHeight });
         }, 100)
     }
 
-     /**
-     *  查询答题排行榜
-     */
-    getStudentAnswerRightCountTop(userId,start,end) {
+    /**
+    *  查询答题排行榜
+    */
+    getStudentAnswerRightCountTop (userId, start, end) {
         var _this = this;
         _this.initData.splice(0);
         _this.state.dataSource = [];
@@ -98,16 +96,16 @@ export default class rankingList extends React.Component {
             "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse:  (result)=> {
-                console.log(result,"ioio")
+            onResponse: (result) => {
+                console.log(result, "ioio")
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v,i)=>{
-                        if(this.state.userId ==v.col_uid){
+                    result.response.forEach((v, i) => {
+                        if (this.state.userId == v.col_uid) {
                             this.setState({
-                                ownData:v,
-                                num:i
-                            },()=>{
-                                console.log(this.state.ownData,"oopop")
+                                ownData: v,
+                                num: i
+                            }, () => {
+                                console.log(this.state.ownData, "oopop")
                             })
                         }
                     })
@@ -141,9 +139,9 @@ export default class rankingList extends React.Component {
         });
     }
 
-     /**
-     *  ListView数据全部渲染完毕的回调
-     */
+    /**
+    *  ListView数据全部渲染完毕的回调
+    */
     onEndReached = (event) => {
         var _this = this;
         var currentPageNo = this.state.defaultPageNo;
@@ -151,12 +149,12 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        this.setState({isLoadingLeft: true, defaultPageNo: currentPageNo});
-        if(this.state.flag == 1){
-            _this.getStudentAnswerRightCountTop(this.state.userId,start,end);
+        this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo });
+        if (this.state.flag == 1) {
+            _this.getStudentAnswerRightCountTop(this.state.userId, start, end);
 
-        }else {
-            _this.getStudentAnswerRightCountTop(this.state.userId,weekStart,end);
+        } else {
+            _this.getStudentAnswerRightCountTop(this.state.userId, weekStart, end);
         }
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.initData),
@@ -164,26 +162,24 @@ export default class rankingList extends React.Component {
         });
     };
 
-     //今日
-     clickToday=()=>{
-         this.setState({
-            flag:1
-         })
-        this.getStudentAnswerRightCountTop(this.state.userId,start,end);
-        console.log("jinri")
+    //今日
+    clickToday = () => {
+        this.setState({
+            flag: 1
+        })
+        this.getStudentAnswerRightCountTop(this.state.userId, start, end);
     }
     //本周
-    toClickWeek=()=>{
+    toClickWeek = () => {
         this.setState({
-            flag:0
-         })
-        this.getStudentAnswerRightCountTop(this.state.userId,weekStart,end);
-        console.log("benzhou")
+            flag: 0
+        })
+        this.getStudentAnswerRightCountTop(this.state.userId, weekStart, end);
     }
 
     //toDetail
-    toDetail=()=>{
-        var url = WebServiceUtil.mobileServiceURL + "detailPage?userid="+this.state.userId;
+    toDetail = () => {
+        var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.userId + "&flag=" + this.state.flag;
         var data = {
             method: 'openNewPage',
             url: url
@@ -192,14 +188,13 @@ export default class rankingList extends React.Component {
             window.location.href = url;
         });
     }
-    render(){
+    render () {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData,"rowData")
-           
+            console.log(rowData, "rowData")
             return (
                 <div>
-                    <img style={{display:rowID < 3 ? "block":"none"}} src={rowData.user.avatar}/>
-                    <div>{Number(rowID)+1}</div>
+                    <img style={{ display: rowID < 3 ? "block" : "none" }} src={rowData.user.avatar} />
+                    <div>{Number(rowID) + 1}</div>
                     <div>{rowData.user.userName}</div>
                     <span>{rowData.count}</span>
                 </div>
@@ -211,16 +206,16 @@ export default class rankingList extends React.Component {
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
                     >
-                        <div style={{backgroundColor: '#fff' }}>
-                                <div>
-                                    <span onClick={this.clickToday}>今日</span>
-                                    <span onClick={this.toClickWeek}>本周</span>
-                                </div>
-                                <ListView
+                        <div style={{ backgroundColor: '#fff' }}>
+                            <div>
+                                <span onClick={this.clickToday}>今日</span>
+                                <span onClick={this.toClickWeek}>本周</span>
+                            </div>
+                            <ListView
                                 ref={el => this.lv = el}
                                 dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                                 renderFooter={() => (
-                                    <div style={{paddingTop: 5, paddingBottom: 40, textAlign: 'center'}}>
+                                    <div style={{ paddingTop: 5, paddingBottom: 40, textAlign: 'center' }}>
                                         {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                                     </div>)}
                                 renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
@@ -237,17 +232,17 @@ export default class rankingList extends React.Component {
                                 }}
                             />
                             <div onClick={this.toDetail}>
-                                <img src={this.state.ownData.user ? this.state.ownData.user.avatar:""}/>
-                                <span>{Number(this.state.num)+1}</span>
-                                <span>{this.state.ownData.user ? this.state.ownData.user.userName:""}</span>
-                                <span>{this.state.ownData.count ? this.state.ownData.count:""}</span>
+                                <img src={this.state.ownData.user ? this.state.ownData.user.avatar : ""} />
+                                <span>{Number(this.state.num) + 1}</span>
+                                <span>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
+                                <span>{this.state.ownData.count ? this.state.ownData.count : ""}</span>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
-                        2
+                            2
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
-                        3
+                            3
                         </div>
                     </Tabs>
                 </div>
