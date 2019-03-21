@@ -117,6 +117,10 @@ export default class validationMes extends React.Component {
                         <div className="bindStudent">
                             <img src={require('../../images/bindTeacher.png')} alt=""/>
                         </div>
+                        <div className="School-information">
+                            <span className="school text_hidden">宜昌天问外国语学校</span>
+                            <span className="class text_hidden">3年级2班</span>
+                        </div>
                         <div className="line_public login-input icon-grayTeacher">
                             <InputItem
                                 className=""
