@@ -155,8 +155,8 @@ export default class watchPosition extends React.Component {
         return (
             <div id="watchPosition" style={{height: '100%'}}>
                 <Map
-                    amapkey='2228dcee9965b2922c14f5cd72c3d0cc'
-                    version='1.4.13'
+                    amapkey={WebServiceUtil.amapkey}
+                    version={WebServiceUtil.version}
                     loading={Loading}
                     plugins={plugins}
                     center={this.state.position}
@@ -165,6 +165,7 @@ export default class watchPosition extends React.Component {
                     buildingAnimation={true}
                     viewMode='3D'
                     events={events}
+                    rotateEnable={false}
                 >
                     <Marker
                         position={this.state.position}
