@@ -1,10 +1,7 @@
 #watchPosition {
-  #getPosition {
+  .customLayer {
     width: 35px;
     height: 35px;
-    position: fixed;
-    bottom: 140px;
-    right: 15px;
     font-size: larger;
     background-color: #fff;
     text-align: center;
@@ -13,10 +10,30 @@
     border: 1px solid #ccc;
     box-shadow: 1px 1px 10px 0 #ccc;
   }
-  .amap-logo{
+
+  #getPosition {
+    position: fixed;
+    bottom: 140px;
+    right: 15px;
+  }
+
+  #getTrail {
+    position: fixed;
+    top: 230px;
+    right: 15px;
+  }
+
+  #safeAddress {
+    position: fixed;
+    top: 290px;
+    right: 15px;
+  }
+
+  .amap-logo {
     display: none !important;
   }
+
   .amap-copyright {
-    opacity:0;
+    opacity: 0;
   }
 }

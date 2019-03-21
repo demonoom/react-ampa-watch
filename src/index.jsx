@@ -59,6 +59,11 @@ const watchPosition = (location, cb) => {
     }, 'watchPosition')
 };
 
+const watchTrail = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/watchTrail').default)
+    }, 'watchTrail')
+};
 
 //闹钟
 const addClock= (location, cb) => {
@@ -66,11 +71,13 @@ const addClock= (location, cb) => {
         cb(null, require('./components/morePage/js/clock/addClock').default)
     }, 'addClock')
 };
+
 const clockList= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/clockList').default)
     }, 'clockList')
 };
+
 const updateClock= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/updateClock').default)
@@ -119,6 +126,7 @@ ReactDOM.render(
             <Route path="validationMes" getComponent={validationMes}/>
             <Route path="morePage" getComponent={morePage}/>
             <Route path="watchPosition" getComponent={watchPosition}/>
+            <Route path="watchTrail" getComponent={watchTrail}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
