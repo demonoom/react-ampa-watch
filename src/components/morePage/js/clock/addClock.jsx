@@ -51,19 +51,21 @@ const checkedData = [
     { value: 6, label: '星期六',extra:"周六"},
     { value: 7, label: '星期日',extra:"周日"},
 ];
-
+var myDate = new Date();
 export default class addClock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             time: "",
-            typeValue: "",
+            typeValue: ["震动"],
             flag: true,
             checked: false,
             repeatDefault: true,
-            defaleSelect: "请选择",
+            defaleSelect: "永不",
             timeArr: [],
-            sendData:[]
+            sendData:[],
+            alarmValue:["起床"],
+            time:myDate
         };
     }
     componentWillMount () {
@@ -145,12 +147,12 @@ export default class addClock extends React.Component {
     }
 
     //星期的选择
-    onSelectChange = (e) => {
-        if ($(e.target).is(":checked")) {
+    onSelectChange = (e,data) => {
+        if (e.target.checked) {
             var arr = [];
             var tempArr = [];
-            arr.push($(e.target).val());
-            tempArr.push($(e.target).attr("title"))
+            arr.push(data.extra);
+            tempArr.push(data.value)
             this.setState({
                 timeArr: this.state.timeArr.concat(arr),
                 sendData:this.state.sendData.concat(tempArr)
@@ -159,7 +161,7 @@ export default class addClock extends React.Component {
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
-                if (v == $(e.target).val()) {
+                if (v == data.extra) {
                     this.state.timeArr.splice(i,1);
                     this.state.sendData.splice(i,1);
                 }
@@ -180,11 +182,16 @@ export default class addClock extends React.Component {
     //星期的取消选择
     cancelSelect = () => {
         this.setState({
-            repeatDefault: true
+            repeatDefault: true,
+            defaleSelect:this.state.timeArr.length == 0 ? "请选择" : this.state.timeArr.join(" ")
         })
     }
     //星期的确定选择
     sureSelect = () => {
+        if(this.state.timeArr.length == 0){
+            Toast.info("请选择重复日期",1)
+            return
+        }
         this.setState({
             defaleSelect:this.state.timeArr.join(" ")
         })
@@ -198,18 +205,24 @@ export default class addClock extends React.Component {
             "method": 'addWatch2gClock',
             "clockType": this.state.alarmValue[0],
             "noticeTime": (this.state.time+"").split(" ")[4],
-            "repeatType": JSON.stringify(this.state.sendData),
+            "repeatType": JSON.stringify(this.state.timeArr),
             "noticeType": this.state.typeValue[0],
             "watchId": this.state.watchId,
              "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.response == null) {
-                    
-                }
+                
                 if (result.success && result.response) {
-                   
+                    Toast.info("保存成功",1);
+                    setTimeout(function () {
+                        var data = {
+                            method: 'finishForRefresh',
+                        };
+                        Bridge.callHandler(data, null, function (error) {
+                            console.log(error);
+                        });
+                    }, 1000)
                 } else {
 
                 }
@@ -245,25 +258,25 @@ export default class addClock extends React.Component {
                 <div onClick={this.onRepeat}>重复 <span>{this.state.defaleSelect}</span></div>
                 <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
-                    {/* <List>
+                    <List>
                         {checkedData.map(i => (
-                            <CheckboxItem key={i.value} onChange={() => this.onSelectChange(i.value)}>
+                            <CheckboxItem key={i.value} onChange={(checked) => this.onSelectChange(checked,i)}>
                                 {i.label}
                             </CheckboxItem>
                         ))}
-                    </List> */}
-                    {
+                    </List>
+                    {/* {
                         checkedData.map((v, i) => {
                             return <label><input onChange={this.onSelectChange} type="checkbox" value={v.extra} title={v.value} />{v.label}</label>
                         })
-                    }
+                    } */}
                 </div>
                 <Picker
                     data={clockType}
                     value={this.state.typeValue}
                     cols={1}
                     className="forss"
-                    extra="请选择"
+                    extra={this.state.typeValue}
                     onChange={this.onPickerChange}
                     onOk={this.typeSure}
                     onDismiss={this.onCancel}
