@@ -35,8 +35,6 @@ export default class schoolPush extends React.Component {
 
                     var  resArray = result.response;
 
-                   console.log(result,ttttt);
-
 
                 } else {
                     Toast.info(result);
