@@ -20,7 +20,7 @@ export default class morePage extends React.Component {
         this.setState({
             macAddr,
             userId,
-            watchId: 1
+            watchId: 29
         })
         var pro = {
             "command": "guardianLogin",
