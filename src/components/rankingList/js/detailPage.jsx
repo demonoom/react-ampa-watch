@@ -2,12 +2,24 @@ import React from "react";
 import ReactEcharts from 'echarts-for-react';
 import { } from 'antd-mobile';
 var calm;
+var myDate = new Date();
+        //获取当前年
+        var year=myDate.getFullYear();
+        //获取当前月
+        var month=myDate.getMonth()+1;
+        //获取当前日
+        var day=myDate.getDate();
+
+        var time=year +'-' + month + '-' + day;
+        var  start = time+' 00:00:00'
+        var  end = time+' 23:59:59';
 export default class detailPage extends React.Component {
     constructor(props) {
         super(props);
         calm = this;
         this.state = {
             faceChartDiv: [],
+            detailData:{}
         };
     }
     componentDidMount() {
@@ -18,7 +30,11 @@ export default class detailPage extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
-        this.getClassFaceEmotionByVidLineChart(111)
+        this.setState({
+            userId
+        })
+        this.getUserById(userId)
+        this.getStudentAnswerDetail(userId);
     }
 
     componentWillUnmount() {
@@ -34,20 +50,46 @@ export default class detailPage extends React.Component {
         }, 100)
     }
 
+    getUserById (ident) {
+        var _this = this;
+        var param = {
+            "method": 'getUserById',
+            "ident": ident,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: function (result) {
+                if (result.msg == '调用成功' || result.success == true) {
+                    _this.setState({
+                        users: result.response
+                    })
+                }
+            },
+            onError: function (error) {
+                // message.error(error);
+            }
+        });
+    }
+
 
      /**
      * 获取表情数据折线图
      */
-    getClassFaceEmotionByVidLineChart(vId) {
+    getStudentAnswerDetail(userId) {
         var _this = this;
         var param = {
-            "method": "getClassFaceEmotionByVidLineChart",
-            "vid": vId
+            "method": "getStudentAnswerDetail",
+            "userId": userId,
+            "startTime":start,
+            "actionName": "watchAction",
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: function (result) {
+            onResponse: (result) =>{
+                console.log(result,"result")
                 var response = result.response;
-                _this.buildFaceLineChart(response);
+                this.setState({
+                    detailData:result.response
+                })
+                _this.buildFaceLineChart(response.answerRight);
             },
             onError: function (error) {
                 // Toast.fail(error, 1);
@@ -60,34 +102,27 @@ export default class detailPage extends React.Component {
     * @param braceletSportSteps
     */
    buildFaceLineChart = (braceletHeartSteps) => {
+       console.log(braceletHeartSteps,"braceletHeartSteps")
     var _this = this;
     var xClazzNameArray = [];
 
-    var AttentionArr = [];
-    var ConfuseArr = [];
-    var ThinkArr = [];
-    var JoyArr = [];
-    var UnderstandArr = [];
-    var SupersizeArr = [];
-
+    var AnswerRight = [];
+    var AnswerTotal = [];
+    var SubjectTotal = [];
     braceletHeartSteps.forEach(function (braceletHeartStepObj) {
-        var second = braceletHeartStepObj.second;
-        xClazzNameArray.push(WebServiceUtil.formatHMS(second));
+        var second = braceletHeartStepObj.x.split(" ")[1];
+        xClazzNameArray.push(second+":00");
+        console.log(xClazzNameArray,"xClazzNameArray")
 
-        var attention = braceletHeartStepObj.attention;
-        AttentionArr.push(attention.toFixed(2));
-        var confuse = braceletHeartStepObj.confuse;
-        ConfuseArr.push(confuse.toFixed(2));
-        var thinking = braceletHeartStepObj.thinking;
-        ThinkArr.push(thinking.toFixed(2));
-        var joy = braceletHeartStepObj.joy;
-        JoyArr.push(joy.toFixed(2));
-        var understand = braceletHeartStepObj.understand;
-        UnderstandArr.push(understand.toFixed(2));
-        var surprise = braceletHeartStepObj.surprise;
-        SupersizeArr.push(surprise.toFixed(2));
+        var answerRight = braceletHeartStepObj.y1;
+        AnswerRight.push(answerRight.toFixed(2));
+        var answerTotal = braceletHeartStepObj.y2;
+        AnswerTotal.push(answerTotal.toFixed(2));
+        var subjectTotal = braceletHeartStepObj.y3;
+        SubjectTotal.push(subjectTotal.toFixed(2));
+       
     });
-    var stepOption = _this.buildFaceOption(xClazzNameArray, AttentionArr, ConfuseArr, ThinkArr, JoyArr, UnderstandArr, SupersizeArr)
+    var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
     var faceChartDiv = <div
     // style={{display:braceletHeartSteps.length == 0 ? "none":"block"}} 
     >
@@ -105,7 +140,7 @@ export default class detailPage extends React.Component {
     /**
   * 创建折线图的option
   */
- buildFaceOption = (xClazzNameArray, AttentionArr, ConfuseArr, ThinkArr, JoyArr, UnderstandArr, SupersizeArr) => {
+ buildFaceOption=(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal) => {
     return {
         tooltip: {
             trigger: 'axis',
@@ -139,27 +174,6 @@ export default class detailPage extends React.Component {
             {
                 type: 'category',
                 data: xClazzNameArray,
-                axisTick: {
-                    show: false
-                },
-                axisLine: {
-                    show: true,
-                    lineStyle: {
-                        color: '#888',
-                        width: 1,
-                        type: 'solid'
-                    },
-                },
-                axisLabel: {
-                    textStyle: {
-                        color: '#fff',
-                        fontSize: 38
-                    },
-                    //这个是倾斜角度，也是考虑到文字过多的时候，方式覆盖采用倾斜
-                    rotate: 0,
-                    //这里是考虑到x轴文件过多的时候设置的，如果文字太多，默认是间隔显示，设置为0，标示全部显示，当然，如果x轴都不显示，那也就没有意义了
-                    interval: 'auto',
-                },
             }
         ],
         yAxis: [
@@ -192,7 +206,7 @@ export default class detailPage extends React.Component {
                 name: 'attention',
                 type: 'line',
                 smooth: true,
-                data: AttentionArr,
+                data: AnswerRight,
                 left: 0,
                 bottom: 0,
                 symbolSize: 6,
@@ -220,7 +234,7 @@ export default class detailPage extends React.Component {
                 name: 'confuse',
                 type: 'line',
                 // stack: '总量',
-                data: ConfuseArr,
+                data: AnswerTotal,
                 label: {
                     normal: {
                         show: true,
@@ -232,50 +246,14 @@ export default class detailPage extends React.Component {
                 name: 'think',
                 type: 'line',
                 // stack: '总量',
-                data: ThinkArr,
+                data: SubjectTotal,
                 label: {
                     normal: {
                         show: true,
                         position: 'top',
                     }
                 }
-            },
-            {
-                name: 'joy',
-                type: 'line',
-                // stack: '总量',
-                data: JoyArr,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                }
-            },
-            {
-                name: 'understand',
-                type: 'line',
-                // stack: '总量',
-                data: UnderstandArr,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                }
-            },
-            {
-                name: 'supersize',
-                type: 'line',
-                // stack: '总量',
-                data: SupersizeArr,
-                label: {
-                    normal: {
-                        show: true,
-                        position: 'top',
-                    }
-                }
-            },
+            }
         ]
     };
 }
@@ -285,14 +263,16 @@ export default class detailPage extends React.Component {
         
         return (
             <div>
-                <div>布拉布拉</div>
                 <div>
-                    准确率：<span>80%</span>
-                    全班排名:<span>12</span>
+                    <img src={this.state.users ? this.state.users.avatar:""} />
+                    <span>{this.state.users ? this.state.users.userName:""}</span>
+                </div>
+                <div>
+                    准确率：<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
+                    全班排名:<span>{this.state.detailData.totalClassTop}</span>
                 </div>
                 <div>今日答题统计</div>
                     {calm.state.faceChartDiv}
-              iiiiis
             </div>
         )
     }
