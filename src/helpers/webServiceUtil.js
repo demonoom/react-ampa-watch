@@ -221,6 +221,14 @@ WebServiceUtil.formatMD = function (nS) {
     var ymdStr = [month, date].join('-');
     return ymdStr;
 };
+WebServiceUtil.formatMD3 = function (nS) {
+    var da = new Date(parseInt(nS));
+    var year = da.getFullYear();
+    var month = da.getMonth() + 1;
+    var date = da.getDate();
+    var ymdStr = [month, date].join('月')+"日";
+    return ymdStr;
+};
 WebServiceUtil.formatMD2 = function (nS) {
     var da = new Date(parseInt(nS));
     var year = da.getFullYear();
@@ -229,6 +237,16 @@ WebServiceUtil.formatMD2 = function (nS) {
     var ymdStr = [month, date].join('.');
     return ymdStr;
 };
+
+//几天前的日期
+WebServiceUtil.fun_date=function (aa){
+    var date1 = new Date(),
+    time1=date1.getFullYear()+"-"+(date1.getMonth()+1)+"-"+date1.getDate();//time1表示当前时间
+    var date2 = new Date(date1);
+    date2.setDate(date1.getDate()+aa);
+    var time2 = (date2.getMonth()+1)+"月"+date2.getDate()+"日";
+    return time2;
+}
 
 /**
  * 时间戳转年月日时分秒，完整时间显示
@@ -263,6 +281,22 @@ WebServiceUtil.formatYMDHM = function (nS) {
     var minutes = da.getMinutes() < 10 ? "0" + (da.getMinutes()) : da.getMinutes();
     var dayStr = [year, month, date].join('-');
     var dateStr = dayStr + " " + hour + minutes;
+    return dateStr;
+};
+/**
+ * 时间戳转月日时分，完整时间显示
+ * @param nS
+ * @returns {string}
+ */
+WebServiceUtil.formatMDHM = function (nS) {
+    var da = new Date(parseInt(nS));
+    var year = da.getFullYear();
+    var month = da.getMonth() + 1;
+    var date = da.getDate();
+    var hour = (da.getHours() < 10 ? "0" + (da.getHours()) : da.getHours()) + ":";
+    var minutes = da.getMinutes() < 10 ? "0" + (da.getMinutes()) : da.getMinutes();
+    var dayStr = [month, date].join('月');
+    var dateStr = dayStr + "日" +" "+ hour + minutes;
     return dateStr;
 };
 /**

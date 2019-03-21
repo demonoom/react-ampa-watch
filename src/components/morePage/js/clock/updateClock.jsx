@@ -85,7 +85,7 @@ export default class updateClock extends React.Component {
     }
 
 
-    getInitData=(clockId)=>{
+    getInitData = (clockId) => {
         var param = {
             "method": 'getWatch2gClocksById',
             "watchClockId": clockId,
@@ -95,15 +95,15 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 console.log(result)
                 if (result.success && result.response) {
-                   this.setState({
-                    defaleSelect:JSON.parse(result.response.repeatType).length == 0 ? "永不":JSON.parse(result.response.repeatType).join(""),
-                    alarmValue:[result.response.clockType],
-                    notciceTime:result.response.noticeTime,
-                    timeArr:JSON.parse(result.response.repeatType),
-                    typeValue:[result.response.noticeType],
-                   },()=>{
-                       console.log(this.state.typeValue)
-                   })
+                    this.setState({
+                        defaleSelect: JSON.parse(result.response.repeatType).length == 0 ? "永不" : JSON.parse(result.response.repeatType).join(""),
+                        alarmValue: [result.response.clockType],
+                        notciceTime: result.response.noticeTime,
+                        timeArr: JSON.parse(result.response.repeatType),
+                        typeValue: [result.response.noticeType],
+                    }, () => {
+                        console.log(this.state.typeValue)
+                    })
                 } else {
 
                 }
@@ -129,8 +129,8 @@ export default class updateClock extends React.Component {
             time: time
         })
     }
-     //点击时间确定
-     timeSure = () => {
+    //点击时间确定
+    timeSure = () => {
         this.setState({
             flag: false
         })
@@ -181,7 +181,7 @@ export default class updateClock extends React.Component {
         });
     }
     //星期的选择
-    onSelectChange = (e,data) => {
+    onSelectChange = (e, data) => {
         if (e.target.checked) {
             var arr = [];
             var tempArr = [];
@@ -189,19 +189,19 @@ export default class updateClock extends React.Component {
             tempArr.push(data.value)
             this.setState({
                 timeArr: this.state.timeArr.concat(arr),
-                sendData:this.state.sendData.concat(tempArr)
+                sendData: this.state.sendData.concat(tempArr)
             }, () => {
                 console.log(this.state.timeArr, "ppp")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
                 if (v == data.extra) {
-                    this.state.timeArr.splice(i,1);
-                    this.state.sendData.splice(i,1);
+                    this.state.timeArr.splice(i, 1);
+                    this.state.sendData.splice(i, 1);
                 }
                 this.setState({
-                    timeArr:this.state.timeArr,
-                    sendData:this.state.sendData
+                    timeArr: this.state.timeArr,
+                    sendData: this.state.sendData
                 })
             })
         }
@@ -222,7 +222,7 @@ export default class updateClock extends React.Component {
     //星期的确定选择
     sureSelect = () => {
         this.setState({
-            defaleSelect: this.state.timeArr.length == 0 ? "永不 ":this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.length == 0 ? "永不 " : this.state.timeArr.join(" ")
         })
         this.setState({
             repeatDefault: true
@@ -243,7 +243,7 @@ export default class updateClock extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    Toast.info("修改成功",1);
+                    Toast.info("修改成功", 1);
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
@@ -274,7 +274,7 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 console.log(result, "re")
                 if (result.success && result.response) {
-                    Toast.info("删除成功",1)
+                    Toast.info("删除成功", 1)
                     //关闭当前窗口，并刷新上一个页面
                     setTimeout(function () {
                         var data = {
@@ -294,7 +294,7 @@ export default class updateClock extends React.Component {
         });
     }
 
-   
+
 
 
     /**
@@ -311,7 +311,7 @@ export default class updateClock extends React.Component {
         }
         const alertInstance = alert('您确定要删除该闹钟吗?', '', [
             { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => this.todelete()},
+            { text: '确定', onPress: () => this.todelete() },
         ], phone);
     };
     render () {
@@ -344,7 +344,7 @@ export default class updateClock extends React.Component {
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
                     <List>
                         {checkedData.map(i => (
-                            <CheckboxItem key={i.value} checked = {this.state.timeArr.indexOf(i.extra) == -1 ? "":"checked"} onChange={(checked) => this.onSelectChange(checked,i)}>
+                            <CheckboxItem key={i.value} checked={this.state.timeArr.indexOf(i.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, i)}>
                                 {i.label}
                             </CheckboxItem>
                         ))}
