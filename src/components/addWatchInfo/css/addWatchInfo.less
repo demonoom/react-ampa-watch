@@ -1,15 +1,21 @@
 #addWatchInfo {
+  width: 100%;
+  height: 100%;
+  background-color: white;
   .picDiv img{
     width: 100%;
   }
   .scanDiv{
     font-size: 15px;
-    padding: 23px 10px 13px;
+    padding: 23px 8px 13px 37px;
+    background: url("../../images/icon_grayScan.png") no-repeat left 22px;
+    background-size: 24px;
     .text_hidden{
       width: calc(~"100% - 23px");
       vertical-align: bottom;
       padding-right: 10px;
       box-sizing: border-box;
+      line-height: 1.5;
     }
     .scanBtn{
       background: url("../../images/icon_scan.png") no-repeat center center;
@@ -21,16 +27,29 @@
       vertical-align: top;
     }
   }
+  .sex .am-list-line{
+    background: url("../../images/icon_graySex.png") no-repeat left 22px;
+    background-size: 24px;
+  }
+  .relation .am-list-line{
+    background: url("../../images/icon_grayUser.png") no-repeat left 22px;
+    background-size: 24px;
+  }
+  .icon_user{
+    .am-list-item.am-input-item{
+      background: url("../../images/icon_grayUser.png") no-repeat left 22px;
+      background-size: 24px;
+    }
+  }
+  .icon_school{
+    .am-list-item.am-input-item{
+      background: url("../../images/icon_graySchool.png") no-repeat left 22px;
+      background-size: 24px;
+    }
+  }
 
   /*学生账号绑定*/
   .bindStu{
-    .am-list-item{
-      padding-bottom: 6px;
-      padding-top: 22px;
-    }
-    .am-list-item .am-list-line{
-      padding-right: 10px;
-    }
     .stuCont{
       padding-top: 56px;
     }

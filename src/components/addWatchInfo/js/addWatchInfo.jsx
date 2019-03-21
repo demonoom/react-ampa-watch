@@ -134,7 +134,7 @@ export default class addWatchInfo extends React.Component {
                     console.log(value, "value");
                     this.setState({
                         relationValue: [value],
-
+                        RelationClassName:'color_3'
                     }, () => {
                         console.log(this.state.relationValue)
                     });
@@ -237,6 +237,7 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         this.setState({
             sexValue: val,
+            extraClassName:'color_3'
         });
     };
 
@@ -260,6 +261,7 @@ export default class addWatchInfo extends React.Component {
      
         this.setState({
             relationValue: val,
+            RelationClassName:'color_3'
         });
     };
     //关系点击确定
@@ -297,7 +299,7 @@ export default class addWatchInfo extends React.Component {
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div>
-                        <div className={'line_public '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        <div className={'sex line_public '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
@@ -310,7 +312,7 @@ export default class addWatchInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div className={'line_public '+ this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        <div className={'relation line_public '+ this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}
