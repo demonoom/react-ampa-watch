@@ -108,13 +108,11 @@ const updateClock = (location, cb) => {
     }, 'updateClock')
 };
 
-<<<<<<< HEAD
 const schoolPush= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/schoolPush/js/schoolPush').default)
     }, 'schoolPush')
-=======
-
+};
 //排行榜
 const rankingList= (location, cb) => {
     require.ensure([], require => {
@@ -125,7 +123,6 @@ const detailPage= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/rankingList/js/detailPage').default)
     }, 'detailPage')
->>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
 };
 
 import './index.less';
@@ -150,18 +147,16 @@ class Index extends React.Component {
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
-<<<<<<< HEAD
 
                     <li>
                         <Link
                             to="/schoolPush"
                             style={{fontSize: '24px'}}>校园通知</Link>
-=======
+                            </li>
                     <li>
                         <Link
                             to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
->>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
                     </li>
                 </ul>
             </div>
@@ -191,12 +186,9 @@ ReactDOM.render(
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
-<<<<<<< HEAD
             <Route path="schoolPush" getComponent={schoolPush}/>
-=======
             <Route path="rankingList" getComponent={rankingList}/>
             <Route path="detailPage" getComponent={detailPage}/>
->>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
         </Route>
     </Router>, document.getElementById('example')
 );
