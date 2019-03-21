@@ -6,6 +6,8 @@ import {
 
 import '../css/addWatchInfo.less'
 
+
+
 const alert = Modal.alert;
 const prompt = Modal.prompt;
 const sexData = [{
@@ -106,16 +108,16 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(159)
-        // var data = {
-        //     method: 'watchBinding'
-        // };
-        // Bridge.callHandler(data, (mes)=> {
-        //     this.getWatch2gByMacAddress(mes)
-        //     this.setState({ macId: mes.toUpperCase() });
-        // }, function (error) {
-        //     console.log(error);
-        // });
+        // this.getWatch2gByMacAddress(159)
+        var data = {
+            method: 'watchBinding'
+        };
+        Bridge.callHandler(data, (mes)=> {
+            this.setState({ macId: mes.toUpperCase() });
+            this.getWatch2gByMacAddress(mes)
+        }, function (error) {
+            console.log(error);
+        });
     }
 
    
@@ -255,7 +257,7 @@ export default class addWatchInfo extends React.Component {
     }
     //关系改变
     onRelationChange = (val) => {
-        console.log(val, "val")
+     
         this.setState({
             relationValue: val,
         });
@@ -265,6 +267,7 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         if (val[0] == "自定义") {
             $(".am-modal-input input").focus();
+            this.showModal()
         } else {
             this.setState({
                 relationValue: val,
