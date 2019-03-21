@@ -41,7 +41,7 @@ const loginSuccess = (location, cb) => {
 };
 
 //更多页面
-const morePage =(location, cb) => {
+const morePage = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/morePage').default)
     }, 'morePage')
@@ -59,28 +59,73 @@ const watchPosition = (location, cb) => {
     }, 'watchPosition')
 };
 
+const watchTrail = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/watchTrail').default)
+    }, 'watchTrail')
+};
+
+const commonLocation = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/commonLocation').default)
+    }, 'updateClock')
+};
+
+const addNewLocation = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/addNewLocation').default)
+    }, 'updateClock')
+};
+
+const chooseLocation = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/chooseLocation').default)
+    }, 'updateClock')
+};
+
+const rangeSetting = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/rangeSetting').default)
+    }, 'updateClock')
+};
 
 //闹钟
-const addClock= (location, cb) => {
+const addClock = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/addClock').default)
     }, 'addClock')
 };
-const clockList= (location, cb) => {
+
+const clockList = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/clockList').default)
     }, 'clockList')
 };
-const updateClock= (location, cb) => {
+
+const updateClock = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/updateClock').default)
     }, 'updateClock')
 };
 
+<<<<<<< HEAD
 const schoolPush= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/schoolPush/js/schoolPush').default)
     }, 'schoolPush')
+=======
+
+//排行榜
+const rankingList= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/rankingList').default)
+    }, 'rankingList')
+};
+const detailPage= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/detailPage').default)
+    }, 'detailPage')
+>>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
 };
 
 import './index.less';
@@ -105,11 +150,18 @@ class Index extends React.Component {
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
+<<<<<<< HEAD
 
                     <li>
                         <Link
                             to="/schoolPush"
                             style={{fontSize: '24px'}}>校园通知</Link>
+=======
+                    <li>
+                        <Link
+                            to="/rankingList"
+                            style={{fontSize: '24px'}}>排行榜</Link>
+>>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
                     </li>
                 </ul>
             </div>
@@ -131,10 +183,20 @@ ReactDOM.render(
             <Route path="validationMes" getComponent={validationMes}/>
             <Route path="morePage" getComponent={morePage}/>
             <Route path="watchPosition" getComponent={watchPosition}/>
+            <Route path="watchTrail" getComponent={watchTrail}/>
+            <Route path="commonLocation" getComponent={commonLocation}/>
+            <Route path="chooseLocation" getComponent={chooseLocation}/>
+            <Route path="addNewLocation" getComponent={addNewLocation}/>
+            <Route path="rangeSetting" getComponent={rangeSetting}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
+<<<<<<< HEAD
             <Route path="schoolPush" getComponent={schoolPush}/>
+=======
+            <Route path="rankingList" getComponent={rankingList}/>
+            <Route path="detailPage" getComponent={detailPage}/>
+>>>>>>> c5f68c617d67ff5cec17605b4ab58b43cdec2007
         </Route>
     </Router>, document.getElementById('example')
 );

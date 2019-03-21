@@ -236,14 +236,14 @@ export default class stuAccountRegist extends React.Component {
                         <div className="bindStudent">
                             <img src={require('../../images/bindStudent.png')} alt=""/>
                         </div>
-                        <div className='am-list-item am-list-item-middle line_public' onClick={this.schoolOnClick}>
+                        <div className='am-list-item am-list-item-middle line_public icon-graySchool ' onClick={this.schoolOnClick}>
                             <div className="am-list-line">
                                 <div className="am-list-content"> </div>
                                 <div className={'am-list-extra '+ this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
                                 <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
-                        <div className={'line_public '+ this.state.stuClassName}>
+                        <div className={'line_public icon-grayClass '+ this.state.stuClassName}>
                             <Picker
                                 data={this.state.data}
                                 cols={this.state.cols}
@@ -255,7 +255,8 @@ export default class stuAccountRegist extends React.Component {
                                 <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
                             </Picker>
                         </div>
-                        <div className="line_public">
+                    </div>
+                        <div className="line_public login-input icon-grayStudent">
                             <InputItem
                                 className=""
                                 placeholder="请输入学生姓名"
@@ -274,7 +275,6 @@ export default class stuAccountRegist extends React.Component {
                                 {this.state.responseList}
                             </div>
                         </div>
-                    </div>
                     <div className="submitBtn" onClick={this.nextStep}>下一步</div>
                 </div>
             </div>

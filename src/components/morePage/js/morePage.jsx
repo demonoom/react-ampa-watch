@@ -1,5 +1,5 @@
 import React from "react";
-import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
+import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
 
 //消息通信js
@@ -10,17 +10,17 @@ export default class morePage extends React.Component {
         this.state = {};
     }
 
-    componentWillMount () {
+    componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
         var userId = 23836;
-        var macAddr = 1;
+        var macAddr = 6666;
         this.getWatchId(macAddr)
         this.setState({
             macAddr,
             userId,
-            watchId:1
+            watchId: 29
         })
         var pro = {
             "command": "guardianLogin",
@@ -35,24 +35,25 @@ export default class morePage extends React.Component {
         ms.connect(pro);
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.watchListener();
 
     }
+
     //获取手表id
-    getWatchId=(macAddress)=>{
+    getWatchId = (macAddress) => {
         var param = {
             "method": 'getWatch2gByMacAddress',
             "macAddress": macAddress,
-            "actionName":"watchAction"
+            "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 console.log(result, "rerere")
                 if (result.success && result.response) {
-                   this.setState({
-                       watchId:result.response.id
-                   })
+                    this.setState({
+                        watchId: result.response.id
+                    })
                 } else {
                     // Toast.info('');
                 }
@@ -65,7 +66,7 @@ export default class morePage extends React.Component {
 
 
     //消息监听
-    watchListener () {
+    watchListener() {
         ms.msgWsListener = {
             onError: function (errorMsg) {
 
@@ -90,7 +91,7 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        var url = WebServiceUtil.mobileServiceURL + "clockList?userId="+this.state.userId+"&watchId="+this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -121,14 +122,14 @@ export default class morePage extends React.Component {
         var commandJson = {
             "command": "watch2gPushWeather",
             data: {
-                "watch2gId": this.state.watchId
+                "macAddress": this.state.macAddr
             }
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
-    }
+    };
 
-    render () {
+    render() {
         return (
             <div id="morePage">
                 <p onClick={this.toFindWatch}>找手表</p>

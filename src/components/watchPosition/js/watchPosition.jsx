@@ -117,6 +117,24 @@ export default class watchPosition extends React.Component {
         this.watch2GLocaltionRequest();
     };
 
+    /**
+     * 获取运动轨迹
+     */
+    getTrail = () => {
+        var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    };
+
+    addSafeAddress = () => {
+        console.log('addSafeAddress');
+    };
+
     render() {
 
         const plugins = [
@@ -137,8 +155,8 @@ export default class watchPosition extends React.Component {
         return (
             <div id="watchPosition" style={{height: '100%'}}>
                 <Map
-                    amapkey='2228dcee9965b2922c14f5cd72c3d0cc'
-                    version='1.4.13'
+                    amapkey={WebServiceUtil.amapkey}
+                    version={WebServiceUtil.version}
                     loading={Loading}
                     plugins={plugins}
                     center={this.state.position}
@@ -147,6 +165,7 @@ export default class watchPosition extends React.Component {
                     buildingAnimation={true}
                     viewMode='3D'
                     events={events}
+                    rotateEnable={false}
                 >
                     <Marker
                         position={this.state.position}
@@ -154,6 +173,12 @@ export default class watchPosition extends React.Component {
                     />
                     <div onClick={this.getPosition} id="getPosition" className="customLayer">
                         寻
+                    </div>
+                    <div onClick={this.getTrail} id="getTrail" className="customLayer">
+                        轨
+                    </div>
+                    <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                        点
                     </div>
                 </Map>
             </div>
