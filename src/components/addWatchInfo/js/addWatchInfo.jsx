@@ -134,7 +134,7 @@ export default class addWatchInfo extends React.Component {
                     console.log(value, "value");
                     this.setState({
                         relationValue: [value],
-
+                        RelationClassName:'color_3'
                     }, () => {
                         console.log(this.state.relationValue)
                     });
@@ -237,6 +237,7 @@ export default class addWatchInfo extends React.Component {
         console.log(val, "val")
         this.setState({
             sexValue: val,
+            extraClassName:'color_3'
         });
     };
 
@@ -260,6 +261,7 @@ export default class addWatchInfo extends React.Component {
      
         this.setState({
             relationValue: val,
+            RelationClassName:'color_3'
         });
     };
     //关系点击确定

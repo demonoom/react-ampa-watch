@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" afterDir="false" />
     </list>
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="addWatchInfo.jsx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="287" column="35" selection-start-line="287" selection-start-column="35" selection-end-line="287" selection-end-column="35" />
+            <state relative-caret-position="166">
+              <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -46,10 +45,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bindStudentInfo.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="bindStudentInfo.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
+            <state relative-caret-position="49">
               <caret line="108" column="55" selection-start-line="108" selection-start-column="55" selection-end-line="108" selection-end-column="55" />
             </state>
           </provider>
@@ -96,6 +95,9 @@
     <findStrings>
       <find>.am-list-item.am-input-item</find>
       <find>scanDiv</find>
+      <find>relationValue</find>
+      <find>onRelationChange</find>
+      <find>sexValue</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -108,6 +110,7 @@
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx" />
+        <option value="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" />
       </list>
     </option>
   </component>
@@ -227,12 +230,12 @@
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
       <workItem from="1553047156778" duration="20663000" />
-      <workItem from="1553134165534" duration="8345000" />
+      <workItem from="1553134165534" duration="9432000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8311000" />
+    <option name="totallyTimeSpent" value="9398000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
@@ -246,7 +249,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.2578125" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.090625" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -522,16 +525,6 @@
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="287" column="35" selection-start-line="287" selection-start-column="35" selection-end-line="287" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -561,8 +554,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/bindStudentInfo.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
+        <state relative-caret-position="49">
           <caret line="108" column="55" selection-start-line="108" selection-start-column="55" selection-end-line="108" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
