@@ -52,7 +52,7 @@ const checkedData = [
     { value: 7, label: '星期日',extra:"周日"},
 ];
 
-export default class addClock extends React.Component {
+export default class updateClock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -148,24 +148,19 @@ export default class addClock extends React.Component {
     onSelectChange = (e) => {
         if ($(e.target).is(":checked")) {
             var arr = [];
-            var tempArr = [];
-            arr.push($(e.target).val());
-            tempArr.push($(e.target).attr("title"))
+            arr.push($(e.target).val())
             this.setState({
-                timeArr: this.state.timeArr.concat(arr),
-                sendData:this.state.sendData.concat(tempArr)
+                timeArr: this.state.timeArr.concat(arr)
             }, () => {
                 console.log(this.state.timeArr, "ppp")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
                 if (v == $(e.target).val()) {
-                    this.state.timeArr.splice(i,1);
-                    this.state.sendData.splice(i,1);
+                    this.state.timeArr.splice(i,1)
                 }
                 this.setState({
-                    timeArr:this.state.timeArr,
-                    sendData:this.state.sendData
+                    timeArr:this.state.timeArr
                 })
             })
         }
@@ -198,10 +193,10 @@ export default class addClock extends React.Component {
             "method": 'addWatch2gClock',
             "clockType": this.state.alarmValue[0],
             "noticeTime": (this.state.time+"").split(" ")[4],
-            "repeatType": JSON.stringify(this.state.sendData),
+            "repeatType": JSON.stringify(this.state.timeArr),
             "noticeType": this.state.typeValue[0],
             "watchId": this.state.watchId,
-             "actionName": "watchAction",
+            "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
@@ -221,7 +216,7 @@ export default class addClock extends React.Component {
     }
     render () {
         return (
-            <div id="addClock">
+            <div id="updateClock">
                 <Picker
                     data={alarmType}
                     value={this.state.alarmValue}
@@ -254,7 +249,7 @@ export default class addClock extends React.Component {
                     </List> */}
                     {
                         checkedData.map((v, i) => {
-                            return <label><input onChange={this.onSelectChange} type="checkbox" value={v.extra} title={v.value} />{v.label}</label>
+                            return <div><input onChange={this.onSelectChange} type="checkbox" value={v.extra} />{v.label}</div>
                         })
                     }
                 </div>

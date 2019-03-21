@@ -13,11 +13,14 @@ export default class clockList extends React.Component {
         };
     }
     componentWillMount () {
-        var userId = 23836;
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var ident = searchArray[0].split('=')[1];
         var pro = {
             "command": "guardianLogin",
             "data": {
-                "userId":userId,
+                "userId": ident,
                 "machineType": "0",
                 "version": '1.0',
                 // "webDevice": WebServiceUtil.createUUID()
@@ -30,13 +33,18 @@ export default class clockList extends React.Component {
     componentDidMount () {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var watchId = 1;
+        var searchArray = locationSearch.split("&");
+        var ident = searchArray[0].split('=')[1];
+        var watchId = searchArray[1].split('=')[1];
+        this.setState({
+            watchId
+        })
         this.getClockList(watchId);
         this.watchListener();
 
     }
 
-       
+
 
     //消息监听
     watchListener () {
@@ -50,9 +58,10 @@ export default class clockList extends React.Component {
             }
         };
     }
+
     //跳转闹钟列表
     toAddClockList = () => {
-        var url = WebServiceUtil.mobileServiceURL + "addClock";
+        var url = WebServiceUtil.mobileServiceURL + "addClock?watchId=" + this.state.watchId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -62,6 +71,7 @@ export default class clockList extends React.Component {
         });
     }
 
+    //获取闹钟列表
     getClockList = (watchId) => {
         var param = {
             "method": 'getWatch2gClocksByWatchId',
@@ -82,7 +92,8 @@ export default class clockList extends React.Component {
         });
     }
 
-    offChange = (index, isOpen, id,data) => {
+    //开关项点击
+    offChange = (index, isOpen, id, data) => {
         console.log(isOpen, "isOpen")
         if (isOpen == 1) {
             this.state.clockList[index].valid = 0;
@@ -105,14 +116,14 @@ export default class clockList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 console.log(result, "rerere")
-                
+
                 if (result.success && result.response) {
                     var commandJson = {
-                        "command": "watch2GClock", 
+                        "command": "watch2GClock",
                         data: {
                             "macAddress": "1",
-                            "clockStatus":isOpen == 1 ? 0 : 1,
-                            "watch2gClock":data,
+                            "clockStatus": isOpen == 1 ? 0 : 1,
+                            "watch2gClock": data,
                         }
                     };
                     console.log(commandJson, "commandJson")
@@ -126,7 +137,17 @@ export default class clockList extends React.Component {
             }
         });
     }
-
+    //跳转编辑页面
+    toUpdate = (data) => {
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?id="+data.id;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
     render () {
         return (
             <div id="clockList">
@@ -134,14 +155,14 @@ export default class clockList extends React.Component {
                     this.state.clockList.map((v, i) => {
                         return (
                             <div>
-                                <span>{WebServiceUtil.formatHM(v.noticeTime)}</span>
-                                <span>{v.clockType}</span>
-                                <List.Item
-                                    extra={<Switch
-                                        checked={v.valid == 1 ? "true" : false}
-                                        onChange={this.offChange.bind(this, i, v.valid, v.id,v)}
-                                    />}
-                                >Off</List.Item>
+                                <div onClick={this.toUpdate.bind(this, v)}>
+                                    <span>{WebServiceUtil.formatHM(v.noticeTime)}</span>
+                                    <span>{v.clockType}</span>
+                                </div>
+                                <Switch
+                                    checked={v.valid == 1 ? "true" : false}
+                                    onChange={this.offChange.bind(this, i, v.valid, v.id, v)}
+                                />
                             </div>
                         )
                     })
