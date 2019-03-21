@@ -154,7 +154,7 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
-                            to="/rankingList"
+                            to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
                     </li>
                 </ul>
