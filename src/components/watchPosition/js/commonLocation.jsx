@@ -3,9 +3,7 @@ import React from "react";
 export default class commonLocation extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        };
+        this.state = {};
     }
 
     componentWillMount() {
@@ -20,11 +18,22 @@ export default class commonLocation extends React.Component {
 
     }
 
+    addNewPos = () => {
+        var url = WebServiceUtil.mobileServiceURL + "addNewLocation";
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    };
+
     render() {
 
         return (
             <div id="commonLocation">
-                常用地点
+                <div onClick={this.addNewPos}>添加新地点</div>
             </div>
         )
     }

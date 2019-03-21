@@ -77,18 +77,6 @@ const addNewLocation = (location, cb) => {
     }, 'updateClock')
 };
 
-const chooseLocation = (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/watchPosition/js/chooseLocation').default)
-    }, 'updateClock')
-};
-
-const rangeSetting = (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/watchPosition/js/rangeSetting').default)
-    }, 'updateClock')
-};
-
 //闹钟
 const addClock = (location, cb) => {
     require.ensure([], require => {
@@ -119,6 +107,7 @@ const rankingList= (location, cb) => {
         cb(null, require('./components/rankingList/js/rankingList').default)
     }, 'rankingList')
 };
+
 const detailPage= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/rankingList/js/detailPage').default)
@@ -147,12 +136,11 @@ class Index extends React.Component {
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
-
                     <li>
                         <Link
                             to="/schoolPush"
                             style={{fontSize: '24px'}}>校园通知</Link>
-                            </li>
+                    </li>
                     <li>
                         <Link
                             to="/rankingList?stuId=23991"
@@ -180,9 +168,7 @@ ReactDOM.render(
             <Route path="watchPosition" getComponent={watchPosition}/>
             <Route path="watchTrail" getComponent={watchTrail}/>
             <Route path="commonLocation" getComponent={commonLocation}/>
-            <Route path="chooseLocation" getComponent={chooseLocation}/>
             <Route path="addNewLocation" getComponent={addNewLocation}/>
-            <Route path="rangeSetting" getComponent={rangeSetting}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>

@@ -132,7 +132,15 @@ export default class watchPosition extends React.Component {
     };
 
     addSafeAddress = () => {
-        console.log('addSafeAddress');
+
+        var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     };
 
     render() {
