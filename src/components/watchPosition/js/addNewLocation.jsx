@@ -51,14 +51,7 @@ export default class addNewLocation extends React.Component {
     };
 
     posClick = () => {
-        var url = WebServiceUtil.mobileServiceURL + "chooseLocation";
-        var data = {
-            method: 'openNewPage',
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
+        console.log('posClick');
     };
 
     saveLocation = () => {
