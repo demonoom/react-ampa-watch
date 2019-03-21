@@ -117,6 +117,24 @@ export default class watchPosition extends React.Component {
         this.watch2GLocaltionRequest();
     };
 
+    /**
+     * 获取运动轨迹
+     */
+    getTrail = () => {
+        var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    };
+
+    addSafeAddress = () => {
+        console.log('addSafeAddress');
+    };
+
     render() {
 
         const plugins = [
@@ -154,6 +172,12 @@ export default class watchPosition extends React.Component {
                     />
                     <div onClick={this.getPosition} id="getPosition" className="customLayer">
                         寻
+                    </div>
+                    <div onClick={this.getTrail} id="getTrail" className="customLayer">
+                        轨
+                    </div>
+                    <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                        点
                     </div>
                 </Map>
             </div>

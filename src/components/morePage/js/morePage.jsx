@@ -15,7 +15,7 @@ export default class morePage extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
         var userId = 23836;
-        var macAddr = 1;
+        var macAddr = 6666;
         this.getWatchId(macAddr)
         this.setState({
             macAddr,
