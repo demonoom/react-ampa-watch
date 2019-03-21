@@ -77,7 +77,7 @@ export default class clockList extends React.Component {
             "method": 'getWatch2gClocksByWatchId',
             "watchId": watchId,
             "actionName": "watchAction",
-            "pageNo": -1
+            "pageNo": 1
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -139,7 +139,7 @@ export default class clockList extends React.Component {
     }
     //跳转编辑页面
     toUpdate = (data) => {
-        var url = WebServiceUtil.mobileServiceURL + "updateClock?id="+data.id;
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId="+this.state.watchId+"&id="+data.id;
         var data = {
             method: 'openNewPage',
             url: url

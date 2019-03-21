@@ -111,7 +111,7 @@ export default class bindStudentInfo extends React.Component {
                         <img
                             src={require('../../images/bindStuPic.png')} alt=""/>
                     </div>
-                    <div className="line_public stuCont">
+                    <div className="icon_user line_public stuCont">
                         <InputItem
                             className=""
                             placeholder="请输入小蚂蚁账号"
