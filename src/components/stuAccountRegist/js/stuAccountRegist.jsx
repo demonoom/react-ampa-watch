@@ -256,7 +256,7 @@ export default class stuAccountRegist extends React.Component {
                             </Picker>
                         </div>
                     </div>
-                        <div className="line_public icon-grayStudent">
+                        <div className="line_public login-input icon-grayStudent">
                             <InputItem
                                 className=""
                                 placeholder="请输入学生姓名"
