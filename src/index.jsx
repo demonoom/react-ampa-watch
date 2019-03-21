@@ -71,6 +71,11 @@ const clockList= (location, cb) => {
         cb(null, require('./components/morePage/js/clock/clockList').default)
     }, 'clockList')
 };
+const updateClock= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/clock/updateClock').default)
+    }, 'updateClock')
+};
 
 import './index.less';
 
@@ -116,6 +121,7 @@ ReactDOM.render(
             <Route path="watchPosition" getComponent={watchPosition}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
+            <Route path="updateClock" getComponent={updateClock}/>
         </Route>
     </Router>, document.getElementById('example')
 );

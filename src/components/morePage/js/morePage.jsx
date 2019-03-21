@@ -14,13 +14,20 @@ export default class morePage extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
+        var userId = 23836;
+        var macAddr = 1;
+        this.getWatchId(macAddr)
+        this.setState({
+            macAddr,
+            userId,
+            watchId: 1
+        })
         var pro = {
             "command": "guardianLogin",
             "data": {
-                "userId": 23836,
+                "userId": userId,
                 "machineType": "0",
                 "version": '1.0',
-                // "webDevice": WebServiceUtil.createUUID()
             }
         };
         ms = new WatchWebsocketConnection();
@@ -32,6 +39,31 @@ export default class morePage extends React.Component {
         this.watchListener();
 
     }
+
+    //获取手表id
+    getWatchId = (macAddress) => {
+        var param = {
+            "method": 'getWatch2gByMacAddress',
+            "macAddress": macAddress,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "rerere")
+                if (result.success && result.response) {
+                    this.setState({
+                        watchId: result.response.id
+                    })
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
 
     //消息监听
     watchListener() {
@@ -50,7 +82,7 @@ export default class morePage extends React.Component {
     toFindWatch = () => {
         var commandJson = {
             "command": "searchWatch2GAction", data: {
-                "macAddress": "1"
+                "macAddress": this.state.macAddr
             }
         };
         console.log(commandJson, "commandJson")
@@ -59,7 +91,7 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        var url = WebServiceUtil.mobileServiceURL + "clockList";
+        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -75,8 +107,8 @@ export default class morePage extends React.Component {
     pushContacts = () => {
         var commandJson = {
             "command": "watch2gPushContacts", data: {
-                "studentId": "3433",
-                "watch2gId": "29"
+                "studentId": this.state.userId,
+                "watch2gId": this.state.watchId
             }
         };
         console.log(commandJson, "commandJson")
@@ -90,7 +122,7 @@ export default class morePage extends React.Component {
         var commandJson = {
             "command": "watch2gPushWeather",
             data: {
-                "macAddress": "6666"
+                "macAddress": this.state.macAddr
             }
         };
         console.log(commandJson, "commandJson")
