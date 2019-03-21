@@ -77,6 +77,12 @@ const updateClock= (location, cb) => {
     }, 'updateClock')
 };
 
+const schoolPush= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/schoolPush/js/schoolPush').default)
+    }, 'schoolPush')
+};
+
 import './index.less';
 
 class Index extends React.Component {
@@ -98,6 +104,12 @@ class Index extends React.Component {
                         <Link
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
+                    </li>
+
+                    <li>
+                        <Link
+                            to="/schoolPush"
+                            style={{fontSize: '24px'}}>校园通知</Link>
                     </li>
                 </ul>
             </div>
@@ -122,6 +134,7 @@ ReactDOM.render(
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
+            <Route path="schoolPush" getComponent={schoolPush}/>
         </Route>
     </Router>, document.getElementById('example')
 );
