@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/morePage/css/addClock.less" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/morePage/css/clockList.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/morePage/css/morePage.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/css/morePage.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/css/addClock.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/css/addClock.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/css/clockList.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/css/clockList.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" afterDir="false" />
@@ -46,8 +45,8 @@
       <file leaf-file-name="index.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="202" column="69" selection-start-line="202" selection-start-column="69" selection-end-line="202" selection-end-column="69" />
+            <state relative-caret-position="146">
+              <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -55,8 +54,8 @@
       <file leaf-file-name="updateClock.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="427" column="43" selection-start-line="427" selection-start-column="36" selection-end-line="427" selection-end-column="43" />
+            <state relative-caret-position="274">
+              <caret line="355" column="53" selection-start-line="355" selection-start-column="53" selection-end-line="355" selection-end-column="53" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -67,8 +66,8 @@
       <file leaf-file-name="clockList.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="158" column="57" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="57" />
+            <state relative-caret-position="234">
+              <caret line="153" column="43" selection-start-line="153" selection-start-column="32" selection-end-line="153" selection-end-column="43" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -79,8 +78,8 @@
       <file leaf-file-name="clockList.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/css/clockList.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            <state relative-caret-position="126">
+              <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -88,9 +87,10 @@
       <file leaf-file-name="addClock.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="32" />
+            <state relative-caret-position="138">
+              <caret line="246" column="53" selection-start-line="246" selection-start-column="53" selection-end-line="246" selection-end-column="53" />
               <folding>
+                <element signature="e#0#26#0" expanded="true" />
                 <element signature="e#6220#6812#0" />
                 <element signature="e#6840#6913#0" />
               </folding>
@@ -101,8 +101,8 @@
       <file leaf-file-name="addClock.less" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/css/addClock.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+            <state relative-caret-position="18">
+              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -129,8 +129,8 @@
     <findStrings>
       <find>@media</find>
       <find>mask</find>
-      <find>.am-checkbox.am-checkbox-checked .am-checkbox-inner</find>
       <find>clockList</find>
+      <find>.am-checkbox.am-checkbox-checked .am-checkbox-inner</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -149,11 +149,11 @@
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" />
         <option value="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" />
         <option value="$PROJECT_DIR$/src/components/morePage/css/morePage.less" />
-        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" />
-        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" />
         <option value="$PROJECT_DIR$/src/components/morePage/css/clockList.less" />
+        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" />
         <option value="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" />
         <option value="$PROJECT_DIR$/src/components/morePage/css/addClock.less" />
+        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" />
         <option value="$PROJECT_DIR$/src/index.less" />
       </list>
     </option>
@@ -312,12 +312,12 @@
       <workItem from="1552898766041" duration="7687000" />
       <workItem from="1553047156778" duration="20663000" />
       <workItem from="1553134165534" duration="10119000" />
-      <workItem from="1553220089213" duration="6752000" />
+      <workItem from="1553220089213" duration="10461000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6123000" />
+    <option name="totallyTimeSpent" value="9832000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
@@ -332,7 +332,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1171875" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.0" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -646,18 +646,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="158" column="57" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="427" column="43" selection-start-line="427" selection-start-column="36" selection-end-line="427" selection-end-column="43" />
+        <state relative-caret-position="234">
+          <caret line="153" column="43" selection-start-line="153" selection-start-column="32" selection-end-line="153" selection-end-column="43" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -666,33 +656,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/morePage/css/clockList.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        <state relative-caret-position="126">
+          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx">
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="32" />
+        <state relative-caret-position="274">
+          <caret line="355" column="53" selection-start-line="355" selection-start-column="53" selection-end-line="355" selection-end-column="53" />
           <folding>
-            <element signature="e#6220#6812#0" />
-            <element signature="e#6840#6913#0" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/morePage/css/addClock.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+        <state relative-caret-position="18">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="246" column="53" selection-start-line="246" selection-start-column="53" selection-end-line="246" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#6220#6812#0" />
+            <element signature="e#6840#6913#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="202" column="69" selection-start-line="202" selection-start-column="69" selection-end-line="202" selection-end-column="69" />
+        <state relative-caret-position="146">
+          <caret line="163" column="23" selection-start-line="163" selection-start-column="23" selection-end-line="163" selection-end-column="23" />
         </state>
       </provider>
     </entry>

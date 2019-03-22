@@ -244,7 +244,7 @@ export default class addClock extends React.Component {
     }
     render () {
         return (
-            <div id="addClock">
+            <div id="addClock" className='public_list'>
                 <div className='line_public'>
                     <Picker
                         data={alarmType}

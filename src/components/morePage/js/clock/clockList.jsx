@@ -151,23 +151,26 @@ export default class clockList extends React.Component {
     render () {
         return (
             <div id="clockList">
-                {
-                    this.state.clockList.map((v, i) => {
-                        return (
-                            <div className='line_public bg_white clockItem'>
+                <div className="public_list">
+                    {
+                        this.state.clockList.map((v, i) => {
+                            return (
+                                <div className='line_public bg_white clockItem'>
                                 <span onClick={this.toUpdate.bind(this, v)}>
                                     <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                     <span>{v.clockType}</span>
                                 </span>
-                                <Switch
-                                    checked={v.valid == 1 ? "true" : false}
-                                    onChange={this.offChange.bind(this, i, v.valid, v)}
-                                />
-                            </div>
-                        )
-                    })
-                }
-                <div className='submitBtn' onClick={this.toAddClockList}>添加</div>
+                                    <Switch
+                                        checked={v.valid == 1 ? "true" : false}
+                                        onChange={this.offChange.bind(this, i, v.valid, v)}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className='addBtn' onClick={this.toAddClockList}>+</div>
             </div>
         )
     }

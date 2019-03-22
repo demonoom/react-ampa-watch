@@ -160,6 +160,9 @@ ul, li {
 .am-list-body::before,.am-list-body::after{
   display: none !important;
 }
+.am-list-line{
+  border: 0 !important;
+}
 /*底部弹窗公用*/
 .mask{
   width: 100%;
@@ -204,7 +207,11 @@ ul, li {
   color: #333 !important;
 }
 
-
+/*公共列表间距*/
+.public_list .am-list-item{
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
 /*radio*/
 .am-switch{
   margin-top: 10px !important;
@@ -221,6 +228,9 @@ ul, li {
 .am-switch .checkbox:before{
   width: 42px !important;
   height: 20px !important;
+}
+.am-switch input[type="checkbox"]:checked + .checkbox{
+  background: #17ACF7 !important;
 }
 /*下拉框下箭头*/
 .selectDown{
@@ -287,7 +297,21 @@ ul, li {
 .color_3  .am-list-item .am-list-line .am-list-extra,.am-list-item .am-list-line .am-list-extra.color_3{
   color: #333 !important;
 }
-
+/*添加按钮*/
+.addBtn{
+  position: fixed;
+  width: 46px;
+  height: 46px;
+  right: 20px;
+  bottom: 20px;
+  border-radius: 50%;
+  background-color: #17ACF7;
+  z-index: 50;
+  color: white;
+  text-align: center;
+  line-height: 45px;
+  font-size: 30px;
+}
 @media screen and (max-width: 320px){
   .submitBtn{
     bottom: 45px;
