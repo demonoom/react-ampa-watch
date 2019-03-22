@@ -1,6 +1,6 @@
 import React from "react";
-import {Map} from "react-amap";
-import {List, Button, Modal, Toast} from 'antd-mobile';
+import {Map, Circle} from "react-amap";
+import {List, Button, Modal, Toast, Slider} from 'antd-mobile';
 import PositionPicker from './positionPicker'
 import '../css/addNewLocation.less'
 
@@ -18,7 +18,13 @@ export default class addNewLocation extends React.Component {
             posList: [],
             position: {longitude: '116.397477', latitude: '39.908692'},
             zoom: 10,
-            map: null
+            map: null,
+            circle: null,
+            addressName: '',
+            addressLT: '',
+            style: {strokeWeight: '0px', fillColor: '#fff850', fillOpacity: '0.5'},
+            radius: 50,
+            sliderValue: 15,
         };
     }
 
@@ -122,17 +128,35 @@ export default class addNewLocation extends React.Component {
     };
 
     intoMap = (obj) => {
-        var position = {
-            longitude: obj.location.split(',')[0],
-            latitude: obj.location.split(',')[1]
-        };
-        // this.state.map.setZoom(17);
-        this.setState({
-            zoom:17
-        });
-        // this.state.map.setCenter(obj.location);
+        var _this = this;
         $('.setPosModel').hide();
         $('.posMap').show();
+        this.setState({sliderValue: 15});
+        setTimeout(() => {
+            _this.state.map.setZoom(17);
+            _this.state.map.setCenter(obj.location.split(','));
+            _this.state.circle.setCenter(obj.location.split(','));
+        }, 300);
+    };
+
+    posPicker = (obj) => {
+        this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+    };
+
+    setPosDone = () => {
+
+    };
+
+    setPosQuit = () => {
+        $('.setPosModel').show();
+        $('.posMap').hide();
+    };
+
+    sliderOnChange = () => {
+        return (value) => {
+            console.log(value);
+            this.setState({sliderValue: value})
+        };
     };
 
     render() {
@@ -141,7 +165,7 @@ export default class addNewLocation extends React.Component {
             {
                 name: 'ToolBar', //地图工具条插件，可以用来控制地图的缩放和平移
                 options: {
-                    locate: false
+                    locate: false,
                 },
             }
         ];
@@ -150,6 +174,12 @@ export default class addNewLocation extends React.Component {
             created: (ins) => {
                 this.setState({map: ins})
             }
+        };
+
+        const circleEvents = {
+            created: (ins) => {
+                this.setState({circle: ins})
+            },
         };
 
         return (
@@ -201,8 +231,33 @@ export default class addNewLocation extends React.Component {
                         buildingAnimation={true}
                         viewMode='3D'
                         rotateEnable={false}
+                        pitchEnable={false}
                     >
-                        <PositionPicker/>
+                        <PositionPicker
+                            posPicker={this.posPicker}
+                        />
+                        {/*<Circle
+                            center={this.state.position}
+                            radius={this.state.radius}
+                            events={circleEvents}
+                            style={this.state.style}
+                        />*/}
+                        <div className="posMessage">
+                            <h4>{this.state.addressName}</h4>
+                            <p>{this.state.addressLT}</p>
+                        </div>
+
+                        <div className='setArea'>
+                            <div onClick={this.setPosDone}>完成</div>
+                            <div onClick={this.setPosQuit}>取消</div>
+                            <Slider
+                                style={{marginLeft: 30, marginRight: 30}}
+                                value={this.state.sliderValue}
+                                min={10}
+                                max={50}
+                                onChange={this.sliderOnChange()}
+                            />
+                        </div>
                     </Map>
                 </div>
             </div>
