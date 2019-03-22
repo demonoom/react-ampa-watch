@@ -2,18 +2,20 @@ import React from "react";
 import {Toast, ListView, Tabs, Modal} from "antd-mobile";
 
 const alert = Modal.alert;
+const dataSource = new ListView.DataSource({
+    rowHasChanged: (row1, row2) => row1 !== row2,
+});
 export default class schoolPush extends React.Component {
     constructor(props) {
         super(props);
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+
         this.initData = [];
         this.state = {
             dataSource: dataSource.cloneWithRows(this.initData),
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
+            userId: 0
         };
     }
 
@@ -34,7 +36,7 @@ export default class schoolPush extends React.Component {
     var _this = this;
         var param = {
             "method": 'getTopicsByNotifyType',
-            "notifyType":'8',
+            "notifyType":'9',
             "ident": userId,
             "pageNo": this.state.defaultPageNo
         };
@@ -112,8 +114,10 @@ export default class schoolPush extends React.Component {
             isLoadingLeft: true,
         });
     }
+
+
     /*获取单个topic*/
-    getTopicByIdRequest = (topid) =>{
+    getTopicByIdRequest = (topid , index) =>{
         var param = {
             "method": 'getTopicById',
             "topicId":topid
@@ -122,7 +126,10 @@ export default class schoolPush extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if(result.success){
-
+                    this.initData[index] = result.response;
+                    this.setState({
+                        dataSource:dataSource.cloneWithRows(this.initData),
+                    })
                 }else {
                     Toast.info(result);
                 }
@@ -135,7 +142,7 @@ export default class schoolPush extends React.Component {
     }
 
    /*点赞*/
-    praiseForTopicById = (topicId) => {
+    praiseForTopicById = (topicId,index) => {
         var param = {
             "method": 'praiseForTopic',
             "topicId":topicId,
@@ -145,7 +152,7 @@ export default class schoolPush extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if(result.success){
-
+                    this.getTopicByIdRequest(topicId,index);
                 }else {
                     Toast.info(result);
                 }
@@ -158,18 +165,19 @@ export default class schoolPush extends React.Component {
     }
 
     /*取消点赞*/
-    cancelPraiseForTopicById =(topicId)=>{
+    cancelPraiseForTopicById =(topicId , index)=>{
         var param = {
             "method": 'cancelPraiseForTopic',
-            "topicId":topicId,
-            "ident": userId
+            "topicId": topicId,
+            "ident": "41"
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.success){
-
-                }else {
+                console.log(result, "result")
+                if (result.success) {
+                     this.getTopicByIdRequest(topicId,index);
+                } else {
                     Toast.info(result);
                 }
 
@@ -180,32 +188,57 @@ export default class schoolPush extends React.Component {
         });
     }
 
-    zanClick = (rowData) =>{
-        console.log(rowData.createTime,'赞');
-         this.praiseForTopicById(rowData.id);
 
-    }
+
 
 
     render() {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData, "rowData")
+            console.log(rowData, "rowData");
             var  time = this.formatUnixtimestamp(rowData.createTime);
-            var  zanSting = '';
-            if (rowData.comments.count > 0 && rowData.comments) {
-                  // for (let index in rowData.comments){
-                  //     console.log(index, "index");
-                  // }
-                console.log('fuck');
-            }
+            var zanArr = [];
+            rowData.comments.forEach((v, i) => {
+                if (v.type == 1) {
+                    zanArr.push(v)
+                }
+            })
+            var  isZan = false;
+            zanArr.forEach((v, i) => {
+                if (v.user.colUid == '41') {
+                    isZan = true;
+                }
+            });
+
+
             return (
                 <div>
                     <img  src={rowData.fromUser.avatar} />
                     <div> 校内通知 </div>
                     <div> {time}</div>
                     <div>{rowData.content}</div>
-                    <button onClick={this.zanClick(rowData)}>点赞</button>
-                    <div></div>
+                    {
+                        isZan ?
+                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id,rowID)}>已点赞</span> :
+                            <span onClick={this.praiseForTopicById.bind(this, rowData.id,rowID)}>未点赞</span>
+                    }
+
+                    {
+                        zanArr.length > 0 ?
+                            <div>
+                                <div>点赞人:</div>
+                                {
+                                    zanArr.map((v, i) => {
+                                        return (
+                                            <div>
+                                                <span>{v.user.userName} </span>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div> : ''
+                    }
+
+
                 </div>
             );
         };
