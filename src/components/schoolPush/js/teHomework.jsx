@@ -1,6 +1,6 @@
 import React from "react";
 import { Toast, ListView, Tabs, Modal, InputItem } from "antd-mobile";
-
+import '../css/teHomework.less'
 const alert = Modal.alert;
 const dataSource = new ListView.DataSource({
     rowHasChanged: (row1, row2) => row1 !== row2,
@@ -294,62 +294,65 @@ export default class teHomework extends React.Component {
                 }
             })
             return (
-                <div>
+                <div className='line_public homeItem'>
                     <img src={rowData.fromUser.avatar} />
-                    <span>{rowData.fromUser.userName}</span>
-                    <div> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
-                    <div>{rowData.content}</div>
-                    <div>
-                        {
-                            isZan ?
-                                <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
-                                <span onClick={this.toClick.bind(this, rowData.id, rowID)}>未点赞</span>
-                        }
-                        <span onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
-                    </div>
-                    <div>
-                        {
-                            zanArr.map((v, i) => {
-                                return (
-                                    <div>
-                                        <span>{v.user.userName}点赞</span>
-                                    </div>
-                                )
-                            })
-                        }
-                        {
-                            pingArr.map((v, i) => {
-                                return (
-                                    <div className="ppp" onClick={this.toShanchu.bind(this, v, rowID)}>
-                                        <span>{v.user.userName}</span>
-                                        <span>回复</span>
-                                        <span>{v.toUser ? v.toUser.userName : ""}:</span>
-                                        <span>{v.content}</span>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+                    <span className='text_hidden userName'>{rowData.fromUser.userName}</span>
+                    <div className='time'> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
+                    <div className='content'>{rowData.content}</div>
+                     <div className='icon_praise'>
+                         {
+                             isZan ?
+                                 <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
+                                 <span className='like' onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
+                         }
+
+                         <span className='comment' onClick={this.toPinglun.bind(this, rowData)}>评论</span>
+                     </div>
+
+                        <div className='replyCont'>
+                            <div className='icon_emptyHeartB line_public'>
+                                {
+                                    zanArr.map((v, i) => {
+                                        return (
+                                            <span>{v.user.userName} </span>
+                                        )
+                                    })
+                                }
+                            </div>
+
+                            {
+                                pingArr.map((v, i) => {
+                                    return (
+                                        <div className="msgItem" onClick={this.toShanchu.bind(this, v)}>
+                                            <span className='blueTxt'>{v.user.userName}</span>
+                                            <span>回复</span>
+                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
+                                            <span>{v.content}</span>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
                 </div>
             );
         };
         return (
-            <div>
-                <div>
+            <div id='teHomework' className='bg_gray'>
+                <div className='commentInput my_flex'>
                     <InputItem
                         className="content"
                         value={this.state.content}
                         onChange={this.contentChange}
                         placeholder="请输入评论内容"
                     ></InputItem>
-                    <div onClick={this.toSendContent}>发送</div>
+                    <div className='sendBtn' onClick={this.toSendContent}>发送</div>
                 </div>
                 <ListView
                     ref={el => this.lv = el}
                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                     renderFooter={() => (
-                        <div style={{ paddingTop: 5, paddingBottom: 40, textAlign: 'center' }}>
+                        <div style={{ paddingTop: 6,  textAlign: 'center' }}>
                             {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                         </div>)}
                     renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable

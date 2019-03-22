@@ -29,11 +29,12 @@ export default class addNewLocation extends React.Component {
     }
 
     componentWillMount() {
-        // var locationHref = decodeURI(window.location.href);
-        // var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        // var userId = locationSearch.split("&")[0].split('=')[1];
-        // var mac = locationSearch.split("&")[1].split('=')[1];
-        // this.setState({userId, mac});
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
+        var mac = locationSearch.split("&")[1].split('=')[1];
+        var macId = locationSearch.split("&")[2].split('=')[1];
+        this.setState({userId, mac, macId});
     }
 
     componentDidMount() {
@@ -67,10 +68,6 @@ export default class addNewLocation extends React.Component {
 
     posClick = () => {
         $('.setPosModel').slideDown();
-    };
-
-    saveLocation = () => {
-        console.log('saveLocation');
     };
 
     searchChange = (e) => {
@@ -141,10 +138,13 @@ export default class addNewLocation extends React.Component {
 
     posPicker = (obj) => {
         this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+        this.state.circle.setCenter([obj.position.lng, obj.position.lat])
     };
 
     setPosDone = () => {
-
+        $('.setPosModel').slideUp();
+        $('.posMap').hide();
+        this.setState({pos: this.state.addressName})
     };
 
     setPosQuit = () => {
@@ -154,9 +154,53 @@ export default class addNewLocation extends React.Component {
 
     sliderOnChange = () => {
         return (value) => {
-            console.log(value);
             this.setState({sliderValue: value})
         };
+    };
+
+    saveLocation = () => {
+        if (this.state.posName === '未设置') {
+            Toast.fail('请设置位置名称', 2);
+            return
+        }
+        if (this.state.pos === '未设置') {
+            Toast.fail('请设置位置信息', 2);
+            return
+        }
+        console.log(this.state.addressLT);
+        this.addWatch2gHomePoint()
+    };
+
+    /**
+     * 手表绑定家
+     * public boolean addWatch2gHomePoint(String homeName,String homeAddress,String watchId,String longitude,String latitude,String creatorId,String safetyRange)
+     */
+    addWatch2gHomePoint = () => {
+        var param = {
+            "method": 'addWatch2gHomePoint',
+            "actionName": "watchAction",
+            "homeName": this.state.posName,
+            "homeAddress": this.state.pos,
+            "watchId": this.state.macId,
+            "longitude": this.state.addressLT.split(',')[0],
+            "latitude": this.state.addressLT.split(',')[1],
+            "creatorId": this.state.userId,
+            "safetyRange": this.state.sliderValue,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' || result.success == true) {
+                    if (result.success) {
+                        Toast.success('保存成功', 2);
+                    }
+                } else {
+                    Toast.fail(result.msg, 1);
+                }
+            },
+            onError: function (error) {
+                Toast.warn('保存失败');
+            }
+        });
     };
 
     render() {
@@ -236,15 +280,14 @@ export default class addNewLocation extends React.Component {
                         <PositionPicker
                             posPicker={this.posPicker}
                         />
-                        {/*<Circle
+                        <Circle
                             center={this.state.position}
                             radius={this.state.radius}
                             events={circleEvents}
                             style={this.state.style}
-                        />*/}
+                        />
                         <div className="posMessage">
                             <h4>{this.state.addressName}</h4>
-                            <p>{this.state.addressLT}</p>
                         </div>
 
                         <div className='setArea'>

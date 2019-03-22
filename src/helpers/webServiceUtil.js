@@ -75,7 +75,6 @@ WebServiceUtil.requestLittleAntApi = function (data, listener) {
         data: {params: data},
         dataType: "json",
         success: function (result) {
-            console.log(result,'result');
             listener.onResponse(result);
         }, error: function (error) {
             listener.onError(error);

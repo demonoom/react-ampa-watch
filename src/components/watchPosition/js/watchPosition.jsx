@@ -33,8 +33,7 @@ export default class watchPosition extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
-        var mac = locationSearch.split("&")[1].split('=')[1];
-        this.setState({userId, mac});
+        this.setState({userId});
 
         var phone;
         if (navigator.userAgent.indexOf('iPhone') > -1 || navigator.userAgent.indexOf('iPad') > -1) {
@@ -56,10 +55,40 @@ export default class watchPosition extends React.Component {
         this.msListener();
     }
 
+    /**
+     * 通过绑定的学生id查找手表信息
+     * public Watch2g getWatch2gByUserId(String userId
+     */
+    getWatch2gByUserId = () => {
+        var _this = this;
+        var param = {
+            "method": 'getWatch2gByUserId',
+            "actionName": "watchAction",
+            "userId": this.state.userId,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' || result.success == true) {
+                    if (result.success) {
+                        if (!!result.response) {
+                            _this.setState({mac: result.response.macAddress, macId: result.response.id});
+                            setTimeout(() => {
+                                this.watch2GLocaltionRequest()
+                            }, 300)
+                        }
+                    }
+                } else {
+                    Toast.fail(result.msg, 1);
+                }
+            },
+            onError: function (error) {
+                Toast.warn('保存失败');
+            }
+        });
+    };
+
     componentDidMount() {
-        setTimeout(() => {
-            this.watch2GLocaltionRequest()
-        }, 300)
+        this.getWatch2gByUserId()
     }
 
     /**
@@ -83,7 +112,6 @@ export default class watchPosition extends React.Component {
             }, onMessage: function (info) {
                 if (info.command === 'sendWatch2GLocaltionData') {
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
-                        console.log(info.data);
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
                             Toast.fail('获取定位失败');
                             return
@@ -121,7 +149,7 @@ export default class watchPosition extends React.Component {
      * 获取运动轨迹
      */
     getTrail = () => {
-        var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -133,7 +161,7 @@ export default class watchPosition extends React.Component {
 
     addSafeAddress = () => {
 
-        var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
             url: url
