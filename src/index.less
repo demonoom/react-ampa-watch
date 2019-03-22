@@ -272,9 +272,11 @@ img{
   text-align: center;
   font-size: 16px;
   letter-spacing: 5px;
-  box-shadow: 0 9px 9px #0d8cd82b;
+  -webkit-box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
+  -moz-box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
+  box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
   position: absolute;
-  bottom: 25px;
+  bottom: 20px;
   left: 38px;
 }
 .am-list-item .am-list-line::after{
@@ -314,9 +316,4 @@ img{
   text-align: center;
   line-height: 45px;
   font-size: 30px;
-}
-@media screen and (max-width: 320px){
-  .submitBtn{
-    bottom: 45px;
-  }
 }
