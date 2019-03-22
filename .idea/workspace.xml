@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/morePage/css/addClock.less" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/morePage/css/clockList.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/css/morePage.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/css/morePage.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.less" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -41,20 +43,20 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="index.less" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/index.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="732">
-              <caret line="205" column="26" selection-start-line="205" selection-start-column="26" selection-end-line="205" selection-end-column="26" />
+            <state relative-caret-position="100">
+              <caret line="202" column="69" selection-start-line="202" selection-start-column="69" selection-end-line="202" selection-end-column="69" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="morePage.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/morePage/js/morePage.jsx">
+      <file leaf-file-name="updateClock.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="303">
-              <caret line="151" column="22" lean-forward="true" selection-start-line="146" selection-start-column="15" selection-end-line="151" selection-end-column="22" />
+            <state relative-caret-position="328">
+              <caret line="427" column="43" selection-start-line="427" selection-start-column="36" selection-end-line="427" selection-end-column="43" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -62,32 +64,73 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addClock.jsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="clockList.jsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="158" column="57" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="57" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="clockList.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/morePage/css/clockList.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="36">
+              <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="addClock.jsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="353">
-              <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+            <state relative-caret-position="90">
+              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="32" />
+              <folding>
+                <element signature="e#6220#6812#0" />
+                <element signature="e#6840#6913#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="verifyStuInfo.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
+      <file leaf-file-name="addClock.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/morePage/css/addClock.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2394">
-              <caret line="137" column="44" selection-start-line="137" selection-start-column="44" selection-end-line="137" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="207">
+              <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="morePage.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/morePage/css/morePage.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Less File" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
       <find>@media</find>
+      <find>mask</find>
+      <find>.am-checkbox.am-checkbox-checked .am-checkbox-inner</find>
+      <find>clockList</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -104,9 +147,14 @@
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/stuAccountRegist.less" />
         <option value="$PROJECT_DIR$/src/components/stuAccountRegist/css/validationMes.less" />
         <option value="$PROJECT_DIR$/src/components/addWatchInfo/css/loginSuccess.less" />
-        <option value="$PROJECT_DIR$/src/index.less" />
         <option value="$PROJECT_DIR$/src/components/morePage/js/morePage.jsx" />
+        <option value="$PROJECT_DIR$/src/components/morePage/css/morePage.less" />
         <option value="$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx" />
+        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx" />
+        <option value="$PROJECT_DIR$/src/components/morePage/css/clockList.less" />
+        <option value="$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx" />
+        <option value="$PROJECT_DIR$/src/components/morePage/css/addClock.less" />
+        <option value="$PROJECT_DIR$/src/index.less" />
       </list>
     </option>
   </component>
@@ -177,6 +225,38 @@
               <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="morePage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="morePage" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="morePage" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="morePage" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="clock" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LittleantWatch_JS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LittleantWatch_JS" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="stuAccountRegist" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -203,8 +283,9 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="addClock&#9;null&#9;null&#10;morePage&#9;null&#9;null&#10;workspace&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml&#10;workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
+    <property name="SearchEverywhereHistoryKey" value="updateClock&#9;null&#9;null&#10;clockList&#9;null&#9;null&#10;addClock&#9;null&#9;null&#10;morePage&#9;null&#9;null&#10;workspace&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml&#10;workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="list.type.of.created.stylesheet" value="Less" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -231,18 +312,18 @@
       <workItem from="1552898766041" duration="7687000" />
       <workItem from="1553047156778" duration="20663000" />
       <workItem from="1553134165534" duration="10119000" />
-      <workItem from="1553220089213" duration="1814000" />
+      <workItem from="1553220089213" duration="6752000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1185000" />
+    <option name="totallyTimeSpent" value="6123000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -251,7 +332,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.33125" />
+      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.1171875" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -269,44 +350,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" column="19" lean-forward="true" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/js/verifyStuInfo.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2394">
-          <caret line="137" column="44" selection-start-line="137" selection-start-column="44" selection-end-line="137" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1116">
-          <caret line="62" column="16" lean-forward="true" selection-start-line="62" selection-start-column="16" selection-end-line="62" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/helpers/webServiceUtil.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/addWatchInfo/css/addWatchInfo.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="13" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5472">
@@ -584,13 +627,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="732">
-          <caret line="205" column="26" selection-start-line="205" selection-start-column="26" selection-end-line="205" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/morePage/js/morePage.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="303">
@@ -601,10 +637,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/css/morePage.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="2" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/clockList.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="158" column="57" selection-start-line="158" selection-start-column="53" selection-end-line="158" selection-end-column="57" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/updateClock.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="427" column="43" selection-start-line="427" selection-start-column="36" selection-end-line="427" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/css/clockList.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="21" lean-forward="true" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/morePage/js/clock/addClock.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="276" column="26" lean-forward="true" selection-start-line="276" selection-start-column="26" selection-end-line="276" selection-end-column="26" />
+        <state relative-caret-position="90">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="32" />
+          <folding>
+            <element signature="e#6220#6812#0" />
+            <element signature="e#6840#6913#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/morePage/css/addClock.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="35" column="25" lean-forward="true" selection-start-line="35" selection-start-column="25" selection-end-line="35" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="202" column="69" selection-start-line="202" selection-start-column="69" selection-end-line="202" selection-end-column="69" />
         </state>
       </provider>
     </entry>

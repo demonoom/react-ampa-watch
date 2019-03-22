@@ -3,7 +3,7 @@ import {
     DatePicker, List, Picker, InputItem, Toast,
     Modal, WhiteSpace, Switch, Checkbox, Flex
 } from 'antd-mobile';
-
+import '../../css/addClock.less'
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -269,15 +269,18 @@ export default class addClock extends React.Component {
                         <List.Item arrow="horizontal">提醒时间</List.Item>
                     </DatePicker>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.onRepeat}>
+                <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
                     <div className="am-list-line">
                         <div className="am-list-content">重复</div>
                         <div className="am-list-extra">{this.state.defaleSelect}</div>
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
-                <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
-                    <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
+                <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
+                    <div className='am-picker-popup-header'>
+                        <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
+                        <div className='am-picker-popup-item am-picker-popup-title'></div>
+                        <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
                         {checkedData.map((v, i) => (
                             <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
@@ -309,7 +312,8 @@ export default class addClock extends React.Component {
                         onChange={this.offChange}
                     />}
                 >Off</List.Item> */}
-                <div onClick={this.toSave}>保存</div>
+                <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
+                <div className='submitBtn' onClick={this.toSave}>保存</div>
             </div>
         )
     }

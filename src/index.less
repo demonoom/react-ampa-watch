@@ -118,11 +118,6 @@ ul, li {
   -webkit-flex-wrap: wrap;
 }
 
-.am-checkbox.am-checkbox-checked .am-checkbox-inner {
-  border-color: #f46a55 !important;
-  background: #f46a55 !important;
-}
-
 .flex_center {
   -webkit-box-pack: center;
   -webkit-justify-content: center;
@@ -162,6 +157,29 @@ ul, li {
 .p38{
   padding: 0 38px;
 }
+.am-list-body::before,.am-list-body::after{
+  display: none !important;
+}
+/*底部弹窗公用*/
+.mask{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  display: none;
+}
+.maskInnerBt{
+  display: block;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+}
 .line_public{
   position: relative;
   &::after{
@@ -181,6 +199,28 @@ ul, li {
 }
 .am-list-item .am-list-line .am-list-content{
   color: #333 !important;
+}
+.am-modal-title,.am-modal-button-group-h .am-modal-button:first-child{
+  color: #333 !important;
+}
+
+
+/*radio*/
+.am-switch{
+  margin-top: 10px !important;
+}
+.am-switch .checkbox{
+  width: 45px !important;
+  height: 24px !important;
+}
+.am-switch .checkbox:after{
+  width: 22px !important;
+  height: 22px !important;
+  top: 1px!important;
+}
+.am-switch .checkbox:before{
+  width: 42px !important;
+  height: 20px !important;
 }
 /*下拉框下箭头*/
 .selectDown{
