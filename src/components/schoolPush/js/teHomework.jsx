@@ -339,14 +339,14 @@ export default class teHomework extends React.Component {
         };
         return (
             <div id='teHomework' className='bg_gray'>
-                <div>
+                <div className='commentInput my_flex'>
                     <InputItem
                         className="content"
                         value={this.state.content}
                         onChange={this.contentChange}
                         placeholder="请输入评论内容"
                     ></InputItem>
-                    <div onClick={this.toSendContent}>发送</div>
+                    <div className='sendBtn' onClick={this.toSendContent}>发送</div>
                 </div>
                 <ListView
                     ref={el => this.lv = el}
