@@ -174,6 +174,14 @@ export default class detailPage extends React.Component {
   */
     buildFaceOption = (xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal) => {
         return {
+            title:{
+                text:'今日答题统计',
+                textStyle: {
+                    fontSize: 15,
+                    fontWeight: 'normal',
+                    color: '#fff'          // 主标题文字颜色
+                },
+            },
             tooltip: {
                 trigger: 'axis',
                 axisPointer: {            // 坐标轴指示器，坐标轴触发有效
@@ -294,25 +302,33 @@ export default class detailPage extends React.Component {
     render () {
         return (
             <div id='detailPage'>
-                <div>
+                <div className='myDetail line_public p15'>
                     <img src={this.state.users ? this.state.users.avatar : ""} />
-                    <span>{this.state.users ? this.state.users.userName : ""}</span>
-                    {
-                        this.state.today == 1 ?
-                            <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
-                            :
-                            <div>
-                                <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
-                            </div>
-                    }
+                    <div className='textCont'>
+                         <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
+                        <span  className='time'>
+                            {
+                                this.state.today == 1 ?
+                                    <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
+                                    :
+                                    <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
+                            }
+                        </span>
+                    </div>
+                    <div className='color_9'>班级</div>
 
                 </div>
-                <div>
-                    准确率：<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
-                    全班排名:<span>{this.state.detailData.totalClassTop}</span>
+                <div className="chartCont line_public">
+                    {calm.state.faceChartDiv}
                 </div>
-                <div>今日答题统计</div>
-                {calm.state.faceChartDiv}
+                <div className='textDetail'>
+                    <div className="line_public item p15">
+                        准确率<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
+                    </div>
+                    <div className="line_public item p15">
+                        全班排名<span>{this.state.detailData.totalClassTop}</span>
+                    </div>
+                </div>
             </div>
         )
     }
