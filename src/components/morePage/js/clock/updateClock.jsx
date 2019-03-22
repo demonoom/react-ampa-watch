@@ -42,15 +42,6 @@ const alarmType = [
     }
 ]
 
-const checkedData = [
-    { value: 1, label: '星期一', extra: "周一" },
-    { value: 2, label: '星期二', extra: "周二" },
-    { value: 3, label: '星期三', extra: "周三" },
-    { value: 4, label: '星期四', extra: "周四" },
-    { value: 5, label: '星期五', extra: "周五" },
-    { value: 6, label: '星期六', extra: "周六" },
-    { value: 7, label: '星期日', extra: "周日" },
-];
 
 
 function sortByKey (array, key) {
@@ -75,7 +66,17 @@ export default class updateClock extends React.Component {
             notciceTime: 46762000,
             timeArr: ["周三", "周四", "周五"],
             sendData: [],
-            allData:[]
+            allData:[],
+            checkedData:[
+                { value: 1, label: '星期一', extra: "周一" },
+                { value: 2, label: '星期二', extra: "周二" },
+                { value: 3, label: '星期三', extra: "周三" },
+                { value: 4, label: '星期四', extra: "周四" },
+                { value: 5, label: '星期五', extra: "周五" },
+                { value: 6, label: '星期六', extra: "周六" },
+                { value: 7, label: '星期日', extra: "周日" },
+            ]
+            
         };
     }
     componentWillMount () {
@@ -239,20 +240,21 @@ export default class updateClock extends React.Component {
     //弹出星期选择框
     onRepeat = () => {
         this.setState({
-            repeatDefault: false
+            repeatDefault: false,
+            checkedData:this.state.checkedData
         })
     }
     //星期的取消选择
     cancelSelect = () => {
         this.setState({
-            repeatDefault: true
+            repeatDefault: true,
         })
     }
     //星期的确定选择
     sureSelect = () => {
         var tempArr = [];
         var timeTempArr = [];
-        checkedData.forEach((v,i)=>{
+        this.state.checkedData.forEach((v,i)=>{
             if(this.state.timeArr.indexOf(v.extra) != -1){
                 tempArr.push(v)
             }
@@ -393,7 +395,7 @@ export default class updateClock extends React.Component {
                         <div className='am-picker-popup-item am-picker-popup-title'></div>
                         <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
-                        {checkedData.map((v,i)=> (
+                        {this.state.checkedData.map((v,i)=> (
                             <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
                                 {v.label}
                             </CheckboxItem>
