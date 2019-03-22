@@ -24,7 +24,9 @@ export default class schoolPush extends React.Component {
     }
 
     componentDidMount () {
-        var userId = 23836;
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
         this.setState({
             userId
         })
@@ -32,6 +34,7 @@ export default class schoolPush extends React.Component {
     }
 
 
+    //请求数据
     requestData = (userId) => {
         var _this = this;
         var param = {
@@ -76,7 +79,7 @@ export default class schoolPush extends React.Component {
     }
 
 
-
+        
     formatUnixtimestamp = (inputTime) => {
         var date = new Date(inputTime);
         var y = date.getFullYear();
