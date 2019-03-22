@@ -21,6 +21,16 @@ const addWatchInfo = (location, cb) => {
         cb(null, require('./components/addWatchInfo/js/addWatchInfo').default)
     }, 'addWatchInfo')
 };
+const babyInfo = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/addWatchInfo/js/babyInfo').default)
+    }, 'babyInfo')
+};
+const schoolInfo = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/addWatchInfo/js/schoolInfo').default)
+    }, 'schoolInfo')
+};
 
 const bindStudentInfo = (location, cb) => {
     require.ensure([], require => {
@@ -159,6 +169,8 @@ ReactDOM.render(
                 <IndexRoute component={Index}/>
             }
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
+            <Route path="babyInfo" getComponent={babyInfo}/>
+            <Route path="schoolInfo" getComponent={schoolInfo}/>
             <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
             <Route path="verifyStuInfo" getComponent={verifyStuInfo}/>
             <Route path="loginSuccess" getComponent={loginSuccess}/>

@@ -2,9 +2,9 @@ import React from 'react';
 import {
     InputItem, Toast, Modal
 } from 'antd-mobile';
-
+import '../css/schoolInfo.less'
 const alert = Modal.alert;
-export default class bindStudentInfo extends React.Component {
+export default class schoolInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,8 +13,8 @@ export default class bindStudentInfo extends React.Component {
         };
     }
 
-    componentWillMount() {
-        document.title = '更多';
+    componentWillMount () {
+        document.title = '学校信息';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -28,16 +28,16 @@ export default class bindStudentInfo extends React.Component {
         })
     }
 
-    componentDidMount() {
+    componentDidMount () {
         Bridge.setShareAble("false");
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
     }
 
     //监听窗口改变时间
-    onWindwoResize() {
+    onWindwoResize () {
         // this
         setTimeout(() => {
             this.setState({
@@ -56,30 +56,15 @@ export default class bindStudentInfo extends React.Component {
     }
     //下一页
     nextPage = () => {
-        if (this.state.littleAntName == "") {
-            Toast.info("请输入小蚂蚁账号")
-            return;
-        }
-        var param = {
-            "method": 'getUserByAccount',
-            "account": this.state.littleAntName,
+        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex;
+        var data = {
+            method: 'openNewPage',
+            url: url
         };
-        console.log(param, "param")
-        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: (result) => {
-                console.log(result, "rerere")
-                if (result.success && result.response) {
-                    this.setState({
-                        stuInfoData: result.response
-                    })
-                } else {
-                    Toast.info('error');
-                }
-            },
-            onError: function (error) {
-                Toast.info('请求失败');
-            }
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
         });
+
 
     }
 
@@ -95,18 +80,22 @@ export default class bindStudentInfo extends React.Component {
         });
     }
 
-    render() {
+    render () {
         return (
-            <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
-                <div className="p38 bindStu login-input">
-                    <div className="picDiv">
-                        <img
-                            src={require('../../images/bindStuPic.png')} alt=""/>
+            <div id="schoolInfo">
+                <div className="my_flex mainCont">
+                    <div className='hasAccount'>
+                        <img onClick={this.toRegPage} src={require('../../images/hasAccount.png')} alt=""/>
+                        <div className="dec">我有小蚂蚁账号</div>
                     </div>
-                  
-                    <div className='applyAccount'><span onClick={this.toRegPage}>*申请新账号</span></div>
-                    <div className='submitBtn' onClick={this.nextPage}>下一步</div>
+                    <div  onClick={this.nextPage} className='noAccount'>
+                        <img src={require('../../images/hasAccount.png')} alt=""/>
+                        <div className="dec">没有小蚂蚁账号</div>
+                    </div>
                 </div>
+                <div className='bt_bg'>
+                </div>
+
 
             </div>
         );
