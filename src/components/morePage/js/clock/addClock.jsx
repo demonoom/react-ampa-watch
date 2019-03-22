@@ -43,15 +43,24 @@ const alarmType = [
 ]
 
 const checkedData = [
-    { value: 1, label: '星期一',extra:"周一" },
-    { value: 2, label: '星期二',extra:"周二" },
-    { value: 3, label: '星期三',extra:"周三"},
-    { value: 4, label: '星期四',extra:"周四"},
-    { value: 5, label: '星期五',extra:"周五"},
-    { value: 6, label: '星期六',extra:"周六"},
-    { value: 7, label: '星期日',extra:"周日"},
+    { value: 1, label: '星期一', extra: "周一" },
+    { value: 2, label: '星期二', extra: "周二" },
+    { value: 3, label: '星期三', extra: "周三" },
+    { value: 4, label: '星期四', extra: "周四" },
+    { value: 5, label: '星期五', extra: "周五" },
+    { value: 6, label: '星期六', extra: "周六" },
+    { value: 7, label: '星期日', extra: "周日" },
 ];
 var myDate = new Date();
+
+
+function sortByKey (array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    })
+}
 export default class addClock extends React.Component {
     constructor(props) {
         super(props);
@@ -63,9 +72,9 @@ export default class addClock extends React.Component {
             repeatDefault: true,
             defaleSelect: "永不",
             timeArr: [],
-            sendData:[],
-            alarmValue:["起床"],
-            time:myDate
+            alarmValue: ["起床"],
+            time: myDate,
+            allData: []
         };
     }
     componentWillMount () {
@@ -147,27 +156,24 @@ export default class addClock extends React.Component {
     }
 
     //星期的选择
-    onSelectChange = (e,data) => {
+    onSelectChange = (e, data, index) => {
         if (e.target.checked) {
-            var arr = [];
-            var tempArr = [];
-            arr.push(data.extra);
-            tempArr.push(data.value)
+            var allArr = [];
+            allArr.push(data)
             this.setState({
-                timeArr: this.state.timeArr.concat(arr),
-                sendData:this.state.sendData.concat(tempArr)
+                allData: sortByKey(this.state.allData.concat(allArr), "value")
             }, () => {
-                console.log(this.state.timeArr, "ppp")
+                console.log(this.state.allData, "allData")
             })
         } else {
-            this.state.timeArr.forEach((v, i) => {
-                if (v == data.extra) {
-                    this.state.timeArr.splice(i,1);
-                    this.state.sendData.splice(i,1);
+            this.state.allData.forEach((v, i) => {
+                if (data.value == v.value) {
+                    this.state.allData.splice(i, 1);
                 }
                 this.setState({
-                    timeArr:this.state.timeArr,
-                    sendData:this.state.sendData
+                    allData: sortByKey(this.state.allData, "value")
+                }, () => {
+                    console.log(this.state.allData, "allData")
                 })
             })
         }
@@ -183,38 +189,42 @@ export default class addClock extends React.Component {
     cancelSelect = () => {
         this.setState({
             repeatDefault: true,
-            defaleSelect:this.state.timeArr.length == 0 ? "请选择" : this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.length == 0 ? "请选择" : this.state.timeArr.join(" ")
         })
     }
     //星期的确定选择
     sureSelect = () => {
-        if(this.state.timeArr.length == 0){
-            Toast.info("请选择重复日期",1)
-            return
-        }
-        this.setState({
-            defaleSelect:this.state.timeArr.join(" ")
+        this.state.timeArr = [];
+        this.state.allData.forEach((v, i) => {
+            this.state.timeArr.push(v.extra);
         })
         this.setState({
-            repeatDefault: true
+            timeArr: this.state.timeArr
+        }, () => {
+            this.setState({
+                defaleSelect: this.state.timeArr.length == 0 ? "永不" : this.state.timeArr.join(" "),
+                repeatDefault: true
+            })
+
         })
+
     }
     //保存
-    toSave = ()=>{
+    toSave = () => {
         var param = {
             "method": 'addWatch2gClock',
             "clockType": this.state.alarmValue[0],
-            "noticeTime": (this.state.time+"").split(" ")[4],
+            "noticeTime": (this.state.time + "").split(" ")[4],
             "repeatType": JSON.stringify(this.state.timeArr),
             "noticeType": this.state.typeValue[0],
             "watchId": this.state.watchId,
-             "actionName": "watchAction",
+            "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                
+
                 if (result.success && result.response) {
-                    Toast.info("保存成功",1);
+                    Toast.info("保存成功", 1);
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
@@ -259,9 +269,9 @@ export default class addClock extends React.Component {
                 <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
                     <List>
-                        {checkedData.map(i => (
-                            <CheckboxItem key={i.value} onChange={(checked) => this.onSelectChange(checked,i)}>
-                                {i.label}
+                        {checkedData.map((v, i) => (
+                            <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
+                                {v.label}
                             </CheckboxItem>
                         ))}
                     </List>
@@ -283,12 +293,12 @@ export default class addClock extends React.Component {
                 >
                     <List.Item arrow="horizontal">提醒方式</List.Item>
                 </Picker>
-                <List.Item
+                {/* <List.Item
                     extra={<Switch
                         checked={this.state.checked}
                         onChange={this.offChange}
                     />}
-                >Off</List.Item>
+                >Off</List.Item> */}
                 <div onClick={this.toSave}>保存</div>
             </div>
         )

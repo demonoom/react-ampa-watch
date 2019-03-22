@@ -1,5 +1,5 @@
 import React from "react";
-import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection';
+import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
 
 //消息通信js
@@ -10,7 +10,7 @@ export default class morePage extends React.Component {
         this.state = {};
     }
 
-    componentWillMount() {
+    componentWillMount () {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
@@ -20,7 +20,7 @@ export default class morePage extends React.Component {
         this.setState({
             macAddr,
             userId,
-            watchId: 1
+            watchId: 29
         })
         var pro = {
             "command": "guardianLogin",
@@ -35,7 +35,7 @@ export default class morePage extends React.Component {
         ms.connect(pro);
     }
 
-    componentDidMount() {
+    componentDidMount () {
         this.watchListener();
 
     }
@@ -66,7 +66,7 @@ export default class morePage extends React.Component {
 
 
     //消息监听
-    watchListener() {
+    watchListener () {
         ms.msgWsListener = {
             onError: function (errorMsg) {
 
@@ -129,7 +129,7 @@ export default class morePage extends React.Component {
         ms.send(commandJson);
     };
 
-    render() {
+    render () {
         return (
             <div id="morePage">
                 <p onClick={this.toFindWatch}>找手表</p>

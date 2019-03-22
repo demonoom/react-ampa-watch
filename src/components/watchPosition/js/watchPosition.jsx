@@ -132,7 +132,15 @@ export default class watchPosition extends React.Component {
     };
 
     addSafeAddress = () => {
-        console.log('addSafeAddress');
+
+        var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     };
 
     render() {
@@ -155,8 +163,8 @@ export default class watchPosition extends React.Component {
         return (
             <div id="watchPosition" style={{height: '100%'}}>
                 <Map
-                    amapkey='2228dcee9965b2922c14f5cd72c3d0cc'
-                    version='1.4.13'
+                    amapkey={WebServiceUtil.amapkey}
+                    version={WebServiceUtil.version}
                     loading={Loading}
                     plugins={plugins}
                     center={this.state.position}
@@ -165,6 +173,7 @@ export default class watchPosition extends React.Component {
                     buildingAnimation={true}
                     viewMode='3D'
                     events={events}
+                    rotateEnable={false}
                 >
                     <Marker
                         position={this.state.position}

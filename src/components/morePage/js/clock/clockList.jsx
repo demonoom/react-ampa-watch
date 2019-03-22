@@ -9,7 +9,7 @@ export default class clockList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            clockList: []
+            clockList: [],
         };
     }
     componentWillMount () {
@@ -45,7 +45,6 @@ export default class clockList extends React.Component {
     }
 
 
-
     //消息监听
     watchListener () {
         ms.msgWsListener = {
@@ -77,7 +76,7 @@ export default class clockList extends React.Component {
             "method": 'getWatch2gClocksByWatchId',
             "watchId": watchId,
             "actionName": "watchAction",
-            "pageNo": 1
+            "pageNo": -1
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -93,7 +92,7 @@ export default class clockList extends React.Component {
     }
 
     //开关项点击
-    offChange = (index, isOpen, id, data) => {
+    offChange = (index, isOpen, data) => {
         console.log(isOpen, "isOpen")
         if (isOpen == 1) {
             this.state.clockList[index].valid = 0;
@@ -108,7 +107,7 @@ export default class clockList extends React.Component {
         }
         var param = {
             "method": 'switchWatch2gClock',
-            "clockId": id,
+            "clockId": data.id,
             "isOpen": isOpen == 1 ? 0 : 1,
             "actionName": "watchAction"
         };
@@ -139,7 +138,7 @@ export default class clockList extends React.Component {
     }
     //跳转编辑页面
     toUpdate = (data) => {
-        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId="+this.state.watchId+"&id="+data.id;
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id;
         var data = {
             method: 'openNewPage',
             url: url
@@ -161,7 +160,7 @@ export default class clockList extends React.Component {
                                 </div>
                                 <Switch
                                     checked={v.valid == 1 ? "true" : false}
-                                    onChange={this.offChange.bind(this, i, v.valid, v.id, v)}
+                                    onChange={this.offChange.bind(this, i, v.valid, v)}
                                 />
                             </div>
                         )

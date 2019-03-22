@@ -1,4 +1,4 @@
-#watchPosition {
+#watchTrail {
   .customLayer {
     font-size: larger;
     background-color: #fff;
@@ -9,28 +9,14 @@
     box-shadow: 1px 1px 10px 0 #ccc;
   }
 
-  #getPosition {
-    width: 35px;
-    height: 35px;
+  #timeChoose {
     position: fixed;
-    bottom: 140px;
-    right: 15px;
-  }
-
-  #getTrail {
-    width: 35px;
-    height: 35px;
-    position: fixed;
-    top: 230px;
-    right: 15px;
-  }
-
-  #safeAddress {
-    width: 35px;
-    height: 35px;
-    position: fixed;
-    top: 290px;
-    right: 15px;
+    top: 29px;
+    left: 50%;
+    transform: translateX(-50%);
+    > span {
+      padding: 0 10px;
+    }
   }
 
   .amap-logo {

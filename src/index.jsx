@@ -41,7 +41,7 @@ const loginSuccess = (location, cb) => {
 };
 
 //更多页面
-const morePage =(location, cb) => {
+const morePage = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/morePage').default)
     }, 'morePage')
@@ -65,23 +65,53 @@ const watchTrail = (location, cb) => {
     }, 'watchTrail')
 };
 
+const commonLocation = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/commonLocation').default)
+    }, 'updateClock')
+};
+
+const addNewLocation = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/addNewLocation').default)
+    }, 'updateClock')
+};
+
 //闹钟
-const addClock= (location, cb) => {
+const addClock = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/addClock').default)
     }, 'addClock')
 };
 
-const clockList= (location, cb) => {
+const clockList = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/clockList').default)
     }, 'clockList')
 };
 
-const updateClock= (location, cb) => {
+const updateClock = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/clock/updateClock').default)
     }, 'updateClock')
+};
+
+const schoolPush= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/schoolPush/js/schoolPush').default)
+    }, 'schoolPush')
+};
+//排行榜
+const rankingList= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/rankingList').default)
+    }, 'rankingList')
+};
+
+const detailPage= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/rankingList/js/detailPage').default)
+    }, 'detailPage')
 };
 
 import './index.less';
@@ -106,6 +136,16 @@ class Index extends React.Component {
                             to="/morePage"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
+                    <li>
+                        <Link
+                            to="/schoolPush"
+                            style={{fontSize: '24px'}}>校园通知</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/rankingList?stuId=23991"
+                            style={{fontSize: '24px'}}>排行榜</Link>
+                    </li>
                 </ul>
             </div>
         );
@@ -127,9 +167,14 @@ ReactDOM.render(
             <Route path="morePage" getComponent={morePage}/>
             <Route path="watchPosition" getComponent={watchPosition}/>
             <Route path="watchTrail" getComponent={watchTrail}/>
+            <Route path="commonLocation" getComponent={commonLocation}/>
+            <Route path="addNewLocation" getComponent={addNewLocation}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
+            <Route path="schoolPush" getComponent={schoolPush}/>
+            <Route path="rankingList" getComponent={rankingList}/>
+            <Route path="detailPage" getComponent={detailPage}/>
         </Route>
     </Router>, document.getElementById('example')
 );
