@@ -14,6 +14,7 @@ export default class schoolPush extends React.Component {
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
+            userId: 0
         };
     }
 
@@ -34,7 +35,7 @@ export default class schoolPush extends React.Component {
     var _this = this;
         var param = {
             "method": 'getTopicsByNotifyType',
-            "notifyType":'8',
+            "notifyType":'9',
             "ident": userId,
             "pageNo": this.state.defaultPageNo
         };
@@ -112,6 +113,8 @@ export default class schoolPush extends React.Component {
             isLoadingLeft: true,
         });
     }
+
+
     /*获取单个topic*/
     getTopicByIdRequest = (topid) =>{
         var param = {
@@ -180,32 +183,74 @@ export default class schoolPush extends React.Component {
         });
     }
 
-    zanClick = (rowData) =>{
-        console.log(rowData.createTime,'赞');
-         this.praiseForTopicById(rowData.id);
+    deleteTopicCommentById =(commentId)=>{
+        var param = {
+            "method": 'deleteTopicComment',
+            "topicCommentId":commentId,
+            "ident": userId
+        };
+        console.log(param, "param")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if(result.success){
 
+                }else {
+                    Toast.info(result);
+                }
+
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+
+
+
+    zanClick = (rowData) =>{
+         //console.log(rowData.createTime,'赞');
+          this.praiseForTopicById(rowData.id);
+         // this.addTopicCommentAndResponse2(rowData,'baidu这个平路手机辐射');
+    }
+
+    addZanView = (rowData)=> {
+        var resString = '';
+        if (rowData.comments.length > 0) {
+            for (i = 0; i < rowData.comments.length; i++) {
+                var keyV = rowData.comments[i];
+                resString = resString + keyV.fromUser.userName;
+            }
+            return(
+                <div>{resString}</div>
+            )
+        }
     }
 
 
     render() {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData, "rowData")
+            console.log(rowData, "rowData");
             var  time = this.formatUnixtimestamp(rowData.createTime);
-            var  zanSting = '';
-            if (rowData.comments.count > 0 && rowData.comments) {
-                  // for (let index in rowData.comments){
-                  //     console.log(index, "index");
-                  // }
-                console.log('fuck');
+            var  zanSting = 'fsd';
+            if (rowData.comments.length > 0) {
+                for (var i=0; i<rowData.comments.length;i++){
+                    var  key = rowData.comments[i];
+                    zanSting = zanSting + key.user.userName;
+                }
             }
+            var  isZan = false;
+            // rowData.comments.map
+
+
             return (
                 <div>
                     <img  src={rowData.fromUser.avatar} />
                     <div> 校内通知 </div>
                     <div> {time}</div>
                     <div>{rowData.content}</div>
-                    <button onClick={this.zanClick(rowData)}>点赞</button>
-                    <div></div>
+                    <button onClick={this.zanClick(rowData,)}>点赞</button>
+                    <div>{zanSting}</div>
                 </div>
             );
         };
