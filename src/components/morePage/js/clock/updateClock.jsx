@@ -3,7 +3,7 @@ import {
     DatePicker, List, Picker, InputItem, Toast,
     Modal, WhiteSpace, Switch, Checkbox, Flex
 } from 'antd-mobile';
-
+import '../../css/addClock.less'
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -42,15 +42,15 @@ const alarmType = [
     }
 ]
 
-const checkedData = [
-    { value: 1, label: '星期一', extra: "周一" },
-    { value: 2, label: '星期二', extra: "周二" },
-    { value: 3, label: '星期三', extra: "周三" },
-    { value: 4, label: '星期四', extra: "周四" },
-    { value: 5, label: '星期五', extra: "周五" },
-    { value: 6, label: '星期六', extra: "周六" },
-    { value: 7, label: '星期日', extra: "周日" },
-];
+
+
+function sortByKey (array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    })
+}
 
 export default class updateClock extends React.Component {
     constructor(props) {
@@ -65,7 +65,18 @@ export default class updateClock extends React.Component {
             typeValue: ["震动"],
             notciceTime: 46762000,
             timeArr: ["周三", "周四", "周五"],
-            sendData: []
+            sendData: [],
+            allData:[],
+            checkedData:[
+                { value: 1, label: '星期一', extra: "周一" },
+                { value: 2, label: '星期二', extra: "周二" },
+                { value: 3, label: '星期三', extra: "周三" },
+                { value: 4, label: '星期四', extra: "周四" },
+                { value: 5, label: '星期五', extra: "周五" },
+                { value: 6, label: '星期六', extra: "周六" },
+                { value: 7, label: '星期日', extra: "周日" },
+            ]
+            
         };
     }
     componentWillMount () {
@@ -181,17 +192,22 @@ export default class updateClock extends React.Component {
         });
     }
     //星期的选择
-    onSelectChange = (e, data) => {
+    onSelectChange = (e, data,index) => {
+        console.log(data,"data")
         if (e.target.checked) {
             var arr = [];
             var tempArr = [];
+            var allArr = [];
             arr.push(data.extra);
-            tempArr.push(data.value)
+            tempArr.push(data.value);
+            allArr.push(data)
             this.setState({
                 timeArr: this.state.timeArr.concat(arr),
-                sendData: this.state.sendData.concat(tempArr)
+                sendData: this.state.sendData.concat(tempArr),
+                allData:this.state.allData.concat(allArr),
             }, () => {
-                console.log(this.state.timeArr, "ppp")
+                console.log(this.state.allData, "ppp")
+                console.log(this.state.timeArr, "timeArr")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
@@ -201,7 +217,21 @@ export default class updateClock extends React.Component {
                 }
                 this.setState({
                     timeArr: this.state.timeArr,
-                    sendData: this.state.sendData
+                    sendData: this.state.sendData,
+                    allData:this.state.allData
+                },()=>{
+                console.log(this.state.timeArr, "timeArr")
+                console.log(this.state.allData, "ppp")
+                })
+            })
+
+            this.state.allData.forEach((v,i)=>{
+                console.log(v,"vvv")
+                if(data.value == v.value){
+                    this.state.allData.splice(i, 1);
+                }
+                this.setState({
+                    allData:this.state.allData
                 })
             })
         }
@@ -210,21 +240,32 @@ export default class updateClock extends React.Component {
     //弹出星期选择框
     onRepeat = () => {
         this.setState({
-            repeatDefault: false
+            repeatDefault: false,
+            checkedData:this.state.checkedData
         })
     }
     //星期的取消选择
     cancelSelect = () => {
         this.setState({
-            repeatDefault: true
+            repeatDefault: true,
         })
     }
     //星期的确定选择
     sureSelect = () => {
-        this.setState({
-            defaleSelect: this.state.timeArr.length == 0 ? "永不 " : this.state.timeArr.join(" ")
+        var tempArr = [];
+        var timeTempArr = [];
+        this.state.checkedData.forEach((v,i)=>{
+            if(this.state.timeArr.indexOf(v.extra) != -1){
+                tempArr.push(v)
+            }
+        })
+        tempArr = sortByKey(tempArr, "value")
+        tempArr.forEach((v,i)=>{
+            timeTempArr.push(v.extra)
         })
         this.setState({
+            defaleSelect: timeTempArr.length == 0 ? "永不 " : timeTempArr.join(" "),
+            timeArr:timeTempArr,
             repeatDefault: true
         })
     }
@@ -239,7 +280,6 @@ export default class updateClock extends React.Component {
             "noticeType": this.state.typeValue[0],
             "actionName": "watchAction",
         };
-        return
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
@@ -272,7 +312,6 @@ export default class updateClock extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "re")
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1)
                     //关闭当前窗口，并刷新上一个页面
@@ -316,36 +355,49 @@ export default class updateClock extends React.Component {
     };
     render () {
         return (
-            <div id="updateClock">
-                <Picker
-                    data={alarmType}
-                    value={this.state.alarmValue}
-                    cols={1}
-                    className="forss"
-                    extra={this.state.alarmValue}
-                    onChange={this.onAlarmChange}
-                    onOk={this.alarmSure}
-                    onDismiss={this.onCancelClock}
-                >
-                    <List.Item arrow="horizontal">闹钟类型</List.Item>
-                </Picker>
-                <DatePicker
-                    mode="time"
-                    extra={WebServiceUtil.formatHM(this.state.notciceTime)}
-                    value={this.state.time}
-                    onChange={this.timeChange}
-                    onOk={this.timeSure}
-                    onDismiss={this.onCancelTime}
-                >
-                    <List.Item arrow="horizontal">提醒时间</List.Item>
-                </DatePicker>
-                <div onClick={this.onRepeat}>重复 <span>{this.state.defaleSelect}</span></div>
-                <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
-                    <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
+            <div id="addClock" className='public_list'>
+                <div className='line_public'>
+                    <Picker
+                        data={alarmType}
+                        value={this.state.alarmValue}
+                        cols={1}
+                        className="forss"
+                        extra={this.state.alarmValue}
+                        onChange={this.onAlarmChange}
+                        onOk={this.alarmSure}
+                        onDismiss={this.onCancelClock}
+                    >
+                        <List.Item arrow="horizontal">闹钟类型</List.Item>
+                    </Picker>
+                </div>
+                <div className="line_public">
+                    <DatePicker
+                        mode="time"
+                        extra={WebServiceUtil.formatHM(this.state.notciceTime)}
+                        value={this.state.time}
+                        onChange={this.timeChange}
+                        onOk={this.timeSure}
+                        onDismiss={this.onCancelTime}
+                    >
+                        <List.Item arrow="horizontal">提醒时间</List.Item>
+                    </DatePicker>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">重复</div>
+                        <div className="am-list-extra">{this.state.defaleSelect}</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
+                    <div className='am-picker-popup-header'>
+                        <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
+                        <div className='am-picker-popup-item am-picker-popup-title'></div>
+                        <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
-                        {checkedData.map(i => (
-                            <CheckboxItem key={i.value} checked={this.state.timeArr.indexOf(i.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, i)}>
-                                {i.label}
+                        {this.state.checkedData.map((v,i)=> (
+                            <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
+                                {v.label}
                             </CheckboxItem>
                         ))}
                     </List>
@@ -373,8 +425,11 @@ export default class updateClock extends React.Component {
                         onChange={this.offChange}
                     />}
                 >Off</List.Item> */}
-                <div onClick={this.toSave}>保存</div>
-                <div onClick={this.showAlert}>删除</div>
+                <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
+                <div className='btns my_flex'>
+                    <div className='leftBtn' onClick={this.toSave}>保存</div>
+                    <div  className='rightBtn' onClick={this.showAlert}>删除</div>
+                </div>
             </div>
         )
     }

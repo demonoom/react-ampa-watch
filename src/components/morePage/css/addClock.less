@@ -1,0 +1,47 @@
+#addClock{
+  .checkRepeat{
+    .am-list{
+      height: 238px;
+      overflow-y: auto;
+    }
+  }
+  .repeatBtn.am-list-item .am-list-line .am-list-extra{
+    -webkit-flex-basis:60%;
+    -ms-flex-preferred-size:60%;
+    flex-basis:60%;
+  }
+  .btns{
+    padding: 0 15px;
+    position: absolute;
+    left: 50%;
+    bottom: 35px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    transform: translateX(-50%);
+    &>div{
+      width: 100px;
+      box-sizing: border-box;
+      border-radius: 25px;
+      cursor: pointer;
+      line-height: 40px;
+      height: 40px;
+      text-align: center;
+      font-size: 16px;
+      letter-spacing: 5px;
+    }
+    .leftBtn{
+      color: white;
+      background-color: #17ACF7;
+      margin-right: 20px;
+      border: 1px #17ACF7 solid;
+    }
+    .rightBtn{
+      color: #17ACF7;
+      border: 1px #17ACF7 solid;
+      letter-spacing: 5px;
+    }
+  }
+
+}

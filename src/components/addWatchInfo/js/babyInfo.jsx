@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    InputItem, Toast,
+    InputItem, Toast, DatePicker,
     Modal, Picker, List, WhiteSpace
 } from 'antd-mobile';
 
@@ -17,11 +17,26 @@ const sexData = [{
     value: '女',
     label: '女'
 }]
-export default class addWatchInfo extends React.Component {
+
+
+function formatDate(date){
+    var str = date+""
+    str = str.replace(/ GMT.+$/, '');// Or str = str.substring(0, 24)
+    var d = new Date(str);
+    var a = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
+    // for (var i = 0, len = a.length; i < len; i++) {
+    //     if (a[i] < 10) {
+    //         a[i] = a[i];
+    //     }
+    // }
+    return str = a[0] + '-' + a[1] + '-' + a[2]
+}
+export default class babyInfo extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
-            macId: "789",
+            macId: "159",
             stuName: "",
             sexValue: "",
             extraClassName: "",
@@ -59,10 +74,15 @@ export default class addWatchInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
-        var ident = searchArray[0].split('=')[1];
+        var loginType = searchArray[0].split('=')[1];
+        var macAddr = searchArray[1].split('=')[1];
+        var relation = searchArray[2].split('=')[1];
+        var phonenumber = searchArray[3].split('=')[1];
+        var ident = searchArray[4].split('=')[1];
+        console.log(phonenumber,"phonenumber")
         // loginType==1  代表主账号
         this.setState({
-            ident
+            loginType,macAddr,relation,phonenumber,ident
         })
     }
 
@@ -107,7 +127,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(789);
+        this.getWatch2gByMacAddress(159)
         var data = {
             method: 'watchBinding'
         };
@@ -144,26 +164,50 @@ export default class addWatchInfo extends React.Component {
     //跳转下一页
     nextPage = () => {
         if (this.state.loginType == 1) {
-            if (this.state.macId == "") {
-                Toast.info("请扫描手表")
+            // if (this.state.macId == "") {
+            //     Toast.info("请扫描手表")
+            //     return
+            // }
+            if (this.state.sexValue == "") {
+                Toast.info("请选择孩子性别",1)
                 return
             }
-            if (this.state.relationValue == "") {
-                Toast.info("请选择您与孩子的关系")
+            if (this.state.sendData == undefined) {
+                Toast.info("请选择孩子生日",1)
                 return
             }
-            if (this.state.phonenumber == undefined) {
-                Toast.info("请输入手表号码")
-                return
-            }
-            var url = WebServiceUtil.mobileServiceURL + "babyInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber+"&ident="+this.state.ident
-            var data = {
-                method: 'openNewPage',
-                url: url
+            var param = {
+                "method": 'bindWatchGuardian',
+                "childSex": this.state.sexValue[0],
+                "macAddress": this.state.macAddr,
+                "familyRelate": this.state.relation,
+                "birthTime": this.state.sendData,
+                "phoneNumber": this.state.phonenumber,
+                "actionName": "watchAction",
+                "guardianId": this.state.ident//绑定监护人的userId
             };
-            Bridge.callHandler(data, null, function (error) {
-                window.location.href = url;
+            console.log(param, "param")
+            WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+                onResponse: (result) => {
+                    console.log(result, "rerere")
+                    if (result.success && result.response) {
+                        var url = WebServiceUtil.mobileServiceURL + "schoolInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&sex=" + this.state.sexValue[0];
+                        var data = {
+                            method: 'openNewPage',
+                            url: url
+                        };
+                        Bridge.callHandler(data, null, function (error) {
+                            window.location.href = url;
+                        });
+                    } else {
+                        // Toast.info('解绑失败');
+                    }
+                },
+                onError: function (error) {
+                    Toast.info('请求失败');
+                }
             });
+
         } else {
             console.log(this.state.relationValue, "this.state.familyRelate")
             if (this.state.macId == "") {
@@ -262,30 +306,29 @@ export default class addWatchInfo extends React.Component {
             RelationClassName: "",
         });
     }
-
-    //phoneNumber
-    phoneNumber = (value) => {
-        console.log(value, "opop")
-        this.setState({
-            phonenumber: value,
-
-        });
+    //生日
+    birChange = (date) => {
+        var str = formatDate(date)
+        console.log(str, "date")
+        this.setState({ date,
+            sendData:str
+        })
     }
     render () {
         return (
-            <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
+            <div id="babyInfo" style={{ height: document.body.clientHeight }}>
                 <div className="p38">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
-                        <div className='line_public'>
+                        {/* <div className='line_public'>
                             <div className="p10 scanDiv">
                                 <span className='text_hidden color_c' style={{ display: this.state.macId ? "none" : "inline-block" }}>请扫描手表二维码</span>
                                 <span className='text_hidden' style={{ display: this.state.macId ? "inline-block" : "none" }}>{this.state.macId}</span>
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
-                        </div>
-                        {/* <div className={'sex line_public '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        </div> */}
+                        <div className={'sex line_public ' + this.state.extraClassName}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
@@ -297,8 +340,19 @@ export default class addWatchInfo extends React.Component {
                             >
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
-                        </div> */}
-                        <div className={'relation line_public ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        </div>
+                        <div>
+                            <DatePicker
+                                mode="date"
+                                title=""
+                                extra="请选择孩子生日"
+                                value={this.state.date}
+                                onChange={this.birChange}
+                            >
+                                <List.Item arrow="horizontal">请选择孩子生日</List.Item>
+                            </DatePicker>
+                        </div>
+                        {/* <div className={'relation line_public ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}
@@ -310,16 +364,9 @@ export default class addWatchInfo extends React.Component {
                             >
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
-                        </div>
-                        <div style={{ display: this.state.showSexDiv ? "block" : "none" }}>
-                            <InputItem
-                                value={this.state.phonenumber}
-                                onChange={this.phoneNumber}
-                                type="phone"
-                                placeholder="请输入手表号码"
-                            ></InputItem>
-                        </div>
+                        </div> */}
                     </div>
+
 
                     <div className='submitBtn' onClick={this.nextPage}>
                         下一步

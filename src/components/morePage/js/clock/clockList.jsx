@@ -4,6 +4,7 @@ import {
     Modal, WhiteSpace, Switch, Checkbox, Flex
 } from 'antd-mobile';
 import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
+import '../../css/clockList.less'
 window.ms = null;
 export default class clockList extends React.Component {
     constructor(props) {
@@ -150,23 +151,26 @@ export default class clockList extends React.Component {
     render () {
         return (
             <div id="clockList">
-                {
-                    this.state.clockList.map((v, i) => {
-                        return (
-                            <div>
-                                <div onClick={this.toUpdate.bind(this, v)}>
-                                    <span>{WebServiceUtil.formatHM(v.noticeTime)}</span>
+                <div className="public_list">
+                    {
+                        this.state.clockList.map((v, i) => {
+                            return (
+                                <div className='line_public bg_white clockItem'>
+                                <span onClick={this.toUpdate.bind(this, v)}>
+                                    <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                     <span>{v.clockType}</span>
+                                </span>
+                                    <Switch
+                                        checked={v.valid == 1 ? "true" : false}
+                                        onChange={this.offChange.bind(this, i, v.valid, v)}
+                                    />
                                 </div>
-                                <Switch
-                                    checked={v.valid == 1 ? "true" : false}
-                                    onChange={this.offChange.bind(this, i, v.valid, v)}
-                                />
-                            </div>
-                        )
-                    })
-                }
-                <span onClick={this.toAddClockList}>添加</span>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className='addBtn' onClick={this.toAddClockList}>+</div>
             </div>
         )
     }
