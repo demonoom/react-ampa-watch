@@ -13,14 +13,14 @@ export default class morePage extends React.Component {
     componentWillMount () {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var sex = locationSearch.split("&")[0].split('=')[1];
-        var userId = 23836;
-        var macAddr = 6666;
+        var userId = locationSearch.split("&")[0].split('=')[1];
+        var macAddr = locationSearch.split("&")[1].split('=')[1];
+        var watchId = locationSearch.split("&")[2].split('=')[1];
         this.getWatchId(macAddr)
         this.setState({
             macAddr,
             userId,
-            watchId: 29
+            watchId: watchId
         })
         var pro = {
             "command": "guardianLogin",
@@ -31,15 +31,12 @@ export default class morePage extends React.Component {
             }
         };
         ms = new WatchWebsocketConnection();
-        console.log(pro, "pro")
         ms.connect(pro);
     }
-
     componentDidMount () {
         this.watchListener();
 
     }
-
     //获取手表id
     getWatchId = (macAddress) => {
         var param = {

@@ -148,7 +148,7 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
-                            to="/morePage"
+                            to="/morePage?userId=23836&macAddr=6666&watch=29"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
                     <li>

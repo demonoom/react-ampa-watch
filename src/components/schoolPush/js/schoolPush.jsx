@@ -1,5 +1,5 @@
 import React from "react";
-import {Toast, ListView, Tabs, Modal} from "antd-mobile";
+import { Toast, ListView, Tabs, Modal } from "antd-mobile";
 
 const alert = Modal.alert;
 const dataSource = new ListView.DataSource({
@@ -19,31 +19,31 @@ export default class schoolPush extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentWillMount () {
 
     }
 
-    componentDidMount() {
-        var userId = 41;
+    componentDidMount () {
+        var userId = 23836;
         this.setState({
             userId
         })
-           this.requestData(userId);
+        this.requestData(userId);
     }
 
 
     requestData = (userId) => {
-    var _this = this;
+        var _this = this;
         var param = {
             "method": 'getTopicsByNotifyType',
-            "notifyType":'9',
+            "notifyType": '9',
             "ident": userId,
             "pageNo": this.state.defaultPageNo
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.success){
+                if (result.success) {
                     var arr = result.response;
                     var pager = result.pager;
                     var isLoading = false;
@@ -56,20 +56,14 @@ export default class schoolPush extends React.Component {
                     } else {
                         isLoading = false;
                     }
-
-                    console.log(arr,'yyyy');
-
+                    console.log(arr, 'yyyy');
                     _this.initData = _this.initData.concat(arr);
                     _this.setState({
                         dataSource: _this.state.dataSource.cloneWithRows(_this.initData),
                         isLoadingLeft: isLoading,
                         refreshing: false
                     })
-
-
-
-
-                }else {
+                } else {
                     Toast.info(result);
                 }
 
@@ -83,7 +77,7 @@ export default class schoolPush extends React.Component {
 
 
 
-    formatUnixtimestamp = (inputTime)=> {
+    formatUnixtimestamp = (inputTime) => {
         var date = new Date(inputTime);
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -96,11 +90,11 @@ export default class schoolPush extends React.Component {
         var second = date.getSeconds();
         minute = minute < 10 ? ('0' + minute) : minute;
         second = second < 10 ? ('0' + second) : second;
-        return  m + '-' + d+' '+h+':'+minute+':'+second;
+        return m + '-' + d + ' ' + h + ':' + minute + ':' + second;
     }
 
 
-    loadMore = () =>{
+    loadMore = () => {
         var _this = this;
         var currentPageNo = this.state.defaultPageNo;
         if (!this.state.isLoadingLeft && !this.state.hasMore) {
@@ -117,20 +111,20 @@ export default class schoolPush extends React.Component {
 
 
     /*获取单个topic*/
-    getTopicByIdRequest = (topid , index) =>{
+    getTopicByIdRequest = (topid, index) => {
         var param = {
             "method": 'getTopicById',
-            "topicId":topid
+            "topicId": topid
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.success){
+                if (result.success) {
                     this.initData[index] = result.response;
                     this.setState({
-                        dataSource:dataSource.cloneWithRows(this.initData),
+                        dataSource: dataSource.cloneWithRows(this.initData),
                     })
-                }else {
+                } else {
                     Toast.info(result);
                 }
 
@@ -141,19 +135,19 @@ export default class schoolPush extends React.Component {
         });
     }
 
-   /*点赞*/
-    praiseForTopicById = (topicId,index) => {
+    /*点赞*/
+    praiseForTopicById = (topicId, index) => {
         var param = {
             "method": 'praiseForTopic',
-            "topicId":topicId,
-            "ident": '41'
+            "topicId": topicId,
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.success){
-                    this.getTopicByIdRequest(topicId,index);
-                }else {
+                if (result.success) {
+                    this.getTopicByIdRequest(topicId, index);
+                } else {
                     Toast.info(result);
                 }
 
@@ -165,18 +159,18 @@ export default class schoolPush extends React.Component {
     }
 
     /*取消点赞*/
-    cancelPraiseForTopicById =(topicId , index)=>{
+    cancelPraiseForTopicById = (topicId, index) => {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
-            "ident": "41"
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.success) {
-                     this.getTopicByIdRequest(topicId,index);
+                    this.getTopicByIdRequest(topicId, index);
                 } else {
                     Toast.info(result);
                 }
@@ -192,19 +186,19 @@ export default class schoolPush extends React.Component {
 
 
 
-    render() {
+    render () {
         const row = (rowData, sectionID, rowID) => {
             console.log(rowData, "rowData");
-            var  time = this.formatUnixtimestamp(rowData.createTime);
+            var time = this.formatUnixtimestamp(rowData.createTime);
             var zanArr = [];
             rowData.comments.forEach((v, i) => {
                 if (v.type == 1) {
                     zanArr.push(v)
                 }
             })
-            var  isZan = false;
+            var isZan = false;
             zanArr.forEach((v, i) => {
-                if (v.user.colUid == '41') {
+                if (v.user.colUid ==  this.state.userId) {
                     isZan = true;
                 }
             });
@@ -212,14 +206,14 @@ export default class schoolPush extends React.Component {
 
             return (
                 <div>
-                    <img  src={rowData.fromUser.avatar} />
+                    <img src={rowData.fromUser.avatar} />
                     <div> 校内通知 </div>
                     <div> {time}</div>
                     <div>{rowData.content}</div>
                     {
                         isZan ?
-                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id,rowID)}>已点赞</span> :
-                            <span onClick={this.praiseForTopicById.bind(this, rowData.id,rowID)}>未点赞</span>
+                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
+                            <span onClick={this.praiseForTopicById.bind(this, rowData.id, rowID)}>未点赞</span>
                     }
 
                     {
@@ -248,7 +242,7 @@ export default class schoolPush extends React.Component {
                     ref={el => this.lv = el}
                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                     renderFooter={() => (
-                        <div style={{paddingTop: 5, paddingBottom: 40, textAlign: 'center'}}>
+                        <div style={{ paddingTop: 5, paddingBottom: 40, textAlign: 'center' }}>
                             {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                         </div>)}
                     renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable

@@ -25,7 +25,7 @@ export default class teHomework extends React.Component {
     }
 
     componentDidMount () {
-        var userId = 41;
+        var userId = 23836;
         this.setState({
             userId
         })
@@ -127,7 +127,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'praiseForTopic',
             "topicId": topicId,
-            "ident": '41'
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -150,7 +150,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
-            "ident": "41"
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -170,7 +170,7 @@ export default class teHomework extends React.Component {
     }
     //删除页面
     toShanchu = (v, index) => {
-        if (v.user.colUid == 41) {
+        if (v.user.colUid == this.state.userId) {
             this.showAlert(v.id, v.topicId, index)
         } else {
             this.setState({
@@ -208,7 +208,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'deleteTopicComment',
             "topicCommentId": comId,
-            "ident": 41
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -254,7 +254,7 @@ export default class teHomework extends React.Component {
                 "content": this.state.sendValue,
                 "topicId": this.state.topicId,
                 "toUserId": this.state.toUserId,
-                "ident": 41
+                "ident":  this.state.userId
             };
             console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -289,7 +289,7 @@ export default class teHomework extends React.Component {
                 }
             })
             zanArr.forEach((v, i) => {
-                if (v.user.colUid == 41) {
+                if (v.user.colUid == this.state.userId) {
                     isZan = true;
                 }
             })
