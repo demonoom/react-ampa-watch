@@ -10,7 +10,8 @@ export default class verifyStuInfo extends React.Component {
         this.state = {
             stuName: "",
             schoolName: "",
-            watchId:""
+            watchId:"",
+            littleAntName: "",
         };
     }
 
@@ -20,16 +21,12 @@ export default class verifyStuInfo extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var loginType = searchArray[0].split('=')[1];
-        var sName = searchArray[1].split('=')[1];
-        var uName = searchArray[2].split('=')[1];
-        var stuId = searchArray[3].split('=')[1];
-        var macAddr = searchArray[4].split('=')[1];
+        var macAddr = searchArray[1].split('=')[1];
+        var sex = searchArray[2].split('=')[1];
         this.setState({
             loginType,
-            sName,
-            uName,
-            stuId,
-            macAddr
+            macAddr,
+            sex
         })
         this.getWatchId(macAddr)
     }
@@ -49,7 +46,16 @@ export default class verifyStuInfo extends React.Component {
             })
         }, 100)
     }
+    //输入小蚂蚁账号
+    littAntOnChange = (value) => {
+        console.log(value, "p")
+        this.setState({
+            littleAntName: value,
 
+        });
+    }
+
+    //
     getWatchId=(macAddress)=>{
         var param = {
             "method": 'getWatch2gByMacAddress',
@@ -91,20 +97,25 @@ export default class verifyStuInfo extends React.Component {
 
     //点击提交按钮
     submmit = () => {
-        if (this.state.uName != this.state.stuName) {
-            Toast.info("请检查学生名称");
+        if (this.state.littleAntName == "") {
+            Toast.info("请输入小蚂蚁账号");
             return
         }
-        if (this.state.sName != this.state.schoolName) {
-            Toast.info("请检查学校名称");
+        if (this.state.stuName == "") {
+            Toast.info("请输入学生名称");
             return
         }
-       
+        if (this.state.schoolName == "") {
+            Toast.info("请输入学校名称");
+            return
+        }
+        
         var param = {
-            "method": 'bindStudentAccount',
-            "studentId": this.state.stuId,
+            "method": 'bindStudentAccountByAccount',
+            "account": this.state.littleAntName,
+            "studentName": this.state.stuName,
+            "schoolName": this.state.schoolName,
             "watch2gId": this.state.watchId,
-            "studentBindType": 0,
             "actionName": "watchAction",
         };
         console.log(param, "param")
@@ -122,7 +133,7 @@ export default class verifyStuInfo extends React.Component {
                         window.location.href = url;
                     });
                 } else {
-                    Toast.info('验证失败');
+                    Toast.info(result.msg);
                 }
             },
             onError: function (error) {
@@ -140,7 +151,14 @@ export default class verifyStuInfo extends React.Component {
                         <img
                             src={require('../../images/stuAccountPic.png')} alt=""/>
                     </div>
-                    <div className='stuAccount'>小蚂蚁账号</div>
+                    <div className="icon_user line_public stuCont">
+                        <InputItem
+                            className=""
+                            placeholder="请输入小蚂蚁账号"
+                            value={this.state.littleAntName}
+                            onChange={this.littAntOnChange}
+                        ></InputItem>
+                    </div>
                     <div className="icon_user line_public">
                         <InputItem
                             className=""

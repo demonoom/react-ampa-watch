@@ -189,7 +189,7 @@ export default class addClock extends React.Component {
     cancelSelect = () => {
         this.setState({
             repeatDefault: true,
-            defaleSelect: this.state.timeArr.length == 0 ? "请选择" : this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.length == 0 ? "永不" : this.state.timeArr.join(" ")
         })
     }
     //星期的确定选择
