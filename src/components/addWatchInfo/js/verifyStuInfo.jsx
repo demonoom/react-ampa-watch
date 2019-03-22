@@ -151,7 +151,7 @@ export default class verifyStuInfo extends React.Component {
                         <img
                             src={require('../../images/stuAccountPic.png')} alt=""/>
                     </div>
-                    <div className="icon_user line_public stuCont">
+                    <div className="icon_watch line_public stuCont">
                         <InputItem
                             className=""
                             placeholder="请输入小蚂蚁账号"
@@ -162,7 +162,7 @@ export default class verifyStuInfo extends React.Component {
                     <div className="icon_user line_public">
                         <InputItem
                             className=""
-                            placeholder="请输入孩子姓名"
+                            placeholder="请输入孩子姓名验证账号信息"
                             value={this.state.stuName}
                             onChange={this.stuOnChange}
                         ></InputItem>
