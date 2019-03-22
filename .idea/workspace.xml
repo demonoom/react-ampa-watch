@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/addWatchInfo/js/addWatchInfo.jsx" afterDir="false" />
-    </list>
+    <list default="true" id="6b9d4840-3eb6-42b8-8039-3e4f81654bd3" name="Default" comment="" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +124,12 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="161" />
+    <option name="y" value="27" />
+    <option name="width" value="1221" />
+    <option name="height" value="699" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -205,6 +208,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="workspace.&#9;FILE&#9;file:///home/zhaojuan/myProject/LittleantWatch_JS/.idea/workspace.xml" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -230,18 +234,17 @@
       <updated>1552898764734</updated>
       <workItem from="1552898766041" duration="7687000" />
       <workItem from="1553047156778" duration="20663000" />
-      <workItem from="1553134165534" duration="9432000" />
+      <workItem from="1553134165534" duration="10119000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9398000" />
+    <option name="totallyTimeSpent" value="10085000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="58" y="-11" width="1309" height="780" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.31332815" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -249,7 +252,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.090625" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.4484375" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32999164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
