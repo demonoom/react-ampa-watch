@@ -150,7 +150,7 @@ export default class clockList extends React.Component {
     }
     render () {
         return (
-            <div id="clockList">
+            <div id="clockList" className='bg_gray'>
                 <div className="public_list">
                     {
                         this.state.clockList.map((v, i) => {

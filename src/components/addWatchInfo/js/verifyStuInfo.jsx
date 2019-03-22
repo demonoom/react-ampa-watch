@@ -146,7 +146,7 @@ export default class verifyStuInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
-                <div className="p38 bindStu login-input">
+                <div className="p38 innerCont bindStu login-input">
                     <div className="picDiv">
                         <img
                             src={require('../../images/stuAccountPic.png')} alt=""/>

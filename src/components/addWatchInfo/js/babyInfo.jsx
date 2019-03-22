@@ -319,7 +319,7 @@ export default class babyInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                <div className="p38">
+                <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
@@ -368,11 +368,9 @@ export default class babyInfo extends React.Component {
                             </Picker>
                         </div> */}
                     </div>
-
-
-                    <div className='submitBtn' onClick={this.nextPage}>
-                        下一步
                 </div>
+                <div className='submitBtn' onClick={this.nextPage}>
+                    下一步
                 </div>
             </div>
         );
