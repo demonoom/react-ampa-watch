@@ -2,14 +2,6 @@ import React from "react";
 import {Map, Polyline} from "react-amap";
 import {Toast} from 'antd-mobile';
 
-const arr = [
-    {longitude: '116.411743', latitude: '39.916485'},
-    {longitude: '117.204551', latitude: '38.993892'},
-    {longitude: '114.559940', latitude: '38.039917'},
-    {longitude: '115.484404', latitude: '38.882533'},
-    {longitude: '117.705878', latitude: '39.899659'},
-];
-
 import '../css/watchTrail.less'
 
 const loadingStyle = {
@@ -28,31 +20,76 @@ export default class watchTrail extends React.Component {
         super(props);
         this.state = {
             position: {longitude: '116.397477', latitude: '39.908692'},
-            zoom: 7,
+            zoom: 10,
             map: null,
-            path: arr,
+            path: [],
         };
     }
 
     componentWillMount() {
-        // var locationHref = decodeURI(window.location.href);
-        // var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        // var userId = locationSearch.split("&")[0].split('=')[1];
-        // var mac = locationSearch.split("&")[1].split('=')[1];
-        // this.setState({userId, mac});
-
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
+        var mac = locationSearch.split("&")[1].split('=')[1];
+        var macId = locationSearch.split("&")[2].split('=')[1];
+        this.setState({userId, mac, macId});
     }
 
     componentDidMount() {
-
+        this.getWatch2gLocationRecordByWatch2gId(0)
     }
+
+    /**
+     * 根据手表名称获取历史路径
+     * public List<Watch2gLocationRecord> getWatch2gLocationRecordByWatch2gId(String Watch2gId,String type) throws Exception{
+     */
+    getWatch2gLocationRecordByWatch2gId = (type) => {
+        var _this = this;
+        var param = {
+            "method": 'getWatch2gLocationRecordByWatch2gId',
+            "Watch2gId": this.state.macId,
+            "actionName": "watchAction",
+            "type": type,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' || result.success == true) {
+                    if (result.success) {
+                        if (!!result.response) {
+                            var path = result.response.map((v) => {
+                                return {
+                                    longitude: v.longitude,
+                                    latitude: v.latitude
+                                }
+                            });
+
+                            _this.setState({
+                                path, position: {
+                                    longitude: path[0].longitude,
+                                    latitude: path[0].latitude
+                                }
+                            })
+                        } else {
+                            Toast.info('未查询到记录');
+                            _this.setState({path:[]})
+                        }
+                    }
+                } else {
+                    Toast.fail(result.msg, 1);
+                }
+            },
+            onError: function (error) {
+                Toast.warn('保存失败');
+            }
+        });
+    };
 
     /**
      * 三天的选择
      */
     timeChoose = (type) => {
         return () => {
-            console.log(type);
+            this.getWatch2gLocationRecordByWatch2gId(type)
         };
     };
 
@@ -102,9 +139,9 @@ export default class watchTrail extends React.Component {
                         events={lineEvents}
                     />
                     <div id='timeChoose' className='customLayer'>
-                        <span onClick={this.timeChoose('1')}>今天</span>
-                        <span onClick={this.timeChoose('2')}>昨天</span>
-                        <span onClick={this.timeChoose('3')}>前天</span>
+                        <span onClick={this.timeChoose('0')}>今天</span>
+                        <span onClick={this.timeChoose('1')}>昨天</span>
+                        <span onClick={this.timeChoose('2')}>前天</span>
                     </div>
                 </Map>
             </div>
