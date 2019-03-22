@@ -85,10 +85,10 @@ export default class schoolInfo extends React.Component {
             <div id="schoolInfo">
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
-                        <img onClick={this.toRegPage} src={require('../../images/hasAccount.png')} alt=""/>
+                        <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>
                         <div className="dec">我有小蚂蚁账号</div>
                     </div>
-                    <div  onClick={this.nextPage} className='noAccount'>
+                    <div onClick={this.toRegPage} className='noAccount'>
                         <img src={require('../../images/noAccount.png')} alt=""/>
                         <div className="dec">没有小蚂蚁账号</div>
                     </div>
