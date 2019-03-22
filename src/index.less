@@ -2,7 +2,7 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 html, body {
-  background-color: #EDEDED !important;
+  background-color: #fff !important;
   height: 100%;
   font-size: 15px !important;
   position: relative;
@@ -132,7 +132,11 @@ ul, li {
 .bg_white {
   background: #fff;
 }
-
+.bg_gray {
+  background: #ededed;
+  height: 100%;
+  width: 100%;
+}
 .text_hidden {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -154,8 +158,14 @@ ul, li {
 .p10{
   padding: 0 10px;
 }
+.p15{
+  padding: 0 15px;
+}
 .p38{
   padding: 0 38px;
+}
+img{
+  max-width: 100%;
 }
 .am-list-body::before,.am-list-body::after{
   display: none !important;
@@ -269,9 +279,11 @@ ul, li {
   text-align: center;
   font-size: 16px;
   letter-spacing: 5px;
-  box-shadow: 0 9px 9px #0d8cd82b;
+  -webkit-box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
+  -moz-box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
+  box-shadow: 0 9px 9px rgba(13, 140, 216,0.2);
   position: absolute;
-  bottom: 65px;
+  bottom: 20px;
   left: 38px;
 }
 .am-list-item .am-list-line::after{
@@ -312,8 +324,7 @@ ul, li {
   line-height: 45px;
   font-size: 30px;
 }
-@media screen and (max-width: 320px){
-  .submitBtn{
-    bottom: 45px;
-  }
+.innerCont{
+  height: calc(~"100% - 89px");
+  overflow-y: auto;
 }

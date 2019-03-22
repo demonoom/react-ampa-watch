@@ -111,6 +111,11 @@ const schoolPush= (location, cb) => {
         cb(null, require('./components/schoolPush/js/schoolPush').default)
     }, 'schoolPush')
 };
+const teHomework= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/schoolPush/js/teHomework').default)
+    }, 'teHomework')
+};
 //排行榜
 const rankingList= (location, cb) => {
     require.ensure([], require => {
@@ -153,6 +158,16 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
+                            to="/teHomework?userId=23836"
+                            style={{fontSize: '24px'}}>教师作业</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/schoolPush"
+                            style={{fontSize: '24px'}}>校园通知</Link>
+                    </li>
+                    <li>
+                        <Link
                             to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
                     </li>
@@ -185,6 +200,7 @@ ReactDOM.render(
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>
             <Route path="schoolPush" getComponent={schoolPush}/>
+            <Route path="teHomework" getComponent={teHomework}/>
             <Route path="rankingList" getComponent={rankingList}/>
             <Route path="detailPage" getComponent={detailPage}/>
         </Route>

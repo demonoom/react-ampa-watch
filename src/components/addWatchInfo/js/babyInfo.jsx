@@ -36,11 +36,12 @@ export default class babyInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "159",
+            macId: "",
             stuName: "",
             sexValue: "",
             extraClassName: "",
             RelationClassName: "",
+            birthClassName:"",
             showSexDiv: false,
             showRelationiDiv: false,
             relationValue: "",
@@ -126,18 +127,18 @@ export default class babyInfo extends React.Component {
     /**
      * 调用客户端
      */
-    scanCode = () => {
-        this.getWatch2gByMacAddress(159)
-        var data = {
-            method: 'watchBinding'
-        };
-        Bridge.callHandler(data, (mes) => {
-            this.setState({ macId: mes.toUpperCase() });
-            this.getWatch2gByMacAddress(mes)
-        }, function (error) {
-            console.log(error);
-        });
-    }
+    // scanCode = () => {
+    //     // this.getWatch2gByMacAddress(159)
+    //     var data = {
+    //         method: 'watchBinding'
+    //     };
+    //     Bridge.callHandler(data, (mes) => {
+    //         this.setState({ macId: mes.toUpperCase() });
+    //         this.getWatch2gByMacAddress(mes)
+    //     }, function (error) {
+    //         console.log(error);
+    //     });
+    // }
 
 
     //自定义关系
@@ -191,7 +192,7 @@ export default class babyInfo extends React.Component {
                 onResponse: (result) => {
                     console.log(result, "rerere")
                     if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "schoolInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&sex=" + this.state.sexValue[0];
+                        var url = WebServiceUtil.mobileServiceURL + "schoolInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr + "&sex=" + this.state.sexValue[0];
                         var data = {
                             method: 'openNewPage',
                             url: url
@@ -210,10 +211,10 @@ export default class babyInfo extends React.Component {
 
         } else {
             console.log(this.state.relationValue, "this.state.familyRelate")
-            if (this.state.macId == "") {
-                Toast.info("请扫描手表")
-                return
-            }
+            // if (this.state.macAddr == "") {
+            //     Toast.info("请扫描手表")
+            //     return
+            // }
             if (this.state.relationValue == "") {
                 Toast.info("请选择您与孩子的关系")
                 return
@@ -221,7 +222,7 @@ export default class babyInfo extends React.Component {
             //副监护人
             var param = {
                 "method": 'bindWatchGuardian',
-                "macAddress": this.state.macId,
+                "macAddress": this.state.macAddr,
                 "familyRelate": this.state.relationValue[0],
                 "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
@@ -311,13 +312,14 @@ export default class babyInfo extends React.Component {
         var str = formatDate(date)
         console.log(str, "date")
         this.setState({ date,
-            sendData:str
+            sendData:str,
+            birthClassName:"color_3"
         })
     }
     render () {
         return (
-            <div id="babyInfo" style={{ height: document.body.clientHeight }}>
-                <div className="p38">
+            <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
+                <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
@@ -341,7 +343,7 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div>
+                        <div className={'icon_birth line_public ' + this.state.birthClassName}>
                             <DatePicker
                                 mode="date"
                                 title=""
@@ -366,11 +368,9 @@ export default class babyInfo extends React.Component {
                             </Picker>
                         </div> */}
                     </div>
-
-
-                    <div className='submitBtn' onClick={this.nextPage}>
-                        下一步
                 </div>
+                <div className='submitBtn' onClick={this.nextPage}>
+                    下一步
                 </div>
             </div>
         );

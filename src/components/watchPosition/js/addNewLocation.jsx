@@ -1,7 +1,11 @@
 import React from "react";
-import {List, Button, Modal} from 'antd-mobile';
+import {Map, Circle} from "react-amap";
+import {List, Button, Modal, Toast, Slider} from 'antd-mobile';
+import PositionPicker from './positionPicker'
+import '../css/addNewLocation.less'
 
 const Item = List.Item;
+const Brief = Item.Brief;
 const prompt = Modal.prompt;
 
 export default class addNewLocation extends React.Component {
@@ -10,6 +14,17 @@ export default class addNewLocation extends React.Component {
         this.state = {
             posName: '未设置',
             pos: '未设置',
+            searchValue: '',
+            posList: [],
+            position: {longitude: '116.397477', latitude: '39.908692'},
+            zoom: 10,
+            map: null,
+            circle: null,
+            addressName: '',
+            addressLT: '',
+            style: {strokeWeight: '0px', fillColor: '#fff850', fillOpacity: '0.5'},
+            radius: 50,
+            sliderValue: 15,
         };
     }
 
@@ -51,14 +66,121 @@ export default class addNewLocation extends React.Component {
     };
 
     posClick = () => {
-        console.log('posClick');
+        $('.setPosModel').slideDown();
     };
 
     saveLocation = () => {
         console.log('saveLocation');
     };
 
+    searchChange = (e) => {
+        this.setState({searchValue: e.target.value});
+    };
+
+    /**
+     * 高德地图/输入提示
+     */
+    searchPos = () => {
+        var _this = this;
+        if (this.state.searchValue.trim() === '') {
+            Toast.info('请输入位置信息', 2);
+            return
+        }
+
+        $.ajax({
+            type: "GET",      //data 传送数据类型。post 传递
+            dataType: 'json',  // 返回数据的数据类型json
+            url: "https://restapi.amap.com/v3/assistant/inputtips?parameters",  // yii 控制器/方法
+            data: {
+                key: WebServiceUtil.amapjskey,
+                keywords: _this.state.searchValue
+            },  //传送的数据
+            error: function () {
+
+            }, success: function (data) {
+                if (data.status === '1') {
+                    _this.buildPosList(data.tips)
+                } else {
+                    Toast.fail('未知的错误', 2)
+                }
+            }
+        })
+    };
+
+    buildPosList = (data) => {
+        var _this = this;
+        var posList = [];
+        data.map((v) => {
+            posList.push(
+                <Item
+                    arrow="horizontal"
+                    multipleLine
+                    onClick={() => {
+                        _this.intoMap(v)
+                    }}
+                    platform="android"
+                >
+                    {v.name}<Brief>{v.district} <br/> {v.address}</Brief>
+                </Item>
+            )
+        });
+        this.setState({posList})
+    };
+
+    intoMap = (obj) => {
+        var _this = this;
+        $('.setPosModel').hide();
+        $('.posMap').show();
+        this.setState({sliderValue: 15});
+        setTimeout(() => {
+            _this.state.map.setZoom(17);
+            _this.state.map.setCenter(obj.location.split(','));
+            _this.state.circle.setCenter(obj.location.split(','));
+        }, 300);
+    };
+
+    posPicker = (obj) => {
+        this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+    };
+
+    setPosDone = () => {
+
+    };
+
+    setPosQuit = () => {
+        $('.setPosModel').show();
+        $('.posMap').hide();
+    };
+
+    sliderOnChange = () => {
+        return (value) => {
+            console.log(value);
+            this.setState({sliderValue: value})
+        };
+    };
+
     render() {
+
+        const plugins = [
+            {
+                name: 'ToolBar', //地图工具条插件，可以用来控制地图的缩放和平移
+                options: {
+                    locate: false,
+                },
+            }
+        ];
+
+        const events = {
+            created: (ins) => {
+                this.setState({map: ins})
+            }
+        };
+
+        const circleEvents = {
+            created: (ins) => {
+                this.setState({circle: ins})
+            },
+        };
 
         return (
             <div id="addNewLocation">
@@ -83,6 +205,61 @@ export default class addNewLocation extends React.Component {
                 </List>
 
                 <Button onClick={this.saveLocation} type="primary" size="small">保存</Button>
+
+                <div className='setPosModel' style={{display: 'none'}}>
+                    <div>
+                        <input onChange={this.searchChange} value={this.state.searchValue} type="text"
+                               placeholder="请输入位置信息"/>
+                        <div onClick={this.searchPos}>搜索</div>
+                    </div>
+
+                    <div>
+                        {this.state.posList}
+                    </div>
+                </div>
+
+                <div className='posMap' style={{display: 'none'}}>
+                    <Map
+                        plugins={plugins}
+                        events={events}
+                        zoom={this.state.zoom}
+                        center={this.state.position}
+                        useAMapUI={true}
+                        amapkey={WebServiceUtil.amapkey}
+                        version={WebServiceUtil.version}
+                        showBuildingBlock={true}
+                        buildingAnimation={true}
+                        viewMode='3D'
+                        rotateEnable={false}
+                        pitchEnable={false}
+                    >
+                        <PositionPicker
+                            posPicker={this.posPicker}
+                        />
+                        {/*<Circle
+                            center={this.state.position}
+                            radius={this.state.radius}
+                            events={circleEvents}
+                            style={this.state.style}
+                        />*/}
+                        <div className="posMessage">
+                            <h4>{this.state.addressName}</h4>
+                            <p>{this.state.addressLT}</p>
+                        </div>
+
+                        <div className='setArea'>
+                            <div onClick={this.setPosDone}>完成</div>
+                            <div onClick={this.setPosQuit}>取消</div>
+                            <Slider
+                                style={{marginLeft: 30, marginRight: 30}}
+                                value={this.state.sliderValue}
+                                min={10}
+                                max={50}
+                                onChange={this.sliderOnChange()}
+                            />
+                        </div>
+                    </Map>
+                </div>
             </div>
         )
     }

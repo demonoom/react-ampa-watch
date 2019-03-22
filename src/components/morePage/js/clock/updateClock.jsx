@@ -355,7 +355,7 @@ export default class updateClock extends React.Component {
     };
     render () {
         return (
-            <div id="addClock" className='public_list'>
+            <div id="addClock" className='public_list bg_gray'>
                 <div className='line_public'>
                     <Picker
                         data={alarmType}
