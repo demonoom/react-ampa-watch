@@ -97,7 +97,7 @@ export default class teHomework extends React.Component {
         });
     }
     /*获取单个topic*/
-    getTopicByIdRequest = (topid) => {
+    getTopicByIdRequest = (topid, index) => {
         var param = {
             "method": 'getTopicById',
             "topicId": topid
@@ -105,8 +105,12 @@ export default class teHomework extends React.Component {
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
+                console.log(result, "result")
                 if (result.success) {
-
+                    this.initData[index] = result.response;
+                    this.setState({
+                        dataSource: dataSource.cloneWithRows(this.initData),
+                    })
                 } else {
                     Toast.info(result);
                 }
@@ -119,7 +123,7 @@ export default class teHomework extends React.Component {
     }
 
     /*点赞*/
-    toClick = (topicId) => {
+    toClick = (topicId, index) => {
         var param = {
             "method": 'praiseForTopic',
             "topicId": topicId,
@@ -129,12 +133,7 @@ export default class teHomework extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    this.initData = [];
-                    this.requestData(this.state.userId);
-                    this.setState({
-                        dataSource: dataSource.cloneWithRows(this.initData),
-                    }, () => {
-                    })
+                    this.getTopicByIdRequest(topicId, index)
                 } else {
                     Toast.info(result);
                 }
@@ -147,7 +146,7 @@ export default class teHomework extends React.Component {
     }
 
     /*取消点赞*/
-    cancelPraiseForTopicById = (topicId) => {
+    cancelPraiseForTopicById = (topicId, index) => {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
@@ -158,11 +157,7 @@ export default class teHomework extends React.Component {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.success) {
-                    this.initData = [];
-                    this.requestData(this.state.userId);
-                    this.setState({
-                        dataSource: dataSource.cloneWithRows(this.initData),
-                    })
+                    this.getTopicByIdRequest(topicId, index)
                 } else {
                     Toast.info(result);
                 }
@@ -174,23 +169,24 @@ export default class teHomework extends React.Component {
         });
     }
     //删除页面
-    toShanchu = (v) => {
-        if (v.user == 41) {
-            this.showAlert(v.id)
+    toShanchu = (v, index) => {
+        if (v.user.colUid == 41) {
+            this.showAlert(v.id, v.topicId, index)
         } else {
             this.setState({
-                toUserId:v.user.colUid,
-                topicId:v.topicId,
+                toUserId: v.user.colUid,
+                topicId: v.topicId,
+                index
             }, () => {
                 $(".am-input-control input").focus();
-                this.toSendContent();
+                this.toSendContent(this.state.index);
             })
         }
     }
     /**
     * 删除弹出框
     */
-    showAlert = (comId) => {
+    showAlert = (comId, topicId, index) => {
         // event.stopPropagation();
         var phoneType = navigator.userAgent;
         var phone;
@@ -201,12 +197,14 @@ export default class teHomework extends React.Component {
         }
         const alertInstance = alert('您确定要删除该评论吗?', '', [
             { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => this.todelete(comId) },
+            { text: '确定', onPress: () => this.todelete(comId, topicId, index) },
         ], phone);
     };
 
     //todelete
-    todelete = (comId) => {
+    todelete = (comId, topicId, index) => {
+        console.log(topicId, "topicId")
+        console.log(index, "index")
         var param = {
             "method": 'deleteTopicComment',
             "topicCommentId": comId,
@@ -217,14 +215,7 @@ export default class teHomework extends React.Component {
             onResponse: (result) => {
                 if (result.success) {
                     Toast.info("删除成功", 1);
-                    this.initData = [];
-                    this.requestData(this.state.userId);
-                    this.setState({
-                        dataSource: dataSource.cloneWithRows(this.initData),
-                    }, () => {
-                    })
-
-
+                    this.getTopicByIdRequest(topicId, index)
                 } else {
                     Toast.info(result);
                 }
@@ -236,12 +227,13 @@ export default class teHomework extends React.Component {
         });
     }
     //评论
-    toPinglun = (data) => {
-        console.log(data,"data")
+    toPinglun = (data, index) => {
+        console.log(data, "data")
         $(".am-input-control input").focus();
         this.setState({
-            topicId:data.id,
-            toUserId:data.fromUserId
+            topicId: data.id,
+            toUserId: data.fromUserId,
+            index
         })
     }
 
@@ -253,7 +245,7 @@ export default class teHomework extends React.Component {
         });
     }
     //发送
-    toSendContent = () => {
+    toSendContent = (index) => {
         this.setState({
             sendValue: this.state.content
         }, () => {
@@ -269,12 +261,7 @@ export default class teHomework extends React.Component {
                 onResponse: (result) => {
                     console.log(result, "result")
                     if (result.success) {
-                        this.initData = [];
-                        this.requestData(this.state.userId);
-                        this.setState({
-                            dataSource: dataSource.cloneWithRows(this.initData),
-                        }, () => {
-                        })
+                        this.getTopicByIdRequest(this.state.topicId, this.state.index)
                     } else {
                         Toast.info(result);
                     }
@@ -312,43 +299,37 @@ export default class teHomework extends React.Component {
                     <span>{rowData.fromUser.userName}</span>
                     <div> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
                     <div>{rowData.content}</div>
-                    {
-                        isZan ?
-                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
-                            <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                    }
-
-                    <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
-                    {rowData.comments.length == 0 ?
-                        <div>
-                            <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                            <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
-                        </div>
-                        :
-                        <div>
-                            {
-                                zanArr.map((v, i) => {
-                                    return (
-                                        <div>
-                                            <span>{v.user.userName}点赞</span>
-                                        </div>
-                                    )
-                                })
-                            }
-                            {
-                                pingArr.map((v, i) => {
-                                    return (
-                                        <div className="ppp" onClick={this.toShanchu.bind(this, v)}>
-                                            <span>{v.user.userName}</span>
-                                            <span>回复</span>
-                                            <span>{v.toUser ? v.toUser.userName : ""}:</span>
-                                            <span>{v.content}</span>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    }
+                    <div>
+                        {
+                            isZan ?
+                                <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
+                                <span onClick={this.toClick.bind(this, rowData.id, rowID)}>未点赞</span>
+                        }
+                        <span onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
+                    </div>
+                    <div>
+                        {
+                            zanArr.map((v, i) => {
+                                return (
+                                    <div>
+                                        <span>{v.user.userName}点赞</span>
+                                    </div>
+                                )
+                            })
+                        }
+                        {
+                            pingArr.map((v, i) => {
+                                return (
+                                    <div className="ppp" onClick={this.toShanchu.bind(this, v, rowID)}>
+                                        <span>{v.user.userName}</span>
+                                        <span>回复</span>
+                                        <span>{v.toUser ? v.toUser.userName : ""}:</span>
+                                        <span>{v.content}</span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
 
                 </div>
             );
