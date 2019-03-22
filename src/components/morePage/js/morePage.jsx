@@ -132,10 +132,30 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage">
-                <p onClick={this.toFindWatch}>找手表</p>
-                <p onClick={this.pushWeather}>推送天气</p>
-                <p onClick={this.toPushClock}>推送闹钟</p>
-                <p onClick={this.pushContacts}>推送监护人</p>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">找手表</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">推送天气</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">推送闹钟</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">推送监护人</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
             </div>
         )
     }
