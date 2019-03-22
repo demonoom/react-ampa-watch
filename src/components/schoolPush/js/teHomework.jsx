@@ -1,6 +1,6 @@
 import React from "react";
 import { Toast, ListView, Tabs, Modal, InputItem } from "antd-mobile";
-
+import '../css/teHomework.less'
 const alert = Modal.alert;
 const dataSource = new ListView.DataSource({
     rowHasChanged: (row1, row2) => row1 !== row2,
@@ -307,41 +307,44 @@ export default class teHomework extends React.Component {
                 }
             })
             return (
-                <div>
+                <div className='line_public homeItem'>
                     <img src={rowData.fromUser.avatar} />
-                    <span>{rowData.fromUser.userName}</span>
-                    <div> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
-                    <div>{rowData.content}</div>
-                    {
-                        isZan ?
-                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
-                            <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                    }
+                    <span className='text_hidden userName'>{rowData.fromUser.userName}</span>
+                    <div className='time'> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
+                    <div className='content'>{rowData.content}</div>
+                     <div className='icon_praise'>
+                         {
+                             isZan ?
+                                 <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
+                                 <span className='like' onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
+                         }
 
-                    <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
+                         <span className='comment' onClick={this.toPinglun.bind(this, rowData)}>评论</span>
+                     </div>
                     {rowData.comments.length == 0 ?
-                        <div>
+                        <div className='icon_praise'>
                             <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
                             <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
                         </div>
                         :
-                        <div>
-                            {
-                                zanArr.map((v, i) => {
-                                    return (
-                                        <div>
-                                            <span>{v.user.userName}点赞</span>
-                                        </div>
-                                    )
-                                })
-                            }
+                        <div className='replyCont'>
+                            <div className='icon_emptyHeartB line_public'>
+                                {
+                                    zanArr.map((v, i) => {
+                                        return (
+                                            <span>{v.user.userName} </span>
+                                        )
+                                    })
+                                }
+                            </div>
+
                             {
                                 pingArr.map((v, i) => {
                                     return (
-                                        <div className="ppp" onClick={this.toShanchu.bind(this, v)}>
-                                            <span>{v.user.userName}</span>
+                                        <div className="msgItem" onClick={this.toShanchu.bind(this, v)}>
+                                            <span className='blueTxt'>{v.user.userName}</span>
                                             <span>回复</span>
-                                            <span>{v.toUser ? v.toUser.userName : ""}:</span>
+                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
                                             <span>{v.content}</span>
                                         </div>
                                     )
@@ -354,7 +357,7 @@ export default class teHomework extends React.Component {
             );
         };
         return (
-            <div>
+            <div id='teHomework' className='bg_gray'>
                 <div>
                     <InputItem
                         className="content"
