@@ -1,7 +1,7 @@
 var isDebug = true;
 var localDomain = "192.168.50.15";   //请求地址
 var isDebugLocal = true;
-var localUrl = "192.168.50.29";    //跳转地址本地地址
+var localUrl = "192.168.0.103";    //跳转地址本地地址
 var isSafeDebug = true;     //false则为隐藏主页列表，本地调试改为true
 
 
@@ -357,6 +357,7 @@ WebServiceUtil.SMALL_IMG = 'size=100x100';
 WebServiceUtil.MIDDLE_IMG = 'size=300x300';
 WebServiceUtil.LARGE_IMG = 'size=500x500';
 WebServiceUtil.amapkey = '2228dcee9965b2922c14f5cd72c3d0cc';
+WebServiceUtil.amapjskey = '367802e595ad90b9167f967508b6217c';
 WebServiceUtil.version = '1.4.13';
 //ar上传权限 AR教材的schoolId
 WebServiceUtil.AR_SCHOOL_ARRAY = [7];
