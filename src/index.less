@@ -2,7 +2,7 @@
 @import "~slick-carousel/slick/slick-theme.css";
 
 html, body {
-  background-color: white !important;
+  background-color: #EDEDED !important;
   height: 100%;
   font-size: 15px !important;
   position: relative;
@@ -179,6 +179,9 @@ ul, li {
     transform: scaleY(0.5);
   }
 }
+.am-list-item .am-list-line .am-list-content{
+  color: #333 !important;
+}
 /*下拉框下箭头*/
 .selectDown{
   .am-list-item{
@@ -200,7 +203,7 @@ ul, li {
     height: 13px;
   }
   .am-list-item .am-list-line .am-list-content{
-    color: #ccc;
+    color: #ccc!important;
     font-size: 15px;
   }
 }
@@ -243,4 +246,10 @@ ul, li {
 }
 .color_3  .am-list-item .am-list-line .am-list-extra,.am-list-item .am-list-line .am-list-extra.color_3{
   color: #333 !important;
+}
+
+@media screen and (max-width: 320px){
+  .submitBtn{
+    bottom: 45px;
+  }
 }

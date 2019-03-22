@@ -245,27 +245,37 @@ export default class addClock extends React.Component {
     render () {
         return (
             <div id="addClock">
-                <Picker
-                    data={alarmType}
-                    value={this.state.alarmValue}
-                    cols={1}
-                    className="forss"
-                    extra={this.state.flag ? "请选择" : this.state.alarmValue}
-                    onChange={this.onAlarmChange}
-                    onOk={this.alarmSure}
-                    onDismiss={this.onCancel}
-                >
-                    <List.Item arrow="horizontal">闹钟类型</List.Item>
-                </Picker>
-                <DatePicker
-                    mode="time"
-                    value={this.state.time}
-                    onChange={this.timeChange}
-                    onDismiss={this.onCancel}
-                >
-                    <List.Item arrow="horizontal">提醒时间</List.Item>
-                </DatePicker>
-                <div onClick={this.onRepeat}>重复 <span>{this.state.defaleSelect}</span></div>
+                <div className='line_public'>
+                    <Picker
+                        data={alarmType}
+                        value={this.state.alarmValue}
+                        cols={1}
+                        className="forss"
+                        extra={this.state.flag ? "请选择" : this.state.alarmValue}
+                        onChange={this.onAlarmChange}
+                        onOk={this.alarmSure}
+                        onDismiss={this.onCancel}
+                    >
+                        <List.Item arrow="horizontal">闹钟类型</List.Item>
+                    </Picker>
+                </div>
+                <div className="line_public">
+                    <DatePicker
+                        mode="time"
+                        value={this.state.time}
+                        onChange={this.timeChange}
+                        onDismiss={this.onCancel}
+                    >
+                        <List.Item arrow="horizontal">提醒时间</List.Item>
+                    </DatePicker>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.onRepeat}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">重复</div>
+                        <div className="am-list-extra">{this.state.defaleSelect}</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
                 <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
                     <List>
