@@ -2,7 +2,7 @@ import React from 'react';
 import {
     InputItem, Toast, Modal
 } from 'antd-mobile';
-
+import '../css/schoolInfo.less'
 const alert = Modal.alert;
 export default class schoolInfo extends React.Component {
     constructor(props) {
@@ -82,11 +82,20 @@ export default class schoolInfo extends React.Component {
 
     render () {
         return (
-            <div id="schoolInfo" style={{ height: this.state.clientHeight }}>
-                <div className="p38 bindStu login-input">
-                    <div className='applyAccount'><span onClick={this.toRegPage}>*手动完善校园信息</span></div>
-                    <div className='submitBtn' onClick={this.nextPage}>小蚂蚁账号同步校园信息</div>
+            <div id="schoolInfo">
+                <div className="my_flex mainCont">
+                    <div className='hasAccount'>
+                        <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>
+                        <div className="dec">我有小蚂蚁账号</div>
+                    </div>
+                    <div onClick={this.toRegPage} className='noAccount'>
+                        <img src={require('../../images/noAccount.png')} alt=""/>
+                        <div className="dec">没有小蚂蚁账号</div>
+                    </div>
                 </div>
+                <div className='bt_bg'>
+                </div>
+
 
             </div>
         );

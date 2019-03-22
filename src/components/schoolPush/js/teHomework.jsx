@@ -2,19 +2,21 @@ import React from "react";
 import { Toast, ListView, Tabs, Modal, InputItem } from "antd-mobile";
 
 const alert = Modal.alert;
+const dataSource = new ListView.DataSource({
+    rowHasChanged: (row1, row2) => row1 !== row2,
+});
 export default class teHomework extends React.Component {
     constructor(props) {
         super(props);
-        const dataSource = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+
         this.initData = [];
         this.state = {
             dataSource: dataSource.cloneWithRows(this.initData),
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
-            sendValue: ""
+            sendValue: "",
+            content: ""
         };
     }
 
@@ -171,13 +173,18 @@ export default class teHomework extends React.Component {
             }
         });
     }
-
-    toShanchu = (userId,comId)=>{
-        console.log(userId,"userId")
-        if(userId == 41){
-            this.showAlert(comId)
-        }else {
-            console.log('ppp')
+    //删除页面
+    toShanchu = (v) => {
+        if (v.user == 41) {
+            this.showAlert(v.id)
+        } else {
+            this.setState({
+                toUserId:v.user.colUid,
+                topicId:v.topicId,
+            }, () => {
+                $(".am-input-control input").focus();
+                this.toSendContent();
+            })
         }
     }
     /**
@@ -229,14 +236,13 @@ export default class teHomework extends React.Component {
         });
     }
     //评论
-    toPinglun = (topicId, toUserId, comId) => {
+    toPinglun = (data) => {
+        console.log(data,"data")
         $(".am-input-control input").focus();
         this.setState({
-            topicId,
-            toUserId
+            topicId:data.id,
+            toUserId:data.fromUserId
         })
-       
-
     }
 
     //输入内容的变化
@@ -258,11 +264,17 @@ export default class teHomework extends React.Component {
                 "toUserId": this.state.toUserId,
                 "ident": 41
             };
+            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
                     console.log(result, "result")
                     if (result.success) {
+                        this.initData = [];
                         this.requestData(this.state.userId);
+                        this.setState({
+                            dataSource: dataSource.cloneWithRows(this.initData),
+                        }, () => {
+                        })
                     } else {
                         Toast.info(result);
                     }
@@ -276,76 +288,66 @@ export default class teHomework extends React.Component {
     }
     render () {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData, "rowData")
             var arr = [];
+            var zanArr = [];
+            var pingArr = [];
+            var isZan = false;
             rowData.comments.forEach((v, i) => {
                 arr.push(v.type)
+                if (v.type == 1) {
+                    zanArr.push(v)
+                }
+                if (v.type == 0) {
+                    pingArr.push(v)
+                }
             })
-            console.log(arr, "arr333")
-
+            zanArr.forEach((v, i) => {
+                if (v.user.colUid == 41) {
+                    isZan = true;
+                }
+            })
             return (
                 <div>
                     <img src={rowData.fromUser.avatar} />
                     <span>{rowData.fromUser.userName}</span>
                     <div> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
                     <div>{rowData.content}</div>
+                    {
+                        isZan ?
+                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
+                            <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
+                    }
+
+                    <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
                     {rowData.comments.length == 0 ?
                         <div>
                             <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                            <span onClick={this.toPinglun.bind(this, rowData.id, rowData.fromUser.colUid, "")}>评论</span>
+                            <span onClick={this.toPinglun.bind(this, rowData)}>评论</span>
                         </div>
                         :
                         <div>
                             {
-                                arr.indexOf(1) > -1 ?
-                                    ""
-                                    :
-                                    <div>
-                                        <span onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                                        <span onClick={this.toPinglun.bind(this, rowData.id, rowData.fromUser.colUid, "")}>评论</span>
-                                    </div>
+                                zanArr.map((v, i) => {
+                                    return (
+                                        <div>
+                                            <span>{v.user.userName}点赞</span>
+                                        </div>
+                                    )
+                                })
                             }
                             {
-                                rowData.comments.map(
-                                    (v, i) => {
-                                        console.log(v, "opopop")
-                                        return (
-                                            <div>
-                                                {
-                                                    v.user.colUid == 41 && v.type == 1 ?
-                                                        <div>
-                                                            <span onClick={this.cancelPraiseForTopicById.bind(this, v.topicId)}>自己已点赞</span>
-                                                            <div onClick={this.toPinglun.bind(this, v.topicId, rowData.fromUser.colUid, v.id)}>评论</div>
-                                                        </div>
-                                                        :
-                                                        v.user.colUid != 41 && v.type == 1 ?
-                                                            <div>
-                                                                <span onClick={this.toClick.bind(this, rowData.id)}>自己未点赞</span>
-                                                                <div onClick={this.toPinglun.bind(this, v.topicId, rowData.fromUser.colUid, v.id)}>评论</div>
-                                                                <p>---------------别人点赞内容---------------------</p>
-                                                                <span>{v.user.userName}<span>已点赞</span></span>
-                                                            </div>
-                                                            :
-                                                            v.type == 0 ?
-                                                                <div className="ppp" onClick={this.toShanchu.bind(this,v.user.colUid,v.id)}>
-                                                                    <p>---------------评论内容---------------------</p>
-                                                                    <span>{v.user.userName}</span>
-                                                                    <span>回复</span>
-                                                                    <span>{v.toUser ? v.toUser.userName : ""}:</span>
-                                                                    <span>{v.content}</span>
-                                                                </div>
-                                                                :
-                                                                ""
-
-                                                }
-                                            </div>
-
-
-                                        )
-                                    })
+                                pingArr.map((v, i) => {
+                                    return (
+                                        <div className="ppp" onClick={this.toShanchu.bind(this, v)}>
+                                            <span>{v.user.userName}</span>
+                                            <span>回复</span>
+                                            <span>{v.toUser ? v.toUser.userName : ""}:</span>
+                                            <span>{v.content}</span>
+                                        </div>
+                                    )
+                                })
                             }
                         </div>
-
                     }
 
                 </div>
@@ -360,7 +362,7 @@ export default class teHomework extends React.Component {
                         onChange={this.contentChange}
                         placeholder="请输入评论内容"
                     ></InputItem>
-                    <span onClick={this.toSendContent}>发送</span>
+                    <div onClick={this.toSendContent}>发送</div>
                 </div>
                 <ListView
                     ref={el => this.lv = el}

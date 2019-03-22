@@ -112,7 +112,7 @@ export default class validationMes extends React.Component {
     render() {
         return (
             <div id="validationMes">
-                <div className="p38">
+                <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className="bindStudent">
                             <img src={require('../../images/bindTeacher.png')} alt=""/>

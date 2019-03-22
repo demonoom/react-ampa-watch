@@ -41,6 +41,7 @@ export default class babyInfo extends React.Component {
             sexValue: "",
             extraClassName: "",
             RelationClassName: "",
+            birthClassName:"",
             showSexDiv: false,
             showRelationiDiv: false,
             relationValue: "",
@@ -311,13 +312,14 @@ export default class babyInfo extends React.Component {
         var str = formatDate(date)
         console.log(str, "date")
         this.setState({ date,
-            sendData:str
+            sendData:str,
+            birthClassName:"color_3"
         })
     }
     render () {
         return (
-            <div id="babyInfo" style={{ height: document.body.clientHeight }}>
-                <div className="p38">
+            <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
+                <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
@@ -341,7 +343,7 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div>
+                        <div className={'icon_birth line_public ' + this.state.birthClassName}>
                             <DatePicker
                                 mode="date"
                                 title=""
@@ -366,11 +368,9 @@ export default class babyInfo extends React.Component {
                             </Picker>
                         </div> */}
                     </div>
-
-
-                    <div className='submitBtn' onClick={this.nextPage}>
-                        下一步
                 </div>
+                <div className='submitBtn' onClick={this.nextPage}>
+                    下一步
                 </div>
             </div>
         );
