@@ -92,7 +92,7 @@ export default class clockList extends React.Component {
     }
 
     //开关项点击
-    offChange = (index, isOpen,data) => {
+    offChange = (index, isOpen, data) => {
         console.log(isOpen, "isOpen")
         if (isOpen == 1) {
             this.state.clockList[index].valid = 0;
@@ -138,7 +138,7 @@ export default class clockList extends React.Component {
     }
     //跳转编辑页面
     toUpdate = (data) => {
-        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId="+this.state.watchId+"&id="+data.id;
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id;
         var data = {
             method: 'openNewPage',
             url: url
