@@ -274,7 +274,7 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                <div className="p38">
+                <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
@@ -320,10 +320,9 @@ export default class addWatchInfo extends React.Component {
                             ></InputItem>
                         </div>
                     </div>
-
-                    <div className='submitBtn' onClick={this.nextPage}>
-                        下一步
                 </div>
+                <div className='submitBtn' onClick={this.nextPage}>
+                    下一步
                 </div>
             </div>
         );

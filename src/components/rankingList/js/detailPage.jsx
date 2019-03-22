@@ -179,7 +179,7 @@ export default class detailPage extends React.Component {
                 axisPointer: {            // 坐标轴指示器，坐标轴触发有效
                     type: 'line',         // 默认为直线，可选为：'line' | 'shadow'
                     lineStyle: {          // 直线指示器样式设置
-                        // color: '#888',
+                        color: '#fff',
                         width: 1,
                         type: 'solid'
                     },
@@ -206,6 +206,14 @@ export default class detailPage extends React.Component {
                 {
                     type: 'category',
                     data: xClazzNameArray,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    },
                 }
             ],
             yAxis: [
@@ -214,7 +222,7 @@ export default class detailPage extends React.Component {
                     axisLine: {
                         show: true,
                         lineStyle: {
-                            // color: '#888',
+                            color: '#fff',
                             width: 1,
                             type: 'solid'
                         },
@@ -223,16 +231,6 @@ export default class detailPage extends React.Component {
 
                 }
             ],
-            // toolbox: {
-            //     left: 'right',
-            //     feature: {
-            //         dataZoom: {
-            //             yAxisIndex: 'none'
-            //         },
-            //         restore: {},
-            //         saveAsImage: {}
-            //     }
-            // },
             series: [
                 {
                     name: 'attention',
@@ -252,7 +250,11 @@ export default class detailPage extends React.Component {
                         //通常情况下：
                         normal: {
                             //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                            // color: '#FFC107'
+                            "color": [
+                                "rgba(73,198,255,0.67)",
+                                "rgba(107,230,193,0.84)",
+                                "rgba(98,108,145,0.77)"
+                            ],
                         }
                     },
                     label: {

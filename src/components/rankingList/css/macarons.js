@@ -21,7 +21,7 @@
     }
     echarts.registerTheme('macarons', {
         "version": 1,
-        "themeName": "walden",
+        "themeName": "macarons",
         "theme": {
             "seriesCnt": "3",
             "backgroundColor": "rgba(0,101,255,0.71)",

@@ -89,7 +89,7 @@ export default class schoolInfo extends React.Component {
                         <div className="dec">我有小蚂蚁账号</div>
                     </div>
                     <div  onClick={this.nextPage} className='noAccount'>
-                        <img src={require('../../images/hasAccount.png')} alt=""/>
+                        <img src={require('../../images/noAccount.png')} alt=""/>
                         <div className="dec">没有小蚂蚁账号</div>
                     </div>
                 </div>
