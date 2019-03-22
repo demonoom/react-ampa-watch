@@ -16,6 +16,9 @@ export default class addNewLocation extends React.Component {
             pos: '未设置',
             searchValue: '',
             posList: [],
+            position: {longitude: '116.397477', latitude: '39.908692'},
+            zoom: 10,
+            map: null
         };
     }
 
@@ -119,12 +122,35 @@ export default class addNewLocation extends React.Component {
     };
 
     intoMap = (obj) => {
-        console.log(obj);
+        var position = {
+            longitude: obj.location.split(',')[0],
+            latitude: obj.location.split(',')[1]
+        };
+        // this.state.map.setZoom(17);
+        this.setState({
+            zoom:17
+        });
+        // this.state.map.setCenter(obj.location);
         $('.setPosModel').hide();
         $('.posMap').show();
     };
 
     render() {
+
+        const plugins = [
+            {
+                name: 'ToolBar', //地图工具条插件，可以用来控制地图的缩放和平移
+                options: {
+                    locate: false
+                },
+            }
+        ];
+
+        const events = {
+            created: (ins) => {
+                this.setState({map: ins})
+            }
+        };
 
         return (
             <div id="addNewLocation">
@@ -164,8 +190,10 @@ export default class addNewLocation extends React.Component {
 
                 <div className='posMap' style={{display: 'none'}}>
                     <Map
-                        zoom={6}
-                        center={[120, 30]}
+                        plugins={plugins}
+                        events={events}
+                        zoom={this.state.zoom}
+                        center={this.state.position}
                         useAMapUI={true}
                         amapkey={WebServiceUtil.amapkey}
                         version={WebServiceUtil.version}

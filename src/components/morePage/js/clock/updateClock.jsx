@@ -52,6 +52,15 @@ const checkedData = [
     { value: 7, label: '星期日', extra: "周日" },
 ];
 
+
+function sortByKey (array, key) {
+    return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+    })
+}
+
 export default class updateClock extends React.Component {
     constructor(props) {
         super(props);
@@ -65,7 +74,8 @@ export default class updateClock extends React.Component {
             typeValue: ["震动"],
             notciceTime: 46762000,
             timeArr: ["周三", "周四", "周五"],
-            sendData: []
+            sendData: [],
+            allData:[]
         };
     }
     componentWillMount () {
@@ -181,17 +191,22 @@ export default class updateClock extends React.Component {
         });
     }
     //星期的选择
-    onSelectChange = (e, data) => {
+    onSelectChange = (e, data,index) => {
+        console.log(data,"data")
         if (e.target.checked) {
             var arr = [];
             var tempArr = [];
+            var allArr = [];
             arr.push(data.extra);
-            tempArr.push(data.value)
+            tempArr.push(data.value);
+            allArr.push(data)
             this.setState({
                 timeArr: this.state.timeArr.concat(arr),
-                sendData: this.state.sendData.concat(tempArr)
+                sendData: this.state.sendData.concat(tempArr),
+                allData:this.state.allData.concat(allArr),
             }, () => {
-                console.log(this.state.timeArr, "ppp")
+                console.log(this.state.allData, "ppp")
+                console.log(this.state.timeArr, "timeArr")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
@@ -201,7 +216,21 @@ export default class updateClock extends React.Component {
                 }
                 this.setState({
                     timeArr: this.state.timeArr,
-                    sendData: this.state.sendData
+                    sendData: this.state.sendData,
+                    allData:this.state.allData
+                },()=>{
+                console.log(this.state.timeArr, "timeArr")
+                console.log(this.state.allData, "ppp")
+                })
+            })
+
+            this.state.allData.forEach((v,i)=>{
+                console.log(v,"vvv")
+                if(data.value == v.value){
+                    this.state.allData.splice(i, 1);
+                }
+                this.setState({
+                    allData:this.state.allData
                 })
             })
         }
@@ -221,10 +250,20 @@ export default class updateClock extends React.Component {
     }
     //星期的确定选择
     sureSelect = () => {
-        this.setState({
-            defaleSelect: this.state.timeArr.length == 0 ? "永不 " : this.state.timeArr.join(" ")
+        var tempArr = [];
+        var timeTempArr = [];
+        checkedData.forEach((v,i)=>{
+            if(this.state.timeArr.indexOf(v.extra) != -1){
+                tempArr.push(v)
+            }
+        })
+        tempArr = sortByKey(tempArr, "value")
+        tempArr.forEach((v,i)=>{
+            timeTempArr.push(v.extra)
         })
         this.setState({
+            defaleSelect: timeTempArr.length == 0 ? "永不 " : timeTempArr.join(" "),
+            timeArr:timeTempArr,
             repeatDefault: true
         })
     }
@@ -239,7 +278,6 @@ export default class updateClock extends React.Component {
             "noticeType": this.state.typeValue[0],
             "actionName": "watchAction",
         };
-        return
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
@@ -272,7 +310,6 @@ export default class updateClock extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "re")
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1)
                     //关闭当前窗口，并刷新上一个页面
@@ -343,9 +380,9 @@ export default class updateClock extends React.Component {
                 <div style={{ display: this.state.repeatDefault ? "none" : "block" }}>
                     <div><span onClick={this.cancelSelect}>取消</span><span onClick={this.sureSelect}>确定</span></div>
                     <List>
-                        {checkedData.map(i => (
-                            <CheckboxItem key={i.value} checked={this.state.timeArr.indexOf(i.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, i)}>
-                                {i.label}
+                        {checkedData.map((v,i)=> (
+                            <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
+                                {v.label}
                             </CheckboxItem>
                         ))}
                     </List>

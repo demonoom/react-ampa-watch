@@ -11,8 +11,17 @@ var day = myDate.getDate();
 var time = year + '-' + month + '-' + day;
 var start = time + ' 00:00:00'
 var end = time + ' 23:59:59';
+
 var myWeekDate = new Date(); //获取七天前日期；
 myWeekDate.setDate(myDate.getDate() - 7);
+//获取当前年
+var weekYear = myWeekDate.getFullYear();
+//获取当前月
+var weekMonth = myWeekDate.getMonth() + 1;
+//获取当前日
+var weekDay = myWeekDate.getDate();
+var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
+var weekStart = timeWeek + ' 00:00:00';
 //数组去重
 function unique (array) {
     var temp = []; //一个新的临时数组
@@ -46,7 +55,11 @@ export default class detailPage extends React.Component {
             today
         })
         this.getUserById(userId)
-        this.getStudentAnswerDetail(userId);
+        if(today == 1){
+            this.getStudentAnswerDetail(userId,start);
+        }else {
+            this.getStudentAnswerDetail(userId,weekStart);
+        }
     }
 
     componentWillUnmount () {
@@ -86,12 +99,13 @@ export default class detailPage extends React.Component {
     /**
     * 获取表情数据折线图
     */
-    getStudentAnswerDetail (userId) {
+    getStudentAnswerDetail (userId,start) {
         var _this = this;
         var param = {
             "method": "getStudentAnswerDetail",
             "userId": userId,
             "startTime": start,
+            "endTime": end,
             "actionName": "watchAction",
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
