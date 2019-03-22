@@ -1,3 +1,58 @@
 #detailPage{
-
+  .chartCont{
+    padding: 15px;
+  }
+  .echarts_wrap{
+    background: -moz-linear-gradient(top, #00c6ff 0%, #4675eb 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#00c6ff), color-stop(100%,#4675eb));
+    background: -webkit-linear-gradient(top, #00c6ff 0%,#4675eb 100%);
+    background: -o-linear-gradient(top, #00c6ff 0%,#4675eb 100%);
+    background: -ms-linear-gradient(top, #00c6ff 0%,#4675eb 100%);
+    background: linear-gradient(to bottom, #00c6ff 0%,#4675eb 100%);
+    border-radius: 10px;
+    padding: 15px 10px 0;
+    box-sizing: border-box;
+  }
+  .myDetail{
+    padding: 24px 15px 24px 85px;
+    position: relative;
+    img{
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .textCont{
+      overflow: hidden;
+      height: 25px;
+      line-height: 25px;
+      .userName{
+        font-size: 17px;
+        width: calc(~"100% - 120px");
+      }
+      .time{
+        float: right;
+        color: #999;
+      }
+    }
+  }
+  .textDetail{
+    .item{
+      line-height: 60px;
+      height: 60px;
+      font-size: 17px;
+      span{
+        color: #3672ED;
+        float: right;
+      }
+    }
+  }
 }

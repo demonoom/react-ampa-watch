@@ -21,7 +21,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "22",
+            macId: "",
             stuName: "",
             sexValue: "",
             extraClassName: "",
@@ -107,7 +107,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress(22);
+        // this.getWatch2gByMacAddress(22222);
         var data = {
             method: 'watchBinding'
         };
@@ -274,7 +274,7 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                <div className="p38">
+                <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
@@ -320,10 +320,9 @@ export default class addWatchInfo extends React.Component {
                             ></InputItem>
                         </div>
                     </div>
-
-                    <div className='submitBtn' onClick={this.nextPage}>
-                        下一步
                 </div>
+                <div className='submitBtn' onClick={this.nextPage}>
+                    下一步
                 </div>
             </div>
         );

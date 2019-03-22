@@ -98,16 +98,18 @@ export default class bindStudentInfo extends React.Component {
     render() {
         return (
             <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
-                <div className="p38 bindStu login-input">
-                    <div className="picDiv">
-                        <img
-                            src={require('../../images/bindStuPic.png')} alt=""/>
-                    </div>
-                  
-                    <div className='applyAccount'><span onClick={this.toRegPage}>*申请新账号</span></div>
-                    <div className='submitBtn' onClick={this.nextPage}>下一步</div>
-                </div>
+                <div className="innerCont">
+                    <div className="p38 bindStu login-input">
+                        <div className="picDiv">
+                            <img
+                                src={require('../../images/bindStuPic.png')} alt=""/>
+                        </div>
 
+                        <div className='applyAccount'><span onClick={this.toRegPage}>*申请新账号</span></div>
+
+                    </div>
+                </div>
+                <div className='submitBtn' onClick={this.nextPage}>下一步</div>
             </div>
         );
     }
