@@ -19,8 +19,8 @@ const sexData = [{
 }]
 
 
-function formatDate(date){
-    var str = date+""
+function formatDate (date) {
+    var str = date + ""
     str = str.replace(/ GMT.+$/, '');// Or str = str.substring(0, 24)
     var d = new Date(str);
     var a = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
@@ -41,7 +41,7 @@ export default class babyInfo extends React.Component {
             sexValue: "",
             extraClassName: "",
             RelationClassName: "",
-            birthClassName:"",
+            birthClassName: "",
             showSexDiv: false,
             showRelationiDiv: false,
             relationValue: "",
@@ -80,10 +80,10 @@ export default class babyInfo extends React.Component {
         var relation = searchArray[2].split('=')[1];
         var phonenumber = searchArray[3].split('=')[1];
         var ident = searchArray[4].split('=')[1];
-        console.log(phonenumber,"phonenumber")
+        console.log(phonenumber, "phonenumber")
         // loginType==1  代表主账号
         this.setState({
-            loginType,macAddr,relation,phonenumber,ident
+            loginType, macAddr, relation, phonenumber, ident
         })
     }
 
@@ -170,11 +170,11 @@ export default class babyInfo extends React.Component {
             //     return
             // }
             if (this.state.sexValue == "") {
-                Toast.info("请选择孩子性别",1)
+                Toast.info("请选择孩子性别", 1)
                 return
             }
             if (this.state.sendData == undefined) {
-                Toast.info("请选择孩子生日",1)
+                Toast.info("请选择孩子生日", 1)
                 return
             }
             var param = {
@@ -311,26 +311,37 @@ export default class babyInfo extends React.Component {
     birChange = (date) => {
         var str = formatDate(date)
         console.log(str, "date")
-        this.setState({ date,
-            sendData:str,
-            birthClassName:"color_3"
+        this.setState({
+            date,
+            sendData: str,
+            birthClassName: "color_3"
         })
+    }
+
+    toBack = () => {
+        var data = {
+            method: 'popView',
+            selfBack: true,
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
     }
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
-                        {/* <div className='line_public'>
+                        {/* <div className='line_publicD'>
                             <div className="p10 scanDiv">
                                 <span className='text_hidden color_c' style={{ display: this.state.macId ? "none" : "inline-block" }}>请扫描手表二维码</span>
                                 <span className='text_hidden' style={{ display: this.state.macId ? "inline-block" : "none" }}>{this.state.macId}</span>
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div> */}
-                        <div className={'sex line_public ' + this.state.extraClassName}>
+                        <div className={'sex line_publicD ' + this.state.extraClassName}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
@@ -343,7 +354,7 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div className={'icon_birth line_public ' + this.state.birthClassName}>
+                        <div className={'icon_birth line_publicD ' + this.state.birthClassName}>
                             <DatePicker
                                 mode="date"
                                 title=""
@@ -354,7 +365,7 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal">请选择孩子生日</List.Item>
                             </DatePicker>
                         </div>
-                        {/* <div className={'relation line_public ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        {/* <div className={'relation line_publicD ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}

@@ -95,9 +95,18 @@ export default class bindStudentInfo extends React.Component {
         });
     }
 
+    toBack = () => {
+        var data = {
+            method: 'popView',
+            selfBack: true,
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render() {
         return (
             <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="innerCont">
                     <div className="p38 bindStu login-input">
                         <div className="picDiv">

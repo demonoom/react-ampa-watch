@@ -80,9 +80,19 @@ export default class schoolInfo extends React.Component {
         });
     }
 
+    toBack = () => {
+        var data = {
+            method: 'popView',
+            selfBack: true,
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
+
     render () {
         return (
             <div id="schoolInfo">
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
                         <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>
