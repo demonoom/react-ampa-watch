@@ -1,6 +1,7 @@
 #watchPosition {
   .am-navbar{
     height: 44px;
+    margin-top: 20px;
   }
   .am-navbar-light{
     background:linear-gradient(18deg,rgba(40,196,253,1) 0%,rgba(0,146,252,1) 100%);
@@ -79,7 +80,7 @@
 
   }
   .map-cont{
-    height: calc(~"100% - 44px");
+    height: calc(~"100% - 64px");
   }
   .user-positioning{
     background: url("../img/user-positioning.png") no-repeat;
@@ -94,5 +95,33 @@
       left: 10px;
       top: 10px;
     }
+  }
+  .amap-touch-toolbar .amap-zoomcontrol{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    bottom: 100px;
+    right: 6px;
+  }
+  .amap-zoom-touch-plus{
+    background: url("../img/icon-expand.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-zoom-touch-minus{
+    background: url("../img/icon-shrinkage.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-touch-toolbar .amap-zoomcontrol:after{
+    background: transparent;
   }
 }
