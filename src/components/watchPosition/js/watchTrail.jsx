@@ -23,6 +23,7 @@ export default class watchTrail extends React.Component {
             zoom: 10,
             map: null,
             path: [],
+            type: 0
         };
     }
 
@@ -71,7 +72,7 @@ export default class watchTrail extends React.Component {
                             })
                         } else {
                             Toast.info('未查询到记录');
-                            _this.setState({path:[]})
+                            _this.setState({path: []})
                         }
                     }
                 } else {
@@ -89,8 +90,16 @@ export default class watchTrail extends React.Component {
      */
     timeChoose = (type) => {
         return () => {
-            this.getWatch2gLocationRecordByWatch2gId(type)
+            this.getWatch2gLocationRecordByWatch2gId(type);
+            this.setState({type});
         };
+    };
+
+    popView = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, null);
     };
 
     render() {
@@ -121,6 +130,11 @@ export default class watchTrail extends React.Component {
 
         return (
             <div id="watchTrail" style={{height: '100%'}}>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">运动轨迹</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 <Map
                     amapkey={WebServiceUtil.amapkey}
                     version={WebServiceUtil.version}
@@ -139,11 +153,12 @@ export default class watchTrail extends React.Component {
                         events={lineEvents}
                     />
                     <div id='timeChoose' className='customLayer'>
-                        <span className="select" onClick={this.timeChoose('0')}>今天</span>
+                        <span className={this.state.type == 0 ? 'select' : ''}
+                              onClick={this.timeChoose('0')}>今天</span>
                         <span className="right-line"></span>
-                        <span onClick={this.timeChoose('1')}>昨天</span>
+                        <span className={this.state.type == 1 ? 'select' : ''} onClick={this.timeChoose('1')}>昨天</span>
                         <span className="right-line"></span>
-                        <span onClick={this.timeChoose('2')}>前天</span>
+                        <span className={this.state.type == 2 ? 'select' : ''} onClick={this.timeChoose('2')}>前天</span>
                     </div>
                 </Map>
             </div>

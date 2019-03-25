@@ -37,10 +37,6 @@ export default class addNewLocation extends React.Component {
         this.setState({userId, mac, macId});
     }
 
-    componentDidMount() {
-
-    }
-
     posNameClick = () => {
         var _this = this;
         var phoneType = navigator.userAgent;
@@ -111,13 +107,15 @@ export default class addNewLocation extends React.Component {
             posList.push(
                 <Item
                     arrow="horizontal"
+                    className="line_public"
                     multipleLine
                     onClick={() => {
                         _this.intoMap(v)
                     }}
                     platform="android"
                 >
-                    {v.name}<Brief>{v.district} <br/> {v.address}</Brief>
+                    <div className="name">{v.name}</div>
+                    <Brief>{v.district}{v.address}</Brief>
                 </Item>
             )
         });
@@ -210,6 +208,13 @@ export default class addNewLocation extends React.Component {
         Bridge.callHandler(data, null, null);
     };
 
+    setPosModelDown = () => {
+        var _this = this;
+        $('.setPosModel').slideUp(function () {
+            _this.setState({posList: [], searchValue: ''})
+        });
+    };
+
     render() {
 
         const plugins = [
@@ -266,13 +271,20 @@ export default class addNewLocation extends React.Component {
                     <div className="submitBtn" onClick={this.saveLocation}>保存</div>
 
                     <div className='setPosModel' style={{display: 'none'}}>
-                        <div>
-                            <input onChange={this.searchChange} value={this.state.searchValue} type="text"
-                                   placeholder="请输入位置信息"/>
-                            <div onClick={this.searchPos}>搜索</div>
+                        <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosModelDown}><i
+                                className="icon-back"></i></span>
+                            <span className="am-navbar-title">地点</span>
+                            <span className="am-navbar-right"></span>
                         </div>
-
-                        <div>
+                        <div className="setPosCont">
+                            <div className="search-item">
+                                <input onChange={this.searchChange} value={this.state.searchValue} type="text"
+                                       placeholder="请输入位置信息"/>
+                                <div className="icon-search" onClick={this.searchPos}></div>
+                            </div>
+                        </div>
+                        <div className="searchResults">
                             {this.state.posList}
                         </div>
                     </div>
@@ -302,19 +314,23 @@ export default class addNewLocation extends React.Component {
                                 style={this.state.style}
                             />
                             <div className="posMessage">
-                                <h4>{this.state.addressName}</h4>
+                                <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
                             </div>
 
                             <div className='setArea'>
-                                <div onClick={this.setPosDone}>完成</div>
-                                <div onClick={this.setPosQuit}>取消</div>
+                                <div className="submitBtn" onClick={this.setPosDone}>确定</div>
+                                <div className="SafeRange">安全范围<span>300m</span></div>
                                 <Slider
-                                    style={{marginLeft: 30, marginRight: 30}}
+                                    style={{marginLeft: 0, marginRight: 10}}
                                     value={this.state.sliderValue}
                                     min={10}
                                     max={50}
                                     onChange={this.sliderOnChange()}
                                 />
+                                <div className="distance">
+                                    <span>0m</span>
+                                    <span className="right">500m</span>
+                                </div>
                             </div>
                         </Map>
                     </div>

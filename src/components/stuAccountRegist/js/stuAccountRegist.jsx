@@ -221,16 +221,23 @@ export default class stuAccountRegist extends React.Component {
         var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName+ "&schName=" + this.state.schoolName+ "&clazzName=" + $('#stuClazz .am-list-extra').html());
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });
     };
-
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render() {
         return (
-            <div id="stuAccountRegist">
+            <div id="stuAccountRegist" onClick={this.toBack}>
                 <div className="icon_back"></div>
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">

@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    InputItem, Toast, Modal
+    Toast, Modal
 } from 'antd-mobile';
 
 const alert = Modal.alert;
@@ -13,7 +13,7 @@ export default class bindStudentInfo extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentWillMount () {
         document.title = '更多';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
@@ -26,18 +26,19 @@ export default class bindStudentInfo extends React.Component {
             macAddr,
             sex
         })
+        window.addEventListener('resize', this.onWindwoResize);
     }
 
-    componentDidMount() {
+    componentDidMount () {
         Bridge.setShareAble("false");
     }
 
-    componentWillUnmount() {
+    componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
     }
 
     //监听窗口改变时间
-    onWindwoResize() {
+    onWindwoResize = () => {
         // this
         setTimeout(() => {
             this.setState({
@@ -48,7 +49,6 @@ export default class bindStudentInfo extends React.Component {
 
     //输入小蚂蚁账号
     littAntOnChange = (value) => {
-        console.log(value, "p")
         this.setState({
             littleAntName: value,
 
@@ -64,10 +64,8 @@ export default class bindStudentInfo extends React.Component {
             "method": 'getUserByAccount',
             "account": this.state.littleAntName,
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.success && result.response) {
                     this.setState({
                         stuInfoData: result.response
@@ -88,22 +86,30 @@ export default class bindStudentInfo extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });
     }
-
-    render() {
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
+    render () {
         return (
-            <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
-                <div className="icon_back"></div>
+            <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="innerCont">
                     <div className="p38 bindStu login-input">
                         <div className="picDiv">
                             <img
-                                src={require('../../images/bindStuPic.png')} alt=""/>
+                                src={require('../../images/bindStuPic.png')} alt="" />
                         </div>
 
                         <div className='applyAccount'><span onClick={this.toRegPage}>*申请新账号</span></div>

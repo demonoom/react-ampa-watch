@@ -43,7 +43,6 @@ export default class schoolPush extends React.Component {
             "ident": userId,
             "pageNo": this.state.defaultPageNo
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -59,7 +58,6 @@ export default class schoolPush extends React.Component {
                     } else {
                         isLoading = false;
                     }
-                    console.log(arr, 'yyyy');
                     _this.initData = _this.initData.concat(arr);
                     _this.setState({
                         dataSource: _this.state.dataSource.cloneWithRows(_this.initData),
@@ -96,7 +94,7 @@ export default class schoolPush extends React.Component {
         return m + '-' + d + ' ' + h + ':' + minute + ':' + second;
     }
 
-
+    //加载更多
     loadMore = () => {
         var _this = this;
         var currentPageNo = this.state.defaultPageNo;
@@ -119,7 +117,6 @@ export default class schoolPush extends React.Component {
             "method": 'getTopicById',
             "topicId": topid
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -145,7 +142,6 @@ export default class schoolPush extends React.Component {
             "topicId": topicId,
             "ident": this.state.userId
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -168,10 +164,8 @@ export default class schoolPush extends React.Component {
             "topicId": topicId,
             "ident": this.state.userId
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index);
                 } else {
@@ -223,7 +217,6 @@ export default class schoolPush extends React.Component {
 
     render () {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData, "rowData");
             var time = this.formatUnixtimestamp(rowData.createTime);
             var zanArr = [];
             rowData.comments.forEach((v, i) => {

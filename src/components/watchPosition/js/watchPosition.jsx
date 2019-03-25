@@ -170,7 +170,7 @@ export default class watchPosition extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
-            // selfBack: true,
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {

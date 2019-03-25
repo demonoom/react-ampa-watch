@@ -131,7 +131,6 @@ export default class rankingList extends React.Component {
 
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "ioio")
                 if (result.msg == '调用成功' && result.success == true) {
                     result.response.forEach((v, i) => {
                         if (this.state.userId == v.col_uid) {
@@ -139,7 +138,6 @@ export default class rankingList extends React.Component {
                                 ownData: v,
                                 num: i
                             }, () => {
-                                console.log(this.state.ownData, "oopop")
                             })
                         }
                     })
@@ -207,7 +205,6 @@ export default class rankingList extends React.Component {
     }
     //本周
     toClickWeek = () => {
-        console.log("00000")
         $(".week").addClass("active")
         $(".today").removeClass("active")
         this.setState({
@@ -228,14 +225,13 @@ export default class rankingList extends React.Component {
         });
     }
 
-    //
+    //跳转绑定页面
     toJupmBind=()=>{
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         window.location.href = url;
     }
     render () {
         const row = (rowData, sectionID, rowID) => {
-            console.log(rowData, "rowData")
             return (
                 <div className='item'>
                     <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
