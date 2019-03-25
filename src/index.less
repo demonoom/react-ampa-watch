@@ -170,7 +170,7 @@ ul, li {
 img{
   max-width: 100%;
 }
-.am-list-body::before,.am-list-body::after{
+.am-list-body::before,.am-list-body::after, .am-picker-popup-header::after{
   display: none !important;
 }
 .am-list-line,.am-list-body{
@@ -374,12 +374,13 @@ img{
   right: 20px;
   bottom: 20px;
   border-radius: 50%;
-  background-color: #17ACF7;
+  background:#fff url("components/images/icon_addBtn.png") no-repeat left center;
+  background-size: cover;
   z-index: 50;
-  color: white;
   text-align: center;
   line-height: 45px;
   font-size: 30px;
+  overflow: hidden;
 }
 .innerCont{
   height: calc(~"100% - 89px");

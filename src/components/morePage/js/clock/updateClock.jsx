@@ -426,9 +426,12 @@ export default class updateClock extends React.Component {
                         <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
                         {this.state.checkedData.map((v,i)=> (
-                            <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
-                                {v.label}
-                            </CheckboxItem>
+                            <div className='line_public checkItem'>
+                                <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
+                                    {v.label}
+                                </CheckboxItem>
+                            </div>
+
                         ))}
                     </List>
                     {/* {
