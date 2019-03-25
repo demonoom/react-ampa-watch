@@ -58,6 +58,7 @@ export default class rankingList extends React.Component {
         this.setState({
             userId
         })
+        this.getWatch2gsByGuardianUserId(userId)
         this.getStudentAnswerRightCountTop(userId, start, end);
         //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
         window.addEventListener('resize', this.onWindowResize)
@@ -74,6 +75,32 @@ export default class rankingList extends React.Component {
         setTimeout(function () {
             this.setState({ clientHeight: document.body.clientHeight });
         }, 100)
+    }
+
+    //获取手表列表
+    getWatch2gsByGuardianUserId = (userId) => {
+        var param = {
+            "method": 'getWatch2gsByGuardianUserId',
+            "userId": userId,
+            "pageNo": -1,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success && result.response) {
+                    if (result.response.length == 0) {
+                        this.setState({
+                            toBind:true
+                        })
+                    }
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
 
     /**
@@ -165,6 +192,8 @@ export default class rankingList extends React.Component {
 
     //今日
     clickToday = () => {
+        $(".today").addClass("active")
+        $(".week").removeClass("active")
         this.setState({
             flag: 1
         })
@@ -172,6 +201,9 @@ export default class rankingList extends React.Component {
     }
     //本周
     toClickWeek = () => {
+        console.log("00000")
+        $(".week").addClass("active")
+        $(".today").removeClass("active")
         this.setState({
             flag: 0
         })
@@ -195,7 +227,7 @@ export default class rankingList extends React.Component {
             return (
                 <div className='item'>
                     <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
-                         <img  src={rowData.user.avatar} />
+                        <img src={rowData.user.avatar} />
                     </div>
                     <div className="line_public itemCont my_flex">
                         <div className='num' style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
@@ -208,15 +240,15 @@ export default class rankingList extends React.Component {
         return (
             <div id='rankingList' className='bg_gray'>
                 <Tabs tabs={tabs}
-                      initalPage={'t2'}
+                    initalPage={'t2'}
                 >
                     <div className='questionCont'>
-                        <div className="emptyCont">
+                        <div className="emptyCont" style={{ display: this.state.toBind ? "block" : "none" }}>
                             <div className="p38 my_flex">
                                 <div>
                                     <i></i>
                                     <span>
-                                        还没有任何信息<br/>
+                                        还没有任何信息<br />
                                         请先绑定手表二维码
                                     </span>
                                 </div>
@@ -224,14 +256,14 @@ export default class rankingList extends React.Component {
                             <div className='submitBtn'>马上绑定</div>
                         </div>
                         <div className='dateBtn'>
-                            <span className='active' onClick={this.clickToday}>今日</span>
-                            <span onClick={this.toClickWeek}>本周</span>
+                            <span className='today active' onClick={this.clickToday}>今日</span>
+                            <span className="week" onClick={this.toClickWeek}>本周</span>
                         </div>
                         <ListView
                             ref={el => this.lv = el}
                             dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                             renderFooter={() => (
-                                <div style={{ paddingTop:6,  textAlign: 'center' }}>
+                                <div style={{ paddingTop: 6, textAlign: 'center' }}>
                                     {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                                 </div>)}
                             renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
@@ -244,7 +276,7 @@ export default class rankingList extends React.Component {
                             initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
                             scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
                             style={{
-                                height: this.state.clientHeight - 82 -50,
+                                height: this.state.clientHeight - 82 - 50,
                             }}
                         />
                         <div className='myGrade' onClick={this.toDetail}>
@@ -255,10 +287,10 @@ export default class rankingList extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div style={{height:document.body.clientHeight}}>
+                    <div style={{ height: document.body.clientHeight }}>
                         2
                     </div>
-                    <div style={{height:document.body.clientHeight}}>
+                    <div style={{ height: document.body.clientHeight }}>
                         3
                     </div>
                 </Tabs>

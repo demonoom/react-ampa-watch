@@ -26,7 +26,6 @@ export default class morePage extends React.Component {
         var macAddr = locationSearch.split("&")[1].split('=')[1];
         var watchId = locationSearch.split("&")[2].split('=')[1];
         this.getWatchId(macAddr)
-        this.getWatch2gById(watchId)
         this.setState({
             macAddr,
             userId,
@@ -42,10 +41,46 @@ export default class morePage extends React.Component {
         };
         ms = new WatchWebsocketConnection();
         ms.connect(pro);
+        this.getWatch2gsByGuardianUserId(userId);
+
     }
     componentDidMount () {
         this.watchListener();
-
+    }
+    //获取手表列表
+    getWatch2gsByGuardianUserId = (userId) => {
+        var param = {
+            "method": 'getWatch2gsByGuardianUserId',
+            "userId": userId,
+            "pageNo": -1,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "123")
+                if (result.success) {
+                    if (result.response.length == 0) {
+                        this.setState({
+                            toBind: true,
+                        })
+                    } else {
+                        this.setState({
+                            watchData: result.response,
+                            imgSrc: result.response[0].student.avatar,
+                            watchName: result.response[0].watchName,
+                            watchId: result.response[0].id
+                        }, () => {
+                            this.getWatch2gById(this.state.watchId)
+                        })
+                    }
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
     //获取手表id
     getWatchId = (macAddress) => {
@@ -70,7 +105,7 @@ export default class morePage extends React.Component {
             }
         });
     }
-    //获取手表信息
+    //根据手表ID获取手表信息
     getWatch2gById = (watchId) => {
         var param = {
             "method": 'getWatch2gById',
@@ -79,7 +114,6 @@ export default class morePage extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.success && result.response) {
                     this.setState({
                         imgSrc: result.response.student.avatar,
@@ -164,7 +198,7 @@ export default class morePage extends React.Component {
         this.setState({
             visible: false,
             selected: opt.props.value,
-        },()=>{
+        }, () => {
             console.log(this.state.selected);
 
         });
@@ -176,41 +210,45 @@ export default class morePage extends React.Component {
     };
 
     render () {
+        console.log(this.state.toBind,"totoo")
         return (
             <div id="morePage">
-                <Popover mask
-                    overlayClassName="fortest"
-                    overlayStyle={{ color: 'currentColor' }}
-                    visible={this.state.visible}
-                    overlay={[
-                        (<Item key="4" value="scan" icon="" data-seed="logId">Scan</Item>),
-                        (<Item key="5" value="special" icon="" style={{ whiteSpace: 'nowrap' }}>My Qrcode</Item>),
-                        (<Item key="6" value="button ct" icon="">
-                            <span style={{ marginRight: 5 }}>Help</span>
-                        </Item>),
-                    ]}
-                    align={{
-                        overflow: { adjustY: 0, adjustX: 0 },
-                        offset: [-100, 0],
-                    }}
-                    onVisibleChange={this.handleVisibleChange}
-                    onSelect={this.onSelect}
-                >
-                    <div style={{
-                        height: '100%',
-                        padding: '0 15px',
-                        marginRight: '-15px',
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}
+                <div style={{ display: "none" }}>
+                    <Popover mask
+                        overlayClassName="fortest"
+                        overlayStyle={{ color: 'currentColor' }}
+                        visible={this.state.visible}
+                        overlay={[
+                            (<Item key="4" value="scan" icon="" data-seed="logId">Scan</Item>),
+                            (<Item key="5" value="special" icon="" style={{ whiteSpace: 'nowrap' }}>My Qrcode</Item>),
+                            (<Item key="6" value="button ct" icon="">
+                                <span style={{ marginRight: 5 }}>Help</span>
+                            </Item>),
+                        ]}
+                        align={{
+                            overflow: { adjustY: 0, adjustX: 0 },
+                            offset: [-100, 0],
+                        }}
+                        onVisibleChange={this.handleVisibleChange}
+                        onSelect={this.onSelect}
                     >
-                        <Icon type="ellipsis" />ppp
+                        <div style={{
+                            height: '100%',
+                            padding: '0 15px',
+                            marginRight: '-15px',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        >
+                            <Icon type="ellipsis" />ppp
                     </div>
-                </Popover>
+                    </Popover>
+                </div>
                 <div>
+                    <span>添加</span>
                     <img src={this.state.imgSrc} alt="" />
                     {
-                        this.state.watchName
+                        this.state.toBind ? "未绑定":this.state.watchName
                     }
                 </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
