@@ -2,9 +2,9 @@ import React from "react";
 import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
 import {
-   Toast,Modal
+    Toast, Modal, Popover, NavBar, Icon
 } from 'antd-mobile';
-
+const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
 window.ms = null;
@@ -13,7 +13,9 @@ export default class morePage extends React.Component {
         super(props);
         this.state = {
             imgSrc: "",
-            watchName:""
+            watchName: "",
+            visible: false,
+            selected: '',
         };
     }
 
@@ -21,14 +23,8 @@ export default class morePage extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
-        var macAddr = locationSearch.split("&")[1].split('=')[1];
-        var watchId = locationSearch.split("&")[2].split('=')[1];
-        this.getWatchId(macAddr)
-        this.getWatch2gById(watchId)
         this.setState({
-            macAddr,
             userId,
-            watchId: watchId
         })
         var pro = {
             "command": "guardianLogin",
@@ -40,10 +36,49 @@ export default class morePage extends React.Component {
         };
         ms = new WatchWebsocketConnection();
         ms.connect(pro);
+        this.getWatch2gsByGuardianUserId(userId);
+
     }
     componentDidMount () {
         this.watchListener();
-
+    }
+    //获取手表列表
+    getWatch2gsByGuardianUserId = (userId) => {
+        var param = {
+            "method": 'getWatch2gsByGuardianUserId',
+            "userId": userId,
+            "pageNo": -1,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "123")
+                if (result.success) {
+                    if (result.response.length == 0) {
+                        this.setState({
+                            toBind: true,
+                        })
+                    } else {
+                        this.setState({
+                            watchData: result.response,
+                            imgSrc: result.response[0].student.avatar,
+                            watchName: result.response[0].watchName,
+                            watchId: result.response[0].id,
+                            macAddr: result.response[0].macAddress
+                        }, () => {
+                            this.getWatch2gById(this.state.watchId)
+                            this.getWatchId(this.state.macAddr)
+                            this.WatchList(this.state.watchData)
+                        })
+                    }
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
     //获取手表id
     getWatchId = (macAddress) => {
@@ -68,7 +103,7 @@ export default class morePage extends React.Component {
             }
         });
     }
-    //获取手表信息
+    //根据手表ID获取手表信息
     getWatch2gById = (watchId) => {
         var param = {
             "method": 'getWatch2gById',
@@ -77,7 +112,6 @@ export default class morePage extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.success && result.response) {
                     this.setState({
                         imgSrc: result.response.student.avatar,
@@ -109,6 +143,10 @@ export default class morePage extends React.Component {
 
     //找手表
     toFindWatch = () => {
+        if (this.state.toBind) {
+            Toast.info("请先绑定手表", 1)
+            return
+        }
         var commandJson = {
             "command": "searchWatch2GAction", data: {
                 "macAddress": this.state.macAddr
@@ -120,6 +158,10 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
+        if (this.state.toBind) {
+            Toast.info("请先绑定手表", 1)
+            return
+        }
         var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
@@ -134,6 +176,10 @@ export default class morePage extends React.Component {
      * 推送监护人
      */
     pushContacts = () => {
+        if (this.state.toBind) {
+            Toast.info("请先绑定手表", 1)
+            return
+        }
         var commandJson = {
             "command": "watch2gPushContacts", data: {
                 "studentId": this.state.userId,
@@ -148,6 +194,10 @@ export default class morePage extends React.Component {
      * 推送天气
      */
     pushWeather = () => {
+        if (this.state.toBind) {
+            Toast.info("请先绑定手表", 1)
+            return
+        }
         var commandJson = {
             "command": "watch2gPushWeather",
             data: {
@@ -158,18 +208,136 @@ export default class morePage extends React.Component {
         ms.send(commandJson);
     };
 
+    //选择
+    onSelect = (opt) => {
+        console.log(opt.props, "ooo")
+        this.setState({
+            visible: false,
+            watchId: opt.props.macId,
+            watchName:opt.props.children
+        }, () => {
+            this.getWatch2gById(this.state.watchId)
+        });
+    };
+
+    //气泡
+    handleVisibleChange = (visible) => {
+        this.setState({
+            visible,
+        });
+    };
+
+    //接棒监护人
+    unbindGuardian = () => {
+        var param = {
+            "method": 'unbindGuardian',
+            "watch2gId": this.state.watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success && result.response) {
+                    Toast.info('解绑成功', 1);
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+    //解绑手表
+    deleteWatch2g = () => {
+        var param = {
+            "method": 'deleteWatch2g',
+            "watch2gId": this.state.watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success && result.response) {
+                    Toast.info('解绑成功', 1);
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+    //手表列表
+    WatchList = (data) => {
+        var watchListData = [];
+        data.forEach((v) => {
+            watchListData.push(
+                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+            );
+        });
+        this.setState({
+            watchListData
+        })
+
+    };
+
+    //退出登录
+    logout = () => {
+        var data = {
+            method: 'loginout',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
+
+    //toJupmBind
+    toJupmBind=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
+        window.location.href = url;
+    }
+
     render () {
         return (
-            <div id="morePage">
+            <div id="morePage" >
+                <div style={{ display: "none" }}>
+                    <Popover mask
+                        overlayClassName="fortest"
+                        placement="bottomLeft"
+                        overlayStyle={{ color: 'currentColor' }}
+                        visible={this.state.visible}
+                        overlay={this.state.watchListData}
+                        align={{
+                            overflow: { adjustY: 0, adjustX: 0 },
+                            offset: [10, 0],
+                        }}
+                        onVisibleChange={this.handleVisibleChange}
+                        onSelect={this.onSelect}
+                    >
+                        <div style={{
+                            height: '100%',
+                            padding: '0 15px',
+                            marginRight: '-15px',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        >
+                            <Icon type="down" />
+                            <span>{this.state.watchName}</span>
+                        </div>
+                    </Popover>
+                </div>
                 <div className='personMsg'>
-                  <div className="wrap">
-                      <img src={this.state.imgSrc} alt=""/>
-                      <span className='text_hidden'>
-                        {
-                            this.state.watchName
-                        }
-                    </span>
-                  </div>
+                    <div className="wrap">
+                        <span onClick={this.toJupmBind} style={{ display: this.state.toBind ? "block" : "none" }}>添加</span>
+                        <img src={this.state.imgSrc} alt="" />
+                        <span className='text_hidden'>
+                            {
+                                this.state.toBind ? "未绑定" : this.state.watchName
+                            }
+                        </span>
+                    </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
                     <div className="am-list-line">
@@ -195,6 +363,9 @@ export default class morePage extends React.Component {
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
+                <div onClick={this.unbindGuardian}>解绑监护人</div>
+                <div onClick={this.deleteWatch2g}>解绑手表</div>
+                <div onClick={this.logout}>退出登录</div>
             </div>
         )
     }
