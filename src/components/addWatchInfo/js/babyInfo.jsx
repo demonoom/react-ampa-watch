@@ -292,7 +292,7 @@ export default class babyInfo extends React.Component {
             birthClassName: "color_3"
         })
     }
-
+    //返回
     toBack = () => {
         var data = {
             method: 'popView',

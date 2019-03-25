@@ -5,29 +5,30 @@
     height: 100%;
     left: 0;
     bottom: 0;
-    background: white;
     z-index: 101;
   }
-
-  .posMap {
-    position: absolute;
+  .setPosCont{
     width: 100%;
-    height: 100%;
-    left: 0;
-    bottom: 0;
-    background: white;
-    z-index: 101;
-  }
-
-  .posMessage {
+    height: 90%;
+    background: #F8F8F8;
     position: absolute;
-    top: 10px;
-    left: 10px;
-    padding: 5px 10px;
-    border: 1px solid #d3d3d3;
-    background-color: #f9f9f9;
+    bottom: 0;
+    .search-item {
+      padding: 15px;
+      input {
+        height: 34px;
+        border-radius: 17px;
+        border: none;
+        padding: 0 35px 0 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      input::placeholder {
+        color: #ccc !important;
+        font-size: 15px !important;
+      }
+    }
   }
-
   .setArea {
     position: fixed;
     bottom: 0px;
@@ -112,8 +113,11 @@
   .submitBtn{
     bottom: 65px;
   }
-  .am-list-item .am-list-line .am-list-arrow{
-
+  .am-list-arrow{
+    background: url("../img/backarrow-right.png") no-repeat;
+    width: 12px;
+    height: 23px;
+    background-size: 100% 100%;
   }
   .am-list-item .am-list-line .am-list-brief{
     width: 50%;
@@ -125,6 +129,12 @@
   }
   .common-space.am-list-item{
     padding: 0 ;
+
+  }
+  .common-space {
+    .am-list-content{
+      height: 44px;
+    }
   }
   .space-name{
     width: calc(~"50% - 54px");
@@ -162,4 +172,47 @@
       transform: scaleY(0.5);
     }
   }
+  .icon-search{
+    background: url("../img/icon-search.png") no-repeat;
+    width: 22px;
+    height: 22px;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 21px;
+    right: 28px;
+  }
+  .searchResults{
+    .name{
+      font-size: 17px;
+    }
+    .am-list-item .am-list-line .am-list-brief{
+      text-align: left;
+      width: 100%;
+      color: #666;
+      line-height: 1;
+      padding-top: 8px;
+    }
+    .am-list-item .am-list-line-multiple{
+      padding: 5px 15px 5px 0;
+    }
+
+  }
+  /*安全范围*/
+  .posMap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    background: white;
+    z-index: 101;
+    .posMessage {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(255,255,255,0.9);
+    }
+  }
+
+
 }

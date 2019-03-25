@@ -80,7 +80,7 @@ export default class schoolInfo extends React.Component {
             window.location.href = url;
         });
     }
-
+    //返回
     toBack = () => {
         var data = {
             method: 'popView',

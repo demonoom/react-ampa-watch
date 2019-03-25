@@ -111,13 +111,15 @@ export default class addNewLocation extends React.Component {
             posList.push(
                 <Item
                     arrow="horizontal"
+                    className="line_public"
                     multipleLine
                     onClick={() => {
                         _this.intoMap(v)
                     }}
                     platform="android"
                 >
-                    {v.name}<Brief>{v.district} <br/> {v.address}</Brief>
+                    <div className="name">{v.name}</div>
+                    <Brief>{v.district}{v.address}</Brief>
                 </Item>
             )
         });
@@ -264,15 +266,15 @@ export default class addNewLocation extends React.Component {
                     </List>
 
                     <div className="submitBtn" onClick={this.saveLocation}>保存</div>
-
                     <div className='setPosModel' style={{display: 'none'}}>
-                        <div>
-                            <input onChange={this.searchChange} value={this.state.searchValue} type="text"
-                                   placeholder="请输入位置信息"/>
-                            <div onClick={this.searchPos}>搜索</div>
+                        <div className="setPosCont">
+                            <div className="search-item">
+                                <input onChange={this.searchChange} value={this.state.searchValue} type="text"
+                                       placeholder="请输入位置信息"/>
+                                <div className="icon-search" onClick={this.searchPos}></div>
+                            </div>
                         </div>
-
-                        <div>
+                        <div className="searchResults">
                             {this.state.posList}
                         </div>
                     </div>
@@ -302,7 +304,7 @@ export default class addNewLocation extends React.Component {
                                 style={this.state.style}
                             />
                             <div className="posMessage">
-                                <h4>{this.state.addressName}</h4>
+                                <div>{this.state.addressName}</div>
                             </div>
 
                             <div className='setArea'>

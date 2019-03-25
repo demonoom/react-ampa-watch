@@ -93,7 +93,7 @@ export default class bindStudentInfo extends React.Component {
             window.location.href = url;
         });
     }
-
+    //返回
     toBack = () => {
         var data = {
             method: 'popView',
