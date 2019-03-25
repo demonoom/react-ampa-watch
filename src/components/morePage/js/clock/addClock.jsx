@@ -320,9 +320,11 @@ export default class addClock extends React.Component {
                         <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
                         {this.state.checkedData.map((v, i) => (
-                            <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
-                                {v.label}
-                            </CheckboxItem>
+                            <div className='checkItem line_public'>
+                                <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
+                                    {v.label}
+                                </CheckboxItem>
+                            </div>
                         ))}
                     </List>
                     {/* {
