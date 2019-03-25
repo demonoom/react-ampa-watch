@@ -33,7 +33,6 @@ export default class teHomework extends React.Component {
         this.setState({
             userId
         })
-        // this.requestData(userId);
         this.getWatch2gsByGuardianUserId(userId);
 
     }
@@ -369,7 +368,7 @@ export default class teHomework extends React.Component {
                                             this.setState({
                                                 showSend: false
                                             })
-                                        }}>{v.user.userName} </span>
+                                        }}>{v.user.userName}{i ==zanArr.length -1 ? "":"," }</span>
                                     )
                                 })
                             }
