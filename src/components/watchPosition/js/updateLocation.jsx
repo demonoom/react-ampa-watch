@@ -227,6 +227,13 @@ export default class updateLocation extends React.Component {
         });
     };
 
+    popView = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, null);
+    };
+
     render() {
 
         const plugins = [
@@ -252,6 +259,11 @@ export default class updateLocation extends React.Component {
 
         return (
             <div id="updateLocation">
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">修改新地址</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 <List className="my-list">
                     <Item
                         arrow="horizontal"

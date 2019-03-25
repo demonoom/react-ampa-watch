@@ -37,10 +37,6 @@ export default class addNewLocation extends React.Component {
         this.setState({userId, mac, macId});
     }
 
-    componentDidMount() {
-
-    }
-
     posNameClick = () => {
         var _this = this;
         var phoneType = navigator.userAgent;
@@ -212,6 +208,13 @@ export default class addNewLocation extends React.Component {
         Bridge.callHandler(data, null, null);
     };
 
+    setPosModelDown = () => {
+        var _this = this;
+        $('.setPosModel').slideUp(function () {
+            _this.setState({posList:[]})
+        });
+    };
+
     render() {
 
         const plugins = [
@@ -266,7 +269,14 @@ export default class addNewLocation extends React.Component {
                     </List>
 
                     <div className="submitBtn" onClick={this.saveLocation}>保存</div>
+
                     <div className='setPosModel' style={{display: 'none'}}>
+                        <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosModelDown}><i
+                                className="icon-back"></i></span>
+                            <span className="am-navbar-title">地点</span>
+                            <span className="am-navbar-right"></span>
+                        </div>
                         <div className="setPosCont">
                             <div className="search-item">
                                 <input onChange={this.searchChange} value={this.state.searchValue} type="text"
