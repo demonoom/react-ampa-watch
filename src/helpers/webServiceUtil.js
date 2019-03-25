@@ -1,11 +1,7 @@
 var isDebug = true;
 var localDomain = "192.168.50.15";   //请求地址
 var isDebugLocal = true;
-<<<<<<< HEAD
 var localUrl = "192.168.50.29";    //跳转地址本地地址
-=======
-var localUrl = "192.168.50.39";    //跳转地址本地地址
->>>>>>> 527f74fa61c7755839f2944326cd0b58fe253c8a
 var isSafeDebug = true;     //false则为隐藏主页列表，本地调试改为true
 
 
