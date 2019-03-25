@@ -2,9 +2,9 @@ import React from "react";
 import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
 import {
-   Toast,Modal
+    Toast, Modal, Popover, NavBar, Icon
 } from 'antd-mobile';
-
+const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
 window.ms = null;
@@ -13,7 +13,9 @@ export default class morePage extends React.Component {
         super(props);
         this.state = {
             imgSrc: "",
-            watchName:""
+            watchName: "",
+            visible: false,
+            selected: '',
         };
     }
 
@@ -158,11 +160,55 @@ export default class morePage extends React.Component {
         ms.send(commandJson);
     };
 
+    onSelect = (opt) => {
+        this.setState({
+            visible: false,
+            selected: opt.props.value,
+        },()=>{
+            console.log(this.state.selected);
+
+        });
+    };
+    handleVisibleChange = (visible) => {
+        this.setState({
+            visible,
+        });
+    };
+
     render () {
         return (
             <div id="morePage">
+                <Popover mask
+                    overlayClassName="fortest"
+                    overlayStyle={{ color: 'currentColor' }}
+                    visible={this.state.visible}
+                    overlay={[
+                        (<Item key="4" value="scan" icon="" data-seed="logId">Scan</Item>),
+                        (<Item key="5" value="special" icon="" style={{ whiteSpace: 'nowrap' }}>My Qrcode</Item>),
+                        (<Item key="6" value="button ct" icon="">
+                            <span style={{ marginRight: 5 }}>Help</span>
+                        </Item>),
+                    ]}
+                    align={{
+                        overflow: { adjustY: 0, adjustX: 0 },
+                        offset: [-100, 0],
+                    }}
+                    onVisibleChange={this.handleVisibleChange}
+                    onSelect={this.onSelect}
+                >
+                    <div style={{
+                        height: '100%',
+                        padding: '0 15px',
+                        marginRight: '-15px',
+                        display: 'flex',
+                        alignItems: 'center',
+                    }}
+                    >
+                        <Icon type="ellipsis" />ppp
+                    </div>
+                </Popover>
                 <div>
-                    <img src={this.state.imgSrc} alt=""/>
+                    <img src={this.state.imgSrc} alt="" />
                     {
                         this.state.watchName
                     }

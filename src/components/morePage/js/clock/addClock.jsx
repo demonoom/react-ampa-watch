@@ -123,7 +123,6 @@ export default class addClock extends React.Component {
 
     //选择器改变事件
     onPickerChange = (val) => {
-        console.log(val, "val")
         this.setState({
             typeValue: val,
         });
@@ -131,7 +130,6 @@ export default class addClock extends React.Component {
 
     //时间改变
     timeChange = (time) => {
-        var tempTime = time + ""
         this.setState({
             time: time
         })
@@ -139,13 +137,12 @@ export default class addClock extends React.Component {
     //取消时间
     onCancel = () => {
         this.setState({
-            time: ""
+            time: myDate
         })
     }
 
     //闹钟类型改变
     onAlarmChange = (v) => {
-        console.log(v, "onAlarmChange")
         this.setState({
             alarmValue: v
         })
@@ -163,8 +160,14 @@ export default class addClock extends React.Component {
         this.setState({
             flag: false
         })
-        prompt('请输入关系', '', [
-            { text: '取消' },
+        prompt('请输入闹钟名称', '', [
+            {
+                text: '取消', onPress: () => {
+                    this.setState({
+                        alarmValue: ["起床"]
+                    })
+                }
+            },
             {
                 text: '确定', onPress: value => {
                     console.log(`输入的内容:${value}`);
@@ -259,7 +262,7 @@ export default class addClock extends React.Component {
                         "command": "watch2GClock",
                         data: {
                             "macAddress": this.state.macAddr,
-                            "clockStatus":1,
+                            "clockStatus": 1,
                             "watch2gClock": result.response,
                         }
                     };
@@ -294,7 +297,6 @@ export default class addClock extends React.Component {
                         extra={this.state.flag ? "请选择" : this.state.alarmValue}
                         onChange={this.onAlarmChange}
                         onOk={this.alarmSure}
-                        onDismiss={this.onCancel}
                     >
                         <List.Item arrow="horizontal">闹钟类型</List.Item>
                     </Picker>
