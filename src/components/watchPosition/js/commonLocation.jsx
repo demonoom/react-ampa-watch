@@ -69,7 +69,6 @@ export default class commonLocation extends React.Component {
         var _this = this;
         var posList = [];
         data.map((v) => {
-            console.log(v);
             posList.push(
                 <Item
                     arrow="horizontal"
@@ -86,8 +85,21 @@ export default class commonLocation extends React.Component {
         this.setState({posList});
     };
 
+    /**
+     * homeAddress: "陕西省西安市雁塔区大雁塔街道大雁塔大雁塔文化休闲景区"
+     homeName: "sdsd "
+     id: 5
+     * @param obj
+     */
     intoDetil = (obj) => {
-        console.log(obj);
+        var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     };
 
     render() {
