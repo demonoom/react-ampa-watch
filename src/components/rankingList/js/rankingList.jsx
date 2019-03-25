@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, WhiteSpace, ListView } from 'antd-mobile';
-
+import '../css/rankingList.less'
 const tabs = [
     { title: '答题排行榜' },
     { title: '运动排行榜' },
@@ -192,30 +192,34 @@ export default class rankingList extends React.Component {
         const row = (rowData, sectionID, rowID) => {
             console.log(rowData, "rowData")
             return (
-                <div>
-                    <img style={{ display: rowID < 3 ? "block" : "none" }} src={rowData.user.avatar} />
-                    <div>{Number(rowID) + 1}</div>
-                    <div>{rowData.user.userName}</div>
-                    <span>{rowData.count}</span>
+                <div className='item'>
+                    <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
+                         <img  src={rowData.user.avatar} />
+                    </div>
+                    <div className="line_public itemCont">
+                        <div style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
+                        <div className='userName text_hidden'>{rowData.user.userName}</div>
+                        <span className='color_9'>答对{rowData.count}道题</span>
+                    </div>
                 </div>
             );
         };
         return (
-            <div>
+            <div id='rankingList' className='bg_gray'>
                 <div>
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
                     >
-                        <div style={{ backgroundColor: '#fff' }}>
-                            <div>
-                                <span onClick={this.clickToday}>今日</span>
+                        <div className='questionCont'>
+                            <div className='dateBtn'>
+                                <span className='active' onClick={this.clickToday}>今日</span>
                                 <span onClick={this.toClickWeek}>本周</span>
                             </div>
                             <ListView
                                 ref={el => this.lv = el}
                                 dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                                 renderFooter={() => (
-                                    <div style={{ paddingTop: 5, paddingBottom: 40, textAlign: 'center' }}>
+                                    <div style={{ paddingTop:6,  textAlign: 'center' }}>
                                         {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                                     </div>)}
                                 renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
@@ -231,11 +235,12 @@ export default class rankingList extends React.Component {
                                     height: this.state.clientHeight,
                                 }}
                             />
-                            <div onClick={this.toDetail}>
-                                <img src={this.state.ownData.user ? this.state.ownData.user.avatar : ""} />
-                                <span>{Number(this.state.num) + 1}</span>
-                                <span>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
-                                <span>{this.state.ownData.count ? this.state.ownData.count : ""}</span>
+                            <div className='myGrade' onClick={this.toDetail}>
+                                <div className='inner'>
+                                    <span>第{Number(this.state.num) + 1}名</span>
+                                    <span className='userName'>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
+                                    <span className='questionNum'>答对{this.state.ownData.count ? this.state.ownData.count : ""}道题</span>
+                                </div>
                             </div>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
