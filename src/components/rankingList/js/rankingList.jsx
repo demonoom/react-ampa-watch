@@ -197,8 +197,8 @@ export default class rankingList extends React.Component {
                     <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
                          <img  src={rowData.user.avatar} />
                     </div>
-                    <div className="line_public itemCont">
-                        <div style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
+                    <div className="line_public itemCont my_flex">
+                        <div className='num' style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
                         <div className='userName text_hidden'>{rowData.user.userName}</div>
                         <span className='color_9 text_hidden'>答对{rowData.count}道题</span>
                     </div>
