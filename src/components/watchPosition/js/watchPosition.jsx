@@ -150,7 +150,7 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <div className="user-positioning"><img style={{width: '40px', height: '40px', borderRadius: '50%'}}
+        return <div className="user-positioning"><img style={{ borderRadius: '50%'}}
                                                       src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")}
                                                       alt=""/></div>
     }
