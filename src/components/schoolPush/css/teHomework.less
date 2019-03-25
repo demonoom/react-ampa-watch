@@ -49,7 +49,6 @@
       background-color: #F3F3F5;
       width: 100%;
       position: relative;
-      padding-bottom: 10px;
       &::before{
         content: '';
         border-right: 7px solid transparent;
@@ -64,9 +63,14 @@
         padding: 6px 10px 6px 35px;
         background: url("../../images/icon_blueLike.png") no-repeat 10px center;
         background-size: 15px;
+        min-height: 34px;
+        box-sizing: border-box;
       }
       .msgItem{
         padding: 6px 10px 0;
+        &:last-child{
+          padding-bottom: 10px;
+        }
         span{
           word-break: break-all;
         }

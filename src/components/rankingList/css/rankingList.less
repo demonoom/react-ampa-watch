@@ -30,6 +30,8 @@
   .questionCont{
     position: relative;
     padding-top: 42px;
+    height: 100%;
+    box-sizing: border-box;
     .dateBtn{
       position: absolute;
       right: 15px;
@@ -180,21 +182,27 @@
       left: 0;
       bottom: 0;
       .inner{
-        padding-top: 15px;
+        margin-top: 15px;
         height: 50px;
-        line-height: 50px;
         color: white;
         padding-left: 30px;
         padding-right: 15px;
         overflow: hidden;
+        align-items: center;
+        justify-content: space-between;
+        .num{
+          width: 65px;
+        }
         .userName{
-          padding-left: 20px;
+          width: calc(~"100% - 195px");
         }
         .questionNum{
-          float: right;
+          width: 130px;
           padding-right: 23px;
           background: url("../../images/icon_rightArrow.jpg") no-repeat right center;
           background-size: 8px;
+          box-sizing: border-box;
+          text-align: right;
         }
       }
     }

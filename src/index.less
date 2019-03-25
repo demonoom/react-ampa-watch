@@ -183,19 +183,32 @@ img{
   top: 0;
   width: 100%;
   height: 100%;
-  text-align: center;
+  z-index: 50;
+  display: none;
+    div{
+      text-align: center;
+    }
     i{
       display: block;
-      background: url("components/images/icon_empty.png") no-repeat;
+      background: url("components/images/icon_empty.png") no-repeat center center;
       width: 187px;
       height: 161px;
       background-size: cover;
+      margin: 0 auto;
     }
     span{
       line-height: 30px;
       color: #9999;
       font-size: 16px;
+      padding-top: 20px;
+      display: block;
     }
+  .my_flex{
+    flex-direction: column;
+    height: calc(~"100% - 115px");
+    justify-content: center;
+
+  }
 }
 /*底部弹窗公用*/
 .mask{
@@ -224,6 +237,23 @@ img{
     position: absolute;
     left: 0;
     bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #DDDDDD;
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    -o-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
+.line_publicBefore{
+  position: relative;
+  &::before{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
     height: 1px;
     width: 100%;
     background-color: #DDDDDD;
