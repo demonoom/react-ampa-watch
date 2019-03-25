@@ -287,10 +287,10 @@ export default class rankingList extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div style={{ height: document.body.clientHeight }}>
+                    <div style={{height:document.body.clientHeight - 40}}>
                         2
                     </div>
-                    <div style={{ height: document.body.clientHeight }}>
+                    <div style={{height:document.body.clientHeight - 40}}>
                         3
                     </div>
                 </Tabs>
