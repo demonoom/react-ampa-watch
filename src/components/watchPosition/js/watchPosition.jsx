@@ -30,6 +30,7 @@ export default class watchPosition extends React.Component {
             map: null,
             visible: false,
             selected: '',
+            watchName: '',
             popoverLay: [],
         };
     }
@@ -99,7 +100,7 @@ export default class watchPosition extends React.Component {
                 (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
-        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id}, () => {
+        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
             this.watch2GLocaltionRequest()
         });
         // setTimeout(() => {
@@ -192,6 +193,7 @@ export default class watchPosition extends React.Component {
 
     onSelect = (opt) => {
         this.setState({
+            watchName: opt.props.children,
             visible: false,
             // selected: opt.props.value,
             mac: opt.props.mac,
@@ -249,7 +251,7 @@ export default class watchPosition extends React.Component {
                                 alignItems: 'center',
                             }}
                             >
-                                <i className="icon-back"></i>张倩
+                                <i className="icon-back"></i>{this.state.watchName}
                             </div>
                         </Popover>
                     }
