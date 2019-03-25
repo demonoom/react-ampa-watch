@@ -72,13 +72,19 @@ export default class commonLocation extends React.Component {
             posList.push(
                 <Item
                     arrow="horizontal"
+                    className="common-space line_public15"
                     multipleLine
                     onClick={() => {
                         _this.intoDetil(v)
                     }}
                     platform="android"
                 >
-                    {v.homeName}<Brief>{v.homeAddress}</Brief>
+                    <span className="spaceAvatar">
+                        <img style={{borderRadius: '50%'}}
+                             src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
+                    </span>
+                    <span className="space-name text_hidden">{v.homeName}</span>
+                    <Brief>{v.homeAddress}</Brief>
                 </Item>
             )
         });

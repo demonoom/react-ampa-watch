@@ -149,8 +149,8 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <img style={{width: '40px', height: '40px', borderRadius: '50%'}}
-                    src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
+        return <div className="user-positioning"><img style={{width: '40px', height: '40px', borderRadius: '50%'}}
+                         src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/></div>
     }
 
     /**
@@ -256,35 +256,37 @@ export default class watchPosition extends React.Component {
                 >
                     定位
                 </NavBar>
-                <Map
-                    amapkey={WebServiceUtil.amapkey}
-                    version={WebServiceUtil.version}
-                    loading={Loading}
-                    plugins={plugins}
-                    center={this.state.position}
-                    zoom={this.state.zoom}
-                    showBuildingBlock={true}
-                    buildingAnimation={true}
-                    viewMode='3D'
-                    events={events}
-                    rotateEnable={false}
-                    className='map'
-                >
-                    <Marker
-                        position={this.state.position}
-                        render={this.renderMarker}
-                    />
-                    <div onClick={this.getPosition} id="getPosition" className="customLayer">
-                        <i className="icon-positioning"></i>
-                    </div>
-                    <div className="orbital-position">
-                        <div onClick={this.getTrail} id="getTrail" className="customLayer line_public">
+                <div className="map-cont">
+                    <Map
+                        amapkey={WebServiceUtil.amapkey}
+                        version={WebServiceUtil.version}
+                        loading={Loading}
+                        plugins={plugins}
+                        center={this.state.position}
+                        zoom={this.state.zoom}
+                        showBuildingBlock={true}
+                        buildingAnimation={true}
+                        viewMode='3D'
+                        events={events}
+                        rotateEnable={false}
+                    >
+                        <Marker
+                            position={this.state.position}
+                            render={this.renderMarker}
+                        />
+                        <div onClick={this.getPosition} id="getPosition" className="customLayer">
+                            <i className="icon-positioning"></i>
                         </div>
-                        <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                        <div className="orbital-position">
+                            <div onClick={this.getTrail} id="getTrail" className="customLayer line_public">
+                            </div>
+                            <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                            </div>
                         </div>
-                    </div>
 
-                </Map>
+                    </Map>
+                </div>
+
             </div>
         )
     }
