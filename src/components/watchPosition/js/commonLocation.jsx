@@ -1,6 +1,7 @@
 import React from "react";
 import {Toast, List} from "antd-mobile";
 import '../css/addNewLocation.less'
+
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -29,6 +30,7 @@ export default class commonLocation extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
@@ -101,6 +103,7 @@ export default class commonLocation extends React.Component {
         var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
@@ -108,12 +111,19 @@ export default class commonLocation extends React.Component {
         });
     };
 
+    popView = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, null);
+    };
+
     render() {
 
         return (
             <div id="addNewLocation">
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">常用地点</span>
                     <span className="am-navbar-right" onClick={this.addNewPos}>添加</span>
                 </div>

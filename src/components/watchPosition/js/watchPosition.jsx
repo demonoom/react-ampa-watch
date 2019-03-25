@@ -151,7 +151,8 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className="user-positioning"><img style={{width: '40px', height: '40px', borderRadius: '50%'}}
-                         src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/></div>
+                                                      src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")}
+                                                      alt=""/></div>
     }
 
     /**
@@ -169,6 +170,7 @@ export default class watchPosition extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
+            // selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
@@ -184,6 +186,7 @@ export default class watchPosition extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {

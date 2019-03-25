@@ -426,9 +426,12 @@ export default class updateClock extends React.Component {
                         <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
                         {this.state.checkedData.map((v,i)=> (
-                            <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
-                                {v.label}
-                            </CheckboxItem>
+                            <div className='line_public checkItem'>
+                                <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
+                                    {v.label}
+                                </CheckboxItem>
+                            </div>
+
                         ))}
                     </List>
                     {/* {
@@ -457,8 +460,8 @@ export default class updateClock extends React.Component {
                 >Off</List.Item> */}
                 <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
                 <div className='btns my_flex'>
-                    <div className='leftBtn' onClick={this.toSave}>保存</div>
-                    <div  className='rightBtn' onClick={this.showAlert}>删除</div>
+                    <div  className='leftBtn' onClick={this.showAlert}>删除</div>
+                    <div className='rightBtn' onClick={this.toSave}>保存</div>
                 </div>
             </div>
         )

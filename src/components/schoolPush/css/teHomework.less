@@ -18,7 +18,7 @@
       color: #999;
     }
     .content{
-      font-size: 14px;
+      font-size: 15px;
       line-height: 1.5;
       padding-top: 10px;
     }
@@ -47,23 +47,23 @@
     .replyCont{
       padding-top: 10px;
       width: 100%;
-      font-size: 13px;
+      font-size: 14px;
+      position: relative;
+      .icon_arrowUp{
+        border-right: 7px solid transparent;
+        border-left: 7px solid transparent;
+        border-bottom: 6px solid #F3F3F5;
+        position: absolute;
+        left: 10px;
+        top: 5px;
+      }
       .icon_emptyHeartB{
         color: #0181D2;
         padding: 6px 10px 6px 35px;
-        background:#F3F3F5 url("../../images/icon_blueLike.png") no-repeat 10px center;
+        background:#F3F3F5 url("../../images/icon_blueLike.png") no-repeat 10px 8px;
         background-size: 15px;
         box-sizing: border-box;
-        position: relative;
-        &::before{
-          content: '';
-          border-right: 7px solid transparent;
-          border-left: 7px solid transparent;
-          border-bottom: 6px solid #F3F3F5;
-          position: absolute;
-          left: 10px;
-          top: -5px;
-        }
+        line-height: 1.2;
       }
       .msgItem{
         background-color: #F3F3F5;

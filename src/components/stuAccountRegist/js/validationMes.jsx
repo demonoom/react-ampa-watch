@@ -114,6 +114,7 @@ export default class validationMes extends React.Component {
     render() {
         return (
             <div id="validationMes">
+                <div className="icon_back"></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className="bindStudent">
@@ -123,7 +124,7 @@ export default class validationMes extends React.Component {
                             <span className="school text_hidden">{this.state.schName}</span>
                             <span className="class text_hidden">{this.state.clazzName}</span>
                         </div>
-                        <div className="line_public login-input icon-grayTeacher">
+                        <div className="line_publicD login-input icon-grayTeacher">
                             <InputItem
                                 className=""
                                 placeholder="请输入班级教师姓名"
@@ -131,7 +132,7 @@ export default class validationMes extends React.Component {
                                 onChange={this.teNameOnChange}
                             ></InputItem>
                         </div>
-                        <div className="line_public login-input icon-grayPhone">
+                        <div className="line_publicD login-input icon-grayPhone">
                             <InputItem
                                 className=""
                                 placeholder="请输入该教师电话号码"

@@ -232,6 +232,7 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'unbindGuardian',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -239,7 +240,7 @@ export default class morePage extends React.Component {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
                 } else {
-                    // Toast.info('');
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 }
             },
             onError: function (error) {
@@ -253,12 +254,14 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'deleteWatch2g',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
                     // Toast.info('');
                 }
@@ -300,7 +303,7 @@ export default class morePage extends React.Component {
 
     render () {
         return (
-            <div id="morePage" >
+            <div id="morePage" className='bg_gray'>
                 <div style={{ display: "none" }}>
                     <Popover mask
                         overlayClassName="fortest"
@@ -329,8 +332,8 @@ export default class morePage extends React.Component {
                     </Popover>
                 </div>
                 <div className='personMsg'>
+                    <span className='icon_add' onClick={this.toJupmBind} style={{ display: this.state.toBind ? "block" : "none" }}>添加手表</span>
                     <div className="wrap">
-                        <span onClick={this.toJupmBind} style={{ display: this.state.toBind ? "block" : "none" }}>添加</span>
                         <img src={this.state.imgSrc} alt="" />
                         <span className='text_hidden'>
                             {
@@ -339,33 +342,38 @@ export default class morePage extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">找手表</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                    </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">推送天气</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                    </div>
-                </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送闹钟</div>
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">找手表</div>
+                    </div>
+                </div>
+                <div className="grayBorder"></div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">推送天气</div>
+                    </div>
+                </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送监护人</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
-                <div onClick={this.unbindGuardian}>解绑监护人</div>
-                <div onClick={this.deleteWatch2g}>解绑手表</div>
-                <div onClick={this.logout}>退出登录</div>
+                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">解绑监护人</div>
+                    </div>
+                </div>
+                <div className='am-list-item am-list-item-middle line_public' onClick={this.logout}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">退出登录</div>
+                    </div>
+                </div>
             </div>
         )
     }

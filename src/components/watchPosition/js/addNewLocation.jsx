@@ -205,6 +205,13 @@ export default class addNewLocation extends React.Component {
         });
     };
 
+    popView = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, null);
+    };
+
     render() {
 
         const plugins = [
@@ -230,6 +237,11 @@ export default class addNewLocation extends React.Component {
 
         return (
             <div id="addNewLocation">
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">添加新地址</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
                     <List className="my-list">

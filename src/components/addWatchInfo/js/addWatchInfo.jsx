@@ -270,18 +270,19 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
+                <div className="icon_back"></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className='picDiv'><img
                             src={require('../../images/bindPic.png')} alt="" /></div>
-                        <div className='line_public'>
+                        <div className='line_publicD'>
                             <div className="p10 scanDiv">
                                 <span className='text_hidden color_c' style={{ display: this.state.macId ? "none" : "inline-block" }}>请扫描手表二维码</span>
                                 <span className='text_hidden' style={{ display: this.state.macId ? "inline-block" : "none" }}>{this.state.macId}</span>
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div>
-                        {/* <div className={'sex line_public '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        {/* <div className={'sex line_publicD '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <Picker
                                 data={sexData}
                                 value={this.state.sexValue}
@@ -294,7 +295,7 @@ export default class addWatchInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div> */}
-                        <div className={'selectDown relation line_public ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
+                        <div className={'selectDown relation line_publicD ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
                                 value={this.state.relationValue}
@@ -307,7 +308,7 @@ export default class addWatchInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div className='login-input line_public icon_watch' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        <div className='login-input line_publicD icon_watch' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <InputItem
                                 value={this.state.phonenumber}
                                 onChange={this.phoneNumber}

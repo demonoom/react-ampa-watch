@@ -146,12 +146,13 @@ export default class verifyStuInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="icon_back"></div>
                 <div className="p38 innerCont bindStu login-input">
                     <div className="picDiv">
                         <img
                             src={require('../../images/stuAccountPic.png')} alt=""/>
                     </div>
-                    <div className="icon_watch line_public stuCont">
+                    <div className="icon_watch line_publicD stuCont">
                         <InputItem
                             className=""
                             placeholder="请输入小蚂蚁账号"
@@ -159,7 +160,7 @@ export default class verifyStuInfo extends React.Component {
                             onChange={this.littAntOnChange}
                         ></InputItem>
                     </div>
-                    <div className="icon_user line_public">
+                    <div className="icon_user line_publicD">
                         <InputItem
                             className=""
                             placeholder="请输入孩子姓名验证账号信息"
@@ -167,7 +168,7 @@ export default class verifyStuInfo extends React.Component {
                             onChange={this.stuOnChange}
                         ></InputItem>
                     </div>
-                   <div className="icon_school line_public">
+                   <div className="icon_school line_publicD">
                        <InputItem
                            className=""
                            placeholder="输入此账号所在的学校名称"

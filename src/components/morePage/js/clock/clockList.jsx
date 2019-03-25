@@ -171,7 +171,7 @@ export default class clockList extends React.Component {
                     }
                 </div>
 
-                <div className='addBtn' onClick={this.toAddClockList}>+</div>
+                <div className='addBtn' onClick={this.toAddClockList}></div>
             </div>
         )
     }
