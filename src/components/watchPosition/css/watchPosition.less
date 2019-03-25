@@ -1,36 +1,71 @@
 #watchPosition {
+  .am-navbar{
+    height: 44px;
+  }
+  .am-navbar-light{
+    background:linear-gradient(18deg,rgba(40,196,253,1) 0%,rgba(0,146,252,1) 100%);
+    color: #fff;
+  }
+  .am-navbar-light .am-navbar-title{
+    font-size: 17px;
+    color: #fff;
+  }
+  .am-navbar-left{
+    font-size: 15px;
+  }
+  .icon-back{
+    background: url("../img/icon-back.png") no-repeat center;
+    background-size: 23px 13px;
+    width: 23px;
+    height: 23px;
+    margin-right: 3px;
+  }
   .customLayer {
     font-size: larger;
-    background-color: #fff;
     text-align: center;
-    line-height: 35px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    box-shadow: 1px 1px 10px 0 #ccc;
   }
 
   #getPosition {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     position: fixed;
-    bottom: 140px;
+    bottom: 11px;
     right: 15px;
+    background:rgba(247,246,246,1);
+    box-shadow:0px 6px 20px 0px rgba(51,51,51,0.2);
+    border-radius:50%;
+    i.icon-positioning{
+      background: url("../img/icon-positioning.png") no-repeat;
+      width: 16px;
+      height: 21px;
+      background-size: 100% 100%;
+      display: inline-block;
+      margin-top: 10px;
+    }
   }
-
+.orbital-position{
+  width:40px;
+  height:84px;
+  background:#fff;
+  border:1px solid #ddd;
+  border-radius: 15px;
+  position: fixed;
+  top: 197px;
+  right: 15px;
+  box-shadow: 1px 1px 10px 0 #ccc;
+}
   #getTrail {
-    width: 35px;
-    height: 35px;
-    position: fixed;
-    top: 230px;
-    right: 15px;
+    background: url("../img/icon-orbital.png") no-repeat;
+    width: 40px;
+    height: 42px;
+    background-size: 100% 100%;
   }
 
   #safeAddress {
-    width: 35px;
-    height: 35px;
-    position: fixed;
-    top: 290px;
-    right: 15px;
+    background: url("../img/icon-place.png") no-repeat;
+    width: 40px;
+    height: 42px;
+    background-size: 100% 100%;
   }
 
   .amap-logo {
@@ -39,5 +74,8 @@
 
   .amap-copyright {
     opacity: 0;
+  }
+  .amap-touch-toolbar .amap-zoomcontrol{
+
   }
 }

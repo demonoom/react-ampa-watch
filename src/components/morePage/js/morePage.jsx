@@ -292,6 +292,12 @@ export default class morePage extends React.Component {
         });
     }
 
+    //toJupmBind
+    toJupmBind=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
+        window.location.href = url;
+    }
+
     render () {
         return (
             <div id="morePage" >
@@ -324,7 +330,7 @@ export default class morePage extends React.Component {
                 </div>
                 <div className='personMsg'>
                     <div className="wrap">
-                        <span style={{ display: this.state.toBind ? "block" : "none" }}>添加</span>
+                        <span onClick={this.toJupmBind} style={{ display: this.state.toBind ? "block" : "none" }}>添加</span>
                         <img src={this.state.imgSrc} alt="" />
                         <span className='text_hidden'>
                             {

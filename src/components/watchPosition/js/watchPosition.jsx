@@ -30,6 +30,7 @@ export default class watchPosition extends React.Component {
             map: null,
             visible: false,
             selected: '',
+            watchName: '',
             popoverLay: [],
         };
     }
@@ -99,7 +100,7 @@ export default class watchPosition extends React.Component {
                 (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
-        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id}, () => {
+        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
             this.watch2GLocaltionRequest()
         });
         // setTimeout(() => {
@@ -192,6 +193,7 @@ export default class watchPosition extends React.Component {
 
     onSelect = (opt) => {
         this.setState({
+            watchName: opt.props.children,
             visible: false,
             // selected: opt.props.value,
             mac: opt.props.mac,
@@ -243,13 +245,13 @@ export default class watchPosition extends React.Component {
                         >
                             <div style={{
                                 height: '100%',
-                                padding: '0 15px',
+                                padding: '0',
                                 marginRight: '-15px',
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
                             >
-                                <Icon type="down"/>
+                                <i className="icon-back"></i>{this.state.watchName}
                             </div>
                         </Popover>
                     }
@@ -268,20 +270,22 @@ export default class watchPosition extends React.Component {
                     viewMode='3D'
                     events={events}
                     rotateEnable={false}
+                    className='map'
                 >
                     <Marker
                         position={this.state.position}
                         render={this.renderMarker}
                     />
                     <div onClick={this.getPosition} id="getPosition" className="customLayer">
-                        寻
+                        <i className="icon-positioning"></i>
                     </div>
-                    <div onClick={this.getTrail} id="getTrail" className="customLayer">
-                        轨
+                    <div className="orbital-position">
+                        <div onClick={this.getTrail} id="getTrail" className="customLayer line_public">
+                        </div>
+                        <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                        </div>
                     </div>
-                    <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
-                        点
-                    </div>
+
                 </Map>
             </div>
         )
