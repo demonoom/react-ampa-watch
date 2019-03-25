@@ -165,7 +165,7 @@ export default class verifyStuInfo extends React.Component {
                     <div className="icon_user line_publicD">
                         <InputItem
                             className=""
-                            placeholder="请输入孩子姓名验证账号信息"
+                            placeholder="请输入孩子姓名"
                             value={this.state.stuName}
                             onChange={this.stuOnChange}
                         ></InputItem>
