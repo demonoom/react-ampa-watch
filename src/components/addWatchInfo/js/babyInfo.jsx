@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    InputItem, Toast, DatePicker,
-    Modal, Picker, List, WhiteSpace
+    Toast, DatePicker,
+    Modal, Picker, List
 } from 'antd-mobile';
 
 import '../css/addWatchInfo.less'
@@ -18,17 +18,12 @@ const sexData = [{
     label: '女'
 }]
 
-
-function formatDate(date){
-    var str = date+""
+//格式化数据
+function formatDate (date) {
+    var str = date + ""
     str = str.replace(/ GMT.+$/, '');// Or str = str.substring(0, 24)
     var d = new Date(str);
     var a = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
-    // for (var i = 0, len = a.length; i < len; i++) {
-    //     if (a[i] < 10) {
-    //         a[i] = a[i];
-    //     }
-    // }
     return str = a[0] + '-' + a[1] + '-' + a[2]
 }
 export default class babyInfo extends React.Component {
@@ -41,7 +36,7 @@ export default class babyInfo extends React.Component {
             sexValue: "",
             extraClassName: "",
             RelationClassName: "",
-            birthClassName:"",
+            birthClassName: "",
             showSexDiv: false,
             showRelationiDiv: false,
             relationValue: "",
@@ -80,16 +75,28 @@ export default class babyInfo extends React.Component {
         var relation = searchArray[2].split('=')[1];
         var phonenumber = searchArray[3].split('=')[1];
         var ident = searchArray[4].split('=')[1];
-        console.log(phonenumber,"phonenumber")
         // loginType==1  代表主账号
         this.setState({
-            loginType,macAddr,relation,phonenumber,ident
+            loginType, macAddr, relation, phonenumber, ident
         })
+        window.addEventListener('resize', this.onWindwoResize);
     }
 
     componentDidMount () {
         Bridge.setShareAble("false");
         document.title = '手环绑定学生班级列表';
+    }
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.onWindwoResize);
+    }
+    //监听窗口改变时间
+    onWindwoResize = () => {
+        // this
+        setTimeout(() => {
+            this.setState({
+                clientHeight: document.body.clientHeight,
+            })
+        }, 100)
     }
     //*根据mac地址获取是第几次登录 */
     getWatch2gByMacAddress = (macAdd) => {
@@ -98,10 +105,8 @@ export default class babyInfo extends React.Component {
             "macAddress": macAdd,
             "actionName": "watchAction",
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.response == null) {
                     this.setState({
                         loginType: 1,
@@ -124,22 +129,6 @@ export default class babyInfo extends React.Component {
         });
     }
 
-    /**
-     * 调用客户端
-     */
-    // scanCode = () => {
-    //     // this.getWatch2gByMacAddress(159)
-    //     var data = {
-    //         method: 'watchBinding'
-    //     };
-    //     Bridge.callHandler(data, (mes) => {
-    //         this.setState({ macId: mes.toUpperCase() });
-    //         this.getWatch2gByMacAddress(mes)
-    //     }, function (error) {
-    //         console.log(error);
-    //     });
-    // }
-
 
     //自定义关系
     showModal () {
@@ -150,13 +139,10 @@ export default class babyInfo extends React.Component {
             { text: '取消' },
             {
                 text: '确定', onPress: value => {
-                    console.log(`输入的内容:${value}`);
-                    console.log(value, "value");
                     this.setState({
                         relationValue: [value],
                         RelationClassName: 'color_3'
                     }, () => {
-                        console.log(this.state.relationValue)
                     });
                 }
             },
@@ -170,11 +156,11 @@ export default class babyInfo extends React.Component {
             //     return
             // }
             if (this.state.sexValue == "") {
-                Toast.info("请选择孩子性别",1)
+                Toast.info("请选择孩子性别", 1)
                 return
             }
             if (this.state.sendData == undefined) {
-                Toast.info("请选择孩子生日",1)
+                Toast.info("请选择孩子生日", 1)
                 return
             }
             var param = {
@@ -187,14 +173,13 @@ export default class babyInfo extends React.Component {
                 "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
-            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
-                    console.log(result, "rerere")
                     if (result.success && result.response) {
                         var url = WebServiceUtil.mobileServiceURL + "schoolInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr + "&sex=" + this.state.sexValue[0];
                         var data = {
                             method: 'openNewPage',
+                            selfBack: true,
                             url: url
                         };
                         Bridge.callHandler(data, null, function (error) {
@@ -210,11 +195,6 @@ export default class babyInfo extends React.Component {
             });
 
         } else {
-            console.log(this.state.relationValue, "this.state.familyRelate")
-            // if (this.state.macAddr == "") {
-            //     Toast.info("请扫描手表")
-            //     return
-            // }
             if (this.state.relationValue == "") {
                 Toast.info("请选择您与孩子的关系")
                 return
@@ -227,7 +207,6 @@ export default class babyInfo extends React.Component {
                 "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
-            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
                     if (result.success && result.response) {
@@ -256,7 +235,6 @@ export default class babyInfo extends React.Component {
 
     //选择器改变事件
     onPickerChange = (val) => {
-        console.log(val, "val")
         this.setState({
             sexValue: val,
             extraClassName: 'color_3'
@@ -265,7 +243,6 @@ export default class babyInfo extends React.Component {
 
     //点击picker确定按钮
     clickSure = (val) => {
-        console.log(val, "val")
         this.setState({
             sexValue: val,
             extraClassName: 'color_3'
@@ -288,7 +265,6 @@ export default class babyInfo extends React.Component {
     };
     //关系点击确定
     clickRelationSure = (val) => {
-        console.log(val, "val")
         if (val[0] == "自定义") {
             $(".am-modal-input input").focus();
             this.showModal()
@@ -310,16 +286,24 @@ export default class babyInfo extends React.Component {
     //生日
     birChange = (date) => {
         var str = formatDate(date)
-        console.log(str, "date")
-        this.setState({ date,
-            sendData:str,
-            birthClassName:"color_3"
+        this.setState({
+            date,
+            sendData: str,
+            birthClassName: "color_3"
         })
+    }
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
     }
     render () {
         return (
             <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                <div className="icon_back"></div>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
