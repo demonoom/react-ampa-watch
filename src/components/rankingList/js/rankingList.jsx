@@ -212,6 +212,16 @@ export default class rankingList extends React.Component {
                         initalPage={'t2'}
                     >
                         <div className='questionCont'>
+                            <div className="emptyCont">
+                                <div className="p38">
+                                    <i></i>
+                                    <span>
+                                        还没有任何信息<br/>
+                                        请先绑定手表二维码
+                                    </span>
+                                </div>
+                                <div className='submitBtn'>马上绑定</div>
+                            </div>
                             <div className='dateBtn'>
                                 <span className='active' onClick={this.clickToday}>今日</span>
                                 <span onClick={this.toClickWeek}>本周</span>
