@@ -291,8 +291,8 @@ export default class addNewLocation extends React.Component {
 
                     <div className='posMap' style={{display: 'none'}}>
                         <div className="am-navbar">
-                            <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
-                            <span className="am-navbar-title">修改新地址</span>
+                            <span className="am-navbar-left" onClick={this.setPosQuit}><i className="icon-back"></i></span>
+                            <span className="am-navbar-title">添加新地址</span>
                             <span className="am-navbar-right"></span>
                         </div>
                         <div className="posMap-content">
