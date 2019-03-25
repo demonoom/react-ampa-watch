@@ -3,7 +3,9 @@ import {
     DatePicker, List, Picker, InputItem, Toast,
     Modal, WhiteSpace, Switch, Checkbox, Flex
 } from 'antd-mobile';
-import '../../css/addClock.less'
+import '../../css/addClock.less';
+import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
+window.ms = null;
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -41,18 +43,7 @@ const alarmType = [
         label: '自定义'
     }
 ]
-
-const checkedData = [
-    { value: 1, label: '星期一', extra: "周一" },
-    { value: 2, label: '星期二', extra: "周二" },
-    { value: 3, label: '星期三', extra: "周三" },
-    { value: 4, label: '星期四', extra: "周四" },
-    { value: 5, label: '星期五', extra: "周五" },
-    { value: 6, label: '星期六', extra: "周六" },
-    { value: 7, label: '星期日', extra: "周日" },
-];
 var myDate = new Date();
-
 
 function sortByKey (array, key) {
     return array.sort(function (a, b) {
@@ -74,7 +65,16 @@ export default class addClock extends React.Component {
             timeArr: [],
             alarmValue: ["起床"],
             time: myDate,
-            allData: []
+            allData: [],
+            checkedData: [
+                { value: 1, label: '星期一', extra: "周一" },
+                { value: 2, label: '星期二', extra: "周二" },
+                { value: 3, label: '星期三', extra: "周三" },
+                { value: 4, label: '星期四', extra: "周四" },
+                { value: 5, label: '星期五', extra: "周五" },
+                { value: 6, label: '星期六', extra: "周六" },
+                { value: 7, label: '星期日', extra: "周日" },
+            ]
         };
     }
     componentWillMount () {
@@ -82,13 +82,44 @@ export default class addClock extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var watchId = searchArray[0].split('=')[1];
+        var ident = searchArray[1].split('=')[1];
+        var macAddr = searchArray[2].split('=')[1];
         this.setState({
-            watchId
+            watchId,
+            macAddr
         })
+        var pro = {
+            "command": "guardianLogin",
+            "data": {
+                "userId": ident,
+                "machineType": "0",
+                "version": '1.0',
+                // "webDevice": WebServiceUtil.createUUID()
+            }
+        };
+        ms = new WatchWebsocketConnection();
+        console.log(pro, "pro")
+        ms.connect(pro);
     }
     componentDidMount () {
+        this.watchListener();
 
     }
+
+
+    //消息监听
+    watchListener () {
+        ms.msgWsListener = {
+            onError: function (errorMsg) {
+
+            }, onWarn: function (warnMsg) {
+
+            }, onMessage: function (info) {
+                console.log(info, "info")
+            }
+        };
+    }
+
 
     //选择器改变事件
     onPickerChange = (val) => {
@@ -189,7 +220,7 @@ export default class addClock extends React.Component {
     cancelSelect = () => {
         this.setState({
             repeatDefault: true,
-            defaleSelect: this.state.timeArr.length == 0 ? "永不" : this.state.timeArr.join(" ")
+            defaleSelect: this.state.timeArr.length == 0 ? "永不" : this.state.timeArr.join(" "),
         })
     }
     //星期的确定选择
@@ -222,9 +253,18 @@ export default class addClock extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-
                 if (result.success && result.response) {
                     Toast.info("保存成功", 1);
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus":1,
+                            "watch2gClock": result.response,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
@@ -282,7 +322,7 @@ export default class addClock extends React.Component {
                         <div className='am-picker-popup-item am-picker-popup-title'></div>
                         <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                     <List>
-                        {checkedData.map((v, i) => (
+                        {this.state.checkedData.map((v, i) => (
                             <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
                                 {v.label}
                             </CheckboxItem>

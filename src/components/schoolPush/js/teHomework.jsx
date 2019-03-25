@@ -171,10 +171,12 @@ export default class teHomework extends React.Component {
     }
     //删除页面
     toShanchu = (v, index) => {
+        this.setState({
+            showSend: false
+        })
         if (v.user.colUid == this.state.userId) {
             this.showAlert(v.id, v.topicId, index)
         } else {
-          
             this.setState({
                 toUserId: v.user.colUid,
                 topicId: v.topicId,
@@ -182,9 +184,6 @@ export default class teHomework extends React.Component {
                 showSend: true
             }, () => {
                 this.handleClick();
-                this.toSendContent(this.state.index);
-
-
             })
         }
     }
@@ -310,11 +309,27 @@ export default class teHomework extends React.Component {
                 }
             })
             return (
-                <div className='line_public homeItem'>
-                    <img src={rowData.fromUser.avatar} />
-                    <span className='text_hidden userName'>{rowData.fromUser.userName}</span>
-                    <div className='time'> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
-                    <div className='content'>{rowData.content}</div>
+                <div className='line_public homeItem' >
+                    <img src={rowData.fromUser.avatar} onClick={() => {
+                        this.setState({
+                            showSend: false
+                        })
+                    }} />
+                    <span className='text_hidden userName' onClick={() => {
+                        this.setState({
+                            showSend: false
+                        })
+                    }}>{rowData.fromUser.userName}</span>
+                    <div className='time' onClick={() => {
+                        this.setState({
+                            showSend: false
+                        })
+                    }}> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
+                    <div className='content' onClick={() => {
+                        this.setState({
+                            showSend: false
+                        })
+                    }}>{rowData.content}</div>
                     <div className='icon_praise'>
                         {
                             isZan ?
@@ -324,36 +339,42 @@ export default class teHomework extends React.Component {
                         <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
                     </div>
                     <div className='replyCont'>
-                        <div className='icon_emptyHeartB line_public'>
+                        <div className='icon_emptyHeartB' style={{display:zanArr.length == 0 ? "none":"block"}}>
                             {
                                 zanArr.map((v, i) => {
                                     return (
-                                        <span>{v.user.userName} </span>
+                                        <span onClick={()=>{
+                                            this.setState({
+                                                showSend: false
+                                            })
+                                        }}>{v.user.userName} </span>
                                     )
                                 })
                             }
                         </div>
-                        {
-                            pingArr.map((v, i) => {
-                                console.log(v, "opopop")
-                                return (
-                                    <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
-                                        {
-                                            v.user.userName == v.toUser.userName ?
-                                                <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
-                                                :
-                                                <span>
+                        <div className='line_publicBefore' style={{display:pingArr.length == 0 ? "none":"block"}}>
+                            {
+                                pingArr.map((v, i) => {
+                                    console.log(v, "opopop")
+                                    return (
+                                        <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
+                                            {
+                                                v.user.userName == v.toUser.userName ?
+                                                    <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
+                                                    :
+                                                    <span>
                                                     <span className='blueTxt'>{v.user.userName}</span>
                                                     <span>回复</span>
                                                     <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
                                                     <span>{v.content}</span>
                                                 </span>
-                                        }
+                                            }
 
-                                    </div>
-                                )
-                            })
-                        }
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
 
                 </div>
@@ -361,7 +382,7 @@ export default class teHomework extends React.Component {
         };
         return (
             <div id='teHomework' className='bg_gray'>
-                <div style={{ display: this.state.showSend ? "block" : "none" }} className='commentInput my_flex'>
+                <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
                     <InputItem
                         className="content"
                         value={this.state.content}
