@@ -16,7 +16,8 @@ export default class teHomework extends React.Component {
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
             sendValue: "",
-            content: ""
+            content: "",
+            showSend:false
         };
     }
 
@@ -25,7 +26,9 @@ export default class teHomework extends React.Component {
     }
 
     componentDidMount () {
-        var userId = 41;
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
         this.setState({
             userId
         })
@@ -66,10 +69,6 @@ export default class teHomework extends React.Component {
                         isLoadingLeft: isLoading,
                         refreshing: false
                     })
-
-
-
-
                 } else {
                     Toast.info(result);
                 }
@@ -127,7 +126,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'praiseForTopic',
             "topicId": topicId,
-            "ident": '41'
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -150,7 +149,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
-            "ident": "41"
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -161,7 +160,6 @@ export default class teHomework extends React.Component {
                 } else {
                     Toast.info(result);
                 }
-
             },
             onError: function (error) {
                 Toast.info('请求失败');
@@ -170,13 +168,14 @@ export default class teHomework extends React.Component {
     }
     //删除页面
     toShanchu = (v, index) => {
-        if (v.user.colUid == 41) {
+        if (v.user.colUid == this.state.userId) {
             this.showAlert(v.id, v.topicId, index)
         } else {
             this.setState({
                 toUserId: v.user.colUid,
                 topicId: v.topicId,
-                index
+                index,
+                showSend:true
             }, () => {
                 $(".am-input-control input").focus();
                 this.toSendContent(this.state.index);
@@ -208,7 +207,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'deleteTopicComment',
             "topicCommentId": comId,
-            "ident": 41
+            "ident":  this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -233,7 +232,8 @@ export default class teHomework extends React.Component {
         this.setState({
             topicId: data.id,
             toUserId: data.fromUserId,
-            index
+            index,
+            showSend:true
         })
     }
 
@@ -254,7 +254,7 @@ export default class teHomework extends React.Component {
                 "content": this.state.sendValue,
                 "topicId": this.state.topicId,
                 "toUserId": this.state.toUserId,
-                "ident": 41
+                "ident":  this.state.userId
             };
             console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -289,7 +289,7 @@ export default class teHomework extends React.Component {
                 }
             })
             zanArr.forEach((v, i) => {
-                if (v.user.colUid == 41) {
+                if (v.user.colUid == this.state.userId) {
                     isZan = true;
                 }
             })
@@ -339,14 +339,14 @@ export default class teHomework extends React.Component {
         };
         return (
             <div id='teHomework' className='bg_gray'>
-                <div className='commentInput my_flex'>
+                <div style={{display:this.state.showSend ? "block":"none"}} className='commentInput my_flex'>
                     <InputItem
                         className="content"
                         value={this.state.content}
                         onChange={this.contentChange}
                         placeholder="请输入评论内容"
                     ></InputItem>
-                    <div className='sendBtn' onClick={this.toSendContent}>发送</div>
+                    <div className='sendBtn'  onClick={this.toSendContent}>发送</div>
                 </div>
                 <ListView
                     ref={el => this.lv = el}

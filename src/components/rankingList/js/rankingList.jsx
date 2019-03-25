@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs, WhiteSpace, ListView } from 'antd-mobile';
 import '../css/rankingList.less'
+import { height } from "window-size";
 const tabs = [
     { title: '答题排行榜' },
     { title: '运动排行榜' },
@@ -243,10 +244,10 @@ export default class rankingList extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
+                        <div style={{height:document.body.clientHeight}}>
                             2
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '250px', backgroundColor: '#fff' }}>
+                        <div style={{height:document.body.clientHeight}}>
                             3
                         </div>
                     </Tabs>
