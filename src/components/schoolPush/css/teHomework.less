@@ -3,7 +3,7 @@
   height: 100%;
   overflow-y: auto;
   .homeItem{
-    padding: 15px 15px 15px 70px;
+    padding: 15px 15px 10px 70px;
     position: relative;
     img{
       width: 45px;
@@ -26,7 +26,6 @@
         color: #666;
         font-size: 12px;
         text-align: right;
-      margin-bottom: 10px;
       .liked{
         background: url("../../images/icon_blueLiked.png") no-repeat left center;
         background-size: 15px;
@@ -46,27 +45,28 @@
       }
     }
     .replyCont{
-      background-color: #F3F3F5;
+      padding-top: 10px;
       width: 100%;
-      position: relative;
-      &::before{
-        content: '';
-        border-right: 7px solid transparent;
-        border-left: 7px solid transparent;
-        border-bottom: 6px solid #F3F3F5;
-        position: absolute;
-        left: 10px;
-        top: -5px;
-      }
+      font-size: 13px;
       .icon_emptyHeartB{
         color: #0181D2;
         padding: 6px 10px 6px 35px;
-        background: url("../../images/icon_blueLike.png") no-repeat 10px center;
+        background:#F3F3F5 url("../../images/icon_blueLike.png") no-repeat 10px center;
         background-size: 15px;
-        min-height: 34px;
         box-sizing: border-box;
+        position: relative;
+        &::before{
+          content: '';
+          border-right: 7px solid transparent;
+          border-left: 7px solid transparent;
+          border-bottom: 6px solid #F3F3F5;
+          position: absolute;
+          left: 10px;
+          top: -5px;
+        }
       }
       .msgItem{
+        background-color: #F3F3F5;
         padding: 6px 10px 0;
         &:last-child{
           padding-bottom: 10px;

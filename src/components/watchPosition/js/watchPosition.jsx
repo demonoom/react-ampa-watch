@@ -243,13 +243,13 @@ export default class watchPosition extends React.Component {
                         >
                             <div style={{
                                 height: '100%',
-                                padding: '0 15px',
+                                padding: '0',
                                 marginRight: '-15px',
                                 display: 'flex',
                                 alignItems: 'center',
                             }}
                             >
-                                <Icon type="down"/>
+                                <i className="icon-back"></i>张倩
                             </div>
                         </Popover>
                     }
@@ -268,20 +268,22 @@ export default class watchPosition extends React.Component {
                     viewMode='3D'
                     events={events}
                     rotateEnable={false}
+                    className='map'
                 >
                     <Marker
                         position={this.state.position}
                         render={this.renderMarker}
                     />
                     <div onClick={this.getPosition} id="getPosition" className="customLayer">
-                        寻
+                        <i className="icon-positioning"></i>
                     </div>
-                    <div onClick={this.getTrail} id="getTrail" className="customLayer">
-                        轨
+                    <div className="orbital-position">
+                        <div onClick={this.getTrail} id="getTrail" className="customLayer line_public">
+                        </div>
+                        <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
+                        </div>
                     </div>
-                    <div onClick={this.addSafeAddress} id="safeAddress" className="customLayer">
-                        点
-                    </div>
+
                 </Map>
             </div>
         )

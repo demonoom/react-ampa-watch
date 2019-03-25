@@ -161,11 +161,15 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage">
-                <div>
-                    <img src={this.state.imgSrc} alt=""/>
-                    {
-                        this.state.watchName
-                    }
+                <div className='personMsg'>
+                  <div className="wrap">
+                      <img src={this.state.imgSrc} alt=""/>
+                      <span className='text_hidden'>
+                        {
+                            this.state.watchName
+                        }
+                    </span>
+                  </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
                     <div className="am-list-line">
