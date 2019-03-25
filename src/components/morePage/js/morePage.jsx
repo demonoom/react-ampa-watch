@@ -303,7 +303,7 @@ export default class morePage extends React.Component {
 
     render () {
         return (
-            <div id="morePage" >
+            <div id="morePage" className='bg_gray'>
                 <div style={{ display: "none" }}>
                     <Popover mask
                         overlayClassName="fortest"
@@ -353,13 +353,12 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">找手表</div>
                     </div>
                 </div>
+                <div className="grayBorder"></div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送天气</div>
                     </div>
                 </div>
-
-                <div className="grayBorder"></div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送监护人</div>
