@@ -1,4 +1,5 @@
 #addNewLocation {
+  height: 100%;
   .setPosModel {
     position: absolute;
     width: 100%;
@@ -6,10 +7,11 @@
     left: 0;
     bottom: 0;
     z-index: 101;
+    overflow: hidden;
   }
   .setPosCont{
     width: 100%;
-    height: 90%;
+    height: calc(~"100% - 44px");
     background: #F8F8F8;
     position: absolute;
     bottom: 0;
@@ -54,6 +56,11 @@
     height: 44px;
     background-color: #fff;
     color: #333;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
   }
   .am-navbar-left, .am-navbar-title, .am-navbar-right {
     -webkit-box-flex: 1;
@@ -87,6 +94,8 @@
   }
   .commonLocation-cont{
     background: #EDEDED;
+    height: calc(~"100% - 44px");
+    padding-top: 44px;
   }
   .WhiteSpace{
     height: 11px;
@@ -94,6 +103,9 @@
   .am-list-item .am-list-line .am-list-content{
     font-size: 15px;
     padding-left: 15px;
+  }
+  .am-list-item .am-list-line .am-list-extra{
+    font-size: 15px;
   }
   .my-list{
     padding-left: 15px;
@@ -175,6 +187,12 @@
     right: 28px;
   }
   .searchResults{
+   /* width: 100%;
+    height: calc(~"100% - 44px");
+    background: #F8F8F8;
+    position: absolute;
+    bottom: 0;
+    overflow-y: auto;*/
     .name{
       font-size: 17px;
     }
@@ -209,6 +227,9 @@
       line-height: 44px;
       padding: 0 15px;
       box-sizing: border-box;
+    }
+    .posMap-content{
+      height: calc(~"100% - 44px");
     }
     .posMap-cont{
       width: calc(~"100% - 22px");
@@ -279,6 +300,39 @@
     }
 
   }
-
+  .btns{
+    position: absolute;
+    left: 15px;
+    bottom: 35px;
+    border:1px  #17ACF7 solid;
+    border-radius: 25px;
+    width: calc(~"100% - 30px");
+    &>div{
+      width: 50%;
+      box-sizing: border-box;
+      border-radius: 25px;
+      cursor: pointer;
+      line-height: 49px;
+      height: 49px;
+      text-align: center;
+      font-size: 16px;
+      letter-spacing: 5px;
+      color: #17ACF7;
+    }
+    .leftBtn{
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #17ACF7;
+      }
+    }
+    .rightBtn{
+      letter-spacing: 5px;
+    }
+  }
 
 }
