@@ -55,6 +55,7 @@
       padding: 142px 0 0;
       margin: 0 15px;
       position: relative;
+
       .item:first-child,.item:nth-child(2),.item:nth-child(3){
         width: 33.3%;
         position: absolute;
@@ -91,9 +92,9 @@
           text-align: center;
           width: 100%;
           line-height: 1;
-
         }
         .itemCont{
+          display: block;
           box-sizing: border-box;
           position: absolute;
           left: 0;
@@ -101,6 +102,8 @@
           border-radius: 5px 5px 0 0;
           background-color: white;
           width: 100%;
+          padding-left: 5px;
+          padding-right: 5px;
         }
       }
       .item:first-child{
@@ -140,6 +143,31 @@
         .itemCont{
           height: 69px;
           padding-top: 21px;
+        }
+      }
+      .item:nth-child(4){
+        border-radius: 5px 5px 0 0;
+        overflow: hidden;
+      }
+      .item{
+        .itemCont{
+          height: 44px;
+          background-color: white;
+          padding-left: 15px;
+          padding-right: 15px;
+          overflow: hidden;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .num{
+          width: 65px;
+        }
+        .color_9{
+          width: 110px;
+          text-align: right;
+        }
+        .userName{
+          width: calc(~"100% - 175px");
         }
       }
     }
