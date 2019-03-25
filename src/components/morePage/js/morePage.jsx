@@ -1,13 +1,20 @@
 import React from "react";
 import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
 import "../css/morePage.less"
+import {
+   Toast,Modal
+} from 'antd-mobile';
 
+const alert = Modal.alert;
 //消息通信js
 window.ms = null;
 export default class morePage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            imgSrc: "",
+            watchName:""
+        };
     }
 
     componentWillMount () {
@@ -17,6 +24,7 @@ export default class morePage extends React.Component {
         var macAddr = locationSearch.split("&")[1].split('=')[1];
         var watchId = locationSearch.split("&")[2].split('=')[1];
         this.getWatchId(macAddr)
+        this.getWatch2gById(watchId)
         this.setState({
             macAddr,
             userId,
@@ -60,6 +68,30 @@ export default class morePage extends React.Component {
             }
         });
     }
+    //获取手表信息
+    getWatch2gById = (watchId) => {
+        var param = {
+            "method": 'getWatch2gById',
+            "watchId": watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "rerere")
+                if (result.success && result.response) {
+                    this.setState({
+                        imgSrc: result.response.student.avatar,
+                        watchName: result.response.watchName,
+                    })
+                } else {
+                    // Toast.info('');
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
 
 
     //消息监听
@@ -88,7 +120,7 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
@@ -129,6 +161,12 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage">
+                <div>
+                    <img src={this.state.imgSrc} alt=""/>
+                    {
+                        this.state.watchName
+                    }
+                </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
                     <div className="am-list-line">
                         <div className="am-list-content">找手表</div>

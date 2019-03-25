@@ -3,7 +3,9 @@ import {
     DatePicker, List, Picker, InputItem, Toast,
     Modal, WhiteSpace, Switch, Checkbox, Flex
 } from 'antd-mobile';
-import '../../css/addClock.less'
+import '../../css/addClock.less';
+import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
+window.ms = null;
 const CheckboxItem = Checkbox.CheckboxItem;
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -85,11 +87,27 @@ export default class updateClock extends React.Component {
         var searchArray = locationSearch.split("&");
         var watchId = searchArray[0].split('=')[1];
         var clockId = searchArray[1].split('=')[1];
+        var macAddr = searchArray[2].split('=')[1];
+        var ident = searchArray[3].split('=')[1];
         this.setState({
             clockId,
-            watchId
+            watchId,
+            macAddr,
+            ident
         })
-        this.getInitData(clockId)
+        this.getInitData(clockId);
+        var pro = {
+            "command": "guardianLogin",
+            "data": {
+                "userId": ident,
+                "machineType": "0",
+                "version": '1.0',
+                // "webDevice": WebServiceUtil.createUUID()
+            }
+        };
+        ms = new WatchWebsocketConnection();
+        console.log(pro, "pro")
+        ms.connect(pro);
     }
     componentDidMount () {
 
@@ -111,6 +129,7 @@ export default class updateClock extends React.Component {
                         alarmValue: [result.response.clockType],
                         notciceTime: result.response.noticeTime,
                         timeArr: JSON.parse(result.response.repeatType),
+                        initTimeArr:JSON.parse(result.response.repeatType),
                         typeValue: [result.response.noticeType],
                     }, () => {
                         console.log(this.state.typeValue)
@@ -248,6 +267,7 @@ export default class updateClock extends React.Component {
     cancelSelect = () => {
         this.setState({
             repeatDefault: true,
+            timeArr:this.state.initTimeArr
         })
     }
     //星期的确定选择
@@ -284,6 +304,16 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("修改成功", 1);
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus":2,
+                            "watch2gClock": result.response,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
