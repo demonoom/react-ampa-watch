@@ -314,19 +314,23 @@ export default class addNewLocation extends React.Component {
                                 style={this.state.style}
                             />
                             <div className="posMessage">
-                                <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div><span className="icon-del" onClick={this.setPosQuit}></span>
+                                <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
                             </div>
 
                             <div className='setArea'>
                                 <div className="submitBtn" onClick={this.setPosDone}>确定</div>
-                                <div className="SafeRange">安全范围</div>
+                                <div className="SafeRange">安全范围<span>300m</span></div>
                                 <Slider
-                                    style={{marginLeft: 0, marginRight: 0}}
+                                    style={{marginLeft: 0, marginRight: 10}}
                                     value={this.state.sliderValue}
                                     min={10}
                                     max={50}
                                     onChange={this.sliderOnChange()}
                                 />
+                                <div className="distance">
+                                    <span>0m</span>
+                                    <span className="right">500m</span>
+                                </div>
                             </div>
                         </Map>
                     </div>
