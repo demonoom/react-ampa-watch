@@ -63,7 +63,8 @@ export default class morePage extends React.Component {
                             imgSrc: result.response[0].student.avatar,
                             watchName: result.response[0].watchName,
                             watchId: result.response[0].id,
-                            macAddr: result.response[0].macAddress
+                            macAddr: result.response[0].macAddress,
+                            studentId: result.response[0].studentId
                         }, () => {
                             this.getWatch2gById(this.state.watchId)
                             this.getWatchId(this.state.macAddr)
@@ -180,12 +181,15 @@ export default class morePage extends React.Component {
         }
         var commandJson = {
             "command": "watch2gPushContacts", data: {
-                "studentId": this.state.userId,
+                "studentId": this.state.studentId,
                 "watch2gId": this.state.watchId
             }
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
+        setTimeout(() => {
+            Toast.info("推送成功", 1)
+        }, 300);
     }
 
     /**
@@ -211,7 +215,7 @@ export default class morePage extends React.Component {
         this.setState({
             visible: false,
             watchId: opt.props.macId,
-            watchName:opt.props.children
+            watchName: opt.props.children
         }, () => {
             this.getWatch2gById(this.state.watchId)
         });
@@ -232,6 +236,7 @@ export default class morePage extends React.Component {
             "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
+
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
@@ -293,9 +298,16 @@ export default class morePage extends React.Component {
     }
 
     //toJupmBind
-    toJupmBind=()=>{
+    toJupmBind = () => {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
-        window.location.href = url;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     }
 
     render () {
@@ -361,7 +373,7 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
-                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
+                <div style={{ display: this.state.toBind ? "none" : "block" }} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
                     </div>

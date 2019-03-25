@@ -74,6 +74,7 @@ export default class schoolInfo extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
