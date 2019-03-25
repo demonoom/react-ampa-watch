@@ -37,8 +37,11 @@ export default class clockList extends React.Component {
         var searchArray = locationSearch.split("&");
         var ident = searchArray[0].split('=')[1];
         var watchId = searchArray[1].split('=')[1];
+        var macAddr = searchArray[2].split('=')[1];
         this.setState({
-            watchId
+            watchId,
+            ident,
+            macAddr
         })
         this.getClockList(watchId);
         this.watchListener();
@@ -61,7 +64,7 @@ export default class clockList extends React.Component {
 
     //跳转闹钟列表
     toAddClockList = () => {
-        var url = WebServiceUtil.mobileServiceURL + "addClock?watchId=" + this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "addClock?watchId=" + this.state.watchId+"&userId="+this.state.ident+"&macAddr="+this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
@@ -94,7 +97,7 @@ export default class clockList extends React.Component {
 
     //开关项点击
     offChange = (index, isOpen, data) => {
-        console.log(isOpen, "isOpen")
+        console.log(isOpen, "isOpen");
         if (isOpen == 1) {
             this.state.clockList[index].valid = 0;
             this.setState({
@@ -115,13 +118,11 @@ export default class clockList extends React.Component {
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
-
                 if (result.success && result.response) {
                     var commandJson = {
                         "command": "watch2GClock",
                         data: {
-                            "macAddress": "1",
+                            "macAddress": this.state.macAddr,
                             "clockStatus": isOpen == 1 ? 0 : 1,
                             "watch2gClock": data,
                         }
@@ -139,7 +140,7 @@ export default class clockList extends React.Component {
     }
     //跳转编辑页面
     toUpdate = (data) => {
-        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id;
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id+"&macAddr="+this.state.macAddr+"&ident="+this.state.ident;
         var data = {
             method: 'openNewPage',
             url: url

@@ -77,10 +77,8 @@ export default class addWatchInfo extends React.Component {
             "macAddress": macAdd,
             "actionName": "watchAction",
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.response == null) {
                     this.setState({
                         loginType: 1,
@@ -129,8 +127,6 @@ export default class addWatchInfo extends React.Component {
             { text: '取消' },
             {
                 text: '确定', onPress: value => {
-                    console.log(`输入的内容:${value}`);
-                    console.log(value, "value");
                     this.setState({
                         relationValue: [value],
                         RelationClassName: 'color_3'

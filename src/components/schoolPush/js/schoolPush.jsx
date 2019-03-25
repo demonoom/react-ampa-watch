@@ -208,21 +208,23 @@ export default class schoolPush extends React.Component {
 
 
             return (
-                <div>
-                    <img src={rowData.fromUser.avatar} />
-                    <div> 校内通知 </div>
-                    <div> {time}</div>
-                    <div>{rowData.content}</div>
-                    {
-                        isZan ?
-                            <span onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
-                            <span onClick={this.praiseForTopicById.bind(this, rowData.id, rowID)}>未点赞</span>
-                    }
+                <div className='line_public homeItem'>
+                    <img src={require('../../images/icon_notify.png')}/>
+                    <span className='text_hidden userName'> 校内通知 </span>
+                    <div className='time'> {time}</div>
+                    <div  className='content'>{rowData.content}</div>
+                    <div className='icon_praise'>
+                        {
+                            isZan ?
+                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
+                                <span className='like' onClick={this.praiseForTopicById.bind(this, rowData.id, rowID)}>未点赞</span>
+                        }
+                    </div>
 
                     {
                         zanArr.length > 0 ?
-                            <div>
-                                <div>点赞人:</div>
+                            <div className='replyCont'>
+                                <div className='icon_emptyHeartB'>
                                 {
                                     zanArr.map((v, i) => {
                                         return (
@@ -232,6 +234,7 @@ export default class schoolPush extends React.Component {
                                         )
                                     })
                                 }
+                                </div>
                             </div> : ''
                     }
 
@@ -240,12 +243,12 @@ export default class schoolPush extends React.Component {
             );
         };
         return (
-            <div>
+            <div id='teHomework' className='bg_gray'>
                 <ListView
                     ref={el => this.lv = el}
                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                     renderFooter={() => (
-                        <div style={{ paddingTop: 5, paddingBottom: 40, textAlign: 'center' }}>
+                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
                             {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                         </div>)}
                     renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
