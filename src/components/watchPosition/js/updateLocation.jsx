@@ -2,7 +2,7 @@ import React from "react";
 import {Map, Circle} from "react-amap";
 import {List, Button, Modal, Toast, Slider} from 'antd-mobile';
 import PositionPicker from './positionPicker'
-import '../css/updateLocation.less'
+import '../css/addNewLocation.less'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -324,6 +324,7 @@ export default class updateLocation extends React.Component {
                             <span className="am-navbar-title">添加新地址</span>
                             <span className="am-navbar-right"></span>
                         </div>
+                        <div className="navbar-bottom"></div>
                         <div className='posMap-content'>
                             <Map
                                 plugins={plugins}

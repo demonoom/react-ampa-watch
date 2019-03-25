@@ -129,7 +129,11 @@ export default class commonLocation extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
-                    {this.state.posList}
+                    <div className="commonLocation-content">{this.state.posList}</div>
+                    <div className="tips">
+                        <div className="tips-title">温馨提示</div>
+                        <div className="tips-cont">设置常用地点后，定位到常用地点时，会直接显示再相应的地点，手表进出地点，将收到对应的消息通知。</div>
+                    </div>
                 </div>
             </div>
         )

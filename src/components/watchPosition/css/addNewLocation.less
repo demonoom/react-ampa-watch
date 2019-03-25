@@ -51,7 +51,6 @@
   }
 
   .am-navbar {
-    padding-bottom: 10px;
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -106,7 +105,7 @@
 
   .commonLocation-cont {
     background: #EDEDED;
-    height: calc(~"100% - 44px");
+    height: calc(~"100% - 54px");
     //padding-top: 44px;
   }
 
@@ -224,6 +223,7 @@
      overflow-y: auto;*/
     height: calc(~"100% - 54px");
     overflow-y: auto;
+    border-top: 10px solid #EDEDED;
 
     .name {
       font-size: 17px;
@@ -267,7 +267,7 @@
     }
 
     .posMap-content {
-      height: calc(~"100% - 44px");
+      height: calc(~"100% - 55px");
     }
 
     .posMap-cont {
@@ -414,5 +414,27 @@
   }
   .amap-touch-toolbar .amap-zoomcontrol:after{
     background: transparent;
+  }
+  .tips{
+    padding: 15px;
+    bottom: 28px;
+    position: absolute;
+    font-size: 14px;
+    line-height: 1.5;
+    .tips-title{
+      color: #666;
+    }
+    .tips-cont{
+    color: #999;
+  }
+  }
+  .commonLocation-content{
+    height: calc(~"100% - 130px");
+    overflow-y: auto;
+  }
+  .navbar-bottom{
+    background:#ededed;
+    height: 11px;
+    width: 100%;
   }
 }
