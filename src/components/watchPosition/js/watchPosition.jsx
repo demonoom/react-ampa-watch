@@ -30,21 +30,9 @@ export default class watchPosition extends React.Component {
             map: null,
             visible: false,
             selected: '',
+            popoverLay: [],
         };
     }
-
-    onSelect = (opt) => {
-        // console.log(opt.props.value);
-        this.setState({
-            visible: false,
-            selected: opt.props.value,
-        });
-    };
-    handleVisibleChange = (visible) => {
-        this.setState({
-            visible,
-        });
-    };
 
     componentWillMount() {
         var locationHref = decodeURI(window.location.href);
@@ -72,27 +60,27 @@ export default class watchPosition extends React.Component {
         this.msListener();
     }
 
+    componentDidMount() {
+        this.getWatch2gsByGuardianUserId()
+    }
+
     /**
-     * 通过绑定的学生id查找手表信息
-     * public Watch2g getWatch2gByUserId(String userId
+     * 查询此人监护的手表列表
+     * public List<Watch2g> getWatch2gsByGuardianUserId(String userId, String pageNo)
      */
-    getWatch2gByUserId = () => {
+    getWatch2gsByGuardianUserId = () => {
         var _this = this;
         var param = {
-            "method": 'getWatch2gByUserId',
+            "method": 'getWatch2gsByGuardianUserId',
             "actionName": "watchAction",
             "userId": this.state.userId,
+            "pageNo": -1,
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
-                    if (result.success) {
-                        if (!!result.response) {
-                            _this.setState({mac: result.response.macAddress, macId: result.response.id});
-                            setTimeout(() => {
-                                this.watch2GLocaltionRequest()
-                            }, 300)
-                        }
+                    if (!!result.response) {
+                        _this.buildStuList(result.response)
                     }
                 } else {
                     Toast.fail(result.msg, 1);
@@ -104,9 +92,20 @@ export default class watchPosition extends React.Component {
         });
     };
 
-    componentDidMount() {
-        this.getWatch2gByUserId()
-    }
+    buildStuList = (data) => {
+        var popoverLay = [];
+        data.forEach((v) => {
+            popoverLay.push(
+                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+            );
+        });
+        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id}, () => {
+            this.watch2GLocaltionRequest()
+        });
+        // setTimeout(() => {
+        //     this.watch2GLocaltionRequest()
+        // }, 300)
+    };
 
     /**
      * 获取手表位置
@@ -163,7 +162,7 @@ export default class watchPosition extends React.Component {
     };
 
     /**
-     * 获取运动轨迹
+     * 获取运动轨迹（跳转）
      */
     getTrail = () => {
         var url = WebServiceUtil.mobileServiceURL + "watchTrail?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
@@ -176,6 +175,9 @@ export default class watchPosition extends React.Component {
         });
     };
 
+    /**
+     * 设置点（跳转）
+     */
     addSafeAddress = () => {
 
         var url = WebServiceUtil.mobileServiceURL + "commonLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
@@ -185,6 +187,18 @@ export default class watchPosition extends React.Component {
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
+        });
+    };
+
+    onSelect = (opt) => {
+        this.setState({
+            visible: false,
+            // selected: opt.props.value,
+            mac: opt.props.mac,
+            macId: opt.props.macId,
+        }, () => {
+            this.watch2GLocaltionRequest();
+            this.state.map.setZoom(17);
         });
     };
 
@@ -215,18 +229,16 @@ export default class watchPosition extends React.Component {
                                  overlayStyle={{color: 'currentColor'}}
                                  visible={this.state.visible}
                                  placement="bottomLeft"
-                                 overlay={[
-                                     (<Item key="4" value="scan" data-seed="logId">Scan</Item>),
-                                     (<Item key="5" value="special" style={{whiteSpace: 'nowrap'}}>My Qrcode</Item>),
-                                     (<Item key="6" value="button ct">
-                                         <span style={{marginRight: 5}}>Help</span>
-                                     </Item>),
-                                 ]}
+                                 overlay={this.state.popoverLay}
                                  align={{
                                      overflow: {adjustY: 0, adjustX: 0},
                                      offset: [10, 0],
                                  }}
-                                 onVisibleChange={this.handleVisibleChange}
+                                 onVisibleChange={(visible) => {
+                                     this.setState({
+                                         visible,
+                                     });
+                                 }}
                                  onSelect={this.onSelect}
                         >
                             <div style={{
@@ -241,7 +253,9 @@ export default class watchPosition extends React.Component {
                             </div>
                         </Popover>
                     }
-                />
+                >
+                    定位
+                </NavBar>
                 <Map
                     amapkey={WebServiceUtil.amapkey}
                     version={WebServiceUtil.version}
