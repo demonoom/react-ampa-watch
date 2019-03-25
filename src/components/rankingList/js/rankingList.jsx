@@ -89,7 +89,7 @@ export default class rankingList extends React.Component {
                 if (result.success && result.response) {
                     if (result.response.length == 0) {
                         this.setState({
-                            toBind: false,
+                            toBind: true,
                         })
                     } else {
                         this.setState({
