@@ -228,80 +228,88 @@ export default class addNewLocation extends React.Component {
 
         return (
             <div id="addNewLocation">
-                <List className="my-list">
-                    <Item
-                        arrow="horizontal"
-                        platform="android"
-                        extra={this.state.posName}
-                        onClick={() => {
-                            this.posNameClick()
-                        }}>地点名称</Item>
-                </List>
-
-                <List className="my-list">
-                    <Item
-                        arrow="horizontal"
-                        platform="android"
-                        extra={this.state.pos}
-                        onClick={() => {
-                            this.posClick()
-                        }}>地点位置</Item>
-                </List>
-
-                <Button onClick={this.saveLocation} type="primary" size="small">保存</Button>
-
-                <div className='setPosModel' style={{display: 'none'}}>
-                    <div>
-                        <input onChange={this.searchChange} value={this.state.searchValue} type="text"
-                               placeholder="请输入位置信息"/>
-                        <div onClick={this.searchPos}>搜索</div>
-                    </div>
-
-                    <div>
-                        {this.state.posList}
-                    </div>
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">添加新地址</span>
+                    <span className="am-navbar-right"></span>
                 </div>
+                <div className="commonLocation-cont">
+                    <div className="WhiteSpace"></div>
+                    <List className="my-list line_public">
+                        <Item
+                            arrow="horizontal"
+                            platform="android"
+                            extra={this.state.posName}
+                            onClick={() => {
+                                this.posNameClick()
+                            }}>地点名称</Item>
+                    </List>
 
-                <div className='posMap' style={{display: 'none'}}>
-                    <Map
-                        plugins={plugins}
-                        events={events}
-                        zoom={this.state.zoom}
-                        center={this.state.position}
-                        useAMapUI={true}
-                        amapkey={WebServiceUtil.amapkey}
-                        version={WebServiceUtil.version}
-                        showBuildingBlock={true}
-                        buildingAnimation={true}
-                        viewMode='3D'
-                        rotateEnable={false}
-                        pitchEnable={false}
-                    >
-                        <PositionPicker
-                            posPicker={this.posPicker}
-                        />
-                        <Circle
+                    <List className="my-list">
+                        <Item
+                            arrow="horizontal"
+                            platform="android"
+                            extra={this.state.pos}
+                            onClick={() => {
+                                this.posClick()
+                            }}>地点位置</Item>
+                    </List>
+
+                    <div className="submitBtn" onClick={this.saveLocation}>保存</div>
+
+                    <div className='setPosModel' style={{display: 'none'}}>
+                        <div>
+                            <input onChange={this.searchChange} value={this.state.searchValue} type="text"
+                                   placeholder="请输入位置信息"/>
+                            <div onClick={this.searchPos}>搜索</div>
+                        </div>
+
+                        <div>
+                            {this.state.posList}
+                        </div>
+                    </div>
+
+                    <div className='posMap' style={{display: 'none'}}>
+                        <Map
+                            plugins={plugins}
+                            events={events}
+                            zoom={this.state.zoom}
                             center={this.state.position}
-                            radius={this.state.radius}
-                            events={circleEvents}
-                            style={this.state.style}
-                        />
-                        <div className="posMessage">
-                            <h4>{this.state.addressName}</h4>
-                        </div>
-
-                        <div className='setArea'>
-                            <div onClick={this.setPosDone}>完成</div>
-                            <div onClick={this.setPosQuit}>取消</div>
-                            <Slider
-                                style={{marginLeft: 30, marginRight: 30}}
-                                value={this.state.sliderValue}
-                                min={10}
-                                max={50}
-                                onChange={this.sliderOnChange()}
+                            useAMapUI={true}
+                            amapkey={WebServiceUtil.amapkey}
+                            version={WebServiceUtil.version}
+                            showBuildingBlock={true}
+                            buildingAnimation={true}
+                            viewMode='3D'
+                            rotateEnable={false}
+                            pitchEnable={false}
+                        >
+                            <PositionPicker
+                                posPicker={this.posPicker}
                             />
-                        </div>
-                    </Map>
+                            <Circle
+                                center={this.state.position}
+                                radius={this.state.radius}
+                                events={circleEvents}
+                                style={this.state.style}
+                            />
+                            <div className="posMessage">
+                                <h4>{this.state.addressName}</h4>
+                            </div>
+
+                            <div className='setArea'>
+                                <div onClick={this.setPosDone}>完成</div>
+                                <div onClick={this.setPosQuit}>取消</div>
+                                <Slider
+                                    style={{marginLeft: 30, marginRight: 30}}
+                                    value={this.state.sliderValue}
+                                    min={10}
+                                    max={50}
+                                    onChange={this.sliderOnChange()}
+                                />
+                            </div>
+                        </Map>
+                    </div>
                 </div>
             </div>
         )

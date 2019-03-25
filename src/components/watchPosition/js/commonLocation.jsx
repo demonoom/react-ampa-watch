@@ -1,6 +1,6 @@
 import React from "react";
 import {Toast, List} from "antd-mobile";
-
+import '../css/addNewLocation.less'
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -105,9 +105,14 @@ export default class commonLocation extends React.Component {
     render() {
 
         return (
-            <div id="commonLocation">
-                <div onClick={this.addNewPos}>添加新地点</div>
-                <div>
+            <div id="addNewLocation">
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">常用地点</span>
+                    <span className="am-navbar-right" onClick={this.addNewPos}>添加</span>
+                </div>
+                <div className="commonLocation-cont">
+                    <div className="WhiteSpace"></div>
                     {this.state.posList}
                 </div>
             </div>
