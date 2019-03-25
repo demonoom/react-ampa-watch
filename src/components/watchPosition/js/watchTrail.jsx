@@ -139,8 +139,10 @@ export default class watchTrail extends React.Component {
                         events={lineEvents}
                     />
                     <div id='timeChoose' className='customLayer'>
-                        <span onClick={this.timeChoose('0')}>今天</span>
+                        <span className="select" onClick={this.timeChoose('0')}>今天</span>
+                        <span className="right-line"></span>
                         <span onClick={this.timeChoose('1')}>昨天</span>
+                        <span className="right-line"></span>
                         <span onClick={this.timeChoose('2')}>前天</span>
                     </div>
                 </Map>

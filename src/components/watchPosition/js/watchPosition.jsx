@@ -237,11 +237,11 @@ export default class watchPosition extends React.Component {
                                 alignItems: 'center',
                             }}
                             >
-                                <Icon type="down"/>
+                                <Icon type="down"/>手表一
                             </div>
                         </Popover>
-                    }
-                />
+                    }>定位
+                </NavBar>
                 <Map
                     amapkey={WebServiceUtil.amapkey}
                     version={WebServiceUtil.version}
