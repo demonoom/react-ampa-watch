@@ -39,7 +39,12 @@ export default class loginSuccess extends React.Component {
 
     //进入主页
     toHomePge=()=>{
-        console.log("ok")
+        var data = {
+            method: 'backHomePage',
+        };
+        console.log(data,"data")
+        Bridge.callHandler(data, null, function (error) {
+        });
     }
 
     render() {
