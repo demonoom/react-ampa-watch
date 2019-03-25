@@ -232,6 +232,7 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'unbindGuardian',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -239,7 +240,7 @@ export default class morePage extends React.Component {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
                 } else {
-                    // Toast.info('');
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 }
             },
             onError: function (error) {
@@ -253,12 +254,14 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'deleteWatch2g',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
                     // Toast.info('');
                 }
@@ -363,8 +366,7 @@ export default class morePage extends React.Component {
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
-                <div onClick={this.unbindGuardian}>解绑监护人</div>
-                <div onClick={this.deleteWatch2g}>解绑手表</div>
+                <div style={{display:this.state.toBind ? "none":"block"}} onClick={this.unbindGuardian}>解绑</div>
                 <div onClick={this.logout}>退出登录</div>
             </div>
         )
