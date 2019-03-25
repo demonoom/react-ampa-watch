@@ -87,6 +87,12 @@ const addNewLocation = (location, cb) => {
     }, 'updateClock')
 };
 
+const updateLocation= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/watchPosition/js/updateLocation').default)
+    }, 'updateLocation')
+};
+
 //闹钟
 const addClock = (location, cb) => {
     require.ensure([], require => {
@@ -111,6 +117,7 @@ const schoolPush= (location, cb) => {
         cb(null, require('./components/schoolPush/js/schoolPush').default)
     }, 'schoolPush')
 };
+
 const teHomework= (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/schoolPush/js/teHomework').default)
@@ -196,6 +203,7 @@ ReactDOM.render(
             <Route path="watchTrail" getComponent={watchTrail}/>
             <Route path="commonLocation" getComponent={commonLocation}/>
             <Route path="addNewLocation" getComponent={addNewLocation}/>
+            <Route path="updateLocation" getComponent={updateLocation}/>
             <Route path="addClock" getComponent={addClock}/>
             <Route path="clockList" getComponent={clockList}/>
             <Route path="updateClock" getComponent={updateClock}/>

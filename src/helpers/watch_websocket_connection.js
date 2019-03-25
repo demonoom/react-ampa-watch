@@ -6,8 +6,8 @@ var isDebugLocal = true;
 export function WatchWebsocketConnection() {
     this.msgWsListener = null;
     this.REMOTE_URL = "ws://www.maaee.com:8887/Excoord_MessageServer/message";
-    this.LOCAL_URL = "ws://192.168.50.71:9797/Excoord_WatchServer_2G/message";
-    this.LOCAL_URL_LIVE = "ws://192.168.50.71:9797/Excoord_WatchServer_2G/message";
+    this.LOCAL_URL = "ws://192.168.50.15:9797/Excoord_WatchServer_2G/message";
+    this.LOCAL_URL_LIVE = "ws://192.168.50.15:9797/Excoord_WatchServer_2G/message";
     this.WS_URL = isDebug ? (isDebugLocal ? this.LOCAL_URL_LIVE : this.LOCAL_URL) : this.REMOTE_URL;
     this.ws = null;
     this.PING_COMMAND = "ping_0123456789_abcdefg";
