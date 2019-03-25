@@ -211,7 +211,7 @@ export default class addNewLocation extends React.Component {
     setPosModelDown = () => {
         var _this = this;
         $('.setPosModel').slideUp(function () {
-            _this.setState({posList:[]})
+            _this.setState({posList: [], searchValue: ''})
         });
     };
 
