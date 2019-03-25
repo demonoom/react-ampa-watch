@@ -304,14 +304,14 @@ export default class addNewLocation extends React.Component {
                                 style={this.state.style}
                             />
                             <div className="posMessage">
-                                <div>{this.state.addressName}</div>
+                                <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div><span className="icon-del" onClick={this.setPosQuit}></span>
                             </div>
 
                             <div className='setArea'>
-                                <div onClick={this.setPosDone}>完成</div>
-                                <div onClick={this.setPosQuit}>取消</div>
+                                <div className="submitBtn" onClick={this.setPosDone}>确定</div>
+                                <div className="SafeRange">安全范围</div>
                                 <Slider
-                                    style={{marginLeft: 30, marginRight: 30}}
+                                    style={{marginLeft: 0, marginRight: 0}}
                                     value={this.state.sliderValue}
                                     min={10}
                                     max={50}
