@@ -333,12 +333,13 @@ export default class teHomework extends React.Component {
                     <div className='icon_praise'>
                         {
                             isZan ?
-                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
-                                <span className='like' onClick={this.toClick.bind(this, rowData.id, rowID)}>未点赞</span>
+                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>取消</span> :
+                                <span className='like' onClick={this.toClick.bind(this, rowData.id, rowID)}>点赞</span>
                         }
                         <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
                     </div>
                     <div className='replyCont' style={{display:zanArr.length == 0 && pingArr.length == 0 ? "none":"block"}}>
+                       <div className='icon_arrowUp'></div>
                         <div className='icon_emptyHeartB' style={{display:zanArr.length == 0 ? "none":"block"}}>
                             {
                                 zanArr.map((v, i) => {

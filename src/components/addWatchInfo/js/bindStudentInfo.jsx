@@ -98,6 +98,7 @@ export default class bindStudentInfo extends React.Component {
     render() {
         return (
             <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
+                <div className="icon_back"></div>
                 <div className="innerCont">
                     <div className="p38 bindStu login-input">
                         <div className="picDiv">

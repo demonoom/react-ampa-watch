@@ -137,6 +137,11 @@ ul, li {
   height: 100%;
   width: 100%;
 }
+.grayBorder{
+  height: 12px;
+  background: #ededed;
+  width: 100%;
+}
 .text_hidden {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -170,7 +175,7 @@ ul, li {
 img{
   max-width: 100%;
 }
-.am-list-body::before,.am-list-body::after, .am-picker-popup-header::after{
+.am-list-body::before,.am-list-body::after, .am-picker-popup-header::after,.am-list-line::after{
   display: none !important;
 }
 .am-list-line,.am-list-body{
@@ -233,6 +238,23 @@ img{
   width: 100%;
   z-index: 100;
 }
+.line_publicD{
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #ddd;
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    -o-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
+}
 .line_public{
   position: relative;
   &::after{
@@ -242,7 +264,7 @@ img{
     bottom: 0;
     height: 1px;
     width: 100%;
-    background-color: #DDDDDD;
+    background-color: #e5e5e5;
     -webkit-transform: scaleY(0.5);
     -moz-transform: scaleY(0.5);
     -ms-transform: scaleY(0.5);
@@ -259,7 +281,7 @@ img{
     top: 0;
     height: 1px;
     width: 100%;
-    background-color: #DDDDDD;
+    background-color: #e5e5e5;
     -webkit-transform: scaleY(0.5);
     -moz-transform: scaleY(0.5);
     -ms-transform: scaleY(0.5);

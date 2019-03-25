@@ -78,7 +78,7 @@ export default class stuAccountRegist extends React.Component {
         var arr = [];
         data.forEach(function (v, i) {
             arr.push(<li
-                className='line_public noomPowerList textOver'
+                className='line_publicD noomPowerList textOver'
                 onClick={() => {
                     _this.schoolItemOnClick(v);
                 }}>{v.name}</li>)
@@ -231,12 +231,13 @@ export default class stuAccountRegist extends React.Component {
     render() {
         return (
             <div id="stuAccountRegist">
+                <div className="icon_back"></div>
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className="bindStudent">
                             <img src={require('../../images/bindStudent.png')} alt=""/>
                         </div>
-                        <div className='am-list-item am-list-item-middle line_public icon-graySchool '
+                        <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
                              onClick={this.schoolOnClick}>
                             <div className="am-list-line">
                                 <div className="am-list-content"></div>
@@ -245,7 +246,7 @@ export default class stuAccountRegist extends React.Component {
                                 <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
-                        <div id='stuClazz' className={'line_public icon-grayClass ' + this.state.stuClassName}>
+                        <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
                             <Picker
                                 data={this.state.data}
                                 cols={this.state.cols}
@@ -258,7 +259,7 @@ export default class stuAccountRegist extends React.Component {
                             </Picker>
                         </div>
                     </div>
-                    <div className="line_public login-input icon-grayStudent">
+                    <div className="line_publicD login-input icon-grayStudent">
                         <InputItem
                             className=""
                             placeholder="请输入学生姓名"

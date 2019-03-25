@@ -83,6 +83,7 @@ export default class schoolInfo extends React.Component {
     render () {
         return (
             <div id="schoolInfo">
+                <div className="icon_back"></div>
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
                         <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>

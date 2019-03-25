@@ -460,8 +460,8 @@ export default class updateClock extends React.Component {
                 >Off</List.Item> */}
                 <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
                 <div className='btns my_flex'>
-                    <div className='leftBtn' onClick={this.toSave}>保存</div>
-                    <div  className='rightBtn' onClick={this.showAlert}>删除</div>
+                    <div  className='leftBtn' onClick={this.showAlert}>删除</div>
+                    <div className='rightBtn' onClick={this.toSave}>保存</div>
                 </div>
             </div>
         )

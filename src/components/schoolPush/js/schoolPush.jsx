@@ -216,14 +216,15 @@ export default class schoolPush extends React.Component {
                     <div className='icon_praise'>
                         {
                             isZan ?
-                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
-                                <span className='like' onClick={this.praiseForTopicById.bind(this, rowData.id, rowID)}>未点赞</span>
+                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>取消</span> :
+                                <span className='like' onClick={this.praiseForTopicById.bind(this, rowData.id, rowID)}>点赞</span>
                         }
                     </div>
 
                     {
                         zanArr.length > 0 ?
                             <div className='replyCont'>
+                                <div className='icon_arrowUp'></div>
                                 <div className='icon_emptyHeartB'>
                                 {
                                     zanArr.map((v, i) => {

@@ -11,36 +11,36 @@
     flex-basis:60%;
   }
   .btns{
-    padding: 0 15px;
     position: absolute;
-    left: 50%;
+    left: 15px;
     bottom: 35px;
-    -webkit-transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    transform: translateX(-50%);
+    border:1px  #17ACF7 solid;
+    border-radius: 25px;
+    width: calc(~"100% - 30px");
     &>div{
-      width: 100px;
+      width: 50%;
       box-sizing: border-box;
       border-radius: 25px;
       cursor: pointer;
-      line-height: 40px;
-      height: 40px;
+      line-height: 49px;
+      height: 49px;
       text-align: center;
       font-size: 16px;
       letter-spacing: 5px;
+      color: #17ACF7;
     }
     .leftBtn{
-      color: white;
-      background-color: #17ACF7;
-      margin-right: 20px;
-      border: 1px #17ACF7 solid;
-      width: 150px;
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute;
+        right: 0;
+        width: 1px;
+        height: 100%;
+        background-color: #17ACF7;
+      }
     }
     .rightBtn{
-      color: #17ACF7;
-      border: 1px #17ACF7 solid;
       letter-spacing: 5px;
     }
   }
