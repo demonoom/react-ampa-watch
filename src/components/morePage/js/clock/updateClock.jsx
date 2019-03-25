@@ -1,7 +1,7 @@
 import React from "react";
 import {
-    DatePicker, List, Picker, InputItem, Toast,
-    Modal, WhiteSpace, Switch, Checkbox, Flex
+    DatePicker, List, Picker, Toast,
+    Modal, Switch, Checkbox, Flex
 } from 'antd-mobile';
 import '../../css/addClock.less';
 import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
@@ -113,7 +113,7 @@ export default class updateClock extends React.Component {
 
     }
 
-
+    //根据ID获取
     getInitData = (clockId) => {
         var param = {
             "method": 'getWatch2gClocksById',
@@ -122,7 +122,6 @@ export default class updateClock extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result)
                 if (result.success && result.response) {
                     this.setState({
                         defaleSelect: JSON.parse(result.response.repeatType).length == 0 ? "永不" : JSON.parse(result.response.repeatType).join(""),
@@ -132,7 +131,6 @@ export default class updateClock extends React.Component {
                         initTimeArr:JSON.parse(result.response.repeatType),
                         typeValue: [result.response.noticeType],
                     }, () => {
-                        console.log(this.state.typeValue)
                     })
                 } else {
 
@@ -146,7 +144,6 @@ export default class updateClock extends React.Component {
 
     //选择器改变事件
     onPickerChange = (val) => {
-        console.log(val, "val")
         this.setState({
             typeValue: val,
         });
@@ -174,7 +171,6 @@ export default class updateClock extends React.Component {
 
     //闹钟类型改变
     onAlarmChange = (v) => {
-        console.log(v, "onAlarmChange")
         this.setState({
             alarmValue: v
         })
@@ -193,12 +189,9 @@ export default class updateClock extends React.Component {
             { text: '取消' },
             {
                 text: '确定', onPress: value => {
-                    console.log(`输入的内容:${value}`);
-                    console.log(value, "value");
                     this.setState({
                         alarmValue: [value],
                     }, () => {
-                        console.log(this.state.alarmValue)
                     });
                 }
             },
@@ -212,7 +205,6 @@ export default class updateClock extends React.Component {
     }
     //星期的选择
     onSelectChange = (e, data,index) => {
-        console.log(data,"data")
         if (e.target.checked) {
             var arr = [];
             var tempArr = [];
@@ -225,8 +217,6 @@ export default class updateClock extends React.Component {
                 sendData: this.state.sendData.concat(tempArr),
                 allData:this.state.allData.concat(allArr),
             }, () => {
-                console.log(this.state.allData, "ppp")
-                console.log(this.state.timeArr, "timeArr")
             })
         } else {
             this.state.timeArr.forEach((v, i) => {
@@ -239,13 +229,10 @@ export default class updateClock extends React.Component {
                     sendData: this.state.sendData,
                     allData:this.state.allData
                 },()=>{
-                console.log(this.state.timeArr, "timeArr")
-                console.log(this.state.allData, "ppp")
                 })
             })
 
             this.state.allData.forEach((v,i)=>{
-                console.log(v,"vvv")
                 if(data.value == v.value){
                     this.state.allData.splice(i, 1);
                 }

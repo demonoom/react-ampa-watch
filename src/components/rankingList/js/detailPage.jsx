@@ -112,7 +112,6 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 var response = result.response;
                 this.setState({
                     detailData: result.response
@@ -130,7 +129,6 @@ export default class detailPage extends React.Component {
     * @param braceletSportSteps
     */
     buildFaceLineChart = (braceletHeartSteps) => {
-        console.log(braceletHeartSteps, "braceletHeartSteps")
         var _this = this;
         var xClazzNameArray = [];
         var AnswerRight = [];

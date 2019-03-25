@@ -1,7 +1,6 @@
 import React from "react";
 import {
-    DatePicker, List, Picker, InputItem, Toast,
-    Modal, WhiteSpace, Switch, Checkbox, Flex
+    List,Toast,Modal, Switch, Flex
 } from 'antd-mobile';
 import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
 import '../../css/clockList.less'
@@ -82,10 +81,8 @@ export default class clockList extends React.Component {
             "actionName": "watchAction",
             "pageNo": -1
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 this.setState({
                     clockList: result.response,
                 })
@@ -97,7 +94,6 @@ export default class clockList extends React.Component {
 
     //开关项点击
     offChange = (index, isOpen, data) => {
-        console.log(isOpen, "isOpen");
         if (isOpen == 1) {
             this.state.clockList[index].valid = 0;
             this.setState({
@@ -115,7 +111,6 @@ export default class clockList extends React.Component {
             "isOpen": isOpen == 1 ? 0 : 1,
             "actionName": "watchAction"
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {

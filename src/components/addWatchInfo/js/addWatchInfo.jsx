@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     InputItem, Toast,
-    Modal, Picker, List, WhiteSpace
+    Modal, Picker, List
 } from 'antd-mobile';
 
 import '../css/addWatchInfo.less'
@@ -64,12 +64,27 @@ export default class addWatchInfo extends React.Component {
         this.setState({
             ident
         })
+        window.addEventListener('resize', this.onWindwoResize);
     }
 
     componentDidMount () {
         Bridge.setShareAble("false");
         document.title = '手环绑定学生班级列表';
     }
+    componentWillUnmount () {
+        window.removeEventListener('resize', this.onWindwoResize);
+    }
+
+    //监听窗口改变时间
+    onWindwoResize = () => {
+        // this
+        setTimeout(() => {
+            this.setState({
+                clientHeight: document.body.clientHeight,
+            })
+        }, 100)
+    }
+
     //*根据mac地址获取是第几次登录 */
     getWatch2gByMacAddress = (macAdd) => {
         var param = {
@@ -131,7 +146,6 @@ export default class addWatchInfo extends React.Component {
                         relationValue: [value],
                         RelationClassName: 'color_3'
                     }, () => {
-                        console.log(this.state.relationValue)
                     });
                 }
             },
@@ -152,16 +166,16 @@ export default class addWatchInfo extends React.Component {
                 Toast.info("请输入手表号码")
                 return
             }
-            var url = WebServiceUtil.mobileServiceURL + "babyInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber+"&ident="+this.state.ident
+            var url = WebServiceUtil.mobileServiceURL + "babyInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber + "&ident=" + this.state.ident
             var data = {
                 method: 'openNewPage',
+                selfBack: true,
                 url: url
             };
             Bridge.callHandler(data, null, function (error) {
                 window.location.href = url;
             });
         } else {
-            console.log(this.state.relationValue, "this.state.familyRelate")
             if (this.state.macId == "") {
                 Toast.info("请扫描手表")
                 return
@@ -178,7 +192,6 @@ export default class addWatchInfo extends React.Component {
                 "actionName": "watchAction",
                 "guardianId": this.state.ident//绑定监护人的userId
             };
-            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
                     if (result.success && result.response) {
@@ -207,7 +220,6 @@ export default class addWatchInfo extends React.Component {
 
     //选择器改变事件
     onPickerChange = (val) => {
-        console.log(val, "val")
         this.setState({
             sexValue: val,
             extraClassName: 'color_3'
@@ -216,7 +228,6 @@ export default class addWatchInfo extends React.Component {
 
     //点击picker确定按钮
     clickSure = (val) => {
-        console.log(val, "val")
         this.setState({
             sexValue: val,
             extraClassName: 'color_3'
@@ -239,7 +250,6 @@ export default class addWatchInfo extends React.Component {
     };
     //关系点击确定
     clickRelationSure = (val) => {
-        console.log(val, "val")
         if (val[0] == "自定义") {
             $(".am-modal-input input").focus();
             this.showModal()
@@ -261,16 +271,24 @@ export default class addWatchInfo extends React.Component {
 
     //phoneNumber
     phoneNumber = (value) => {
-        console.log(value, "opop")
         this.setState({
             phonenumber: value,
 
         });
     }
+
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
-            <div id="addWatchInfo" style={{ height: document.body.clientHeight }}>
-                <div className="icon_back"></div>
+            <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className='picDiv'><img
