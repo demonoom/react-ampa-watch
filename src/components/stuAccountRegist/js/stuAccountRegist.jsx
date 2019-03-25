@@ -221,6 +221,7 @@ export default class stuAccountRegist extends React.Component {
         var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName+ "&schName=" + this.state.schoolName+ "&clazzName=" + $('#stuClazz .am-list-extra').html());
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
@@ -230,7 +231,6 @@ export default class stuAccountRegist extends React.Component {
     toBack = () => {
         var data = {
             method: 'popView',
-            selfBack: true,
         };
         Bridge.callHandler(data, null, function (error) {
         });

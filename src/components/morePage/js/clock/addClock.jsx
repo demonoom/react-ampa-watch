@@ -1,7 +1,7 @@
 import React from "react";
 import {
-    DatePicker, List, Picker, InputItem, Toast,
-    Modal, WhiteSpace, Switch, Checkbox, Flex
+    DatePicker, List, Picker, Toast,
+    Modal, Switch, Checkbox, Flex
 } from 'antd-mobile';
 import '../../css/addClock.less';
 import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
@@ -170,12 +170,9 @@ export default class addClock extends React.Component {
             },
             {
                 text: '确定', onPress: value => {
-                    console.log(`输入的内容:${value}`);
-                    console.log(value, "value");
                     this.setState({
                         alarmValue: [value],
                     }, () => {
-                        console.log(this.state.alarmValue)
                     });
                 }
             },
@@ -197,7 +194,6 @@ export default class addClock extends React.Component {
             this.setState({
                 allData: sortByKey(this.state.allData.concat(allArr), "value")
             }, () => {
-                console.log(this.state.allData, "allData")
             })
         } else {
             this.state.allData.forEach((v, i) => {
@@ -207,7 +203,6 @@ export default class addClock extends React.Component {
                 this.setState({
                     allData: sortByKey(this.state.allData, "value")
                 }, () => {
-                    console.log(this.state.allData, "allData")
                 })
             })
         }

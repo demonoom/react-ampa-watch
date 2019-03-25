@@ -70,7 +70,7 @@ export default class teHomework extends React.Component {
         });
     }
 
-
+    //请求作业数据
     requestData = (userId) => {
         var _this = this;
         var param = {
@@ -79,7 +79,6 @@ export default class teHomework extends React.Component {
             "ident": userId,
             "pageNo": this.state.defaultPageNo
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -96,7 +95,6 @@ export default class teHomework extends React.Component {
                         isLoading = false;
                     }
 
-                    console.log(arr, 'yyyy');
 
                     _this.initData = _this.initData.concat(arr);
                     _this.setState({
@@ -136,14 +134,10 @@ export default class teHomework extends React.Component {
             "method": 'getTopicById',
             "topicId": topid
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    console.log(result, "uiuiui")
-                    console.log(index, "resuthis.initDatalt")
                     this.initData[index] = result.response;
-                    console.log(this.initData, "resuthis.initDatalt")
                     this.setState({
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
@@ -165,7 +159,6 @@ export default class teHomework extends React.Component {
             "topicId": topicId,
             "ident": this.state.userId
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -188,10 +181,8 @@ export default class teHomework extends React.Component {
             "topicId": topicId,
             "ident": this.state.userId
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
@@ -246,7 +237,6 @@ export default class teHomework extends React.Component {
             "topicCommentId": comId,
             "ident": this.state.userId
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -276,7 +266,6 @@ export default class teHomework extends React.Component {
 
     //输入内容的变化
     contentChange = (value) => {
-        console.log(value, "opop")
         this.setState({
             content: value,
         });
@@ -297,10 +286,8 @@ export default class teHomework extends React.Component {
                 "toUserId": this.state.toUserId,
                 "ident": this.state.userId
             };
-            console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
-                    console.log(result, "result")
                     if (result.success) {
                         this.setState({
                             showSend: false,
@@ -391,7 +378,6 @@ export default class teHomework extends React.Component {
                         <div className={zanArr.length == 0 ? '' : 'line_publicBefore'} style={{display:pingArr.length == 0 ? "none":"block"}}>
                             {
                                 pingArr.map((v, i) => {
-                                    console.log(v, "opopop")
                                     return (
                                         <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
                                             {
@@ -417,7 +403,7 @@ export default class teHomework extends React.Component {
             );
         };
         return (
-            <div id='teHomework' className='bg_gray'>
+            <div id='teHomework' className='bg_gray' style={{height: this.state.clientHeight}}>
                 <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
                     <InputItem
                         className="content"

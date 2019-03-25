@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-
-} from 'antd-mobile';
 import '../css/loginSuccess.less'
 export default class loginSuccess extends React.Component {
     constructor(props) {
@@ -19,6 +16,7 @@ export default class loginSuccess extends React.Component {
         this.setState({
             loginType,
         })
+        window.addEventListener('resize', this.onWindwoResize);
     }
     componentDidMount(){
         Bridge.setShareAble("false");
@@ -28,7 +26,7 @@ export default class loginSuccess extends React.Component {
     }
 
     //监听窗口改变时间
-    onWindwoResize() {
+    onWindwoResize=()=> {
         // this
         setTimeout(() => {
             this.setState({
@@ -42,7 +40,6 @@ export default class loginSuccess extends React.Component {
         var data = {
             method: 'backHomePage',
         };
-        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }

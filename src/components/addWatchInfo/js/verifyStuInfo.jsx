@@ -1,7 +1,6 @@
 import React from 'react';
 import {
-    InputItem, Toast,
-    Modal
+    InputItem, Toast, Modal
 } from 'antd-mobile';
 const alert = Modal.alert;
 export default class verifyStuInfo extends React.Component {
@@ -10,7 +9,7 @@ export default class verifyStuInfo extends React.Component {
         this.state = {
             stuName: "",
             schoolName: "",
-            watchId:"",
+            watchId: "",
             littleAntName: "",
         };
     }
@@ -29,6 +28,7 @@ export default class verifyStuInfo extends React.Component {
             sex
         })
         this.getWatchId(macAddr)
+        window.addEventListener('resize', this.onWindwoResize);
     }
     componentDidMount () {
         Bridge.setShareAble("false");
@@ -38,7 +38,7 @@ export default class verifyStuInfo extends React.Component {
     }
 
     //监听窗口改变时间
-    onWindwoResize () {
+    onWindwoResize = () => {
         // this
         setTimeout(() => {
             this.setState({
@@ -48,7 +48,6 @@ export default class verifyStuInfo extends React.Component {
     }
     //输入小蚂蚁账号
     littAntOnChange = (value) => {
-        console.log(value, "p")
         this.setState({
             littleAntName: value,
 
@@ -56,19 +55,18 @@ export default class verifyStuInfo extends React.Component {
     }
 
     //
-    getWatchId=(macAddress)=>{
+    getWatchId = (macAddress) => {
         var param = {
             "method": 'getWatch2gByMacAddress',
             "macAddress": macAddress,
-            "actionName":"watchAction"
+            "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.success && result.response) {
-                   this.setState({
-                       watchId:result.response.id
-                   })
+                    this.setState({
+                        watchId: result.response.id
+                    })
                 } else {
                     // Toast.info('');
                 }
@@ -80,7 +78,6 @@ export default class verifyStuInfo extends React.Component {
     }
     //输入学生姓名
     stuOnChange = (value) => {
-        console.log(value, "p")
         this.setState({
             stuName: value,
 
@@ -88,7 +85,6 @@ export default class verifyStuInfo extends React.Component {
     }
     //输入学校
     schoolOnChange = (value) => {
-        console.log(value, "schoolName")
         this.setState({
             schoolName: value,
 
@@ -109,7 +105,6 @@ export default class verifyStuInfo extends React.Component {
             Toast.info("请输入学校名称");
             return
         }
-        
         var param = {
             "method": 'bindStudentAccountByAccount',
             "account": this.state.littleAntName,
@@ -118,15 +113,14 @@ export default class verifyStuInfo extends React.Component {
             "watch2gId": this.state.watchId,
             "actionName": "watchAction",
         };
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "rerere")
                 if (result.success && result.response) {
                     Toast.info('验证成功');
                     var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=" + this.state.loginType;
                     var data = {
                         method: 'openNewPage',
+                        selfBack: true,
                         url: url
                     };
                     Bridge.callHandler(data, null, function (error) {
@@ -143,13 +137,22 @@ export default class verifyStuInfo extends React.Component {
 
 
     }
+
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont bindStu login-input">
                     <div className="picDiv">
                         <img
-                            src={require('../../images/stuAccountPic.png')} alt=""/>
+                            src={require('../../images/stuAccountPic.png')} alt="" />
                     </div>
                     <div className="icon_watch line_publicD stuCont">
                         <InputItem
@@ -167,14 +170,14 @@ export default class verifyStuInfo extends React.Component {
                             onChange={this.stuOnChange}
                         ></InputItem>
                     </div>
-                   <div className="icon_school line_publicD">
-                       <InputItem
-                           className=""
-                           placeholder="输入此账号所在的学校名称"
-                           value={this.state.schoolName}
-                           onChange={this.schoolOnChange}
-                       ></InputItem>
-                   </div>
+                    <div className="icon_school line_publicD">
+                        <InputItem
+                            className=""
+                            placeholder="输入此账号所在的学校名称"
+                            value={this.state.schoolName}
+                            onChange={this.schoolOnChange}
+                        ></InputItem>
+                    </div>
 
                 </div>
 

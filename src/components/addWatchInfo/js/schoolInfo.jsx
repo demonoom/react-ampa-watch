@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    InputItem, Toast, Modal
+    Toast, Modal
 } from 'antd-mobile';
 import '../css/schoolInfo.less'
 const alert = Modal.alert;
@@ -26,6 +26,7 @@ export default class schoolInfo extends React.Component {
             macAddr,
             sex
         })
+        window.addEventListener('resize', this.onWindwoResize);
     }
 
     componentDidMount () {
@@ -37,7 +38,7 @@ export default class schoolInfo extends React.Component {
     }
 
     //监听窗口改变时间
-    onWindwoResize () {
+    onWindwoResize =()=> {
         // this
         setTimeout(() => {
             this.setState({
@@ -48,7 +49,6 @@ export default class schoolInfo extends React.Component {
 
     //输入小蚂蚁账号
     littAntOnChange = (value) => {
-        console.log(value, "p")
         this.setState({
             littleAntName: value,
 
@@ -59,6 +59,7 @@ export default class schoolInfo extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
@@ -83,7 +84,6 @@ export default class schoolInfo extends React.Component {
     toBack = () => {
         var data = {
             method: 'popView',
-            selfBack: true,
         };
         Bridge.callHandler(data, null, function (error) {
         });

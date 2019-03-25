@@ -1,5 +1,5 @@
 import React from "react";
-import {Toast, InputItem, Button} from 'antd-mobile';
+import { Toast, InputItem, Button } from 'antd-mobile';
 import '../css/validationMes.less'
 
 export default class validationMes extends React.Component {
@@ -11,7 +11,7 @@ export default class validationMes extends React.Component {
         };
     }
 
-    componentDidMount() {
+    componentDidMount () {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var macAddr = locationSearch.split("&")[0].split('=')[1];
@@ -20,7 +20,7 @@ export default class validationMes extends React.Component {
         var stuName = locationSearch.split("&")[3].split('=')[1];
         var schName = locationSearch.split("&")[4].split('=')[1];
         var clazzName = locationSearch.split("&")[5].split('=')[1];
-        this.setState({macAddr, classId, schoolId, stuName, schName, clazzName});
+        this.setState({ macAddr, classId, schoolId, stuName, schName, clazzName });
         this.getWatch2gByMacAddress(macAddr);
     }
 
@@ -38,7 +38,7 @@ export default class validationMes extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
-                    _this.setState({childSex: result.response.childSex, macId: result.response.id})
+                    _this.setState({ childSex: result.response.childSex, macId: result.response.id })
                 } else {
                     Toast.fail(result.msg, 1);
                 }
@@ -50,11 +50,11 @@ export default class validationMes extends React.Component {
     };
 
     teNameOnChange = (e) => {
-        this.setState({teName: e})
+        this.setState({ teName: e })
     };
 
     teNumOnChange = (e) => {
-        this.setState({teNumOnChange: e})
+        this.setState({ teNumOnChange: e })
     };
 
     nextStep = () => {
@@ -92,6 +92,7 @@ export default class validationMes extends React.Component {
                     var url = encodeURI(WebServiceUtil.mobileServiceURL + "loginSuccess??type=1");
                     var data = {
                         method: 'openNewPage',
+                        selfBack: true,
                         url: url
                     };
                     Bridge.callHandler(data, null, function (error) {
@@ -113,19 +114,18 @@ export default class validationMes extends React.Component {
     toBack = () => {
         var data = {
             method: 'popView',
-            selfBack: true,
         };
         Bridge.callHandler(data, null, function (error) {
         });
     }
-    render() {
+    render () {
         return (
             <div id="validationMes">
                 <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">
                         <div className="bindStudent">
-                            <img src={require('../../images/bindTeacher.png')} alt=""/>
+                            <img src={require('../../images/bindTeacher.png')} alt="" />
                         </div>
                         <div className="School-information">
                             <span className="school text_hidden">{this.state.schName}</span>
