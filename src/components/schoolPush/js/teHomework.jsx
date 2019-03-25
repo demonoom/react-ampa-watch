@@ -382,7 +382,7 @@ export default class teHomework extends React.Component {
                                         <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
                                             {
                                                 v.user.userName == v.toUser.userName ?
-                                                    <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
+                                                    <span> <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span></span>
                                                     :
                                                     <span>
                                                     <span className='blueTxt'>{v.user.userName}</span>

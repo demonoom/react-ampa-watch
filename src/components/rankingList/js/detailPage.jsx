@@ -152,15 +152,17 @@ export default class detailPage extends React.Component {
             xClazzNameArray = unique(xClazzNameArray)
 
         });
+        console.log(xClazzNameArray,'xx')
+        xClazzNameArray=["25日","26日","27日","28日"]
+        SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
         var faceChartDiv = <div
         // style={{display:braceletHeartSteps.length == 0 ? "none":"block"}} 
         >
-            <div style={{ width: '100%', height: '300px' }} className="echarts_wrap">
+            <div style={{ width: '100%', height: '250px' }} className="echarts_wrap">
                 <ReactEcharts
                     option={stepOption}
                     style={{ height: '100%', width: '100%' }}
-                    theme='macarons'
                     className='' />
             </div>
         </div>;
@@ -189,14 +191,23 @@ export default class detailPage extends React.Component {
                         width: 1,
                         type: 'solid'
                     },
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
                 },
             },
-            legend: {
-                show: false,
-                data: [],
-                bottom: 0,
-                right: '5',
+            grid: {
+                left:'8%',
+                right:'5%',
+                top:'40',
+                bottom: '10%',//距离下边的距离
             },
+            // legend: {
+            //     show: false,
+            //     data: [],
+            //     bottom: 0,
+            //     right: '0',
+            // },
             // toolbox: {
             //     left: 'center',
             //     feature: {
@@ -220,6 +231,7 @@ export default class detailPage extends React.Component {
                             type: 'solid'
                         },
                     },
+
                 }
             ],
             yAxis: [
@@ -233,34 +245,48 @@ export default class detailPage extends React.Component {
                             type: 'solid'
                         },
                     },
-
-
                 }
             ],
+
             series: [
                 {
-                    name: 'attention',
+                    name: '总数',
                     type: 'line',
+                    areaStyle: {},
                     smooth: true,
                     data: AnswerRight,
                     left: 0,
                     bottom: 0,
-                    symbolSize: 6,
-                    // markLine: {
-                    //     silent: true,
-                    //     data: [{
-                    //         yAxis: 90
-                    //     }]
-                    // },
+                    symbolSize: 3,
                     itemStyle: {
                         //通常情况下：
+                       normal:{
+                           color:'#49c6ff',
+                           lineStyle:{
+                               color:'#49c6ff'
+                           }
+                       }
+                    },
+                    label: {
                         normal: {
-                            //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组
-                            "color": [
-                                "rgba(73,198,255,0.67)",
-                                "rgba(107,230,193,0.84)",
-                                "rgba(98,108,145,0.77)"
-                            ],
+                            show: true,
+                            position: 'top',
+                        }
+                    }
+                },
+                {
+                    name: '答题次数',
+                    type: 'line',
+                    areaStyle: {},
+                    // stack: '总量',
+                    data: AnswerTotal,
+                    itemStyle: {
+                        //通常情况下：
+                        normal:{
+                            color:'#d615f5',
+                            lineStyle:{
+                                color:'#d615f5'
+                            }
                         }
                     },
                     label: {
@@ -271,22 +297,20 @@ export default class detailPage extends React.Component {
                     }
                 },
                 {
-                    name: 'confuse',
+                    name: '答对次数',
                     type: 'line',
-                    // stack: '总量',
-                    data: AnswerTotal,
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top',
-                        }
-                    }
-                },
-                {
-                    name: 'think',
-                    type: 'line',
+                    areaStyle: {},
                     // stack: '总量',
                     data: SubjectTotal,
+                    itemStyle: {
+                        //通常情况下：
+                        normal:{
+                            color:'#6be6c1',
+                            lineStyle:{
+                                color:'#6be6c1'
+                            }
+                        }
+                    },
                     label: {
                         normal: {
                             show: true,
