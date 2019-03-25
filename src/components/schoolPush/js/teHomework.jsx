@@ -1,6 +1,7 @@
 import React from "react";
 import { Toast, ListView, Tabs, Modal, InputItem } from "antd-mobile";
 import '../css/teHomework.less'
+var calm;
 const alert = Modal.alert;
 const dataSource = new ListView.DataSource({
     rowHasChanged: (row1, row2) => row1 !== row2,
@@ -8,15 +9,16 @@ const dataSource = new ListView.DataSource({
 export default class teHomework extends React.Component {
     constructor(props) {
         super(props);
-
         this.initData = [];
+        calm = this;
         this.state = {
             dataSource: dataSource.cloneWithRows(this.initData),
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
             sendValue: "",
-            content: ""
+            content: "",
+            showSend: false
         };
     }
 
@@ -25,7 +27,9 @@ export default class teHomework extends React.Component {
     }
 
     componentDidMount () {
-        var userId = 41;
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var userId = locationSearch.split("&")[0].split('=')[1];
         this.setState({
             userId
         })
@@ -66,10 +70,6 @@ export default class teHomework extends React.Component {
                         isLoadingLeft: isLoading,
                         refreshing: false
                     })
-
-
-
-
                 } else {
                     Toast.info(result);
                 }
@@ -105,9 +105,11 @@ export default class teHomework extends React.Component {
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success) {
+                    console.log(result, "uiuiui")
+                    console.log(index, "resuthis.initDatalt")
                     this.initData[index] = result.response;
+                    console.log(this.initData, "resuthis.initDatalt")
                     this.setState({
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
@@ -127,7 +129,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'praiseForTopic',
             "topicId": topicId,
-            "ident": '41'
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -150,7 +152,7 @@ export default class teHomework extends React.Component {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
-            "ident": "41"
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -161,7 +163,6 @@ export default class teHomework extends React.Component {
                 } else {
                     Toast.info(result);
                 }
-
             },
             onError: function (error) {
                 Toast.info('请求失败');
@@ -170,16 +171,20 @@ export default class teHomework extends React.Component {
     }
     //删除页面
     toShanchu = (v, index) => {
-        if (v.user.colUid == 41) {
+        if (v.user.colUid == this.state.userId) {
             this.showAlert(v.id, v.topicId, index)
         } else {
+          
             this.setState({
                 toUserId: v.user.colUid,
                 topicId: v.topicId,
-                index
+                index,
+                showSend: true
             }, () => {
-                $(".am-input-control input").focus();
+                this.handleClick();
                 this.toSendContent(this.state.index);
+
+
             })
         }
     }
@@ -203,19 +208,17 @@ export default class teHomework extends React.Component {
 
     //todelete
     todelete = (comId, topicId, index) => {
-        console.log(topicId, "topicId")
-        console.log(index, "index")
         var param = {
             "method": 'deleteTopicComment',
             "topicCommentId": comId,
-            "ident": 41
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
                     Toast.info("删除成功", 1);
-                    this.getTopicByIdRequest(topicId, index)
+                    this.getTopicByIdRequest(topicId, index);
                 } else {
                     Toast.info(result);
                 }
@@ -228,12 +231,13 @@ export default class teHomework extends React.Component {
     }
     //评论
     toPinglun = (data, index) => {
-        console.log(data, "data")
-        $(".am-input-control input").focus();
         this.setState({
             topicId: data.id,
             toUserId: data.fromUserId,
-            index
+            index,
+            showSend: true
+        }, () => {
+            this.handleClick();
         })
     }
 
@@ -246,6 +250,10 @@ export default class teHomework extends React.Component {
     }
     //发送
     toSendContent = (index) => {
+        if (this.state.content == "") {
+            Toast.info("评论内容不能为空", 1);
+            return
+        }
         this.setState({
             sendValue: this.state.content
         }, () => {
@@ -254,14 +262,18 @@ export default class teHomework extends React.Component {
                 "content": this.state.sendValue,
                 "topicId": this.state.topicId,
                 "toUserId": this.state.toUserId,
-                "ident": 41
+                "ident": this.state.userId
             };
             console.log(param, "param")
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
                     console.log(result, "result")
                     if (result.success) {
-                        this.getTopicByIdRequest(this.state.topicId, this.state.index)
+                        this.setState({
+                            showSend: false,
+                            content: ""
+                        })
+                        this.getTopicByIdRequest(this.state.topicId, this.state.index);
                     } else {
                         Toast.info(result);
                     }
@@ -272,6 +284,10 @@ export default class teHomework extends React.Component {
                 }
             });
         })
+    }
+    //聚焦
+    handleClick = () => {
+        this.inputRef.focus();
     }
     render () {
         const row = (rowData, sectionID, rowID) => {
@@ -289,7 +305,7 @@ export default class teHomework extends React.Component {
                 }
             })
             zanArr.forEach((v, i) => {
-                if (v.user.colUid == 41) {
+                if (v.user.colUid == this.state.userId) {
                     isZan = true;
                 }
             })
@@ -299,60 +315,67 @@ export default class teHomework extends React.Component {
                     <span className='text_hidden userName'>{rowData.fromUser.userName}</span>
                     <div className='time'> {WebServiceUtil.formatMDHM(rowData.createTime)}</div>
                     <div className='content'>{rowData.content}</div>
-                     <div className='icon_praise'>
-                         {
-                             isZan ?
-                                 <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id)}>已点赞</span> :
-                                 <span className='like' onClick={this.toClick.bind(this, rowData.id)}>未点赞</span>
-                         }
-
-                         <span className='comment' onClick={this.toPinglun.bind(this, rowData)}>评论</span>
-                     </div>
-
-                        <div className='replyCont'>
-                            <div className='icon_emptyHeartB line_public'>
-                                {
-                                    zanArr.map((v, i) => {
-                                        return (
-                                            <span>{v.user.userName} </span>
-                                        )
-                                    })
-                                }
-                            </div>
-
+                    <div className='icon_praise'>
+                        {
+                            isZan ?
+                                <span className='liked' onClick={this.cancelPraiseForTopicById.bind(this, rowData.id, rowID)}>已点赞</span> :
+                                <span className='like' onClick={this.toClick.bind(this, rowData.id, rowID)}>未点赞</span>
+                        }
+                        <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
+                    </div>
+                    <div className='replyCont'>
+                        <div className='icon_emptyHeartB line_public'>
                             {
-                                pingArr.map((v, i) => {
+                                zanArr.map((v, i) => {
                                     return (
-                                        <div className="msgItem" onClick={this.toShanchu.bind(this, v)}>
-                                            <span className='blueTxt'>{v.user.userName}</span>
-                                            <span>回复</span>
-                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
-                                            <span>{v.content}</span>
-                                        </div>
+                                        <span>{v.user.userName} </span>
                                     )
                                 })
                             }
                         </div>
+                        {
+                            pingArr.map((v, i) => {
+                                console.log(v, "opopop")
+                                return (
+                                    <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
+                                        {
+                                            v.user.userName == v.toUser.userName ?
+                                                <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
+                                                :
+                                                <span>
+                                                    <span className='blueTxt'>{v.user.userName}</span>
+                                                    <span>回复</span>
+                                                    <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
+                                                    <span>{v.content}</span>
+                                                </span>
+                                        }
+
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
 
                 </div>
             );
         };
         return (
             <div id='teHomework' className='bg_gray'>
-                <div>
+                <div style={{ display: this.state.showSend ? "block" : "none" }} className='commentInput my_flex'>
                     <InputItem
                         className="content"
                         value={this.state.content}
                         onChange={this.contentChange}
                         placeholder="请输入评论内容"
+                        ref={el => this.inputRef = el}
                     ></InputItem>
-                    <div onClick={this.toSendContent}>发送</div>
+                    <div className='sendBtn' onClick={this.toSendContent}>发送</div>
                 </div>
                 <ListView
                     ref={el => this.lv = el}
                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                     renderFooter={() => (
-                        <div style={{ paddingTop: 6,  textAlign: 'center' }}>
+                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
                             {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
                         </div>)}
                     renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable

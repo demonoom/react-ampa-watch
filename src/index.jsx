@@ -155,13 +155,8 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
-                            to="/morePage"
+                            to="/morePage?userId=23836&macAddr=6666&watch=29"
                             style={{fontSize: '24px'}}>morePage</Link>
-                    </li>
-                    <li>
-                        <Link
-                            to="/schoolPush"
-                            style={{fontSize: '24px'}}>校园通知</Link>
                     </li>
                     <li>
                         <Link
@@ -170,7 +165,7 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
-                            to="/schoolPush"
+                            to="/schoolPush?userId=23836"
                             style={{fontSize: '24px'}}>校园通知</Link>
                     </li>
                     <li>
