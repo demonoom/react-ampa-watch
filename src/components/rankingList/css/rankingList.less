@@ -10,6 +10,9 @@
   .am-tabs-default-bar-top .am-tabs-default-bar-tab::after,.am-tabs-default-bar-underline{
     display: none;
   }
+  .am-list-body{
+    background-color:#ededed;
+  }
   .am-tabs-default-bar-tab-active::before{
     content: '';
     position: absolute;
@@ -49,14 +52,15 @@
 
     }
     .list-view-section-body{
-      padding: 142px 15px 0;
-      background-color: #ededed;
+      padding: 142px 0 0;
+      margin: 0 15px;
       position: relative;
       .item:first-child,.item:nth-child(2),.item:nth-child(3){
         width: 33.3%;
         position: absolute;
         top: 0;
         height: 130px;
+        margin-bottom: 12px;
         .imgDiv{
           width: 50px;
           height: 60px;
@@ -65,7 +69,6 @@
           padding-left: 4px;
           position: absolute;
           left: 50%;
-          top: 0;
           -webkit-transform: translateX(-50%);
           -moz-transform: translateX(-50%);
           -ms-transform: translateX(-50%);
@@ -79,13 +82,19 @@
           }
       }
         .userName{
-          padding-top: 5px;
-          padding-bottom: 10px;
+          padding-bottom: 1px;
+          text-align: center;
+          width: 100%;
         }
         .color_9{
           font-size: 13px;
+          text-align: center;
+          width: 100%;
+          line-height: 1;
+
         }
         .itemCont{
+          box-sizing: border-box;
           position: absolute;
           left: 0;
           bottom: 0;
@@ -99,9 +108,14 @@
         .imgDiv{
           background: url("../../images/num1.png") no-repeat;
           background-size: cover;
+          top: 0;
         }
         .itemCont{
           height: 97px;
+          padding-top: 30px;
+        }
+        .userName{
+          padding-bottom: 5px;
         }
       }
       .item:nth-child(2){
@@ -109,9 +123,11 @@
         .imgDiv{
           background: url("../../images/num2.png") no-repeat;
           background-size: cover;
+          top: 13px;
         }
         .itemCont{
           height: 78px;
+          padding-top: 24px;
         }
       }
       .item:nth-child(3){
@@ -119,9 +135,11 @@
         .imgDiv{
           background: url("../../images/num3.png") no-repeat;
           background-size: cover;
+          top: 20px;
         }
         .itemCont{
           height: 69px;
+          padding-top: 21px;
         }
       }
     }
@@ -130,6 +148,9 @@
       background-size: cover;
       height: 65px;
       width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
       .inner{
         padding-top: 15px;
         height: 50px;
