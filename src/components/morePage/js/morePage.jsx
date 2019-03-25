@@ -361,7 +361,8 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
-                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
+                <div className="grayBorder"></div>
+                <div style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
                     </div>

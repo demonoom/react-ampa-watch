@@ -33,7 +33,6 @@ export default class teHomework extends React.Component {
         this.setState({
             userId
         })
-        // this.requestData(userId);
         this.getWatch2gsByGuardianUserId(userId);
 
     }
@@ -369,7 +368,7 @@ export default class teHomework extends React.Component {
                                             this.setState({
                                                 showSend: false
                                             })
-                                        }}>{v.user.userName} </span>
+                                        }}>{v.user.userName}{i ==zanArr.length -1 ? "":"," }</span>
                                     )
                                 })
                             }
@@ -382,7 +381,7 @@ export default class teHomework extends React.Component {
                                         <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
                                             {
                                                 v.user.userName == v.toUser.userName ?
-                                                    <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
+                                                    <span> <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span></span>
                                                     :
                                                     <span>
                                                     <span className='blueTxt'>{v.user.userName}</span>
