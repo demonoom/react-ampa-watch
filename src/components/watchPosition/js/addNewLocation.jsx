@@ -230,8 +230,8 @@ export default class addNewLocation extends React.Component {
             <div id="addNewLocation">
                 <div className="am-navbar">
                     <span className="am-navbar-left"><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">常用地点</span>
-                    <span className="am-navbar-right" onClick={this.addNewPos}>添加</span>
+                    <span className="am-navbar-title">添加新地址</span>
+                    <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>

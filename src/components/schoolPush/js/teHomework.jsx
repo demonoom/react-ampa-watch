@@ -338,7 +338,7 @@ export default class teHomework extends React.Component {
                         }
                         <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
                     </div>
-                    <div className='replyCont'>
+                    <div className='replyCont' style={{display:zanArr.length == 0 && pingArr.length == 0 ? "none":"block"}}>
                         <div className='icon_emptyHeartB' style={{display:zanArr.length == 0 ? "none":"block"}}>
                             {
                                 zanArr.map((v, i) => {
@@ -352,7 +352,8 @@ export default class teHomework extends React.Component {
                                 })
                             }
                         </div>
-                        <div className='line_publicBefore' style={{display:pingArr.length == 0 ? "none":"block"}}>
+
+                        <div className={zanArr.length == 0 ? '' : 'line_publicBefore'} style={{display:pingArr.length == 0 ? "none":"block"}}>
                             {
                                 pingArr.map((v, i) => {
                                     console.log(v, "opopop")
