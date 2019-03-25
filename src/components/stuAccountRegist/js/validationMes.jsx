@@ -18,7 +18,9 @@ export default class validationMes extends React.Component {
         var classId = locationSearch.split("&")[1].split('=')[1];
         var schoolId = locationSearch.split("&")[2].split('=')[1];
         var stuName = locationSearch.split("&")[3].split('=')[1];
-        this.setState({macAddr, classId, schoolId, stuName});
+        var schName = locationSearch.split("&")[4].split('=')[1];
+        var clazzName = locationSearch.split("&")[5].split('=')[1];
+        this.setState({macAddr, classId, schoolId, stuName, schName, clazzName});
         this.getWatch2gByMacAddress(macAddr);
     }
 
@@ -118,8 +120,8 @@ export default class validationMes extends React.Component {
                             <img src={require('../../images/bindTeacher.png')} alt=""/>
                         </div>
                         <div className="School-information">
-                            <span className="school text_hidden">宜昌天问外国语学校</span>
-                            <span className="class text_hidden">3年级2班</span>
+                            <span className="school text_hidden">{this.state.schName}</span>
+                            <span className="class text_hidden">{this.state.clazzName}</span>
                         </div>
                         <div className="line_public login-input icon-grayTeacher">
                             <InputItem

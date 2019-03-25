@@ -1,6 +1,6 @@
 import React from "react";
 import {Map, Marker} from "react-amap";
-import {Toast} from 'antd-mobile';
+import {Toast, NavBar, Icon, Popover} from 'antd-mobile';
 import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection'
 
 import '../css/watchPosition.less'
@@ -16,6 +16,8 @@ const loadingStyle = {
 
 const Loading = <div style={loadingStyle}>正在生成地图...</div>;
 
+const Item = Popover.Item;
+
 //消息通信js
 window.ms = null;
 
@@ -25,9 +27,24 @@ export default class watchPosition extends React.Component {
         this.state = {
             position: {longitude: '116.397477', latitude: '39.908692'},
             zoom: 10,
-            map: null
+            map: null,
+            visible: false,
+            selected: '',
         };
     }
+
+    onSelect = (opt) => {
+        // console.log(opt.props.value);
+        this.setState({
+            visible: false,
+            selected: opt.props.value,
+        });
+    };
+    handleVisibleChange = (visible) => {
+        this.setState({
+            visible,
+        });
+    };
 
     componentWillMount() {
         var locationHref = decodeURI(window.location.href);
@@ -190,6 +207,41 @@ export default class watchPosition extends React.Component {
 
         return (
             <div id="watchPosition" style={{height: '100%'}}>
+                <NavBar
+                    mode="light"
+                    leftContent={
+                        <Popover mask
+                                 overlayClassName="fortest"
+                                 overlayStyle={{color: 'currentColor'}}
+                                 visible={this.state.visible}
+                                 placement="bottomLeft"
+                                 overlay={[
+                                     (<Item key="4" value="scan" data-seed="logId">Scan</Item>),
+                                     (<Item key="5" value="special" style={{whiteSpace: 'nowrap'}}>My Qrcode</Item>),
+                                     (<Item key="6" value="button ct">
+                                         <span style={{marginRight: 5}}>Help</span>
+                                     </Item>),
+                                 ]}
+                                 align={{
+                                     overflow: {adjustY: 0, adjustX: 0},
+                                     offset: [10, 0],
+                                 }}
+                                 onVisibleChange={this.handleVisibleChange}
+                                 onSelect={this.onSelect}
+                        >
+                            <div style={{
+                                height: '100%',
+                                padding: '0 15px',
+                                marginRight: '-15px',
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                            >
+                                <Icon type="down"/>
+                            </div>
+                        </Popover>
+                    }
+                />
                 <Map
                     amapkey={WebServiceUtil.amapkey}
                     version={WebServiceUtil.version}

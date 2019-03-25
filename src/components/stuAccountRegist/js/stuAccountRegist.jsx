@@ -14,8 +14,8 @@ export default class stuAccountRegist extends React.Component {
             responseList: [],
             data: [],
             cols: 1,
-            stuClassName:'',
-            schoolClassName:''
+            stuClassName: '',
+            schoolClassName: ''
         };
     }
 
@@ -88,7 +88,7 @@ export default class stuAccountRegist extends React.Component {
 
     schoolItemOnClick = (data) => {
         this.exitSchoolInput();
-        this.setState({schoolName: data.name, schoolId: data.id,schoolClassName:'color_3'})
+        this.setState({schoolName: data.name, schoolId: data.id, schoolClassName: 'color_3'})
     };
 
     schoolNameOnChange = (e) => {
@@ -218,7 +218,7 @@ export default class stuAccountRegist extends React.Component {
             return
         }
 
-        var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName);
+        var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName+ "&schName=" + this.state.schoolName+ "&clazzName=" + $('#stuClazz .am-list-extra').html());
         var data = {
             method: 'openNewPage',
             url: url
@@ -232,49 +232,51 @@ export default class stuAccountRegist extends React.Component {
         return (
             <div id="stuAccountRegist">
                 <div className="p38 innerCont">
-                        <div className="infoContent selectDown">
-                            <div className="bindStudent">
-                                <img src={require('../../images/bindStudent.png')} alt=""/>
-                            </div>
-                            <div className='am-list-item am-list-item-middle line_public icon-graySchool ' onClick={this.schoolOnClick}>
-                                <div className="am-list-line">
-                                    <div className="am-list-content"> </div>
-                                    <div className={'am-list-extra '+ this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
-                                    <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                                </div>
-                            </div>
-                            <div className={'line_public icon-grayClass '+ this.state.stuClassName}>
-                                <Picker
-                                    data={this.state.data}
-                                    cols={this.state.cols}
-                                    value={this.state.asyncValue}
-                                    onPickerChange={this.onPickerChange}
-                                    onOk={v => this.setState({classId: this.state.asyncValue[1],stuClassName:'color_3'})}
-                                    extra='学生所在班级'
-                                >
-                                    <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
-                                </Picker>
+                    <div className="infoContent selectDown">
+                        <div className="bindStudent">
+                            <img src={require('../../images/bindStudent.png')} alt=""/>
+                        </div>
+                        <div className='am-list-item am-list-item-middle line_public icon-graySchool '
+                             onClick={this.schoolOnClick}>
+                            <div className="am-list-line">
+                                <div className="am-list-content"></div>
+                                <div
+                                    className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
                             </div>
                         </div>
-                        <div className="line_public login-input icon-grayStudent">
-                            <InputItem
-                                className=""
-                                placeholder="请输入学生姓名"
-                                value={this.state.stuName}
-                                onChange={this.stuOnChange}
-                            ></InputItem>
+                        <div id='stuClazz' className={'line_public icon-grayClass ' + this.state.stuClassName}>
+                            <Picker
+                                data={this.state.data}
+                                cols={this.state.cols}
+                                value={this.state.asyncValue}
+                                onPickerChange={this.onPickerChange}
+                                onOk={v => this.setState({classId: this.state.asyncValue[1], stuClassName: 'color_3'})}
+                                extra='学生所在班级'
+                            >
+                                <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
+                            </Picker>
                         </div>
-                        <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
-                        <div className='updateModel' style={{display: 'none'}}>
-                            <div className='searchDiv'>
-                                <input type="text" value={this.state.inputValue} onChange={this.schoolNameOnChange}
-                                       placeholder='请输入搜索内容'/>
-                                <span onClick={this.getSchoolsBySchoolName}>搜索</span>
-                            </div>
-                            <div className='cont'>
-                                {this.state.responseList}
-                            </div>
+                    </div>
+                    <div className="line_public login-input icon-grayStudent">
+                        <InputItem
+                            className=""
+                            placeholder="请输入学生姓名"
+                            value={this.state.stuName}
+                            onChange={this.stuOnChange}
+                        ></InputItem>
+                    </div>
+                    <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
+                    <div className='updateModel' style={{display: 'none'}}>
+                        <div className='searchDiv'>
+                            <input type="text" value={this.state.inputValue} onChange={this.schoolNameOnChange}
+                                   placeholder='请输入搜索内容'/>
+                            <span onClick={this.getSchoolsBySchoolName}>搜索</span>
                         </div>
+                        <div className='cont'>
+                            {this.state.responseList}
+                        </div>
+                    </div>
                     <div className="submitBtn" onClick={this.nextStep}>下一步</div>
                 </div>
             </div>
