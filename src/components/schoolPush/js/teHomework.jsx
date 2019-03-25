@@ -339,7 +339,7 @@ export default class teHomework extends React.Component {
                         <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
                     </div>
                     <div className='replyCont'>
-                        <div className='icon_emptyHeartB line_public'>
+                        <div className='icon_emptyHeartB'>
                             {
                                 zanArr.map((v, i) => {
                                     return (
@@ -352,27 +352,29 @@ export default class teHomework extends React.Component {
                                 })
                             }
                         </div>
-                        {
-                            pingArr.map((v, i) => {
-                                console.log(v, "opopop")
-                                return (
-                                    <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
-                                        {
-                                            v.user.userName == v.toUser.userName ?
-                                                <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
-                                                :
-                                                <span>
+                        <div className='line_publicBefore'>
+                            {
+                                pingArr.map((v, i) => {
+                                    console.log(v, "opopop")
+                                    return (
+                                        <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
+                                            {
+                                                v.user.userName == v.toUser.userName ?
+                                                    <span> <span className='blueTxt'>{v.user.userName}</span>: <span>{v.content}</span></span>
+                                                    :
+                                                    <span>
                                                     <span className='blueTxt'>{v.user.userName}</span>
                                                     <span>回复</span>
                                                     <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
                                                     <span>{v.content}</span>
                                                 </span>
-                                        }
+                                            }
 
-                                    </div>
-                                )
-                            })
-                        }
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
                     </div>
 
                 </div>
