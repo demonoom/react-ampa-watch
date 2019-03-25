@@ -89,7 +89,7 @@ export default class rankingList extends React.Component {
                 if (result.success && result.response) {
                     if (result.response.length == 0) {
                         this.setState({
-                            toBind: true,
+                            toBind: false,
                         })
                     } else {
                         this.setState({
@@ -263,7 +263,7 @@ export default class rankingList extends React.Component {
                     </div>
                     <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
-                <div  style={{ display: this.state.toBind ? "none" : "block" }}>
+                <div  style={{ display: this.state.toBind ? "none" : "block",height:"100%" }}>
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
                     >
