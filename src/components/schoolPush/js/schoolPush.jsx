@@ -30,7 +30,7 @@ export default class schoolPush extends React.Component {
         this.setState({
             userId
         })
-        this.requestData(userId);
+        this.getWatch2gsByGuardianUserId(userId)
     }
 
 
@@ -79,7 +79,7 @@ export default class schoolPush extends React.Component {
     }
 
 
-        
+
     formatUnixtimestamp = (inputTime) => {
         var date = new Date(inputTime);
         var y = date.getFullYear();
@@ -143,7 +143,7 @@ export default class schoolPush extends React.Component {
         var param = {
             "method": 'praiseForTopic',
             "topicId": topicId,
-            "ident":  this.state.userId
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -166,7 +166,7 @@ export default class schoolPush extends React.Component {
         var param = {
             "method": 'cancelPraiseForTopic',
             "topicId": topicId,
-            "ident":  this.state.userId
+            "ident": this.state.userId
         };
         console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -178,6 +178,38 @@ export default class schoolPush extends React.Component {
                     Toast.info(result);
                 }
 
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+    //获取手表列表
+    getWatch2gsByGuardianUserId = (userId) => {
+        var param = {
+            "method": 'getWatch2gsByGuardianUserId',
+            "userId": userId,
+            "pageNo": -1,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success && result.response) {
+                    if (result.response.length == 0) {
+                        this.setState({
+                            toBind: true,
+                        })
+                    } else {
+                        this.setState({
+                            studentId: result.response[0].student.colUid
+                        }, () => {
+                            this.requestData(this.state.studentId);
+                        })
+                    }
+                } else {
+                    // Toast.info('');
+                }
             },
             onError: function (error) {
                 Toast.info('请求失败');
@@ -201,7 +233,7 @@ export default class schoolPush extends React.Component {
             })
             var isZan = false;
             zanArr.forEach((v, i) => {
-                if (v.user.colUid ==  this.state.userId) {
+                if (v.user.colUid == this.state.userId) {
                     isZan = true;
                 }
             });
@@ -209,10 +241,10 @@ export default class schoolPush extends React.Component {
 
             return (
                 <div className='line_public homeItem'>
-                    <img src={require('../../images/icon_notify.png')}/>
+                    <img src={require('../../images/icon_notify.png')} />
                     <span className='text_hidden userName'> 校内通知 </span>
                     <div className='time'> {time}</div>
-                    <div  className='content'>{rowData.content}</div>
+                    <div className='content'>{rowData.content}</div>
                     <div className='icon_praise'>
                         {
                             isZan ?
@@ -226,15 +258,15 @@ export default class schoolPush extends React.Component {
                             <div className='replyCont'>
                                 <div className='icon_arrowUp'></div>
                                 <div className='icon_emptyHeartB'>
-                                {
-                                    zanArr.map((v, i) => {
-                                        return (
-                                            <div>
-                                                <span>{v.user.userName} </span>
-                                            </div>
-                                        )
-                                    })
-                                }
+                                    {
+                                        zanArr.map((v, i) => {
+                                            return (
+                                                <div>
+                                                    <span>{v.user.userName} </span>
+                                                </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div> : ''
                     }

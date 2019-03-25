@@ -232,6 +232,7 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'unbindGuardian',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -239,7 +240,7 @@ export default class morePage extends React.Component {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
                 } else {
-                    // Toast.info('');
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 }
             },
             onError: function (error) {
@@ -253,12 +254,14 @@ export default class morePage extends React.Component {
         var param = {
             "method": 'deleteWatch2g',
             "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info('解绑成功', 1);
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
                     // Toast.info('');
                 }
@@ -362,14 +365,9 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
+                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑监护人</div>
-                    </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.deleteWatch2g}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">解绑手表</div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.logout}>
