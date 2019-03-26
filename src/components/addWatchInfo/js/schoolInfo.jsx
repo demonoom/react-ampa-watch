@@ -14,7 +14,6 @@ export default class schoolInfo extends React.Component {
     }
 
     componentWillMount () {
-        document.title = '学校信息';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -53,13 +52,6 @@ export default class schoolInfo extends React.Component {
         }, 100)
     }
 
-    //输入小蚂蚁账号
-    littAntOnChange = (value) => {
-        this.setState({
-            littleAntName: value,
-
-        });
-    }
     //下一页
     nextPage = () => {
         var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex+"&relation="+this.state.relation+"&phoneNumber="+this.state.phoneNumber+"&ident="+this.state.ident+"&birthDay="+this.state.birthDay;

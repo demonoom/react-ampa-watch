@@ -272,12 +272,20 @@ export default class addClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
                 Toast.info('请求失败');
             }
+        });
+    }
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
         });
     }
     render () {

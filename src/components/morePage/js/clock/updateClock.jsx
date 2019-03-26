@@ -134,7 +134,7 @@ export default class updateClock extends React.Component {
                     }, () => {
                     })
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -311,7 +311,7 @@ export default class updateClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -352,7 +352,7 @@ export default class updateClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -381,6 +381,15 @@ export default class updateClock extends React.Component {
             { text: '确定', onPress: () => this.todelete() },
         ], phone);
     };
+
+      //返回
+      toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
             <div id="addClock" className='public_list bg_gray'>
@@ -432,11 +441,6 @@ export default class updateClock extends React.Component {
 
                         ))}
                     </List>
-                    {/* {
-                        checkedData.map((v, i) => {
-                            return <label><input onChange={this.onSelectChange} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "":"checked"} type="checkbox" value={v.extra} />{v.label}</label>
-                        })
-                    } */}
                 </div>
                 <Picker
                     data={clockType}
