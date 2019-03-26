@@ -83,7 +83,6 @@ export default class babyInfo extends React.Component {
 
     componentDidMount () {
         Bridge.setShareAble("false");
-        document.title = '手环绑定学生班级列表';
     }
     componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
@@ -119,7 +118,7 @@ export default class babyInfo extends React.Component {
                         showRelationiDiv: true
                     })
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -168,7 +167,6 @@ export default class babyInfo extends React.Component {
         });
 
     }
-
     //选择器改变事件
     onPickerChange = (val) => {
         this.setState({
@@ -243,14 +241,8 @@ export default class babyInfo extends React.Component {
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className='picDiv'><img
-                            src={require('../../images/bindPic.png')} alt="" /></div>
-                        {/* <div className='line_publicD'>
-                            <div className="p10 scanDiv">
-                                <span className='text_hidden color_c' style={{ display: this.state.macId ? "none" : "inline-block" }}>请扫描手表二维码</span>
-                                <span className='text_hidden' style={{ display: this.state.macId ? "inline-block" : "none" }}>{this.state.macId}</span>
-                                <span className='scanBtn' onClick={this.scanCode}>扫描</span>
-                            </div>
-                        </div> */}
+                            src={require('../../images/bindPic.png')} alt="" />
+                        </div>
                         <div className={'sex line_publicD ' + this.state.extraClassName}>
                             <Picker
                                 data={sexData}
@@ -275,19 +267,6 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal">请选择孩子生日</List.Item>
                             </DatePicker>
                         </div>
-                        {/* <div className={'relation line_publicD ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
-                            <Picker
-                                data={this.state.relationData}
-                                value={this.state.relationValue}
-                                cols={1}
-                                extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
-                                onChange={this.onRelationChange}
-                                onOk={this.clickRelationSure}
-                                onDismiss={this.onRelationCancel}
-                            >
-                                <List.Item arrow="horizontal"></List.Item>
-                            </Picker>
-                        </div> */}
                     </div>
                 </div>
                 <div className='submitBtn' onClick={this.nextPage}>

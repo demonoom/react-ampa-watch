@@ -18,7 +18,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "wwww",
+            macId: "111111",
             stuName: "",
             sexValue: "",
             extraClassName: "",
@@ -66,7 +66,6 @@ export default class addWatchInfo extends React.Component {
 
     componentDidMount () {
         Bridge.setShareAble("false");
-        document.title = '手环绑定学生班级列表';
     }
     componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
@@ -104,7 +103,7 @@ export default class addWatchInfo extends React.Component {
                         showRelationiDiv: true
                     })
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -117,7 +116,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("wwww");
+        this.getWatch2gByMacAddress("111111");
         var data = {
             method: 'watchBinding'
         };
@@ -201,7 +200,7 @@ export default class addWatchInfo extends React.Component {
                             window.location.href = url;
                         });
                     } else {
-                        // Toast.info('解绑失败');
+                        Toast.fail(result.msg, 1);
                     }
                 },
                 onError: function (error) {

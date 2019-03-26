@@ -9,13 +9,11 @@ export default class verifyStuInfo extends React.Component {
         this.state = {
             stuName: "",
             schoolName: "",
-            watchId: "",
             littleAntName: "",
         };
     }
 
     componentWillMount () {
-        document.title = '验证学生账号';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -33,7 +31,6 @@ export default class verifyStuInfo extends React.Component {
             ident,
             birthDay
         })
-        this.getWatchId(macAddr)
         window.addEventListener('resize', this.onWindwoResize);
     }
     componentDidMount () {
@@ -57,29 +54,6 @@ export default class verifyStuInfo extends React.Component {
         this.setState({
             littleAntName: value,
 
-        });
-    }
-
-    //
-    getWatchId = (macAddress) => {
-        var param = {
-            "method": 'getWatch2gByMacAddress',
-            "macAddress": macAddress,
-            "actionName": "watchAction"
-        };
-        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: (result) => {
-                if (result.success && result.response) {
-                    this.setState({
-                        watchId: result.response.id
-                    })
-                } else {
-                    // Toast.info('');
-                }
-            },
-            onError: function (error) {
-                Toast.info('请求失败');
-            }
         });
     }
     //输入学生姓名
@@ -121,11 +95,12 @@ export default class verifyStuInfo extends React.Component {
             "guardianId":this.state.ident,
             "phoneNumber":this.state.phoneNumber,
             "birthTime":this.state.birthDay,
-            "actionName": "watchAction",
+            "hasStudentAccount":true,
         }
         var param = {
             "method": 'bindWatchGuardian',
-            "json": json,
+            "json": JSON.stringify(json),
+            "actionName": "watchAction",
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
@@ -141,7 +116,7 @@ export default class verifyStuInfo extends React.Component {
                         window.location.href = url;
                     });
                 } else {
-                    Toast.info(result.msg);
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {

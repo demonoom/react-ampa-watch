@@ -14,7 +14,6 @@ export default class schoolInfo extends React.Component {
     }
 
     componentWillMount () {
-        document.title = '学校信息';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
