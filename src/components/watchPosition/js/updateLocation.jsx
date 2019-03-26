@@ -203,7 +203,16 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('修改成功', 2);
+                        Toast.success('修改成功', 1);
+
+                        setTimeout(function () {
+                            var data = {
+                                method: 'finishForRefresh',
+                            };
+                            Bridge.callHandler(data, null, function (error) {
+                                console.log(error);
+                            });
+                        }, 1000)
                     }
                 } else {
                     Toast.fail(result.msg, 1);
@@ -229,7 +238,16 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('删除成功', 2);
+                        Toast.success('删除成功', 1);
+
+                        setTimeout(function () {
+                            var data = {
+                                method: 'finishForRefresh',
+                            };
+                            Bridge.callHandler(data, null, function (error) {
+                                console.log(error);
+                            });
+                        }, 1000)
                     }
                 } else {
                     Toast.fail(result.msg, 1);
