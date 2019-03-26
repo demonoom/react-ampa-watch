@@ -295,6 +295,7 @@ export default class addNewLocation extends React.Component {
                             <span className="am-navbar-title">添加新地址</span>
                             <span className="am-navbar-right"></span>
                         </div>
+                        <div className="navbar-bottom"></div>
                         <div className="posMap-content">
                             <Map
                                 plugins={plugins}
