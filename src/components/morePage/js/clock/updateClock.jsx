@@ -399,6 +399,7 @@ export default class updateClock extends React.Component {
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont">
+                    <div className='grayBorder'></div>
                     <div className='line_public'>
                         <Picker
                             data={alarmType}

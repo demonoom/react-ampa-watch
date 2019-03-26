@@ -337,11 +337,12 @@ export default class detailPage extends React.Component {
                 </div>
                 <div className="commonLocation-cont overScroll">
                     <div className='grayBorder'></div>
-                    <div className='myDetail line_public p15'>
-                        <img src={this.state.users ? this.state.users.avatar : ""} />
-                        <div className='textCont'>
-                            <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
-                            <span  className='time'>
+                    <div className='bg_white'>
+                        <div className='myDetail line_public p15'>
+                            <img src={this.state.users ? this.state.users.avatar : ""} />
+                            <div className='textCont'>
+                                <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
+                                <span  className='time'>
                             {
                                 this.state.today == 1 ?
                                     <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
@@ -349,19 +350,20 @@ export default class detailPage extends React.Component {
                                     <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
                             }
                         </span>
-                        </div>
-                        <div className='color_9'>{this.state.detailData.clazz ? this.state.detailData.clazz.grade.name + this.state.detailData.clazz.name : ""}</div>
+                            </div>
+                            <div className='color_9'>{this.state.detailData.clazz ? this.state.detailData.clazz.grade.name + this.state.detailData.clazz.name : ""}</div>
 
-                    </div>
-                    <div className="chartCont line_public">
-                        {calm.state.faceChartDiv}
-                    </div>
-                    <div className='textDetail'>
-                        <div className="line_public item p15">
-                            准确率<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
                         </div>
-                        <div className="line_public item p15">
-                            全班排名<span>{this.state.detailData.totalClassTop}</span>
+                        <div className="chartCont line_public">
+                            {calm.state.faceChartDiv}
+                        </div>
+                        <div className='textDetail'>
+                            <div className="line_public item p15">
+                                准确率<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
+                            </div>
+                            <div className="line_public item p15">
+                                全班排名<span>{this.state.detailData.totalClassTop}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
