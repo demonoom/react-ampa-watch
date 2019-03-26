@@ -18,7 +18,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "123",
+            macId: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -117,7 +117,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("123");
+        // this.getWatch2gByMacAddress("aa");
         var data = {
             method: 'watchBinding'
         };
