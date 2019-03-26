@@ -2,11 +2,6 @@ import React from "react";
 import { Tabs, WhiteSpace, ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
-const tabs = [
-    { title: '答题排行榜' },
-    { title: '运动排行榜' },
-    { title: '爱心排行榜' },
-];
 
 var myDate = new Date();
 //获取当前年
@@ -45,7 +40,12 @@ export default class rankingList extends React.Component {
             isLoadingLeft: true,
             flag: 1,
             ownData: {},
-            num: ""
+            num: "",
+            tabs: [
+                { title: '答题排行榜' },
+                { title: '运动' },
+                { title: '爱心' },
+            ]
         };
     }
     componentDidMount () {
@@ -239,6 +239,35 @@ export default class rankingList extends React.Component {
             window.location.href = url;
         });
     }
+
+    //tabs 改变
+    onTabsChange=(v)=>{
+        if(v.title == "运动"){
+            this.setState({
+                tabs:[
+                    { title: '答题' },
+                    { title: '运动排行榜' },
+                    { title: '爱心' },
+                ]
+            })
+        }else if(v.title == "爱心"){
+            this.setState({
+                tabs:[
+                    { title: '答题' },
+                    { title: '运动' },
+                    { title: '爱心排行榜' },
+                ]
+            })
+        }else if(v.title == "答题"){
+            this.setState({
+                tabs:[
+                    { title: '答题排行榜' },
+                    { title: '运动' },
+                    { title: '爱心' },
+                ]
+            })
+        }
+    }
     render () {
         const row = (rowData, sectionID, rowID) => {
             return (
@@ -256,26 +285,26 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue">
+                <div className="am-navbar-blue" style={{ display: "none" }}>
                     <NavBar
                         mode="light"
                         leftContent={
                             <Popover mask
-                                     overlayClassName="fortest"
-                                     overlayStyle={{color: 'currentColor'}}
-                                     visible={this.state.visible}
-                                     placement="bottomLeft"
-                                     overlay={this.state.popoverLay}
-                                     align={{
-                                         overflow: {adjustY: 0, adjustX: 0},
-                                         offset: [10, 0],
-                                     }}
-                                     onVisibleChange={(visible) => {
-                                         this.setState({
-                                             visible,
-                                         });
-                                     }}
-                                     onSelect={this.onSelect}
+                                overlayClassName="fortest"
+                                overlayStyle={{ color: 'currentColor' }}
+                                visible={this.state.visible}
+                                placement="bottomLeft"
+                                overlay={this.state.popoverLay}
+                                align={{
+                                    overflow: { adjustY: 0, adjustX: 0 },
+                                    offset: [10, 0],
+                                }}
+                                onVisibleChange={(visible) => {
+                                    this.setState({
+                                        visible,
+                                    });
+                                }}
+                                onSelect={this.onSelect}
                             >
                                 <div style={{
                                     height: '100%',
@@ -285,7 +314,7 @@ export default class rankingList extends React.Component {
                                     alignItems: 'center',
                                 }}
                                 >
-                                    <div style={{display:"none"}}><i className="icon-back"></i>{this.state.watchName}</div>
+                                    <div style={{ display: "none" }}><i className="icon-back"></i>{this.state.watchName}</div>
                                 </div>
                             </Popover>
                         }
@@ -299,17 +328,18 @@ export default class rankingList extends React.Component {
                             <div>
                                 <i></i>
                                 <span>
-                                还没有任何信息<br />
-                                请先绑定手表二维码
+                                    还没有任何信息<br />
+                                    请先绑定手表二维码
                                     </span>
                             </div>
                         </div>
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                     <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
-                        <Tabs tabs={tabs}
-                              initalPage={'t2'}
-                              swipeable={false}
+                        <Tabs tabs={this.state.tabs}
+                            onChange={this.onTabsChange}
+                            initalPage={'t2'}
+                            swipeable={false}
                         >
                             <div className='questionCont' >
                                 <ListView
