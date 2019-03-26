@@ -99,7 +99,7 @@ export default class commonLocation extends React.Component {
             posList.push(
                 <Item
                     arrow="horizontal"
-                    className="common-space line_public15"
+                    className="common-space line_public"
                     multipleLine
                     onClick={() => {
                         _this.intoDetil(0, v)
@@ -214,7 +214,7 @@ export default class commonLocation extends React.Component {
                         <div className="publicPos">
                             <Item
                                 arrow="horizontal"
-                                className="common-space line_public15"
+                                className="common-space line_public"
                                 multipleLine
                                 onClick={() => {
                                     this.intoDetil(1)

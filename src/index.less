@@ -455,12 +455,12 @@ img{
 
 .am-navbar-title {
   color: #333;
-  font-size: 17px;
+  font-size: 17px !important;
 }
 
 .am-navbar-right {
   color: #17ACF7;
-  font-size: 15px;
+  font-size: 15px !important;
 }
 .am-navbar-del{
   color: #333;
@@ -504,4 +504,18 @@ img{
 }
 .overScroll{
   overflow-y: auto;
+}
+.emptyLoading{
+  position: absolute;
+  left: 50%;
+  top:50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #999;
+  .loading-icon{
+    background: url("components/watchPosition/img/loading-icon.gif") no-repeat;
+    width: 122px;
+    height:62px;
+    background-size: 100% 100%;
+  }
 }

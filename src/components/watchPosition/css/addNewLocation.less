@@ -60,6 +60,10 @@
   .am-list-item .am-list-line .am-list-content {
     padding-left: 15px;
   }
+  .line_public:last-child::after{
+    display: none;
+
+  }
 }
   .am-list-item .am-list-line .am-list-content {
     font-size: 15px;
@@ -71,8 +75,11 @@
   }
 
   .my-list {
-    padding-left: 15px;
+    padding-left: 0;
     background: #fff;
+    .am-list-item{
+      padding-left: 15px;
+    }
   }
 
   .am-list-item {

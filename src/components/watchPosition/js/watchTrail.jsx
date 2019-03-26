@@ -13,7 +13,7 @@ const loadingStyle = {
     alignItems: 'center'
 };
 
-const Loading = <div style={loadingStyle}>正在生成地图...</div>;
+const Loading = <div className="emptyLoading"><div className="loading-icon"></div><div>正在生成地图...</div></div>;
 
 export default class watchTrail extends React.Component {
     constructor(props) {
