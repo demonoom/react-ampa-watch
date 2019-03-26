@@ -21,11 +21,17 @@ const Item = Popover.Item;
 //消息通信js
 window.ms = null;
 
+var watchPositionThis;
 export default class watchPosition extends React.Component {
     constructor(props) {
         super(props);
+        watchPositionThis = this;
         this.state = {
             position: {longitude: '116.397477', latitude: '39.908692'},
+            homePoint: {longitude: '116.397477', latitude: '39.908692'},
+            sclPoint: {longitude: '116.397477', latitude: '39.908692'},
+            homePointFlag: false,
+            sclPointFlag: false,
             zoom: 17,
             map: null,
             visible: false,
@@ -94,6 +100,10 @@ export default class watchPosition extends React.Component {
     };
 
     buildStuList = (data) => {
+        if (data.length == 0) {
+            console.log(1);
+            return
+        }
         var popoverLay = [];
         data.forEach((v) => {
             popoverLay.push(
@@ -101,11 +111,61 @@ export default class watchPosition extends React.Component {
             );
         });
         this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
-            this.watch2GLocaltionRequest()
+            this.watch2GLocaltionRequest();
+            this.getWatch2gHomePoint()
         });
-        // setTimeout(() => {
-        //     this.watch2GLocaltionRequest()
-        // }, 300)
+    };
+
+    /**
+     * 查看手表家
+     *  public List<Watch2gHomePoint> getWatch2gHomePoint(String watchId)
+     */
+    getWatch2gHomePoint = () => {
+        var _this = this;
+        var param = {
+            "method": 'getWatch2gHomePoint',
+            "actionName": "watchAction",
+            "watchId": this.state.macId,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' || result.success == true) {
+                    if (result.success) {
+                        if (!!result.response) {
+                            _this.buildPublicPoint(result.response.filter((v) => {
+                                return v.type == 1
+                            }), result.response.filter((v) => {
+                                return v.type == 2
+                            }))
+                        }
+                    }
+                } else {
+                    Toast.fail(result.msg, 1);
+                }
+            },
+            onError: function (error) {
+                Toast.warn('保存失败');
+            }
+        });
+    };
+
+    buildPublicPoint = (home, school) => {
+        if (home.length != 0) {
+            //常用点，家
+            var homePoint = {
+                "longitude": home[0].longitude,
+                "latitude": home[0].latitude,
+            };
+            this.setState({homePointFlag: true, homePoint});
+        }
+        if (school.length != 0) {
+            //常用点，学校
+            var sclPoint = {
+                "longitude": school[0].longitude,
+                "latitude": school[0].latitude,
+            };
+            this.setState({sclPointFlag: true, sclPoint});
+        }
     };
 
     /**
@@ -150,9 +210,23 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <div className="user-positioning"><img style={{ borderRadius: '50%'}}
+        return <div className="user-positioning"><img style={{borderRadius: '50%'}}
                                                       src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")}
                                                       alt=""/></div>
+    }
+
+    renderhomePoint() {
+        return <div style={{display: watchPositionThis.state.homePointFlag ? '' : 'none'}} className="school-positioning">
+            <img
+                style={{borderRadius: '50%'}}
+                src={require('../img/icon-home.png')} alt=""/></div>
+    }
+
+    rendersclPoint() {
+        return <div style={{display: watchPositionThis.state.sclPointFlag ? '' : 'none'}} className="school-positioning">
+            <img
+                style={{borderRadius: '50%'}}
+                src={require('../img/icon-schoolA.png')} alt=""/></div>
     }
 
     /**
@@ -201,8 +275,11 @@ export default class watchPosition extends React.Component {
             // selected: opt.props.value,
             mac: opt.props.mac,
             macId: opt.props.macId,
+            homePointFlag: false,
+            sclPointFlag: false,
         }, () => {
             this.watch2GLocaltionRequest();
+            this.getWatch2gHomePoint();
             this.state.map.setZoom(17);
         });
     };
@@ -227,41 +304,41 @@ export default class watchPosition extends React.Component {
         return (
             <div id="watchPosition" style={{height: '100%'}}>
                 <div className="am-navbar-blue">
-                <NavBar
-                    mode="light"
-                    leftContent={
-                        <Popover mask
-                                 overlayClassName="fortest"
-                                 overlayStyle={{color: 'currentColor'}}
-                                 visible={this.state.visible}
-                                 placement="bottomLeft"
-                                 overlay={this.state.popoverLay}
-                                 align={{
-                                     overflow: {adjustY: 0, adjustX: 0},
-                                     offset: [10, 0],
-                                 }}
-                                 onVisibleChange={(visible) => {
-                                     this.setState({
-                                         visible,
-                                     });
-                                 }}
-                                 onSelect={this.onSelect}
-                        >
-                            <div style={{
-                                height: '100%',
-                                padding: '0',
-                                marginRight: '-15px',
-                                display: 'flex',
-                                alignItems: 'center',
-                            }}
+                    <NavBar
+                        mode="light"
+                        leftContent={
+                            <Popover mask
+                                     overlayClassName="fortest"
+                                     overlayStyle={{color: 'currentColor'}}
+                                     visible={this.state.visible}
+                                     placement="bottomLeft"
+                                     overlay={this.state.popoverLay}
+                                     align={{
+                                         overflow: {adjustY: 0, adjustX: 0},
+                                         offset: [10, 0],
+                                     }}
+                                     onVisibleChange={(visible) => {
+                                         this.setState({
+                                             visible,
+                                         });
+                                     }}
+                                     onSelect={this.onSelect}
                             >
-                                <i className="icon-back"></i>{this.state.watchName}
-                            </div>
-                        </Popover>
-                    }
-                >
-                    定位
-                </NavBar>
+                                <div style={{
+                                    height: '100%',
+                                    padding: '0',
+                                    marginRight: '-15px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
+                                >
+                                    <i className="icon-back"></i>{this.state.watchName}
+                                </div>
+                            </Popover>
+                        }
+                    >
+                        定位
+                    </NavBar>
                 </div>
                 <div className="map-cont">
                     <Map
@@ -280,6 +357,14 @@ export default class watchPosition extends React.Component {
                         <Marker
                             position={this.state.position}
                             render={this.renderMarker}
+                        />
+                        <Marker
+                            position={this.state.homePoint}
+                            render={this.renderhomePoint}
+                        />
+                        <Marker
+                            position={this.state.sclPoint}
+                            render={this.rendersclPoint}
                         />
                         <div onClick={this.getPosition} id="getPosition" className="customLayer">
                             <i className="icon-positioning"></i>
