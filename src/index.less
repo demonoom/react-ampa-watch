@@ -110,6 +110,9 @@ ul, li {
   line-height: 20px;
 }
 
+.topPadding{
+  padding-top: 20px;
+}
 .font_20 {
   font-size: 1.42rem;
   font-family: sans-serif;
@@ -149,7 +152,7 @@ ul, li {
   width: 100%;
 }
 .grayBorder{
-  height: 12px;
+  height: 11px;
   background: #ededed;
   width: 100%;
 }
@@ -402,8 +405,8 @@ img{
 /*添加按钮*/
 .addBtn{
   position: fixed;
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   right: 20px;
   bottom: 25px;
   border-radius: 50%;
@@ -411,7 +414,6 @@ img{
   background-size: cover;
   z-index: 50;
   text-align: center;
-  line-height: 45px;
   font-size: 30px;
   overflow: hidden;
 }
@@ -430,7 +432,7 @@ img{
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  height: 44px;
+  height: 44px !important;
   background: #fff !important;
   color: #333;
   padding-top: 20px;
@@ -473,7 +475,7 @@ img{
 }
 .am-navbar-blue{
   .am-navbar{
-    height: 44px;
+    height: 44px !important;
     padding-top: 20px;
   }
   .am-navbar-light{
@@ -498,5 +500,9 @@ img{
 }
 .commonLocation-cont {
   background: #EDEDED;
+  position: relative;
   height: calc(~"100% - 64px");
+}
+.overScroll{
+  overflow-y: auto;
 }

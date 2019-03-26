@@ -79,9 +79,19 @@ export default class schoolInfo extends React.Component {
             window.location.href = url;
         });
     }
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
-            <div id="schoolInfo">
+            <div id="schoolInfo" className='bg_gray'>
+                <div className="topPadding"></div>
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
                         <img onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt="" />
