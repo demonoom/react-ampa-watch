@@ -292,7 +292,7 @@ export default class addClock extends React.Component {
         return (
             <div id="addClock" className='public_list bg_gray'>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">添加闹钟</span>
                     <span className="am-navbar-right"></span>
                 </div>
@@ -342,11 +342,6 @@ export default class addClock extends React.Component {
                                 </div>
                             ))}
                         </List>
-                        {/* {
-                            checkedData.map((v, i) => {
-                                return <label><input onChange={this.onSelectChange} type="checkbox" value={v.extra} title={v.value} />{v.label}</label>
-                            })
-                        } */}
                     </div>
                     <Picker
                         data={clockType}

@@ -213,6 +213,14 @@ export default class schoolPush extends React.Component {
 
 
 
+     //返回
+     toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
 
 
     render () {
@@ -271,7 +279,7 @@ export default class schoolPush extends React.Component {
         return (
             <div id='teHomework' className='bg_gray'>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>

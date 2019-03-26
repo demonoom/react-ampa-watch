@@ -126,6 +126,19 @@ export default class verifyStuInfo extends React.Component {
 
 
     }
+
+    //点击输入学生账号
+    studentClick = () => {
+        this.inputRef.focus();
+    }
+    //点击输入学生姓名
+    nameClick = () => {
+        this.nameInput.focus();
+    }
+    //点击输入学校名称
+    schooleNameClick = () => {
+        this.schoolNameInput.focus();
+    }
     //返回
     toBack = () => {
         var data = {
@@ -144,28 +157,31 @@ export default class verifyStuInfo extends React.Component {
                         <img
                             src={require('../../images/stuAccountPic.png')} alt="" />
                     </div>
-                    <div className="icon_account line_publicD stuCont">
+                    <div onClick={this.handleClick} className="icon_account line_publicD stuCont">
                         <InputItem
                             className=""
                             placeholder="请输入小蚂蚁账号"
                             value={this.state.littleAntName}
                             onChange={this.littAntOnChange}
+                            ref={el => this.inputRef = el}
                         ></InputItem>
                     </div>
-                    <div className="icon_user line_publicD">
+                    <div onClick={this.nameClick} className="icon_user line_publicD">
                         <InputItem
                             className=""
                             placeholder="请输入孩子姓名"
                             value={this.state.stuName}
                             onChange={this.stuOnChange}
+                            ref={el => this.nameInput = el}
                         ></InputItem>
                     </div>
-                    <div className="icon_school line_publicD">
+                    <div onClick={this.schooleNameClick} className="icon_school line_publicD">
                         <InputItem
                             className=""
                             placeholder="输入此账号所在的学校名称"
                             value={this.state.schoolName}
                             onChange={this.schoolOnChange}
+                            ref={el => this.schoolNameInput = el}
                         ></InputItem>
                     </div>
                 </div>

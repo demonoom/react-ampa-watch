@@ -163,7 +163,7 @@ export default class clockList extends React.Component {
         return (
             <div id="clockList" className='bg_gray'>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">闹钟列表</span>
                     <span className="am-navbar-right"></span>
                 </div>

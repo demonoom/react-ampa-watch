@@ -285,7 +285,7 @@ export default class rankingList extends React.Component {
                                     alignItems: 'center',
                                 }}
                                 >
-                                    <i className="icon-back"></i>{this.state.watchName}
+                                    <div style={{display:"none"}}><i className="icon-back"></i>{this.state.watchName}</div>
                                 </div>
                             </Popover>
                         }

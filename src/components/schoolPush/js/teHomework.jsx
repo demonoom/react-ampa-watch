@@ -308,6 +308,16 @@ export default class teHomework extends React.Component {
     handleClick = () => {
         this.inputRef.focus();
     }
+
+
+     //返回
+     toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         const row = (rowData, sectionID, rowID) => {
             var arr = [];
@@ -404,7 +414,7 @@ export default class teHomework extends React.Component {
         return (
             <div id='teHomework' className='bg_gray' style={{height: this.state.clientHeight}}>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">教师作业</span>
                     <span className="am-navbar-right"></span>
                 </div>

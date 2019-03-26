@@ -394,7 +394,7 @@ export default class updateClock extends React.Component {
         return (
             <div id="addClock" className='public_list bg_gray'>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">编辑闹钟</span>
                     <span className="am-navbar-right"></span>
                 </div>
@@ -445,7 +445,6 @@ export default class updateClock extends React.Component {
                                         {v.label}
                                     </CheckboxItem>
                                 </div>
-
                             ))}
                         </List>
                     </div>

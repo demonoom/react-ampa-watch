@@ -327,11 +327,20 @@ export default class detailPage extends React.Component {
             ]
         };
     }
+
+     //返回
+     toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
             <div id='detailPage'>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">今日排行榜详情</span>
                     <span className="am-navbar-right"></span>
                 </div>
@@ -359,10 +368,10 @@ export default class detailPage extends React.Component {
                         </div>
                         <div className='textDetail'>
                             <div className="line_public item p15">
-                                准确率<span>{Math.ceil(this.state.detailData.rigthAccuay * 100)}%</span>
+                                准确率<span>{this.state.detailData.rigthAccuay ? Math.ceil(this.state.detailData.rigthAccuay * 100) : "0"}% </span>
                             </div>
                             <div className="line_public item p15">
-                                全班排名<span>{this.state.detailData.totalClassTop}</span>
+                                全班排名<span>{this.state.detailData.totalClassTop ? this.state.detailData.totalClassTop : "0"}</span>
                             </div>
                         </div>
                     </div>
