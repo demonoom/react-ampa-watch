@@ -200,14 +200,35 @@
       }
     }
     .myGrade{
-      background: url("../../images/myGrade.png") no-repeat;
-      background-size: 100% 100%;
       height: 65px;
       width: 100%;
       position: absolute;
       left: 0;
       bottom: 0;
+      &:before{
+        content: '';
+        width:0;
+        height:0;
+        border-width:0 0 15px 15px;
+        border-style:solid;
+        border-color:#0076C8 transparent;/*透明 透明 透明 黄*/
+        position:absolute;
+        top:0px;
+        left:0px;
+      }
+      &:after{
+        content: '';
+        width:0;
+        height:0;
+        border-width:15px  0 0 15px;
+        border-style:solid;
+        border-color:transparent #0076C8 ;/*透明 透明 透明 黄*/
+        position:absolute;
+        top:0px;
+        right:0px;
+      }
       .inner{
+        background-color: #0096FF;
         margin-top: 15px;
         height: 50px;
         color: white;
