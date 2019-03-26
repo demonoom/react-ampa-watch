@@ -267,9 +267,7 @@ export default class addNewLocation extends React.Component {
                                 this.posClick()
                             }}>地点位置</Item>
                     </List>
-
                     <div className="submitBtn" onClick={this.saveLocation}>保存</div>
-
                     <div className='setPosModel' style={{display: 'none'}}>
                         <div className="am-navbar">
                             <span className="am-navbar-left" onClick={this.setPosModelDown}><i

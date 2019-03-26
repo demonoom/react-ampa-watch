@@ -293,10 +293,7 @@ export default class updateLocation extends React.Component {
                                 this.posClick()
                             }}>地点位置</Item>
                     </List>
-                    <div className='btns my_flex'>
-                        <div  className='leftBtn' onClick={this.deleteWatch2gHomePoint}>删除</div>
-                        <div className='rightBtn'onClick={this.saveLocation}>保存</div>
-                    </div>
+                        <div className='submitBtn'onClick={this.saveLocation}>保存</div>
                 </div>
                     <div className='setPosModel' style={{display: 'none'}}>
                         <div className="am-navbar">
@@ -322,7 +319,7 @@ export default class updateLocation extends React.Component {
                         <div className="am-navbar">
                             <span className="am-navbar-left" onClick={this.setPosQuit}><i className="icon-back"></i></span>
                             <span className="am-navbar-title">添加新地址</span>
-                            <span className="am-navbar-right"></span>
+                            <span className="am-navbar-right am-navbar-del"><span onClick={this.deleteWatch2gHomePoint}>删除</span></span>
                         </div>
                         <div className="navbar-bottom"></div>
                         <div className='posMap-content'>
