@@ -226,6 +226,7 @@ export default class watchPosition extends React.Component {
 
         return (
             <div id="watchPosition" style={{height: '100%'}}>
+                <div className="am-navbar-blue">
                 <NavBar
                     mode="light"
                     leftContent={
@@ -261,6 +262,7 @@ export default class watchPosition extends React.Component {
                 >
                     定位
                 </NavBar>
+                </div>
                 <div className="map-cont">
                     <Map
                         amapkey={WebServiceUtil.amapkey}
