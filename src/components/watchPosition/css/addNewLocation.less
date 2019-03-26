@@ -71,7 +71,8 @@
   }
 
   .am-list-item .am-list-line .am-list-extra {
-    font-size: 15px;
+    font-size: 14px;
+    flex-basis:60%;
   }
 
   .my-list {
@@ -98,15 +99,6 @@
     background-size: 100% 100%;
   }
 
-  .am-list-item .am-list-line .am-list-brief {
-    width: 50%;
-    margin-top: 0;
-    display: inline-block;
-    text-align: right;
-    color: #333;
-    line-height: 44px;
-  }
-
   .common-space.am-list-item {
     padding: 0;
 
@@ -117,12 +109,25 @@
       height: 44px;
     }
   }
-
+.space-wrap{
+  width: calc(~"100% - 54px");
+  padding-left: 54px;
+  height: 44px;
   .space-name {
-    width: calc(~"50% - 54px");
-    line-height: 44px;
+    display: block;
+    line-height: 1.7;
   }
-
+  .am-list-brief{
+    font-size: 14px;
+    line-height: 1.3;
+  }
+}
+  .am-list-item .am-list-line .am-list-brief {
+    text-align: left;
+    width: 100%;
+    color: #666;
+    margin-top: 0 !important;
+  }
   .spaceAvatar {
     width: 44px;
     height: 44px;
@@ -184,13 +189,7 @@
       font-size: 17px;
     }
 
-    .am-list-item .am-list-line .am-list-brief {
-      text-align: left;
-      width: 100%;
-      color: #666;
-      line-height: 1;
-      padding-top: 8px;
-    }
+
 
     .am-list-item .am-list-line-multiple {
       padding: 5px 15px 5px 0;

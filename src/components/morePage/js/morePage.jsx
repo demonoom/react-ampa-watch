@@ -370,9 +370,10 @@ export default class morePage extends React.Component {
                 </div>
                 <div className='personMsg'>
                     <div className="topPadding"></div>
-                    <span className='icon_add' onClick={this.toJupmBind} 
+                    <span className='icon_add' onClick={this.toJupmBind}
                     // style={{ display: this.state.toBind ? "block" : "none" }}
                     >添加手表</span>
+                    <div className="clear"></div>
                     <div className="wrap">
                         <img src={this.state.imgSrc} alt="" onError={this.onImgError.bind(this)} />
                         <span className='text_hidden'>
