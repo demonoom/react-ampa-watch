@@ -137,13 +137,14 @@ export default class verifyStuInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="topPadding"></div>
                 <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont bindStu login-input">
                     <div className="picDiv">
                         <img
                             src={require('../../images/stuAccountPic.png')} alt="" />
                     </div>
-                    <div className="icon_watch line_publicD stuCont">
+                    <div className="icon_account line_publicD stuCont">
                         <InputItem
                             className=""
                             placeholder="请输入小蚂蚁账号"

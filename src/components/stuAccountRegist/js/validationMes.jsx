@@ -126,6 +126,7 @@ export default class validationMes extends React.Component {
     render() {
         return (
             <div id="validationMes">
+                <div className="topPadding"></div>
                 <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">

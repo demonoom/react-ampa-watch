@@ -403,16 +403,22 @@ export default class teHomework extends React.Component {
         };
         return (
             <div id='teHomework' className='bg_gray' style={{height: this.state.clientHeight}}>
-                <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
-                    <InputItem
-                        className="content"
-                        value={this.state.content}
-                        onChange={this.contentChange}
-                        placeholder="请输入评论内容"
-                        ref={el => this.inputRef = el}
-                    ></InputItem>
-                    <div className='sendBtn' onClick={this.toSendContent}>发送</div>
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">教师作业</span>
+                    <span className="am-navbar-right"></span>
                 </div>
+                <div className="commonLocation-cont">
+                    <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
+                        <InputItem
+                            className="content"
+                            value={this.state.content}
+                            onChange={this.contentChange}
+                            placeholder="请输入评论内容"
+                            ref={el => this.inputRef = el}
+                        ></InputItem>
+                        <div className='sendBtn' onClick={this.toSendContent}>发送</div>
+                    </div>
                 <ListView
                     ref={el => this.lv = el}
                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
@@ -433,7 +439,7 @@ export default class teHomework extends React.Component {
                         height: this.state.clientHeight,
                     }}
                 />
-
+                </div>
             </div>
         )
     }
