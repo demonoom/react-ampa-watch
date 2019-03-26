@@ -32,7 +32,6 @@ export default class watchPosition extends React.Component {
             sclPoint: {longitude: '116.397477', latitude: '39.908692'},
             homePointFlag: false,
             sclPointFlag: false,
-            zoom: 17,
             map: null,
             visible: false,
             toBind: false,
@@ -102,7 +101,6 @@ export default class watchPosition extends React.Component {
 
     buildStuList = (data) => {
         if (data.length == 0) {
-            console.log(1);
             this.setState({toBind: true});
             return
         }
@@ -312,8 +310,9 @@ export default class watchPosition extends React.Component {
 
         const events = {
             created: (ins) => {
-                this.setState({map: ins})
-            }
+                this.setState({map: ins});
+                ins.setZoom(17)
+            },
         };
 
         return (
@@ -363,7 +362,6 @@ export default class watchPosition extends React.Component {
                         loading={Loading}
                         plugins={plugins}
                         center={this.state.position}
-                        zoom={this.state.zoom}
                         showBuildingBlock={true}
                         buildingAnimation={true}
                         viewMode='3D'
