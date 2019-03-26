@@ -43,7 +43,7 @@ export default class schoolInfo extends React.Component {
     }
 
     //监听窗口改变时间
-    onWindwoResize =()=> {
+    onWindwoResize = () => {
         // this
         setTimeout(() => {
             this.setState({
@@ -54,7 +54,7 @@ export default class schoolInfo extends React.Component {
 
     //下一页
     nextPage = () => {
-        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex+"&relation="+this.state.relation+"&phoneNumber="+this.state.phoneNumber+"&ident="+this.state.ident+"&birthDay="+this.state.birthDay;
+        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?macAddr=" + this.state.macAddr + "&sex=" + this.state.sex + "&relation=" + this.state.relation + "&phoneNumber=" + this.state.phoneNumber + "&ident=" + this.state.ident + "&birthDay=" + this.state.birthDay;
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -69,7 +69,7 @@ export default class schoolInfo extends React.Component {
 
     //跳注册页面
     toRegPage = () => {
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr+"&relation="+this.state.relation+"&phoneNumber="+this.state.phoneNumber+"&ident="+this.state.ident+"&birthDay="+this.state.birthDay;
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr + "&relation=" + this.state.relation + "&phoneNumber=" + this.state.phoneNumber + "&ident=" + this.state.ident + "&birthDay=" + this.state.birthDay;
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -84,11 +84,11 @@ export default class schoolInfo extends React.Component {
             <div id="schoolInfo">
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
-                        <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>
+                        <img onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt="" />
                         <div className="dec">我有小蚂蚁账号</div>
                     </div>
                     <div onClick={this.toRegPage} className='noAccount'>
-                        <img src={require('../../images/noAccount.png')} alt=""/>
+                        <img src={require('../../images/noAccount.png')} alt="" />
                         <div className="dec">没有小蚂蚁账号</div>
                     </div>
                 </div>

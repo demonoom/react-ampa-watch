@@ -18,7 +18,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "",
+            macId: "123",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -89,18 +89,20 @@ export default class addWatchInfo extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.response == null) {
-                    this.setState({
-                        loginType: 1,
-                        showSexDiv: true,
-                        showRelationiDiv: true
-                    })
-                }
-                if (result.success && result.response) {
-                    this.setState({
-                        loginType: 0,
-                        showRelationiDiv: true
-                    })
+                if (result.success) {
+                    if (result.response == null) {
+                        this.setState({
+                            loginType: 1,
+                            showSexDiv: true,
+                            showRelationiDiv: true
+                        })
+                    } else {
+                        this.setState({
+                            loginType: 0,
+                            showRelationiDiv: true
+                        })
+                    }
+
                 } else {
                     Toast.fail(result.msg, 1);
                 }
@@ -115,7 +117,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("wwww");
+        this.getWatch2gByMacAddress("123");
         var data = {
             method: 'watchBinding'
         };
@@ -189,7 +191,7 @@ export default class addWatchInfo extends React.Component {
             };
             WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
                 onResponse: (result) => {
-                    if (result.success && result.response) {
+                    if (result.success) {
                         var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=" + this.state.loginType;
                         var data = {
                             method: 'openNewPage',
@@ -257,6 +259,10 @@ export default class addWatchInfo extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+    //input聚焦
+    handleClick = () => {
+        this.inputRef.focus();
+    }
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
@@ -285,12 +291,13 @@ export default class addWatchInfo extends React.Component {
                                 <List.Item arrow="horizontal"></List.Item>
                             </Picker>
                         </div>
-                        <div className='login-input line_publicD icon_watch' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
+                        <div onClick={this.handleClick} className='login-input line_publicD icon_watch' style={{ display: this.state.showSexDiv ? "block" : "none" }}>
                             <InputItem
                                 value={this.state.phonenumber}
                                 onChange={this.phoneNumber}
                                 type="phone"
                                 placeholder="请输入手表号码"
+                                ref={el => this.inputRef = el}
                             ></InputItem>
                         </div>
                     </div>
