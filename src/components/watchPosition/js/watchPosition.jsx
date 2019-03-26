@@ -35,6 +35,7 @@ export default class watchPosition extends React.Component {
             zoom: 17,
             map: null,
             visible: false,
+            toBind: false,
             selected: '',
             watchName: '',
             popoverLay: [],
@@ -102,6 +103,7 @@ export default class watchPosition extends React.Component {
     buildStuList = (data) => {
         if (data.length == 0) {
             console.log(1);
+            this.setState({toBind: true});
             return
         }
         var popoverLay = [];
@@ -112,7 +114,6 @@ export default class watchPosition extends React.Component {
         });
         this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
             this.watch2GLocaltionRequest();
-            this.getWatch2gHomePoint()
         });
     };
 
@@ -172,6 +173,7 @@ export default class watchPosition extends React.Component {
      * 获取手表位置
      */
     watch2GLocaltionRequest = () => {
+        this.getWatch2gHomePoint();
         var obj = {
             "command": "watch2GLocaltionRequest",
             "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
@@ -216,14 +218,16 @@ export default class watchPosition extends React.Component {
     }
 
     renderhomePoint() {
-        return <div style={{display: watchPositionThis.state.homePointFlag ? '' : 'none'}} className="school-positioning">
+        return <div style={{display: watchPositionThis.state.homePointFlag ? '' : 'none'}}
+                    className="school-positioning">
             <img
                 style={{borderRadius: '50%'}}
                 src={require('../img/icon-home.png')} alt=""/></div>
     }
 
     rendersclPoint() {
-        return <div style={{display: watchPositionThis.state.sclPointFlag ? '' : 'none'}} className="school-positioning">
+        return <div style={{display: watchPositionThis.state.sclPointFlag ? '' : 'none'}}
+                    className="school-positioning">
             <img
                 style={{borderRadius: '50%'}}
                 src={require('../img/icon-schoolA.png')} alt=""/></div>
@@ -279,8 +283,19 @@ export default class watchPosition extends React.Component {
             sclPointFlag: false,
         }, () => {
             this.watch2GLocaltionRequest();
-            this.getWatch2gHomePoint();
             this.state.map.setZoom(17);
+        });
+    };
+
+    toJupmBind = () => {
+        var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
         });
     };
 
@@ -332,7 +347,8 @@ export default class watchPosition extends React.Component {
                                     alignItems: 'center',
                                 }}
                                 >
-                                    <i className="icon-back"></i>{this.state.watchName}
+                                    <i className="icon-back"
+                                       style={{display: this.state.toBind ? 'none' : ''}}></i>{this.state.watchName}
                                 </div>
                             </Popover>
                         }
@@ -340,7 +356,7 @@ export default class watchPosition extends React.Component {
                         定位
                     </NavBar>
                 </div>
-                <div className="map-cont">
+                <div style={{display: this.state.toBind ? "none" : ""}} className="map-cont">
                     <Map
                         amapkey={WebServiceUtil.amapkey}
                         version={WebServiceUtil.version}
@@ -377,6 +393,19 @@ export default class watchPosition extends React.Component {
                         </div>
 
                     </Map>
+                </div>
+
+                <div className="emptyCont" style={{display: this.state.toBind ? "block" : "none"}}>
+                    <div className="p38 my_flex">
+                        <div>
+                            <i></i>
+                            <span>
+                                还没有任何信息<br/>
+                                请先绑定手表二维码
+                                    </span>
+                        </div>
+                    </div>
+                    <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
 
             </div>

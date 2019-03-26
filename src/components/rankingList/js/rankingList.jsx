@@ -2,12 +2,7 @@ import React from "react";
 import { Tabs, WhiteSpace, ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
-const tabs = [
-    { title: '答题排行榜' },
-    { title: '运动排行榜' },
-    { title: '爱心排行榜' },
-];
-
+const Item = Popover.Item;
 var myDate = new Date();
 //获取当前年
 var year = myDate.getFullYear();
@@ -45,7 +40,13 @@ export default class rankingList extends React.Component {
             isLoadingLeft: true,
             flag: 1,
             ownData: {},
-            num: ""
+            watchName: "",
+            num: "",
+            tabs: [
+                { title: '答题排行榜' },
+                { title: '运动' },
+                { title: '爱心' },
+            ]
         };
     }
     componentDidMount () {
@@ -92,10 +93,15 @@ export default class rankingList extends React.Component {
                         })
                     } else {
                         this.setState({
-                            studentId: result.response[0].student.colUid
+                            watchData: result.response,
+                            studentId: result.response[0].student.colUid,
+                            watchName: result.response[0].watchName,
+                            watchId: result.response[0].id,
+                            macAddr: result.response[0].macAddress,
                         }, () => {
                             console.log(this.state.toBingStudent, "toBingStudent")
                             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+                            this.WatchList(this.state.watchData)
                         })
                     }
                 } else {
@@ -185,10 +191,10 @@ export default class rankingList extends React.Component {
         currentPageNo += 1;
         this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo });
         if (this.state.flag == 1) {
-            _this.getStudentAnswerRightCountTop(this.state.userId, start, end);
+            _this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
 
         } else {
-            _this.getStudentAnswerRightCountTop(this.state.userId, weekStart, end);
+            _this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
         }
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.initData),
@@ -239,6 +245,69 @@ export default class rankingList extends React.Component {
             window.location.href = url;
         });
     }
+
+    //tabs 改变
+    onTabsChange = (v) => {
+        if (v.title == "运动") {
+            this.setState({
+                tabs: [
+                    { title: '答题' },
+                    { title: '运动排行榜' },
+                    { title: '爱心' },
+                ]
+            })
+        } else if (v.title == "爱心") {
+            this.setState({
+                tabs: [
+                    { title: '答题' },
+                    { title: '运动' },
+                    { title: '爱心排行榜' },
+                ]
+            })
+        } else if (v.title == "答题") {
+            this.setState({
+                tabs: [
+                    { title: '答题排行榜' },
+                    { title: '运动' },
+                    { title: '爱心' },
+                ]
+            })
+        }
+    }
+
+    //选择
+    onSelect = (opt) => {
+        this.setState({
+            visible: false,
+            watchId: opt.props.macId,
+            watchName: opt.props.children
+        }, () => {
+            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+        });
+    };
+
+
+    //手表列表
+    WatchList = (data) => {
+        var watchListData = [];
+        data.forEach((v) => {
+            watchListData.push(
+                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+            );
+        });
+        this.setState({
+            watchListData
+        })
+
+    };
+
+    //气泡
+    handleVisibleChange = (visible) => {
+        this.setState({
+            visible,
+        });
+    };
+
     render () {
         const row = (rowData, sectionID, rowID) => {
             return (
@@ -256,42 +325,35 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue">
-                    <NavBar
-                        mode="light"
-                        leftContent={
-                            <Popover mask
-                                     overlayClassName="fortest"
-                                     overlayStyle={{color: 'currentColor'}}
-                                     visible={this.state.visible}
-                                     placement="bottomLeft"
-                                     overlay={this.state.popoverLay}
-                                     align={{
-                                         overflow: {adjustY: 0, adjustX: 0},
-                                         offset: [10, 0],
-                                     }}
-                                     onVisibleChange={(visible) => {
-                                         this.setState({
-                                             visible,
-                                         });
-                                     }}
-                                     onSelect={this.onSelect}
-                            >
-                                <div style={{
-                                    height: '100%',
-                                    padding: '0',
-                                    marginRight: '-15px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                }}
-                                >
-                                    <div style={{display:"none"}}><i className="icon-back"></i>{this.state.watchName}</div>
-                                </div>
-                            </Popover>
-                        }
+                <div className="am-navbar-blue" style={{ display: "block" }}>
+                    <Popover mask
+                        overlayClassName="fortest"
+                        overlayStyle={{ color: 'currentColor' }}
+                        visible={this.state.visible}
+                        placement="bottomLeft"
+                        overlay={this.state.watchListData}
+                        align={{
+                            overflow: { adjustY: 0, adjustX: 0 },
+                            offset: [10, 0],
+                        }}
+                        onVisibleChange={(visible) => {
+                            this.setState({
+                                visible,
+                            });
+                        }}
+                        onSelect={this.onSelect}
                     >
-                        排行榜
-                    </NavBar>
+                        <div style={{
+                            height: '100%',
+                            padding: '0',
+                            marginRight: '-15px',
+                            display: 'flex',
+                            alignItems: 'center',
+                        }}
+                        >
+                            {this.state.watchName} <i className="icon-back"></i>
+                        </div>
+                    </Popover>
                 </div>
                 <div className="commonLocation-cont">
                     <div className="emptyCont" style={{ display: this.state.toBind ? "block" : "none" }}>
@@ -299,17 +361,18 @@ export default class rankingList extends React.Component {
                             <div>
                                 <i></i>
                                 <span>
-                                还没有任何信息<br />
-                                请先绑定手表二维码
+                                    还没有任何信息<br />
+                                    请先绑定手表二维码
                                     </span>
                             </div>
                         </div>
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                     <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
-                        <Tabs tabs={tabs}
-                              initalPage={'t2'}
-                              swipeable={false}
+                        <Tabs tabs={this.state.tabs}
+                            onChange={this.onTabsChange}
+                            initalPage={'t2'}
+                            swipeable={false}
                         >
                             <div className='questionCont' >
                                 <ListView
