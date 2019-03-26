@@ -285,7 +285,7 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue" style={{ display: "none" }}>
+                <div className="am-navbar-blue" style={{ display: this.state.toBind ? "block" : "none" }}>
                     <NavBar
                         mode="light"
                         leftContent={
@@ -322,8 +322,8 @@ export default class rankingList extends React.Component {
                         排行榜
                     </NavBar>
                 </div>
-                <div className="commonLocation-cont">
-                    <div className="emptyCont" style={{ display: this.state.toBind ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display: this.state.toBind ? "block" : "none" }}>
+                    <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
                                 <i></i>
@@ -335,6 +335,7 @@ export default class rankingList extends React.Component {
                         </div>
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
+                </div>
                     <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
                         <Tabs tabs={this.state.tabs}
                             onChange={this.onTabsChange}
@@ -365,7 +366,7 @@ export default class rankingList extends React.Component {
                                     initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
                                     scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
                                     style={{
-                                        height: this.state.clientHeight - 90 - 64,
+                                        height: this.state.clientHeight - 50 - 64,
                                     }}
                                 />
                                 <div className='myGrade' onClick={this.toDetail}>
@@ -384,7 +385,7 @@ export default class rankingList extends React.Component {
                             </div>
                         </Tabs>
                     </div>
-                </div>
+
             </div>
         )
     }
