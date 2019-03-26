@@ -1,17 +1,26 @@
 #rankingList{
     .am-tabs-default-bar-top{
-      background-color: #0096FF !important;
+      background: -webkit-linear-gradient(72deg, #28c4fd 0%, #0092fc 100%) !important;
+      background: linear-gradient(18deg, #28c4fd 0%, #0092fc 100%) !important;
+      color: #fff;
+      padding: 20px 15px 0;
     }
   .am-tabs-default-bar-tab-active,.am-tabs-default-bar-tab{
     color: white;
-    height: 40px;
-    line-height: 40px;
+    height: 44px;
+    line-height: 44px;
+  }
+  .am-tabs-default-bar-tab-active{
+    font-size: 16px;
   }
   .am-tabs-default-bar-top .am-tabs-default-bar-tab::after,.am-tabs-default-bar-underline{
     display: none;
   }
   .am-list-body{
     background-color:#ededed;
+  }
+  .am-tabs-default-bar-top .am-tabs-default-bar-content{
+    width: calc(~"100% - 100px");
   }
   .am-tabs-default-bar-tab-active::before{
     content: '';
@@ -26,6 +35,19 @@
     -ms-transform: translateX(-50%);
     -o-transform: translateX(-50%);
     transform: translateX(-50%);
+  }
+  .watchSelect{
+    position: absolute;
+    right: 30px;
+    top: 28px;
+    height: auto;
+    z-index: 50;
+    color: #fff;
+    .watchName{
+      padding-right: 5px;
+      font-size: 14px;
+      max-width: 50px;
+    }
   }
   .questionCont{
     position: relative;
@@ -209,6 +231,17 @@
           text-align: right;
         }
       }
+    }
+  }
+  @media only screen and (max-width: 380px) {
+    .am-tabs-default-bar-tab{
+      font-size: 13px;
+    }
+    .am-tabs-default-bar-tab-active{
+      font-size: 14px;
+    }
+    .am-tabs-default-bar-top .am-tabs-default-bar-content{
+      width: calc(~"100% - 80px");
     }
   }
 }

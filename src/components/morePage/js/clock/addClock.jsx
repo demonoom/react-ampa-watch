@@ -113,7 +113,7 @@ export default class addClock extends React.Component {
             onError: function (errorMsg) {
 
             }, onWarn: function (warnMsg) {
-
+                Toast.info(warnMsg,1)
             }, onMessage: function (info) {
                 console.log(info, "info")
             }

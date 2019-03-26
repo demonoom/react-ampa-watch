@@ -13,17 +13,26 @@ const loadingStyle = {
     alignItems: 'center'
 };
 
-const Loading = <div className="emptyLoading"><div className="loading-icon"></div><div>正在生成地图...</div></div>;
+const Loading = <div className="emptyLoading">
+    <div className="loading-icon"></div>
+    <div>正在生成地图...</div>
+</div>;
 
 export default class watchTrail extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             position: {longitude: '116.397477', latitude: '39.908692'},
-            zoom: 10,
+            zoom: 19,
             map: null,
             path: [],
-            type: 0
+            type: 0,
+            style: {
+                strokeWeight: '10',
+                lineJoin: 'round',
+                strokeColor: '#3e2bff',
+                strokeOpacity: '0.7'
+            }
         };
     }
 
@@ -152,6 +161,7 @@ export default class watchTrail extends React.Component {
                         <Polyline
                             path={this.state.path}
                             events={lineEvents}
+                            style={this.state.style}
                         />
                         <div id='timeChoose' className='customLayer'>
                         <span className={this.state.type == 0 ? 'select' : ''}
