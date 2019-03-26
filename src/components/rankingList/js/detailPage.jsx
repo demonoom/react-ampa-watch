@@ -207,6 +207,7 @@ export default class detailPage extends React.Component {
                 right:'5%',
                 top:'40',
                 bottom: '10%',//距离下边的距离
+                containLabel: true
             },
             // legend: {
             //     show: false,
@@ -243,6 +244,7 @@ export default class detailPage extends React.Component {
             yAxis: [
                 {
                     type: 'value',
+                    splitLine:{show: false},
                     axisLine: {
                         show: true,
                         lineStyle: {
