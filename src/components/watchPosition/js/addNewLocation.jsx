@@ -206,7 +206,16 @@ export default class addNewLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('保存成功', 2);
+                        Toast.success('保存成功', 1);
+
+                        setTimeout(function () {
+                            var data = {
+                                method: 'finishForRefresh',
+                            };
+                            Bridge.callHandler(data, null, function (error) {
+                                console.log(error);
+                            });
+                        }, 1000)
                     }
                 } else {
                     Toast.fail(result.msg, 1);
