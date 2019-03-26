@@ -275,6 +275,8 @@ export default class watchPosition extends React.Component {
             // selected: opt.props.value,
             mac: opt.props.mac,
             macId: opt.props.macId,
+            homePointFlag: false,
+            sclPointFlag: false,
         }, () => {
             this.watch2GLocaltionRequest();
             this.getWatch2gHomePoint();
