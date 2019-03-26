@@ -14,7 +14,7 @@ const loadingStyle = {
     alignItems: 'center'
 };
 
-const Loading = <div className="emptyLoading"><div className="loading-icon"></div><div>正在生成地图...</div></div>;
+const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
 
 const Item = Popover.Item;
 
