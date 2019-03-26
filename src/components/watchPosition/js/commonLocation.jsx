@@ -247,7 +247,7 @@ export default class commonLocation extends React.Component {
                             <div className="WhiteSpace"></div>
                         </div>
 
-                        <div>{this.state.posList}</div>
+                        <div className="publicPos">{this.state.posList}</div>
 
                         <div className="tips">
                             <div className="tips-title">温馨提示</div>

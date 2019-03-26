@@ -216,14 +216,14 @@ export default class watchPosition extends React.Component {
     }
 
     renderhomePoint() {
-        return <div style={{display: watchPositionThis.state.homePointFlag ? '' : 'none'}} className="user-positioning">
+        return <div style={{display: watchPositionThis.state.homePointFlag ? '' : 'none'}} className="school-positioning">
             <img
                 style={{borderRadius: '50%'}}
                 src={require('../img/icon-home.png')} alt=""/></div>
     }
 
     rendersclPoint() {
-        return <div style={{display: watchPositionThis.state.sclPointFlag ? '' : 'none'}} className="user-positioning">
+        return <div style={{display: watchPositionThis.state.sclPointFlag ? '' : 'none'}} className="school-positioning">
             <img
                 style={{borderRadius: '50%'}}
                 src={require('../img/icon-schoolA.png')} alt=""/></div>
