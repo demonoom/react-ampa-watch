@@ -226,6 +226,24 @@ export default class morePage extends React.Component {
         });
     };
 
+      /**
+     * 删除弹出框
+     */
+    showAlert = (event) => {
+        event.stopPropagation();
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+        const alertInstance = alert('您确定解绑吗?', '', [
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            { text: '确定', onPress: () => this.unbindGuardian() },
+        ], phone);
+    };
+
     //解绑监护人
     unbindGuardian = () => {
         var param = {
@@ -387,7 +405,7 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.unbindGuardian}>
+                <div style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
                     </div>
