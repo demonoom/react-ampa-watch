@@ -314,6 +314,12 @@ export default class morePage extends React.Component {
         });
     }
 
+
+    onImgError = ()=>{
+        this.setState({
+            imgSrc:"http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png"
+        })
+    }
     render () {
         return (
             <div id="morePage" className='bg_gray'>
@@ -346,9 +352,11 @@ export default class morePage extends React.Component {
                 </div>
                 <div className='personMsg'>
                     <div className="topPadding"></div>
-                    <span className='icon_add' onClick={this.toJupmBind} style={{ display: this.state.toBind ? "block" : "none" }}>添加手表</span>
+                    <span className='icon_add' onClick={this.toJupmBind} 
+                    // style={{ display: this.state.toBind ? "block" : "none" }}
+                    >添加手表</span>
                     <div className="wrap">
-                        <img src={this.state.imgSrc} alt="" />
+                        <img src={this.state.imgSrc} alt="" onError={this.onImgError.bind(this)} />
                         <span className='text_hidden'>
                             {
                                 this.state.toBind ? "未绑定" : this.state.watchName
