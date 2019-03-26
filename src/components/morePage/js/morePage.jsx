@@ -228,7 +228,7 @@ export default class morePage extends React.Component {
         });
     };
 
-    //接棒监护人
+    //解绑监护人
     unbindGuardian = () => {
         var param = {
             "method": 'unbindGuardian',
@@ -239,8 +239,13 @@ export default class morePage extends React.Component {
 
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
+                if (result.success) {
                     Toast.info('解绑成功', 1);
+                    var data = {
+                        method: 'unBindSuccess',
+                    };
+                    Bridge.callHandler(data, null, function (error) {
+                    });
                     this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
                     Toast.fail(result.msg, 1);
