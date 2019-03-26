@@ -10,6 +10,10 @@ export default class commonLocation extends React.Component {
         super(props);
         this.state = {
             posList: [],
+            homePosition: '未设置',
+            homeObj: null,
+            schoolPosition: '未设置',
+            schoolObj: null,
         };
     }
 
@@ -27,7 +31,7 @@ export default class commonLocation extends React.Component {
     }
 
     addNewPos = () => {
-        var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
+        var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=0';
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -77,7 +81,7 @@ export default class commonLocation extends React.Component {
                     className="common-space line_public15"
                     multipleLine
                     onClick={() => {
-                        _this.intoDetil(v)
+                        _this.intoDetil(0, v)
                     }}
                     platform="android"
                 >
@@ -99,16 +103,52 @@ export default class commonLocation extends React.Component {
      id: 5
      * @param obj
      */
-    intoDetil = (obj) => {
-        var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
-        var data = {
-            method: 'openNewPage',
-            selfBack: true,
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
+    intoDetil = (type, obj) => {
+        if (type == 0) {
+            //自定义
+            var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
+            var data = {
+                method: 'openNewPage',
+                selfBack: true,
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        } else if (type == 1) {
+            //家
+            if (!!this.state.homeObj) {
+                //修改
+            } else {
+                //添加
+                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=1';
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            }
+        } else if (type == 2) {
+            //学校
+            if (!!this.state.schoolObj) {
+                //修改
+            } else {
+                //添加
+                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=2';
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            }
+        }
+
     };
 
     popView = () => {
@@ -129,6 +169,40 @@ export default class commonLocation extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
+                    <div className="publicPos">
+                        <Item
+                            arrow="horizontal"
+                            className="common-space line_public15"
+                            multipleLine
+                            onClick={() => {
+                                this.intoDetil(1)
+                            }}
+                            platform="android"
+                        >
+                            <span className="spaceAvatar">
+                                <img style={{borderRadius: '50%'}}
+                                     src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
+                            </span>
+                            <span className="space-name text_hidden">家</span>
+                            <Brief>{this.state.homePosition}</Brief>
+                        </Item>
+                        <Item
+                            arrow="horizontal"
+                            className="common-space line_public15"
+                            multipleLine
+                            onClick={() => {
+                                this.intoDetil(2)
+                            }}
+                            platform="android"
+                        >
+                            <span className="spaceAvatar">
+                                <img style={{borderRadius: '50%'}}
+                                     src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
+                            </span>
+                            <span className="space-name text_hidden">公司</span>
+                            <Brief>{this.state.schoolPosition}</Brief>
+                        </Item>
+                    </div>
                     <div className="commonLocation-content">{this.state.posList}</div>
                     <div className="tips">
                         <div className="tips-title">温馨提示</div>

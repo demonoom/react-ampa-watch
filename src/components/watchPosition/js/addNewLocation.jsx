@@ -34,7 +34,13 @@ export default class addNewLocation extends React.Component {
         var userId = locationSearch.split("&")[0].split('=')[1];
         var mac = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
-        this.setState({userId, mac, macId});
+        var type = locationSearch.split("&")[3].split('=')[1];
+        if (type == 1) {
+            this.setState({posName: '家'})
+        } else if (type == 2) {
+            this.setState({posName: '学校'})
+        }
+        this.setState({userId, mac, macId, type});
     }
 
     posNameClick = () => {
@@ -184,6 +190,7 @@ export default class addNewLocation extends React.Component {
             "latitude": this.state.addressLT.split(',')[1],
             "creatorId": this.state.userId,
             "safetyRange": this.state.sliderValue,
+            "type": this.state.type
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
