@@ -118,7 +118,7 @@ export default class babyInfo extends React.Component {
                         showRelationiDiv: true
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -149,11 +149,11 @@ export default class babyInfo extends React.Component {
     //跳转下一页
     nextPage = () => {
         if (this.state.sexValue == "") {
-            Toast.info("请选择孩子性别", 1)
+            Toast.info("请选择孩子性别",1,null,false)
             return
         }
         if (this.state.sendData == undefined) {
-            Toast.info("请选择孩子生日", 1)
+            Toast.info("请选择孩子生日",1,null,false)
             return
         }
         var url = WebServiceUtil.mobileServiceURL + "schoolInfo?macAddr=" + this.state.macAddr + "&sex=" + this.state.sexValue[0]+"&relation="+this.state.relation+"&phoneNumber="+this.state.phonenumber+"&ident="+this.state.ident+"&birthDay="+this.state.sendData;

@@ -91,7 +91,7 @@ export default class updateLocation extends React.Component {
     searchPos = () => {
         var _this = this;
         if (this.state.searchValue.trim() === '') {
-            Toast.info('请输入位置信息', 2);
+            Toast.info('请输入位置信息',2,null,false);
             return
         }
 
@@ -173,11 +173,11 @@ export default class updateLocation extends React.Component {
 
     saveLocation = () => {
         if (this.state.posName === '未设置') {
-            Toast.fail('请设置位置名称', 2);
+            Toast.fail('请设置位置名称',2,null,false);
             return
         }
         if (this.state.pos === '未设置') {
-            Toast.fail('请设置位置信息', 2);
+            Toast.fail('请设置位置信息',2,null,false);
             return
         }
         this.updateWatch2gHomePoint()
@@ -203,7 +203,7 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('修改成功', 1);
+                        Toast.success('修改成功',1,null,false);
 
                         setTimeout(function () {
                             var data = {
@@ -215,7 +215,7 @@ export default class updateLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -238,7 +238,7 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('删除成功', 1);
+                        Toast.success('删除成功',1,null,false);
 
                         setTimeout(function () {
                             var data = {
@@ -250,7 +250,7 @@ export default class updateLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

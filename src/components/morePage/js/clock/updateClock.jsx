@@ -134,7 +134,7 @@ export default class updateClock extends React.Component {
                     }, () => {
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -291,7 +291,7 @@ export default class updateClock extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    Toast.info("修改成功", 1);
+                    Toast.info("修改成功",1,null,false);
                     var commandJson = {
                         "command": "watch2GClock",
                         data: {
@@ -311,7 +311,7 @@ export default class updateClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -331,7 +331,7 @@ export default class updateClock extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    Toast.info("删除成功", 1)
+                    Toast.info("删除成功",1,null,false)
                     var commandJson = {
                         "command": "watch2GClock",
                         data: {
@@ -352,7 +352,7 @@ export default class updateClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

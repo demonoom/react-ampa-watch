@@ -92,7 +92,7 @@ export default class addNewLocation extends React.Component {
     searchPos = () => {
         var _this = this;
         if (this.state.searchValue.trim() === '') {
-            Toast.info('请输入位置信息', 2);
+            Toast.info('请输入位置信息',2,null,false);
             return
         }
 

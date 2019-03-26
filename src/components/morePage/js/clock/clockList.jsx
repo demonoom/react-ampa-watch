@@ -54,7 +54,7 @@ export default class clockList extends React.Component {
             onError: function (errorMsg) {
 
             }, onWarn: function (warnMsg) {
-                Toast.info(warnMsg,1)
+                Toast.info(warnMsg,1,null,false)
             }, onMessage: function (info) {
                 console.log(info, "info")
             }
@@ -88,7 +88,7 @@ export default class clockList extends React.Component {
                         clockList: result.response,
                     })
                 }else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
                 
             },
@@ -131,7 +131,7 @@ export default class clockList extends React.Component {
                     console.log(commandJson, "commandJson")
                     ms.send(commandJson);
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

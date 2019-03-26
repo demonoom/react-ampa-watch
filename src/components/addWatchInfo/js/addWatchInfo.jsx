@@ -104,7 +104,7 @@ export default class addWatchInfo extends React.Component {
                     }
 
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -117,7 +117,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("aa");
+        // this.getWatch2gByMacAddress("11111");
         var data = {
             method: 'watchBinding'
         };
@@ -152,15 +152,15 @@ export default class addWatchInfo extends React.Component {
     nextPage = () => {
         if (this.state.loginType == 1) {
             if (this.state.macId == "") {
-                Toast.info("请扫描手表")
+                Toast.info("请扫描手表",1,null,false)
                 return
             }
             if (this.state.relationValue == "") {
-                Toast.info("请选择您与孩子的关系")
+                Toast.info("请选择您与孩子的关系",1,null,false)
                 return
             }
             if (this.state.phonenumber == undefined) {
-                Toast.info("请输入手表号码")
+                Toast.info("请输入手表号码",1,null,false)
                 return
             }
             var url = WebServiceUtil.mobileServiceURL + "babyInfo?macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber + "&ident=" + this.state.ident
@@ -174,11 +174,11 @@ export default class addWatchInfo extends React.Component {
             });
         } else {
             if (this.state.macId == "") {
-                Toast.info("请扫描手表")
+                Toast.info("请扫描手表",1,null,false)
                 return
             }
             if (this.state.relationValue == "") {
-                Toast.info("请选择您与孩子的关系")
+                Toast.info("请选择您与孩子的关系",1,null,false)
                 return
             }
             //副监护人
@@ -201,7 +201,7 @@ export default class addWatchInfo extends React.Component {
                             window.location.href = url;
                         });
                     } else {
-                        Toast.fail(result.msg, 1);
+                        Toast.fail(result.msg,1,null,false);
                     }
                 },
                 onError: function (error) {

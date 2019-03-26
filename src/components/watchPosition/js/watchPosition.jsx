@@ -91,7 +91,7 @@ export default class watchPosition extends React.Component {
                         _this.buildStuList(result.response)
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -141,7 +141,7 @@ export default class watchPosition extends React.Component {
                         }
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -192,7 +192,7 @@ export default class watchPosition extends React.Component {
                 if (info.command === 'sendWatch2GLocaltionData') {
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
-                            Toast.fail('获取定位失败');
+                            Toast.fail('获取定位失败',1,null,false);
                             return
                         }
 
