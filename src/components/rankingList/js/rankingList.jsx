@@ -256,7 +256,7 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue">
+                <div className="am-navbar-blue" style={{display:"none"}}>
                     <NavBar
                         mode="light"
                         leftContent={
