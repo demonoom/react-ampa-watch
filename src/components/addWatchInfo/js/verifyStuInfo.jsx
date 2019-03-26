@@ -24,12 +24,14 @@ export default class verifyStuInfo extends React.Component {
         var relation = searchArray[2].split('=')[1];
         var phoneNumber = searchArray[3].split('=')[1];
         var ident = searchArray[4].split('=')[1];
+        var birthDay = searchArray[5].split('=')[1];
         this.setState({
             macAddr,
             sex,
             relation,
             phoneNumber,
-            ident
+            ident,
+            birthDay
         })
         this.getWatchId(macAddr)
         window.addEventListener('resize', this.onWindwoResize);
@@ -118,7 +120,7 @@ export default class verifyStuInfo extends React.Component {
             "familyRelate":this.state.relation,
             "guardianId":this.state.ident,
             "phoneNumber":this.state.phoneNumber,
-            "birthTime":"iop",
+            "birthTime":this.state.birthDay,
             "actionName": "watchAction",
         }
         var param = {
