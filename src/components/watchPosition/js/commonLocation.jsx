@@ -58,7 +58,14 @@ export default class commonLocation extends React.Component {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
                         if (!!result.response) {
-                            _this.buildPosList(result.response)
+                            _this.buildPosList(result.response.filter((v) => {
+                                return (v.type != 1 && v.type != 2)
+                            }));
+                            _this.buildPublicMsg(result.response.filter((v) => {
+                                return v.type == 1
+                            }), result.response.filter((v) => {
+                                return v.type == 2
+                            }))
                         }
                     }
                 } else {
@@ -69,6 +76,20 @@ export default class commonLocation extends React.Component {
                 Toast.warn('保存失败');
             }
         });
+    };
+
+    /**
+     * @param home
+     * @param school
+     */
+    buildPublicMsg = (home, school) => {
+        if (home.length != 0) {
+            this.setState({homePosition: home[0].homeAddress, homeObj: home[0]});
+        }
+        if (school.length != 0) {
+            this.setState({schoolPosition: school[0].homeAddress, schoolObj: school[0]});
+        }
+
     };
 
     buildPosList = (data) => {
@@ -106,7 +127,7 @@ export default class commonLocation extends React.Component {
     intoDetil = (type, obj) => {
         if (type == 0) {
             //自定义
-            var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
+            var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress + '&type=0');
             var data = {
                 method: 'openNewPage',
                 selfBack: true,
@@ -119,6 +140,15 @@ export default class commonLocation extends React.Component {
             //家
             if (!!this.state.homeObj) {
                 //修改
+                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.homeObj.id + '&homeName=' + this.state.homeObj.homeName + '&homeAddress=' + this.state.homeObj.homeAddress + '&type=1');
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
             } else {
                 //添加
                 var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=1';
@@ -135,6 +165,15 @@ export default class commonLocation extends React.Component {
             //学校
             if (!!this.state.schoolObj) {
                 //修改
+                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.schoolObj.id + '&homeName=' + this.state.schoolObj.homeName + '&homeAddress=' + this.state.schoolObj.homeAddress + '&type=2');
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
             } else {
                 //添加
                 var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=2';
@@ -199,7 +238,7 @@ export default class commonLocation extends React.Component {
                                 <img style={{borderRadius: '50%'}}
                                      src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")} alt=""/>
                             </span>
-                            <span className="space-name text_hidden">公司</span>
+                            <span className="space-name text_hidden">学校</span>
                             <Brief>{this.state.schoolPosition}</Brief>
                         </Item>
                     </div>

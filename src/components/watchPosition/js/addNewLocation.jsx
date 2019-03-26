@@ -22,7 +22,14 @@ export default class addNewLocation extends React.Component {
             circle: null,
             addressName: '',
             addressLT: '',
-            style: {strokeWeight: '16', strokeColor : "rgba(23,172,247,1)", strokeOpacity : 0.13, strokeStyle:"solid", fillColor: 'rgba(23,172,247,1)', fillOpacity: '0.26'},
+            style: {
+                strokeWeight: '16',
+                strokeColor: "rgba(23,172,247,1)",
+                strokeOpacity: 0.13,
+                strokeStyle: "solid",
+                fillColor: 'rgba(23,172,247,1)',
+                fillOpacity: '0.26'
+            },
             radius: 50,
             sliderValue: 15,
         };
@@ -44,6 +51,9 @@ export default class addNewLocation extends React.Component {
     }
 
     posNameClick = () => {
+        if (this.state.type == 1 || this.state.type == 2) {
+            return
+        }
         var _this = this;
         var phoneType = navigator.userAgent;
         var phone;
