@@ -24,7 +24,11 @@ export default class stuAccountRegist extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var sex = locationSearch.split("&")[0].split('=')[1];
         var macAddr = locationSearch.split("&")[1].split('=')[1];
-        this.setState({sex, macAddr});
+        var relation = locationSearch.split("&")[2].split('=')[1];
+        var phoneNumber = locationSearch.split("&")[3].split('=')[1];
+        var ident = locationSearch.split("&")[4].split('=')[1];
+        var birthDay = locationSearch.split("&")[5].split('=')[1];
+        this.setState({sex, macAddr, relation, phoneNumber, ident, birthDay});
     }
 
     /**
@@ -218,7 +222,9 @@ export default class stuAccountRegist extends React.Component {
             return
         }
 
-        var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName+ "&schName=" + this.state.schoolName+ "&clazzName=" + $('#stuClazz .am-list-extra').html());
+        // this.setState({sex, relation, phoneNumber, ident, birthDay});
+
+        var url = encodeURI(WebServiceUtil.mobileServiceURL + "validationMes?macAddr=" + this.state.macAddr + "&classId=" + this.state.classId + "&schoolId=" + this.state.schoolId + "&stuName=" + this.state.stuName + "&schName=" + this.state.schoolName + "&clazzName=" + $('#stuClazz .am-list-extra').html() + "&sex=" + this.state.sex + "&relation=" + this.state.relation + "&phoneNumber=" + this.state.phoneNumber + "&ident=" + this.state.ident + "&birthDay=" + this.state.birthDay);
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -235,6 +241,7 @@ export default class stuAccountRegist extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+
     render() {
         return (
             <div id="stuAccountRegist" >

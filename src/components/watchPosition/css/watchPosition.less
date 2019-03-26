@@ -10,7 +10,7 @@
     height: 40px;
     position: fixed;
     bottom: 60px;
-    right: 15px;
+    right: 16px;
     background:rgba(247,246,246,1);
     box-shadow:0px 6px 20px 0px rgba(51,51,51,0.2);
     border-radius:50%;
@@ -33,20 +33,19 @@
   box-shadow: 0px 6px 20px 0px rgba(51, 51, 51, 0.2);
   border-radius: 10px;
 }
+  #getTrail, #safeAddress{
+    width: 38px;
+    height: 40px;
+  }
   #getTrail {
     background: url("../img/icon-orbital.png") no-repeat center;
-    width: 38px;
-    height: 38px;
     background-size: 20px 29px;
   }
 
   #safeAddress {
-    background: url("../img/icon-place.png") no-repeat;
-    width: 40px;
-    height: 42px;
-    background-size: 100% 100%;
+    background: url("../img/icon-place.png") no-repeat center;
+    background-size: 28px 22px;
   }
-
   .amap-logo {
     display: none !important;
   }
@@ -60,7 +59,7 @@
   .user-positioning{
     background: url("../img/user-positioning.png") no-repeat;
     width: 40px;
-    height: 86px;
+    height: 53px;
     background-size: 100% 100%;
     img{
       width: 26px;
@@ -74,26 +73,43 @@
   .amap-touch-toolbar .amap-zoomcontrol{
     border: none;
     bottom: 100px;
-    right: 16px;
+    width: 38px;
+    right: 6px;
     background:rgba(247,247,247,1);
     box-shadow:0px 6px 20px 0px rgba(51,51,51,0.2);
     border-radius:10px;
 
   }
   .amap-zoom-touch-plus{
-    background: url("../img/icon-expand.png") no-repeat;
-    width: 35px;
-    height: 35px;
-    background-size: 100% 100%;
+    background: url("../img/icon-expand.png") no-repeat center;
+    width: 38px;
+    height: 40px;
+    background-size: 17px 17px;
+    margin-bottom: 0;
+    position: relative;
     > div{
       display: none;
     }
+    &::after{
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      background-color: #e5e5e5;
+      -webkit-transform: scaleY(0.5);
+      -moz-transform: scaleY(0.5);
+      -ms-transform: scaleY(0.5);
+      -o-transform: scaleY(0.5);
+      transform: scaleY(0.5);
+    }
   }
   .amap-zoom-touch-minus{
-    background: url("../img/icon-shrinkage.png") no-repeat;
-    width: 35px;
-    height: 35px;
-    background-size: 100% 100%;
+    background: url("../img/icon-shrinkage.png") no-repeat center;
+    width: 38px;
+    height: 40px;
+    background-size: 17px 2px;
     > div{
       display: none;
     }
