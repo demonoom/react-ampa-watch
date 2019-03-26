@@ -150,16 +150,18 @@ export default class detailPage extends React.Component {
                 xClazzNameArray.push(second2 + "日");
             }
             var answerRight = braceletHeartStepObj.y1;
-            AnswerRight.push(answerRight.toFixed(2));
+            AnswerRight.push(answerRight);
             var answerTotal = braceletHeartStepObj.y2;
-            AnswerTotal.push(answerTotal.toFixed(2));
+            AnswerTotal.push(answerTotal);
             var subjectTotal = braceletHeartStepObj.y3;
-            SubjectTotal.push(subjectTotal.toFixed(2));
+            SubjectTotal.push(subjectTotal);
             xClazzNameArray = unique(xClazzNameArray)
 
         });
-        // console.log(xClazzNameArray,'xx')
-        // xClazzNameArray=["25日","26日","27日","28日"]
+        // console.log(xClazzNameArray,'AnswerTotal')
+        // xClazzNameArray=["25日","26日","27日","28日","29日"];
+        // AnswerRight=["22.00","11.00"]
+        // AnswerTotal=["0.00", "20.00", "0.00", "3.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         // SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
         var faceChartDiv = <div
@@ -203,18 +205,33 @@ export default class detailPage extends React.Component {
                 },
             },
             grid: {
-                left:'8%',
-                right:'5%',
-                top:'40',
-                bottom: '10%',//距离下边的距离
+                left:'5',
+                right:'5',
+                top:'35',
+                bottom: '0',//距离下边的距离
                 containLabel: true
             },
-            // legend: {
-            //     show: false,
-            //     data: [],
-            //     bottom: 0,
-            //     right: '0',
-            // },
+            legend: {
+                show: true,
+                itemWidth: 20,
+                itemHeight: 6,
+                data: [{
+                    name:'总数',icon:'rect'
+                    },
+                    {
+                        name:'答题次数',icon:'rect'
+                    },
+                    {
+                        name:'答对次数',icon:'rect'
+                    },
+                    ],
+                top: 0,
+                right: '0',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#F1F1F3'
+                }
+            },
             // toolbox: {
             //     left: 'center',
             //     feature: {
@@ -244,7 +261,12 @@ export default class detailPage extends React.Component {
             yAxis: [
                 {
                     type: 'value',
-                    splitLine:{show: false},
+                    splitLine:{
+                        show: true,
+                        lineStyle:{
+                            color:'rgba(255,255,255,0.2)'
+                        }
+                    },
                     axisLine: {
                         show: true,
                         lineStyle: {
@@ -265,22 +287,16 @@ export default class detailPage extends React.Component {
                     data: AnswerRight,
                     left: 0,
                     bottom: 0,
-                    symbolSize: 3,
                     itemStyle: {
                         //通常情况下：
                        normal:{
-                           color:'#49c6ff',
+                           color:'rgba(181,114,8,0.5)',
+                           label : {show: false},
                            lineStyle:{
-                               color:'#49c6ff'
+                               color:'#b57208'
                            }
                        }
                     },
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top',
-                        }
-                    }
                 },
                 {
                     name: '答题次数',
@@ -291,18 +307,13 @@ export default class detailPage extends React.Component {
                     itemStyle: {
                         //通常情况下：
                         normal:{
-                            color:'#d615f5',
+                            color:'rgba(235,222,77,0.4)',
+                            label : {show: false},
                             lineStyle:{
-                                color:'#d615f5'
+                                color:'#ebde4d'
                             }
                         }
                     },
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top',
-                        }
-                    }
                 },
                 {
                     name: '答对次数',
@@ -313,18 +324,13 @@ export default class detailPage extends React.Component {
                     itemStyle: {
                         //通常情况下：
                         normal:{
-                            color:'#6be6c1',
+                            color:'rgba(130,231,128,0.4)',
+                            label : {show: false},
                             lineStyle:{
-                                color:'#6be6c1'
+                                color:'#82e780'
                             }
                         }
                     },
-                    label: {
-                        normal: {
-                            show: true,
-                            position: 'top',
-                        }
-                    }
                 }
             ]
         };
