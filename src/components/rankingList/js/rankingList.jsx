@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, WhiteSpace, ListView } from 'antd-mobile';
+import { Tabs, WhiteSpace, ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
 const tabs = [
@@ -256,6 +256,44 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
+                <div className="am-navbar-blue">
+                    <NavBar
+                        mode="light"
+                        leftContent={
+                            <Popover mask
+                                     overlayClassName="fortest"
+                                     overlayStyle={{color: 'currentColor'}}
+                                     visible={this.state.visible}
+                                     placement="bottomLeft"
+                                     overlay={this.state.popoverLay}
+                                     align={{
+                                         overflow: {adjustY: 0, adjustX: 0},
+                                         offset: [10, 0],
+                                     }}
+                                     onVisibleChange={(visible) => {
+                                         this.setState({
+                                             visible,
+                                         });
+                                     }}
+                                     onSelect={this.onSelect}
+                            >
+                                <div style={{
+                                    height: '100%',
+                                    padding: '0',
+                                    marginRight: '-15px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                }}
+                                >
+                                    <i className="icon-back"></i>{this.state.watchName}
+                                </div>
+                            </Popover>
+                        }
+                    >
+                        排行榜
+                    </NavBar>
+                </div>
+
                 <div className="emptyCont" style={{ display: this.state.toBind ? "block" : "none" }}>
                     <div className="p38 my_flex">
                         <div>
@@ -297,7 +335,7 @@ export default class rankingList extends React.Component {
                                 initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
                                 scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
                                 style={{
-                                    height: this.state.clientHeight - 90,
+                                    height: this.state.clientHeight - 90 - 64,
                                 }}
                             />
                             <div className='myGrade' onClick={this.toDetail}>

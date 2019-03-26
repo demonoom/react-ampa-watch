@@ -330,6 +330,11 @@ export default class detailPage extends React.Component {
     render () {
         return (
             <div id='detailPage'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">今日排行榜详情</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 <div className='myDetail line_public p15'>
                     <img src={this.state.users ? this.state.users.avatar : ""} />
                     <div className='textCont'>
