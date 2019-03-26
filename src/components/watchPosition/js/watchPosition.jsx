@@ -110,9 +110,7 @@ export default class watchPosition extends React.Component {
                 (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
-        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
-            this.watch2GLocaltionRequest();
-        });
+        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName});
     };
 
     /**
@@ -194,6 +192,8 @@ export default class watchPosition extends React.Component {
                             return
                         }
 
+                        console.log(_this.state.map);
+
                         var position = {
                             "longitude": info.data.longitude,
                             "latitude": info.data.latitude,
@@ -211,7 +211,7 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className="user-positioning"><img style={{borderRadius: '50%'}}
-                                                      src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")}
+                                                      src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
                                                       alt=""/></div>
     }
 
@@ -311,7 +311,8 @@ export default class watchPosition extends React.Component {
         const events = {
             created: (ins) => {
                 this.setState({map: ins});
-                ins.setZoom(17)
+                ins.setZoom(17);
+                this.watch2GLocaltionRequest();
             },
         };
 
