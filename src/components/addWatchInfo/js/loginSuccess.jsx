@@ -8,7 +8,6 @@ export default class loginSuccess extends React.Component {
     }
 
     componentWillMount() {
-        document.title = '注册成功';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");

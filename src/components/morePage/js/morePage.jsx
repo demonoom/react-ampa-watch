@@ -72,7 +72,7 @@ export default class morePage extends React.Component {
                         })
                     }
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -94,7 +94,7 @@ export default class morePage extends React.Component {
                         watchId: result.response.id
                     })
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -117,7 +117,7 @@ export default class morePage extends React.Component {
                         watchName: result.response.watchName,
                     })
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -243,6 +243,7 @@ export default class morePage extends React.Component {
                     Toast.info('解绑成功', 1);
                     this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -265,7 +266,7 @@ export default class morePage extends React.Component {
                     Toast.info('解绑成功', 1);
                     this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {

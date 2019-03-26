@@ -50,7 +50,6 @@ export default class rankingList extends React.Component {
     }
     componentDidMount () {
         Bridge.setShareAble("false");
-        document.title = '运动排行列表';
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -93,15 +92,14 @@ export default class rankingList extends React.Component {
                         })
                     } else {
                         this.setState({
-                            // toBingStudent:result.response[0].studentId,
                             studentId: result.response[0].student.colUid
                         }, () => {
-                            console.log(this.state.toBingStudent,"toBingStudent")
+                            console.log(this.state.toBingStudent, "toBingStudent")
                             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                         })
                     }
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -165,6 +163,8 @@ export default class rankingList extends React.Component {
                         isLoadingLeft: isLoading,
                         refreshing: false
                     })
+                } else {
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -234,7 +234,7 @@ export default class rankingList extends React.Component {
             method: 'openNewPage',
             selfBack: true,
             url: url
-        }; 
+        };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });
@@ -271,19 +271,18 @@ export default class rankingList extends React.Component {
                 <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
-                          swipeable={false}
+                        swipeable={false}
                     >
-
                         <div className='questionCont' >
                             <ListView
                                 ref={el => this.lv = el}
                                 dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                                 renderHeader={() => (
                                     <div className='dateBtn'>
-                                    <span className='today active' onClick={this.clickToday}>今日</span>
-                                    <span className="week" onClick={this.toClickWeek}>本周</span>
+                                        <span className='today active' onClick={this.clickToday}>今日</span>
+                                        <span className="week" onClick={this.toClickWeek}>本周</span>
                                     </div>
-                                    )}
+                                )}
                                 renderFooter={() => (
                                     <div style={{ paddingTop: 6, textAlign: 'center' }}>
                                         {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
@@ -311,10 +310,10 @@ export default class rankingList extends React.Component {
                         </div>
                         <div style={{ height: document.body.clientHeight - 40 }}>
                             2
-                    </div>
+                        </div>
                         <div style={{ height: document.body.clientHeight - 40 }}>
                             3
-                    </div>
+                        </div>
                     </Tabs>
                 </div>
 

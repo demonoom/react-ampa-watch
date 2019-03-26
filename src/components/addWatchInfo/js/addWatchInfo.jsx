@@ -20,7 +20,6 @@ export default class addWatchInfo extends React.Component {
         this.state = {
             macId: "aa",
             stuName: "",
-            sexValue: "",
             extraClassName: "",
             RelationClassName: "",
             showSexDiv: false,
@@ -66,7 +65,6 @@ export default class addWatchInfo extends React.Component {
 
     componentDidMount () {
         Bridge.setShareAble("false");
-        document.title = '手环绑定学生班级列表';
     }
     componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
@@ -104,7 +102,7 @@ export default class addWatchInfo extends React.Component {
                         showRelationiDiv: true
                     })
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -201,7 +199,7 @@ export default class addWatchInfo extends React.Component {
                             window.location.href = url;
                         });
                     } else {
-                        // Toast.info('解绑失败');
+                        Toast.fail(result.msg, 1);
                     }
                 },
                 onError: function (error) {
@@ -215,31 +213,8 @@ export default class addWatchInfo extends React.Component {
 
     }
 
-    //选择器改变事件
-    onPickerChange = (val) => {
-        this.setState({
-            sexValue: val,
-            extraClassName: 'color_3'
-        });
-    };
-
-    //点击picker确定按钮
-    clickSure = (val) => {
-        this.setState({
-            sexValue: val,
-            extraClassName: 'color_3'
-        });
-    }
-    //点击取消按钮
-    onCancel = () => {
-        this.setState({
-            sexValue: "",
-            extraClassName: ''
-        });
-    }
     //关系改变
     onRelationChange = (val) => {
-
         this.setState({
             relationValue: val,
             RelationClassName: 'color_3'
@@ -297,19 +272,6 @@ export default class addWatchInfo extends React.Component {
                                 <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                             </div>
                         </div>
-                        {/* <div className={'sex line_publicD '+ this.state.extraClassName} style={{ display: this.state.showSexDiv ? "block" : "none" }}>
-                            <Picker
-                                data={sexData}
-                                value={this.state.sexValue}
-                                cols={1}
-                                extra="请选择孩子的性别"
-                                onChange={this.onPickerChange}
-                                onOk={this.clickSure}
-                                onDismiss={this.onCancel}
-                            >
-                                <List.Item arrow="horizontal"></List.Item>
-                            </Picker>
-                        </div> */}
                         <div className={'selectDown relation line_publicD ' + this.state.RelationClassName} style={{ display: this.state.showRelationiDiv ? "block" : "none" }}>
                             <Picker
                                 data={this.state.relationData}
