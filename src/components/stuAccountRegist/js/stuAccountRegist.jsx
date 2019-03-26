@@ -237,8 +237,8 @@ export default class stuAccountRegist extends React.Component {
     }
     render() {
         return (
-            <div id="stuAccountRegist" onClick={this.toBack}>
-                <div className="icon_back"></div>
+            <div id="stuAccountRegist" >
+                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent selectDown">
                         <div className="bindStudent">

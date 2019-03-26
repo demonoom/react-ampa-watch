@@ -93,8 +93,10 @@ export default class rankingList extends React.Component {
                         })
                     } else {
                         this.setState({
+                            // toBingStudent:result.response[0].studentId,
                             studentId: result.response[0].student.colUid
                         }, () => {
+                            console.log(this.state.toBingStudent,"toBingStudent")
                             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                         })
                     }
@@ -226,9 +228,16 @@ export default class rankingList extends React.Component {
     }
 
     //跳转绑定页面
-    toJupmBind=()=>{
+    toJupmBind = () => {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
-        window.location.href = url;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url
+        }; 
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     }
     render () {
         const row = (rowData, sectionID, rowID) => {
@@ -259,7 +268,7 @@ export default class rankingList extends React.Component {
                     </div>
                     <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
-                <div  style={{ display: this.state.toBind ? "none" : "block",height:"100%" }}>
+                <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
                           swipeable={false}

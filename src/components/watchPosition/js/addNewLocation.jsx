@@ -22,7 +22,7 @@ export default class addNewLocation extends React.Component {
             circle: null,
             addressName: '',
             addressLT: '',
-            style: {strokeWeight: '0px', fillColor: '#fff850', fillOpacity: '0.5'},
+            style: {strokeWeight: '16', strokeColor : "rgba(23,172,247,1)", strokeOpacity : 0.13, strokeStyle:"solid", fillColor: 'rgba(23,172,247,1)', fillOpacity: '0.26'},
             radius: 50,
             sliderValue: 15,
         };
@@ -295,6 +295,7 @@ export default class addNewLocation extends React.Component {
                             <span className="am-navbar-title">添加新地址</span>
                             <span className="am-navbar-right"></span>
                         </div>
+                        <div className="navbar-bottom"></div>
                         <div className="posMap-content">
                             <Map
                                 plugins={plugins}
