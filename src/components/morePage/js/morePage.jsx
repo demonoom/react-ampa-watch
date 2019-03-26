@@ -133,6 +133,7 @@ export default class morePage extends React.Component {
             onError: function (errorMsg) {
 
             }, onWarn: function (warnMsg) {
+                console.log(warnMsg, "warnMsg")
                 Toast.info(warnMsg,1)
             }, onMessage: function (info) {
                 console.log(info, "info")
@@ -187,9 +188,6 @@ export default class morePage extends React.Component {
         };
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
-        setTimeout(() => {
-            Toast.info("推送成功", 1)
-        }, 300);
     }
 
     /**
