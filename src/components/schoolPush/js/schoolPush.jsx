@@ -65,7 +65,7 @@ export default class schoolPush extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
 
@@ -125,7 +125,7 @@ export default class schoolPush extends React.Component {
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -147,7 +147,7 @@ export default class schoolPush extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -169,7 +169,7 @@ export default class schoolPush extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -202,7 +202,7 @@ export default class schoolPush extends React.Component {
                         })
                     }
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {

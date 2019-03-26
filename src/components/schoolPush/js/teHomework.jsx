@@ -60,7 +60,7 @@ export default class teHomework extends React.Component {
                         })
                     }
                 } else {
-                    // Toast.info('');
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -102,7 +102,7 @@ export default class teHomework extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
 
@@ -141,7 +141,7 @@ export default class teHomework extends React.Component {
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -163,7 +163,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -185,7 +185,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -242,7 +242,7 @@ export default class teHomework extends React.Component {
                     Toast.info("删除成功", 1);
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.info(result);
+                    Toast.fail(result.msg, 1);
                 }
 
             },
@@ -294,7 +294,7 @@ export default class teHomework extends React.Component {
                         })
                         this.getTopicByIdRequest(this.state.topicId, this.state.index);
                     } else {
-                        Toast.info(result);
+                        Toast.fail(result.msg, 1);
                     }
 
                 },

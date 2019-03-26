@@ -83,11 +83,17 @@ export default class clockList extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                this.setState({
-                    clockList: result.response,
-                })
+                if(result.response){
+                    this.setState({
+                        clockList: result.response,
+                    })
+                }else {
+                    Toast.fail(result.msg, 1);
+                }
+                
             },
             onError: function (error) {
+
             }
         });
     }
@@ -125,7 +131,7 @@ export default class clockList extends React.Component {
                     console.log(commandJson, "commandJson")
                     ms.send(commandJson);
                 } else {
-
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -142,6 +148,15 @@ export default class clockList extends React.Component {
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
+        });
+    }
+
+      //返回
+      toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
         });
     }
     render () {

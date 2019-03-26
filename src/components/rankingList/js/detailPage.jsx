@@ -45,7 +45,6 @@ export default class detailPage extends React.Component {
     }
     componentDidMount () {
         Bridge.setShareAble("false");
-        document.title = '运动排行列表详情页';
         //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
         window.addEventListener('resize', this.onWindowResize);
         var locationHref = decodeURI(window.location.href);
@@ -89,6 +88,8 @@ export default class detailPage extends React.Component {
                     _this.setState({
                         users: result.response
                     })
+                }else {
+                    Toast.fail(result.msg, 1);
                 }
             },
             onError: function (error) {
@@ -112,11 +113,16 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                var response = result.response;
-                this.setState({
-                    detailData: result.response
-                })
-                _this.buildFaceLineChart(response.answerRight);
+                if(result.response){
+                    var response = result.response;
+                    this.setState({
+                        detailData: result.response
+                    })
+                    _this.buildFaceLineChart(response.answerRight);
+                }else {
+                    Toast.fail(result.msg, 1);
+                }
+               
             },
             onError: function (error) {
                 // Toast.fail(error, 1);
