@@ -2,7 +2,7 @@ import React from "react";
 import {Map, Circle} from "react-amap";
 import {List, Button, Modal, Toast, Slider} from 'antd-mobile';
 import PositionPicker from './positionPicker'
-import '../css/updateLocation.less'
+import '../css/addNewLocation.less'
 
 const Item = List.Item;
 const Brief = Item.Brief;
@@ -111,13 +111,15 @@ export default class updateLocation extends React.Component {
             posList.push(
                 <Item
                     arrow="horizontal"
+                    className="line_public"
                     multipleLine
                     onClick={() => {
                         _this.intoMap(v)
                     }}
                     platform="android"
                 >
-                    {v.name}<Brief>{v.district} <br/> {v.address}</Brief>
+                    <div className="name">{v.name}</div>
+                    <Brief>{v.district}{v.address}</Brief>
                 </Item>
             )
         });
@@ -234,6 +236,13 @@ export default class updateLocation extends React.Component {
         Bridge.callHandler(data, null, null);
     };
 
+    setPosModelDown = () => {
+        var _this = this;
+        $('.setPosModel').slideUp(function () {
+            _this.setState({posList: [], searchValue: ''})
+        });
+    };
+
     render() {
 
         const plugins = [
@@ -258,89 +267,112 @@ export default class updateLocation extends React.Component {
         };
 
         return (
-            <div id="updateLocation">
+            <div id="addNewLocation">
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">修改新地址</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <List className="my-list">
-                    <Item
-                        arrow="horizontal"
-                        platform="android"
-                        extra={this.state.posName}
-                        onClick={() => {
-                            this.posNameClick()
-                        }}>地点名称</Item>
-                </List>
-
-                <List className="my-list">
-                    <Item
-                        arrow="horizontal"
-                        platform="android"
-                        extra={this.state.pos}
-                        onClick={() => {
-                            this.posClick()
-                        }}>地点位置</Item>
-                </List>
-
-                <Button onClick={this.saveLocation} type="primary" size="small">保存</Button>
-
-                <Button onClick={this.deleteWatch2gHomePoint} type="warning" size="small">删除</Button>
-
-                <div className='setPosModel' style={{display: 'none'}}>
-                    <div>
-                        <input onChange={this.searchChange} value={this.state.searchValue} type="text"
-                               placeholder="请输入位置信息"/>
-                        <div onClick={this.searchPos}>搜索</div>
-                    </div>
-
-                    <div>
-                        {this.state.posList}
+                <div className="commonLocation-cont">
+                    <div className="WhiteSpace"></div>
+                    <List className="my-list line_public">
+                        <Item
+                            arrow="horizontal"
+                            platform="android"
+                            extra={this.state.posName}
+                            onClick={() => {
+                                this.posNameClick()
+                            }}>地点名称</Item>
+                    </List>
+                    <List className="my-list">
+                        <Item
+                            arrow="horizontal"
+                            platform="android"
+                            extra={this.state.pos}
+                            onClick={() => {
+                                this.posClick()
+                            }}>地点位置</Item>
+                    </List>
+                    <div className='btns my_flex'>
+                        <div  className='leftBtn' onClick={this.deleteWatch2gHomePoint}>删除</div>
+                        <div className='rightBtn'onClick={this.saveLocation}>保存</div>
                     </div>
                 </div>
-
-                <div className='posMap' style={{display: 'none'}}>
-                    <Map
-                        plugins={plugins}
-                        events={events}
-                        zoom={this.state.zoom}
-                        center={this.state.position}
-                        useAMapUI={true}
-                        amapkey={WebServiceUtil.amapkey}
-                        version={WebServiceUtil.version}
-                        showBuildingBlock={true}
-                        buildingAnimation={true}
-                        viewMode='3D'
-                        rotateEnable={false}
-                        pitchEnable={false}
-                    >
-                        <PositionPicker
-                            posPicker={this.posPicker}
-                        />
-                        <Circle
-                            center={this.state.position}
-                            radius={this.state.radius}
-                            events={circleEvents}
-                            style={this.state.style}
-                        />
-                        <div className="posMessage">
-                            <h4>{this.state.addressName}</h4>
+                    <div className='setPosModel' style={{display: 'none'}}>
+                        <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosModelDown}><i
+                                className="icon-back"></i></span>
+                            <span className="am-navbar-title">地点</span>
+                            <span className="am-navbar-right"></span>
+                        </div>
+                        <div className="setPosCont">
+                            <div className="search-item">
+                            <input onChange={this.searchChange} value={this.state.searchValue} type="text"
+                                   placeholder="请输入位置信息"/>
+                                <div className="icon-search" onClick={this.searchPos}></div>
+                            </div>
                         </div>
 
-                        <div className='setArea'>
-                            <div onClick={this.setPosDone}>完成</div>
-                            <div onClick={this.setPosQuit}>取消</div>
-                            <Slider
-                                style={{marginLeft: 30, marginRight: 30}}
-                                value={this.state.sliderValue}
-                                min={10}
-                                max={50}
-                                onChange={this.sliderOnChange()}
-                            />
+                        <div className="searchResults">
+                            {this.state.posList}
                         </div>
-                    </Map>
+                    </div>
+
+                    <div className='posMap' style={{display: 'none'}}>
+                        <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosQuit}><i className="icon-back"></i></span>
+                            <span className="am-navbar-title">添加新地址</span>
+                            <span className="am-navbar-right"></span>
+                        </div>
+                        <div className="navbar-bottom"></div>
+                        <div className='posMap-content'>
+                            <Map
+                                plugins={plugins}
+                                events={events}
+                                zoom={this.state.zoom}
+                                center={this.state.position}
+                                useAMapUI={true}
+                                amapkey={WebServiceUtil.amapkey}
+                                version={WebServiceUtil.version}
+                                showBuildingBlock={true}
+                                buildingAnimation={true}
+                                viewMode='3D'
+                                rotateEnable={false}
+                                pitchEnable={false}
+                            >
+                                <PositionPicker
+                                    posPicker={this.posPicker}
+                                />
+                                <Circle
+                                    center={this.state.position}
+                                    radius={this.state.radius}
+                                    events={circleEvents}
+                                    style={this.state.style}
+                                />
+                                <div className="posMessage">
+                                    <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
+                                </div>
+
+                                <div className='setArea'>
+                                    <div className="submitBtn" onClick={this.setPosDone}>确定</div>
+                                    <div className="SafeRange">安全范围<span>300m</span></div>
+                                    {/*<div onClick={this.setPosQuit}>取消</div>*/}
+                                    <Slider
+                                        style={{marginLeft: 0, marginRight: 10}}
+                                        value={this.state.sliderValue}
+                                        min={10}
+                                        max={50}
+                                        onChange={this.sliderOnChange()}
+                                    />
+                                    <div className="distance">
+                                        <span>0m</span>
+                                        <span className="right">500m</span>
+                                    </div>
+                                </div>
+                            </Map>
+                        </div>
                 </div>
+
             </div>
         )
     }

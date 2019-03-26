@@ -290,49 +290,56 @@ export default class addNewLocation extends React.Component {
                     </div>
 
                     <div className='posMap' style={{display: 'none'}}>
-                        <Map
-                            plugins={plugins}
-                            events={events}
-                            zoom={this.state.zoom}
-                            center={this.state.position}
-                            useAMapUI={true}
-                            amapkey={WebServiceUtil.amapkey}
-                            version={WebServiceUtil.version}
-                            showBuildingBlock={true}
-                            buildingAnimation={true}
-                            viewMode='3D'
-                            rotateEnable={false}
-                            pitchEnable={false}
-                        >
-                            <PositionPicker
-                                posPicker={this.posPicker}
-                            />
-                            <Circle
+                        <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosQuit}><i className="icon-back"></i></span>
+                            <span className="am-navbar-title">添加新地址</span>
+                            <span className="am-navbar-right"></span>
+                        </div>
+                        <div className="posMap-content">
+                            <Map
+                                plugins={plugins}
+                                events={events}
+                                zoom={this.state.zoom}
                                 center={this.state.position}
-                                radius={this.state.radius}
-                                events={circleEvents}
-                                style={this.state.style}
-                            />
-                            <div className="posMessage">
-                                <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
-                            </div>
-
-                            <div className='setArea'>
-                                <div className="submitBtn" onClick={this.setPosDone}>确定</div>
-                                <div className="SafeRange">安全范围<span>300m</span></div>
-                                <Slider
-                                    style={{marginLeft: 0, marginRight: 10}}
-                                    value={this.state.sliderValue}
-                                    min={10}
-                                    max={50}
-                                    onChange={this.sliderOnChange()}
+                                useAMapUI={true}
+                                amapkey={WebServiceUtil.amapkey}
+                                version={WebServiceUtil.version}
+                                showBuildingBlock={true}
+                                buildingAnimation={true}
+                                viewMode='3D'
+                                rotateEnable={false}
+                                pitchEnable={false}
+                            >
+                                <PositionPicker
+                                    posPicker={this.posPicker}
                                 />
-                                <div className="distance">
-                                    <span>0m</span>
-                                    <span className="right">500m</span>
+                                <Circle
+                                    center={this.state.position}
+                                    radius={this.state.radius}
+                                    events={circleEvents}
+                                    style={this.state.style}
+                                />
+                                <div className="posMessage">
+                                    <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
                                 </div>
-                            </div>
-                        </Map>
+
+                                <div className='setArea'>
+                                    <div className="submitBtn" onClick={this.setPosDone}>确定</div>
+                                    <div className="SafeRange">安全范围<span>300m</span></div>
+                                    <Slider
+                                        style={{marginLeft: 0, marginRight: 10}}
+                                        value={this.state.sliderValue}
+                                        min={10}
+                                        max={50}
+                                        onChange={this.sliderOnChange()}
+                                    />
+                                    <div className="distance">
+                                        <span>0m</span>
+                                        <span className="right">500m</span>
+                                    </div>
+                                </div>
+                            </Map>
+                        </div>
                     </div>
                 </div>
             </div>

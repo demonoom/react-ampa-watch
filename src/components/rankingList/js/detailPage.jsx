@@ -152,9 +152,9 @@ export default class detailPage extends React.Component {
             xClazzNameArray = unique(xClazzNameArray)
 
         });
-        console.log(xClazzNameArray,'xx')
-        xClazzNameArray=["25日","26日","27日","28日"]
-        SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
+        // console.log(xClazzNameArray,'xx')
+        // xClazzNameArray=["25日","26日","27日","28日"]
+        // SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
         var faceChartDiv = <div
         // style={{display:braceletHeartSteps.length == 0 ? "none":"block"}} 

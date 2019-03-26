@@ -83,4 +83,32 @@
   .amap-copyright {
     opacity: 0;
   }
+  .amap-touch-toolbar .amap-zoomcontrol{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    bottom: 100px;
+    right: 6px;
+  }
+  .amap-zoom-touch-plus{
+    background: url("../img/icon-expand.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-zoom-touch-minus{
+    background: url("../img/icon-shrinkage.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-touch-toolbar .amap-zoomcontrol:after{
+    background: transparent;
+  }
 }

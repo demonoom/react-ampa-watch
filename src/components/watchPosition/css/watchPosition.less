@@ -1,6 +1,8 @@
 #watchPosition {
+  overflow: hidden;
   .am-navbar{
     height: 44px;
+    padding-top: 20px;
   }
   .am-navbar-light{
     background:linear-gradient(18deg,rgba(40,196,253,1) 0%,rgba(0,146,252,1) 100%);
@@ -48,7 +50,7 @@
   height:84px;
   background:#fff;
   border:1px solid #ddd;
-  border-radius: 15px;
+  border-radius: 8px;
   position: fixed;
   top: 197px;
   right: 15px;
@@ -79,20 +81,48 @@
 
   }
   .map-cont{
-    height: calc(~"100% - 44px");
+    height: calc(~"100% - 64px");
   }
   .user-positioning{
     background: url("../img/user-positioning.png") no-repeat;
-    width:62px;
-    height: 116px;
+    width: 40px;
+    height: 86px;
     background-size: 100% 100%;
     img{
-      width: 43px;
-      height: 43px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       position: absolute;
-      left: 10px;
-      top: 10px;
+      left: 7px;
+      top: 7px;
     }
+  }
+  .amap-touch-toolbar .amap-zoomcontrol{
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    bottom: 100px;
+    right: 6px;
+  }
+  .amap-zoom-touch-plus{
+    background: url("../img/icon-expand.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-zoom-touch-minus{
+    background: url("../img/icon-shrinkage.png") no-repeat;
+    width: 35px;
+    height: 35px;
+    background-size: 100% 100%;
+    > div{
+      display: none;
+    }
+  }
+  .amap-touch-toolbar .amap-zoomcontrol:after{
+    background: transparent;
   }
 }

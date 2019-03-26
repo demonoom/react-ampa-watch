@@ -302,7 +302,7 @@ export default class rankingList extends React.Component {
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.num) + 1}名</span>
                                     <span className='userName text_hidden'>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
-                                    <span className='questionNum'>答对{this.state.ownData.count ? this.state.ownData.count : ""}道题</span>
+                                    <span className='questionNum'>答对{this.state.ownData.count ? this.state.ownData.count : "0"}道题</span>
                                 </div>
                             </div>
                         </div>
