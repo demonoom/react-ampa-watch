@@ -70,14 +70,13 @@ export default class babyInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
-        var loginType = searchArray[0].split('=')[1];
-        var macAddr = searchArray[1].split('=')[1];
-        var relation = searchArray[2].split('=')[1];
-        var phonenumber = searchArray[3].split('=')[1];
-        var ident = searchArray[4].split('=')[1];
+        var macAddr = searchArray[0].split('=')[1];
+        var relation = searchArray[1].split('=')[1];
+        var phonenumber = searchArray[2].split('=')[1];
+        var ident = searchArray[3].split('=')[1];
         // loginType==1  代表主账号
         this.setState({
-            loginType, macAddr, relation, phonenumber, ident
+            macAddr, relation, phonenumber, ident
         })
         window.addEventListener('resize', this.onWindwoResize);
     }
@@ -150,86 +149,23 @@ export default class babyInfo extends React.Component {
     }
     //跳转下一页
     nextPage = () => {
-        if (this.state.loginType == 1) {
-            // if (this.state.macId == "") {
-            //     Toast.info("请扫描手表")
-            //     return
-            // }
-            if (this.state.sexValue == "") {
-                Toast.info("请选择孩子性别", 1)
-                return
-            }
-            if (this.state.sendData == undefined) {
-                Toast.info("请选择孩子生日", 1)
-                return
-            }
-            var param = {
-                "method": 'bindWatchGuardian',
-                "childSex": this.state.sexValue[0],
-                "macAddress": this.state.macAddr,
-                "familyRelate": this.state.relation,
-                "birthTime": this.state.sendData,
-                "phoneNumber": this.state.phonenumber,
-                "actionName": "watchAction",
-                "guardianId": this.state.ident//绑定监护人的userId
-            };
-            WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-                onResponse: (result) => {
-                    if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "schoolInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr + "&sex=" + this.state.sexValue[0];
-                        var data = {
-                            method: 'openNewPage',
-                            selfBack: true,
-                            url: url
-                        };
-                        Bridge.callHandler(data, null, function (error) {
-                            window.location.href = url;
-                        });
-                    } else {
-                        // Toast.info('解绑失败');
-                    }
-                },
-                onError: function (error) {
-                    Toast.info('请求失败');
-                }
-            });
-
-        } else {
-            if (this.state.relationValue == "") {
-                Toast.info("请选择您与孩子的关系")
-                return
-            }
-            //副监护人
-            var param = {
-                "method": 'bindWatchGuardian',
-                "macAddress": this.state.macAddr,
-                "familyRelate": this.state.relationValue[0],
-                "actionName": "watchAction",
-                "guardianId": this.state.ident//绑定监护人的userId
-            };
-            WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-                onResponse: (result) => {
-                    if (result.success && result.response) {
-                        var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=" + this.state.loginType;
-                        var data = {
-                            method: 'openNewPage',
-                            url: url
-                        };
-                        Bridge.callHandler(data, null, function (error) {
-                            window.location.href = url;
-                        });
-                    } else {
-                        // Toast.info('解绑失败');
-                    }
-                },
-                onError: function (error) {
-                    Toast.info('请求失败');
-                }
-            });
-
+        if (this.state.sexValue == "") {
+            Toast.info("请选择孩子性别", 1)
+            return
         }
-
-
+        if (this.state.sendData == undefined) {
+            Toast.info("请选择孩子生日", 1)
+            return
+        }
+        var url = WebServiceUtil.mobileServiceURL + "schoolInfo?macAddr=" + this.state.macAddr + "&sex=" + this.state.sexValue[0]+"&relation="+this.state.relation+"&phoneNumber="+this.state.phonenumber+"&ident="+this.state.ident+"&birthDay="+this.state.sendData;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
 
     }
 

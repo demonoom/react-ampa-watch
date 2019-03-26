@@ -18,13 +18,19 @@ export default class schoolInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
-        var loginType = searchArray[0].split('=')[1];
-        var macAddr = searchArray[1].split('=')[1];
-        var sex = searchArray[2].split('=')[1];
+        var macAddr = searchArray[0].split('=')[1];
+        var sex = searchArray[1].split('=')[1];
+        var relation = searchArray[2].split('=')[1];
+        var phoneNumber = searchArray[3].split('=')[1];
+        var ident = searchArray[4].split('=')[1];
+        var birthDay = searchArray[5].split('=')[1];
         this.setState({
-            loginType,
             macAddr,
-            sex
+            sex,
+            relation,
+            phoneNumber,
+            ident,
+            birthDay
         })
         window.addEventListener('resize', this.onWindwoResize);
     }
@@ -56,7 +62,7 @@ export default class schoolInfo extends React.Component {
     }
     //下一页
     nextPage = () => {
-        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex;
+        var url = WebServiceUtil.mobileServiceURL + "verifyStuInfo?macAddr=" + this.state.macAddr+ "&sex=" + this.state.sex+"&relation="+this.state.relation+"&phoneNumber="+this.state.phoneNumber+"&ident="+this.state.ident+"&birthDay="+this.state.birthDay;
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -71,28 +77,19 @@ export default class schoolInfo extends React.Component {
 
     //跳注册页面
     toRegPage = () => {
-        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr;
+        var url = WebServiceUtil.mobileServiceURL + "stuAccountRegist?sex=" + this.state.sex + "&macAddr=" + this.state.macAddr+"&relation="+this.state.relation+"&phoneNumber="+this.state.phoneNumber+"&ident="+this.state.ident+"&birthDay="+this.state.birthDay;
         var data = {
             method: 'openNewPage',
+            selfBack: true,
             url: url
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });
     }
-    //返回
-    toBack = () => {
-        var data = {
-            method: 'popView',
-        };
-        Bridge.callHandler(data, null, function (error) {
-        });
-    }
-
     render () {
         return (
             <div id="schoolInfo">
-                <div className="icon_back" onClick={this.toBack}></div>
                 <div className="my_flex mainCont">
                     <div className='hasAccount'>
                         <img  onClick={this.nextPage} src={require('../../images/hasAccount.png')} alt=""/>

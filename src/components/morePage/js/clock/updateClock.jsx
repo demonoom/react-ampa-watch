@@ -130,6 +130,7 @@ export default class updateClock extends React.Component {
                         timeArr: JSON.parse(result.response.repeatType),
                         initTimeArr:JSON.parse(result.response.repeatType),
                         typeValue: [result.response.noticeType],
+                        initClockData:result.response
                     }, () => {
                     })
                 } else {
@@ -331,6 +332,16 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1)
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus": 0,
+                            "watch2gClock": this.state.initClockData,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
                     //关闭当前窗口，并刷新上一个页面
                     setTimeout(function () {
                         var data = {
