@@ -361,9 +361,9 @@ export default class addClock extends React.Component {
                             onChange={this.offChange}
                         />}
                     >Off</List.Item> */}
-                    <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
                     <div className='submitBtn' onClick={this.toSave}>保存</div>
                 </div>
+                    <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
             </div>
         )
     }
