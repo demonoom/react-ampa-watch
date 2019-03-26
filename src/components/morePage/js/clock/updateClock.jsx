@@ -393,77 +393,84 @@ export default class updateClock extends React.Component {
     render () {
         return (
             <div id="addClock" className='public_list bg_gray'>
-                <div className='line_public'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">编辑闹钟</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className="commonLocation-cont">
+                    <div className='line_public'>
+                        <Picker
+                            data={alarmType}
+                            value={this.state.alarmValue}
+                            cols={1}
+                            className="forss"
+                            extra={this.state.alarmValue}
+                            onChange={this.onAlarmChange}
+                            onOk={this.alarmSure}
+                            onDismiss={this.onCancelClock}
+                        >
+                            <List.Item arrow="horizontal">闹钟类型</List.Item>
+                        </Picker>
+                    </div>
+                    <div className="line_public">
+                        <DatePicker
+                            mode="time"
+                            extra={WebServiceUtil.formatHM(this.state.notciceTime)}
+                            value={this.state.time}
+                            onChange={this.timeChange}
+                            onOk={this.timeSure}
+                            onDismiss={this.onCancelTime}
+                        >
+                            <List.Item arrow="horizontal">提醒时间</List.Item>
+                        </DatePicker>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">重复</div>
+                            <div className="am-list-extra">{this.state.defaleSelect}</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
+                    <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
+                        <div className='am-picker-popup-header'>
+                            <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
+                            <div className='am-picker-popup-item am-picker-popup-title'></div>
+                            <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
+                        <List>
+                            {this.state.checkedData.map((v,i)=> (
+                                <div className='line_public checkItem'>
+                                    <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
+                                        {v.label}
+                                    </CheckboxItem>
+                                </div>
+
+                            ))}
+                        </List>
+                    </div>
                     <Picker
-                        data={alarmType}
-                        value={this.state.alarmValue}
+                        data={clockType}
+                        value={this.state.typeValue}
                         cols={1}
                         className="forss"
-                        extra={this.state.alarmValue}
-                        onChange={this.onAlarmChange}
-                        onOk={this.alarmSure}
-                        onDismiss={this.onCancelClock}
+                        extra={this.state.typeValue}
+                        onChange={this.onPickerChange}
+                        onOk={this.typeSure}
+                        onDismiss={this.onCancelType}
                     >
-                        <List.Item arrow="horizontal">闹钟类型</List.Item>
+                        <List.Item arrow="horizontal">提醒方式</List.Item>
                     </Picker>
-                </div>
-                <div className="line_public">
-                    <DatePicker
-                        mode="time"
-                        extra={WebServiceUtil.formatHM(this.state.notciceTime)}
-                        value={this.state.time}
-                        onChange={this.timeChange}
-                        onOk={this.timeSure}
-                        onDismiss={this.onCancelTime}
-                    >
-                        <List.Item arrow="horizontal">提醒时间</List.Item>
-                    </DatePicker>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">重复</div>
-                        <div className="am-list-extra">{this.state.defaleSelect}</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    {/* <List.Item
+                        extra={<Switch
+                            checked={this.state.checked}
+                            onChange={this.offChange}
+                        />}
+                    >Off</List.Item> */}
+                    <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
+                    <div className='btns my_flex'>
+                        <div  className='leftBtn' onClick={this.showAlert}>删除</div>
+                        <div className='rightBtn' onClick={this.toSave}>保存</div>
                     </div>
-                </div>
-                <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
-                    <div className='am-picker-popup-header'>
-                        <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
-                        <div className='am-picker-popup-item am-picker-popup-title'></div>
-                        <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
-                    <List>
-                        {this.state.checkedData.map((v,i)=> (
-                            <div className='line_public checkItem'>
-                                <CheckboxItem key={v.value} checked={this.state.timeArr.indexOf(v.extra) == -1 ? "" : "checked"} onChange={(checked) => this.onSelectChange(checked, v,i)}>
-                                    {v.label}
-                                </CheckboxItem>
-                            </div>
-
-                        ))}
-                    </List>
-                </div>
-                <Picker
-                    data={clockType}
-                    value={this.state.typeValue}
-                    cols={1}
-                    className="forss"
-                    extra={this.state.typeValue}
-                    onChange={this.onPickerChange}
-                    onOk={this.typeSure}
-                    onDismiss={this.onCancelType}
-                >
-                    <List.Item arrow="horizontal">提醒方式</List.Item>
-                </Picker>
-                {/* <List.Item
-                    extra={<Switch
-                        checked={this.state.checked}
-                        onChange={this.offChange}
-                    />}
-                >Off</List.Item> */}
-                <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
-                <div className='btns my_flex'>
-                    <div  className='leftBtn' onClick={this.showAlert}>删除</div>
-                    <div className='rightBtn' onClick={this.toSave}>保存</div>
                 </div>
             </div>
         )

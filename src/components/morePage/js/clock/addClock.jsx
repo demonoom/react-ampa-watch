@@ -291,76 +291,83 @@ export default class addClock extends React.Component {
     render () {
         return (
             <div id="addClock" className='public_list bg_gray'>
-                <div className='line_public'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">添加闹钟</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className="commonLocation-cont">
+                    <div className='line_public'>
+                        <Picker
+                            data={alarmType}
+                            value={this.state.alarmValue}
+                            cols={1}
+                            className="forss"
+                            extra={this.state.flag ? "请选择" : this.state.alarmValue}
+                            onChange={this.onAlarmChange}
+                            onOk={this.alarmSure}
+                        >
+                            <List.Item arrow="horizontal">闹钟类型</List.Item>
+                        </Picker>
+                    </div>
+                    <div className="line_public">
+                        <DatePicker
+                            mode="time"
+                            value={this.state.time}
+                            onChange={this.timeChange}
+                            onDismiss={this.onCancel}
+                        >
+                            <List.Item arrow="horizontal">提醒时间</List.Item>
+                        </DatePicker>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">重复</div>
+                            <div className="am-list-extra">{this.state.defaleSelect}</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
+                    <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
+                        <div className='am-picker-popup-header'>
+                            <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
+                            <div className='am-picker-popup-item am-picker-popup-title'></div>
+                            <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
+                        <List>
+                            {this.state.checkedData.map((v, i) => (
+                                <div className='checkItem line_public'>
+                                    <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
+                                        {v.label}
+                                    </CheckboxItem>
+                                </div>
+                            ))}
+                        </List>
+                        {/* {
+                            checkedData.map((v, i) => {
+                                return <label><input onChange={this.onSelectChange} type="checkbox" value={v.extra} title={v.value} />{v.label}</label>
+                            })
+                        } */}
+                    </div>
                     <Picker
-                        data={alarmType}
-                        value={this.state.alarmValue}
+                        data={clockType}
+                        value={this.state.typeValue}
                         cols={1}
                         className="forss"
-                        extra={this.state.flag ? "请选择" : this.state.alarmValue}
-                        onChange={this.onAlarmChange}
-                        onOk={this.alarmSure}
-                    >
-                        <List.Item arrow="horizontal">闹钟类型</List.Item>
-                    </Picker>
-                </div>
-                <div className="line_public">
-                    <DatePicker
-                        mode="time"
-                        value={this.state.time}
-                        onChange={this.timeChange}
+                        extra={this.state.typeValue}
+                        onChange={this.onPickerChange}
+                        onOk={this.typeSure}
                         onDismiss={this.onCancel}
                     >
-                        <List.Item arrow="horizontal">提醒时间</List.Item>
-                    </DatePicker>
+                        <List.Item arrow="horizontal">提醒方式</List.Item>
+                    </Picker>
+                    {/* <List.Item
+                        extra={<Switch
+                            checked={this.state.checked}
+                            onChange={this.offChange}
+                        />}
+                    >Off</List.Item> */}
+                    <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
+                    <div className='submitBtn' onClick={this.toSave}>保存</div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">重复</div>
-                        <div className="am-list-extra">{this.state.defaleSelect}</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                    </div>
-                </div>
-                <div className='checkRepeat maskInnerBt' style={{ display: this.state.repeatDefault ? "none" : "block" }}>
-                    <div className='am-picker-popup-header'>
-                        <div className='am-picker-popup-item am-picker-popup-header-left' onClick={this.cancelSelect}>取消</div>
-                        <div className='am-picker-popup-item am-picker-popup-title'></div>
-                        <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
-                    <List>
-                        {this.state.checkedData.map((v, i) => (
-                            <div className='checkItem line_public'>
-                                <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
-                                    {v.label}
-                                </CheckboxItem>
-                            </div>
-                        ))}
-                    </List>
-                    {/* {
-                        checkedData.map((v, i) => {
-                            return <label><input onChange={this.onSelectChange} type="checkbox" value={v.extra} title={v.value} />{v.label}</label>
-                        })
-                    } */}
-                </div>
-                <Picker
-                    data={clockType}
-                    value={this.state.typeValue}
-                    cols={1}
-                    className="forss"
-                    extra={this.state.typeValue}
-                    onChange={this.onPickerChange}
-                    onOk={this.typeSure}
-                    onDismiss={this.onCancel}
-                >
-                    <List.Item arrow="horizontal">提醒方式</List.Item>
-                </Picker>
-                {/* <List.Item
-                    extra={<Switch
-                        checked={this.state.checked}
-                        onChange={this.offChange}
-                    />}
-                >Off</List.Item> */}
-                <div className="mask" style={{ display: this.state.repeatDefault ? "none" : "block" }}></div>
-                <div className='submitBtn' onClick={this.toSave}>保存</div>
             </div>
         )
     }
