@@ -71,7 +71,7 @@ export default class watchTrail extends React.Component {
                                 }
                             })
                         } else {
-                            Toast.info('未查询到记录');
+                            Toast.info('未查询到记录', 1);
                             _this.setState({path: []})
                         }
                     }
@@ -157,9 +157,11 @@ export default class watchTrail extends React.Component {
                         <span className={this.state.type == 0 ? 'select' : ''}
                               onClick={this.timeChoose('0')}>今天</span>
                             <span className="right-line"></span>
-                            <span className={this.state.type == 1 ? 'select' : ''} onClick={this.timeChoose('1')}>昨天</span>
+                            <span className={this.state.type == 1 ? 'select' : ''}
+                                  onClick={this.timeChoose('1')}>昨天</span>
                             <span className="right-line"></span>
-                            <span className={this.state.type == 2 ? 'select' : ''} onClick={this.timeChoose('2')}>前天</span>
+                            <span className={this.state.type == 2 ? 'select' : ''}
+                                  onClick={this.timeChoose('2')}>前天</span>
                         </div>
                     </Map>
                 </div>
