@@ -189,34 +189,7 @@ export default class babyInfo extends React.Component {
             extraClassName: ''
         });
     }
-    //关系改变
-    onRelationChange = (val) => {
-
-        this.setState({
-            relationValue: val,
-            RelationClassName: 'color_3'
-        });
-    };
-    //关系点击确定
-    clickRelationSure = (val) => {
-        if (val[0] == "自定义") {
-            $(".am-modal-input input").focus();
-            this.showModal()
-        } else {
-            this.setState({
-                relationValue: val,
-                RelationClassName: 'color_3'
-            });
-        }
-
-    }
-    //关系取消
-    onRelationCancel = () => {
-        this.setState({
-            relationValue: "",
-            RelationClassName: "",
-        });
-    }
+ 
     //生日
     birChange = (date) => {
         var str = formatDate(date)

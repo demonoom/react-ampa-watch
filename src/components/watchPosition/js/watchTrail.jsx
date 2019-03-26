@@ -71,7 +71,7 @@ export default class watchTrail extends React.Component {
                                 }
                             })
                         } else {
-                            Toast.info('未查询到记录');
+                            Toast.info('未查询到记录', 1);
                             _this.setState({path: []})
                         }
                     }
@@ -135,32 +135,36 @@ export default class watchTrail extends React.Component {
                     <span className="am-navbar-title">运动轨迹</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <Map
-                    amapkey={WebServiceUtil.amapkey}
-                    version={WebServiceUtil.version}
-                    loading={Loading}
-                    plugins={plugins}
-                    center={this.state.position}
-                    zoom={this.state.zoom}
-                    showBuildingBlock={true}
-                    buildingAnimation={true}
-                    viewMode='3D'
-                    events={events}
-                    rotateEnable={false}
-                >
-                    <Polyline
-                        path={this.state.path}
-                        events={lineEvents}
-                    />
-                    <div id='timeChoose' className='customLayer'>
+                <div className="watchTrail-cont">
+                    <Map
+                        amapkey={WebServiceUtil.amapkey}
+                        version={WebServiceUtil.version}
+                        loading={Loading}
+                        plugins={plugins}
+                        center={this.state.position}
+                        zoom={this.state.zoom}
+                        showBuildingBlock={true}
+                        buildingAnimation={true}
+                        viewMode='3D'
+                        events={events}
+                        rotateEnable={false}
+                    >
+                        <Polyline
+                            path={this.state.path}
+                            events={lineEvents}
+                        />
+                        <div id='timeChoose' className='customLayer'>
                         <span className={this.state.type == 0 ? 'select' : ''}
                               onClick={this.timeChoose('0')}>今天</span>
-                        <span className="right-line"></span>
-                        <span className={this.state.type == 1 ? 'select' : ''} onClick={this.timeChoose('1')}>昨天</span>
-                        <span className="right-line"></span>
-                        <span className={this.state.type == 2 ? 'select' : ''} onClick={this.timeChoose('2')}>前天</span>
-                    </div>
-                </Map>
+                            <span className="right-line"></span>
+                            <span className={this.state.type == 1 ? 'select' : ''}
+                                  onClick={this.timeChoose('1')}>昨天</span>
+                            <span className="right-line"></span>
+                            <span className={this.state.type == 2 ? 'select' : ''}
+                                  onClick={this.timeChoose('2')}>前天</span>
+                        </div>
+                    </Map>
+                </div>
             </div>
         )
     }

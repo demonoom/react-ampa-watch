@@ -86,16 +86,16 @@ export default class verifyStuInfo extends React.Component {
             return
         }
         var json = {
-            "account":this.state.littleAntName,
-            "studentName":this.state.stuName,
+            "account": this.state.littleAntName,
+            "studentName": this.state.stuName,
             "schoolName": this.state.schoolName,
-            "childSex":this.state.sex,
-            "macAddress":this.state.macAddr,
-            "familyRelate":this.state.relation,
-            "guardianId":this.state.ident,
-            "phoneNumber":this.state.phoneNumber,
-            "birthTime":this.state.birthDay,
-            "hasStudentAccount":true,
+            "childSex": this.state.sex,
+            "macAddress": this.state.macAddr,
+            "familyRelate": this.state.relation,
+            "guardianId": this.state.ident,
+            "phoneNumber": this.state.phoneNumber,
+            "birthTime": this.state.birthDay,
+            "hasStudentAccount": true,
         }
         var param = {
             "method": 'bindWatchGuardian',
@@ -126,7 +126,7 @@ export default class verifyStuInfo extends React.Component {
 
 
     }
-
+    //返回
     toBack = () => {
         var data = {
             method: 'popView',
@@ -167,11 +167,8 @@ export default class verifyStuInfo extends React.Component {
                             onChange={this.schoolOnChange}
                         ></InputItem>
                     </div>
-
                 </div>
-
                 <div className='submitBtn' onClick={this.submmit}>确定</div>
-
             </div>
         );
     }
