@@ -32,11 +32,6 @@ const schoolInfo = (location, cb) => {
     }, 'schoolInfo')
 };
 
-const bindStudentInfo = (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/addWatchInfo/js/bindStudentInfo').default)
-    }, 'bindStudentInfo')
-};
 
 const verifyStuInfo = (location, cb) => {
     require.ensure([], require => {
@@ -60,7 +55,7 @@ const morePage = (location, cb) => {
 const validationMes = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/stuAccountRegist/js/validationMes').default)
-    }, 'bindStudentInfo')
+    }, 'validationMes')
 };
 
 const watchPosition = (location, cb) => {
@@ -188,7 +183,6 @@ ReactDOM.render(
             <Route path="addWatchInfo" getComponent={addWatchInfo}/>
             <Route path="babyInfo" getComponent={babyInfo}/>
             <Route path="schoolInfo" getComponent={schoolInfo}/>
-            <Route path="bindStudentInfo" getComponent={bindStudentInfo}/>
             <Route path="verifyStuInfo" getComponent={verifyStuInfo}/>
             <Route path="loginSuccess" getComponent={loginSuccess}/>
             <Route path="stuAccountRegist" getComponent={stuAccountRegist}/>
