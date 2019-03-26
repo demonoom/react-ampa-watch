@@ -291,7 +291,8 @@ export default class addNewLocation extends React.Component {
 
                     <div className='posMap' style={{display: 'none'}}>
                         <div className="am-navbar">
-                            <span className="am-navbar-left" onClick={this.setPosQuit}><i className="icon-back"></i></span>
+                            <span className="am-navbar-left" onClick={this.setPosQuit}><i
+                                className="icon-back"></i></span>
                             <span className="am-navbar-title">添加新地址</span>
                             <span className="am-navbar-right"></span>
                         </div>
@@ -320,12 +321,14 @@ export default class addNewLocation extends React.Component {
                                     style={this.state.style}
                                 />
                                 <div className="posMessage">
-                                    <span className="icon-posMap"></span><div className="posMap-cont text_hidden">{this.state.addressName}</div>
+                                    <span className="icon-posMap"></span>
+                                    <div className="posMap-cont text_hidden">{this.state.addressName}</div>
                                 </div>
 
                                 <div className='setArea'>
                                     <div className="submitBtn" onClick={this.setPosDone}>确定</div>
-                                    <div className="SafeRange">安全范围<span>300m</span></div>
+                                    <div className="SafeRange">安全范围<span>{Number(this.state.sliderValue) * 10}m</span>
+                                    </div>
                                     <Slider
                                         style={{marginLeft: 0, marginRight: 10}}
                                         value={this.state.sliderValue}
@@ -334,7 +337,7 @@ export default class addNewLocation extends React.Component {
                                         onChange={this.sliderOnChange()}
                                     />
                                     <div className="distance">
-                                        <span>0m</span>
+                                        <span>100m</span>
                                         <span className="right">500m</span>
                                     </div>
                                 </div>

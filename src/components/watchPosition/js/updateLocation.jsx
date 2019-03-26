@@ -355,8 +355,7 @@ export default class updateLocation extends React.Component {
 
                                 <div className='setArea'>
                                     <div className="submitBtn" onClick={this.setPosDone}>确定</div>
-                                    <div className="SafeRange">安全范围<span>300m</span></div>
-                                    {/*<div onClick={this.setPosQuit}>取消</div>*/}
+                                    <div className="SafeRange">安全范围<span>{Number(this.state.sliderValue) * 10}m</span></div>
                                     <Slider
                                         style={{marginLeft: 0, marginRight: 10}}
                                         value={this.state.sliderValue}
@@ -365,7 +364,7 @@ export default class updateLocation extends React.Component {
                                         onChange={this.sliderOnChange()}
                                     />
                                     <div className="distance">
-                                        <span>0m</span>
+                                        <span>100m</span>
                                         <span className="right">500m</span>
                                     </div>
                                 </div>
