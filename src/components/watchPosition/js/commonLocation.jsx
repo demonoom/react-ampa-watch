@@ -10,6 +10,10 @@ export default class commonLocation extends React.Component {
         super(props);
         this.state = {
             posList: [],
+            homePosition: '未设置',
+            homeObj: null,
+            schoolPosition: '未设置',
+            schoolObj: null,
         };
     }
 
@@ -27,7 +31,7 @@ export default class commonLocation extends React.Component {
     }
 
     addNewPos = () => {
-        var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId;
+        var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=0';
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -54,7 +58,14 @@ export default class commonLocation extends React.Component {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
                         if (!!result.response) {
-                            _this.buildPosList(result.response)
+                            _this.buildPosList(result.response.filter((v) => {
+                                return (v.type != 1 && v.type != 2)
+                            }));
+                            _this.buildPublicMsg(result.response.filter((v) => {
+                                return v.type == 1
+                            }), result.response.filter((v) => {
+                                return v.type == 2
+                            }))
                         }
                     }
                 } else {
@@ -67,6 +78,20 @@ export default class commonLocation extends React.Component {
         });
     };
 
+    /**
+     * @param home
+     * @param school
+     */
+    buildPublicMsg = (home, school) => {
+        if (home.length != 0) {
+            this.setState({homePosition: home[0].homeAddress, homeObj: home[0]});
+        }
+        if (school.length != 0) {
+            this.setState({schoolPosition: school[0].homeAddress, schoolObj: school[0]});
+        }
+
+    };
+
     buildPosList = (data) => {
         var _this = this;
         var posList = [];
@@ -77,7 +102,7 @@ export default class commonLocation extends React.Component {
                     className="common-space line_public15"
                     multipleLine
                     onClick={() => {
-                        _this.intoDetil(v)
+                        _this.intoDetil(0, v)
                     }}
                     platform="android"
                 >
@@ -99,16 +124,70 @@ export default class commonLocation extends React.Component {
      id: 5
      * @param obj
      */
-    intoDetil = (obj) => {
-        var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress);
-        var data = {
-            method: 'openNewPage',
-            selfBack: true,
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
+    intoDetil = (type, obj) => {
+        if (type == 0) {
+            //自定义
+            var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress + '&type=0');
+            var data = {
+                method: 'openNewPage',
+                selfBack: true,
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        } else if (type == 1) {
+            //家
+            if (!!this.state.homeObj) {
+                //修改
+                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.homeObj.id + '&homeName=' + this.state.homeObj.homeName + '&homeAddress=' + this.state.homeObj.homeAddress + '&type=1');
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            } else {
+                //添加
+                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=1';
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            }
+        } else if (type == 2) {
+            //学校
+            if (!!this.state.schoolObj) {
+                //修改
+                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.schoolObj.id + '&homeName=' + this.state.schoolObj.homeName + '&homeAddress=' + this.state.schoolObj.homeAddress + '&type=2');
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            } else {
+                //添加
+                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=2';
+                var data = {
+                    method: 'openNewPage',
+                    selfBack: true,
+                    url: url
+                };
+                Bridge.callHandler(data, null, function (error) {
+                    window.location.href = url;
+                });
+            }
+        }
+
     };
 
     popView = () => {
@@ -131,12 +210,47 @@ export default class commonLocation extends React.Component {
                     <div className="WhiteSpace"></div>
                     <div className="commonLocation-content">
                         <div>{this.state.posList}</div>
+                    <div className="publicPos">
+                        <Item
+                            arrow="horizontal"
+                            className="common-space line_public15"
+                            multipleLine
+                            onClick={() => {
+                                this.intoDetil(1)
+                            }}
+                            platform="android"
+                        >
+                            <span className="spaceAvatar">
+                                <img style={{borderRadius: '50%'}}
+                                     src={require("../img/icon-home.png")} alt=""/>
+                            </span>
+                            <span className="space-name text_hidden">家</span>
+                            <Brief>{this.state.homePosition}</Brief>
+                        </Item>
+                        <Item
+                            arrow="horizontal"
+                            className="common-space"
+                            multipleLine
+                            onClick={() => {
+                                this.intoDetil(2)
+                            }}
+                            platform="android"
+                        >
+                            <span className="spaceAvatar">
+                                <img style={{borderRadius: '50%'}}
+                                     src={require("../img/icon-schoolA.png")} alt=""/>
+                            </span>
+                            <span className="space-name text_hidden">学校</span>
+                            <Brief>{this.state.schoolPosition}</Brief>
+                        </Item>
+                        <div className="WhiteSpace"></div>
+                    </div>
                         <div className="tips">
                             <div className="tips-title">温馨提示</div>
                             <div className="tips-cont">设置常用地点后，定位到常用地点时，会直接显示再相应的地点，手表进出地点，将收到对应的消息通知。</div>
                         </div>
-                    </div>
                 </div>
+            </div>
             </div>
         )
     }
