@@ -285,6 +285,7 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
+                <div className="topPadding"></div>
                 <div className="icon_back" onClick={this.toBack}></div>
                 <div className="p38 innerCont">
                     <div className="infoContent">
