@@ -19,13 +19,19 @@ export default class verifyStuInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
-        var loginType = searchArray[0].split('=')[1];
-        var macAddr = searchArray[1].split('=')[1];
-        var sex = searchArray[2].split('=')[1];
+        var macAddr = searchArray[0].split('=')[1];
+        var sex = searchArray[1].split('=')[1];
+        var relation = searchArray[2].split('=')[1];
+        var phoneNumber = searchArray[3].split('=')[1];
+        var ident = searchArray[4].split('=')[1];
+        var birthDay = searchArray[5].split('=')[1];
         this.setState({
-            loginType,
             macAddr,
-            sex
+            sex,
+            relation,
+            phoneNumber,
+            ident,
+            birthDay
         })
         this.getWatchId(macAddr)
         window.addEventListener('resize', this.onWindwoResize);
@@ -105,19 +111,27 @@ export default class verifyStuInfo extends React.Component {
             Toast.info("请输入学校名称");
             return
         }
-        var param = {
-            "method": 'bindStudentAccountByAccount',
-            "account": this.state.littleAntName,
-            "studentName": this.state.stuName,
+        var json = {
+            "account":this.state.littleAntName,
+            "studentName":this.state.stuName,
             "schoolName": this.state.schoolName,
-            "watch2gId": this.state.watchId,
+            "childSex":this.state.sex,
+            "macAddress":this.state.macAddr,
+            "familyRelate":this.state.relation,
+            "guardianId":this.state.ident,
+            "phoneNumber":this.state.phoneNumber,
+            "birthTime":this.state.birthDay,
             "actionName": "watchAction",
+        }
+        var param = {
+            "method": 'bindWatchGuardian',
+            "json": json,
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info('验证成功');
-                    var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=" + this.state.loginType;
+                    var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=1";
                     var data = {
                         method: 'openNewPage',
                         selfBack: true,

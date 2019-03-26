@@ -93,8 +93,10 @@ export default class rankingList extends React.Component {
                         })
                     } else {
                         this.setState({
+                            // toBingStudent:result.response[0].studentId,
                             studentId: result.response[0].student.colUid
                         }, () => {
+                            console.log(this.state.toBingStudent,"toBingStudent")
                             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                         })
                     }
@@ -226,9 +228,16 @@ export default class rankingList extends React.Component {
     }
 
     //跳转绑定页面
-    toJupmBind=()=>{
+    toJupmBind = () => {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
-        window.location.href = url;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url
+        }; 
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     }
     render () {
         const row = (rowData, sectionID, rowID) => {
@@ -259,19 +268,22 @@ export default class rankingList extends React.Component {
                     </div>
                     <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
-                <div  style={{ display: this.state.toBind ? "none" : "block",height:"100%" }}>
+                <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={tabs}
                         initalPage={'t2'}
+                          swipeable={false}
                     >
 
                         <div className='questionCont' >
-                            <div className='dateBtn'>
-                                <span className='today active' onClick={this.clickToday}>今日</span>
-                                <span className="week" onClick={this.toClickWeek}>本周</span>
-                            </div>
                             <ListView
                                 ref={el => this.lv = el}
                                 dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
+                                renderHeader={() => (
+                                    <div className='dateBtn'>
+                                    <span className='today active' onClick={this.clickToday}>今日</span>
+                                    <span className="week" onClick={this.toClickWeek}>本周</span>
+                                    </div>
+                                    )}
                                 renderFooter={() => (
                                     <div style={{ paddingTop: 6, textAlign: 'center' }}>
                                         {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
@@ -286,7 +298,7 @@ export default class rankingList extends React.Component {
                                 initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
                                 scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
                                 style={{
-                                    height: this.state.clientHeight - 82 - 50,
+                                    height: this.state.clientHeight - 90,
                                 }}
                             />
                             <div className='myGrade' onClick={this.toDetail}>

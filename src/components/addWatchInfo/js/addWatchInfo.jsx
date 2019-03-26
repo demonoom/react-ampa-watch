@@ -3,10 +3,7 @@ import {
     InputItem, Toast,
     Modal, Picker, List
 } from 'antd-mobile';
-
 import '../css/addWatchInfo.less'
-
-
 
 const alert = Modal.alert;
 const prompt = Modal.prompt;
@@ -21,7 +18,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macId: "",
+            macId: "wwww",
             stuName: "",
             sexValue: "",
             extraClassName: "",
@@ -120,7 +117,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress(22222);
+        this.getWatch2gByMacAddress("wwww");
         var data = {
             method: 'watchBinding'
         };
@@ -166,7 +163,7 @@ export default class addWatchInfo extends React.Component {
                 Toast.info("请输入手表号码")
                 return
             }
-            var url = WebServiceUtil.mobileServiceURL + "babyInfo?loginType=" + this.state.loginType + "&macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber + "&ident=" + this.state.ident
+            var url = WebServiceUtil.mobileServiceURL + "babyInfo?macAddr=" + this.state.macId + "&relation=" + this.state.relationValue[0] + "&phonenumber=" + this.state.phonenumber + "&ident=" + this.state.ident
             var data = {
                 method: 'openNewPage',
                 selfBack: true,

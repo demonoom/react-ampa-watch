@@ -22,7 +22,7 @@ export default class updateLocation extends React.Component {
             circle: null,
             addressName: '',
             addressLT: '',
-            style: {strokeWeight: '0px', fillColor: '#fff850', fillOpacity: '0.5'},
+            style: {strokeWeight: '16', strokeColor : "rgba(23,172,247,1)", strokeOpacity : 0.13, strokeStyle:"solid", fillColor: 'rgba(23,172,247,1)', fillOpacity: '0.26'},
             radius: 50,
             sliderValue: 15,
         };
