@@ -1,5 +1,5 @@
 import React from "react";
-import {Map, Polyline} from "react-amap";
+import {Map, Polyline, Marker} from "react-amap";
 import {Toast} from 'antd-mobile';
 
 import '../css/watchTrail.less'
@@ -11,13 +11,14 @@ const Loading = <div className="emptyLoading">
     </div>
 </div>;
 
+var watchTrailThis;
 export default class watchTrail extends React.Component {
     constructor(props) {
         super(props);
+        watchTrailThis = this;
         this.state = {
-            position: {longitude: '116.397477', latitude: '39.908692'},
-            zoom: 19,
             map: null,
+            pointFlag: false,
             path: [],
             type: 0,
             style: {
@@ -25,8 +26,10 @@ export default class watchTrail extends React.Component {
                 lineJoin: 'round',
                 lineCap: 'round',
                 strokeColor: '#3e2bff',
-                strokeOpacity: '0.7'
-            }
+                strokeOpacity: '0.7',
+            },
+            startPoint: {longitude: '116.397477', latitude: '39.908692'},
+            endPoint: {longitude: '116.397477', latitude: '39.908692'},
         };
     }
 
@@ -67,15 +70,29 @@ export default class watchTrail extends React.Component {
                                 }
                             });
 
+                            var locationName = result.response.map((v) => {
+                                return v.locationName;
+                            });
+
+                            console.log(locationName);
+
                             _this.setState({
-                                path, position: {
+                                path, startPoint: {
                                     longitude: path[0].longitude,
                                     latitude: path[0].latitude
+                                },
+                                endPoint: {
+                                    longitude: path[path.length - 1].longitude,
+                                    latitude: path[path.length - 1].latitude
+                                }, pointFlag: true
+                            }, () => {
+                                if (!!_this.state.map) {
+                                    _this.state.map.setFitView()
                                 }
                             })
                         } else {
                             Toast.info('未查询到记录', 1, null, false);
-                            _this.setState({path: []})
+                            _this.setState({path: [], pointFlag: false})
                         }
                     }
                 } else {
@@ -106,6 +123,26 @@ export default class watchTrail extends React.Component {
         Bridge.callHandler(data, null, null);
     };
 
+    /**
+     * 
+     * @returns {*}
+     */
+    renderStartPoint() {
+        return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
+                    className="school-positioning">
+            <img
+                style={{borderRadius: '50%'}}
+                src={require('../img/icon-home.png')} alt=""/></div>
+    };
+
+    renderEndPoint() {
+        return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
+                    className="school-positioning">
+            <img
+                style={{borderRadius: '50%'}}
+                src={require('../img/icon-schoolA.png')} alt=""/></div>
+    };
+
     render() {
 
         const plugins = [
@@ -119,13 +156,14 @@ export default class watchTrail extends React.Component {
 
         const events = {
             created: (ins) => {
-                this.setState({map: ins})
-            }
+                this.setState({map: ins});
+            },
         };
 
         const lineEvents = {
             created: (ins) => {
-                console.log(ins)
+                console.log(ins);
+                this.state.map.setFitView()
             },
             click: () => {
                 console.log('line clicked')
@@ -145,8 +183,6 @@ export default class watchTrail extends React.Component {
                         version={WebServiceUtil.version}
                         loading={Loading}
                         plugins={plugins}
-                        center={this.state.position}
-                        zoom={this.state.zoom}
                         showBuildingBlock={true}
                         // buildingAnimation={true}
                         // viewMode='3D'
@@ -157,6 +193,14 @@ export default class watchTrail extends React.Component {
                             path={this.state.path}
                             events={lineEvents}
                             style={this.state.style}
+                        />
+                        <Marker
+                            position={this.state.startPoint}
+                            render={this.renderStartPoint}
+                        />
+                        <Marker
+                            position={this.state.endPoint}
+                            render={this.renderEndPoint}
                         />
                         <div id='timeChoose' className='customLayer'>
                         <span className={this.state.type == 0 ? 'select' : ''}
