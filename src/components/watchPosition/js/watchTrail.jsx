@@ -1,6 +1,6 @@
 import React from "react";
-import {Map, Polyline} from "react-amap";
-import {Toast} from 'antd-mobile';
+import {Map, Polyline, Marker} from "react-amap";
+import {Toast, Steps, WingBlank, WhiteSpace} from 'antd-mobile';
 
 import '../css/watchTrail.less'
 
@@ -11,22 +11,28 @@ const Loading = <div className="emptyLoading">
     </div>
 </div>;
 
+const Step = Steps.Step;
+
+var watchTrailThis;
 export default class watchTrail extends React.Component {
     constructor(props) {
         super(props);
+        watchTrailThis = this;
         this.state = {
-            position: {longitude: '116.397477', latitude: '39.908692'},
-            zoom: 19,
             map: null,
+            pointFlag: false,
             path: [],
             type: 0,
+            locationName: [],
             style: {
                 strokeWeight: '10',
                 lineJoin: 'round',
                 lineCap: 'round',
                 strokeColor: '#3e2bff',
-                strokeOpacity: '0.7'
-            }
+                strokeOpacity: '0.7',
+            },
+            startPoint: {longitude: '116.397477', latitude: '39.908692'},
+            endPoint: {longitude: '116.397477', latitude: '39.908692'},
         };
     }
 
@@ -67,15 +73,32 @@ export default class watchTrail extends React.Component {
                                 }
                             });
 
+                            var locationNameMes = result.response.map((v) => {
+                                return {
+                                    time: v.createTime,
+                                    locationName: v.locationName,
+                                }
+                            });
+
+                            _this.buildLocationName(locationNameMes);
+
                             _this.setState({
-                                path, position: {
+                                path, startPoint: {
                                     longitude: path[0].longitude,
                                     latitude: path[0].latitude
+                                },
+                                endPoint: {
+                                    longitude: path[path.length - 1].longitude,
+                                    latitude: path[path.length - 1].latitude
+                                }, pointFlag: true
+                            }, () => {
+                                if (!!_this.state.map) {
+                                    _this.state.map.setFitView()
                                 }
                             })
                         } else {
                             Toast.info('未查询到记录', 1, null, false);
-                            _this.setState({path: []})
+                            _this.setState({path: [], pointFlag: false})
                         }
                     }
                 } else {
@@ -86,6 +109,21 @@ export default class watchTrail extends React.Component {
                 Toast.warn('保存失败');
             }
         });
+    };
+
+    /**
+     * locationName
+     * <Step title="Step 8" description="This is description"/>
+     * @param arr
+     */
+    buildLocationName = (data) => {
+        var locationName = [];
+        data.forEach((v) => {
+            locationName.push(
+                <Step title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
+            )
+        });
+        this.setState({locationName})
     };
 
     /**
@@ -106,6 +144,28 @@ export default class watchTrail extends React.Component {
         Bridge.callHandler(data, null, null);
     };
 
+    /**
+     *
+     * @returns {*}
+     */
+    renderStartPoint() {
+        return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
+                    className="icon-startPoint"></div>
+    };
+
+    renderEndPoint() {
+        return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
+                    className="icon-endPoint"></div>
+    };
+
+    getLocationDetil = () => {
+        $('.setPosModel').slideDown();
+    };
+
+    setPosModelDown = () => {
+        $('.setPosModel').slideUp();
+    };
+
     render() {
 
         const plugins = [
@@ -119,13 +179,14 @@ export default class watchTrail extends React.Component {
 
         const events = {
             created: (ins) => {
-                this.setState({map: ins})
-            }
+                this.setState({map: ins});
+            },
         };
 
         const lineEvents = {
             created: (ins) => {
-                console.log(ins)
+                console.log(ins);
+                this.state.map.setFitView()
             },
             click: () => {
                 console.log('line clicked')
@@ -145,8 +206,6 @@ export default class watchTrail extends React.Component {
                         version={WebServiceUtil.version}
                         loading={Loading}
                         plugins={plugins}
-                        center={this.state.position}
-                        zoom={this.state.zoom}
                         showBuildingBlock={true}
                         // buildingAnimation={true}
                         // viewMode='3D'
@@ -158,6 +217,14 @@ export default class watchTrail extends React.Component {
                             events={lineEvents}
                             style={this.state.style}
                         />
+                        <Marker
+                            position={this.state.startPoint}
+                            render={this.renderStartPoint}
+                        />
+                        <Marker
+                            position={this.state.endPoint}
+                            render={this.renderEndPoint}
+                        />
                         <div id='timeChoose' className='customLayer'>
                         <span className={this.state.type == 0 ? 'select' : ''}
                               onClick={this.timeChoose('0')}>今天</span>
@@ -168,7 +235,30 @@ export default class watchTrail extends React.Component {
                             <span className={this.state.type == 2 ? 'select' : ''}
                                   onClick={this.timeChoose('2')}>前天</span>
                         </div>
+                        <div onClick={this.getLocationDetil} id="getPosition" className="customLayer">
+                            <i className="icon-TrackDetails"></i>
+                        </div>
                     </Map>
+                </div>
+
+                <div className='setPosModel' style={{display: 'none'}}>
+                    <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosModelDown}><i
+                                className="icon-back"></i></span>
+                        <span className="am-navbar-title">轨迹详情</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
+                    <div className='modelContent'>
+                        <div className="WhiteSpace"></div>
+                        <div className="TrackDetails-cont">
+                            <WingBlank size="lg">
+                                <WhiteSpace size="lg"/>
+                                <Steps current={this.state.locationName.length-1}>
+                                    {this.state.locationName}
+                                </Steps>
+                            </WingBlank>
+                        </div>
+                    </div>
                 </div>
             </div>
         )

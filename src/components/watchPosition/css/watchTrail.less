@@ -3,6 +3,17 @@
   .watchTrail-cont{
     height: calc(~"100% - 64px");
   }
+
+  .school-positioning{
+    width: 22px;
+    height: 22px;
+    img{
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+    }
+  }
+
   .customLayer {
     font-size: larger;
     background-color: rgba(255,255,255,0.85);
@@ -134,5 +145,91 @@
   }
   .amap-touch-toolbar .amap-zoomcontrol:after{
     background: transparent;
+  }
+
+  i.icon-positioning{
+    background: url("../img/icon-positioning.png") no-repeat;
+    width: 16px;
+    height: 21px;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-top: 10px;
+  }
+  i.icon-TrackDetails{
+    background: url("../img/icon-TrackDetails.png") no-repeat;
+    width: 21px;
+    height: 18px;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-top: 11px;
+  }
+  #getPosition {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    bottom: 60px;
+    right: 16px;
+    background:rgba(247,246,246,1);
+    box-shadow:0px 6px 20px 0px rgba(51,51,51,0.2);
+    border-radius:50%;
+    padding: 0;
+    i.icon-positioning{
+      background: url("../img/icon-positioning.png") no-repeat;
+      width: 16px;
+      height: 21px;
+      background-size: 100% 100%;
+      display: inline-block;
+      margin-top: 10px;
+    }
+  }
+
+  .setPosModel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 666;
+    overflow: hidden;
+    .modelContent {
+      width: 100%;
+      height: calc(~"100% - 64px");
+      background: #F8F8F8;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  .icon-startPoint, .icon-endPoint{
+    width: 25px;
+    height: 36px;
+  }
+  .icon-startPoint{
+    background: url("../img/icon-startingPoint.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .icon-endPoint{
+    background: url("../img/icon-end.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .WhiteSpace {
+    height: 11px;
+    background: #ededed;
+  }
+  /*轨迹详情*/
+  .TrackDetails-cont{
+    background: #fff;
+    height: calc(~"100% - 11px");
+    overflow-x: hidden;
+    overflow-y: auto;
+    .am-steps-item-title{
+      font-size: 15px;
+      color: #333;
+      font-weight: normal;
+      line-height: 1.5;
+    }
+    .am-steps-item-description{
+      color: #666;
+      font-size: 14px;
+    }
   }
 }
