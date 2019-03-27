@@ -209,28 +209,29 @@ export default class morePage extends React.Component {
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
                 this.setState({
-                    guardians: v.guardians
+                    guardians: v.guardians,
+                    studentId: v.studentId
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
                         if (v.guardian.colUid == this.state.userId) {
                             this.setState({
                                 guardianData: v,
                             }, () => {
-                                console.log(this.state.guardianData, "guardianData")
+                                this.setState({
+                                    visible: false,
+                                    watchId: opt.props.macId,
+                                    watchName: opt.props.children,
+                                    macAddr: opt.props.mac
+                                }, () => {
+                                    this.getWatch2gById(this.state.watchId)
+                                });
                             })
                         }
                     })
                 })
             }
         })
-        this.setState({
-            visible: false,
-            watchId: opt.props.macId,
-            watchName: opt.props.children,
-            macAddr: opt.props.mac
-        }, () => {
-            this.getWatch2gById(this.state.watchId)
-        });
+
     };
 
     //气泡
@@ -365,10 +366,6 @@ export default class morePage extends React.Component {
     }
 
     render () {
-        console.log(this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2)
-        console.log(this.state.guardianData.valid)
-        console.log(this.state.guardianData.bindType)
-        console.log(this.state.guardianData)
         return (
             <div id="morePage" className='bg_gray'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
@@ -402,7 +399,7 @@ export default class morePage extends React.Component {
                 <div className='personMsg'>
                     <div className="topPadding"></div>
                     <span className='icon_add' onClick={this.toJupmBind}
-                        style={{ display: this.state.toBind ? "none" : "block" }}
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}
                     >添加手表</span>
                     <div className="clear"></div>
                     <div className="wrap">
@@ -415,35 +412,35 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送闹钟</div>
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }} className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
                     <div className="am-list-line">
                         <div className="am-list-content">找手表</div>
                     </div>
                 </div>
-                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
+                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送天气</div>
                     </div>
                 </div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
-                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }} style={{ display: this.state.toBind ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
+                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
                     </div>
                 </div>
-                <div style={{ display: this.state.toBind ? "block" : "none" }} className='am-list-item am-list-item-middle line_public' onClick={this.toJupmBind}>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='am-list-item am-list-item-middle line_public' onClick={this.toJupmBind}>
                     <div className="am-list-line">
                         <div className="am-list-content">添加手表</div>
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>

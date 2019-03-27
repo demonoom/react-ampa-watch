@@ -278,20 +278,39 @@ export default class rankingList extends React.Component {
 
     //选择
     onSelect = (opt) => {
-        console.log(this.state.flag,"opopop")
-        this.setState({
-            visible: false,
-            watchId: opt.props.macId,
-            watchName: opt.props.children,
-            macAddr:opt.props.mac
-        }, () => {
-            if (this.state.flag == 1) {
-                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-            } else {
-                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-
+        this.state.watchData.forEach((v, i) => {
+            if (v.id == opt.props.macId) {
+                console.log(v, "rtyuio")
+                this.setState({
+                    guardians: v.guardians,
+                    studentId: v.studentId
+                }, () => {
+                    this.state.guardians.forEach((v, i) => {
+                        console.log(v, "iop")
+                        if (v.guardian.colUid == this.state.userId) {
+                            this.setState({
+                                guardianData: v,
+                            }, () => {
+                                this.setState({
+                                    visible: false,
+                                    watchId: opt.props.macId,
+                                    watchName: opt.props.children,
+                                    macAddr:opt.props.mac
+                                }, () => {
+                                    if (this.state.flag == 1) {
+                                        this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+                                    } else {
+                                        this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                        
+                                    }
+                                });
+                            })
+                        }
+                    })
+                })
             }
-        });
+        })
+       
     };
 
 
