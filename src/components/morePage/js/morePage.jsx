@@ -287,7 +287,7 @@ export default class morePage extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{color:'#333'}} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -327,7 +327,7 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray'>
-                <div style={{display:this.state.toBind ? "none":"block"}}>
+                <div className='watchSelect am-navbar-blue' style={{display:this.state.toBind ? "none":"block"}}>
                     <Popover mask
                         overlayClassName="fortest"
                         placement="bottomLeft"
@@ -342,15 +342,16 @@ export default class morePage extends React.Component {
                         onSelect={this.onSelect}
                     >
                         <div style={{
-                            height: '100%',
-                            padding: '0 15px',
+                            height: '22px',
+                            lineHeight:'22px',
+                            padding: '0 15px 15px',
                             marginRight: '-15px',
                             display: 'flex',
                             alignItems: 'center',
                         }}
                         >
-                            <Icon type="down" />
-                            <span>{this.state.watchName}</span>
+                            <span className="icon-back"></span>
+                            <span className='text_hidden watchName'>{this.state.watchName}</span>
                         </div>
                     </Popover>
                 </div>

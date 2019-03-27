@@ -18,7 +18,7 @@ var start = time + ' 00:00:00'
 var end = time + ' 23:59:59';
 
 var myWeekDate = new Date(); //获取七天前日期；
-myWeekDate.setDate(myDate.getDate() - 365);
+myWeekDate.setDate(myDate.getDate() - 7);
 //获取当前年
 var weekYear = myWeekDate.getFullYear();
 //获取当前月
@@ -101,7 +101,6 @@ export default class rankingList extends React.Component {
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
                         }, () => {
-                            console.log(this.state.toBingStudent, "toBingStudent")
                             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                             this.WatchList(this.state.watchData)
                         })
@@ -279,6 +278,7 @@ export default class rankingList extends React.Component {
 
     //选择
     onSelect = (opt) => {
+        console.log(this.state.flag,"opopop")
         this.setState({
             visible: false,
             watchId: opt.props.macId,
@@ -287,9 +287,9 @@ export default class rankingList extends React.Component {
         }, () => {
             if (this.state.flag == 1) {
                 this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-
             } else {
                 this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+
             }
         });
     };
@@ -300,7 +300,7 @@ export default class rankingList extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{color:'#333'}} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -340,20 +340,20 @@ export default class rankingList extends React.Component {
                 </div>
                 <div className="am-navbar-blue watchSelect">
                     <Popover mask
-                        overlayClassName="fortest"
-                        overlayStyle={{ color: 'currentColor' }}
-                        visible={this.state.visible}
-                        overlay={this.state.watchListData}
-                        align={{
-                            overflow: { adjustY: 0, adjustX: 0 },
-                            offset: [10, 0],
-                        }}
-                        onVisibleChange={(visible) => {
-                            this.setState({
-                                visible,
-                            });
-                        }}
-                        onSelect={this.onSelect}
+                             overlayClassName="fortest"
+                             overlayStyle={{ color: 'currentColor' }}
+                             visible={this.state.visible}
+                             overlay={this.state.watchListData}
+                             awatchSelectlign={{
+                                 overflow: { adjustY: 0, adjustX: 0 },
+                                 offset: [10, 0],
+                             }}
+                             onVisibleChange={(visible) => {
+                                 this.setState({
+                                     visible,
+                                 });
+                             }}
+                             onSelect={this.onSelect}
                     >
                         <div style={{
                             height: '100%',
