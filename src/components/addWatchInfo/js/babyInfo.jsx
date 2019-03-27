@@ -241,6 +241,17 @@ export default class babyInfo extends React.Component {
                                 <List.Item arrow="horizontal">请选择孩子生日</List.Item>
                             </DatePicker>
                         </div>
+                        <div>
+                        <div onClick={this.handleClick} className='login-input line_publicD icon_watch'>
+                            <InputItem
+                                value={this.state.phonenumber}
+                                onChange={this.phoneNumber}
+                                type="phone"
+                                placeholder="请输入手表号码"
+                                ref={el => this.inputRef = el}
+                            ></InputItem>
+                        </div>
+                        </div>
                     </div>
                 </div>
                 <div className='submitBtn' onClick={this.nextPage}>
