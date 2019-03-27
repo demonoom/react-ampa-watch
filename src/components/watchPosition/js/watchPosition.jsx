@@ -5,7 +5,12 @@ import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connect
 
 import '../css/watchPosition.less'
 
-const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
+const Loading = <div className="emptyLoading">
+    <div className="loading-cont">
+        <div className="loading-icon"></div>
+        <div>正在生成地图...</div>
+    </div>
+</div>;
 
 const Item = Popover.Item;
 
