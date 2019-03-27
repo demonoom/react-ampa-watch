@@ -101,42 +101,15 @@ export default class verifyBinding extends React.Component {
     render() {
         return (
             <div id="verifyBinding">
-{/*<<<<<<< HEAD*/}
-                {/*<div>*/}
-                    {/*<span>{this.state.guardianName}</span>请求绑定<span>{this.state.watch2gName}</span>的手表*/}
-                {/*</div>*/}
-                {/*<div style={{display: this.state.unprocessed}}>*/}
-                    {/*<button onClick={this.agree}>同意</button>*/}
-                    {/*<button onClick={this.refuse}>拒绝</button>*/}
-                {/*</div>*/}
-                {/*<div style={{display: this.state.processed}}>*/}
-                    {/*<div>该请求已处理</div>*/}
-{/*=======*/}
-                <div className="am-modal-mask"></div>
-                <div className="am-modal-wrap ">
-                    <div className="am-modal am-modal-transparent">
-                        <div className="am-modal-content">
-                            <div className="am-modal-header">
-                                <div className="am-modal-title">
-                                    <span>{this.state.guardianName}</span>请求绑定<span>{this.state.watch2gName}</span>的手表
-                                </div>
-                            </div>
-                            <div className="am-modal-body">
-                                <div className="am-modal-propmt-content">
-                                </div>
-                            </div>
-                            <div className="am-modal-footer">
-                                <div className="am-modal-button-group-h am-modal-button-group-normal" style={{display: this.state.unprocessed}}>
-                                    <a className="am-modal-button" onClick={this.refuse}>拒绝</a>
-                                    <a className="am-modal-button" onClick={this.agree}>同意</a>
-                                </div>
-                                <div style={{display: this.state.processed}}>
-                                    <div>该请求已处理</div>
-                                </div>
-                            </div>
-                        </div>
+                <div className="center verify_Binding">
+                    <div className="verify-cont"><span className="userName">{this.state.guardianName}</span>请求绑定<span className="userName">{this.state.watch2gName}</span>的手表</div>
+                    <div style={{display: this.state.unprocessed}}>
+                        <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
+                        <a className="verify-submitBtn verify-submitBtn-right"  onClick={this.agree}>同意</a>
                     </div>
-{/*>>>>>>> 3c032eb41f5f918789f90b557b7b920eaa68e39b*/}
+                    <div style={{display: this.state.processed}} >
+                        <div>该请求已处理</div>
+                    </div>
                 </div>
             </div>
         )
