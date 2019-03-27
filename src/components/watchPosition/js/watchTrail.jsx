@@ -4,19 +4,7 @@ import {Toast} from 'antd-mobile';
 
 import '../css/watchTrail.less'
 
-const loadingStyle = {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-};
-
-const Loading = <div className="emptyLoading">
-    <div className="loading-icon"></div>
-    <div>正在生成地图...</div>
-</div>;
+const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
 
 export default class watchTrail extends React.Component {
     constructor(props) {
@@ -30,6 +18,7 @@ export default class watchTrail extends React.Component {
             style: {
                 strokeWeight: '10',
                 lineJoin: 'round',
+                lineCap: 'round',
                 strokeColor: '#3e2bff',
                 strokeOpacity: '0.7'
             }

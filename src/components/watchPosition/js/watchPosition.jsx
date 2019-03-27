@@ -5,16 +5,7 @@ import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connect
 
 import '../css/watchPosition.less'
 
-const loadingStyle = {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-};
-
-const Loading = <div className="emptyLoading"><div className="loading-icon"></div><div>正在生成地图...</div></div>;
+const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
 
 const Item = Popover.Item;
 
@@ -345,6 +336,7 @@ export default class watchPosition extends React.Component {
                                     marginRight: '-15px',
                                     display: 'flex',
                                     alignItems: 'center',
+                                    display:'none'
                                 }}
                                 >
                                     <i className="icon-back"

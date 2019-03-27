@@ -110,8 +110,10 @@ export default class commonLocation extends React.Component {
                         <img style={{borderRadius: '50%'}}
                              src={require("../img/icon-home.png")} alt=""/>
                     </span>
-                    <span className="space-name text_hidden">{v.homeName}</span>
-                    <Brief>{v.homeAddress}</Brief>
+                    <div className="space-wrap">
+                        <div className="space-name text_hidden">{v.homeName}</div>
+                        <Brief>{v.homeAddress}</Brief>
+                    </div>
                 </Item>
             )
         });
@@ -225,8 +227,10 @@ export default class commonLocation extends React.Component {
                                     <img style={{borderRadius: '50%'}}
                                          src={require("../img/icon-home.png")} alt=""/>
                                 </span>
-                                <span className="space-name text_hidden">家</span>
-                                <Brief>{this.state.homePosition}</Brief>
+                                <div className="space-wrap">
+                                    <div className="space-name text_hidden">家</div>
+                                    <Brief>{this.state.homePosition}</Brief>
+                                </div>
                             </Item>
                             <Item
                                 arrow="horizontal"
@@ -241,8 +245,10 @@ export default class commonLocation extends React.Component {
                                     <img style={{borderRadius: '50%'}}
                                          src={require("../img/icon-schoolA.png")} alt=""/>
                                 </span>
-                                <span className="space-name text_hidden">学校</span>
-                                <Brief>{this.state.schoolPosition}</Brief>
+                                <div className="space-wrap">
+                                    <div className="space-name text_hidden">学校</div>
+                                    <Brief>{this.state.schoolPosition}</Brief>
+                                </div>
                             </Item>
                             <div className="WhiteSpace"></div>
                         </div>
