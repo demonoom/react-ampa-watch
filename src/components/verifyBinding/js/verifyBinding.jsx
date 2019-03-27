@@ -76,11 +76,26 @@ export default class verifyBinding extends React.Component {
     render() {
         return (
             <div id="verifyBinding">
-                <div>
-                    <span>{this.state.title}</span>
+                <div className="am-modal-mask"></div>
+                <div className="am-modal-wrap ">
+                    <div className="am-modal am-modal-transparent">
+                        <div className="am-modal-content">
+                            <div className="am-modal-header">
+                                <div className="am-modal-title">{this.state.title}</div>
+                            </div>
+                            <div className="am-modal-body">
+                                <div className="am-modal-propmt-content">
+                                </div>
+                            </div>
+                            <div className="am-modal-footer">
+                                <div className="am-modal-button-group-h am-modal-button-group-normal">
+                                    <a className="am-modal-button" onClick={this.refuse}>拒绝</a>
+                                    <a className="am-modal-button" onClick={this.agree}>同意</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button onClick={this.agree}>同意</button>
-                <button onClick={this.refuse}>拒绝</button>
             </div>
         )
     }
