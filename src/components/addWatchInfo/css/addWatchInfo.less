@@ -91,4 +91,141 @@
       padding:40px 10px 0;
     }
   }
+
+  /*注册选择学校弹窗*/
+  .stuAccountRegist{
+    .updateModel {
+      position: absolute;
+      width: 100%;
+      height: 70%;
+      left: 0;
+      bottom: 0;
+      background: white;
+      z-index: 101;
+      .searchDiv {
+        height: 28px;
+        padding: 8px;
+        background-color: #F1F1F1;
+        overflow: hidden;
+        line-height: 28px;
+        input {
+          height: 28px;
+          background-color: white;
+          border-radius: 2px;
+          padding: 0 9px;
+          box-sizing: border-box;
+          width: calc(~"100% - 50px");
+          border: 0;
+        }
+        span {
+          color: #108ee9;
+          font-size: 16px;
+          float: right;
+          padding-right: 4px;
+          cursor: pointer;
+        }
+      }
+      .cont {
+        padding: 0 15px;
+        overflow-y: auto;
+        height: calc(~"100% - 44px");
+        .noomPowerList {
+          line-height: 42px;
+          font-size: 15px;
+          color: #333;
+          cursor: pointer;
+        }
+      }
+      .bottomBox {
+        display: flex;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        span {
+          flex: 1;
+          text-align: center;
+          font-size: 15px;
+          padding: 0;
+          line-height: 40px;
+          height: 40px;
+          display: inline-block;
+          -webkit-border-radius: 2px;
+          -moz-border-radius: 2px;
+          border-radius: 2px;
+          border: 1px #F56A55 solid;
+          color: #F56A55;
+          &.bind {
+            background: #F56A55;
+            color: #fff;
+            &:active {
+              color: rgba(255, 255, 255, 0.3);
+              background-color: #F56A55;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /*完善进度*/
+  .dec{
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 25px;
+  }
+  .progressPic{
+    width: 100%;
+    padding-bottom: 20px;
+  }
+  .tabCont{
+    border: 1px #E5E5E5 solid;
+    border-top: none;
+    padding: 0 20px 50px;
+  }
+
+  .am-tabs-default-bar-underline,.am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
+    display: none;
+  }
+  .am-tabs-default-bar-tab{
+    height: 40px;
+    line-height: 40px;
+    background-color: #F5F5F5;
+    color: #666;
+    margin-top: 6px;
+    border: 1px #E5E5E5 solid;
+    border-left-width: 0;
+    border-radius: 0 5px 0 0;
+  }
+  .am-tabs-default-bar-tab:first-child{
+    border-left-width: 1px;
+    border-right-width: 0;
+    border-radius: 5px 0  0 0;
+  }
+  .am-tabs-default-bar-tab.am-tabs-default-bar-tab-active{
+    height: 46px;
+    line-height: 46px;
+    box-sizing: border-box;
+    border: 1px #E5E5E5 solid;
+    border-radius: 5px 5px 0 0;
+    font-size: 15px;
+    color: #666;
+    border-bottom: 0;
+    background-color: #fff;
+    margin-top: 0;
+  }
+  .p29{
+    padding-top: 29px;
+  }
+  @media screen and (max-width: 320px){
+    .commonLocation-cont>div{
+      height: 100%;
+      &>div.p38{
+      height: calc(~"100% - 80px");
+      }
+    }
+    .button_preNext{
+      bottom: 20px;
+    }
+  }
 }

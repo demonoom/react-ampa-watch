@@ -417,8 +417,7 @@ img{
   overflow: hidden;
 }
 .innerCont{
-  height: calc(~"100% - 130px");
-  overflow-y: auto;
+ padding-top: 22px;
 }
 /* 返回navbar */
 
@@ -495,12 +494,24 @@ img{
     height: 23px;
     margin-right: 3px;
   }
+  &.whiteBack{
+    .icon-back {
+      background: url("components/images/icon_backWhite.png") no-repeat center;
+      background-size: 100% 100%;
+      width: 13px;
+      height: 23px;
+      margin-right: 3px;
+    }
+  }
 
 }
 .commonLocation-cont {
   background: #EDEDED;
   position: relative;
   height: calc(~"100% - 64px");
+  &.bg_white{
+    background-color: white;
+  }
 }
 .overScroll{
   overflow-y: auto;
@@ -529,6 +540,7 @@ img{
   top: auto !important;
   bottom: 20%;
 }
+
 .center{
   position: absolute;
   top:50%;
@@ -538,4 +550,42 @@ img{
   -ms-transform: translate(-50%, -50%);
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+
+/*上一步下一步按钮*/
+.button_preNext{
+  position: absolute;
+  bottom: 65px;
+  left: 38px;
+  width: calc(~'100% - 76px');
+  height: 49px;
+  .prev{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 46%;
+    border-radius: 25px;
+    cursor: pointer;
+    line-height: 49px;
+    color: white;
+    background-color: #FFA734;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 9px 9px rgba(255, 167, 52, 0.2);
+  }
+  .next{
+    width: 46%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 25px;
+    cursor: pointer;
+    line-height: 49px;
+    color: white;
+    background-color: #17ACF7;
+    text-align: center;
+    font-size: 16px;
+    box-shadow: 0 9px 9px rgba(13, 140, 216, 0.2);
+  }
 }
