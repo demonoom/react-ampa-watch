@@ -686,7 +686,7 @@ export default class addWatchInfo extends React.Component {
         this.setState({teNumOnChange: e})
     };
 
-    nextStep = () => {
+    nextForRegPage = () => {
         if (this.state.teName.trim() === '') {
             Toast.fail('请输入教师姓名',1,null,false);
             return
@@ -944,7 +944,7 @@ export default class addWatchInfo extends React.Component {
                             </div>
                         </div>
                         <div onClick={this.preForRegPage}>上一步</div>
-                        <div className="submitBtn" onClick={this.nextStep}>下一步</div>
+                        <div className="submitBtn" onClick={this.nextForRegPage}>下一步</div>
                     </div>
                 </div>
                 <div id="stuAccountRegist">
