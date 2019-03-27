@@ -358,7 +358,7 @@ export default class morePage extends React.Component {
                 <div className='personMsg'>
                     <div className="topPadding"></div>
                     <span className='icon_add' onClick={this.toJupmBind}
-                    // style={{ display: this.state.toBind ? "block" : "none" }}
+                    style={{ display: this.state.toBind ? "none" : "block" }}
                     >添加手表</span>
                     <div className="clear"></div>
                     <div className="wrap">
@@ -370,6 +370,7 @@ export default class morePage extends React.Component {
                         </span>
                     </div>
                 </div>
+                <div className="grayBorder"></div>
                 <div style={{display:this.state.toBind ? "none":"block"}}  className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送闹钟</div>
@@ -381,7 +382,7 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">找手表</div>
                     </div>
                 </div>
-                <div className="grayBorder"></div>
+                <div className="grayBorder" style={{display:this.state.toBind ? "none":"block"}}></div>
                 <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送天气</div>
@@ -392,10 +393,16 @@ export default class morePage extends React.Component {
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
-                <div className="grayBorder"></div>
+                <div className="grayBorder" style={{display:this.state.toBind ? "none":"block"}}></div>
                 <div style={{display:this.state.toBind ? "none":"block"}} style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
+                    </div>
+                </div>
+                <div style={{display:this.state.toBind ? "block":"none"}}  className='am-list-item am-list-item-middle line_public'  onClick={this.toJupmBind}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">添加手表</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.logout}>
