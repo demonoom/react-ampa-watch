@@ -348,6 +348,7 @@ export default class morePage extends React.Component {
         var data = {
             method: 'loginout',
         };
+        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
