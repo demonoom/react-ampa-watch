@@ -92,7 +92,7 @@ export default class addNewLocation extends React.Component {
     searchPos = () => {
         var _this = this;
         if (this.state.searchValue.trim() === '') {
-            Toast.info('请输入位置信息', 2);
+            Toast.info('请输入位置信息',2,null,false);
             return
         }
 
@@ -110,7 +110,7 @@ export default class addNewLocation extends React.Component {
                 if (data.status === '1') {
                     _this.buildPosList(data.tips)
                 } else {
-                    Toast.fail('未知的错误', 2)
+                    Toast.fail('未知的错误',2,null,false)
                 }
             }
         })
@@ -174,11 +174,11 @@ export default class addNewLocation extends React.Component {
 
     saveLocation = () => {
         if (this.state.posName === '') {
-            Toast.fail('请设置位置名称', 2);
+            Toast.fail('请设置位置名称', 2,null,false);
             return
         }
         if (this.state.pos === '') {
-            Toast.fail('请设置位置信息', 2);
+            Toast.fail('请设置位置信息', 2,null,false);
             return
         }
         console.log(this.state.addressLT);
@@ -206,7 +206,7 @@ export default class addNewLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('保存成功', 1);
+                        Toast.success('保存成功', 1,null,false);
 
                         setTimeout(function () {
                             var data = {
@@ -218,7 +218,7 @@ export default class addNewLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg, 1,null,false);
                 }
             },
             onError: function (error) {

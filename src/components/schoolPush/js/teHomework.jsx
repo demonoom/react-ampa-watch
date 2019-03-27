@@ -60,7 +60,7 @@ export default class teHomework extends React.Component {
                         })
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -102,7 +102,7 @@ export default class teHomework extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
 
 
@@ -141,7 +141,7 @@ export default class teHomework extends React.Component {
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
 
             },
@@ -163,7 +163,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
 
             },
@@ -185,7 +185,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -239,10 +239,10 @@ export default class teHomework extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    Toast.info("删除成功", 1);
+                    Toast.info("删除成功",1,null,false);
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
 
             },
@@ -272,7 +272,7 @@ export default class teHomework extends React.Component {
     //发送
     toSendContent = (index) => {
         if (this.state.content == "") {
-            Toast.info("评论内容不能为空", 1);
+            Toast.info("评论内容不能为空",1,null,false);
             return
         }
         this.setState({
@@ -294,7 +294,7 @@ export default class teHomework extends React.Component {
                         })
                         this.getTopicByIdRequest(this.state.topicId, this.state.index);
                     } else {
-                        Toast.fail(result.msg, 1);
+                        Toast.fail(result.msg,1,null,false);
                     }
 
                 },

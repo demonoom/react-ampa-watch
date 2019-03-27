@@ -50,11 +50,11 @@ export default class validationMes extends React.Component {
 
     nextStep = () => {
         if (this.state.teName.trim() === '') {
-            Toast.fail('请输入教师姓名');
+            Toast.fail('请输入教师姓名',1,null,false);
             return
         }
         if (this.state.teNumOnChange.trim() === '') {
-            Toast.fail('请输入教师电话');
+            Toast.fail('请输入教师电话',1,null,false);
             return
         }
         this.bindStudentAccountAndSaveStudent()
@@ -104,9 +104,9 @@ export default class validationMes extends React.Component {
                     });
                 } else {
                     if (result.msg === '老师电话号码验证错误') {
-                        Toast.fail('请核实信息正确性', 2);
+                        Toast.fail('请核实信息正确性',2,null,false);
                     } else {
-                        Toast.fail(result.msg)
+                        Toast.fail(result.msg,1,null,false)
                     }
                 }
             },

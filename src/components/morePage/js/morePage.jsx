@@ -72,7 +72,7 @@ export default class morePage extends React.Component {
                         })
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -94,7 +94,7 @@ export default class morePage extends React.Component {
                         watchId: result.response.id
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -117,7 +117,7 @@ export default class morePage extends React.Component {
                         watchName: result.response.watchName,
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -134,7 +134,7 @@ export default class morePage extends React.Component {
 
             }, onWarn: function (warnMsg) {
                 console.log(warnMsg, "warnMsg")
-                Toast.info(warnMsg,1)
+                Toast.info(warnMsg,1,null,false)
             }, onMessage: function (info) {
                 console.log(info, "info")
             }
@@ -144,7 +144,7 @@ export default class morePage extends React.Component {
     //找手表
     toFindWatch = () => {
         if (this.state.toBind) {
-            Toast.info("请先绑定手表", 1)
+            Toast.info("请先绑定手表",1,null,false)
             return
         }
         var commandJson = {
@@ -159,7 +159,7 @@ export default class morePage extends React.Component {
     //推送闹钟
     toPushClock = () => {
         if (this.state.toBind) {
-            Toast.info("请先绑定手表", 1)
+            Toast.info("请先绑定手表",1,null,false)
             return
         }
         var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr;
@@ -177,7 +177,7 @@ export default class morePage extends React.Component {
      */
     pushContacts = () => {
         if (this.state.toBind) {
-            Toast.info("请先绑定手表", 1)
+            Toast.info("请先绑定手表",1,null,false)
             return
         }
         var commandJson = {
@@ -195,7 +195,7 @@ export default class morePage extends React.Component {
      */
     pushWeather = () => {
         if (this.state.toBind) {
-            Toast.info("请先绑定手表", 1)
+            Toast.info("请先绑定手表",1,null,false)
             return
         }
         var commandJson = {
@@ -256,7 +256,7 @@ export default class morePage extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    Toast.info('解绑成功', 1);
+                    Toast.info('解绑成功',1,null,false);
                     var data = {
                         method: 'unBindSuccess',
                     };
@@ -264,7 +264,7 @@ export default class morePage extends React.Component {
                     });
                     this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -284,10 +284,10 @@ export default class morePage extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    Toast.info('解绑成功', 1);
+                    Toast.info('解绑成功',1,null,false);
                     this.getWatch2gsByGuardianUserId(this.state.userId);
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -341,7 +341,7 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray'>
-                <div style={{ display: "none" }}>
+                <div>
                     <Popover mask
                         overlayClassName="fortest"
                         placement="bottomLeft"

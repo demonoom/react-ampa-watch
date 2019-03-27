@@ -113,7 +113,7 @@ export default class addClock extends React.Component {
             onError: function (errorMsg) {
 
             }, onWarn: function (warnMsg) {
-                Toast.info(warnMsg,1)
+                Toast.info(warnMsg,1,null,false)
             }, onMessage: function (info) {
                 console.log(info, "info")
             }
@@ -252,7 +252,7 @@ export default class addClock extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    Toast.info("保存成功", 1);
+                    Toast.info("保存成功",1,null,false);
                     var commandJson = {
                         "command": "watch2GClock",
                         data: {
@@ -272,7 +272,7 @@ export default class addClock extends React.Component {
                         });
                     }, 1000)
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

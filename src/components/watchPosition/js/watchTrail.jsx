@@ -69,12 +69,12 @@ export default class watchTrail extends React.Component {
                                 }
                             })
                         } else {
-                            Toast.info('未查询到记录', 1);
+                            Toast.info('未查询到记录',1,null,false);
                             _this.setState({path: []})
                         }
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

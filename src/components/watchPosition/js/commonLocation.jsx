@@ -69,7 +69,7 @@ export default class commonLocation extends React.Component {
                         }
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg, 1,null,false);
                 }
             },
             onError: function (error) {

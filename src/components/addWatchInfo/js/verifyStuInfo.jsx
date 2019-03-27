@@ -74,15 +74,15 @@ export default class verifyStuInfo extends React.Component {
     //点击提交按钮
     submmit = () => {
         if (this.state.littleAntName == "") {
-            Toast.info("请输入小蚂蚁账号");
+            Toast.info("请输入小蚂蚁账号",1,null,false);
             return
         }
-        if (this.state.stuName == "") {
-            Toast.info("请输入学生名称");
+        if (this.state.stuName == "",1,null,false) {
+            Toast.info("请输入学生名称",1,null,false);
             return
         }
-        if (this.state.schoolName == "") {
-            Toast.info("请输入学校名称");
+        if (this.state.schoolName == "",1,null,false) {
+            Toast.info("请输入学校名称",1,null,false);
             return
         }
         var json = {
@@ -104,8 +104,8 @@ export default class verifyStuInfo extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
-                    Toast.info('验证成功');
+                if (result.success) {
+                    Toast.info('绑定成功',1,null,false);
                     var url = WebServiceUtil.mobileServiceURL + "loginSuccess?loginType=1";
                     var data = {
                         method: 'openNewPage',
@@ -116,7 +116,7 @@ export default class verifyStuInfo extends React.Component {
                         window.location.href = url;
                     });
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {

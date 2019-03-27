@@ -51,7 +51,7 @@ export default class stuAccountRegist extends React.Component {
     getSchoolsBySchoolName = () => {
         var _this = this;
         if (this.state.inputValue === '') {
-            Toast.fail('请输入内容');
+            Toast.fail('请输入内容',1,null,false);
             return
         }
         var param = {
@@ -63,12 +63,12 @@ export default class stuAccountRegist extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.response.length === 0) {
-                        Toast.info('未找到相关学校')
+                        Toast.info('未找到相关学校',1,null,false)
                     } else {
                         _this.buildSchoolList(result.response)
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -108,7 +108,7 @@ export default class stuAccountRegist extends React.Component {
 
     classOnClick = () => {
         if (this.state.schoolId === '') {
-            Toast.fail('请先选择学校');
+            Toast.fail('请先选择学校',1,null,false);
             return
         }
         this.getGradesBySchoolId(this.state.schoolId);
@@ -140,7 +140,7 @@ export default class stuAccountRegist extends React.Component {
                         _this.onPickerChange([arr[0].value])
                     });
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -203,7 +203,7 @@ export default class stuAccountRegist extends React.Component {
                         }
                     }))
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -214,11 +214,11 @@ export default class stuAccountRegist extends React.Component {
 
     nextStep = () => {
         if (this.state.stuName.trim() === '') {
-            Toast.fail('请输入学生姓名');
+            Toast.fail('请输入学生姓名',1,null,false);
             return
         }
         if (this.state.classId === '') {
-            Toast.fail('请选择学生所在班级');
+            Toast.fail('请选择学生所在班级',1,null,false);
             return
         }
 

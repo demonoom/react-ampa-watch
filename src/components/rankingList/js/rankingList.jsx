@@ -1,8 +1,10 @@
 import React from "react";
-import { Tabs, WhiteSpace, ListView, NavBar, Popover } from 'antd-mobile';
+import { Tabs, WhiteSpace,Toast ,ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
+import {Modal} from "antd-mobile/lib/index";
 const Item = Popover.Item;
+const alert = Modal.alert;
 var myDate = new Date();
 //获取当前年
 var year = myDate.getFullYear();
@@ -105,7 +107,7 @@ export default class rankingList extends React.Component {
                         })
                     }
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -170,7 +172,7 @@ export default class rankingList extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.fail(result.msg, 1);
+                    Toast.fail(result.msg,1,null,false);
                 }
             },
             onError: function (error) {
@@ -330,12 +332,11 @@ export default class rankingList extends React.Component {
                         mode="light"
                     >排行榜</NavBar>
                 </div>
-                <div className="am-navbar-blue watchSelect" style={{display:'none'}}>
+                <div className="am-navbar-blue watchSelect">
                     <Popover mask
                              overlayClassName="fortest"
                              overlayStyle={{ color: 'currentColor' }}
                              visible={this.state.visible}
-                             placement="bottomLeft"
                              overlay={this.state.watchListData}
                              align={{
                                  overflow: { adjustY: 0, adjustX: 0 },
