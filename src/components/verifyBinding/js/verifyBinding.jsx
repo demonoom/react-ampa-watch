@@ -26,7 +26,31 @@ export default class verifyBinding extends React.Component {
     }
 
     requestBinding = () => {
-        this.setState({title: this.state.guardianName + '请求绑定' + this.state.watch2gName + '的手表'});
+        var param = {
+            "method": 'getWatch2gGuardianById',
+            "actionName": "watchAction",
+            "guardianId": this.state.guardianId,
+            "watchId": this.state.watch2gId,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result);
+                if (result.success) {
+                    if (result.response.valid != 2) {
+                        var unprocessed = 'none';
+                        this.setState({unprocessed});
+                    }
+                    var processed = 'none';
+                    this.setState({processed});
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+
     };
 
     agree = () => {
@@ -41,6 +65,7 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
+
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -77,10 +102,15 @@ export default class verifyBinding extends React.Component {
         return (
             <div id="verifyBinding">
                 <div>
-                    <span>{this.state.title}</span>
+                    <span>{this.state.guardianName}</span>请求绑定<span>{this.state.watch2gName}</span>的手表
                 </div>
-                <button onClick={this.agree}>同意</button>
-                <button onClick={this.refuse}>拒绝</button>
+                <div style={{display: this.state.unprocessed}}>
+                    <button onClick={this.agree}>同意</button>
+                    <button onClick={this.refuse}>拒绝</button>
+                </div>
+                <div style={{display: this.state.processed}}>
+                    <div>该请求已处理</div>
+                </div>
             </div>
         )
     }
