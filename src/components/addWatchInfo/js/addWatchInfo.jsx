@@ -32,7 +32,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macAddress: "qweqeeweqe",
+            macAddress: "112",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -145,7 +145,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("qweqeeweqe");
+        this.getWatch2gByMacAddress("112");
         var data = {
             method: 'watchBinding'
         };
@@ -759,62 +759,72 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
-                <div className="topPadding"></div>
-                <div>完善手表信息</div>
-                <div onClick={this.toBack}>返回</div>
-                <div className="firDiv">
-                    <div className="p38 innerCont">
-                        <div className="infoContent">
-                            <div className='line_publicD'>
-                                <div className="p10 scanDiv">
-                                    <span className='text_hidden color_c'>请扫描手表二维码</span>
-                                    <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
-                                    <span className='scanBtn' onClick={this.scanCode}>扫描</span>
+                <div className="am-navbar-blue whiteBack">
+                    <div className="am-navbar am-navbar-light">
+                        <div onClick={this.toBack} className="am-navbar-left" role="button">
+                            <i className='icon-back'></i>
+                        </div>
+                        <div className="am-navbar-title">完善手表信息</div>
+                        <div className="am-navbar-right"></div>
+                    </div>
+                </div>
+                <div className="commonLocation-cont bg_white">
+                    <div className="firDiv">
+                        <div className="p38 innerCont">
+                            <div className="infoContent">
+                                <div className='line_publicD'>
+                                    <div className="p10 scanDiv">
+                                        <span className='text_hidden color_c' style={{ display: this.state.macAddress ? "none" : "inline-block" }}>请扫描手表二维码</span>
+                                        <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
+                                        <span className='scanBtn' onClick={this.scanCode}>扫描</span>
+                                    </div>
+                                </div>
+                                <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
+                                    <Picker
+                                        data={this.state.relationData}
+                                        value={this.state.relationValue}
+                                        cols={1}
+                                        extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
+                                        onChange={this.onRelationChange}
+                                        onOk={this.clickRelationSure}
+                                        onDismiss={this.onRelationCancel}
+                                    >
+                                        <List.Item arrow="horizontal"></List.Item>
+                                    </Picker>
                                 </div>
                             </div>
-                            <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
-                                <Picker
-                                    data={this.state.relationData}
-                                    value={this.state.relationValue}
-                                    cols={1}
-                                    extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
-                                    onChange={this.onRelationChange}
-                                    onOk={this.clickRelationSure}
-                                    onDismiss={this.onRelationCancel}
-                                >
-                                    <List.Item arrow="horizontal"></List.Item>
-                                </Picker>
-                            </div>
                         </div>
+                        <div className='submitBtn' onClick={this.nextFirPage}>下一步</div>
                     </div>
-                    <div onClick={this.nextFirPage}>下一步</div>
-                </div>
-                <div className="secDiv" style={{ display: "none" }}>
-                    <div className="p38 innerCont">
-                        <div className="infoContent selectDown">
-                            <div className={'sex line_publicD ' + this.state.extraClassName}>
-                                <Picker
-                                    data={sexData}
-                                    value={this.state.sexValue}
-                                    cols={1}
-                                    extra="请选择孩子的性别"
-                                    onChange={this.onSexChange}
-                                    onOk={this.clickSure}
-                                    onDismiss={this.onCancel}
-                                >
-                                    <List.Item arrow="horizontal"></List.Item>
-                                </Picker>
-                            </div>
-                            <div className={'icon_birth line_publicD ' + this.state.birthClassName}>
-                                <DatePicker
-                                    mode="date"
-                                    title=""
-                                    extra="请选择孩子生日"
-                                    value={this.state.date}
-                                    onChange={this.birChange}
-                                >
-                                    <List.Item arrow="horizontal">请选择孩子生日</List.Item>
-                                </DatePicker>
+                    <div className="secDiv" style={{ display: "none" }}>
+                        <div className="p38">
+                            <div className='dec'>手表初次绑定，请完善相关信息</div>
+                            <img className='progressPic' src={require('../../images/progress1.png')} alt=""/>
+                            <div className="infoContent selectDown">
+                                <div className={'sex line_publicD ' + this.state.extraClassName}>
+                                    <Picker
+                                        data={sexData}
+                                        value={this.state.sexValue}
+                                        cols={1}
+                                        extra="请选择孩子的性别"
+                                        onChange={this.onSexChange}
+                                        onOk={this.clickSure}
+                                        onDismiss={this.onCancel}
+                                    >
+                                        <List.Item arrow="horizontal"></List.Item>
+                                    </Picker>
+                                </div>
+                                <div className={'icon_birth line_publicD ' + this.state.birthClassName}>
+                                    <DatePicker
+                                        mode="date"
+                                        title=""
+                                        extra="请选择孩子生日"
+                                        value={this.state.date}
+                                        onChange={this.birChange}
+                                    >
+                                        <List.Item arrow="horizontal">请选择孩子生日</List.Item>
+                                    </DatePicker>
+                                </div>
                             </div>
                             <div>
                                 <div onClick={this.handleClick} className='login-input line_publicD icon_watch'>
@@ -828,126 +838,146 @@ export default class addWatchInfo extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div onClick={this.preSenPage}>上一步</div>
-                    <div onClick={this.nextSenPage}>
-                        下一步
-                </div>
-                </div>
-                <div className="thirDiv" style={{ display: "none" }}>
-                    <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
-                        <div >
-                            <div onClick={this.handleClick} className="icon_account line_publicD stuCont">
-                                <InputItem
-                                    className=""
-                                    placeholder="请输入小蚂蚁账号"
-                                    value={this.state.littleAntName}
-                                    onChange={this.littAntOnChange}
-                                    ref={el => this.inputRef = el}
-                                ></InputItem>
-                            </div>
+                        <div className="button_preNext">
+                            <div className='prev' onClick={this.preSenPage}>上一步</div>
+                            <div className='next' onClick={this.nextSenPage}>下一步</div>
                         </div>
-                        <div >
-                            <div  >
-                                <div className="p38 innerCont">
-                                    <div className="infoContent selectDown">
-                                        <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
-                                            onClick={this.schoolOnClick}>
-                                            <div className="am-list-line">
-                                                <div className="am-list-content"></div>
-                                                <div
-                                                    className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
-                                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+
+                    </div>
+                    <div className="thirDiv" style={{ display: "none" }}>
+                        <div className="p38 stuAccountRegist">
+                            <div className='dec'>手表初次绑定，请完善相关信息</div>
+                            <img className='progressPic' src={require('../../images/progress2.png')} alt=""/>
+                            <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
+                               <div className="innerCont tabCont">
+                                   <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
+                                       <InputItem
+                                           className=""
+                                           placeholder="请输入小蚂蚁账号"
+                                           value={this.state.littleAntName}
+                                           onChange={this.littAntOnChange}
+                                           ref={el => this.inputRef = el}
+                                       ></InputItem>
+                                   </div>
+                               </div>
+                                <div>
+                                    <div>
+                                        <div className="innerCont tabCont">
+                                            <div className="infoContent selectDown">
+                                                <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
+                                                     onClick={this.schoolOnClick}>
+                                                    <div className="am-list-line">
+                                                        <div className="am-list-content"></div>
+                                                        <div
+                                                            className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
+                                                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                                                    </div>
+                                                </div>
+                                                <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
+                                                    <Picker
+                                                        data={this.state.data}
+                                                        cols={this.state.cols}
+                                                        value={this.state.asyncValue}
+                                                        onPickerChange={this.onPickerChange}
+                                                        onOk={v => this.setState({ classId: this.state.asyncValue[1], stuClassName: 'color_3' })}
+                                                        extra='学生所在班级'
+                                                    >
+                                                        <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
+                                                    </Picker>
+                                                </div>
+                                            </div>
+                                            <div className="line_publicD login-input icon-grayStudent">
+                                                <InputItem
+                                                    className=""
+                                                    placeholder="请输入学生姓名"
+                                                    value={this.state.studentName}
+                                                    onChange={this.stuOnChange}
+                                                ></InputItem>
                                             </div>
                                         </div>
-                                        <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
-                                            <Picker
-                                                data={this.state.data}
-                                                cols={this.state.cols}
-                                                value={this.state.asyncValue}
-                                                onPickerChange={this.onPickerChange}
-                                                onOk={v => this.setState({ classId: this.state.asyncValue[1], stuClassName: 'color_3' })}
-                                                extra='学生所在班级'
-                                            >
-                                                <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
-                                            </Picker>
+                                    </div>
+                                </div>
+
+                            </Tabs>
+                        </div>
+                        <div className="button_preNext">
+                            <div className='prev' onClick={this.preThirPage}>上一步</div>
+                            <div className='next' onClick={this.nextThirPage}>下一步</div>
+                        </div>
+                    </div>
+                    <div className="forDiv"  style={{ display: "none" }}>
+                        <div className="p38">
+                            <div className='dec'>手表初次绑定，请完善相关信息</div>
+                            <img className='progressPic' src={require('../../images/progress3.png')} alt=""/>
+                            <div className="p29 login-input">
+                                <div className='accountName'>
+                                    {this.state.littleAntName}
+                                </div>
+                                <div onClick={this.nameClick} className="icon_user line_publicD">
+                                    <InputItem
+                                        className=""
+                                        placeholder="请输入孩子姓名"
+                                        value={this.state.stuName}
+                                        onChange={this.stuOnChangeHas}
+                                        ref={el => this.nameInput = el}
+                                    ></InputItem>
+                                </div>
+                                <div onClick={this.schooleNameClick} className="icon_school line_publicD">
+                                    <InputItem
+                                        className=""
+                                        placeholder="输入此账号所在的学校名称"
+                                        value={this.state.schName}
+                                        onChange={this.schoolOnChange}
+                                        ref={el => this.schoolNameInput = el}
+                                    ></InputItem>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="button_preNext">
+                            <div className='prev'  onClick={this.preForPage}>上一步</div>
+                            <div className='next' onClick={this.nextForPage}>下一步</div>
+                        </div>
+                    </div>
+                    <div className="regiForDiv"  style={{ display: "none" }}>
+                        <div className="p38">
+                            <div className='dec'>手表初次绑定，请完善相关信息</div>
+                            <img className='progressPic' src={require('../../images/progress3.png')} alt=""/>
+                            <div id="validationMes">
+                                <div className="p29">
+                                    <div className="infoContent">
+                                        <div className="School-information">
+                                            <span className="school text_hidden">{this.state.schName}</span>
+                                            <span className="class text_hidden">{this.state.clazzName}</span>
+                                        </div>
+                                        <div className="line_publicD login-input icon-grayTeacher">
+                                            <InputItem
+                                                className=""
+                                                placeholder="请输入班级教师姓名"
+                                                value={this.state.teName}
+                                                onChange={this.teNameOnChange}
+                                            ></InputItem>
+                                        </div>
+                                        <div className="line_publicD login-input icon-grayPhone">
+                                            <InputItem
+                                                className=""
+                                                placeholder="请输入该教师电话号码"
+                                                value={this.state.teNumOnChange}
+                                                onChange={this.teNumOnChange}
+                                            ></InputItem>
                                         </div>
                                     </div>
-                                    <div className="line_publicD login-input icon-grayStudent">
-                                        <InputItem
-                                            className=""
-                                            placeholder="请输入学生姓名"
-                                            value={this.state.studentName}
-                                            onChange={this.stuOnChange}
-                                        ></InputItem>
-                                    </div>
+                                </div>
+                                <div className="button_preNext">
+                                    <div className='prev'  onClick={this.preForRegPage}>上一步</div>
+                                    <div className='next' onClick={this.nextForRegPage}>下一步</div>
                                 </div>
                             </div>
                         </div>
 
-                    </Tabs>
-                    <div onClick={this.preThirPage}>上一步</div>
-                    <div onClick={this.nextThirPage}>下一步</div>
-                </div>
-                <div className="forDiv" style={{ display: "none" }}>
-                    <div className="p38 innerCont bindStu login-input">
-                        <div>
-                            {this.state.littleAntName}
-                        </div>
-                        <div onClick={this.nameClick} className="icon_user line_publicD">
-                            <InputItem
-                                className=""
-                                placeholder="请输入孩子姓名"
-                                value={this.state.stuName}
-                                onChange={this.stuOnChangeHas}
-                                ref={el => this.nameInput = el}
-                            ></InputItem>
-                        </div>
-                        <div onClick={this.schooleNameClick} className="icon_school line_publicD">
-                            <InputItem
-                                className=""
-                                placeholder="输入此账号所在的学校名称"
-                                value={this.state.schName}
-                                onChange={this.schoolOnChange}
-                                ref={el => this.schoolNameInput = el}
-                            ></InputItem>
-                        </div>
                     </div>
-                    <div onClick={this.preForPage}>上一步</div>
-                    <div onClick={this.nextForPage}>下一步</div>
                 </div>
-                <div className="regiForDiv" style={{ display: "none" }}>
-                    <div id="validationMes">
-                        <div className="p38 innerCont">
-                            <div className="infoContent">
 
-                                <div className="School-information">
-                                    <span className="school text_hidden">{this.state.schName}</span>
-                                    <span className="class text_hidden">{this.state.clazzName}</span>
-                                </div>
-                                <div className="line_publicD login-input icon-grayTeacher">
-                                    <InputItem
-                                        className=""
-                                        placeholder="请输入班级教师姓名"
-                                        value={this.state.teName}
-                                        onChange={this.teNameOnChange}
-                                    ></InputItem>
-                                </div>
-                                <div className="line_publicD login-input icon-grayPhone">
-                                    <InputItem
-                                        className=""
-                                        placeholder="请输入该教师电话号码"
-                                        value={this.state.teNumOnChange}
-                                        onChange={this.teNumOnChange}
-                                    ></InputItem>
-                                </div>
-                            </div>
-                        </div>
-                        <div onClick={this.preForRegPage}>上一步</div>
-                        <div className="submitBtn" onClick={this.nextForRegPage}>下一步</div>
-                    </div>
-                </div>
-                <div id="stuAccountRegist">
+                <div className="stuAccountRegist">
                     <div className="mask" onClick={this.exitSchoolInput} style={{ display: 'none' }}></div>
                     <div className='updateModel' style={{ display: 'none' }}>
                         <div className='searchDiv'>
