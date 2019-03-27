@@ -10,6 +10,9 @@
     height: 44px;
     line-height: 44px;
   }
+  .am-tabs-default-bar-top .am-tabs-default-bar-tab{
+    border: 0;
+  }
   .am-tabs-default-bar-tab-active{
     font-size: 16px;
   }
@@ -39,14 +42,18 @@
   .watchSelect{
     position: absolute;
     right: 30px;
-    top: 28px;
-    height: auto;
+    top: 20px;
+    height: 44px;
     z-index: 50;
     color: #fff;
     .watchName{
       padding-right: 5px;
       font-size: 14px;
       max-width: 50px;
+    }
+    .icon-back{
+      height: 100%;
+      margin-right: 0;
     }
   }
   .questionCont{
@@ -254,7 +261,7 @@
       }
     }
   }
-  @media only screen and (max-width: 380px) {
+  @media only screen and (max-width: 320px) {
     .am-tabs-default-bar-tab{
       font-size: 13px;
     }
@@ -263,6 +270,9 @@
     }
     .am-tabs-default-bar-top .am-tabs-default-bar-content{
       width: calc(~"100% - 80px");
+    }
+    .watchSelect .watchName{
+      font-size: 12px;
     }
   }
 }

@@ -294,7 +294,7 @@ export default class rankingList extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{color:'#333'}} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -338,7 +338,7 @@ export default class rankingList extends React.Component {
                              overlayStyle={{ color: 'currentColor' }}
                              visible={this.state.visible}
                              overlay={this.state.watchListData}
-                             align={{
+                             awatchSelectlign={{
                                  overflow: { adjustY: 0, adjustX: 0 },
                                  offset: [10, 0],
                              }}
