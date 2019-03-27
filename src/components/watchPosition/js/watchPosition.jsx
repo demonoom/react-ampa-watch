@@ -336,7 +336,6 @@ export default class watchPosition extends React.Component {
                                     marginRight: '-15px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    display:'none'
                                 }}
                                 >
                                     <i className="icon-back"
@@ -356,8 +355,8 @@ export default class watchPosition extends React.Component {
                         plugins={plugins}
                         center={this.state.position}
                         showBuildingBlock={true}
-                        buildingAnimation={true}
-                        viewMode='3D'
+                        // viewMode='3D'
+                        // buildingAnimation={true}
                         events={events}
                         rotateEnable={false}
                     >
