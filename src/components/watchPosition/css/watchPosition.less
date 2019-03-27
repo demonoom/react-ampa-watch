@@ -1,5 +1,6 @@
 #watchPosition {
   overflow: hidden;
+  -webkit-overflow-scrolling: touch;
   .customLayer {
     font-size: larger;
     text-align: center;
@@ -68,6 +69,7 @@
       position: absolute;
       left: 7px;
       top: 7px;
+      object-fit:contain
     }
   }
   .school-positioning{
@@ -125,5 +127,10 @@
   }
   .amap-touch-toolbar .amap-zoomcontrol:after{
     background: transparent;
+  }
+  .emptyCont-bg{
+    background-color: #ededed;
+    height: calc(~"100% - 64px");
+    top: 64px;
   }
 }

@@ -331,8 +331,8 @@ export default class addNewLocation extends React.Component {
                             amapkey={WebServiceUtil.amapkey}
                             version={WebServiceUtil.version}
                             showBuildingBlock={true}
-                            buildingAnimation={true}
-                            viewMode='3D'
+                            // buildingAnimation={true}
+                            // viewMode='3D'
                             rotateEnable={false}
                             pitchEnable={false}
                         >

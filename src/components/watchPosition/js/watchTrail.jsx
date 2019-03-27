@@ -4,7 +4,12 @@ import {Toast} from 'antd-mobile';
 
 import '../css/watchTrail.less'
 
-const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
+const Loading = <div className="emptyLoading">
+    <div className="loading-cont">
+        <div className="loading-icon"></div>
+        <div>正在生成地图...</div>
+    </div>
+</div>;
 
 export default class watchTrail extends React.Component {
     constructor(props) {
@@ -69,12 +74,12 @@ export default class watchTrail extends React.Component {
                                 }
                             })
                         } else {
-                            Toast.info('未查询到记录',1,null,false);
+                            Toast.info('未查询到记录', 1, null, false);
                             _this.setState({path: []})
                         }
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -94,6 +99,7 @@ export default class watchTrail extends React.Component {
     };
 
     popView = () => {
+        this.state.map.destroy();
         var data = {
             method: 'popView',
         };
@@ -142,8 +148,8 @@ export default class watchTrail extends React.Component {
                         center={this.state.position}
                         zoom={this.state.zoom}
                         showBuildingBlock={true}
-                        buildingAnimation={true}
-                        viewMode='3D'
+                        // buildingAnimation={true}
+                        // viewMode='3D'
                         events={events}
                         rotateEnable={false}
                     >
