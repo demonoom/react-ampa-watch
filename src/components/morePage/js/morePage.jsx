@@ -12,7 +12,7 @@ export default class morePage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imgSrc: "",
+            childSex: "",
             watchName: "",
             visible: false,
             selected: '',
@@ -60,7 +60,7 @@ export default class morePage extends React.Component {
                     } else {
                         this.setState({
                             watchData: result.response,
-                            imgSrc: result.response[0].student.avatar,
+                            childSex: result.response[0].childSex,
                             watchName: result.response[0].watchName,
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
@@ -113,7 +113,7 @@ export default class morePage extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     this.setState({
-                        imgSrc: result.response.student.avatar,
+                        childSex: result.response.childSex,
                         watchName: result.response.watchName,
                     })
                 } else {
@@ -362,7 +362,7 @@ export default class morePage extends React.Component {
                     >添加手表</span>
                     <div className="clear"></div>
                     <div className="wrap">
-                        <img src={this.state.imgSrc} alt="" onError={this.onImgError.bind(this)} />
+                        <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png":"http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" onError={this.onImgError.bind(this)} />
                         <span className='text_hidden'>
                             {
                                 this.state.toBind ? "未绑定" : this.state.watchName
