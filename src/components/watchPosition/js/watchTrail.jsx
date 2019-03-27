@@ -1,6 +1,6 @@
 import React from "react";
 import {Map, Polyline, Marker} from "react-amap";
-import {Toast} from 'antd-mobile';
+import {Toast, Steps, WingBlank, WhiteSpace} from 'antd-mobile';
 
 import '../css/watchTrail.less'
 
@@ -10,6 +10,8 @@ const Loading = <div className="emptyLoading">
         <div>正在生成地图...</div>
     </div>
 </div>;
+
+const Step = Steps.Step;
 
 var watchTrailThis;
 export default class watchTrail extends React.Component {
@@ -21,6 +23,7 @@ export default class watchTrail extends React.Component {
             pointFlag: false,
             path: [],
             type: 0,
+            locationName: [],
             style: {
                 strokeWeight: '10',
                 lineJoin: 'round',
@@ -70,11 +73,14 @@ export default class watchTrail extends React.Component {
                                 }
                             });
 
-                            var locationName = result.response.map((v) => {
-                                return v.locationName;
+                            var locationNameMes = result.response.map((v) => {
+                                return {
+                                    time: v.createTime,
+                                    locationName: v.locationName,
+                                }
                             });
 
-                            console.log(locationName);
+                            _this.buildLocationName(locationNameMes);
 
                             _this.setState({
                                 path, startPoint: {
@@ -103,6 +109,21 @@ export default class watchTrail extends React.Component {
                 Toast.warn('保存失败');
             }
         });
+    };
+
+    /**
+     * locationName
+     * <Step title="Step 8" description="This is description"/>
+     * @param arr
+     */
+    buildLocationName = (data) => {
+        var locationName = [];
+        data.forEach((v) => {
+            locationName.push(
+                <Step title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
+            )
+        });
+        this.setState({locationName})
     };
 
     /**
@@ -141,6 +162,14 @@ export default class watchTrail extends React.Component {
             <img
                 style={{borderRadius: '50%'}}
                 src={require('../img/icon-schoolA.png')} alt=""/></div>
+    };
+
+    getLocationDetil = () => {
+        $('.setPosModel').slideDown();
+    };
+
+    setPosModelDown = () => {
+        $('.setPosModel').slideUp();
     };
 
     render() {
@@ -212,7 +241,27 @@ export default class watchTrail extends React.Component {
                             <span className={this.state.type == 2 ? 'select' : ''}
                                   onClick={this.timeChoose('2')}>前天</span>
                         </div>
+                        <div onClick={this.getLocationDetil} id="getPosition" className="customLayer">
+                            <i className="icon-positioning"></i>
+                        </div>
                     </Map>
+                </div>
+
+                <div className='setPosModel' style={{display: 'none'}}>
+                    <div className="am-navbar">
+                            <span className="am-navbar-left" onClick={this.setPosModelDown}><i
+                                className="icon-back"></i></span>
+                        <span className="am-navbar-title">轨迹详情</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
+                    <div className='modelContent'>
+                        <WingBlank size="lg">
+                            <WhiteSpace size="lg"/>
+                            <Steps current={1}>
+                                {this.state.locationName}
+                            </Steps>
+                        </WingBlank>
+                    </div>
                 </div>
             </div>
         )
