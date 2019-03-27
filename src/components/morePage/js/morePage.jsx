@@ -341,7 +341,7 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray'>
-                <div style={{ display: "none" }}>
+                <div>
                     <Popover mask
                         overlayClassName="fortest"
                         placement="bottomLeft"
