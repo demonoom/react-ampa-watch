@@ -150,18 +150,12 @@ export default class watchTrail extends React.Component {
      */
     renderStartPoint() {
         return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
-                    className="school-positioning">
-            <img
-                style={{borderRadius: '50%'}}
-                src={require('../img/icon-home.png')} alt=""/></div>
+                    className="icon-startPoint"></div>
     };
 
     renderEndPoint() {
         return <div style={{display: watchTrailThis.state.pointFlag ? '' : 'none'}}
-                    className="school-positioning">
-            <img
-                style={{borderRadius: '50%'}}
-                src={require('../img/icon-schoolA.png')} alt=""/></div>
+                    className="icon-endPoint"></div>
     };
 
     getLocationDetil = () => {
@@ -242,7 +236,7 @@ export default class watchTrail extends React.Component {
                                   onClick={this.timeChoose('2')}>前天</span>
                         </div>
                         <div onClick={this.getLocationDetil} id="getPosition" className="customLayer">
-                            <i className="icon-positioning"></i>
+                            <i className="icon-TrackDetails"></i>
                         </div>
                     </Map>
                 </div>
@@ -255,12 +249,15 @@ export default class watchTrail extends React.Component {
                         <span className="am-navbar-right"></span>
                     </div>
                     <div className='modelContent'>
-                        <WingBlank size="lg">
-                            <WhiteSpace size="lg"/>
-                            <Steps current={1}>
-                                {this.state.locationName}
-                            </Steps>
-                        </WingBlank>
+                        <div className="WhiteSpace"></div>
+                        <div className="TrackDetails-cont">
+                            <WingBlank size="lg">
+                                <WhiteSpace size="lg"/>
+                                <Steps current={this.state.locationName.length-1}>
+                                    {this.state.locationName}
+                                </Steps>
+                            </WingBlank>
+                        </div>
                     </div>
                 </div>
             </div>
