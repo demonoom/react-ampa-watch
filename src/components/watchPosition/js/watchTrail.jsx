@@ -124,7 +124,7 @@ export default class watchTrail extends React.Component {
     };
 
     /**
-     * 
+     *
      * @returns {*}
      */
     renderStartPoint() {

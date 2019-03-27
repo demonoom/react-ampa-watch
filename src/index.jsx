@@ -131,6 +131,13 @@ const detailPage= (location, cb) => {
     }, 'detailPage')
 };
 
+//验证绑定
+const verifyBinding= (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/verifyBinding/js/verifyBinding').default)
+    }, 'verifyBinding')
+};
+
 import './index.less';
 
 class Index extends React.Component {
@@ -200,6 +207,7 @@ ReactDOM.render(
             <Route path="teHomework" getComponent={teHomework}/>
             <Route path="rankingList" getComponent={rankingList}/>
             <Route path="detailPage" getComponent={detailPage}/>
+            <Route path="verifyBinding" getComponent={verifyBinding}/>
         </Route>
     </Router>, document.getElementById('example')
 );
