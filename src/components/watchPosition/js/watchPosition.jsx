@@ -5,15 +5,6 @@ import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connect
 
 import '../css/watchPosition.less'
 
-const loadingStyle = {
-    position: 'relative',
-    height: '100%',
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
-};
-
 const Loading = <div className="emptyLoading"><div className="loading-cont"><div className="loading-icon"></div><div>正在生成地图...</div></div></div>;
 
 const Item = Popover.Item;
@@ -32,7 +23,6 @@ export default class watchPosition extends React.Component {
             sclPoint: {longitude: '116.397477', latitude: '39.908692'},
             homePointFlag: false,
             sclPointFlag: false,
-            zoom: 17,
             map: null,
             visible: false,
             toBind: false,
@@ -102,7 +92,6 @@ export default class watchPosition extends React.Component {
 
     buildStuList = (data) => {
         if (data.length == 0) {
-            console.log(1);
             this.setState({toBind: true});
             return
         }
@@ -112,9 +101,7 @@ export default class watchPosition extends React.Component {
                 (<Item macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
-        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName}, () => {
-            this.watch2GLocaltionRequest();
-        });
+        this.setState({popoverLay, mac: data[0].macAddress, macId: data[0].id, watchName: data[0].watchName});
     };
 
     /**
@@ -196,6 +183,8 @@ export default class watchPosition extends React.Component {
                             return
                         }
 
+                        console.log(_this.state.map);
+
                         var position = {
                             "longitude": info.data.longitude,
                             "latitude": info.data.latitude,
@@ -213,7 +202,7 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className="user-positioning"><img style={{borderRadius: '50%'}}
-                                                      src={require("../img/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif")}
+                                                      src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
                                                       alt=""/></div>
     }
 
@@ -312,8 +301,10 @@ export default class watchPosition extends React.Component {
 
         const events = {
             created: (ins) => {
-                this.setState({map: ins})
-            }
+                this.setState({map: ins});
+                ins.setZoom(17);
+                this.watch2GLocaltionRequest();
+            },
         };
 
         return (
@@ -364,7 +355,6 @@ export default class watchPosition extends React.Component {
                         loading={Loading}
                         plugins={plugins}
                         center={this.state.position}
-                        zoom={this.state.zoom}
                         showBuildingBlock={true}
                         buildingAnimation={true}
                         viewMode='3D'
