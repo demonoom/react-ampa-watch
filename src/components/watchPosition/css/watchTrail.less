@@ -155,7 +155,14 @@
     display: inline-block;
     margin-top: 10px;
   }
-
+  i.icon-TrackDetails{
+    background: url("../img/icon-TrackDetails.png") no-repeat;
+    width: 21px;
+    height: 18px;
+    background-size: 100% 100%;
+    display: inline-block;
+    margin-top: 11px;
+  }
   #getPosition {
     width: 40px;
     height: 40px;
@@ -165,6 +172,7 @@
     background:rgba(247,246,246,1);
     box-shadow:0px 6px 20px 0px rgba(51,51,51,0.2);
     border-radius:50%;
+    padding: 0;
     i.icon-positioning{
       background: url("../img/icon-positioning.png") no-repeat;
       width: 16px;
@@ -189,6 +197,39 @@
       background: #F8F8F8;
       position: absolute;
       bottom: 0;
+    }
+  }
+  .icon-startPoint, .icon-endPoint{
+    width: 25px;
+    height: 36px;
+  }
+  .icon-startPoint{
+    background: url("../img/icon-startingPoint.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .icon-endPoint{
+    background: url("../img/icon-end.png") no-repeat;
+    background-size: 100% 100%;
+  }
+  .WhiteSpace {
+    height: 11px;
+    background: #ededed;
+  }
+  /*轨迹详情*/
+  .TrackDetails-cont{
+    background: #fff;
+    height: calc(~"100% - 11px");
+    overflow-x: hidden;
+    overflow-y: auto;
+    .am-steps-item-title{
+      font-size: 15px;
+      color: #333;
+      font-weight: normal;
+      line-height: 1.5;
+    }
+    .am-steps-item-description{
+      color: #666;
+      font-size: 14px;
     }
   }
 }
