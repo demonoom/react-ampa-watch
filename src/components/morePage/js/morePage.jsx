@@ -143,10 +143,6 @@ export default class morePage extends React.Component {
 
     //找手表
     toFindWatch = () => {
-        if (this.state.toBind) {
-            Toast.info("请先绑定手表",1,null,false)
-            return
-        }
         var commandJson = {
             "command": "searchWatch2GAction", data: {
                 "macAddress": this.state.macAddr
@@ -158,10 +154,6 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        if (this.state.toBind) {
-            Toast.info("请先绑定手表",1,null,false)
-            return
-        }
         var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
@@ -176,10 +168,6 @@ export default class morePage extends React.Component {
      * 推送监护人
      */
     pushContacts = () => {
-        if (this.state.toBind) {
-            Toast.info("请先绑定手表",1,null,false)
-            return
-        }
         var commandJson = {
             "command": "watch2gPushContacts", data: {
                 "studentId": this.state.studentId,
@@ -194,10 +182,6 @@ export default class morePage extends React.Component {
      * 推送天气
      */
     pushWeather = () => {
-        if (this.state.toBind) {
-            Toast.info("请先绑定手表",1,null,false)
-            return
-        }
         var commandJson = {
             "command": "watch2gPushWeather",
             data: {
@@ -210,10 +194,12 @@ export default class morePage extends React.Component {
 
     //选择
     onSelect = (opt) => {
+        console.log(opt.props)
         this.setState({
             visible: false,
             watchId: opt.props.macId,
-            watchName: opt.props.children
+            watchName: opt.props.children,
+            macAddr:opt.props.mac
         }, () => {
             this.getWatch2gById(this.state.watchId)
         });
@@ -341,7 +327,7 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray'>
-                <div>
+                <div style={{display:this.state.toBind ? "none":"block"}}>
                     <Popover mask
                         overlayClassName="fortest"
                         placement="bottomLeft"
@@ -383,30 +369,30 @@ export default class morePage extends React.Component {
                         </span>
                     </div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
+                <div style={{display:this.state.toBind ? "none":"block"}}  className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送闹钟</div>
                         <div className="am-list-arrow am-list-arrow-horizontal"></div>
                     </div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
+                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
                     <div className="am-list-line">
                         <div className="am-list-content">找手表</div>
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
+                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送天气</div>
                     </div>
                 </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
+                <div style={{display:this.state.toBind ? "none":"block"}} className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送监护人</div>
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
+                <div style={{display:this.state.toBind ? "none":"block"}} style={{display:this.state.toBind ? "none":"flex"}} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
                     <div className="am-list-line">
                         <div className="am-list-content">解绑</div>
                     </div>
