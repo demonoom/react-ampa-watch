@@ -348,7 +348,7 @@ export default class morePage extends React.Component {
         var data = {
             method: 'loginout',
         };
-        console.log(data,"data")
+        console.log(data, "data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
@@ -407,7 +407,8 @@ export default class morePage extends React.Component {
                         <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
                         <span className='text_hidden'>
                             {
-                                this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : this.state.watchName
+
+                                this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : <span><span>{this.state.watchName}</span><span>我与宝贝的关系：{this.state.guardianData.familyRelate}</span></span>
                             }
                         </span>
                     </div>
