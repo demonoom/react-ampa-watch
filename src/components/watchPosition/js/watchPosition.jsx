@@ -385,7 +385,7 @@ export default class watchPosition extends React.Component {
                     </Map>
                 </div>
 
-                <div className="emptyCont" style={{display: this.state.toBind ? "block" : "none"}}>
+                <div className="emptyCont emptyCont-bg" style={{display: this.state.toBind ? "block" : "none"}}>
                     <div className="p38 my_flex">
                         <div>
                             <i></i>
