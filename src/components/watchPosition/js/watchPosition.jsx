@@ -336,7 +336,6 @@ export default class watchPosition extends React.Component {
                                     marginRight: '-15px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    display:'none'
                                 }}
                                 >
                                     <i className="icon-back"
