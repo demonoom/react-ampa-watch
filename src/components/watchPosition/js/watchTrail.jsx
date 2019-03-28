@@ -133,7 +133,7 @@ export default class watchTrail extends React.Component {
     timeChoose = (type) => {
         return () => {
             this.getWatch2gLocationRecordByWatch2gId(type);
-            this.setState({type});
+            this.setState({type, locationName: []});
         };
     };
 
