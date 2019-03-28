@@ -122,15 +122,15 @@ export default class watchTrail extends React.Component {
             console.log(i);
             if (i == 0) {
                 locationName.push(
-                    <Step icon={<img src={require('../../images/icon_addBtn.png')} alt=""/>} title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
+                    <Step icon={<img src={require('../img/icon-startingPoint.png')} alt=""/>} title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
                 )
             } else if (i == data.length - 1) {
                 locationName.push(
-                    <Step title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
+                    <Step icon={<img src={require('../img/icon-end.png')} alt=""/>} title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
                 )
             } else {
                 locationName.push(
-                    <Step title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
+                    <Step icon={<img src={require('../img/icon-dot.png')} alt=""/>} title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
                 )
             }
         });
