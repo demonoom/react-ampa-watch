@@ -8,6 +8,9 @@ export default class verifyBinding extends React.Component {
         super(props);
         this.state = {
             title: '',
+            processed: 'none',
+            disagree: 'none',
+            determine: 'none',
         };
     }
 
@@ -26,7 +29,30 @@ export default class verifyBinding extends React.Component {
     }
 
     requestBinding = () => {
-        this.setState({title: this.state.guardianName + '请求绑定' + this.state.watch2gName + '的手表'});
+        var param = {
+            "method": 'getWatch2gGuardianById',
+            "actionName": "watchAction",
+            "guardianId": this.state.guardianId,
+            "watchId": this.state.watch2gId,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result);
+                if (result.success) {
+                    if (result.response.valid != 2) {
+                        var unprocessed = 'none';
+                        var processed = '';
+                        this.setState({unprocessed, processed});
+                    }
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+
     };
 
     agree = () => {
@@ -41,6 +67,9 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
+                    var review = 'none'
+                    var determine = ''
+                    this.setState({review, determine});
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -63,6 +92,9 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
+                    var review = 'none'
+                    var disagree = ''
+                    this.setState({review, disagree});
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -76,25 +108,26 @@ export default class verifyBinding extends React.Component {
     render() {
         return (
             <div id="verifyBinding">
-                <div className="am-modal-mask"></div>
-                <div className="am-modal-wrap ">
-                    <div className="am-modal am-modal-transparent">
-                        <div className="am-modal-content">
-                            <div className="am-modal-header">
-                                <div className="am-modal-title">{this.state.title}</div>
-                            </div>
-                            <div className="am-modal-body">
-                                <div className="am-modal-propmt-content">
-                                </div>
-                            </div>
-                            <div className="am-modal-footer">
-                                <div className="am-modal-button-group-h am-modal-button-group-normal">
-                                    <a className="am-modal-button" onClick={this.refuse}>拒绝</a>
-                                    <a className="am-modal-button" onClick={this.agree}>同意</a>
-                                </div>
-                            </div>
+                <div style={{display: this.state.review}}>
+                    <div className="center verify_Binding">
+                        <div className="verify-cont"><span
+                            className="userName">{this.state.guardianName}</span>请求绑定<span
+                            className="userName">{this.state.watch2gName}</span>的手表
+                        </div>
+                        <div style={{display: this.state.unprocessed}}>
+                            <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
+                            <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
+                        </div>
+                        <div style={{display: this.state.processed}}>
+                            <div>该请求已处理</div>
                         </div>
                     </div>
+                </div>
+                <div style={{display: this.state.determine}}>
+                    <span>已同意绑定</span>
+                </div>
+                <div style={{display: this.state.disagree}}>
+                    <span>已拒绝绑定</span>
                 </div>
             </div>
         )
