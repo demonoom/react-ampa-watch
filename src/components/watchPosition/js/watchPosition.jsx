@@ -35,7 +35,8 @@ export default class watchPosition extends React.Component {
             selected: '',
             watchName: '',
             popoverLay: [],
-            loadPosition: false
+            loadPosition: false,
+            jumpClass: 'user-positioning'
         };
     }
 
@@ -172,14 +173,16 @@ export default class watchPosition extends React.Component {
             "command": "watch2GLocaltionRequest",
             "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
         };
+        console.log(obj);
         ms.send(obj);
         if (!this.state.toBind) {
-            Toast.loading('正在获取位置信息...', 10, () => {
+            Toast.loading('正在获取位置信息...', 5, () => {
                 if (this.state.loadPosition) {
                     Toast.offline('获取定位失败')
                 }
+                this.setState({jumpClass: 'user-positioning'});
             });
-            this.setState({loadPosition: true});
+            this.setState({loadPosition: true, jumpClass: 'user-positioning-jump'});
         }
     };
 
@@ -224,9 +227,9 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <div className="user-positioning-jump"><img style={{borderRadius: '50%'}}
-                                                           src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
-                                                           alt=""/></div>
+        return <div className={watchPositionThis.state.jumpClass}><img style={{borderRadius: '50%'}}
+                                                          src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                                                          alt=""/></div>
     }
 
     renderhomePoint() {
@@ -327,10 +330,12 @@ export default class watchPosition extends React.Component {
                 this.watch2GLocaltionRequest();
             },
             moveend: () => {
-                Toast.hide()
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
             },
             zoomend: () => {
-                Toast.hide()
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
             }
         };
 
@@ -339,7 +344,8 @@ export default class watchPosition extends React.Component {
                 this.setState({marker: instance});
             },
             moveend: () => {
-                Toast.hide()
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
             }
         };
 
@@ -396,7 +402,7 @@ export default class watchPosition extends React.Component {
                         preloadMode={false}
                         events={events}
                         rotateEnable={false}
-                        touchZoomCenter={1}
+                        touchZoomCenter='1'
                     >
                         <Marker
                             position={this.state.position}

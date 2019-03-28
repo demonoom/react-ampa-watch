@@ -30,7 +30,6 @@ export default class addNewLocation extends React.Component {
                 fillColor: 'rgba(23,172,247,1)',
                 fillOpacity: '0.26'
             },
-            radius: 50,
             sliderValue: 15,
         };
     }
@@ -92,7 +91,7 @@ export default class addNewLocation extends React.Component {
     searchPos = () => {
         var _this = this;
         if (this.state.searchValue.trim() === '') {
-            Toast.info('请输入位置信息',2,null,false);
+            Toast.info('请输入位置信息', 2, null, false);
             return
         }
 
@@ -110,7 +109,7 @@ export default class addNewLocation extends React.Component {
                 if (data.status === '1') {
                     _this.buildPosList(data.tips)
                 } else {
-                    Toast.fail('未知的错误',2,null,false)
+                    Toast.fail('未知的错误', 2, null, false)
                 }
             }
         })
@@ -174,11 +173,11 @@ export default class addNewLocation extends React.Component {
 
     saveLocation = () => {
         if (this.state.posName === '请输入地点名称') {
-            Toast.fail('请输入地点名称', 2,null,false);
+            Toast.fail('请输入地点名称', 2, null, false);
             return
         }
         if (this.state.pos === '请设置地点位置') {
-            Toast.fail('请设置地点位置', 2,null,false);
+            Toast.fail('请设置地点位置', 2, null, false);
             return
         }
         console.log(this.state.addressLT);
@@ -206,7 +205,7 @@ export default class addNewLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('保存成功', 1,null,false);
+                        Toast.success('保存成功', 1, null, false);
 
                         setTimeout(function () {
                             var data = {
@@ -218,7 +217,7 @@ export default class addNewLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg, 1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -273,7 +272,8 @@ export default class addNewLocation extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
-                    <List className="my-list home-hidden">
+                    <List
+                        className={(this.state.type == 1 || this.state.type == 2) ? 'my-list home-hidden' : 'my-list'}>
                         <Item
                             arrow="horizontal"
                             platform="android"
@@ -341,7 +341,7 @@ export default class addNewLocation extends React.Component {
                             />
                             <Circle
                                 center={this.state.position}
-                                radius={this.state.radius}
+                                radius={this.state.sliderValue}
                                 events={circleEvents}
                                 style={this.state.style}
                             />
