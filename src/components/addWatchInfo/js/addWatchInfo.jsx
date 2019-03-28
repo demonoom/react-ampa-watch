@@ -109,12 +109,10 @@ export default class addWatchInfo extends React.Component {
         this.setState({
             ident
         })
-        window.addEventListener('resize', this.onWindwoResize);
     }
 
     componentDidMount () {
         Bridge.setShareAble("false");
-        console.log($('.commonLocation-cont').height());
         /**
      * 防止软键盘挡住页面
      */
@@ -132,16 +130,17 @@ export default class addWatchInfo extends React.Component {
                 $(".button_preNext").show();
             }
         });
+
     }
     componentWillUnmount () {
-        window.removeEventListener('resize', this.onWindwoResize);
+        window.removeEventListener('resize', calm.onWindwoResize);
     }
 
     //监听窗口改变时间
     onWindwoResize = () => {
         // this
         setTimeout(() => {
-            this.setState({
+            calm.setState({
                 clientHeight: document.body.clientHeight,
             })
         }, 100)
@@ -331,7 +330,7 @@ export default class addWatchInfo extends React.Component {
         }
         const alertInstance = alert('您确定放弃本次编辑吗?', '', [
             { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => calm.toBack()},
+            { text: '确定', onPress: () => calm.toBack() },
         ], phone);
 
     }

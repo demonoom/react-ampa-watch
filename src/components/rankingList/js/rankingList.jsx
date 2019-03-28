@@ -50,7 +50,8 @@ export default class rankingList extends React.Component {
                 { title: '答题排行榜' },
                 { title: '运动' },
                 { title: '爱心' },
-            ]
+            ],
+            guardianData: {}
         };
     }
     componentDidMount () {
@@ -90,12 +91,21 @@ export default class rankingList extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
+                if (result.success) {
                     if (result.response.length == 0) {
                         this.setState({
                             toBind: true,
                         })
                     } else {
+                        result.response[0].guardians.forEach((v, i) => {
+                            if (v.guardian.colUid == this.state.userId) {
+                                calm.setState({
+                                    guardianData: v,
+                                }, () => {
+                                    console.log(this.state.guardianData, "guardianData1")
+                                })
+                            }
+                        })
                         this.setState({
                             watchData: result.response,
                             studentId: result.response[0].student.colUid,
@@ -288,11 +298,11 @@ export default class rankingList extends React.Component {
                     studentId: v.studentId
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
-                        console.log(v, "iop")
                         if (v.guardian.colUid == this.state.userId) {
                             this.setState({
                                 guardianData: v,
                             }, () => {
+                                console.log(this.state.guardianData, "guardianData2")
                                 this.setState({
                                     visible: false,
                                     watchId: opt.props.macId,
@@ -416,33 +426,33 @@ export default class rankingList extends React.Component {
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                 </div>
-                {/*绑定后未验证空页面*/}
-                <div className="commonLocation-cont" style={{display:'none'}}>
-                    <div className="emptyCont emptyContBind">
-                        <div className="p38 my_flex">
-                            <div>
-                                <i></i>
-                                <span>
-                                    申请已提交<br />
-                                请等待管理员（爸爸）验证通过
-                                    </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={this.state.tabs}
                         onChange={this.onTabsChange}
                         initalPage={'t2'}
                         swipeable={false}
                     >
-
-                        <div className='questionCont' >
+                        <div className='questionCont'>
+                            {/*绑定后未验证空页面*/}
+                            <div className="commonLocation-cont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                                <div className="emptyCont emptyContBind">
+                                    <div className="p38 my_flex">
+                                        <div>
+                                            <i></i>
+                                            <span>
+                                                申请已提交<br />
+                                                请等待管理员（爸爸）验证通过
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <PullToRefresh
                                 damping={130}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
+                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
                                 }}
                                 indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
                                 direction='down'
@@ -453,7 +463,7 @@ export default class rankingList extends React.Component {
                                         this.setState({ refreshing: false }, () => {
                                             if (this.state.flag == 1) {
                                                 this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-                                
+
                                             } else {
                                                 this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
                                             }
@@ -486,13 +496,13 @@ export default class rankingList extends React.Component {
                                     style={{
                                         height: this.state.clientHeight - 50 - 64,
                                     }}
-                                    // pullToRefresh={<PullToRefresh
-                                    //     onRefresh={this.onRefresh}
-                                    //     distanceToRefresh={30}
-                                    // />}
+                                // pullToRefresh={<PullToRefresh
+                                //     onRefresh={this.onRefresh}
+                                //     distanceToRefresh={30}
+                                // />}
                                 />
                             </PullToRefresh>
-                            <div className='myGrade' onClick={this.toDetail}>
+                            <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.num) + 1}名</span>
                                     <span className='userName text_hidden'>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
@@ -508,7 +518,6 @@ export default class rankingList extends React.Component {
                             </div>
                     </Tabs>
                 </div>
-
             </div>
         )
     }
