@@ -96,6 +96,20 @@ export default class addWatchInfo extends React.Component {
 
     componentDidMount () {
         Bridge.setShareAble("false");
+        /**
+     * 防止软键盘挡住页面
+     */
+        var winHeight = $(window).height(); // 获取当前页面高度  
+        $(window).resize(function () {
+            var resizeHeight = $(this).height();
+            if (winHeight - resizeHeight > 50) {
+                // 软键盘弹出  
+                $('body').css('height', winHeight + 'px');
+            } else {
+                //软键盘收起
+                $('body').css('height', '100%');
+            }
+        });
     }
     componentWillUnmount () {
         window.removeEventListener('resize', this.onWindwoResize);
@@ -145,7 +159,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("111");
+        // this.getWatch2gByMacAddress("wdc");
         var data = {
             method: 'watchBinding'
         };
@@ -159,8 +173,19 @@ export default class addWatchInfo extends React.Component {
 
     //自定义关系
     showModal () {
+        this.setState({
+            flag: false
+        })
         prompt('请输入关系', '', [
-            { text: '取消' },
+            {
+                text: '取消', onPress: value => {
+                    this.setState({
+                        relationValue: "",
+                        RelationClassName: 'color_3'
+                    }, () => {
+                    });
+                },
+            },
             {
                 text: '确定', onPress: value => {
                     this.setState({
@@ -280,23 +305,7 @@ export default class addWatchInfo extends React.Component {
 
     //第二个div
     //自定义关系
-    showModal () {
-        this.setState({
-            flag: false
-        })
-        prompt('请输入关系', '', [
-            { text: '取消' },
-            {
-                text: '确定', onPress: value => {
-                    this.setState({
-                        relationValue: [value],
-                        RelationClassName: 'color_3'
-                    }, () => {
-                    });
-                }
-            },
-        ], 'default', '')
-    }
+
 
     //上一步
     preSenPage = () => {
@@ -356,7 +365,7 @@ export default class addWatchInfo extends React.Component {
 
     //第三个div
     preThirPage = () => {
-       
+
         $(".thirDiv").hide();
         $(".secDiv").show();
     }
@@ -379,12 +388,12 @@ export default class addWatchInfo extends React.Component {
                 Toast.fail('请选择学生所在班级', 1, null, false);
                 return
             }
-    
+
             $(".thirDiv").hide();
             $(".regiForDiv").show();
         }
     }
-    
+
     onTabsChange = (v) => {
         if (v.label == "has") {
             this.setState({
@@ -676,24 +685,24 @@ export default class addWatchInfo extends React.Component {
     };
 
 
-      /**
-     * 注册验证
-     */
+    /**
+   * 注册验证
+   */
     teNameOnChange = (e) => {
-        this.setState({teName: e})
+        this.setState({ teName: e })
     };
 
     teNumOnChange = (e) => {
-        this.setState({teNumOnChange: e})
+        this.setState({ teNumOnChange: e })
     };
 
     nextForRegPage = () => {
         if (this.state.teName.trim() === '') {
-            Toast.fail('请输入教师姓名',1,null,false);
+            Toast.fail('请输入教师姓名', 1, null, false);
             return
         }
         if (this.state.teNumOnChange.trim() === '') {
-            Toast.fail('请输入教师电话',1,null,false);
+            Toast.fail('请输入教师电话', 1, null, false);
             return
         }
         this.bindStudentAccountAndSaveStudent()
@@ -739,9 +748,9 @@ export default class addWatchInfo extends React.Component {
                     });
                 } else {
                     if (result.msg === '老师电话号码验证错误') {
-                        Toast.fail('请核实信息正确性',2,null,false);
+                        Toast.fail('请核实信息正确性', 2, null, false);
                     } else {
-                        Toast.fail(result.msg,1,null,false)
+                        Toast.fail(result.msg, 1, null, false)
                     }
                 }
             },
@@ -751,14 +760,14 @@ export default class addWatchInfo extends React.Component {
         });
     };
 
-    preForRegPage=()=>{
+    preForRegPage = () => {
         $(".thirDiv").show();
         $(".regiForDiv").hide();
     }
 
 
     render () {
-        console.log($('#stuClazz .am-list-extra').html(),"$('#stuClazz .am-list-extra').html()")
+        console.log($('#stuClazz .am-list-extra').html(), "$('#stuClazz .am-list-extra').html()")
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
                 <div className="am-navbar-blue whiteBack">
@@ -801,7 +810,7 @@ export default class addWatchInfo extends React.Component {
                     <div className="secDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress1.png')} alt=""/>
+                            <img className='progressPic' src={require('../../images/progress1.png')} alt="" />
                             <div className="infoContent selectDown">
                                 <div className={'sex line_publicD ' + this.state.extraClassName}>
                                     <Picker
@@ -849,25 +858,25 @@ export default class addWatchInfo extends React.Component {
                     <div className="thirDiv" style={{ display: "none" }}>
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress2.png')} alt=""/>
+                            <img className='progressPic' src={require('../../images/progress2.png')} alt="" />
                             <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
-                               <div className="innerCont tabCont">
-                                   <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
-                                       <InputItem
-                                           className=""
-                                           placeholder="请输入小蚂蚁账号"
-                                           value={this.state.littleAntName}
-                                           onChange={this.littAntOnChange}
-                                           ref={el => this.inputRef = el}
-                                       ></InputItem>
-                                   </div>
-                               </div>
+                                <div className="innerCont tabCont">
+                                    <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
+                                        <InputItem
+                                            className=""
+                                            placeholder="请输入小蚂蚁账号"
+                                            value={this.state.littleAntName}
+                                            onChange={this.littAntOnChange}
+                                            ref={el => this.inputRef = el}
+                                        ></InputItem>
+                                    </div>
+                                </div>
                                 <div>
                                     <div>
                                         <div className="innerCont tabCont">
                                             <div className="infoContent selectDown">
                                                 <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
-                                                     onClick={this.schoolOnClick}>
+                                                    onClick={this.schoolOnClick}>
                                                     <div className="am-list-line">
                                                         <div className="am-list-content"></div>
                                                         <div
@@ -907,10 +916,10 @@ export default class addWatchInfo extends React.Component {
                             <div className='next' onClick={this.nextThirPage}>下一步</div>
                         </div>
                     </div>
-                    <div className="forDiv"  style={{ display: "none" }}>
+                    <div className="forDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress3.png')} alt=""/>
+                            <img className='progressPic' src={require('../../images/progress3.png')} alt="" />
                             <div className="p29 login-input">
                                 <div className='accountName'>
                                     {this.state.littleAntName}
@@ -936,14 +945,14 @@ export default class addWatchInfo extends React.Component {
                             </div>
                         </div>
                         <div className="button_preNext">
-                            <div className='prev'  onClick={this.preForPage}>上一步</div>
+                            <div className='prev' onClick={this.preForPage}>上一步</div>
                             <div className='next' onClick={this.nextForPage}>下一步</div>
                         </div>
                     </div>
-                    <div className="regiForDiv"  style={{ display: "none" }}>
+                    <div className="regiForDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress3.png')} alt=""/>
+                            <img className='progressPic' src={require('../../images/progress3.png')} alt="" />
                             <div id="validationMes">
                                 <div className="p29">
                                     <div className="infoContent">
@@ -970,7 +979,7 @@ export default class addWatchInfo extends React.Component {
                                     </div>
                                 </div>
                                 <div className="button_preNext">
-                                    <div className='prev'  onClick={this.preForRegPage}>上一步</div>
+                                    <div className='prev' onClick={this.preForRegPage}>上一步</div>
                                     <div className='next' onClick={this.nextForRegPage}>下一步</div>
                                 </div>
                             </div>
