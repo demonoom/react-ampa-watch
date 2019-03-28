@@ -32,7 +32,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macAddress: "112",
+            macAddress: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -145,7 +145,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("112");
+        // this.getWatch2gByMacAddress("111");
         var data = {
             method: 'watchBinding'
         };
@@ -356,10 +356,7 @@ export default class addWatchInfo extends React.Component {
 
     //第三个div
     preThirPage = () => {
-        if (this.state.littleAntName == "") {
-            Toast.info("请输入小蚂蚁账号", 1, null, false);
-            return
-        }
+       
         $(".thirDiv").hide();
         $(".secDiv").show();
     }
@@ -367,6 +364,10 @@ export default class addWatchInfo extends React.Component {
     //第三个div的下一步
     nextThirPage = () => {
         if (this.state.jump == "check") {
+            if (this.state.littleAntName == "") {
+                Toast.info("请输入小蚂蚁账号", 1, null, false);
+                return
+            }
             $(".thirDiv").hide();
             $(".forDiv").show();
         } else {
@@ -425,11 +426,11 @@ export default class addWatchInfo extends React.Component {
 
     //点击提交按钮
     nextForPage = () => {
-        if (this.state.stuName == "", 1, null, false) {
+        if (this.state.stuName == "") {
             Toast.info("请输入学生名称", 1, null, false);
             return
         }
-        if (this.state.schName == "", 1, null, false) {
+        if (this.state.schName == "") {
             Toast.info("请输入学校名称", 1, null, false);
             return
         }
@@ -757,6 +758,7 @@ export default class addWatchInfo extends React.Component {
 
 
     render () {
+        console.log($('#stuClazz .am-list-extra').html(),"$('#stuClazz .am-list-extra').html()")
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
                 <div className="am-navbar-blue whiteBack">
@@ -945,9 +947,9 @@ export default class addWatchInfo extends React.Component {
                             <div id="validationMes">
                                 <div className="p29">
                                     <div className="infoContent">
-                                        <div className="School-information">
-                                            <span className="school text_hidden">{this.state.schName}</span>
-                                            <span className="class text_hidden">{this.state.clazzName}</span>
+                                        <div className="School-information text_hidden">
+                                            <span className="school">{this.state.schoolName}</span>
+                                            <span className="class">{$('#stuClazz .am-list-extra').html() != undefined ? $('#stuClazz .am-list-extra').html().split(",").join("") : ""}</span>
                                         </div>
                                         <div className="line_publicD login-input icon-grayTeacher">
                                             <InputItem
