@@ -74,6 +74,7 @@ export default class morePage extends React.Component {
                             watchData: result.response,
                             childSex: result.response[0].childSex,
                             watchName: result.response[0].watchName,
+                            phoneNumber:result.response[0].phoneNumber,
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
                             studentId: result.response[0].studentId,
@@ -206,6 +207,7 @@ export default class morePage extends React.Component {
 
     //选择
     onSelect = (opt) => {
+        console.log(opt)
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
                 this.setState({
@@ -219,6 +221,7 @@ export default class morePage extends React.Component {
                             }, () => {
                                 this.setState({
                                     visible: false,
+                                    phoneNumber:opt.props.phoneNumber,
                                     watchId: opt.props.macId,
                                     watchName: opt.props.children,
                                     macAddr: opt.props.mac
@@ -334,7 +337,7 @@ export default class morePage extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item style={{ color: '#333' }} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{ color: '#333' }} phoneNumber={v.phoneNumber} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -407,7 +410,7 @@ export default class morePage extends React.Component {
                         <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
                         {
 
-                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate}</div></div>
+                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
                         }
                     </div>
                 </div>

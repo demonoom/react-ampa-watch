@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, WhiteSpace, Toast, ListView, NavBar, Popover } from 'antd-mobile';
+import { Tabs, WhiteSpace, Toast, PullToRefresh, ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
 import { Modal } from "antd-mobile/lib/index";
@@ -27,9 +27,11 @@ var weekMonth = myWeekDate.getMonth() + 1;
 var weekDay = myWeekDate.getDate();
 var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
 var weekStart = timeWeek + ' 00:00:00';
+var calm;
 export default class rankingList extends React.Component {
     constructor(props) {
         super(props);
+        calm = this;
         const dataSource = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
         });
@@ -74,7 +76,7 @@ export default class rankingList extends React.Component {
        */
     onWindowResize () {
         setTimeout(() => {
-            this.setState({ clientHeight: document.body.clientHeight });
+            calm.setState({ clientHeight: document.body.clientHeight });
         }, 100)
     }
 
@@ -140,7 +142,7 @@ export default class rankingList extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
                     result.response.forEach((v, i) => {
-                        if (this.state.userId == v.col_uid) {
+                        if (this.state.studentId == v.col_uid) {
                             this.setState({
                                 ownData: v,
                                 num: i
@@ -295,13 +297,13 @@ export default class rankingList extends React.Component {
                                     visible: false,
                                     watchId: opt.props.macId,
                                     watchName: opt.props.children,
-                                    macAddr:opt.props.mac
+                                    macAddr: opt.props.mac
                                 }, () => {
                                     if (this.state.flag == 1) {
                                         this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                                     } else {
                                         this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-                        
+
                                     }
                                 });
                             })
@@ -310,7 +312,7 @@ export default class rankingList extends React.Component {
                 })
             }
         })
-       
+
     };
 
 
@@ -319,7 +321,7 @@ export default class rankingList extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item style={{color:'#333'}} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{ color: '#333' }} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -334,6 +336,20 @@ export default class rankingList extends React.Component {
             visible,
         });
     };
+
+    onRefresh = () => {
+        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
+        divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
+        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
+            if (this.state.flag == 1) {
+                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+            } else {
+                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+            }
+        });
+
+    }
 
     render () {
         const row = (rowData, sectionID, rowID) => {
@@ -359,20 +375,20 @@ export default class rankingList extends React.Component {
                 </div>
                 <div className="am-navbar-blue watchSelect" style={{ display: this.state.toBind ? "none" : "block" }}>
                     <Popover mask
-                             overlayClassName="fortest"
-                             overlayStyle={{ color: 'currentColor' }}
-                             visible={this.state.visible}
-                             overlay={this.state.watchListData}
-                             awatchSelectlign={{
-                                 overflow: { adjustY: 0, adjustX: 0 },
-                                 offset: [10, 0],
-                             }}
-                             onVisibleChange={(visible) => {
-                                 this.setState({
-                                     visible,
-                                 });
-                             }}
-                             onSelect={this.onSelect}
+                        overlayClassName="fortest"
+                        overlayStyle={{ color: 'currentColor' }}
+                        visible={this.state.visible}
+                        overlay={this.state.watchListData}
+                        awatchSelectlign={{
+                            overflow: { adjustY: 0, adjustX: 0 },
+                            offset: [10, 0],
+                        }}
+                        onVisibleChange={(visible) => {
+                            this.setState({
+                                visible,
+                            });
+                        }}
+                        onSelect={this.onSelect}
                     >
                         <div style={{
                             height: '100%',
@@ -407,33 +423,62 @@ export default class rankingList extends React.Component {
                         initalPage={'t2'}
                         swipeable={false}
                     >
+
                         <div className='questionCont' >
-                            <ListView
-                                ref={el => this.lv = el}
-                                dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
-                                renderHeader={() => (
-                                    <div className='dateBtn'>
-                                        <span className='today active' onClick={this.clickToday}>今日</span>
-                                        <span className="week" onClick={this.toClickWeek}>本周</span>
-                                    </div>
-                                )}
-                                renderFooter={() => (
-                                    <div style={{ paddingTop: 6, textAlign: 'center' }}>
-                                        {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
-                                    </div>)}
-                                renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
-                                className="am-list"
-                                pageSize={30}    //每次事件循环（每帧）渲染的行数
-                                //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
-                                scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
-                                onEndReached={this.onEndReached}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
-                                onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
-                                initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
-                                scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                            <PullToRefresh
+                                damping={130}
+                                ref={el => this.ptr = el}
                                 style={{
-                                    height: this.state.clientHeight - 50 - 64,
+                                    height: this.state.clientHeight - 114,
                                 }}
-                            />
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshing}
+                                onRefresh={() => {
+                                    this.setState({ refreshing: true });
+                                    setTimeout(() => {
+                                        this.setState({ refreshing: false }, () => {
+                                            if (this.state.flag == 1) {
+                                                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+                                
+                                            } else {
+                                                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            >
+                                <ListView
+                                    ref={el => this.lv = el}
+                                    dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
+                                    renderHeader={() => (
+                                        <div className='dateBtn'>
+                                            <span className='today active' onClick={this.clickToday}>今日</span>
+                                            <span className="week" onClick={this.toClickWeek}>本周</span>
+                                        </div>
+                                    )}
+                                    renderFooter={() => (
+                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                            {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
+                                        </div>)}
+                                    renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                    className="am-list"
+                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                    onEndReached={this.onEndReached}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                    style={{
+                                        height: this.state.clientHeight - 50 - 64,
+                                    }}
+                                    // pullToRefresh={<PullToRefresh
+                                    //     onRefresh={this.onRefresh}
+                                    //     distanceToRefresh={30}
+                                    // />}
+                                />
+                            </PullToRefresh>
                             <div className='myGrade' onClick={this.toDetail}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.num) + 1}名</span>
