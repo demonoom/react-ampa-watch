@@ -288,7 +288,7 @@ export default class detailPage extends React.Component {
                     type: 'line',
                     // areaStyle: {},
                     // stack: '总量',
-                    data: SubjectTotal,
+                    data: AnswerRight,
                     itemStyle: {
                         //通常情况下：
                         normal: {
@@ -323,7 +323,7 @@ export default class detailPage extends React.Component {
                     name: '总数',
                     type: 'line',
                     // areaStyle: {},
-                    data: AnswerRight,
+                    data: SubjectTotal,
                     left: 0,
                     bottom: 0,
                     itemStyle: {
@@ -353,13 +353,7 @@ export default class detailPage extends React.Component {
     render () {
         return (
             <div id='detailPage'>
-                <div className="am-navbar" style={{
-                        position: fixed,
-                        top: 0,
-                        left: 0,
-                        zIndex: 111,
-                        width: "100%",
-                }}>
+                <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情":"本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
