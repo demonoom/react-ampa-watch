@@ -32,9 +32,9 @@ var calm;
 export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
-        calm =this;
+        calm = this;
         this.state = {
-            macAddress: "qq1",
+            macAddress: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -181,7 +181,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("qq1");
+        // this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
@@ -311,8 +311,17 @@ export default class addWatchInfo extends React.Component {
         });
     }
 
-    
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        console.log(data, "data")
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     showAlertExit () {
+        var _this = this;
         var phoneType = navigator.userAgent;
         var phone;
         if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
@@ -325,16 +334,6 @@ export default class addWatchInfo extends React.Component {
             { text: '确定', onPress: () => calm.toBack()},
         ], phone);
 
-    }
-
-    //返回
-    toBack = () => {
-        var data = {
-            method: 'popView',
-        };
-        console.log(data, "data")
-        Bridge.callHandler(data, null, function (error) {
-        });
     }
 
 

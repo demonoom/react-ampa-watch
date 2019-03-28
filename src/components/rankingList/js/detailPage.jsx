@@ -288,7 +288,7 @@ export default class detailPage extends React.Component {
                     type: 'line',
                     // areaStyle: {},
                     // stack: '总量',
-                    data: SubjectTotal,
+                    data: AnswerRight,
                     itemStyle: {
                         //通常情况下：
                         normal: {
@@ -323,7 +323,7 @@ export default class detailPage extends React.Component {
                     name: '总数',
                     type: 'line',
                     // areaStyle: {},
-                    data: AnswerRight,
+                    data: SubjectTotal,
                     left: 0,
                     bottom: 0,
                     itemStyle: {
