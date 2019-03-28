@@ -402,7 +402,6 @@ export default class rankingList extends React.Component {
                         </div>
                     </Popover>
                 </div>
-
                 <div className="commonLocation-cont" style={{ display: this.state.toBind ? "block" : "none" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
@@ -415,6 +414,20 @@ export default class rankingList extends React.Component {
                             </div>
                         </div>
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
+                    </div>
+                </div>
+                {/*绑定后未验证空页面*/}
+                <div className="commonLocation-cont" style={{display:'none'}}>
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    申请已提交<br />
+                                请等待管理员（爸爸）验证通过
+                                    </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
