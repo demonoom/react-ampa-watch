@@ -865,7 +865,7 @@ export default class addWatchInfo extends React.Component {
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <img className='progressPic' src={require('../../images/progress2.png')} alt=""/>
-                           <div className="innerCont">
+                           <div className="p29">
                                <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
                                    <div className="tabCont">
                                        <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
@@ -987,13 +987,12 @@ export default class addWatchInfo extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="button_preNext">
-                                    <div className='prev'  onClick={this.preForRegPage}>上一步</div>
-                                    <div className='next' onClick={this.nextForRegPage}>下一步</div>
-                                </div>
                             </div>
                         </div>
-
+                        <div className="button_preNext">
+                            <div className='prev'  onClick={this.preForRegPage}>上一步</div>
+                            <div className='next' onClick={this.nextForRegPage}>下一步</div>
+                        </div>
                     </div>
                 </div>
 
