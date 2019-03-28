@@ -134,6 +134,11 @@
       transform: scaleY(0.5);
     }
   }
+  .amap-zoom-touch-plus:active{
+    background: url("../img/icon-expand.png") #e5e5e5 no-repeat center;
+    background-size: 17px 17px;
+    border-radius: 10px 10px 0 0;
+  }
   .amap-zoom-touch-minus{
     background: url("../img/icon-shrinkage.png") no-repeat center;
     width: 38px;
@@ -142,6 +147,11 @@
     > div{
       display: none;
     }
+  }
+  .amap-zoom-touch-minus:active{
+    background: url("../img/icon-shrinkage.png") #e5e5e5 no-repeat center;
+    background-size: 17px 2px;
+    border-radius: 0 0 10px 10px ;
   }
   .amap-touch-toolbar .amap-zoomcontrol:after{
     background: transparent;
@@ -182,7 +192,10 @@
       margin-top: 10px;
     }
   }
-
+  #getPosition:active{
+    background: #e5e5e5;
+  }
+;
   .setPosModel {
     position: absolute;
     width: 100%;

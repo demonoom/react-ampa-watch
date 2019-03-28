@@ -39,7 +39,7 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-                    if (result.response.valid == 2) {
+                    if (result.response.valid != 2) {
                         var unprocessed = 'none';
                         var processed = '';
                         this.setState({unprocessed, processed});

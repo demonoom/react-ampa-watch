@@ -273,7 +273,7 @@ export default class addNewLocation extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
-                    <List className="my-list">
+                    <List className="my-list home-hidden">
                         <Item
                             arrow="horizontal"
                             platform="android"
