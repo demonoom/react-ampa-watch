@@ -32,7 +32,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macAddress: "",
+            macAddress: "qq1",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -145,7 +145,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("wet");
+        this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
@@ -801,7 +801,7 @@ export default class addWatchInfo extends React.Component {
                                         data={this.state.relationData}
                                         value={this.state.relationValue}
                                         cols={1}
-                                        extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
+                                        extra={this.state.flag ? "您是孩子的" : this.state.relationValue}
                                         onChange={this.onRelationChange}
                                         onOk={this.clickRelationSure}
                                         onDismiss={this.onRelationCancel}
