@@ -23,12 +23,13 @@
       padding: 15px;
 
       input {
-        height: 34px;
+        height: 40px;
         border-radius: 17px;
         border: none;
         padding: 0 35px 0 14px;
         width: 100%;
         box-sizing: border-box;
+        line-height:40px;
       }
 
       input::placeholder {
@@ -170,7 +171,7 @@
     height: 22px;
     background-size: 100% 100%;
     position: absolute;
-    top: 21px;
+    top: 24px;
     right: 28px;
   }
 
@@ -376,6 +377,11 @@
       transform: scaleY(0.5);
     }
   }
+  .amap-zoom-touch-plus:active{
+    background: url("../img/icon-expand.png") #e5e5e5 no-repeat center;
+    background-size: 17px 17px;
+    border-radius: 10px 10px 0 0;
+  }
   .amap-zoom-touch-minus{
     background: url("../img/icon-shrinkage.png") no-repeat center;
     width: 38px;
@@ -384,6 +390,11 @@
     > div{
       display: none;
     }
+  }
+  .amap-zoom-touch-minus:active{
+    background: url("../img/icon-shrinkage.png") #e5e5e5 no-repeat center;
+    background-size: 17px 2px;
+    border-radius: 0 0 10px 10px ;
   }
   .amap-touch-toolbar .amap-zoomcontrol:after{
     background: transparent;
@@ -408,5 +419,8 @@
     background:#ededed;
     height: 11px;
     width: 100%;
+  }
+  .home-hidden .am-list-arrow{
+    display: none;
   }
 }
