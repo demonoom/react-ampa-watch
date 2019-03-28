@@ -174,7 +174,7 @@ export default class addNewLocation extends React.Component {
 
     saveLocation = () => {
         if (this.state.posName === '') {
-            Toast.fail('请设置位置名称', 200,null,false);
+            Toast.fail('请设置位置名称', 2,null,false);
             return
         }
         if (this.state.pos === '') {
