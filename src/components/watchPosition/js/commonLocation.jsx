@@ -18,12 +18,23 @@ export default class commonLocation extends React.Component {
     }
 
     componentWillMount() {
+        var _this = this;
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
         var mac = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
         this.setState({userId, mac, macId});
+        var data = {
+            method: 'getLocation',
+        };
+        setTimeout(() => {
+            Bridge.callHandler(data, function (data) {
+                _this.setState({posTude: data});
+            }, function (error) {
+
+            });
+        }, 1000)
     }
 
     componentDidMount() {
@@ -35,7 +46,7 @@ export default class commonLocation extends React.Component {
         var data = {
             method: 'openNewPage',
             selfBack: true,
-            url: url
+            url: url + '&posTude=' + this.state.posTude
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
@@ -69,7 +80,7 @@ export default class commonLocation extends React.Component {
                         }
                     }
                 } else {
-                    Toast.fail(result.msg, 1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -127,69 +138,37 @@ export default class commonLocation extends React.Component {
      * @param obj
      */
     intoDetil = (type, obj) => {
+        var url;
         if (type == 0) {
             //自定义
-            var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress + '&type=0');
-            var data = {
-                method: 'openNewPage',
-                selfBack: true,
-                url: url
-            };
-            Bridge.callHandler(data, null, function (error) {
-                window.location.href = url;
-            });
+            url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress + '&type=0');
         } else if (type == 1) {
             //家
             if (!!this.state.homeObj) {
                 //修改
-                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.homeObj.id + '&homeName=' + this.state.homeObj.homeName + '&homeAddress=' + this.state.homeObj.homeAddress + '&type=1');
-                var data = {
-                    method: 'openNewPage',
-                    selfBack: true,
-                    url: url
-                };
-                Bridge.callHandler(data, null, function (error) {
-                    window.location.href = url;
-                });
+                url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.homeObj.id + '&homeName=' + this.state.homeObj.homeName + '&homeAddress=' + this.state.homeObj.homeAddress + '&type=1');
             } else {
                 //添加
-                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=1';
-                var data = {
-                    method: 'openNewPage',
-                    selfBack: true,
-                    url: url
-                };
-                Bridge.callHandler(data, null, function (error) {
-                    window.location.href = url;
-                });
+                url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=1';
             }
         } else if (type == 2) {
             //学校
             if (!!this.state.schoolObj) {
                 //修改
-                var url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.schoolObj.id + '&homeName=' + this.state.schoolObj.homeName + '&homeAddress=' + this.state.schoolObj.homeAddress + '&type=2');
-                var data = {
-                    method: 'openNewPage',
-                    selfBack: true,
-                    url: url
-                };
-                Bridge.callHandler(data, null, function (error) {
-                    window.location.href = url;
-                });
+                url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.schoolObj.id + '&homeName=' + this.state.schoolObj.homeName + '&homeAddress=' + this.state.schoolObj.homeAddress + '&type=2');
             } else {
                 //添加
-                var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=2';
-                var data = {
-                    method: 'openNewPage',
-                    selfBack: true,
-                    url: url
-                };
-                Bridge.callHandler(data, null, function (error) {
-                    window.location.href = url;
-                });
+                url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=2';
             }
         }
-
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url + '&posTude=' + this.state.posTude
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     };
 
     popView = () => {
