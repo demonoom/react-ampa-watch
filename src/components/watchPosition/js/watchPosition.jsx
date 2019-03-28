@@ -442,7 +442,17 @@ export default class watchPosition extends React.Component {
                     </div>
                     <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
-
+                <div className="emptyCont emptyCont-bg emptyContBind">
+                    <div className="p38 my_flex">
+                        <div>
+                            <i></i>
+                            <span>
+                                    申请已提交<br />
+                                请等待管理员（爸爸）验证通过
+                                    </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
