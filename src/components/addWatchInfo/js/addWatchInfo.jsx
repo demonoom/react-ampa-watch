@@ -34,7 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
-            macAddress: "",
+            macAddress: "qaz",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -109,35 +109,38 @@ export default class addWatchInfo extends React.Component {
         this.setState({
             ident
         })
-        window.addEventListener('resize', this.onWindwoResize);
     }
 
     componentDidMount () {
         Bridge.setShareAble("false");
+        window.addEventListener('resize', calm.onWindwoResize);
         /**
-     * 防止软键盘挡住页面
-     */
+      * 防止软键盘挡住页面
+      */
         var winHeight = $(window).height(); // 获取当前页面高度  
         $(window).resize(function () {
             var resizeHeight = $(this).height();
             if (winHeight - resizeHeight > 50) {
                 // 软键盘弹出  
-                $('body').css('height', winHeight + 'px');
+                $('body').css('height', $(window).height() + 'px');
+                $(".button_preNext").hide()
             } else {
                 //软键盘收起
                 $('body').css('height', '100%');
+                $(".button_preNext").show()
             }
         });
+
     }
     componentWillUnmount () {
-        window.removeEventListener('resize', this.onWindwoResize);
+        window.removeEventListener('resize', calm.onWindwoResize);
     }
 
     //监听窗口改变时间
     onWindwoResize = () => {
         // this
         setTimeout(() => {
-            this.setState({
+            calm.setState({
                 clientHeight: document.body.clientHeight,
             })
         }, 100)
@@ -177,7 +180,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("qq1");
+        this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
@@ -327,7 +330,7 @@ export default class addWatchInfo extends React.Component {
         }
         const alertInstance = alert('您确定放弃本次编辑吗?', '', [
             { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => calm.toBack()},
+            { text: '确定', onPress: () => calm.toBack() },
         ], phone);
 
     }

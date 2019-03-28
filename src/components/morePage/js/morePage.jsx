@@ -19,6 +19,7 @@ export default class morePage extends React.Component {
             guardianData: {},
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
+            guardianData:{}
         };
     }
 
@@ -370,6 +371,7 @@ export default class morePage extends React.Component {
     }
 
     render () {
+        console.log(this.state.guardianData, "guardianData")
         return (
             <div id="morePage" className='bg_gray'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
@@ -410,7 +412,7 @@ export default class morePage extends React.Component {
                         <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
                         {
 
-                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
+                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
                         }
                     </div>
                 </div>
@@ -453,6 +455,9 @@ export default class morePage extends React.Component {
                     <div className="am-list-line">
                         <div className="am-list-content">退出登录</div>
                     </div>
+                </div>
+                <div style={{display:this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block":"none"}}>
+                    空
                 </div>
             </div>
         )
