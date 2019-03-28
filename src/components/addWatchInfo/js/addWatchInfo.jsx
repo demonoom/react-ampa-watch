@@ -150,7 +150,7 @@ export default class addWatchInfo extends React.Component {
             method: 'watchBinding'
         };
         Bridge.callHandler(data, (mes) => {
-            this.setState({ macAddress: mes.toUpperCase() });
+            this.setState({ macAddress: mes });
             this.getWatch2gByMacAddress(mes)
         }, function (error) {
         });
@@ -372,7 +372,7 @@ export default class addWatchInfo extends React.Component {
 
     //第三个div
     preThirPage = () => {
-       
+
         $(".thirDiv").hide();
         $(".secDiv").show();
     }
@@ -395,12 +395,12 @@ export default class addWatchInfo extends React.Component {
                 Toast.fail('请选择学生所在班级', 1, null, false);
                 return
             }
-    
+
             $(".thirDiv").hide();
             $(".regiForDiv").show();
         }
     }
-    
+
     onTabsChange = (v) => {
         if (v.label == "has") {
             this.setState({

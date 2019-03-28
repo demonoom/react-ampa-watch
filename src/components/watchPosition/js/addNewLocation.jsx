@@ -12,8 +12,8 @@ export default class addNewLocation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            posName: '',
-            pos: '',
+            posName: '请输入地点名称',
+            pos: '请设置地点位置',
             searchValue: '',
             posList: [],
             position: {longitude: '116.397477', latitude: '39.908692'},
@@ -173,12 +173,12 @@ export default class addNewLocation extends React.Component {
     };
 
     saveLocation = () => {
-        if (this.state.posName === '') {
-            Toast.fail('请设置位置名称', 2,null,false);
+        if (this.state.posName === '请输入地点名称') {
+            Toast.fail('请输入地点名称', 2,null,false);
             return
         }
-        if (this.state.pos === '') {
-            Toast.fail('请设置位置信息', 2,null,false);
+        if (this.state.pos === '请设置地点位置') {
+            Toast.fail('请设置地点位置', 2,null,false);
             return
         }
         console.log(this.state.addressLT);
