@@ -8,6 +8,9 @@ export default class verifyBinding extends React.Component {
         super(props);
         this.state = {
             title: '',
+            processed: 'none',
+            disagree: 'none',
+            determine: 'none',
         };
     }
 
@@ -36,12 +39,11 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-                    if (result.response.valid != 2) {
+                    if (result.response.valid == 2) {
                         var unprocessed = 'none';
-                        this.setState({unprocessed});
+                        var processed = '';
+                        this.setState({unprocessed, processed});
                     }
-                    var processed = 'none';
-                    this.setState({processed});
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -65,7 +67,9 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-
+                    var review = 'none'
+                    var determine = ''
+                    this.setState({review, determine});
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -88,6 +92,9 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
+                    var review = 'none'
+                    var disagree = ''
+                    this.setState({review, disagree});
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -101,42 +108,30 @@ export default class verifyBinding extends React.Component {
     render() {
         return (
             <div id="verifyBinding">
-{/*<<<<<<< HEAD*/}
-                {/*<div>*/}
-                    {/*<span>{this.state.guardianName}</span>请求绑定<span>{this.state.watch2gName}</span>的手表*/}
-                {/*</div>*/}
-                {/*<div style={{display: this.state.unprocessed}}>*/}
-                    {/*<button onClick={this.agree}>同意</button>*/}
-                    {/*<button onClick={this.refuse}>拒绝</button>*/}
-                {/*</div>*/}
-                {/*<div style={{display: this.state.processed}}>*/}
-                    {/*<div>该请求已处理</div>*/}
-{/*=======*/}
-                <div className="am-modal-mask"></div>
-                <div className="am-modal-wrap ">
-                    <div className="am-modal am-modal-transparent">
-                        <div className="am-modal-content">
-                            <div className="am-modal-header">
-                                <div className="am-modal-title">
-                                    <span>{this.state.guardianName}</span>请求绑定<span>{this.state.watch2gName}</span>的手表
-                                </div>
-                            </div>
-                            <div className="am-modal-body">
-                                <div className="am-modal-propmt-content">
-                                </div>
-                            </div>
-                            <div className="am-modal-footer">
-                                <div className="am-modal-button-group-h am-modal-button-group-normal" style={{display: this.state.unprocessed}}>
-                                    <a className="am-modal-button" onClick={this.refuse}>拒绝</a>
-                                    <a className="am-modal-button" onClick={this.agree}>同意</a>
-                                </div>
-                                <div style={{display: this.state.processed}}>
-                                    <div>该请求已处理</div>
-                                </div>
-                            </div>
+                <div style={{display: this.state.review}}>
+                    <div className="center verify_Binding">
+                        <div className="verify-cont"><span
+                            className="userName">{this.state.guardianName}</span>请求绑定<span
+                            className="userName">{this.state.watch2gName}</span>的手表
+                        </div>
+                        <div style={{display: this.state.unprocessed}}>
+                            <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
+                            <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
+                        </div>
+                        <div style={{display: this.state.processed}}>
+                            <div className="prompt">该请求已处理</div>
                         </div>
                     </div>
-{/*>>>>>>> 3c032eb41f5f918789f90b557b7b920eaa68e39b*/}
+                </div>
+                <div className="verify-toast center" style={{display: this.state.determine}}>
+                    <div className="am-toast-text" >
+                        <div className="am-toast-text-info">已同意绑定</div>
+                    </div>
+                </div>
+                <div className="verify-toast center" style={{display: this.state.disagree}}>
+                    <div className="am-toast-text" >
+                        <div className="am-toast-text-info">已拒绝绑定</div>
+                    </div>
                 </div>
             </div>
         )
