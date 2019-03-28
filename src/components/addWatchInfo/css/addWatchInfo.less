@@ -3,6 +3,13 @@
   height: 100%;
   box-sizing: border-box;
   background-color: white;
+  .am-navbar-blue{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+  }
   .icon_back{
     width: 54px;
     height: 54px;
@@ -217,11 +224,16 @@
   .p29{
     padding-top: 29px;
   }
-  .commonLocation-cont>div{
+  .commonLocation-cont{
     height: 100%;
-    &>div.p38{
-      height: calc(~'100% - 114px');
-      box-sizing: border-box;
+    padding-top: 64px;
+    box-sizing: border-box;
+    &>div{
+      height: 100%;
+      &>div.p38{
+        height: calc(~'100% - 114px');
+        box-sizing: border-box;
+      }
     }
   }
   @media screen and (max-width: 320px){
