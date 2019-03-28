@@ -225,8 +225,8 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className="user-positioning-jump"><img style={{borderRadius: '50%'}}
-                                                      src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
-                                                      alt=""/></div>
+                                                           src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                                                           alt=""/></div>
     }
 
     renderhomePoint() {
@@ -338,6 +338,9 @@ export default class watchPosition extends React.Component {
             created: (instance) => {
                 this.setState({marker: instance});
             },
+            moveend: () => {
+                Toast.hide()
+            }
         };
 
         return (
