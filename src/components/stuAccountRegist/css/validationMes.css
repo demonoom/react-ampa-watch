@@ -1,0 +1,32 @@
+#validationMes {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+}
+#validationMes .icon_back {
+  width: 54px;
+  height: 54px;
+  position: absolute;
+  left: 0;
+  top: 20px;
+  background: url("../../images/icon_backLogin.png") no-repeat center 11px;
+  background-size: 24px;
+}
+#validationMes .bindStudent {
+  margin-bottom: 20px;
+}
+#validationMes .bindStudent img {
+  width: 100%;
+}
+#validationMes .icon-grayTeacher .am-list-item.am-input-item {
+  background: url("../../images/icon_grayUser.png") no-repeat left 22px;
+  background-size: 24px;
+}
+#validationMes .icon-grayPhone .am-list-item.am-input-item {
+  padding: 18px 0 6px 0;
+  background: url("../../images/icon_grayPhone.png") no-repeat left 22px;
+  background-size: 24px;
+}
+#validationMes .School-information .school {
+  margin-right: 10px;
+}
