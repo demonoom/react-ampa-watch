@@ -1,5 +1,5 @@
 import React from "react";
-import { Tabs, WhiteSpace, Toast, ListView, NavBar, Popover } from 'antd-mobile';
+import { Tabs, WhiteSpace, Toast,PullToRefresh, ListView, NavBar, Popover } from 'antd-mobile';
 import '../css/rankingList.less'
 import { height } from "window-size";
 import { Modal } from "antd-mobile/lib/index";
@@ -140,7 +140,7 @@ export default class rankingList extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
                     result.response.forEach((v, i) => {
-                        if (this.state.userId == v.col_uid) {
+                        if (this.state.studentId == v.col_uid) {
                             this.setState({
                                 ownData: v,
                                 num: i
@@ -335,6 +335,20 @@ export default class rankingList extends React.Component {
         });
     };
 
+    onRefresh = () => {
+        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
+        divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
+        this.setState({defaultPageNo: 1, refreshing: true, isLoadingLeft: true},()=>{
+            if (this.state.flag == 1) {
+                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+    
+            } else {
+                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+            }
+        });
+     
+    }
+
     render () {
         const row = (rowData, sectionID, rowID) => {
             return (
@@ -433,6 +447,10 @@ export default class rankingList extends React.Component {
                                 style={{
                                     height: this.state.clientHeight - 50 - 64,
                                 }}
+                                // pullToRefresh={<PullToRefresh
+                                //     onRefresh={this.onRefresh}
+                                //     distanceToRefresh={80}
+                                // />}
                             />
                             <div className='myGrade' onClick={this.toDetail}>
                                 <div className='inner my_flex'>

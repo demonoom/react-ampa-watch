@@ -41,20 +41,36 @@ export default class addWatchInfo extends React.Component {
             jump: "check",
             relationData: [
                 {
-                    value: "父亲",
-                    label: '父亲'
+                    value: "爸爸",
+                    label: '爸爸'
                 },
                 {
-                    value: "母亲",
-                    label: "母亲"
+                    value: "妈妈",
+                    label: "妈妈"
                 },
                 {
-                    value: "祖父",
-                    label: "祖父"
+                    value: "爷爷",
+                    label: "爷爷"
                 },
                 {
-                    value: "祖母",
-                    label: "祖母"
+                    value: "奶奶",
+                    label: "奶奶"
+                },
+                {
+                    value: "哥哥",
+                    label: "哥哥"
+                },
+                {
+                    value: "姐妹",
+                    label: "姐姐"
+                },
+                {
+                    value: "叔叔",
+                    label: "叔叔"
+                },
+                {
+                    value: "阿姨",
+                    label: "阿姨"
                 },
                 {
                     value: "自定义",
@@ -299,7 +315,11 @@ export default class addWatchInfo extends React.Component {
     }
     //input聚焦
     handleClick = () => {
-        this.inputRef.focus();
+        this.inputLittantRef.focus();
+    }
+    //input聚焦
+    handlePhoneClick = () => {
+        this.inputPhoneRef.focus();
     }
 
 
@@ -838,13 +858,13 @@ export default class addWatchInfo extends React.Component {
                                 </div>
                             </div>
                             <div>
-                                <div onClick={this.handleClick} className='login-input line_publicD icon_watch'>
+                                <div onClick={this.handlePhoneClick} className='login-input line_publicD icon_watch'>
                                     <InputItem
                                         value={this.state.phonenumber}
                                         onChange={this.phoneNumber}
                                         type="phone"
                                         placeholder="请输入手表号码"
-                                        ref={el => this.inputRef = el}
+                                        ref={el => this.inputPhoneRef = el}
                                     ></InputItem>
                                 </div>
                             </div>
@@ -859,57 +879,59 @@ export default class addWatchInfo extends React.Component {
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <img className='progressPic' src={require('../../images/progress2.png')} alt="" />
-                            <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
-                                <div className="innerCont tabCont">
-                                    <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
-                                        <InputItem
-                                            className=""
-                                            placeholder="请输入小蚂蚁账号"
-                                            value={this.state.littleAntName}
-                                            onChange={this.littAntOnChange}
-                                            ref={el => this.inputRef = el}
-                                        ></InputItem>
+                            <div className="innerCont">
+                                <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
+                                    <div className="tabCont">
+                                        <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
+                                            <InputItem
+                                                className=""
+                                                placeholder="请输入小蚂蚁账号"
+                                                value={this.state.littleAntName}
+                                                onChange={this.littAntOnChange}
+                                                ref={el => this.inputLittantRef = el}
+                                            ></InputItem>
+                                        </div>
                                     </div>
-                                </div>
-                                <div>
                                     <div>
-                                        <div className="innerCont tabCont">
-                                            <div className="infoContent selectDown">
-                                                <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
-                                                    onClick={this.schoolOnClick}>
-                                                    <div className="am-list-line">
-                                                        <div className="am-list-content"></div>
-                                                        <div
-                                                            className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
-                                                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                                        <div>
+                                            <div className="innerCont tabCont">
+                                                <div className="infoContent selectDown">
+                                                    <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
+                                                        onClick={this.schoolOnClick}>
+                                                        <div className="am-list-line">
+                                                            <div className="am-list-content"></div>
+                                                            <div
+                                                                className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
+                                                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
+                                                        <Picker
+                                                            data={this.state.data}
+                                                            cols={this.state.cols}
+                                                            value={this.state.asyncValue}
+                                                            onPickerChange={this.onPickerChange}
+                                                            onOk={v => this.setState({ classId: this.state.asyncValue[1], stuClassName: 'color_3' })}
+                                                            extra='学生所在班级'
+                                                        >
+                                                            <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
+                                                        </Picker>
                                                     </div>
                                                 </div>
-                                                <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
-                                                    <Picker
-                                                        data={this.state.data}
-                                                        cols={this.state.cols}
-                                                        value={this.state.asyncValue}
-                                                        onPickerChange={this.onPickerChange}
-                                                        onOk={v => this.setState({ classId: this.state.asyncValue[1], stuClassName: 'color_3' })}
-                                                        extra='学生所在班级'
-                                                    >
-                                                        <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
-                                                    </Picker>
+                                                <div className="line_publicD login-input icon-grayStudent">
+                                                    <InputItem
+                                                        className=""
+                                                        placeholder="请输入学生姓名"
+                                                        value={this.state.studentName}
+                                                        onChange={this.stuOnChange}
+                                                    ></InputItem>
                                                 </div>
-                                            </div>
-                                            <div className="line_publicD login-input icon-grayStudent">
-                                                <InputItem
-                                                    className=""
-                                                    placeholder="请输入学生姓名"
-                                                    value={this.state.studentName}
-                                                    onChange={this.stuOnChange}
-                                                ></InputItem>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </Tabs>
+                            </div>
 
-                            </Tabs>
                         </div>
                         <div className="button_preNext">
                             <div className='prev' onClick={this.preThirPage}>上一步</div>

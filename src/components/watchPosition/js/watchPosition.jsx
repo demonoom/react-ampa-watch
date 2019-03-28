@@ -360,8 +360,8 @@ export default class watchPosition extends React.Component {
                         plugins={plugins}
                         center={this.state.position}
                         showBuildingBlock={true}
-                        // viewMode='3D'
-                        // buildingAnimation={true}
+                        viewMode='3D'
+                        buildingAnimation={true}
                         events={events}
                         rotateEnable={false}
                     >

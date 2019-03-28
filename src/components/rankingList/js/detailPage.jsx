@@ -71,7 +71,7 @@ export default class detailPage extends React.Component {
        * 视窗改变时改变高度
        */
     onWindowResize () {
-        setTimeout(function () {
+        setTimeout(()=>{
             this.setState({ clientHeight: document.body.clientHeight });
         }, 100)
     }
@@ -216,13 +216,13 @@ export default class detailPage extends React.Component {
                 itemWidth: 20,
                 itemHeight: 6,
                 data: [{
-                    name:'总数',icon:'rect'
+                    name:'答对次数',icon:'rect'
                     },
                     {
                         name:'答题次数',icon:'rect'
                     },
                     {
-                        name:'答对次数',icon:'rect'
+                        name:'总数',icon:'rect'
                     },
                     ],
                 top: 0,
@@ -280,34 +280,34 @@ export default class detailPage extends React.Component {
 
             series: [
                 {
-                    name: '总数',
+                    name: '答对次数',
                     type: 'line',
-                    areaStyle: {},
-                    smooth: true,
-                    data: AnswerRight,
-                    left: 0,
-                    bottom: 0,
+                    // areaStyle: {},
+                    // stack: '总量',
+                    data: SubjectTotal,
                     itemStyle: {
                         //通常情况下：
-                       normal:{
-                           color:'rgba(181,114,8,0.5)',
-                           label : {show: false},
-                           lineStyle:{
-                               color:'#b57208'
-                           }
-                       }
+                        normal:{
+                            // color:'rgba(130,231,128,0.4)',
+                            color:'#82e780',
+                            label : {show: false},
+                            lineStyle:{
+                                color:'#82e780'
+                            }
+                        }
                     },
                 },
                 {
                     name: '答题次数',
                     type: 'line',
-                    areaStyle: {},
+                    // areaStyle: {},
                     // stack: '总量',
                     data: AnswerTotal,
                     itemStyle: {
                         //通常情况下：
                         normal:{
-                            color:'rgba(235,222,77,0.4)',
+                            // color:'rgba(235,222,77,0.4)',
+                            color:'#ebde4d',
                             label : {show: false},
                             lineStyle:{
                                 color:'#ebde4d'
@@ -316,20 +316,22 @@ export default class detailPage extends React.Component {
                     },
                 },
                 {
-                    name: '答对次数',
+                    name: '总数',
                     type: 'line',
-                    areaStyle: {},
-                    // stack: '总量',
-                    data: SubjectTotal,
+                    // areaStyle: {},
+                    data: AnswerRight,
+                    left: 0,
+                    bottom: 0,
                     itemStyle: {
                         //通常情况下：
-                        normal:{
-                            color:'rgba(130,231,128,0.4)',
-                            label : {show: false},
-                            lineStyle:{
-                                color:'#82e780'
-                            }
-                        }
+                       normal:{
+                        //    color:'rgba(181,114,8,0.5)',
+                           color:'#b57208',
+                           label : {show: false},
+                           lineStyle:{
+                               color:'#b57208'
+                           }
+                       }
                     },
                 }
             ]
