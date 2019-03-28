@@ -357,7 +357,7 @@ export default class rankingList extends React.Component {
                         mode="light"
                     >排行榜</NavBar>
                 </div>
-                <div className="am-navbar-blue watchSelect">
+                <div className="am-navbar-blue watchSelect" style={{ display: this.state.toBind ? "none" : "block" }}>
                     <Popover mask
                              overlayClassName="fortest"
                              overlayStyle={{ color: 'currentColor' }}
