@@ -32,7 +32,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macAddress: "",
+            macAddress: "qq1",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -145,7 +145,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("wet");
+        this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
@@ -801,7 +801,7 @@ export default class addWatchInfo extends React.Component {
                                         data={this.state.relationData}
                                         value={this.state.relationValue}
                                         cols={1}
-                                        extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
+                                        extra={this.state.flag ? "您是孩子的" : this.state.relationValue}
                                         onChange={this.onRelationChange}
                                         onOk={this.clickRelationSure}
                                         onDismiss={this.onRelationCancel}
@@ -865,7 +865,7 @@ export default class addWatchInfo extends React.Component {
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <img className='progressPic' src={require('../../images/progress2.png')} alt=""/>
-                           <div className="innerCont">
+                           <div className="p29">
                                <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
                                    <div className="tabCont">
                                        <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
@@ -987,13 +987,12 @@ export default class addWatchInfo extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="button_preNext">
-                                    <div className='prev'  onClick={this.preForRegPage}>上一步</div>
-                                    <div className='next' onClick={this.nextForRegPage}>下一步</div>
-                                </div>
                             </div>
                         </div>
-
+                        <div className="button_preNext">
+                            <div className='prev'  onClick={this.preForRegPage}>上一步</div>
+                            <div className='next' onClick={this.nextForRegPage}>下一步</div>
+                        </div>
                     </div>
                 </div>
 

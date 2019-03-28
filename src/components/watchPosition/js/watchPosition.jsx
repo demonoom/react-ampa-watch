@@ -224,7 +224,7 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <div className="user-positioning"><img style={{borderRadius: '50%'}}
+        return <div className="user-positioning-jump"><img style={{borderRadius: '50%'}}
                                                       src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
                                                       alt=""/></div>
     }

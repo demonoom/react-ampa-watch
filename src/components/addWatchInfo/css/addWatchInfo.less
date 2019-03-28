@@ -217,15 +217,17 @@
   .p29{
     padding-top: 29px;
   }
-  @media screen and (max-width: 320px){
-    .commonLocation-cont>div{
-      height: 100%;
-      &>div.p38{
-      height: calc(~"100% - 80px");
-      }
+  .commonLocation-cont>div{
+    height: 100%;
+    &>div.p38{
+      height: calc(~'100% - 114px');
+      box-sizing: border-box;
     }
-    .button_preNext{
-      bottom: 20px;
+  }
+  @media screen and (max-width: 320px){
+    .commonLocation-cont>div>div.p38{
+      overflow-y: auto;
+      padding-bottom: 20px;
     }
   }
 }
