@@ -257,7 +257,7 @@ export default class commonLocation extends React.Component {
 
                         <div className="tips">
                             <div className="tips-title">温馨提示</div>
-                            <div className="tips-cont">设置常用地点后，当手表定位到该地点时，会直接显示在相应的地点。进出地点，家长端将收到对应的消息通知。</div>
+                            <div className="tips-cont">设置常用地点后，手表定位到该地点时，地图界面会自动显示相应设置信息。手表进出相应地点范围，家长端将收到对应的消息通知。</div>
                         </div>
                     </div>
                 </div>
