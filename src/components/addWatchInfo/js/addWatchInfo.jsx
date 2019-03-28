@@ -28,11 +28,13 @@ function formatDate (date) {
     var a = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
     return str = a[0] + '-' + a[1] + '-' + a[2]
 }
+var calm;
 export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
+        calm =this;
         this.state = {
-            macAddress: "",
+            macAddress: "qq1",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -175,12 +177,12 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("wdc");
+        this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
         Bridge.callHandler(data, (mes) => {
-            this.setState({ macAddress: mes.toUpperCase() });
+            this.setState({ macAddress: mes });
             this.getWatch2gByMacAddress(mes)
         }, function (error) {
         });
@@ -305,14 +307,33 @@ export default class addWatchInfo extends React.Component {
         });
     }
 
+    
+    showAlertExit () {
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+        const alertInstance = alert('您确定放弃本次编辑吗?', '', [
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            { text: '确定', onPress: () => calm.toBack()},
+        ], phone);
+
+    }
+
     //返回
     toBack = () => {
         var data = {
             method: 'popView',
         };
+        console.log(data, "data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
+
+
     //input聚焦
     handleClick = () => {
         this.inputLittantRef.focus();
@@ -787,12 +808,11 @@ export default class addWatchInfo extends React.Component {
 
 
     render () {
-        console.log($('#stuClazz .am-list-extra').html(), "$('#stuClazz .am-list-extra').html()")
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
                 <div className="am-navbar-blue whiteBack">
                     <div className="am-navbar am-navbar-light">
-                        <div onClick={this.toBack} className="am-navbar-left" role="button">
+                        <div onClick={this.showAlertExit} className="am-navbar-left" role="button">
                             <i className='icon-back'></i>
                         </div>
                         <div className="am-navbar-title">完善手表信息</div>
@@ -815,7 +835,7 @@ export default class addWatchInfo extends React.Component {
                                         data={this.state.relationData}
                                         value={this.state.relationValue}
                                         cols={1}
-                                        extra={this.state.flag ? "请选择你与孩子的关系" : this.state.relationValue}
+                                        extra={this.state.flag ? "我是他的" : this.state.relationValue}
                                         onChange={this.onRelationChange}
                                         onOk={this.clickRelationSure}
                                         onDismiss={this.onRelationCancel}
@@ -879,7 +899,7 @@ export default class addWatchInfo extends React.Component {
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <img className='progressPic' src={require('../../images/progress2.png')} alt="" />
-                            <div className="innerCont">
+                            <div className="p29">
                                 <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
                                     <div className="tabCont">
                                         <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
@@ -1000,13 +1020,12 @@ export default class addWatchInfo extends React.Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="button_preNext">
-                                    <div className='prev' onClick={this.preForRegPage}>上一步</div>
-                                    <div className='next' onClick={this.nextForRegPage}>下一步</div>
-                                </div>
                             </div>
                         </div>
-
+                        <div className="button_preNext">
+                            <div className='prev' onClick={this.preForRegPage}>上一步</div>
+                            <div className='next' onClick={this.nextForRegPage}>下一步</div>
+                        </div>
                     </div>
                 </div>
 

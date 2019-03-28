@@ -1,5 +1,8 @@
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
+import {
+    PullToRefresh
+} from 'antd-mobile';
 import '../css/detailPage.less';
 import '../css/macarons';
 var calm;
@@ -13,7 +16,6 @@ var day = myDate.getDate();
 var time = year + '-' + month + '-' + day;
 var start = time + ' 00:00:00'
 var end = time + ' 23:59:59';
-
 var myWeekDate = new Date(); //获取七天前日期；
 myWeekDate.setDate(myDate.getDate() - 7);
 //获取当前年
@@ -34,13 +36,15 @@ function unique (array) {
     }
     return temp;
 }
+
 export default class detailPage extends React.Component {
     constructor(props) {
         super(props);
         calm = this;
         this.state = {
             faceChartDiv: [],
-            detailData: {}
+            detailData: {},
+            clientHeight: document.body.clientHeight
         };
     }
     componentDidMount () {
@@ -56,10 +60,10 @@ export default class detailPage extends React.Component {
             today
         })
         this.getUserById(userId)
-        if(today == 1){
-            this.getStudentAnswerDetail(userId,start);
-        }else {
-            this.getStudentAnswerDetail(userId,weekStart);
+        if (today == 1) {
+            this.getStudentAnswerDetail(userId, start);
+        } else {
+            this.getStudentAnswerDetail(userId, weekStart);
         }
     }
 
@@ -71,8 +75,8 @@ export default class detailPage extends React.Component {
        * 视窗改变时改变高度
        */
     onWindowResize () {
-        setTimeout(()=>{
-            this.setState({ clientHeight: document.body.clientHeight });
+        setTimeout(() => {
+            calm.setState({ clientHeight: document.body.clientHeight });
         }, 100)
     }
     //获取用户的信息
@@ -88,8 +92,8 @@ export default class detailPage extends React.Component {
                     _this.setState({
                         users: result.response
                     })
-                }else {
-                    Toast.fail(result.msg,1,null,false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -102,7 +106,7 @@ export default class detailPage extends React.Component {
     /**
     * 获取表情数据折线图
     */
-    getStudentAnswerDetail (userId,start) {
+    getStudentAnswerDetail (userId, start) {
         var _this = this;
         var param = {
             "method": "getStudentAnswerDetail",
@@ -113,16 +117,16 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.response){
+                if (result.response) {
                     var response = result.response;
                     this.setState({
                         detailData: result.response
                     })
                     _this.buildFaceLineChart(response.answerRight);
-                }else {
-                    Toast.fail(result.msg,1,null,false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
                 }
-               
+
             },
             onError: function (error) {
                 // Toast.fail(error, 1);
@@ -182,8 +186,8 @@ export default class detailPage extends React.Component {
   */
     buildFaceOption = (xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal) => {
         return {
-            title:{
-                text:'今日答题统计',
+            title: {
+                text: '今日答题统计',
                 textStyle: {
                     fontSize: 15,
                     fontWeight: 'normal',
@@ -205,9 +209,9 @@ export default class detailPage extends React.Component {
                 },
             },
             grid: {
-                left:'5',
-                right:'5',
-                top:'35',
+                left: '5',
+                right: '5',
+                top: '35',
                 bottom: '0',//距离下边的距离
                 containLabel: true
             },
@@ -216,15 +220,15 @@ export default class detailPage extends React.Component {
                 itemWidth: 20,
                 itemHeight: 6,
                 data: [{
-                    name:'答对次数',icon:'rect'
-                    },
-                    {
-                        name:'答题次数',icon:'rect'
-                    },
-                    {
-                        name:'总数',icon:'rect'
-                    },
-                    ],
+                    name: '答对次数', icon: 'rect'
+                },
+                {
+                    name: '答题次数', icon: 'rect'
+                },
+                {
+                    name: '总数', icon: 'rect'
+                },
+                ],
                 top: 0,
                 right: '0',
                 textStyle: {
@@ -261,10 +265,10 @@ export default class detailPage extends React.Component {
             yAxis: [
                 {
                     type: 'value',
-                    splitLine:{
+                    splitLine: {
                         show: true,
-                        lineStyle:{
-                            color:'rgba(255,255,255,0.2)'
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.2)'
                         }
                     },
                     axisLine: {
@@ -287,12 +291,12 @@ export default class detailPage extends React.Component {
                     data: SubjectTotal,
                     itemStyle: {
                         //通常情况下：
-                        normal:{
+                        normal: {
                             // color:'rgba(130,231,128,0.4)',
-                            color:'#82e780',
-                            label : {show: false},
-                            lineStyle:{
-                                color:'#82e780'
+                            color: '#82e780',
+                            label: { show: false },
+                            lineStyle: {
+                                color: '#82e780'
                             }
                         }
                     },
@@ -305,12 +309,12 @@ export default class detailPage extends React.Component {
                     data: AnswerTotal,
                     itemStyle: {
                         //通常情况下：
-                        normal:{
+                        normal: {
                             // color:'rgba(235,222,77,0.4)',
-                            color:'#ebde4d',
-                            label : {show: false},
-                            lineStyle:{
-                                color:'#ebde4d'
+                            color: '#ebde4d',
+                            label: { show: false },
+                            lineStyle: {
+                                color: '#ebde4d'
                             }
                         }
                     },
@@ -324,22 +328,22 @@ export default class detailPage extends React.Component {
                     bottom: 0,
                     itemStyle: {
                         //通常情况下：
-                       normal:{
-                        //    color:'rgba(181,114,8,0.5)',
-                           color:'#b57208',
-                           label : {show: false},
-                           lineStyle:{
-                               color:'#b57208'
-                           }
-                       }
+                        normal: {
+                            //    color:'rgba(181,114,8,0.5)',
+                            color: '#b57208',
+                            label: { show: false },
+                            lineStyle: {
+                                color: '#b57208'
+                            }
+                        }
                     },
                 }
             ]
         };
     }
 
-     //返回
-     toBack = () => {
+    //返回
+    toBack = () => {
         var data = {
             method: 'popView',
         };
@@ -349,42 +353,76 @@ export default class detailPage extends React.Component {
     render () {
         return (
             <div id='detailPage'>
-                <div className="am-navbar">
+                <div className="am-navbar" style={{
+                        position: fixed,
+                        top: 0,
+                        left: 0,
+                        zIndex: 111,
+                        width: "100%",
+                }}>
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">今日排行榜详情</span>
+                    <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情":"本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
-                    <div className='grayBorder'></div>
-                    <div className='bg_white'>
-                        <div className='myDetail line_public p15'>
-                            <img src={this.state.users ? this.state.users.avatar : ""} />
-                            <div className='textCont'>
-                                <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
-                                <span  className='time'>
-                            {
-                                this.state.today == 1 ?
-                                    <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
-                                    :
-                                    <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
-                            }
-                        </span>
-                            </div>
-                            <div className='color_9'>{this.state.detailData.clazz ? this.state.detailData.clazz.grade.name + this.state.detailData.clazz.name : ""}</div>
+                    <PullToRefresh
+                        damping={130}
+                        ref={el => this.ptr = el}
+                        style={{
+                            height: calm.state.clientHeight-64,
+                        }}
+                        indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                        direction='down'
+                        refreshing={this.state.refreshing}
+                        onRefresh={() => {
+                            this.setState({ refreshing: true });
+                            setTimeout(() => {
+                                this.setState({ refreshing: false }, () => {
+                                    if (this.state.today == 1) {
+                                        this.getStudentAnswerDetail(this.state.userId, start);
+                                    } else {
+                                        this.getStudentAnswerDetail(this.state.userId, weekStart);
+                                    }
+                                });
+                            }, 1000);
+                        }}
+                    >
+                        <div style={{
+                            height: calm.state.clientHeight-64,
+                        }}>
+                            <div className='grayBorder'></div>
+                            <div className='bg_white'>
+                                <div className='myDetail line_public p15'>
+                                    <img src={this.state.users ? this.state.users.avatar : ""} />
+                                    <div className='textCont'>
+                                        <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
+                                        <span className='time'>
+                                            {
+                                                this.state.today == 1 ?
+                                                    <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
+                                                    :
+                                                    <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
+                                            }
+                                        </span>
+                                    </div>
+                                    <div className='color_9'>{this.state.detailData.clazz ? this.state.detailData.clazz.grade.name + this.state.detailData.clazz.name : ""}</div>
 
-                        </div>
-                        <div className="chartCont line_public">
-                            {calm.state.faceChartDiv}
-                        </div>
-                        <div className='textDetail'>
-                            <div className="line_public item p15">
-                                准确率<span>{this.state.detailData.rigthAccuay ? Math.ceil(this.state.detailData.rigthAccuay * 100) : "0"}% </span>
+                                </div>
+                                <div className="chartCont line_public">
+                                    {calm.state.faceChartDiv}
+                                </div>
+                                <div className='textDetail'>
+                                    <div className="line_public item p15">
+                                        准确率<span>{this.state.detailData.rigthAccuay ? Math.ceil(this.state.detailData.rigthAccuay * 100) : "0"}% </span>
+                                    </div>
+                                    <div className="line_public item p15">
+                                        全班排名<span>{this.state.detailData.totalClassTop ? this.state.detailData.totalClassTop : "0"}</span>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="line_public item p15">
-                                全班排名<span>{this.state.detailData.totalClassTop ? this.state.detailData.totalClassTop : "0"}</span>
-                            </div>
                         </div>
-                    </div>
+
+                    </PullToRefresh>
                 </div>
 
             </div>

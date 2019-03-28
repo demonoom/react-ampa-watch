@@ -118,7 +118,8 @@ export default class watchTrail extends React.Component {
      */
     buildLocationName = (data) => {
         var locationName = [];
-        data.forEach((v) => {
+        data.forEach((v, i) => {
+            console.log(i);
             locationName.push(
                 <Step title={v.locationName} description={WebServiceUtil.formatHM(v.time)}/>
             )
@@ -132,7 +133,7 @@ export default class watchTrail extends React.Component {
     timeChoose = (type) => {
         return () => {
             this.getWatch2gLocationRecordByWatch2gId(type);
-            this.setState({type});
+            this.setState({type, locationName: []});
         };
     };
 
@@ -185,12 +186,8 @@ export default class watchTrail extends React.Component {
 
         const lineEvents = {
             created: (ins) => {
-                console.log(ins);
                 this.state.map.setFitView()
-            },
-            click: () => {
-                console.log('line clicked')
-            },
+            }
         };
 
         return (
@@ -253,7 +250,7 @@ export default class watchTrail extends React.Component {
                         <div className="TrackDetails-cont">
                             <WingBlank size="lg">
                                 <WhiteSpace size="lg"/>
-                                <Steps current={this.state.locationName.length-1}>
+                                <Steps current={this.state.locationName.length - 1}>
                                     {this.state.locationName}
                                 </Steps>
                             </WingBlank>
