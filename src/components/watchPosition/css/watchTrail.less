@@ -212,9 +212,14 @@
       bottom: 0;
     }
   }
-  .icon-startPoint, .icon-endPoint{
+  .icon-startPoint, .icon-endPoint, .StepStart, .StepEnd{
     width: 25px;
     height: 36px;
+  }
+  .StepDot{
+    width: 8px;
+    height:8px;
+    margin: 0 8px;
   }
   .icon-startPoint{
     background: url("../img/icon-startingPoint.png") no-repeat;
@@ -241,8 +246,39 @@
       line-height: 1.5;
     }
     .am-steps-item-description{
-      color: #666;
+      color: #999;
       font-size: 14px;
+      line-height: 1;
+      padding-bottom: 15px;
     }
+    .am-steps-item-tail:after{
+      background-color:transparent;
+      border-right: 1px dashed #ccc;
+    }
+
+    .am-steps-item-content{
+      position: relative;
+      margin-top: 15px;
+      &::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 1px;
+        width: 100%;
+        background-color: #ddd;
+        -webkit-transform: scaleY(0.5);
+        -moz-transform: scaleY(0.5);
+        -ms-transform: scaleY(0.5);
+        -o-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+      }
+    }
+    .am-whitespace.am-whitespace-lg{
+      height: 5px;
+    }
+
+
+
   }
 }
