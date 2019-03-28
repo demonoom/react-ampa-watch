@@ -49,6 +49,17 @@ export default class addNewLocation extends React.Component {
         this.setState({userId, mac, macId, type});
     }
 
+    componentDidMount() {
+        var data = {
+            method: 'getLocation',
+        };
+        Bridge.callHandler(data, function (data) {
+            console.log(data);
+        }, function (error) {
+
+        });
+    }
+
     posNameClick = () => {
         if (this.state.type == 1 || this.state.type == 2) {
             return
