@@ -32,7 +32,7 @@ export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            macAddress: "we",
+            macAddress: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -145,7 +145,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("we");
+        // this.getWatch2gByMacAddress("wet");
         var data = {
             method: 'watchBinding'
         };
@@ -272,6 +272,22 @@ export default class addWatchInfo extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+    showAlertExit () {
+            var phoneType = navigator.userAgent;
+            var phone;
+            if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+                phone = 'ios'
+            } else {
+                phone = 'android'
+            }
+            const alertInstance = alert('您确定放弃本次编辑吗?', '', [
+                { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+                { text: '确定', onPress: () => this.toBack() },
+            ], phone);
+
+    }
+
+
     //input聚焦
     handleClick = () => {
         this.inputRef.focus();
@@ -758,12 +774,11 @@ export default class addWatchInfo extends React.Component {
 
 
     render () {
-        console.log($('#stuClazz .am-list-extra').html(),"$('#stuClazz .am-list-extra').html()")
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
                 <div className="am-navbar-blue whiteBack">
                     <div className="am-navbar am-navbar-light">
-                        <div onClick={this.toBack} className="am-navbar-left" role="button">
+                        <div onClick={this.showAlertExit} className="am-navbar-left" role="button">
                             <i className='icon-back'></i>
                         </div>
                         <div className="am-navbar-title">完善手表信息</div>
