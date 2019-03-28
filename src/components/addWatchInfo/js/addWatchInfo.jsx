@@ -34,7 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
-            macAddress: "qaz",
+            macAddress: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -113,21 +113,21 @@ export default class addWatchInfo extends React.Component {
 
     componentDidMount () {
         Bridge.setShareAble("false");
-        window.addEventListener('resize', calm.onWindwoResize);
         /**
-      * 防止软键盘挡住页面
-      */
-        var winHeight = $(window).height(); // 获取当前页面高度  
+     * 防止软键盘挡住页面
+     */
+        var winHeight = $(window).height(); // 获取当前页面高度
         $(window).resize(function () {
             var resizeHeight = $(this).height();
             if (winHeight - resizeHeight > 50) {
-                // 软键盘弹出  
-                $('body').css('height', $(window).height() + 'px');
-                $(".button_preNext").hide()
+                console.log($('.commonLocation-cont').height());
+                // 软键盘弹出
+                $('.commonLocation-cont').css('top', '-100px');
+                $(".button_preNext").hide();
             } else {
                 //软键盘收起
-                $('body').css('height', '100%');
-                $(".button_preNext").show()
+                $('.commonLocation-cont').css('top', '0');
+                $(".button_preNext").show();
             }
         });
 
@@ -180,7 +180,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("qq1");
+        // this.getWatch2gByMacAddress("qq1");
         var data = {
             method: 'watchBinding'
         };
@@ -824,27 +824,25 @@ export default class addWatchInfo extends React.Component {
                 <div className="commonLocation-cont bg_white">
                     <div className="firDiv">
                         <div className="p38 innerCont">
-                            <div className="infoContent">
-                                <div className='line_publicD'>
-                                    <div className="p10 scanDiv">
-                                        <span className='text_hidden color_c' style={{ display: this.state.macAddress ? "none" : "inline-block" }}>请扫描手表二维码</span>
-                                        <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
-                                        <span className='scanBtn' onClick={this.scanCode}>扫描</span>
-                                    </div>
+                            <div className='line_publicD'>
+                                <div className="p10 scanDiv activeDiv">
+                                    <span className='text_hidden color_c' style={{ display: this.state.macAddress ? "none" : "inline-block" }}>请扫描手表二维码</span>
+                                    <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
+                                    <span className='scanBtn' onClick={this.scanCode}>扫描</span>
                                 </div>
-                                <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
-                                    <Picker
-                                        data={this.state.relationData}
-                                        value={this.state.relationValue}
-                                        cols={1}
-                                        extra={this.state.flag ? "我是他的" : this.state.relationValue}
-                                        onChange={this.onRelationChange}
-                                        onOk={this.clickRelationSure}
-                                        onDismiss={this.onRelationCancel}
-                                    >
-                                        <List.Item arrow="horizontal"></List.Item>
-                                    </Picker>
-                                </div>
+                            </div>
+                            <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
+                                <Picker
+                                    data={this.state.relationData}
+                                    value={this.state.relationValue}
+                                    cols={1}
+                                    extra={this.state.flag ? "我是他的" : this.state.relationValue}
+                                    onChange={this.onRelationChange}
+                                    onOk={this.clickRelationSure}
+                                    onDismiss={this.onRelationCancel}
+                                >
+                                    <List.Item arrow="horizontal"></List.Item>
+                                </Picker>
                             </div>
                         </div>
                         <div className='submitBtn' onClick={this.nextFirPage}>下一步</div>
@@ -852,8 +850,22 @@ export default class addWatchInfo extends React.Component {
                     <div className="secDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress1.png')} alt="" />
-                            <div className="infoContent selectDown">
+                            <div className="progress progress1">
+                                <div className="my_flex text">
+                                    <span className='active'>完善信息</span>
+                                    <span>关联校园</span>
+                                    <span>安全验证</span>
+                                </div>
+                                <div className="circle">
+                                    <div className="line lineGray"></div>
+                                    <div className='my_flex icon_circle'>
+                                        <span className='active'><i></i></span>
+                                        <span><i></i></span>
+                                        <span><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="innerCont selectDown">
                                 <div className={'sex line_publicD ' + this.state.extraClassName}>
                                     <Picker
                                         data={sexData}
@@ -897,10 +909,27 @@ export default class addWatchInfo extends React.Component {
                         </div>
 
                     </div>
-                    <div className="thirDiv" style={{ display: "none" }}>
+                    <div className="thirDiv"  style={{ display: "none" }}>
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress2.png')} alt="" />
+                            <div className="progress progress2">
+                                <div className="my_flex text">
+                                    <span className='active'>完善信息</span>
+                                    <span className='active'>关联校园</span>
+                                    <span>安全验证</span>
+                                </div>
+                                <div className="circle">
+                                    <div className="lines my_flex">
+                                        <div className="line lineGray"></div>
+                                        <div className="line lineBlue"></div>
+                                    </div>
+                                    <div className='my_flex icon_circle'>
+                                        <span className='active'><i></i></span>
+                                        <span className='active'><i></i></span>
+                                        <span><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="p29">
                                 <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
                                     <div className="tabCont">
@@ -917,8 +946,8 @@ export default class addWatchInfo extends React.Component {
                                     <div>
                                         <div>
                                             <div className="innerCont tabCont">
-                                                <div className="infoContent selectDown">
-                                                    <div className='am-list-item am-list-item-middle line_publicD icon-graySchool '
+                                                <div className="selectDown">
+                                                    <div className='am-list-item am-list-item-middle line_publicD icon-graySchool activeDiv'
                                                         onClick={this.schoolOnClick}>
                                                         <div className="am-list-line">
                                                             <div className="am-list-content"></div>
@@ -963,7 +992,22 @@ export default class addWatchInfo extends React.Component {
                     <div className="forDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress3.png')} alt="" />
+                            <div className="progress progress3">
+                                <div className="my_flex text">
+                                    <span className='active'>完善信息</span>
+                                    <span className='active'>关联校园</span>
+                                    <span className='active'>安全验证</span>
+                                </div>
+                                <div className="circle">
+                                    <div className="line lineBlue"></div>
+                                    <div className='my_flex icon_circle'>
+                                        <span className='active'><i></i></span>
+                                        <span className='active'><i></i></span>
+                                        <span className='active'><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/*<img className='progressPic' src={require('../../images/progress3.png')} alt="" />*/}
                             <div className="p29 login-input">
                                 <div className='accountName'>
                                     {this.state.littleAntName}
@@ -996,7 +1040,21 @@ export default class addWatchInfo extends React.Component {
                     <div className="regiForDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
-                            <img className='progressPic' src={require('../../images/progress3.png')} alt="" />
+                            <div className="progress progress3">
+                                <div className="my_flex text">
+                                    <span className='active'>完善信息</span>
+                                    <span className='active'>关联校园</span>
+                                    <span className='active'>安全验证</span>
+                                </div>
+                                <div className="circle">
+                                    <div className="line lineBlue"></div>
+                                    <div className='my_flex icon_circle'>
+                                        <span className='active'><i></i></span>
+                                        <span className='active'><i></i></span>
+                                        <span className='active'><i></i></span>
+                                    </div>
+                                </div>
+                            </div>
                             <div id="validationMes">
                                 <div className="p29">
                                     <div className="infoContent">

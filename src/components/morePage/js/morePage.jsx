@@ -371,7 +371,6 @@ export default class morePage extends React.Component {
     }
 
     render () {
-        console.log(this.state.guardianData, "guardianData")
         return (
             <div id="morePage" className='bg_gray'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
@@ -416,50 +415,61 @@ export default class morePage extends React.Component {
                         }
                     </div>
                 </div>
-                <div className="grayBorder"></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">推送闹钟</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    <div className="grayBorder"></div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">推送闹钟</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">找手表</div>
+                        </div>
+                    </div>
+                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">推送天气</div>
+                        </div>
+                    </div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">推送监护人</div>
+                        </div>
+                    </div>
+                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">解绑</div>
+                        </div>
+                    </div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='am-list-item am-list-item-middle line_public' onClick={this.toJupmBind}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">添加手表</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public' onClick={this.showAlertLogout}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">退出登录</div>
+                        </div>
+                    </div>
+                {/*绑定后未验证空页面*/}
+                <div className="personEmptyCont" style={{display:this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block":"none"}}>
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    申请已提交<br />
+                                请等待管理员（{this.state.guardianData.familyRelate} ）验证通过
+                                    </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toFindWatch}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">找手表</div>
-                    </div>
                 </div>
-                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushWeather}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">推送天气</div>
-                    </div>
-                </div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.pushContacts}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">推送监护人</div>
-                    </div>
-                </div>
-                <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.showAlert}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">解绑</div>
-                    </div>
-                </div>
-                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='am-list-item am-list-item-middle line_public' onClick={this.toJupmBind}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">添加手表</div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                    </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public' onClick={this.showAlertLogout}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">退出登录</div>
-                    </div>
-                </div>
-                <div style={{display:this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block":"none"}}>
-                    空
-                </div>
-            </div>
         )
     }
 }
