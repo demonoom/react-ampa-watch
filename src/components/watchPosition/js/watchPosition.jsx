@@ -29,11 +29,14 @@ export default class watchPosition extends React.Component {
             homePointFlag: false,
             sclPointFlag: false,
             map: null,
+            marker: null,
             visible: false,
             toBind: false,
             selected: '',
             watchName: '',
             popoverLay: [],
+            loadPosition: false,
+            jumpClass: 'user-positioning'
         };
     }
 
@@ -86,7 +89,7 @@ export default class watchPosition extends React.Component {
                         _this.buildStuList(result.response)
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    // Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -133,7 +136,7 @@ export default class watchPosition extends React.Component {
                         }
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    // Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -170,31 +173,49 @@ export default class watchPosition extends React.Component {
             "command": "watch2GLocaltionRequest",
             "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
         };
+        console.log(obj);
         ms.send(obj);
+        if (!this.state.toBind) {
+            Toast.loading('正在获取位置信息...', 5, () => {
+                if (this.state.loadPosition) {
+                    Toast.offline('获取定位失败')
+                }
+                this.setState({jumpClass: 'user-positioning'});
+            });
+            this.setState({loadPosition: true, jumpClass: 'user-positioning-jump'});
+        }
     };
 
     msListener() {
         var _this = this;
         ms.msgWsListener = {
             onError: function (errorMsg) {
-                // Toast.fail(errorMsg)
+
             }, onWarn: function (warnMsg) {
-                // Toast.fail(warnMsg)
+
             }, onMessage: function (info) {
                 if (info.command === 'sendWatch2GLocaltionData') {
+                    console.log(info);
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
-                            Toast.fail('获取定位失败',1,null,false);
+                            Toast.fail('获取定位失败', 1, null, false);
                             return
                         }
+                        // var position = {
+                        //     "longitude": info.data.longitude,
+                        //     "latitude": info.data.latitude,
+                        // };
+                        // _this.setState({position})
 
-                        console.log(_this.state.map);
+                        _this.setState({loadPosition: false});
 
-                        var position = {
-                            "longitude": info.data.longitude,
-                            "latitude": info.data.latitude,
-                        };
-                        _this.setState({position})
+                        if (!!_this.state.map) {
+                            _this.state.map.panTo([info.data.longitude, info.data.latitude]);
+                            _this.state.map.setZoom(17);
+                        }
+                        if (!!_this.state.marker) {
+                            _this.state.marker.setPosition([info.data.longitude, info.data.latitude]);
+                        }
                     }
                 }
             }
@@ -206,9 +227,9 @@ export default class watchPosition extends React.Component {
      * @returns {*}
      */
     renderMarker() {
-        return <div className="user-positioning-jump"><img style={{borderRadius: '50%'}}
-                                                      src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
-                                                      alt=""/></div>
+        return <div className={watchPositionThis.state.jumpClass}><img style={{borderRadius: '50%'}}
+                                                          src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                                                          alt=""/></div>
     }
 
     renderhomePoint() {
@@ -231,7 +252,6 @@ export default class watchPosition extends React.Component {
      * 手动获取位置
      */
     getPosition = () => {
-        this.state.map.setZoom(17);
         this.watch2GLocaltionRequest();
     };
 
@@ -277,7 +297,6 @@ export default class watchPosition extends React.Component {
             sclPointFlag: false,
         }, () => {
             this.watch2GLocaltionRequest();
-            this.state.map.setZoom(17);
         });
     };
 
@@ -310,6 +329,24 @@ export default class watchPosition extends React.Component {
                 ins.setZoom(17);
                 this.watch2GLocaltionRequest();
             },
+            moveend: () => {
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
+            },
+            zoomend: () => {
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
+            }
+        };
+
+        const markerEvents = {
+            created: (instance) => {
+                this.setState({marker: instance});
+            },
+            moveend: () => {
+                Toast.hide();
+                this.setState({jumpClass: 'user-positioning'});
+            }
         };
 
         return (
@@ -359,15 +396,18 @@ export default class watchPosition extends React.Component {
                         loading={Loading}
                         plugins={plugins}
                         center={this.state.position}
-                        showBuildingBlock={true}
-                        viewMode='3D'
-                        buildingAnimation={true}
+                        // showBuildingBlock={true}
+                        // viewMode='3D'
+                        // buildingAnimation={true}
+                        preloadMode={false}
                         events={events}
                         rotateEnable={false}
+                        touchZoomCenter='1'
                     >
                         <Marker
                             position={this.state.position}
                             render={this.renderMarker}
+                            events={markerEvents}
                         />
                         <Marker
                             position={this.state.homePoint}

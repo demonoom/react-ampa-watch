@@ -91,7 +91,7 @@ export default class updateLocation extends React.Component {
     searchPos = () => {
         var _this = this;
         if (this.state.searchValue.trim() === '') {
-            Toast.info('请输入位置信息',2,null,false);
+            Toast.info('请输入位置信息', 2, null, false);
             return
         }
 
@@ -173,11 +173,11 @@ export default class updateLocation extends React.Component {
 
     saveLocation = () => {
         if (this.state.posName === '未设置') {
-            Toast.fail('请设置位置名称',2,null,false);
+            Toast.fail('请设置位置名称', 2, null, false);
             return
         }
         if (this.state.pos === '未设置') {
-            Toast.fail('请设置位置信息',2,null,false);
+            Toast.fail('请设置位置信息', 2, null, false);
             return
         }
         this.updateWatch2gHomePoint()
@@ -203,7 +203,7 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('修改成功',1,null,false);
+                        Toast.success('修改成功', 1, null, false);
 
                         setTimeout(function () {
                             var data = {
@@ -215,7 +215,7 @@ export default class updateLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -238,7 +238,7 @@ export default class updateLocation extends React.Component {
             onResponse: (result) => {
                 if (result.msg == '调用成功' || result.success == true) {
                     if (result.success) {
-                        Toast.success('删除成功',1,null,false);
+                        Toast.success('删除成功', 1, null, false);
 
                         setTimeout(function () {
                             var data = {
@@ -250,7 +250,7 @@ export default class updateLocation extends React.Component {
                         }, 1000)
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -301,13 +301,15 @@ export default class updateLocation extends React.Component {
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">修改新地址</span>
-                    <span className="am-navbar-right am-navbar-del"><span
-                        style={{display: (this.state.type == 1 || this.state.type == 2) ? 'none' : ''}}
-                        onClick={this.deleteWatch2gHomePoint}>删除</span></span>
+                    <span className="am-navbar-right am-navbar-del">
+                        <span style={{display: (this.state.type == 1 || this.state.type == 2) ? 'none' : ''}}
+                              onClick={this.deleteWatch2gHomePoint}>删除</span>
+                    </span>
                 </div>
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
-                    <List className="my-list line_public">
+                    <List
+                        className={(this.state.type == 1 || this.state.type == 2) ? 'my-list home-hidden' : 'my-list'}>
                         <Item
                             arrow="horizontal"
                             platform="android"
@@ -373,7 +375,7 @@ export default class updateLocation extends React.Component {
                             />
                             <Circle
                                 center={this.state.position}
-                                radius={this.state.radius}
+                                radius={this.state.sliderValue}
                                 events={circleEvents}
                                 style={this.state.style}
                             />
