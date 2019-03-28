@@ -166,6 +166,7 @@ export default class commonLocation extends React.Component {
             selfBack: true,
             url: url + '&posTude=' + this.state.posTude
         };
+        console.log(data);
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });

@@ -99,6 +99,10 @@ export default class watchPosition extends React.Component {
     };
 
     buildStuList = (data) => {
+        // guardianId
+        console.log(data[0].guardians.filter((v) => {
+            return v.guardianId == this.state.userId
+        }));
         if (data.length == 0) {
             this.setState({toBind: true});
             return
@@ -228,8 +232,8 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className={watchPositionThis.state.jumpClass}><img style={{borderRadius: '50%'}}
-                                                          src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
-                                                          alt=""/></div>
+                                                                       src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                                                                       alt=""/></div>
     }
 
     renderhomePoint() {
