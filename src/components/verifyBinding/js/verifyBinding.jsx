@@ -39,7 +39,7 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-                    if (result.response.valid != 2) {
+                    if (result.response.valid == 2) {
                         var unprocessed = 'none';
                         var processed = '';
                         this.setState({unprocessed, processed});
@@ -119,15 +119,19 @@ export default class verifyBinding extends React.Component {
                             <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
                         </div>
                         <div style={{display: this.state.processed}}>
-                            <div>该请求已处理</div>
+                            <div className="prompt">该请求已处理</div>
                         </div>
                     </div>
                 </div>
-                <div style={{display: this.state.determine}}>
-                    <span>已同意绑定</span>
+                <div className="verify-toast center" style={{display: this.state.determine}}>
+                    <div className="am-toast-text" >
+                        <div className="am-toast-text-info">已同意绑定</div>
+                    </div>
                 </div>
-                <div style={{display: this.state.disagree}}>
-                    <span>已拒绝绑定</span>
+                <div className="verify-toast center" style={{display: this.state.disagree}}>
+                    <div className="am-toast-text" >
+                        <div className="am-toast-text-info">已拒绝绑定</div>
+                    </div>
                 </div>
             </div>
         )
