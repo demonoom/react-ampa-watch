@@ -235,7 +235,7 @@ export default class watchPosition extends React.Component {
                     if (info.data.guardianId == _this.state.userId) {
                         if (info.data.operateStatus == 0) {
                             //拒绝
-                            _this.setState({toConfirm: false, toBind: true}, () => {
+                            _this.setState({toConfirm: false, toBind: false, watchName: ''}, () => {
                                 _this.getWatch2gsByGuardianUserId()
                             })
                         } else {
