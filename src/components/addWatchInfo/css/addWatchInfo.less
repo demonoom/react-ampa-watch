@@ -3,6 +3,13 @@
   height: 100%;
   box-sizing: border-box;
   background-color: white;
+  .am-navbar-blue{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+  }
   .icon_back{
     width: 54px;
     height: 54px;
@@ -69,6 +76,9 @@
       background-size: 24px;
     }
   }
+  .accountName{
+    color: #10A7FC;
+  }
   .icon_birth{
     .am-list-line{
       background: url("../../images/icon_grayBirth.png") no-repeat left 22px;
@@ -123,6 +133,9 @@
           float: right;
           padding-right: 4px;
           cursor: pointer;
+          width: 50px;
+          text-align: right;
+          box-sizing: border-box;
         }
       }
       .cont {
@@ -169,10 +182,98 @@
   }
 
   /*完善进度*/
+  .progress{
+    padding-top: 70px;
+    .circle{
+      .lineGray{
+        background-color: #BFBFBF;
+      }
+      .lineBlue{
+        background-color: #13ABFD;
+      }
+    }
+    .text{
+      justify-content: space-between;
+      color: #BFBFBF;
+      font-size: 14px;
+      span.active{
+        color: #17ACF7;
+      }
+    }
+    .circle{
+      position: relative;
+      width: 100%;
+      height: 20px;
+      .line{
+        height: 4px;
+        width: calc(~"100% - 34px");
+        position: absolute;
+        left: 17px;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        transform: translateY(-50%);
+        z-index: 5;
+      }
+      .lines{
+        .lineBlue{
+          width: calc(~"50% - 17px");
+        }
+        .lineGray{
+          width: calc(~"50% - 17px");
+          left: auto;
+          right: 17px;
+        }
+      }
+      .icon_circle{
+        padding: 0 17px;
+        box-sizing: border-box;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        justify-content: space-between;
+        span{
+          border: 1px #BFBFBF solid;
+          border-radius: 50%;
+          width: 20px;
+          height: 20px;
+          box-sizing: border-box;
+          padding: 3px;
+          display: block;
+          background-color: white;
+          &.active{
+            border: 1px #13ABFD solid;
+            i{
+              background-color: #13ABFD;
+            }
+          }
+          i{
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: #BFBFBF;
+          }
+        }
+      }
+    }
+  }
   .dec{
-    text-align: center;
-    padding-top: 30px;
-    padding-bottom: 25px;
+    text-align: left;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 30px;
+    background-color: #ededed;
+    color: #666;
+    font-size: 13px;
   }
   .progressPic{
     width: 100%;
@@ -181,7 +282,7 @@
   .tabCont{
     border: 1px #E5E5E5 solid;
     border-top: none;
-    padding: 20px 20px 50px;
+    padding: 15px 20px 50px;
   }
 
   .am-tabs-default-bar-underline,.am-tabs-default-bar-top .am-tabs-default-bar-tab::after{
@@ -209,19 +310,36 @@
     border: 1px #E5E5E5 solid;
     border-radius: 5px 5px 0 0;
     font-size: 15px;
-    color: #666;
+    color: #17ACF7;
     border-bottom: 0;
     background-color: #fff;
     margin-top: 0;
+    &::before{
+      content: '';
+      width: 95%;
+      height: 2px;
+      background-color: #17ACF7;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+    }
   }
   .p29{
-    padding-top: 29px;
+    padding-top: 40px;
   }
-  .commonLocation-cont>div{
-    height: 100%;
-    &>div.p38{
-      height: calc(~'100% - 114px');
-      box-sizing: border-box;
+  .commonLocation-cont{
+   height: 100%;
+    &>div{
+      height: 100%;
+      &>div.p38{
+        height: calc(~'100% - 114px');
+        box-sizing: border-box;
+      }
     }
   }
   @media screen and (max-width: 320px){

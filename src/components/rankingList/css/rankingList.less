@@ -41,11 +41,17 @@
   }
   .watchSelect{
     position: absolute;
-    right: 30px;
-    top: 20px;
-    height: 44px;
+    right: 0;
+    top: 5px;
     z-index: 50;
     color: #fff;
+    &.left{
+      right: auto;
+      left: 30px;
+      .watchName{
+        padding-left: 5px;
+      }
+    }
     .watchName{
       padding-right: 5px;
       font-size: 14px;

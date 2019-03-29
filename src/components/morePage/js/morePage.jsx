@@ -19,6 +19,7 @@ export default class morePage extends React.Component {
             guardianData: {},
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
+            guardianData: {}
         };
     }
 
@@ -74,6 +75,7 @@ export default class morePage extends React.Component {
                             watchData: result.response,
                             childSex: result.response[0].childSex,
                             watchName: result.response[0].watchName,
+                            phoneNumber: result.response[0].phoneNumber,
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
                             studentId: result.response[0].studentId,
@@ -206,6 +208,7 @@ export default class morePage extends React.Component {
 
     //选择
     onSelect = (opt) => {
+        console.log(opt)
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
                 this.setState({
@@ -219,6 +222,7 @@ export default class morePage extends React.Component {
                             }, () => {
                                 this.setState({
                                     visible: false,
+                                    phoneNumber: opt.props.phoneNumber,
                                     watchId: opt.props.macId,
                                     watchName: opt.props.children,
                                     macAddr: opt.props.mac
@@ -334,7 +338,7 @@ export default class morePage extends React.Component {
         var watchListData = [];
         data.forEach((v) => {
             watchListData.push(
-                (<Item style={{ color: '#333' }} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
+                (<Item style={{ color: '#333' }} phoneNumber={v.phoneNumber} macId={v.id} mac={v.macAddress} key={v.id}>{v.watchName}</Item>)
             );
         });
         this.setState({
@@ -358,8 +362,10 @@ export default class morePage extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            selfBack: true,
-            url: url
+            isNativeNav: true,
+            isCanBack: true,
+            url: url,
+            backAlertInfo:"是否放弃本次编辑？"
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
@@ -386,8 +392,7 @@ export default class morePage extends React.Component {
                         <div style={{
                             height: '22px',
                             lineHeight: '22px',
-                            padding: '0 15px 15px',
-                            marginRight: '-15px',
+                            padding: '15px',
                             display: 'flex',
                             alignItems: 'center',
                         }}
@@ -402,12 +407,11 @@ export default class morePage extends React.Component {
                     <span className='icon_add' onClick={this.toJupmBind}
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}
                     >添加手表</span>
-                    <div className="clear"></div>
                     <div className="wrap">
                         <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
                         {
 
-                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "未绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate}</div></div>
+                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
                         }
                     </div>
                 </div>
@@ -449,6 +453,20 @@ export default class morePage extends React.Component {
                 <div className='am-list-item am-list-item-middle line_public' onClick={this.showAlertLogout}>
                     <div className="am-list-line">
                         <div className="am-list-content">退出登录</div>
+                    </div>
+                </div>
+                {/*绑定后未验证空页面*/}
+                <div className="personEmptyCont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    申请已提交<br />
+                                    请等待管理员（{this.state.guardianData.familyRelate} ）验证通过
+                                    </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
