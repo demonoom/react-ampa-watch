@@ -390,9 +390,9 @@ export default class morePage extends React.Component {
                         onSelect={this.onSelect}
                     >
                         <div style={{
-                            height: '22px',
-                            lineHeight: '22px',
-                            padding: '15px',
+                            height: '44px',
+                            lineHeight: '44px',
+                            padding: '15px 15px 0',
                             display: 'flex',
                             alignItems: 'center',
                         }}
