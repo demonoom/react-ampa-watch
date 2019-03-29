@@ -189,10 +189,8 @@ export default class commonLocation extends React.Component {
                     <span className="am-navbar-right" onClick={this.addNewPos}>添加</span>
                 </div>
                 <div className="commonLocation-cont">
-                    <div className="WhiteSpace"></div>
-
                     <div className="commonLocation-content">
-
+                        <div className="WhiteSpace"></div>
                         <div className="publicPos">
                             <Item
                                 arrow="horizontal"
