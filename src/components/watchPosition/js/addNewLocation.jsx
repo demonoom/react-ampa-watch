@@ -16,6 +16,7 @@ export default class addNewLocation extends React.Component {
             pos: '请设置地点位置',
             searchValue: '',
             posList: [],
+            defaultPos: [],
             position: {longitude: '116.397477', latitude: '39.908692'},
             zoom: 10,
             map: null,
@@ -54,6 +55,7 @@ export default class addNewLocation extends React.Component {
     }
 
     inverseGeocoding = (posTude) => {
+        var _this = this;
         $.ajax({
             type: "GET",      //data 传送数据类型。post 传递
             dataType: 'json',  // 返回数据的数据类型json
@@ -65,7 +67,26 @@ export default class addNewLocation extends React.Component {
             error: function () {
 
             }, success: function (data) {
-                console.log(data, '结果');
+                if (data.status === '1') {
+                    _this.setState({
+                        defaultPos: <Item
+                            arrow="horizontal"
+                            className="line_public"
+                            multipleLine
+                            onClick={() => {
+                                _this.intoMap({
+                                    location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+                                })
+                            }}
+                            platform="android"
+                        >
+                            <div className="name">当前位置</div>
+                            <Brief>{data.regeocode.formatted_address}</Brief>
+                        </Item>
+                    })
+                } else {
+                    Toast.fail('未知的错误', 2, null, false)
+                }
             }
         })
     };
@@ -329,6 +350,7 @@ export default class addNewLocation extends React.Component {
                                    placeholder="请输入位置信息"/>
                             <div className="icon-search" onClick={this.searchPos}></div>
                         </div>
+                        {this.state.defaultPos}
                     </div>
                     <div className="searchResults">
                         {this.state.posList}
