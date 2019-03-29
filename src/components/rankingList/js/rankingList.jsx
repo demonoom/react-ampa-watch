@@ -403,11 +403,10 @@ export default class rankingList extends React.Component {
                         onSelect={this.onSelect}
                     >
                         <div style={{
-                            height: '100%',
-                            padding: '0',
-                            marginRight: '-15px',
+                            height: '44px',
                             display: 'flex',
                             alignItems: 'center',
+                            padding: '15px 15px 0 15px'
                         }}
                         >
                             <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
