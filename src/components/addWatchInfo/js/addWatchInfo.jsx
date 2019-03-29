@@ -465,6 +465,7 @@ export default class addWatchInfo extends React.Component {
         }
     }
 
+
     //第四个div
     //输入小蚂蚁账号
     littAntOnChange = (value) => {
@@ -844,7 +845,7 @@ export default class addWatchInfo extends React.Component {
                     </div>
                 </div> */}
                 <div className="commonLocation-cont bg_white">
-                    <div className="firDiv" style={{display: 'none'}}>
+                    <div className="firDiv">
                         <div className="p38 innerCont">
                             <div className='line_publicD'>
                                 <div className="p10 scanDiv activeDiv" onClick={this.scanCode}>
@@ -934,7 +935,7 @@ export default class addWatchInfo extends React.Component {
                         </div>
 
                     </div>
-                    <div className="thirDiv" style={{display: ""}}>
+                    <div className="thirDiv" style={{display: 'none'}}>
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress2">
