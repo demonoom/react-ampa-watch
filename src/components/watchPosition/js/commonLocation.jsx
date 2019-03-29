@@ -157,7 +157,7 @@ export default class commonLocation extends React.Component {
                 >
                     <span className="spaceAvatar">
                         <img style={{borderRadius: '50%'}}
-                             src={require("../img/icon-home.png")} alt=""/>
+                             src={require("../img/icon-Public.png")} alt=""/>
                     </span>
                     <div className="space-wrap">
                         <div className="space-name text_hidden">{v.homeName}</div>
