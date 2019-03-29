@@ -102,6 +102,10 @@ export default class watchPosition extends React.Component {
     };
 
     buildStuList = (data) => {
+        if (data.length == 0) {
+            this.setState({toBind: true});
+            return
+        }
         this.setState({
             watch2gs: data, familyRelate: data[0].guardians.filter((v) => {
                 return v.bindType == 1
@@ -115,10 +119,7 @@ export default class watchPosition extends React.Component {
             this.setState({toConfirm: true});
         }
 
-        if (data.length == 0) {
-            this.setState({toBind: true});
-            return
-        }
+        
         var popoverLay = [];
         data.forEach((v) => {
             popoverLay.push(

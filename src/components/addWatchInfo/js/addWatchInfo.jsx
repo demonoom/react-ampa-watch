@@ -118,17 +118,28 @@ export default class addWatchInfo extends React.Component {
         /**
      * 防止软键盘挡住页面
      */
-        var winHeight = $(window).height(); // 获取当前页面高度
+        // var winHeight = $(window).height(); // 获取当前页面高度
+        // $(window).resize(function () {
+        //     var resizeHeight = $(this).height();
+        //     if (winHeight - resizeHeight > 50) {
+        //         // 软键盘弹出
+        //         $('.commonLocation-cont').css('top', '-100px');
+        //         $(".button_preNext").hide();
+        //     } else {
+        //         //软键盘收起
+        //         $('.commonLocation-cont').css('top', '0');
+        //         $(".button_preNext").show();
+        //     }
+        // });
+        var winHeight = $(window).height(); // 获取当前页面高度  
         $(window).resize(function () {
             var resizeHeight = $(this).height();
             if (winHeight - resizeHeight > 50) {
-                // 软键盘弹出
-                $('.commonLocation-cont').css('top', '-100px');
-                $(".button_preNext").hide();
+                // 软键盘弹出  
+                $('body').css('height', winHeight + 'px');
             } else {
                 //软键盘收起
-                $('.commonLocation-cont').css('top', '0');
-                $(".button_preNext").show();
+                $('body').css('height', '100%');
             }
         });
 
@@ -458,6 +469,7 @@ export default class addWatchInfo extends React.Component {
             })
         }
     }
+
 
     //第四个div
     //输入小蚂蚁账号
@@ -821,7 +833,7 @@ export default class addWatchInfo extends React.Component {
         $(".regiForDiv").hide();
     }
 
-    searchInputFcous=()=>{
+    searchInputFcous = () => {
         $(".searchDiv input").focus();
     }
 
