@@ -43,7 +43,7 @@ export default class verifyBinding extends React.Component {
                     } else if (result.response.valid == 1) {
                         var determine = '';
                         this.setState({determine});
-                    } else if (result.response == 0) {
+                    } else if (result.response.valid == 0) {
                         var disagree = '';
                         this.setState({disagree});
                     }
