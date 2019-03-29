@@ -42,6 +42,8 @@ export default class updateLocation extends React.Component {
         var posName = locationSearch.split("&")[1].split('=')[1];
         var pos = locationSearch.split("&")[2].split('=')[1];
         var type = locationSearch.split("&")[3].split('=')[1];
+        var posTude = locationSearch.split("&")[4].split('=')[1];
+        console.log(posTude, 'posTude');
         this.setState({id, posName, pos, type});
     }
 

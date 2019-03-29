@@ -32,11 +32,14 @@ export default class watchPosition extends React.Component {
             marker: null,
             visible: false,
             toBind: false,
+            toConfirm: false,
             selected: '',
             watchName: '',
             popoverLay: [],
             loadPosition: false,
-            jumpClass: 'user-positioning'
+            jumpClass: 'user-positioning',
+            watch2gs: [],
+            familyRelate: ''
         };
     }
 
@@ -99,9 +102,18 @@ export default class watchPosition extends React.Component {
     };
 
     buildStuList = (data) => {
-        /*console.log(data[0].guardians.filter((v) => {
+        this.setState({
+            watch2gs: data, familyRelate: data[0].guardians.filter((v) => {
+                return v.bindType == 1
+            })[0].familyRelate
+        });
+
+        if (data[0].guardians.filter((v) => {
             return v.guardianId == this.state.userId
-        }));*/
+        })[0].bindType == 2) {
+            this.setState({toConfirm: true});
+        }
+
         if (data.length == 0) {
             this.setState({toBind: true});
             return
@@ -176,9 +188,8 @@ export default class watchPosition extends React.Component {
             "command": "watch2GLocaltionRequest",
             "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
         };
-        console.log(obj);
         ms.send(obj);
-        if (!this.state.toBind) {
+        if (!this.state.toBind && !this.state.toConfirm) {
             Toast.loading('正在获取位置信息...', 5, () => {
                 if (this.state.loadPosition) {
                     Toast.offline('手表不在线')
@@ -198,7 +209,6 @@ export default class watchPosition extends React.Component {
 
             }, onMessage: function (info) {
                 if (info.command === 'sendWatch2GLocaltionData') {
-                    console.log(info);
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
                             Toast.fail('手表不在线', 1, null, false);
@@ -290,6 +300,24 @@ export default class watchPosition extends React.Component {
     };
 
     onSelect = (opt) => {
+        var optObj = this.state.watch2gs.filter((v) => {
+            return v.id == opt.props.macId
+        })[0];
+
+        this.setState({
+            familyRelate: optObj.guardians.filter((v) => {
+                return v.bindType == 1
+            })[0].familyRelate
+        });
+
+        if (optObj.guardians.filter((v) => {
+            return v.guardianId == this.state.userId
+        })[0].bindType == 2) {
+            this.setState({toConfirm: true});
+        } else {
+            this.setState({toConfirm: false});
+        }
+
         this.setState({
             watchName: opt.props.children,
             visible: false,
@@ -445,13 +473,14 @@ export default class watchPosition extends React.Component {
                     </div>
                     <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                 </div>
-                <div className="emptyCont emptyCont-bg emptyContBind" style={{display: 'none'}}>
+                <div className="emptyCont emptyCont-bg emptyContBind"
+                     style={{display: this.state.toConfirm ? 'block' : 'none'}}>
                     <div className="p38 my_flex">
                         <div>
                             <i></i>
                             <span>
                                     申请已提交<br/>
-                                请等待管理员（爸爸）验证通过
+                                请等待管理员（{this.state.familyRelate}）验证通过
                                     </span>
                         </div>
                     </div>
