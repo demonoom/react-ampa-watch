@@ -26,6 +26,12 @@ var weekMonth = myWeekDate.getMonth() + 1;
 var weekDay = myWeekDate.getDate();
 var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
 var weekStart = timeWeek + ' 00:00:00';
+var  dataLegend=[
+    {name: '答对次数', icon: 'rect',value:'40'},
+    {name: '答题次数', icon: 'rect',value:'40'},
+    {name: '总数', icon: 'rect',value:'40'}
+]
+
 //数组去重
 function unique (array) {
     var temp = []; //一个新的临时数组
@@ -212,7 +218,7 @@ export default class detailPage extends React.Component {
                 left: '5',
                 right: '5',
                 top: '35',
-                bottom: '0',//距离下边的距离
+                bottom: '35',//距离下边的距离
                 containLabel: true
             },
             legend: {
@@ -229,8 +235,19 @@ export default class detailPage extends React.Component {
                     name: '总数', icon: 'rect'
                 },
                 ],
-                top: 0,
-                right: '0',
+                formatter: function (name) {
+                    var total = 0;
+                    var target;
+                    for (var i = 0, l = dataLegend.length; i < l; i++) {
+                        total += dataLegend[i].value;
+                        if (dataLegend[i].name == name) {
+                            target = dataLegend[i].value;
+                        }
+                    }
+                    return name + '(' + target + ')';
+                },
+                y: 'bottom',
+                x: 'center',
                 textStyle: {
                     fontSize: 12,
                     color: '#F1F1F3'
@@ -265,6 +282,7 @@ export default class detailPage extends React.Component {
             yAxis: [
                 {
                     type: 'value',
+                    minInterval: 1,
                     splitLine: {
                         show: true,
                         lineStyle: {
