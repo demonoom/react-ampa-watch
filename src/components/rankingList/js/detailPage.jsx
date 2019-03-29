@@ -26,12 +26,6 @@ var weekMonth = myWeekDate.getMonth() + 1;
 var weekDay = myWeekDate.getDate();
 var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
 var weekStart = timeWeek + ' 00:00:00';
-var  dataLegend=[
-    {name: '答对次数', icon: 'rect',value:'40'},
-    {name: '答题次数', icon: 'rect',value:'40'},
-    {name: '总数', icon: 'rect',value:'40'}
-]
-
 //数组去重
 function unique (array) {
     var temp = []; //一个新的临时数组
@@ -50,7 +44,12 @@ export default class detailPage extends React.Component {
         this.state = {
             faceChartDiv: [],
             detailData: {},
-            clientHeight: document.body.clientHeight
+            clientHeight: document.body.clientHeight,
+            dataLegend: [
+                { name: '答对次数', icon: 'rect', value: '40' },
+                { name: '答题次数', icon: 'rect', value: '40' },
+                { name: '总数', icon: 'rect', value: '40' }
+            ]
         };
     }
     componentDidMount () {
@@ -150,6 +149,9 @@ export default class detailPage extends React.Component {
         var AnswerRight = [];
         var AnswerTotal = [];
         var SubjectTotal = [];
+        var sumNumberTotal = 0;
+        var AnswRightTotal = 0;
+        var AnswTotal = 0;
         braceletHeartSteps.forEach((braceletHeartStepObj) => {
             var second = braceletHeartStepObj.x.split(" ")[1];
             var second2 = braceletHeartStepObj.x.split(" ")[0];
@@ -160,11 +162,14 @@ export default class detailPage extends React.Component {
                 xClazzNameArray.push(second2 + "日");
             }
             var answerRight = braceletHeartStepObj.y1;
+            AnswRightTotal += braceletHeartStepObj.y1;
             AnswerRight.push(answerRight);
             var answerTotal = braceletHeartStepObj.y2;
+            AnswTotal += braceletHeartStepObj.y2;
             AnswerTotal.push(answerTotal);
             var subjectTotal = braceletHeartStepObj.y3;
             SubjectTotal.push(subjectTotal);
+            sumNumberTotal += braceletHeartStepObj.y3;
             xClazzNameArray = unique(xClazzNameArray)
 
         });
@@ -184,12 +189,17 @@ export default class detailPage extends React.Component {
                     className='' />
             </div>
         </div>;
-        _this.setState({ faceChartDiv });
+        _this.setState({
+            faceChartDiv,
+            dataLegend: [{ name: '答对次数', icon: 'rect', value: AnswRightTotal },
+            { name: '答题次数', icon: 'rect', value: AnswTotal },
+            { name: '总数', icon: 'rect', value: sumNumberTotal }]
+        });
     }
 
     /**
-  * 创建折线图的option
-  */
+    * 创建折线图的option
+    */
     buildFaceOption = (xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal) => {
         return {
             title: {
@@ -238,10 +248,10 @@ export default class detailPage extends React.Component {
                 formatter: function (name) {
                     var total = 0;
                     var target;
-                    for (var i = 0, l = dataLegend.length; i < l; i++) {
-                        total += dataLegend[i].value;
-                        if (dataLegend[i].name == name) {
-                            target = dataLegend[i].value;
+                    for (var i = 0, l = calm.state.dataLegend.length; i < l; i++) {
+                        total += calm.state.dataLegend[i].value;
+                        if (calm.state.dataLegend[i].name == name) {
+                            target = calm.state.dataLegend[i].value;
                         }
                     }
                     return name + '(' + target + ')';
@@ -373,7 +383,7 @@ export default class detailPage extends React.Component {
             <div id='detailPage'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情":"本周排行榜详情"}</span>
+                    <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情" : "本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
@@ -381,7 +391,7 @@ export default class detailPage extends React.Component {
                         damping={130}
                         ref={el => this.ptr = el}
                         style={{
-                            height: calm.state.clientHeight-64,
+                            height: calm.state.clientHeight - 64,
                         }}
                         indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
                         direction='down'
@@ -400,7 +410,7 @@ export default class detailPage extends React.Component {
                         }}
                     >
                         <div style={{
-                            height: calm.state.clientHeight-64,
+                            height: calm.state.clientHeight - 64,
                         }}>
                             <div className='grayBorder'></div>
                             <div className='bg_white'>
