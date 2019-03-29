@@ -65,8 +65,9 @@ export default class updateLocation extends React.Component {
             }, success: function (data) {
                 if (data.status === '1') {
                     _this.setState({
-                        defaultPos: <Item
-                            arrow="horizontal"
+                        defaultPos:
+                            <div className="search-mapItem">
+                            <Item arrow="horizontal"
                             className="line_public"
                             multipleLine
                             onClick={() => {
@@ -76,9 +77,11 @@ export default class updateLocation extends React.Component {
                             }}
                             platform="android"
                         >
+                            <i className="icon-search-map"></i>
                             <div className="name">当前位置</div>
                             <Brief>{data.regeocode.formatted_address}</Brief>
                         </Item>
+                        </div>
                     })
                 } else {
                     Toast.fail('未知的错误', 2, null, false)

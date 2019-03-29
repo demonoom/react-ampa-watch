@@ -69,20 +69,23 @@ export default class addNewLocation extends React.Component {
             }, success: function (data) {
                 if (data.status === '1') {
                     _this.setState({
-                        defaultPos: <Item
-                            arrow="horizontal"
-                            className="line_public"
-                            multipleLine
-                            onClick={() => {
-                                _this.intoMap({
-                                    location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
-                                })
-                            }}
-                            platform="android"
-                        >
-                            <div className="name">当前位置</div>
-                            <Brief>{data.regeocode.formatted_address}</Brief>
-                        </Item>
+                        defaultPos: <div className="search-mapItem">
+                            <Item
+                                arrow="horizontal"
+                                className="line_public"
+                                multipleLine
+                                onClick={() => {
+                                    _this.intoMap({
+                                        location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+                                    })
+                                }}
+                                platform="android"
+                            >
+                                <i className="icon-search-map"></i>
+                                <div className="name">当前位置</div>
+                                <Brief>{data.regeocode.formatted_address}</Brief>
+                            </Item>
+                        </div>
                     })
                 } else {
                     Toast.fail('未知的错误', 2, null, false)
