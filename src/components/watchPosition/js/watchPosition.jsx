@@ -181,7 +181,7 @@ export default class watchPosition extends React.Component {
         if (!this.state.toBind) {
             Toast.loading('正在获取位置信息...', 5, () => {
                 if (this.state.loadPosition) {
-                    Toast.offline('获取定位失败')
+                    Toast.offline('手表不在线')
                 }
                 this.setState({jumpClass: 'user-positioning'});
             });
@@ -201,7 +201,7 @@ export default class watchPosition extends React.Component {
                     console.log(info);
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
-                            Toast.fail('获取定位失败', 1, null, false);
+                            Toast.fail('手表不在线', 1, null, false);
                             return
                         }
                         // var position = {

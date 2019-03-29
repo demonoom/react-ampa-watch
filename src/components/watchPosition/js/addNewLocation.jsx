@@ -150,7 +150,7 @@ export default class addNewLocation extends React.Component {
     };
 
     posPicker = (obj) => {
-        this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+        this.setState({addressName: obj.nearestPOI, addressLT: obj.position.lng + ',' + obj.position.lat});
         this.state.circle.setCenter([obj.position.lng, obj.position.lat])
     };
 
