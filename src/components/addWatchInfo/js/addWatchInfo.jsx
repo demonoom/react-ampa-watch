@@ -34,7 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
-            macAddress: "23456",
+            macAddress: "",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -122,7 +122,6 @@ export default class addWatchInfo extends React.Component {
         $(window).resize(function () {
             var resizeHeight = $(this).height();
             if (winHeight - resizeHeight > 50) {
-                console.log($('.commonLocation-cont').height());
                 // 软键盘弹出
                 $('.commonLocation-cont').css('top', '-100px');
                 $(".button_preNext").hide();
@@ -182,7 +181,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("23456");
+        // this.getWatch2gByMacAddress("23456");
         var data = {
             method: 'watchBinding'
         };
@@ -822,6 +821,9 @@ export default class addWatchInfo extends React.Component {
         $(".regiForDiv").hide();
     }
 
+    searchInputFcous=()=>{
+        $(".searchDiv input").focus();
+    }
 
     render () {
         return (
@@ -1111,7 +1113,7 @@ export default class addWatchInfo extends React.Component {
                     <div className="mask" onClick={this.exitSchoolInput} style={{ display: 'none' }}></div>
                     <div className='updateModel' style={{ display: 'none' }}>
                         <div className='searchDiv'>
-                            <input type="text" value={this.state.inputValue} onChange={this.schoolNameOnChange}
+                            <input type="text" value={this.state.inputValue} onClick={this.searchInputFcous} onChange={this.schoolNameOnChange}
                                 placeholder='请输入搜索内容' />
                             <span onClick={this.getSchoolsBySchoolName}>搜索</span>
                         </div>
