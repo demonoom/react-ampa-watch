@@ -14,6 +14,8 @@ export default class commonLocation extends React.Component {
             homeObj: null,
             schoolPosition: '未设置',
             schoolObj: null,
+            mainId: '',
+            posTude: null
         };
     }
 
@@ -21,8 +23,8 @@ export default class commonLocation extends React.Component {
         var _this = this;
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var userId = locationSearch.split("&")[0].split('=')[1];
-        var mac = locationSearch.split("&")[1].split('=')[1];
+        var mac = locationSearch.split("&")[0].split('=')[1];
+        var userId = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
         this.setState({userId, mac, macId});
         var data = {
@@ -38,10 +40,46 @@ export default class commonLocation extends React.Component {
     }
 
     componentDidMount() {
-        this.getWatch2gHomePoint()
+        this.getWatch2gHomePoint();
+        this.getWatch2gsByGuardianUserId()
     }
 
+    /**
+     * 查询此人监护的手表列表
+     * public List<Watch2g> getWatch2gsByGuardianUserId(String userId, String pageNo)
+     */
+    getWatch2gsByGuardianUserId = () => {
+        var _this = this;
+        var param = {
+            "method": 'getWatch2gsByGuardianUserId',
+            "actionName": "watchAction",
+            "userId": this.state.userId,
+            "pageNo": -1,
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' || result.success == true) {
+                    if (!!result.response) {
+                        this.setState({
+                            mainId: result.response.filter((v) => {
+                                return v.id == this.state.macId
+                            })[0].guardians.filter((item) => {
+                                return item.bindType == 1
+                            })[0].guardianId
+                        })
+                    }
+                } else {
+                    // Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.warn('保存失败');
+            }
+        });
+    };
+
     addNewPos = () => {
+        var _this = this;
         var url = WebServiceUtil.mobileServiceURL + "addNewLocation?mac=" + this.state.mac + '&userId=' + this.state.userId + '&macId=' + this.state.macId + '&type=0';
         var data = {
             method: 'openNewPage',
@@ -49,7 +87,7 @@ export default class commonLocation extends React.Component {
             url: url + '&posTude=' + this.state.posTude
         };
         Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
+            window.location.href = url + '&posTude=' + _this.state.posTude;
         });
     };
 
@@ -138,12 +176,21 @@ export default class commonLocation extends React.Component {
      * @param obj
      */
     intoDetil = (type, obj) => {
+        var _this = this;
         var url;
         if (type == 0) {
             //自定义
+            if (obj.creatorId != this.state.userId) {
+                Toast.fail('常用地点只能由创建者修改');
+                return
+            }
             url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + obj.id + '&homeName=' + obj.homeName + '&homeAddress=' + obj.homeAddress + '&type=0');
         } else if (type == 1) {
             //家
+            if (this.state.mainId != this.state.userId) {
+                Toast.fail('只允许主监护人修改');
+                return
+            }
             if (!!this.state.homeObj) {
                 //修改
                 url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.homeObj.id + '&homeName=' + this.state.homeObj.homeName + '&homeAddress=' + this.state.homeObj.homeAddress + '&type=1');
@@ -153,6 +200,10 @@ export default class commonLocation extends React.Component {
             }
         } else if (type == 2) {
             //学校
+            if (this.state.mainId != this.state.userId) {
+                Toast.fail('只允许主监护人修改');
+                return
+            }
             if (!!this.state.schoolObj) {
                 //修改
                 url = encodeURI(WebServiceUtil.mobileServiceURL + "updateLocation?id=" + this.state.schoolObj.id + '&homeName=' + this.state.schoolObj.homeName + '&homeAddress=' + this.state.schoolObj.homeAddress + '&type=2');
@@ -168,7 +219,7 @@ export default class commonLocation extends React.Component {
         };
         console.log(data);
         Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
+            window.location.href = url + '&posTude=' + _this.state.posTude;
         });
     };
 
