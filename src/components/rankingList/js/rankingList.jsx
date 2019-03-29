@@ -251,8 +251,10 @@ export default class rankingList extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            selfBack: true,
-            url: url
+            isNativeNav: true,
+            isCanBack: true,
+            url: url,
+            backAlertInfo:"是否放弃本次编辑？"
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
@@ -378,12 +380,12 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue" style={{ display: this.state.toBind ? "block" : "none" }}>
+                <div className="am-navbar-blue" style={{ display: this.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ) ? "block" : "none" }}>
                     <NavBar
                         mode="light"
                     >排行榜</NavBar>
                 </div>
-                <div className="am-navbar-blue watchSelect" style={{ display: this.state.toBind ? "none" : "block" }}>
+                <div className="am-navbar-blue watchSelect" style={{ display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "block" : "none" }}>
                     <Popover mask
                         overlayClassName="fortest"
                         overlayStyle={{ color: 'currentColor' }}
@@ -401,18 +403,17 @@ export default class rankingList extends React.Component {
                         onSelect={this.onSelect}
                     >
                         <div style={{
-                            height: '100%',
-                            padding: '0',
-                            marginRight: '-15px',
+                            height: '44px',
                             display: 'flex',
                             alignItems: 'center',
+                            padding: '15px 15px 0 15px'
                         }}
                         >
                             <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
                         </div>
                     </Popover>
                 </div>
-                <div className="commonLocation-cont" style={{ display: this.state.toBind ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
@@ -426,27 +427,27 @@ export default class rankingList extends React.Component {
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                 </div>
-                <div style={{ display: this.state.toBind ? "none" : "block", height: "100%" }}>
+                {/*绑定后未验证空页面*/}
+                <div className="commonLocation-cont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    申请已提交<br />
+                                    请等待管理员（{this.state.guardianData.familyRelate}）验证通过
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={this.state.tabs}
                         onChange={this.onTabsChange}
                         initalPage={'t2'}
                         swipeable={false}
                     >
                         <div className='questionCont'>
-                            {/*绑定后未验证空页面*/}
-                            <div className="commonLocation-cont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
-                                <div className="emptyCont emptyContBind">
-                                    <div className="p38 my_flex">
-                                        <div>
-                                            <i></i>
-                                            <span>
-                                                申请已提交<br />
-                                                请等待管理员（爸爸）验证通过
-                                    </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <PullToRefresh
                                 damping={130}
                                 ref={el => this.ptr = el}

@@ -321,7 +321,7 @@ export default class addClock extends React.Component {
                             <List.Item arrow="horizontal">提醒时间</List.Item>
                         </DatePicker>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public repeatBtn' onClick={this.onRepeat}>
+                    <div className='am-list-item am-list-item-middle line_public repeatBtn activeDiv' onClick={this.onRepeat}>
                         <div className="am-list-line">
                             <div className="am-list-content">重复</div>
                             <div className="am-list-extra">{this.state.defaleSelect}</div>

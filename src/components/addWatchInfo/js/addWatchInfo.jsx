@@ -19,7 +19,7 @@ const tabs = [
     { title: '小蚂蚁账号同步', label: "has" },
     { title: '手动完善信息', label: "notHas" },
 ];
-
+const nowTimeStamp = Date.now();
 //格式化数据
 function formatDate (date) {
     var str = date + ""
@@ -34,7 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
-            macAddress: "",
+            macAddress: "12345",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -101,6 +101,7 @@ export default class addWatchInfo extends React.Component {
     }
 
     componentWillMount () {
+        document.title="完善手表信息";
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -112,6 +113,7 @@ export default class addWatchInfo extends React.Component {
     }
 
     componentDidMount () {
+        document.title="完善手表信息";
         Bridge.setShareAble("false");
         /**
      * 防止软键盘挡住页面
@@ -180,7 +182,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("qq1");
+        this.getWatch2gByMacAddress("12345");
         var data = {
             method: 'watchBinding'
         };
@@ -812,7 +814,7 @@ export default class addWatchInfo extends React.Component {
     render () {
         return (
             <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
-                <div className="am-navbar-blue whiteBack">
+                {/* <div className="am-navbar-blue whiteBack">
                     <div className="am-navbar am-navbar-light">
                         <div onClick={this.showAlertExit} className="am-navbar-left" role="button">
                             <i className='icon-back'></i>
@@ -820,15 +822,15 @@ export default class addWatchInfo extends React.Component {
                         <div className="am-navbar-title">完善手表信息</div>
                         <div className="am-navbar-right"></div>
                     </div>
-                </div>
+                </div> */}
                 <div className="commonLocation-cont bg_white">
                     <div className="firDiv">
                         <div className="p38 innerCont">
                             <div className='line_publicD'>
-                                <div className="p10 scanDiv activeDiv">
+                                <div className="p10 scanDiv activeDiv" onClick={this.scanCode}>
                                     <span className='text_hidden color_c' style={{ display: this.state.macAddress ? "none" : "inline-block" }}>请扫描手表二维码</span>
                                     <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
-                                    <span className='scanBtn' onClick={this.scanCode}>扫描</span>
+                                    <span className='scanBtn' >扫描</span>
                                 </div>
                             </div>
                             <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
@@ -836,7 +838,7 @@ export default class addWatchInfo extends React.Component {
                                     data={this.state.relationData}
                                     value={this.state.relationValue}
                                     cols={1}
-                                    extra={this.state.flag ? "我是Ta的" : this.state.relationValue}
+                                    extra={this.state.flag ? "我是TA的" : this.state.relationValue}
                                     onChange={this.onRelationChange}
                                     onOk={this.clickRelationSure}
                                     onDismiss={this.onRelationCancel}
@@ -884,6 +886,7 @@ export default class addWatchInfo extends React.Component {
                                         mode="date"
                                         title=""
                                         extra="请选择孩子生日"
+                                        maxDate={new Date(nowTimeStamp + 1e7)}
                                         value={this.state.date}
                                         onChange={this.birChange}
                                     >
@@ -909,7 +912,7 @@ export default class addWatchInfo extends React.Component {
                         </div>
 
                     </div>
-                    <div className="thirDiv"  style={{ display: "none" }}>
+                    <div className="thirDiv" style={{ display: "none" }}>
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress2">
