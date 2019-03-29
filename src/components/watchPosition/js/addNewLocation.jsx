@@ -69,7 +69,7 @@ export default class addNewLocation extends React.Component {
             }, success: function (data) {
                 if (data.status === '1') {
                     _this.setState({
-                        defaultPos: <div className="search-mapItem">
+                        defaultPos:
                             <Item
                                 arrow="horizontal"
                                 className="line_public"
@@ -85,7 +85,6 @@ export default class addNewLocation extends React.Component {
                                 <div className="name">当前位置</div>
                                 <Brief>{data.regeocode.formatted_address}</Brief>
                             </Item>
-                        </div>
                     })
                 } else {
                     Toast.fail('未知的错误', 2, null, false)
@@ -353,7 +352,7 @@ export default class addNewLocation extends React.Component {
                                    placeholder="请输入位置信息"/>
                             <div className="icon-search" onClick={this.searchPos}></div>
                         </div>
-                        {this.state.defaultPos}
+                        <div className="search-mapItem">{this.state.defaultPos}</div>
                     </div>
                     <div className="searchResults">
                         {this.state.posList}

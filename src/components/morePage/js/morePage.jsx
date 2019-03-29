@@ -150,7 +150,7 @@ export default class morePage extends React.Component {
                 console.log(warnMsg, "warnMsg")
                 Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
-                console.log(info, "info")
+                console.log(info, "infoWatch")
             }
         };
     }
