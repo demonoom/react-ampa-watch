@@ -8,9 +8,11 @@ const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
 window.ms = null;
+var calm;
 export default class morePage extends React.Component {
     constructor(props) {
         super(props);
+        calm = this;
         this.state = {
             childSex: "",
             watchName: "",
@@ -151,6 +153,36 @@ export default class morePage extends React.Component {
                 Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
                 console.log(info, "infoWatch")
+                if(info.command == "userOperateResponse"){
+                    calm.state.watchData.forEach((value, i) => {
+                        if (value.id == info.data.watchId) {
+                            calm.setState({
+                                guardians: value.guardians,
+                                studentId: value.studentId
+                            }, () => {
+                                calm.state.guardians.forEach((v, i) => {
+                                    if (v.guardian.colUid == calm.state.userId) {
+                                        calm.setState({
+                                            guardianData: v,
+                                        }, () => {
+                                            calm.setState({
+                                                visible: false,
+                                                phoneNumber: value.phoneNumber,
+                                                watchId: value.id,
+                                                watchName: value.watchName,
+                                                macAddr: value.macAddress
+                                            }, () => {
+                                                console.log(calm.state.watchId,"watchId")
+                                                console.log(calm.state.watchName,"name")
+                                                calm.getWatch2gById(calm.state.watchId)
+                                            });
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
             }
         };
     }
