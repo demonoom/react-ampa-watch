@@ -16,6 +16,7 @@ export default class addNewLocation extends React.Component {
             pos: '请设置地点位置',
             searchValue: '',
             posList: [],
+            defaultPos: [],
             position: {longitude: '116.397477', latitude: '39.908692'},
             zoom: 10,
             map: null,
@@ -37,8 +38,8 @@ export default class addNewLocation extends React.Component {
     componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var userId = locationSearch.split("&")[0].split('=')[1];
-        var mac = locationSearch.split("&")[1].split('=')[1];
+        var mac = locationSearch.split("&")[0].split('=')[1];
+        var userId = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
         var type = locationSearch.split("&")[3].split('=')[1];
         var posTude = locationSearch.split("&")[4].split('=')[1];
@@ -54,6 +55,7 @@ export default class addNewLocation extends React.Component {
     }
 
     inverseGeocoding = (posTude) => {
+        var _this = this;
         $.ajax({
             type: "GET",      //data 传送数据类型。post 传递
             dataType: 'json',  // 返回数据的数据类型json
@@ -65,7 +67,29 @@ export default class addNewLocation extends React.Component {
             error: function () {
 
             }, success: function (data) {
-                console.log(data, '结果');
+                if (data.status === '1') {
+                    _this.setState({
+                        defaultPos: <div className="search-mapItem">
+                            <Item
+                                arrow="horizontal"
+                                className="line_public"
+                                multipleLine
+                                onClick={() => {
+                                    _this.intoMap({
+                                        location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+                                    })
+                                }}
+                                platform="android"
+                            >
+                                <i className="icon-search-map"></i>
+                                <div className="name">当前位置</div>
+                                <Brief>{data.regeocode.formatted_address}</Brief>
+                            </Item>
+                        </div>
+                    })
+                } else {
+                    Toast.fail('未知的错误', 2, null, false)
+                }
             }
         })
     };
@@ -329,6 +353,7 @@ export default class addNewLocation extends React.Component {
                                    placeholder="请输入位置信息"/>
                             <div className="icon-search" onClick={this.searchPos}></div>
                         </div>
+                        {this.state.defaultPos}
                     </div>
                     <div className="searchResults">
                         {this.state.posList}
