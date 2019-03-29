@@ -54,7 +54,8 @@ export default class rankingList extends React.Component {
                 { title: '运动' },
                 { title: '爱心' },
             ],
-            guardianData: {}
+            guardianData: {},
+            watchData:[]
         };
     }
     componentWillMount () {
@@ -115,6 +116,7 @@ export default class rankingList extends React.Component {
             }, onMessage: function (info) {
                 console.log(info, "infoWatch")
                 if (info.command == "userOperateResponse") {
+                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
                     calm.state.watchData.forEach((value, i) => {
                         if (value.id == info.data.watchId) {
                             calm.setState({
@@ -499,7 +501,7 @@ export default class rankingList extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="commonLocation-cont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display:calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
