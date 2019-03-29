@@ -391,8 +391,7 @@ export default class morePage extends React.Component {
                         <div style={{
                             height: '22px',
                             lineHeight: '22px',
-                            padding: '0 15px 15px',
-                            marginRight: '-15px',
+                            padding: '15px',
                             display: 'flex',
                             alignItems: 'center',
                         }}
@@ -407,7 +406,6 @@ export default class morePage extends React.Component {
                     <span className='icon_add' onClick={this.toJupmBind}
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}
                     >添加手表</span>
-                    <div className="clear"></div>
                     <div className="wrap">
                         <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
                         {

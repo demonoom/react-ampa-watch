@@ -8,9 +8,9 @@ export default class verifyBinding extends React.Component {
         super(props);
         this.state = {
             title: '',
-            processed: 'none',
             disagree: 'none',
             determine: 'none',
+            review: 'none',
         };
     }
 
@@ -39,10 +39,19 @@ export default class verifyBinding extends React.Component {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-                    if (result.response.valid != 2) {
+                    if (result.response != null) {
+                        if (result.response.valid == 2) {
+                            var review = '';
+                            this.setState({unprocessed, review});
+                        }else if (result.response.valid == 1) {
+                            var unprocessed = 'none';
+                            var determine = '';
+                            this.setState({unprocessed, determine});
+                        }
+                    } else if (result.response == null) {
                         var unprocessed = 'none';
-                        var processed = '';
-                        this.setState({unprocessed, processed});
+                        var disagree = '';
+                        this.setState({unprocessed, disagree});
                     }
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -108,28 +117,23 @@ export default class verifyBinding extends React.Component {
     render() {
         return (
             <div id="verifyBinding">
-                <div style={{display: this.state.review}}>
-                    <div className="center verify_Binding">
-                        <div className="verify-cont"><span
-                            className="userName">{this.state.guardianName}</span>请求绑定<span
-                            className="userName">{this.state.watch2gName}</span>的手表
-                        </div>
-                        <div style={{display: this.state.unprocessed}}>
-                            <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
-                            <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
-                        </div>
-                        <div style={{display: this.state.processed}}>
-                            <div className="prompt">该请求已处理</div>
-                        </div>
+                <div className="center verify_Binding" style={{display: this.state.review}}>
+                    <div className="verify-cont"><span
+                        className="userName">{this.state.guardianName}</span>请求绑定<span
+                        className="userName">{this.state.watch2gName}</span>的手表
+                    </div>
+                    <div style={{display: this.state.unprocessed}}>
+                        <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
+                        <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
                     </div>
                 </div>
                 <div className="verify-toast center" style={{display: this.state.determine}}>
-                    <div className="am-toast-text" >
+                    <div className="am-toast-text">
                         <div className="am-toast-text-info">已同意绑定</div>
                     </div>
                 </div>
                 <div className="verify-toast center" style={{display: this.state.disagree}}>
-                    <div className="am-toast-text" >
+                    <div className="am-toast-text">
                         <div className="am-toast-text-info">已拒绝绑定</div>
                     </div>
                 </div>

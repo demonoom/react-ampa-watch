@@ -850,7 +850,7 @@ export default class addWatchInfo extends React.Component {
                                     data={this.state.relationData}
                                     value={this.state.relationValue}
                                     cols={1}
-                                    extra={this.state.flag ? "我是Ta的" : this.state.relationValue}
+                                    extra={this.state.flag ? "我是TA的" : this.state.relationValue}
                                     onChange={this.onRelationChange}
                                     onOk={this.clickRelationSure}
                                     onDismiss={this.onRelationCancel}
