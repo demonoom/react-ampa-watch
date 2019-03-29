@@ -362,8 +362,7 @@ export default class morePage extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            isNativeNav: true,
-            isCanBack: true,
+            navType:2,
             url: url,
             backAlertInfo:"是否放弃本次编辑？"
         };

@@ -41,13 +41,34 @@ export default class addNewLocation extends React.Component {
         var mac = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
         var type = locationSearch.split("&")[3].split('=')[1];
+        var posTude = locationSearch.split("&")[4].split('=')[1];
         if (type == 1) {
             this.setState({posName: '家'})
         } else if (type == 2) {
             this.setState({posName: '学校'})
         }
         this.setState({userId, mac, macId, type});
+        if (posTude != 'null') {
+            this.inverseGeocoding(posTude)
+        }
     }
+
+    inverseGeocoding = (posTude) => {
+        $.ajax({
+            type: "GET",      //data 传送数据类型。post 传递
+            dataType: 'json',  // 返回数据的数据类型json
+            url: "https://restapi.amap.com/v3/geocode/regeo?parameters",  // yii 控制器/方法
+            data: {
+                key: WebServiceUtil.amapjskey,
+                location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+            },  //传送的数据
+            error: function () {
+
+            }, success: function (data) {
+                console.log(data, '结果');
+            }
+        })
+    };
 
     posNameClick = () => {
         if (this.state.type == 1 || this.state.type == 2) {
@@ -150,7 +171,7 @@ export default class addNewLocation extends React.Component {
     };
 
     posPicker = (obj) => {
-        this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+        this.setState({addressName: obj.nearestPOI, addressLT: obj.position.lng + ',' + obj.position.lat});
         this.state.circle.setCenter([obj.position.lng, obj.position.lat])
     };
 
