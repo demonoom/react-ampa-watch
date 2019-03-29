@@ -38,8 +38,8 @@ export default class addNewLocation extends React.Component {
     componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var userId = locationSearch.split("&")[0].split('=')[1];
-        var mac = locationSearch.split("&")[1].split('=')[1];
+        var mac = locationSearch.split("&")[0].split('=')[1];
+        var userId = locationSearch.split("&")[1].split('=')[1];
         var macId = locationSearch.split("&")[2].split('=')[1];
         var type = locationSearch.split("&")[3].split('=')[1];
         var posTude = locationSearch.split("&")[4].split('=')[1];
