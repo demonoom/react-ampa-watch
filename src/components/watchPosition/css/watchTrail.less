@@ -40,7 +40,10 @@
     color: #333;
     padding-top: 20px;
   }
-  .am-navbar-left, .am-navbar-title, .am-navbar-right {
+  .am-navbar-left, .am-navbar-right{
+    width: 100px;
+  }
+  .am-navbar-title {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
     -ms-flex: 1;
@@ -62,13 +65,6 @@
   .am-navbar-right{
     color: #17ACF7;
     font-size: 15px;
-  }
-  .icon-back{
-    background: url("../img/icon-back2.png") no-repeat center;
-    background-size: 100% 100%;
-    width: 13px;
-    height: 23px;
-    margin-right: 3px;
   }
 
   #timeChoose {
@@ -229,14 +225,10 @@
     background: url("../img/icon-end.png") no-repeat;
     background-size: 100% 100%;
   }
-  .WhiteSpace {
-    height: 11px;
-    background: #ededed;
-  }
   /*轨迹详情*/
   .TrackDetails-cont{
     background: #fff;
-    height: calc(~"100% - 11px");
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
     .am-steps-item{

@@ -16,6 +16,7 @@ export default class updateLocation extends React.Component {
             pos: '未设置',
             searchValue: '',
             posList: [],
+            defaultPos: [],
             position: {longitude: '116.397477', latitude: '39.908692'},
             zoom: 10,
             map: null,
@@ -42,12 +43,52 @@ export default class updateLocation extends React.Component {
         var posName = locationSearch.split("&")[1].split('=')[1];
         var pos = locationSearch.split("&")[2].split('=')[1];
         var type = locationSearch.split("&")[3].split('=')[1];
+        var posTude = locationSearch.split("&")[4].split('=')[1];
         this.setState({id, posName, pos, type});
+        if (posTude != 'null') {
+            this.inverseGeocoding(posTude)
+        }
     }
 
-    componentDidMount() {
+    inverseGeocoding = (posTude) => {
+        var _this = this;
+        $.ajax({
+            type: "GET",      //data 传送数据类型。post 传递
+            dataType: 'json',  // 返回数据的数据类型json
+            url: "https://restapi.amap.com/v3/geocode/regeo?parameters",  // yii 控制器/方法
+            data: {
+                key: WebServiceUtil.amapjskey,
+                location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+            },  //传送的数据
+            error: function () {
 
-    }
+            }, success: function (data) {
+                if (data.status === '1') {
+                    _this.setState({
+                        defaultPos:
+                            <div className="search-mapItem">
+                            <Item arrow="horizontal"
+                            className="line_public"
+                            multipleLine
+                            onClick={() => {
+                                _this.intoMap({
+                                    location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+                                })
+                            }}
+                            platform="android"
+                        >
+                            <i className="icon-search-map"></i>
+                            <div className="name">当前位置</div>
+                            <Brief>{data.regeocode.formatted_address}</Brief>
+                        </Item>
+                        </div>
+                    })
+                } else {
+                    Toast.fail('未知的错误', 2, null, false)
+                }
+            }
+        })
+    };
 
     posNameClick = () => {
         if (this.state.type == 1 || this.state.type == 2) {
@@ -150,7 +191,7 @@ export default class updateLocation extends React.Component {
     };
 
     posPicker = (obj) => {
-        this.setState({addressName: obj.address, addressLT: obj.position.lng + ',' + obj.position.lat});
+        this.setState({addressName: obj.nearestPOI, addressLT: obj.position.lng + ',' + obj.position.lat});
         this.state.circle.setCenter([obj.position.lng, obj.position.lat])
     };
 
@@ -342,6 +383,7 @@ export default class updateLocation extends React.Component {
                                    placeholder="请输入位置信息"/>
                             <div className="icon-search" onClick={this.searchPos}></div>
                         </div>
+                        {this.state.defaultPos}
                     </div>
 
                     <div className="searchResults">
