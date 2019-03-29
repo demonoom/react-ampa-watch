@@ -372,6 +372,8 @@ export default class morePage extends React.Component {
     }
 
     render () {
+        console.log(this.state.guardianData.valid,"valid")
+        console.log(this.state.guardianData.bindType,"bindType")
         return (
             <div id="morePage" className='bg_gray'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>

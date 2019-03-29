@@ -363,6 +363,8 @@ export default class rankingList extends React.Component {
     }
 
     render () {
+        console.log(this.state.guardianData.valid,"valid")
+        console.log(this.state.guardianData.bindType,"bindType")
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className='item'>
