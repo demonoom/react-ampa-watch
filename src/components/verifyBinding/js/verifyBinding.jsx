@@ -119,15 +119,21 @@ export default class verifyBinding extends React.Component {
                         <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
                     </div>
                 </div>
-                <div className="verify-toast center" style={{display: this.state.determine}}>
-                    <div className="am-toast-text">
-                        <div className="am-toast-text-info">已同意绑定</div>
+                <div className="center binding-results" style={{display: this.state.determine}}>
+                    <i className="icon-AgreeBinding"></i>
+                    <div className="bingding-cont"><span
+                        className="userName">{this.state.guardianName}</span>请求绑定<span
+                        className="userName">{this.state.watch2gName}</span>的手表
                     </div>
+                    <div className="bingding-text bingding-text-agree">已同意</div>
                 </div>
-                <div className="verify-toast center" style={{display: this.state.disagree}}>
-                    <div className="am-toast-text">
-                        <div className="am-toast-text-info">已拒绝绑定</div>
+                <div className="center binding-results" style={{display: this.state.disagree}}>
+                    <i className="icon-Rejectedbingding"></i>
+                    <div className="bingding-cont"><span
+                        className="userName">{this.state.guardianName}</span>请求绑定<span
+                        className="userName">{this.state.watch2gName}</span>的手表
                     </div>
+                    <div className="bingding-text bingding-text-rejected">已拒绝</div>
                 </div>
             </div>
         )
