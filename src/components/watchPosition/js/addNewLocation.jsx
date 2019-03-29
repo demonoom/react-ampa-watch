@@ -273,7 +273,7 @@ export default class addNewLocation extends React.Component {
                 <div className="commonLocation-cont">
                     <div className="WhiteSpace"></div>
                     <List
-                        className={(this.state.type == 1 || this.state.type == 2) ? 'my-list home-hidden' : 'my-list'}>
+                        className={(this.state.type == 1 || this.state.type == 2) ? 'my-list home-hidden' : 'my-list home-hidden'}>
                         <Item
                             arrow="horizontal"
                             platform="android"

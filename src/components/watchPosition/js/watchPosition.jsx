@@ -99,9 +99,9 @@ export default class watchPosition extends React.Component {
     };
 
     buildStuList = (data) => {
-        console.log(data[0].guardians.filter((v) => {
+        /*console.log(data[0].guardians.filter((v) => {
             return v.guardianId == this.state.userId
-        }));
+        }));*/
         if (data.length == 0) {
             this.setState({toBind: true});
             return
