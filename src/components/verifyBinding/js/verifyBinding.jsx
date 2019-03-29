@@ -17,11 +17,10 @@ export default class verifyBinding extends React.Component {
     componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var watch2gId = locationSearch.split("&")[0].split('=')[1];
-        var guardianId = locationSearch.split("&")[1].split('=')[1];
-        var guardianName = locationSearch.split("&")[2].split('=')[1];
-        var watch2gName = locationSearch.split("&")[3].split('=')[1];
-        this.setState({watch2gId, guardianId, guardianName, watch2gName});
+        var id = locationSearch.split("&")[0].split('=')[1];
+        var guardianName = locationSearch.split("&")[1].split('=')[1];
+        var watch2gName = locationSearch.split("&")[2].split('=')[1];
+        this.setState({id, guardianName, watch2gName});
     }
 
     componentDidMount() {
@@ -32,22 +31,19 @@ export default class verifyBinding extends React.Component {
         var param = {
             "method": 'getWatch2gGuardianById',
             "actionName": "watchAction",
-            "guardianId": this.state.guardianId,
-            "watchId": this.state.watch2gId,
+            "id": this.state.id,
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 console.log(result);
                 if (result.success) {
-                    if (result.response != null) {
-                        if (result.response.valid == 2) {
-                            var review = '';
-                            this.setState({review});
-                        }else if (result.response.valid == 1) {
-                            var determine = '';
-                            this.setState({determine});
-                        }
-                    } else if (result.response == null) {
+                    if (result.response.valid == 2) {
+                        var review = '';
+                        this.setState({review});
+                    } else if (result.response.valid == 1) {
+                        var determine = '';
+                        this.setState({determine});
+                    } else if (result.response.valid == 0) {
                         var disagree = '';
                         this.setState({disagree});
                     }
@@ -66,8 +62,7 @@ export default class verifyBinding extends React.Component {
         var param = {
             "method": 'acceptGuardianApply',
             "actionName": "watchAction",
-            "watch2gId": this.state.watch2gId,
-            "guardianId": this.state.guardianId,
+            "id": this.state.id,
             "status": '1',
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
@@ -91,8 +86,7 @@ export default class verifyBinding extends React.Component {
         var param = {
             "method": 'acceptGuardianApply',
             "actionName": "watchAction",
-            "watch2gId": this.state.watch2gId,
-            "guardianId": this.state.guardianId,
+            "id": this.state.id,
             "status": '0',
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
