@@ -42,16 +42,14 @@ export default class verifyBinding extends React.Component {
                     if (result.response != null) {
                         if (result.response.valid == 2) {
                             var review = '';
-                            this.setState({unprocessed, review});
+                            this.setState({review});
                         }else if (result.response.valid == 1) {
-                            var unprocessed = 'none';
                             var determine = '';
-                            this.setState({unprocessed, determine});
+                            this.setState({determine});
                         }
                     } else if (result.response == null) {
-                        var unprocessed = 'none';
                         var disagree = '';
-                        this.setState({unprocessed, disagree});
+                        this.setState({disagree});
                     }
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -122,7 +120,7 @@ export default class verifyBinding extends React.Component {
                         className="userName">{this.state.guardianName}</span>请求绑定<span
                         className="userName">{this.state.watch2gName}</span>的手表
                     </div>
-                    <div style={{display: this.state.unprocessed}}>
+                    <div>
                         <a className="verify-submitBtn verify-submitBtn-left" onClick={this.refuse}>拒绝</a>
                         <a className="verify-submitBtn verify-submitBtn-right" onClick={this.agree}>同意</a>
                     </div>
