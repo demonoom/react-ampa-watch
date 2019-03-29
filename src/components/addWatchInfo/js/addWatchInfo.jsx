@@ -16,27 +16,24 @@ const sexData = [{
 }]
 
 const tabs = [
-    {title: '小蚂蚁账号同步', label: "has"},
-    {title: '手动完善信息', label: "notHas"},
+    { title: '小蚂蚁账号同步', label: "has" },
+    { title: '手动完善信息', label: "notHas" },
 ];
 const nowTimeStamp = Date.now();
-
 //格式化数据
-function formatDate(date) {
+function formatDate (date) {
     var str = date + ""
     str = str.replace(/ GMT.+$/, '');// Or str = str.substring(0, 24)
     var d = new Date(str);
     var a = [d.getFullYear(), d.getMonth() + 1, d.getDate(), d.getHours(), d.getMinutes(), d.getSeconds()];
     return str = a[0] + '-' + a[1] + '-' + a[2]
 }
-
 var calm;
 export default class addWatchInfo extends React.Component {
     constructor(props) {
         super(props);
         calm = this;
         this.state = {
-            inputDisableFlag: true,
             macAddress: "",
             stuName: "",
             extraClassName: "",
@@ -103,7 +100,7 @@ export default class addWatchInfo extends React.Component {
         };
     }
 
-    componentWillMount() {
+    componentWillMount () {
         document.title = "完善手表信息";
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
@@ -115,29 +112,39 @@ export default class addWatchInfo extends React.Component {
         })
     }
 
-    componentDidMount() {
+    componentDidMount () {
         document.title = "完善手表信息";
         Bridge.setShareAble("false");
         /**
-         * 防止软键盘挡住页面
-         */
-        var winHeight = $(window).height(); // 获取当前页面高度
+     * 防止软键盘挡住页面
+     */
+        // var winHeight = $(window).height(); // 获取当前页面高度
+        // $(window).resize(function () {
+        //     var resizeHeight = $(this).height();
+        //     if (winHeight - resizeHeight > 50) {
+        //         // 软键盘弹出
+        //         $('.commonLocation-cont').css('top', '-100px');
+        //         $(".button_preNext").hide();
+        //     } else {
+        //         //软键盘收起
+        //         $('.commonLocation-cont').css('top', '0');
+        //         $(".button_preNext").show();
+        //     }
+        // });
+        var winHeight = $(window).height(); // 获取当前页面高度  
         $(window).resize(function () {
             var resizeHeight = $(this).height();
             if (winHeight - resizeHeight > 50) {
-                // 软键盘弹出
-                $('.commonLocation-cont').css('top', '-100px');
-                $(".button_preNext").hide();
+                // 软键盘弹出  
+                $('body').css('height', winHeight + 'px');
             } else {
                 //软键盘收起
-                $('.commonLocation-cont').css('top', '0');
-                $(".button_preNext").show();
+                $('body').css('height', '100%');
             }
         });
 
     }
-
-    componentWillUnmount() {
+    componentWillUnmount () {
         window.removeEventListener('resize', calm.onWindwoResize);
     }
 
@@ -190,7 +197,7 @@ export default class addWatchInfo extends React.Component {
             method: 'watchBinding'
         };
         Bridge.callHandler(data, (mes) => {
-            this.setState({macAddress: mes});
+            this.setState({ macAddress: mes });
             this.getWatch2gByMacAddress(mes)
         }, function (error) {
         });
@@ -198,7 +205,7 @@ export default class addWatchInfo extends React.Component {
 
 
     //自定义关系
-    showModal() {
+    showModal () {
         this.setState({
             flag: false
         })
@@ -223,7 +230,6 @@ export default class addWatchInfo extends React.Component {
             },
         ], 'default', '')
     }
-
     //跳转下一页
     nextFirPage = () => {
         if (this.state.loginType == 1) {
@@ -277,6 +283,7 @@ export default class addWatchInfo extends React.Component {
         }
 
 
+
     }
 
     //关系改变
@@ -324,8 +331,7 @@ export default class addWatchInfo extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
-
-    showAlertExit() {
+    showAlertExit () {
         var _this = this;
         var phoneType = navigator.userAgent;
         var phone;
@@ -335,8 +341,8 @@ export default class addWatchInfo extends React.Component {
             phone = 'android'
         }
         const alertInstance = alert('您确定放弃本次编辑吗?', '', [
-            {text: '取消', onPress: () => console.log('cancel'), style: 'default'},
-            {text: '确定', onPress: () => calm.toBack()},
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            { text: '确定', onPress: () => calm.toBack() },
         ], phone);
 
     }
@@ -453,7 +459,6 @@ export default class addWatchInfo extends React.Component {
     }
 
     onTabsChange = (v) => {
-        this.setState({inputDisableFlag: !this.state.inputDisableFlag});
         if (v.label == "has") {
             this.setState({
                 jump: "check"
@@ -567,11 +572,11 @@ export default class addWatchInfo extends React.Component {
      */
 
     /**
-     * 改变学生姓名
-     * @param e
-     */
+   * 改变学生姓名
+   * @param e
+   */
     stuOnChange = (e) => {
-        this.setState({studentName: e})
+        this.setState({ studentName: e })
     };
 
     schoolOnClick = () => {
@@ -622,23 +627,23 @@ export default class addWatchInfo extends React.Component {
                     _this.schoolItemOnClick(v);
                 }}>{v.name}</li>)
         });
-        this.setState({responseList: arr})
+        this.setState({ responseList: arr })
     };
 
     schoolItemOnClick = (data) => {
         this.exitSchoolInput();
-        this.setState({schoolName: data.name, schoolId: data.id, schoolClassName: 'color_3'})
+        this.setState({ schoolName: data.name, schoolId: data.id, schoolClassName: 'color_3' })
     };
 
     schoolNameOnChange = (e) => {
-        this.setState({inputValue: e.target.value})
+        this.setState({ inputValue: e.target.value })
     };
 
     exitSchoolInput = () => {
-        this.setState({responseList: []});
+        this.setState({ responseList: [] });
         $('.updateModel').slideUp();
         $('.mask').hide();
-        this.setState({inputValue: ''})
+        this.setState({ inputValue: '' })
     };
 
     classOnClick = () => {
@@ -749,14 +754,14 @@ export default class addWatchInfo extends React.Component {
 
 
     /**
-     * 注册验证
-     */
+   * 注册验证
+   */
     teNameOnChange = (e) => {
-        this.setState({teName: e.trim()})
+        this.setState({ teName: e.trim() })
     };
 
     teNumOnChange = (e) => {
-        this.setState({teNumOnChange: e.trim()})
+        this.setState({ teNumOnChange: e.trim() })
     };
 
     nextForRegPage = () => {
@@ -832,9 +837,9 @@ export default class addWatchInfo extends React.Component {
         $(".searchDiv input").focus();
     }
 
-    render() {
+    render () {
         return (
-            <div id="addWatchInfo" style={{height: this.state.clientHeight}}>
+            <div id="addWatchInfo" style={{ height: this.state.clientHeight }}>
                 {/* <div className="am-navbar-blue whiteBack">
                     <div className="am-navbar am-navbar-light">
                         <div onClick={this.showAlertExit} className="am-navbar-left" role="button">
@@ -849,11 +854,9 @@ export default class addWatchInfo extends React.Component {
                         <div className="p38 innerCont">
                             <div className='line_publicD'>
                                 <div className="p10 scanDiv activeDiv" onClick={this.scanCode}>
-                                    <span className='text_hidden color_c'
-                                          style={{display: this.state.macAddress ? "none" : "inline-block"}}>请扫描手表二维码</span>
-                                    <span className='text_hidden'
-                                          style={{display: this.state.macAddress ? "inline-block" : "none"}}>{this.state.macAddress}</span>
-                                    <span className='scanBtn'>扫描</span>
+                                    <span className='text_hidden color_c' style={{ display: this.state.macAddress ? "none" : "inline-block" }}>请扫描手表二维码</span>
+                                    <span className='text_hidden' style={{ display: this.state.macAddress ? "inline-block" : "none" }}>{this.state.macAddress}</span>
+                                    <span className='scanBtn' >扫描</span>
                                 </div>
                             </div>
                             <div className={'selectDown relation line_publicD ' + this.state.RelationClassName}>
@@ -872,7 +875,7 @@ export default class addWatchInfo extends React.Component {
                         </div>
                         <div className='submitBtn' onClick={this.nextFirPage}>下一步</div>
                     </div>
-                    <div className="secDiv" style={{display: "none"}}>
+                    <div className="secDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress1">
@@ -935,7 +938,7 @@ export default class addWatchInfo extends React.Component {
                         </div>
 
                     </div>
-                    <div className="thirDiv" style={{display: 'none'}}>
+                    <div className="thirDiv" style={{ display: "none" }}>
                         <div className="p38 stuAccountRegist">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress2">
@@ -957,13 +960,10 @@ export default class addWatchInfo extends React.Component {
                                 </div>
                             </div>
                             <div className="p29">
-                                <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false}
-                                      useOnPan={false}>
+                                <Tabs onChange={this.onTabsChange} tabs={tabs} initialPage={0} animated={false} useOnPan={false}>
                                     <div className="tabCont">
-                                        <div onClick={this.handleClick}
-                                             className="icon_account login-input line_publicD stuCont">
+                                        <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
                                             <InputItem
-                                                disabled={!this.state.inputDisableFlag}
                                                 className=""
                                                 placeholder="请输入小蚂蚁账号"
                                                 value={this.state.littleAntName}
@@ -976,39 +976,30 @@ export default class addWatchInfo extends React.Component {
                                         <div>
                                             <div className="innerCont tabCont">
                                                 <div className="selectDown">
-                                                    <div
-                                                        className='am-list-item am-list-item-middle line_publicD icon-graySchool activeDiv'
+                                                    <div className='am-list-item am-list-item-middle line_publicD icon-graySchool activeDiv'
                                                         onClick={this.schoolOnClick}>
                                                         <div className="am-list-line">
                                                             <div className="am-list-content"></div>
                                                             <div
                                                                 className={'am-list-extra ' + this.state.schoolClassName}>{this.state.schoolName == '' ? '学生所在学校' : this.state.schoolName}</div>
-                                                            <div
-                                                                className="am-list-arrow am-list-arrow-horizontal"></div>
+                                                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                                                         </div>
                                                     </div>
-                                                    <div id='stuClazz'
-                                                         className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
+                                                    <div id='stuClazz' className={'line_publicD icon-grayClass ' + this.state.stuClassName}>
                                                         <Picker
                                                             data={this.state.data}
                                                             cols={this.state.cols}
                                                             value={this.state.asyncValue}
                                                             onPickerChange={this.onPickerChange}
-                                                            onOk={v => this.setState({
-                                                                classId: this.state.asyncValue[1],
-                                                                stuClassName: 'color_3'
-                                                            })}
+                                                            onOk={v => this.setState({ classId: this.state.asyncValue[1], stuClassName: 'color_3' })}
                                                             extra='学生所在班级'
                                                         >
-                                                            <List.Item arrow="horizontal"
-                                                                       onClick={this.classOnClick}> </List.Item>
+                                                            <List.Item arrow="horizontal" onClick={this.classOnClick}> </List.Item>
                                                         </Picker>
                                                     </div>
                                                 </div>
-                                                <div className="line_publicD login-input icon-grayStudent"
-                                                     onClick={this.toFocusStuNAme}>
+                                                <div className="line_publicD login-input icon-grayStudent" onClick={this.toFocusStuNAme}>
                                                     <InputItem
-                                                        disabled={this.state.inputDisableFlag}
                                                         className=""
                                                         placeholder="请输入学生姓名"
                                                         value={this.state.studentName}
@@ -1028,7 +1019,7 @@ export default class addWatchInfo extends React.Component {
                             <div className='next' onClick={this.nextThirPage}>下一步</div>
                         </div>
                     </div>
-                    <div className="forDiv" style={{display: "none"}}>
+                    <div className="forDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress3">
@@ -1076,7 +1067,7 @@ export default class addWatchInfo extends React.Component {
                             <div className='next' onClick={this.nextForPage}>下一步</div>
                         </div>
                     </div>
-                    <div className="regiForDiv" style={{display: "none"}}>
+                    <div className="regiForDiv" style={{ display: "none" }}>
                         <div className="p38">
                             <div className='dec'>手表初次绑定，请完善相关信息</div>
                             <div className="progress progress3">
@@ -1099,11 +1090,9 @@ export default class addWatchInfo extends React.Component {
                                     <div className="infoContent">
                                         <div className="School-information text_hidden">
                                             <span className="school">{this.state.schoolName}</span>
-                                            <span
-                                                className="class">{$('#stuClazz .am-list-extra').html() != undefined ? $('#stuClazz .am-list-extra').html().split(",").join("") : ""}</span>
+                                            <span className="class">{$('#stuClazz .am-list-extra').html() != undefined ? $('#stuClazz .am-list-extra').html().split(",").join("") : ""}</span>
                                         </div>
-                                        <div className="line_publicD login-input icon-grayTeacher"
-                                             onClick={this.inputTeName}>
+                                        <div className="line_publicD login-input icon-grayTeacher" onClick={this.inputTeName}>
                                             <InputItem
                                                 className=""
                                                 placeholder="请输入班级教师姓名"
@@ -1112,8 +1101,7 @@ export default class addWatchInfo extends React.Component {
                                                 ref={el => this.inputClassTeName = el}
                                             ></InputItem>
                                         </div>
-                                        <div className="line_publicD login-input icon-grayPhone"
-                                             onClick={this.inputTeNumber}>
+                                        <div className="line_publicD login-input icon-grayPhone" onClick={this.inputTeNumber}>
                                             <InputItem
                                                 className=""
                                                 placeholder="请输入该教师电话号码"
@@ -1134,12 +1122,11 @@ export default class addWatchInfo extends React.Component {
                 </div>
 
                 <div className="stuAccountRegist">
-                    <div className="mask" onClick={this.exitSchoolInput} style={{display: 'none'}}></div>
-                    <div className='updateModel' style={{display: 'none'}}>
+                    <div className="mask" onClick={this.exitSchoolInput} style={{ display: 'none' }}></div>
+                    <div className='updateModel' style={{ display: 'none' }}>
                         <div className='searchDiv'>
-                            <input type="text" value={this.state.inputValue} onClick={this.searchInputFcous}
-                                   onChange={this.schoolNameOnChange}
-                                   placeholder='请输入搜索内容'/>
+                            <input type="text" value={this.state.inputValue} onClick={this.searchInputFcous} onChange={this.schoolNameOnChange}
+                                placeholder='请输入搜索内容' />
                             <span onClick={this.getSchoolsBySchoolName}>搜索</span>
                         </div>
                         <div className='cont'>
