@@ -107,10 +107,11 @@ export default class watchPosition extends React.Component {
                 return v.bindType == 1
             })[0].familyRelate
         });
-
         if (data[0].guardians.filter((v) => {
             return v.guardianId == this.state.userId
-        })[0].bindType == 2) {
+        })[0].bindType == 2 && data[0].guardians.filter((v) => {
+            return v.guardianId == this.state.userId
+        })[0].valid == 2) {
             this.setState({toConfirm: true});
         }
 
@@ -312,7 +313,9 @@ export default class watchPosition extends React.Component {
 
         if (optObj.guardians.filter((v) => {
             return v.guardianId == this.state.userId
-        })[0].bindType == 2) {
+        })[0].bindType == 2 && optObj.guardians.filter((item) => {
+            return item.guardianId == this.state.userId
+        })[0].valid == 2) {
             this.setState({toConfirm: true});
         } else {
             this.setState({toConfirm: false});
@@ -335,9 +338,9 @@ export default class watchPosition extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            navType:2,
+            navType: 2,
             url: url,
-            backAlertInfo:"是否放弃本次编辑？"
+            backAlertInfo: "是否放弃本次编辑？"
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
