@@ -256,8 +256,8 @@ export default class watchTrail extends React.Component {
                         <span className="am-navbar-right"></span>
                     </div>
                     <div className='modelContent'>
-                        <div className="WhiteSpace"></div>
                         <div className="TrackDetails-cont">
+                            <div className="WhiteSpace"></div>
                             <WingBlank size="lg">
                                 <WhiteSpace size="lg"/>
                                 <Steps current={this.state.locationName.length - 1}>

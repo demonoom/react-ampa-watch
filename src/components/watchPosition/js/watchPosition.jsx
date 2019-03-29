@@ -335,8 +335,9 @@ export default class watchPosition extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            selfBack: true,
-            url: url
+            navType:2,
+            url: url,
+            backAlertInfo:"是否放弃本次编辑？"
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;

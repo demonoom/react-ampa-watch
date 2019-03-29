@@ -151,7 +151,7 @@ ul, li {
   height: 100%;
   width: 100%;
 }
-.grayBorder{
+.grayBorder, .WhiteSpace {
   height: 11px;
   background: #ededed;
   width: 100%;
@@ -446,6 +446,21 @@ img{
   background: #fff !important;
   color: #333;
   padding-top: 20px;
+  position: relative;
+  &::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: #e5e5e5;
+    -webkit-transform: scaleY(0.5);
+    -moz-transform: scaleY(0.5);
+    -ms-transform: scaleY(0.5);
+    -o-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+  }
 }
 
 .am-navbar-left, .am-navbar-title, .am-navbar-right {
@@ -487,6 +502,10 @@ img{
   .am-navbar{
     height: 44px !important;
     padding-top: 20px;
+    position: relative;
+    &::after{
+      display: none;
+    }
   }
   .am-navbar-light{
     background:linear-gradient(18deg,rgba(40,196,253,1) 0%,rgba(0,146,252,1) 100%) !important;
