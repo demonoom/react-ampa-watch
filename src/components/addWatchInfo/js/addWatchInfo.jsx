@@ -34,7 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
-            macAddress: "12345",
+            macAddress: "23456",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -101,7 +101,7 @@ export default class addWatchInfo extends React.Component {
     }
 
     componentWillMount () {
-        document.title="完善手表信息";
+        document.title = "完善手表信息";
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
@@ -113,7 +113,7 @@ export default class addWatchInfo extends React.Component {
     }
 
     componentDidMount () {
-        document.title="完善手表信息";
+        document.title = "完善手表信息";
         Bridge.setShareAble("false");
         /**
      * 防止软键盘挡住页面
@@ -182,7 +182,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        this.getWatch2gByMacAddress("12345");
+        this.getWatch2gByMacAddress("23456");
         var data = {
             method: 'watchBinding'
         };
@@ -307,7 +307,7 @@ export default class addWatchInfo extends React.Component {
     //phoneNumber
     phoneNumber = (value) => {
         this.setState({
-            phonenumber: value,
+            phonenumber: value.trim(),
 
         });
     }
@@ -345,6 +345,15 @@ export default class addWatchInfo extends React.Component {
     //input聚焦
     handlePhoneClick = () => {
         this.inputPhoneRef.focus();
+    }
+
+    //输入教师姓名
+    inputTeName = () => {
+        this.inputClassTeName.focus();
+    }
+    //输入教室电话
+    inputTeNumber = () => {
+        this.inputClassTeNumber.focus();
     }
 
 
@@ -455,21 +464,21 @@ export default class addWatchInfo extends React.Component {
     //输入小蚂蚁账号
     littAntOnChange = (value) => {
         this.setState({
-            littleAntName: value,
+            littleAntName: value.trim(),
 
         });
     }
     //输入学生姓名
     stuOnChangeHas = (value) => {
         this.setState({
-            stuName: value,
+            stuName: value.trim(),
 
         });
     }
     //输入学校
     schoolOnChange = (value) => {
         this.setState({
-            schName: value,
+            schName: value.trim(),
         });
     }
 
@@ -541,6 +550,9 @@ export default class addWatchInfo extends React.Component {
     //点击输入学校名称
     schooleNameClick = () => {
         this.schoolNameInput.focus();
+    }
+    toFocusStuNAme = () => {
+        this.inputStuNameRef.focus();
     }
 
 
@@ -734,11 +746,11 @@ export default class addWatchInfo extends React.Component {
    * 注册验证
    */
     teNameOnChange = (e) => {
-        this.setState({ teName: e })
+        this.setState({ teName: e.trim() })
     };
 
     teNumOnChange = (e) => {
-        this.setState({ teNumOnChange: e })
+        this.setState({ teNumOnChange: e.trim() })
     };
 
     nextForRegPage = () => {
@@ -972,12 +984,13 @@ export default class addWatchInfo extends React.Component {
                                                         </Picker>
                                                     </div>
                                                 </div>
-                                                <div className="line_publicD login-input icon-grayStudent">
+                                                <div className="line_publicD login-input icon-grayStudent" onClick={this.toFocusStuNAme}>
                                                     <InputItem
                                                         className=""
                                                         placeholder="请输入学生姓名"
                                                         value={this.state.studentName}
                                                         onChange={this.stuOnChange}
+                                                        ref={el => this.inputStuNameRef = el}
                                                     ></InputItem>
                                                 </div>
                                             </div>
@@ -1065,20 +1078,22 @@ export default class addWatchInfo extends React.Component {
                                             <span className="school">{this.state.schoolName}</span>
                                             <span className="class">{$('#stuClazz .am-list-extra').html() != undefined ? $('#stuClazz .am-list-extra').html().split(",").join("") : ""}</span>
                                         </div>
-                                        <div className="line_publicD login-input icon-grayTeacher">
+                                        <div className="line_publicD login-input icon-grayTeacher" onClick={this.inputTeName}>
                                             <InputItem
                                                 className=""
                                                 placeholder="请输入班级教师姓名"
                                                 value={this.state.teName}
                                                 onChange={this.teNameOnChange}
+                                                ref={el => this.inputClassTeName = el}
                                             ></InputItem>
                                         </div>
-                                        <div className="line_publicD login-input icon-grayPhone">
+                                        <div className="line_publicD login-input icon-grayPhone" onClick={this.inputTeNumber}>
                                             <InputItem
                                                 className=""
                                                 placeholder="请输入该教师电话号码"
                                                 value={this.state.teNumOnChange}
                                                 onChange={this.teNumOnChange}
+                                                ref={el => this.inputClassTeNumber = el}
                                             ></InputItem>
                                         </div>
                                     </div>
