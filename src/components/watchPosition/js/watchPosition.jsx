@@ -232,7 +232,16 @@ export default class watchPosition extends React.Component {
                         }
                     }
                 } else if (info.command === 'userOperateResponse') {
-                    _this.userOperateResponse(info.data)
+                    if (info.data.guardianId == _this.state.userId) {
+                        if (info.data.operateStatus == 0) {
+                            //拒绝
+                            _this.setState({toConfirm: false, toBind: true}, () => {
+                                _this.getWatch2gsByGuardianUserId()
+                            })
+                        } else {
+                            _this.userOperateResponse(info.data)
+                        }
+                    }
                 }
             }
         }
@@ -341,7 +350,7 @@ export default class watchPosition extends React.Component {
         var optObj = this.state.watch2gs.filter((v) => {
             return v.id == data.watchId
         })[0];
-        
+
         this.setState({
             familyRelate: optObj.guardians.filter((v) => {
                 return v.bindType == 1
