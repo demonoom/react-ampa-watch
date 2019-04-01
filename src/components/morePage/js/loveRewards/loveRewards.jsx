@@ -9,9 +9,10 @@ export default class loveRewards extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            defaultSteps: 3000,
-            defaultAnswerValue: 3,
-            defaultRight: 80
+            defaultSteps: 0,
+            defaultAnswerValue: 0,
+            defaultRight: 0,
+            defaultId: ""
         };
     }
 
@@ -27,18 +28,23 @@ export default class loveRewards extends React.Component {
 
     }
 
-    getWatch2gLoveOptionByStudentId = (studentId)=>{
+    getWatch2gLoveOptionByStudentId = (studentId) => {
         var param = {
             "method": 'getWatch2gLoveOptionByStudentId',
             "studentId": studentId,
-            "pageNo":-1,
+            "pageNo": -1,
             "actionName": "watchAction"
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result,"result")
+                console.log(result, "result")
                 if (result.success && result.response) {
-                    
+                    this.setState({
+                        data: result.response,
+                        defaultSteps: result.response[0].optionValue,
+                        defaultAnswerValue: result.response[1].optionValue,
+                        defaultRight: result.response[2].optionValue
+                    })
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -53,12 +59,28 @@ export default class loveRewards extends React.Component {
 
     toSetSteps = () => {
         $(".steps").show();
+        this.setState({
+            defaultId: this.state.data[0].id
+        }, () => {
+            console.log(this.state.defaultId)
+        })
     }
     toSetAnswer = () => {
         $(".answers").show()
+        this.setState({
+            defaultId: this.state.data[1].id
+        }, () => {
+
+            console.log(this.state.defaultId)
+        })
     }
     toSetRight = () => {
         $(".right").show()
+        this.setState({
+            defaultId: this.state.data[2].id
+        }, () => {
+            console.log(this.state.defaultId)
+        })
     }
 
     toCloseSteps = () => {
@@ -98,7 +120,7 @@ export default class loveRewards extends React.Component {
             defaultAnswerValue: this.state.defaultAnswerValue
         })
     }
-    
+
     addAnswer = () => {
         this.state.defaultAnswerValue += 1;
         this.setState({
@@ -128,12 +150,38 @@ export default class loveRewards extends React.Component {
 
     toSaveSteps = () => {
         console.log("steps")
+        this.setWatch2gLoveOptionById(this.state.defaultSteps)
     }
     toSaveAnswerSum = () => {
         console.log("answer")
+        this.setWatch2gLoveOptionById(this.state.defaultAnswerValue)
+
     }
     toSaveRight = () => {
         console.log("right")
+        this.setWatch2gLoveOptionById(this.state.defaultRight)
+    }
+
+    setWatch2gLoveOptionById = (optionValue) => {
+        var param = {
+            "method": 'setWatch2gLoveOptionById',
+            "id": this.state.defaultId,
+            "optionValue": optionValue,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "result")
+                if (result.success && result.response) {
+                    Toast.info("保存成功", 1, null, false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
     render () {
         return (
