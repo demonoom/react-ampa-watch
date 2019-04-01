@@ -400,7 +400,7 @@ export default class updateClock extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className='grayBorder'></div>
-                    <div className='line_public'>
+                    <div className='line_public15'>
                         <Picker
                             data={alarmType}
                             value={this.state.alarmValue}
@@ -414,7 +414,7 @@ export default class updateClock extends React.Component {
                             <List.Item arrow="horizontal">闹钟类型</List.Item>
                         </Picker>
                     </div>
-                    <div className="line_public">
+                    <div className="line_public15">
                         <DatePicker
                             mode="time"
                             extra={WebServiceUtil.formatHM(this.state.notciceTime)}
@@ -426,7 +426,7 @@ export default class updateClock extends React.Component {
                             <List.Item arrow="horizontal">提醒时间</List.Item>
                         </DatePicker>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public repeatBtn activeDiv' onClick={this.onRepeat}>
+                    <div className='am-list-item am-list-item-middle line_public15 repeatBtn activeDiv' onClick={this.onRepeat}>
                         <div className="am-list-line">
                             <div className="am-list-content">重复</div>
                             <div className="am-list-extra">{this.state.defaleSelect}</div>
