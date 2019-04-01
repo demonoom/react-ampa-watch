@@ -15,7 +15,6 @@ export default class watchContacts extends React.Component {
         this.state = {
             watchData: [],
             watchContactsData: [],
-
         };
     }
 
