@@ -22,7 +22,7 @@ export default class morePage extends React.Component {
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
             guardianData: {},
-            watchData:[]
+            watchData: []
         };
     }
 
@@ -154,7 +154,7 @@ export default class morePage extends React.Component {
                 Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
                 console.log(info, "infoWatch")
-                if(info.command == "userOperateResponse"){
+                if (info.command == "userOperateResponse") {
                     calm.getWatch2gsByGuardianUserId(calm.state.userId);
                     calm.state.watchData.forEach((value, i) => {
                         if (value.id == info.data.watchId) {
@@ -174,8 +174,8 @@ export default class morePage extends React.Component {
                                                 watchName: value.watchName,
                                                 macAddr: value.macAddress
                                             }, () => {
-                                                console.log(calm.state.watchId,"watchId")
-                                                console.log(calm.state.watchName,"name")
+                                                console.log(calm.state.watchId, "watchId")
+                                                console.log(calm.state.watchName, "name")
                                                 calm.getWatch2gById(calm.state.watchId)
                                             });
                                         })
@@ -396,9 +396,47 @@ export default class morePage extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            navType:2,
+            navType: 2,
             url: url,
-            backAlertInfo:"是否放弃本次编辑？"
+            backAlertInfo: "是否放弃本次编辑？"
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+
+    //跳转学生名片
+    toStudentInfo = () => {
+        var url = WebServiceUtil.mobileServiceURL + "studentInfo?watchId=" + this.state.watchId;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url,
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+
+    //跳转手表通讯录
+    toWatchContacts = () => {
+        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url,
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+    //爱心奖励设置
+    toSetStar = () => {
+        var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId;
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url,
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
@@ -406,8 +444,6 @@ export default class morePage extends React.Component {
     }
 
     render () {
-        console.log(this.state.guardianData.valid,"valid")
-        console.log(this.state.guardianData.bindType,"bindType")
         return (
             <div id="morePage" className='bg_gray'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
@@ -451,6 +487,15 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 <div className="grayBorder"></div>
+                <div onClick={this.toStudentInfo}>
+                    学生名片
+                </div>
+                <div onClick={this.toWatchContacts}>
+                    手表通讯录
+                </div>
+                <div onClick={this.toSetStar}>
+                    爱心奖励设置
+                </div>
                 <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送闹钟</div>
@@ -491,7 +536,7 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="personEmptyCont" style={{ display:calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false? "none" : "block" }}>
+                <div className="personEmptyCont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>

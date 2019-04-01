@@ -60,7 +60,7 @@ export default class teHomework extends React.Component {
                         })
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -93,8 +93,6 @@ export default class teHomework extends React.Component {
                     } else {
                         isLoading = false;
                     }
-
-
                     _this.initData = _this.initData.concat(arr);
                     _this.setState({
                         dataSource: _this.state.dataSource.cloneWithRows(_this.initData),
@@ -102,7 +100,7 @@ export default class teHomework extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
 
@@ -141,7 +139,7 @@ export default class teHomework extends React.Component {
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -163,7 +161,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -185,7 +183,7 @@ export default class teHomework extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index)
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -239,10 +237,10 @@ export default class teHomework extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    Toast.info("删除成功",1,null,false);
+                    Toast.info("删除成功", 1, null, false);
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -272,7 +270,7 @@ export default class teHomework extends React.Component {
     //发送
     toSendContent = (index) => {
         if (this.state.content == "") {
-            Toast.info("评论内容不能为空",1,null,false);
+            Toast.info("评论内容不能为空", 1, null, false);
             return
         }
         this.setState({
@@ -294,7 +292,7 @@ export default class teHomework extends React.Component {
                         })
                         this.getTopicByIdRequest(this.state.topicId, this.state.index);
                     } else {
-                        Toast.fail(result.msg,1,null,false);
+                        Toast.fail(result.msg, 1, null, false);
                     }
 
                 },
@@ -310,8 +308,8 @@ export default class teHomework extends React.Component {
     }
 
 
-     //返回
-     toBack = () => {
+    //返回
+    toBack = () => {
         var data = {
             method: 'popView',
         };
@@ -368,37 +366,42 @@ export default class teHomework extends React.Component {
                         }
                         <span className='comment' onClick={this.toPinglun.bind(this, rowData, rowID)}>评论</span>
                     </div>
-                    <div className='replyCont' style={{display:zanArr.length == 0 && pingArr.length == 0 ? "none":"block"}}>
-                       <div className='icon_arrowUp'></div>
-                        <div className='icon_emptyHeartB' style={{display:zanArr.length == 0 ? "none":"block"}}>
+                    <div className='replyCont' style={{ display: zanArr.length == 0 && pingArr.length == 0 ? "none" : "block" }}>
+                        <div className='icon_arrowUp'></div>
+                        <div className='icon_emptyHeartB' style={{ display: zanArr.length == 0 ? "none" : "block" }}>
                             {
                                 zanArr.map((v, i) => {
                                     return (
-                                        <span onClick={()=>{
+                                        <span onClick={() => {
                                             this.setState({
                                                 showSend: false
                                             })
-                                        }}>{v.user.userName}{i ==zanArr.length -1 ? "":"," }</span>
+                                        }}>{v.user.userName}{i == zanArr.length - 1 ? "" : ","}</span>
                                     )
                                 })
                             }
                         </div>
 
-                        <div className={zanArr.length == 0 ? '' : 'line_publicBefore'} style={{display:pingArr.length == 0 ? "none":"block"}}>
+                        <div className={zanArr.length == 0 ? '' : 'line_publicBefore'} style={{ display: pingArr.length == 0 ? "none" : "block" }}>
                             {
                                 pingArr.map((v, i) => {
                                     return (
                                         <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
                                             {
                                                 v.user.userName == v.toUser.userName ?
-                                                    <span> <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span></span>
+                                                    <span> 
+                                                        <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span>
+                                                    </span>
                                                     :
                                                     <span>
-                                                    <span className='blueTxt'>{v.user.userName}</span>
-                                                    <span>回复</span>
-                                                    <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
-                                                    <span>{v.content}</span>
-                                                </span>
+                                                        <span>
+                                                            <span className='blueTxt'>{v.user.userName}</span>
+                                                            <span>回复</span>
+                                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
+                                                            <span>{v.content}</span>
+                                                        </span>
+                                                    </span>
+
                                             }
 
                                         </div>
@@ -412,7 +415,7 @@ export default class teHomework extends React.Component {
             );
         };
         return (
-            <div id='teHomework' className='bg_gray' style={{height: this.state.clientHeight}}>
+            <div id='teHomework' className='bg_gray' style={{ height: this.state.clientHeight }}>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">教师作业</span>
@@ -429,26 +432,26 @@ export default class teHomework extends React.Component {
                         ></InputItem>
                         <div className='sendBtn' onClick={this.toSendContent}>发送</div>
                     </div>
-                <ListView
-                    ref={el => this.lv = el}
-                    dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
-                    renderFooter={() => (
-                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
-                            {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
-                        </div>)}
-                    renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
-                    className="am-list"
-                    pageSize={30}    //每次事件循环（每帧）渲染的行数
-                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
-                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
-                    onEndReached={this.loadMore}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
-                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
-                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
-                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
-                    style={{
-                        height: this.state.clientHeight - 64,
-                    }}
-                />
+                    <ListView
+                        ref={el => this.lv = el}
+                        dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
+                        renderFooter={() => (
+                            <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
+                            </div>)}
+                        renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                        className="am-list"
+                        pageSize={30}    //每次事件循环（每帧）渲染的行数
+                        //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                        scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                        onEndReached={this.loadMore}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                        onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                        initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                        scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                        style={{
+                            height: this.state.clientHeight - 64,
+                        }}
+                    />
                 </div>
             </div>
         )

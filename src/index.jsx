@@ -138,6 +138,24 @@ const verifyBinding= (location, cb) => {
     }, 'verifyBinding')
 };
 
+//学生信息
+const studentInfo = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/studentInfo/studentInfo').default)
+    }, 'studentInfo')
+};
+const watchContacts = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/watchContacts/watchContacts').default)
+    }, 'watchContacts')
+};
+const loveRewards = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/loveRewards/loveRewards').default)
+    }, 'loveRewards')
+};
+
+
 import './index.less';
 
 class Index extends React.Component {
@@ -208,6 +226,9 @@ ReactDOM.render(
             <Route path="rankingList" getComponent={rankingList}/>
             <Route path="detailPage" getComponent={detailPage}/>
             <Route path="verifyBinding" getComponent={verifyBinding}/>
+            <Route path="studentInfo" getComponent={studentInfo}/>
+            <Route path="watchContacts" getComponent={watchContacts}/>
+            <Route path="loveRewards" getComponent={loveRewards}/>
         </Route>
     </Router>, document.getElementById('example')
 );
