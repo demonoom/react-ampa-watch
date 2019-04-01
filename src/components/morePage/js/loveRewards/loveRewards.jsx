@@ -208,78 +208,87 @@ export default class loveRewards extends React.Component {
                         <span className="am-navbar-title">爱心奖励设置</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div style={{ display: this.state.bindType == 2 ? "block" : "none" }}>遮罩层</div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetSteps}>
-                        <div className="am-list-line">
-                            <div className="am-list-content">每日运动目标</div>
-                            <div className="am-list-extra">{this.state.defaultSteps}步</div>
-                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                    <div className="commonLocation-cont">
+                        <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                        <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetSteps}>
+                            <div className="am-list-line">
+                                <div className="am-list-content">每日运动目标</div>
+                                <div className="am-list-extra">{this.state.defaultSteps}步</div>
+                                <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetAnswer}>
-                        <div className="am-list-line">
-                            <div className="am-list-content">每日答题数</div>
-                            <div className="am-list-extra">{this.state.defaultAnswerValue}道题</div>
-                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                        <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetAnswer}>
+                            <div className="am-list-line">
+                                <div className="am-list-content">每日答题数</div>
+                                <div className="am-list-extra">{this.state.defaultAnswerValue}道题</div>
+                                <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetRight}>
-                        <div className="am-list-line">
-                            <div className="am-list-content">每日答题正确率</div>
-                            <div className="am-list-extra">{this.state.defaultRight}%</div>
-                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                        <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetRight}>
+                            <div className="am-list-line">
+                                <div className="am-list-content">每日答题正确率</div>
+                                <div className="am-list-extra">{this.state.defaultRight}%</div>
+                                <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div className='steps step bg_gray publicList_50' style={{ display: "none" }}>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toCloseSteps}><i className="icon-back"></i></span>
-                        <span className="am-navbar-title">每日运动目标</span>
+                        <span className="am-navbar-title">设置运动目标</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div>
-                        <span>{this.state.defaultSteps}步</span>
-                        目标步数
+                    <div className="WhiteSpace"></div>
+                    <div className="icon-targetBg">
+                        <div className="targetTitle">目标运动步数</div>
+                        <div className="targetCont">{this.state.defaultSteps}</div>
+                        <div className="targetIcon icon-step"></div>
                     </div>
-                    <div>
-                        <span onClick={this.toDeSteps}>-</span>
-                        <span>{this.state.defaultSteps}</span>
-                        <span onClick={this.addSteps}>+</span>
+                    <div className="operation">
+                        <span onClick={this.toDeSteps}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.addSteps} className="icon-operation icon-plusSign"></span>
                     </div>
+                    <div className="tags">完成每日目标宝贝可获得2爱心</div>
                     <div className="submitBtn" onClick={this.toSaveSteps}>保存</div>
+                    <div className="tags tags-step">研究表明，青少年每天坚持30分钟快走或慢跑（每分钟110步以上）对健康益处较大，推荐每日目标8000步。</div>
                 </div>
                 <div className="answers step bg_gray publicList_50" style={{ display: "none" }}>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toCloseAnswer}><i className="icon-back"></i></span>
-                        <span className="am-navbar-title">目标答题数</span>
+                        <span className="am-navbar-title">设置答题目标</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div>
-                        <span>{this.state.defaultAnswerValue}道题</span>
-                        目标答题数
+                    <div className="WhiteSpace"></div>
+                    <div className="icon-targetBg">
+                        <div className="targetTitle">目标答题数</div>
+                        <div className="targetCont">{this.state.defaultAnswerValue}</div>
+                        <div className="targetIcon icon-Questions"></div>
                     </div>
-                    <div>
-                        <span onClick={this.deAnswer}>-</span>
-                        <span>{this.state.defaultAnswerValue}</span>
-                        <span onClick={this.addAnswer}>+</span>
+                    <div className="operation">
+                        <span onClick={this.deAnswer}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.addAnswer} className="icon-operation icon-plusSign"></span>
                     </div>
+                    <div className="tags">完成每日目标宝贝可获得2爱心</div>
                     <div className="submitBtn" onClick={this.toSaveAnswerSum}>保存</div>
                 </div>
                 <div className="right step bg_gray publicList_50" style={{ display: "none" }}>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toCloseRight}><i className="icon-back"></i></span>
-                        <span className="am-navbar-title">目标正确率</span>
+                        <span className="am-navbar-title">设置正确率目标</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div>
-                        <span>{this.state.defaultRight}%</span>
-                        目标正确率
+                    <div className="WhiteSpace"></div>
+                    <div className="icon-targetBg">
+                        <div className="targetTitle">目标答题正确率</div>
+                        <div className="targetCont">{this.state.defaultRight}%</div>
+                        <div className="targetIcon icon-TargetRight"></div>
                     </div>
-                    <div>
-                        <span onClick={this.deRight}>-</span>
-                        <span>{this.state.defaultRight}</span>
-                        <span onClick={this.addRight}>+</span>
+                    <div className="operation">
+                        <span onClick={this.deRight}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.addRight} className="icon-operation icon-plusSign"></span>
                     </div>
+                    <div className="tags">完成每日目标宝贝可获得2爱心</div>
                     <div className="submitBtn" onClick={this.toSaveRight}>保存</div>
                 </div>
             </div>
