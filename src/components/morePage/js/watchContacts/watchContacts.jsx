@@ -135,12 +135,14 @@ export default class watchContacts extends React.Component {
                         return (
                             <div className='item'>
                                 <img src={v.guardian.avatar} alt="" />
-                                <div className="line_public">
-                                    <div className='my_flex relateName'>
-                                        <span className='relate text_hidden'>{v.familyRelate}</span>
-                                        <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                <div className="line_public my_flex">
+                                    <div>
+                                        <div className='my_flex relateName'>
+                                            <span className='relate text_hidden'>{v.familyRelate}</span>
+                                            <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                        </div>
+                                        <div className='tel'>{v.guardian.colAccount}</div>
                                     </div>
-                                    <div className='tel'>{v.guardian.colAccount}</div>
                                     <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
                                          style={{ display: v.bindType == 1 ? "none" : "block" }}
                                     >删除</div>
