@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, WhiteSpace, Toast, PullToRefresh, ListView, NavBar, Popover } from 'antd-mobile';
+import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
 import '../css/rankingList.less'
 import { height } from "window-size";
 import { Modal } from "antd-mobile/lib/index";
@@ -28,6 +29,8 @@ var weekDay = myWeekDate.getDate();
 var timeWeek = weekYear + '-' + weekMonth + '-' + weekDay;
 var weekStart = timeWeek + ' 00:00:00';
 var calm;
+//消息通信js
+window.ms = null;
 export default class rankingList extends React.Component {
     constructor(props) {
         super(props);
@@ -51,8 +54,28 @@ export default class rankingList extends React.Component {
                 { title: '运动' },
                 { title: '爱心' },
             ],
-            guardianData: {}
+            guardianData: {},
+            watchData:[]
         };
+    }
+    componentWillMount () {
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var userId = searchArray[0].split('=')[1];
+        this.setState({
+            userId
+        })
+        var pro = {
+            "command": "guardianLogin",
+            "data": {
+                "userId": userId,
+                "machineType": "0",
+                "version": '1.0',
+            }
+        };
+        ms = new WatchWebsocketConnection();
+        ms.connect(pro);
     }
     componentDidMount () {
         Bridge.setShareAble("false");
@@ -66,6 +89,7 @@ export default class rankingList extends React.Component {
         this.getWatch2gsByGuardianUserId(userId)
         //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
         window.addEventListener('resize', this.onWindowResize)
+        this.watchListener();
     }
 
     componentWillUnmount () {
@@ -79,6 +103,54 @@ export default class rankingList extends React.Component {
         setTimeout(() => {
             calm.setState({ clientHeight: document.body.clientHeight });
         }, 100)
+    }
+
+    //消息监听
+    watchListener () {
+        ms.msgWsListener = {
+            onError: function (errorMsg) {
+
+            }, onWarn: function (warnMsg) {
+                console.log(warnMsg, "warnMsg")
+                Toast.info(warnMsg, 1, null, false)
+            }, onMessage: function (info) {
+                console.log(info, "infoWatch")
+                if (info.command == "userOperateResponse") {
+                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
+                    calm.state.watchData.forEach((value, i) => {
+                        if (value.id == info.data.watchId) {
+                            calm.setState({
+                                guardians: value.guardians,
+                                studentId: value.studentId
+                            }, () => {
+                                calm.state.guardians.forEach((v, i) => {
+                                    if (v.guardian.colUid == calm.state.userId) {
+                                        calm.setState({
+                                            guardianData: v,
+                                        }, () => {
+                                            calm.setState({
+                                                visible: false,
+                                                phoneNumber: value.phoneNumber,
+                                                watchId: value.id,
+                                                watchName: value.watchName,
+                                                macAddr: value.macAddress
+                                            }, () => {
+                                                if (calm.state.flag == 1) {
+                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, start, end);
+                                                } else {
+                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
+            
+                                                }
+                                            });
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        };
     }
 
     //获取手表列表
@@ -251,9 +323,9 @@ export default class rankingList extends React.Component {
         var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
         var data = {
             method: 'openNewPage',
-            navType:2,
+            navType: 2,
             url: url,
-            backAlertInfo:"是否放弃本次编辑？"
+            backAlertInfo: "是否放弃本次编辑？"
         };
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
@@ -363,8 +435,8 @@ export default class rankingList extends React.Component {
     }
 
     render () {
-        console.log(this.state.guardianData.valid,"valid")
-        console.log(this.state.guardianData.bindType,"bindType")
+        console.log(this.state.guardianData.valid, "valid")
+        console.log(this.state.guardianData.bindType, "bindType")
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className='item'>
@@ -381,7 +453,7 @@ export default class rankingList extends React.Component {
         };
         return (
             <div id='rankingList' className='bg_gray'>
-                <div className="am-navbar-blue" style={{ display: this.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ) ? "block" : "none" }}>
+                <div className="am-navbar-blue" style={{ display: this.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2)) ? "block" : "none" }}>
                     <NavBar
                         mode="light"
                     >排行榜</NavBar>
@@ -429,7 +501,7 @@ export default class rankingList extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="commonLocation-cont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display:calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>

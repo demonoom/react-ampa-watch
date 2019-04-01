@@ -119,7 +119,6 @@ export default class watchPosition extends React.Component {
             this.setState({toConfirm: true});
         }
 
-        
         var popoverLay = [];
         data.forEach((v) => {
             popoverLay.push(
@@ -232,6 +231,17 @@ export default class watchPosition extends React.Component {
                             _this.state.marker.setPosition([info.data.longitude, info.data.latitude]);
                         }
                     }
+                } else if (info.command === 'userOperateResponse') {
+                    if (info.data.guardianId == _this.state.userId) {
+                        if (info.data.operateStatus == 0) {
+                            //拒绝
+                            _this.setState({toConfirm: false, toBind: false, watchName: ''}, () => {
+                                _this.getWatch2gsByGuardianUserId()
+                            })
+                        } else {
+                            _this.userOperateResponse(info.data)
+                        }
+                    }
                 }
             }
         }
@@ -332,6 +342,33 @@ export default class watchPosition extends React.Component {
             sclPointFlag: false,
         }, () => {
             this.watch2GLocaltionRequest();
+        });
+    };
+
+    userOperateResponse = (data) => {
+
+        var optObj = this.state.watch2gs.filter((v) => {
+            return v.id == data.watchId
+        })[0];
+
+        this.setState({
+            familyRelate: optObj.guardians.filter((v) => {
+                return v.bindType == 1
+            })[0].familyRelate
+        });
+
+        this.setState({toConfirm: false});
+
+        this.setState({
+            watchName: optObj.watchName,
+            visible: false,
+            // selected: opt.props.value,
+            mac: optObj.macAddress,
+            macId: optObj.id,
+            homePointFlag: false,
+            sclPointFlag: false,
+        }, () => {
+            // this.watch2GLocaltionRequest();
         });
     };
 

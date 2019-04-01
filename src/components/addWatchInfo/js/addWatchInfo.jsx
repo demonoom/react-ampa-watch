@@ -34,6 +34,7 @@ export default class addWatchInfo extends React.Component {
         super(props);
         calm = this;
         this.state = {
+            inputDisableFlag: true,
             macAddress: "",
             stuName: "",
             extraClassName: "",
@@ -131,17 +132,17 @@ export default class addWatchInfo extends React.Component {
         //         $(".button_preNext").show();
         //     }
         // });
-        var winHeight = $(window).height(); // 获取当前页面高度  
-        $(window).resize(function () {
-            var resizeHeight = $(this).height();
-            if (winHeight - resizeHeight > 50) {
-                // 软键盘弹出  
-                $('body').css('height', winHeight + 'px');
-            } else {
-                //软键盘收起
-                $('body').css('height', '100%');
-            }
-        });
+        // var winHeight = $(window).height(); // 获取当前页面高度  
+        // $(window).resize(function () {
+        //     var resizeHeight = $(this).height();
+        //     if (winHeight - resizeHeight > 50) {
+        //         // 软键盘弹出  
+        //         $('body').css('height', winHeight + 'px');
+        //     } else {
+        //         //软键盘收起
+        //         $('body').css('height', '100%');
+        //     }
+        // });
 
     }
     componentWillUnmount () {
@@ -459,6 +460,7 @@ export default class addWatchInfo extends React.Component {
     }
 
     onTabsChange = (v) => {
+        this.setState({inputDisableFlag: !this.state.inputDisableFlag});
         if (v.label == "has") {
             this.setState({
                 jump: "check"
@@ -964,6 +966,7 @@ export default class addWatchInfo extends React.Component {
                                     <div className="tabCont">
                                         <div onClick={this.handleClick} className="icon_account login-input line_publicD stuCont">
                                             <InputItem
+                                            disabled={!this.state.inputDisableFlag}
                                                 className=""
                                                 placeholder="请输入小蚂蚁账号"
                                                 value={this.state.littleAntName}
@@ -1002,6 +1005,7 @@ export default class addWatchInfo extends React.Component {
                                                     <InputItem
                                                         className=""
                                                         placeholder="请输入学生姓名"
+                                                        disabled={this.state.inputDisableFlag}
                                                         value={this.state.studentName}
                                                         onChange={this.stuOnChange}
                                                         ref={el => this.inputStuNameRef = el}

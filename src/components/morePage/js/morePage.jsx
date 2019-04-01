@@ -8,9 +8,11 @@ const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
 window.ms = null;
+var calm;
 export default class morePage extends React.Component {
     constructor(props) {
         super(props);
+        calm = this;
         this.state = {
             childSex: "",
             watchName: "",
@@ -19,7 +21,8 @@ export default class morePage extends React.Component {
             guardianData: {},
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
-            guardianData: {}
+            guardianData: {},
+            watchData:[]
         };
     }
 
@@ -151,6 +154,37 @@ export default class morePage extends React.Component {
                 Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
                 console.log(info, "infoWatch")
+                if(info.command == "userOperateResponse"){
+                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
+                    calm.state.watchData.forEach((value, i) => {
+                        if (value.id == info.data.watchId) {
+                            calm.setState({
+                                guardians: value.guardians,
+                                studentId: value.studentId
+                            }, () => {
+                                calm.state.guardians.forEach((v, i) => {
+                                    if (v.guardian.colUid == calm.state.userId) {
+                                        calm.setState({
+                                            guardianData: v,
+                                        }, () => {
+                                            calm.setState({
+                                                visible: false,
+                                                phoneNumber: value.phoneNumber,
+                                                watchId: value.id,
+                                                watchName: value.watchName,
+                                                macAddr: value.macAddress
+                                            }, () => {
+                                                console.log(calm.state.watchId,"watchId")
+                                                console.log(calm.state.watchName,"name")
+                                                calm.getWatch2gById(calm.state.watchId)
+                                            });
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
             }
         };
     }
@@ -457,7 +491,7 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="personEmptyCont" style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "block" : "none" }}>
+                <div className="personEmptyCont" style={{ display:calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
