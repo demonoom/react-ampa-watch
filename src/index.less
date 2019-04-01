@@ -274,7 +274,7 @@ img{
     transform: scaleY(0.5);
   }
 }
-.line_public{
+.line_public,.line_public15{
   position: relative;
   &::after{
     content: '';
@@ -289,6 +289,14 @@ img{
     -ms-transform: scaleY(0.5);
     -o-transform: scaleY(0.5);
     transform: scaleY(0.5);
+  }
+}
+
+.line_public15{
+  &::after {
+    content: '';
+    left: 15px;
+    width: calc(~"100% - 15px");
   }
 }
 .line_publicBefore{
