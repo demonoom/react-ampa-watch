@@ -169,11 +169,11 @@ export default class clockList extends React.Component {
                 </div>
                 <div className="commonLocation-cont overScroll">
                     <div className='grayBorder'></div>
-                    <div className="public_list">
+                    <div className="publicList_50">
                         {
                             this.state.clockList.map((v, i) => {
                                 return (
-                                    <div className='line_public bg_white clockItem'>
+                                    <div className='line_public15 bg_white clockItem'>
                                     <span onClick={this.toUpdate.bind(this, v)}>
                                         <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                         <span>{v.clockType}</span>

@@ -3,6 +3,7 @@ import {
     InputItem, Toast, DatePicker, Popover,
     Modal, Picker, List, Tabs
 } from 'antd-mobile';
+import '../../css/studentInfo.less'
 const Item = Popover.Item;
 const alert = Modal.alert;
 const prompt = Modal.prompt;
@@ -166,24 +167,43 @@ export default class studentInfo extends React.Component {
     }
     render () {
         return (
-            <div id="studentInfo" className='bg_gray'>
-                <div>
-                    <span>宝贝头像</span>
-                    <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
+            <div id="studentInfo" className='bg_gray publicList_50'>
+                <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                    <div className="am-list-line photo">
+                        <div className="am-list-content">宝贝头像</div>
+                        <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                <div onClick={this.toUpdateUserName}>
-                    <span>宝贝名字</span>
-                    <span>{this.state.userName} </span>
+                <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUpdateUserName}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">宝贝名字</div>
+                        <div className="am-list-extra">
+                            {this.state.userName}
+                        </div>
+                        <div className="am-list-arrow"></div>
+                    </div>
                 </div>
-                <div onClick={this.updatePhoneNumber}>
-                    <span>手表号码</span>
-                    <span>{this.state.phoneNumber} </span>
+                <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.updatePhoneNumber}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">手表号码</div>
+                        <div className="am-list-extra">
+                            {this.state.phoneNumber}
+                        </div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                <div>
-                    <span>学生账号</span>
-                    <span>{this.state.watchData.student ? this.state.watchData.student.colUid : ""} </span>
+                <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">学生账号</div>
+                        <div className="am-list-extra">
+                            {this.state.watchData.student ? this.state.watchData.student.colUid : ""}
+                        </div>
+                        <div className="am-list-arrow"></div>
+                    </div>
                 </div>
-                <div className={'sex line_publicD ' + this.state.extraClassName}>
+                <div className="grayBorder"></div>
+                <div className='line_public15'>
                     <Picker
                         data={sexData}
                         value={this.state.sexValue}
@@ -196,7 +216,7 @@ export default class studentInfo extends React.Component {
                         <List.Item arrow="horizontal">性别</List.Item>
                     </Picker>
                 </div>
-                <div className={'icon_birth line_publicD ' + this.state.birthClassName}>
+                <div className='icon_birth line_public15'>
                     <DatePicker
                         mode="date"
                         title=""
@@ -208,15 +228,24 @@ export default class studentInfo extends React.Component {
                         <List.Item arrow="horizontal">生日</List.Item>
                     </DatePicker>
                 </div>
-                <div>
-                    <span>学校</span>
-                    <span>{this.state.watchData.student ? this.state.watchData.student.schoolName : ""} </span>
+                <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">学校</div>
+                        <div className="am-list-extra">
+                            {this.state.watchData.student ? this.state.watchData.student.schoolName : ""}
+                        </div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                <div>
-                    <span>班级</span>
-                    <span>{this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""} </span>
+                <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">班级</div>
+                        <div className="am-list-extra">
+                            {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
+                        </div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                
             </div>
         )
     }

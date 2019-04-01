@@ -290,7 +290,7 @@ export default class addClock extends React.Component {
     }
     render () {
         return (
-            <div id="addClock" className='public_list bg_gray'>
+            <div id="addClock" className='publicList_50 bg_gray'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">添加闹钟</span>
@@ -298,7 +298,7 @@ export default class addClock extends React.Component {
                 </div>
                 <div className="commonLocation-cont">
                     <div className='grayBorder'></div>
-                    <div className='line_public'>
+                    <div className='line_public15'>
                         <Picker
                             data={alarmType}
                             value={this.state.alarmValue}
@@ -311,7 +311,7 @@ export default class addClock extends React.Component {
                             <List.Item arrow="horizontal">闹钟类型</List.Item>
                         </Picker>
                     </div>
-                    <div className="line_public">
+                    <div className="line_public15">
                         <DatePicker
                             mode="time"
                             value={this.state.time}
@@ -321,7 +321,7 @@ export default class addClock extends React.Component {
                             <List.Item arrow="horizontal">提醒时间</List.Item>
                         </DatePicker>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public repeatBtn activeDiv' onClick={this.onRepeat}>
+                    <div className='am-list-item am-list-item-middle line_public15 repeatBtn activeDiv' onClick={this.onRepeat}>
                         <div className="am-list-line">
                             <div className="am-list-content">重复</div>
                             <div className="am-list-extra">{this.state.defaleSelect}</div>
@@ -335,7 +335,7 @@ export default class addClock extends React.Component {
                             <div className='am-picker-popup-item am-picker-popup-header-right' onClick={this.sureSelect}>确定</div></div>
                         <List>
                             {this.state.checkedData.map((v, i) => (
-                                <div className='checkItem line_public'>
+                                <div className='checkItem line_public15'>
                                     <CheckboxItem key={v.value} onChange={(checked) => this.onSelectChange(checked, v, i)}>
                                         {v.label}
                                     </CheckboxItem>
