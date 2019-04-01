@@ -128,13 +128,13 @@ export default class studentInfo extends React.Component {
                 text: '确定', onPress: value => {
                     console.log(value, "value")
                     this.setState({
-                        phoneNumber: [value],
+                        phoneNumber: value,
                         RelationClassName: 'color_3'
                     }, () => {
                         this.updateWatch2g();
-                        setTimeout(() => {
-                            this.getWatch2gById(this.state.watchId)
-                        }, 300)
+                        // setTimeout(() => {
+                        //     this.getWatch2gById(this.state.watchId)
+                        // }, 300)
                     });
                 }
             },
@@ -149,54 +149,35 @@ export default class studentInfo extends React.Component {
             extraClassName: 'color_3'
         }, () => {
             this.updateWatch2g();
-            setTimeout(() => {
-                this.getWatch2gById(this.state.watchId)
-            }, 300)
+            // setTimeout(() => {
+            //     this.getWatch2gById(this.state.watchId)
+            // }, 300)
         });
     }
 
     //修改头像---调用客户端
     updatePhoto = () => {
-        var str = "http://60.205.86.217/upload8/2018-11-02/16/7503db83-ebba-45c2-814d-f13db9a62d1c.jpeg";
-        this.setState({
-            photoAddr: str
-        }, () => {
-            this.upadteAvatar(str);
-        })
-        // var data = {
-        //     method: 'selectedImage'
-        // };
-        // Bridge.callHandler(data, (photoAddr) => {
-        //     this.setState({ photoAddr: photoAddr }, () => {
-        //         this.upadteAvatar(photoAddr);
-        //         setTimeout(() => {
-        //             this.getWatch2gById(this.state.watchId)
-        //         }, 300)
-        //     });
-        // }, function (error) {
-        // });
-    }
-
-    //修改图像
-    upadteAvatar = (photoAddr) => {
-        var param = {
-            "method": 'upadteAvatar',
-            "ident": this.state.studentId,
-            "avatar": photoAddr
+        // var str = "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg";
+        // this.setState({
+        //     photoAddr: str
+        // }, () => {
+        //     this.updateWatch2g()
+        // })
+        var data = {
+            method: 'selectedImage'
         };
-        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: (result) => {
-                if (result.success) {
-                    Toast.info("修改成功", 1, null, false);
-                } else {
-                    Toast.fail(result.msg, 1, null, false);
-                }
-            },
-            onError: function (error) {
-                Toast.info('请求失败');
-            }
+        Bridge.callHandler(data, (photoAddr) => {
+            this.setState({ photoAddr: photoAddr }, () => {
+                this.updateWatch2g();
+                // setTimeout(() => {
+                //     this.getWatch2gById(this.state.watchId)
+                // }, 300)
+            });
+        }, function (error) {
         });
     }
+
+    
 
     //修改手表信息
     updateWatch2g = () => {
@@ -205,7 +186,8 @@ export default class studentInfo extends React.Component {
             "birthTime": this.state.sendData,
             "watch2gId": this.state.watchId,
             "childSex": this.state.sexValue[0],
-            "phoneNumber": this.state.phoneNumber[0],
+            "avatar":this.state.photoAddr,
+            "phoneNumber": this.state.phoneNumber,
             "actionName": "watchAction",
         };
         console.log(param)
@@ -231,9 +213,9 @@ export default class studentInfo extends React.Component {
             birthClassName: "color_3"
         }, () => {
             this.updateWatch2g();
-            setTimeout(() => {
-                this.getWatch2gById(this.state.watchId)
-            }, 300)
+            // setTimeout(() => {
+            //     this.getWatch2gById(this.state.watchId)
+            // }, 300)
         })
     }
     //返回
