@@ -236,7 +236,8 @@ export default class studentInfo extends React.Component {
                     <span className="am-navbar-title">学生名片</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
+                <div className="commonLocation-cont overScroll">
+                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}></div>
                 <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                     <div className="am-list-line photo">
                         <div className="am-list-content">宝贝头像</div>
@@ -315,6 +316,7 @@ export default class studentInfo extends React.Component {
                         </div>
                         <div className="am-list-arrow"></div>
                     </div>
+                </div>
                 </div>
             </div>
         )
