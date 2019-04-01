@@ -155,6 +155,18 @@ const loveRewards = (location, cb) => {
     }, 'loveRewards')
 };
 
+const articleList = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/article/js/articleList').default)
+    }, 'articleList')
+};
+
+const articleDetail = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/article/js/articleDetail').default)
+    }, 'articleDetail')
+};
+
 
 import './index.less';
 
@@ -229,6 +241,8 @@ ReactDOM.render(
             <Route path="studentInfo" getComponent={studentInfo}/>
             <Route path="watchContacts" getComponent={watchContacts}/>
             <Route path="loveRewards" getComponent={loveRewards}/>
+            <Route path="articleList" getComponent={articleList}/>
+            <Route path="articleDetail" getComponent={articleDetail}/>
         </Route>
     </Router>, document.getElementById('example')
 );
