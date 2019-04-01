@@ -3,6 +3,7 @@ import {
     InputItem, Toast, DatePicker, Popover,
     Modal, Picker, List, Tabs
 } from 'antd-mobile';
+import '../../css/watchContacts.less'
 const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
@@ -112,33 +113,45 @@ export default class watchContacts extends React.Component {
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
-                <div className="am-navbar">
-                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">手表通讯录</span>
-                    <span className="am-navbar-right"></span>
+                <div className="contactBg">
+                    <div className="am-navbar am-navbar-blue whiteBack">
+                        <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                        <span className="am-navbar-title">手表通讯录</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
+                    <div className="p15">
+                        <div className='mainItem'>
+                            <div className="icon_bg"><img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
+                            <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
+                            <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
+                        </div>
+                    </div>
                 </div>
+                <div className="contactCont overScroll">
                 <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
-                <div>
-                    <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
-                    <span>{this.state.watchData.watchName}</span>
-                    <span>{this.state.watchData.phoneNumber}</span>
-                </div>
                 {
                     this.state.watchContactsData.map((v, i) => {
                         console.log(v, "V")
                         return (
-                            <div>
+                            <div className='item'>
                                 <img src={v.guardian.avatar} alt="" />
-                                <span style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
-                                <span>{v.familyRelate}</span>
-                                <span>{v.guardian.colAccount}</span>
-                                <span onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                    style={{ display: v.bindType == 1 ? "none" : "block" }}
-                                >删除</span>
+                                <div className="line_public my_flex">
+                                    <div>
+                                        <div className='my_flex relateName'>
+                                            <span className='relate text_hidden'>{v.familyRelate}</span>
+                                            <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                        </div>
+                                        <div className='tel'>{v.guardian.colAccount}</div>
+                                    </div>
+                                    <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                         style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                    >删除</div>
+                                </div>
                             </div>
                         )
                     })
                 }
+                </div>
             </div>
         )
     }

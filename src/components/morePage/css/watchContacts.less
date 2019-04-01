@@ -1,0 +1,121 @@
+#watchContacts{
+  .tel{
+    font-size: 14px;
+    color: #666;
+    display: block;
+  }
+  .contactCont{
+    height: calc(~"100% - 195px");
+    position: relative;
+  }
+  .contactBg{
+    position: relative;
+    height: 195px;
+    background: url("../../images/icon_contactBg.png") no-repeat;
+    width: 100%;
+    background-size: 100% 100%;
+    .am-navbar{
+      background: none !important;
+      &::after{
+        display: none;
+      }
+    }
+    .p15{
+      position: absolute;
+      bottom: 16px;
+      left: 0;
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+  .tag{
+    color: #17ACF7;
+    border: 1px #17ACF7 solid;
+    border-radius: 4px;
+    padding: 0 5px;
+    margin-left: 10px;
+    font-size: 12px;
+    height: 18px;
+  }
+  .mainItem{
+    background-color: white;
+    height: 99px;
+    border-radius: 12px;
+    padding:0 7px 0 117px;
+    position: relative;
+    .icon_bg{
+      width: 110px;
+      background: url("../../images/icon_mainContact.png") no-repeat;
+      height: 100%;
+      background-size: 100% 100%;
+      position: absolute;
+      left: 7px;
+      top: 0;
+    }
+    img{
+      position: absolute;
+      left: 21px;
+      top: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+    .relate{
+      padding-top: 25px;
+
+    }
+    .tel{
+      padding-top: 12px;
+    }
+  }
+  .item{
+    background-color: white;
+    height: 64px;
+    position: relative;
+    padding-left: 70px;
+    .line_public{
+      height: 100%;
+      align-items: center;
+      padding-right: 15px;
+    }
+    .rightCont{
+
+    }
+    .relateName{
+      height: 20px;
+      align-items: center;
+    }
+    img{
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      position: absolute;
+      left: 15px;
+      top: 10px;
+    }
+    .deleteBtn{
+      color: #17ACF7;
+      border: 1px #17ACF7 solid;
+      border-radius: 4px;
+      width: 44px;
+      text-align: center;
+      padding: 4px 0;
+      font-size: 14px;
+      box-sizing: border-box;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+      transform: translateY(-50%);
+    }
+    .relate{
+      max-width: calc(~"100% - 155px");
+    }
+    .tel{
+      padding-top: 9px;
+    }
+  }
+}
