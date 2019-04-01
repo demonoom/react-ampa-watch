@@ -445,7 +445,7 @@ export default class morePage extends React.Component {
 
     render () {
         return (
-            <div id="morePage" className='bg_gray'>
+            <div id="morePage" className='bg_gray publicList_50'>
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
                     <Popover mask
                         overlayClassName="fortest"
@@ -487,14 +487,23 @@ export default class morePage extends React.Component {
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div onClick={this.toStudentInfo}>
-                    学生名片
+                <div onClick={this.toStudentInfo} className='am-list-item am-list-item-middle line_public'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">学生名片</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                <div onClick={this.toWatchContacts}>
-                    手表通讯录
+                <div onClick={this.toWatchContacts} className='am-list-item am-list-item-middle line_public'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">手表通讯录</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
-                <div onClick={this.toSetStar}>
-                    爱心奖励设置
+                <div onClick={this.toSetStar} className='am-list-item am-list-item-middle line_public'>
+                    <div className="am-list-line">
+                        <div className="am-list-content">爱心奖励设置</div>
+                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    </div>
                 </div>
                 <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public' onClick={this.toPushClock}>
                     <div className="am-list-line">
