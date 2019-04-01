@@ -319,7 +319,7 @@ export default class studentInfo extends React.Component {
                     <div className="am-list-line">
                         <div className="am-list-content">班级</div>
                         <div className="am-list-extra">
-                            {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
+                            {/* {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""} */}
                         </div>
                         <div className="am-list-arrow"></div>
                     </div>

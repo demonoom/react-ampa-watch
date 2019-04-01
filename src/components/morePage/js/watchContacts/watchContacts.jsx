@@ -128,14 +128,15 @@ export default class watchContacts extends React.Component {
                     </div>
                 </div>
                 <div className="contactCont overScroll">
-                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
-                    {
-                        this.state.watchContactsData.map((v, i) => {
-                            console.log(v, "V")
-                            return (
-                                <div className='item'>
-                                    <img src={v.guardian.avatar} alt="" />
-                                    <div className="line_public">
+                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}></div>
+                {
+                    this.state.watchContactsData.map((v, i) => {
+                        console.log(v, "V")
+                        return (
+                            <div className='item'>
+                                <img src={v.guardian.avatar} alt="" />
+                                <div className="line_public my_flex">
+                                    <div>
                                         <div className='my_flex relateName'>
                                             <span className='relate text_hidden'>{v.familyRelate}</span>
                                             <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
@@ -145,6 +146,10 @@ export default class watchContacts extends React.Component {
                                             style={{ display: v.bindType == 1 ? "none" : "block" }}
                                         >删除</div>
                                     </div>
+                                    </div>
+                                    <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                         style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                    >删除</div>
                                 </div>
                             )
                         })
