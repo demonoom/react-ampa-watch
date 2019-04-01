@@ -557,20 +557,6 @@ export default class articleDetail extends React.Component {
                                 onBlur={this.textareaBlur.bind(this)}
                             />
                             <div style={
-                                this.state.textareaFocus ? {display: 'none'} : {display: 'inline-block'}
-                            }>
-                                <div className="pent" onClick={this.changePent.bind(this)}>
-                                    <img
-                                        src={this.state.collection ? require("../images/fillPent.png") : require("../images/pent.png")}
-                                        alt=""/>
-                                </div>
-                                <div className="share" onClick={this.toShare}>
-                                    <img
-                                        src={require("../images/share.png")}
-                                        alt=""/>
-                                </div>
-                            </div>
-                            <div style={
                                 this.state.textareaFocus ? {display: 'inline-block'} : {display: 'none'}
                             }>
                                 <a className='commit_button' type="primary"
