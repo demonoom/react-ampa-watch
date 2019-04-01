@@ -117,7 +117,7 @@ export default class watchContacts extends React.Component {
                     <span className="am-navbar-title">手表通讯录</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
+                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
                 <div>
                     <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
                     <span>{this.state.watchData.watchName}</span>
