@@ -24,7 +24,7 @@ export default class loveRewards extends React.Component {
         var studentId = locationSearch.split("&")[1].split('=')[1];
         var bindType = locationSearch.split("&")[2].split('=')[1];
         this.setState({
-            watchId,studentId,bindType
+            watchId, studentId, bindType
         })
         this.getWatch2gLoveOptionByStudentId(studentId)
 
@@ -208,28 +208,26 @@ export default class loveRewards extends React.Component {
                         <span className="am-navbar-title">爱心奖励设置</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
-                    <div onClick={this.toSetSteps}>
-                        每日运动目标<span>{this.state.defaultSteps}步</span>
+                    <div style={{ display: this.state.bindType == 2 ? "block" : "none" }}>遮罩层</div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetSteps}>
                         <div className="am-list-line">
                             <div className="am-list-content">每日运动目标</div>
                             <div className="am-list-extra">{this.state.defaultSteps}步</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetAnswer}>
                         <div className="am-list-line">
                             <div className="am-list-content">每日答题数</div>
                             <div className="am-list-extra">{this.state.defaultAnswerValue}道题</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetRight}>
                         <div className="am-list-line">
                             <div className="am-list-content">每日答题正确率</div>
                             <div className="am-list-extra">{this.state.defaultRight}%</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
                 </div>
