@@ -489,7 +489,7 @@ export default class morePage extends React.Component {
                 <div className='moreList overScroll'>
                     <div className="grayBorder"></div>
                     <div
-                        // style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
                         onClick={this.toStudentInfo} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">学生名片</div>
