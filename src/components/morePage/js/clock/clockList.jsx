@@ -169,7 +169,7 @@ export default class clockList extends React.Component {
                 </div>
                 <div className="commonLocation-cont overScroll">
                     <div className='grayBorder'></div>
-                    <div className="public_list">
+                    <div className="publicList_50">
                         {
                             this.state.clockList.map((v, i) => {
                                 return (

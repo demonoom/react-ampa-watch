@@ -290,7 +290,7 @@ export default class addClock extends React.Component {
     }
     render () {
         return (
-            <div id="addClock" className='public_list bg_gray'>
+            <div id="addClock" className='publicList_50 bg_gray'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">添加闹钟</span>
