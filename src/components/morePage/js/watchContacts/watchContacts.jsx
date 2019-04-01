@@ -22,8 +22,9 @@ export default class watchContacts extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
+        var bindType = locationSearch.split("&")[1].split('=')[1];
         this.setState({
-            watchId,
+            watchId,bindType
         })
         this.getWatch2gById(watchId)
 
@@ -116,6 +117,7 @@ export default class watchContacts extends React.Component {
                     <span className="am-navbar-title">手表通讯录</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
                 <div>
                     <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
                     <span>{this.state.watchData.watchName}</span>

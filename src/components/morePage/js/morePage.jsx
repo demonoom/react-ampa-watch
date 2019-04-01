@@ -407,7 +407,7 @@ export default class morePage extends React.Component {
 
     //跳转学生名片
     toStudentInfo = () => {
-        var url = WebServiceUtil.mobileServiceURL + "studentInfo?watchId=" + this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "studentInfo?watchId=" + this.state.watchId+"&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -420,7 +420,7 @@ export default class morePage extends React.Component {
 
     //跳转手表通讯录
     toWatchContacts = () => {
-        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId+"&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -432,7 +432,7 @@ export default class morePage extends React.Component {
     }
     //爱心奖励设置
     toSetStar = () => {
-        var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId+"&studentId="+this.state.studentId;
+        var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -488,33 +488,38 @@ export default class morePage extends React.Component {
                 </div>
                 <div className='moreList overScroll'>
                     <div className="grayBorder"></div>
-                    <div onClick={this.toStudentInfo} className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                    <div
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                        onClick={this.toStudentInfo} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">学生名片</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
-                    <div onClick={this.toWatchContacts} className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                    <div
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                        onClick={this.toWatchContacts} className='am-list-item am-list-item-middle line_public15 activeDiv'
+                    >
                         <div className="am-list-line">
                             <div className="am-list-content">手表通讯录</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushClock}>
                         <div className="am-list-line">
                             <div className="am-list-content">设置闹钟</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
-                    <div onClick={this.toSetStar} className='am-list-item am-list-item-middle line_public activeDiv'>
+                    <div
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                        onClick={this.toSetStar} className='am-list-item am-list-item-middle line_public activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">爱心奖励</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
-
-
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
                         <div className="am-list-line">
                             <div className="am-list-content">找手表</div>

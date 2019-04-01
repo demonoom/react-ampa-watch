@@ -41,8 +41,9 @@ export default class studentInfo extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
+        var bindType = locationSearch.split("&")[1].split('=')[1];
         this.setState({
-            watchId,
+            watchId,bindType
         })
         this.getWatch2gById(watchId)
 
@@ -235,6 +236,7 @@ export default class studentInfo extends React.Component {
                     <span className="am-navbar-title">学生名片</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
                 <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                     <div className="am-list-line photo">
                         <div className="am-list-content">宝贝头像</div>

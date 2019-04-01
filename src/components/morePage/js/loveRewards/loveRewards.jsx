@@ -21,8 +21,9 @@ export default class loveRewards extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var studentId = locationSearch.split("&")[1].split('=')[1];
+        var bindType = locationSearch.split("&")[2].split('=')[1];
         this.setState({
-            watchId,
+            watchId,studentId,bindType
         })
         this.getWatch2gLoveOptionByStudentId(studentId)
 
