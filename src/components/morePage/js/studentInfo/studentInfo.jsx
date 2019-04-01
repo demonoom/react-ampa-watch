@@ -31,6 +31,7 @@ export default class studentInfo extends React.Component {
         calm = this;
         this.state = {
             watchData: [],
+            photoAddr: ""
 
         };
     }
@@ -59,9 +60,12 @@ export default class studentInfo extends React.Component {
                 if (result.success && result.response) {
                     this.setState({
                         watchData: result.response,
+                        studentId: result.response.studentId,
                         phoneNumber: result.response.phoneNumber,
                         sexValue: [result.response.childSex],
-                        userName:result.response.student ? result.response.student.userName : ""
+                        photoAddr: result.response.student ? result.response.student.avatar : "",
+                        userName: result.response.student ? result.response.student.userName : "",
+                        birthTime: WebServiceUtil.formatYMD(result.response.bindTime),
                     })
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -104,9 +108,9 @@ export default class studentInfo extends React.Component {
 
     updatePhoneNumber = () => {
         $(".am-modal-input input").focus();
+        $(".am-modal-input input").attr("type","number");
         this.showModal();
     }
-
 
     showModal () {
         prompt('请输入手表号码', '', [
@@ -121,57 +125,115 @@ export default class studentInfo extends React.Component {
             },
             {
                 text: '确定', onPress: value => {
+                    console.log(value, "value")
                     this.setState({
                         phoneNumber: [value],
                         RelationClassName: 'color_3'
                     }, () => {
+                        this.updateWatch2g();
+                        setTimeout(() => {
+                            this.getWatch2gById(this.state.watchId)
+                        }, 300)
                     });
                 }
             },
-        ], 'default', this.state.phoneNumber)
+        ], 'default', "")
     }
 
-
-    showNameModal () {
-        prompt('请输入学生姓名', '', [
-            {
-                text: '取消', onPress: value => {
-                    this.setState({
-                        userName: this.state.userName,
-                    }, () => {
-                    });
-                },
-            },
-            {
-                text: '确定', onPress: value => {
-                    this.setState({
-                        userName: [value],
-                    }, () => {
-                    });
-                }
-            },
-        ], 'default', this.state.userName)
-    }
 
     //点击picker确定按钮
     clickSure = (val) => {
         this.setState({
             sexValue: val,
             extraClassName: 'color_3'
+        }, () => {
+            this.updateWatch2g();
+            setTimeout(() => {
+                this.getWatch2gById(this.state.watchId)
+            }, 300)
         });
     }
-    toUpdateUserName = ()=>{
-        $(".am-modal-input input").focus();
-        this.showNameModal()
+    
+    //修改头像
+    updatePhoto = () => {
+        var data = {
+            method: 'selectedImage'
+        };
+        Bridge.callHandler(data, (photoAddr) => {
+            this.setState({ photoAddr: photoAddr }, () => {
+                this.upadteAvatar(photoAddr);
+                setTimeout(() => {
+                    this.getWatch2gById(this.state.watchId)
+                }, 300)
+            });
+        }, function (error) {
+        });
+    }
+
+    //修改图像
+    upadteAvatar = (photoAddr) => {
+        var param = {
+            "method": 'upadteAvatar',
+            "ident": this.state.studentId,
+            "avatar": photoAddr
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success) {
+                    Toast.info("修改成功", 1, null, false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+    //修改手表信息
+    updateWatch2g = () => {
+        var param = {
+            "method": 'updateWatch2g',
+            "birthTime": this.state.birthTime,
+            "watch2gId": this.state.watchId,
+            "childSex": this.state.sexValue[0],
+            "phoneNumber": this.state.phoneNumber[0],
+            "actionName": "watchAction",
+        };
+        console.log(param, "ppp")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success) {
+                    Toast.info("修改成功", 1, null, false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+    //确认修改生日
+    sureBirthTime = (date) => {
+        var str = formatDate(date)
+        this.setState({
+            date,
+            sendData: str,
+            birthClassName: "color_3"
+        }, () => {
+            this.updateWatch2g();
+        })
     }
     render () {
         return (
             <div id="studentInfo" className='bg_gray'>
-                <div>
+                <div onClick={this.updatePhoto}>
                     <span>宝贝头像</span>
-                    <img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" />
+                    <img src={this.state.photoAddr} alt="" />
                 </div>
-                <div onClick={this.toUpdateUserName}>
+                <div>
                     <span>宝贝名字</span>
                     <span>{this.state.userName} </span>
                 </div>
@@ -200,9 +262,10 @@ export default class studentInfo extends React.Component {
                     <DatePicker
                         mode="date"
                         title=""
-                        extra={WebServiceUtil.formatYMD(this.state.watchData.bindTime)}
+                        extra={this.state.birthTime}
                         maxDate={new Date(nowTimeStamp + 1e7)}
                         value={this.state.date}
+                        onOk={this.sureBirthTime}
                         onChange={this.birChange}
                     >
                         <List.Item arrow="horizontal">生日</List.Item>
@@ -216,7 +279,7 @@ export default class studentInfo extends React.Component {
                     <span>班级</span>
                     <span>{this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""} </span>
                 </div>
-                
+
             </div>
         )
     }

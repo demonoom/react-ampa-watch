@@ -56,7 +56,7 @@ export default class watchContacts extends React.Component {
     }
 
     //删除弹出框
-    showAlertDelete () {
+    showAlertDelete (wId,ident) {
         var _this = this;
         var phoneType = navigator.userAgent;
         var phone;
@@ -65,16 +65,40 @@ export default class watchContacts extends React.Component {
         } else {
             phone = 'android'
         }
-        const alertInstance = alert('您确定放弃本次编辑吗?', '', [
+        const alertInstance = alert('您确定删除?', '', [
             { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => calm.toDelete() },
+            { text: '确定', onPress: () => calm.toDelete(wId,ident) },
         ], phone);
 
     }
     //删除
-    toDelete = () => {
-        console.log("删除")
+    toDelete = (wid,ident) => {
+        var param = {
+            "method": 'unbindGuardian',
+            "watch2gId": wid,
+            "guardianId": ident,
+            "actionName": "watchAction"
+        };
+
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success) {
+                    Toast.info('解绑成功', 1, null, false);
+                    var data = {
+                        method: 'unBindSuccess',
+                    };
+                    Bridge.callHandler(data, null, function (error) {
+                    });
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
+
 
 
 
@@ -95,8 +119,8 @@ export default class watchContacts extends React.Component {
                                 <span style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
                                 <span>{v.familyRelate}</span>
                                 <span>{v.guardian.colAccount}</span>
-                                <span onClick={this.showAlertDelete} 
-                                    // style={{ display: v.bindType == 1 ? "none" : "block"}}
+                                <span onClick={this.showAlertDelete.bind(this,v.watch2gId,v.guardian.colUid)} 
+                                    style={{ display: v.bindType == 1 ? "none" : "block"}}
                                 >删除</span>
                             </div>
                         )

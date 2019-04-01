@@ -19,10 +19,34 @@ export default class loveRewards extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
+        var studentId = locationSearch.split("&")[1].split('=')[1];
         this.setState({
             watchId,
         })
+        this.getWatch2gLoveOptionByStudentId(studentId)
 
+    }
+
+    getWatch2gLoveOptionByStudentId = (studentId)=>{
+        var param = {
+            "method": 'getWatch2gLoveOptionByStudentId',
+            "studentId": studentId,
+            "pageNo":-1,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"result")
+                if (result.success && result.response) {
+                    
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
     }
     componentDidMount () {
     }
@@ -63,7 +87,7 @@ export default class loveRewards extends React.Component {
             defaultSteps: this.state.defaultSteps
         })
     }
-
+    //减少答题数
     deAnswer = () => {
         if (this.state.defaultAnswerValue == 0) {
             Toast.info("不能再低了哦", 1, null, false)
@@ -74,6 +98,7 @@ export default class loveRewards extends React.Component {
             defaultAnswerValue: this.state.defaultAnswerValue
         })
     }
+    
     addAnswer = () => {
         this.state.defaultAnswerValue += 1;
         this.setState({

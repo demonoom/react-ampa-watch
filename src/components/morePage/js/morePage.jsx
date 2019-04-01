@@ -432,7 +432,7 @@ export default class morePage extends React.Component {
     }
     //爱心奖励设置
     toSetStar = () => {
-        var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId;
+        var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId+"&studentId="+this.state.studentId;
         var data = {
             method: 'openNewPage',
             selfBack: true,
