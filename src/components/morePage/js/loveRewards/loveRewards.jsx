@@ -208,7 +208,6 @@ export default class loveRewards extends React.Component {
                         <span className="am-navbar-title">爱心奖励设置</span>
                         <span className="am-navbar-right"></span>
                     </div>
-                    <div style={{ display: this.state.bindType == 2 ? "block" : "none" }}>遮罩层</div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetSteps}>
                         <div className="am-list-line">
                             <div className="am-list-content">每日运动目标</div>
@@ -231,6 +230,7 @@ export default class loveRewards extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div className="mask" style={{ display: this.state.bindType == 2 ? "block" : "none" }}>遮罩层</div>
                 <div className='steps step bg_gray publicList_50' style={{ display: "none" }}>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toCloseSteps}><i className="icon-back"></i></span>
