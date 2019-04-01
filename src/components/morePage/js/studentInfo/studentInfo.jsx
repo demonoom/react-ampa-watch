@@ -241,7 +241,7 @@ export default class studentInfo extends React.Component {
                     <div className="am-list-line photo">
                         <div className="am-list-content">宝贝头像</div>
                         <img src={this.state.photoAddr} alt="" />
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUpdateUserName}>
@@ -259,7 +259,7 @@ export default class studentInfo extends React.Component {
                         <div className="am-list-extra">
                             {this.state.phoneNumber}
                         </div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public activeDiv'>
