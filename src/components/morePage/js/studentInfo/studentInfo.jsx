@@ -196,13 +196,12 @@ export default class studentInfo extends React.Component {
     updateWatch2g = () => {
         var param = {
             "method": 'updateWatch2g',
-            "birthTime": this.state.birthTime,
+            "birthTime": this.state.sendData,
             "watch2gId": this.state.watchId,
             "childSex": this.state.sexValue[0],
             "phoneNumber": this.state.phoneNumber[0],
             "actionName": "watchAction",
         };
-        console.log(param, "ppp")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -225,6 +224,9 @@ export default class studentInfo extends React.Component {
             birthClassName: "color_3"
         }, () => {
             this.updateWatch2g();
+            setTimeout(() => {
+                this.getWatch2gById(this.state.watchId)
+            }, 300)
         })
     }
     render () {
@@ -304,7 +306,7 @@ export default class studentInfo extends React.Component {
                     <div className="am-list-line">
                         <div className="am-list-content">班级</div>
                         <div className="am-list-extra">
-                            {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
+                            {/* {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""} */}
                         </div>
                         <div className="am-list-arrow"></div>
                     </div>
