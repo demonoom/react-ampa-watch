@@ -25,7 +25,7 @@ export default class watchContacts extends React.Component {
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var bindType = locationSearch.split("&")[1].split('=')[1];
         this.setState({
-            watchId,bindType
+            watchId, bindType
         })
         this.getWatch2gById(watchId)
 
@@ -128,27 +128,27 @@ export default class watchContacts extends React.Component {
                     </div>
                 </div>
                 <div className="contactCont overScroll">
-                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
-                {
-                    this.state.watchContactsData.map((v, i) => {
-                        console.log(v, "V")
-                        return (
-                            <div className='item'>
-                                <img src={v.guardian.avatar} alt="" />
-                                <div className="line_public">
-                                    <div className='my_flex relateName'>
-                                        <span className='relate text_hidden'>{v.familyRelate}</span>
-                                        <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    {
+                        this.state.watchContactsData.map((v, i) => {
+                            console.log(v, "V")
+                            return (
+                                <div className='item'>
+                                    <img src={v.guardian.avatar} alt="" />
+                                    <div className="line_public">
+                                        <div className='my_flex relateName'>
+                                            <span className='relate text_hidden'>{v.familyRelate}</span>
+                                            <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                        </div>
+                                        <div className='tel'>{v.guardian.colAccount}</div>
+                                        <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                            style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                        >删除</div>
                                     </div>
-                                    <div className='tel'>{v.guardian.colAccount}</div>
-                                    <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                         style={{ display: v.bindType == 1 ? "none" : "block" }}
-                                    >删除</div>
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
                 </div>
             </div>
         )
