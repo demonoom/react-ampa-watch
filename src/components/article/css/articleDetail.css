@@ -1,0 +1,431 @@
+#articleDetail {
+  color: #333;
+  background-color: #f4f4f4;
+}
+#articleDetail .am-list-content,
+#articleDetail .am-list-line,
+#articleDetail .am-list-item {
+  padding: 0;
+}
+#articleDetail .am-list-item .am-list-line .am-list-content {
+  white-space: inherit !important;
+}
+#articleDetail .p15 {
+  padding: 10px 15px;
+  background-color: #fff;
+}
+#articleDetail .inner {
+  padding-bottom: 50px;
+}
+#articleDetail .inner iframe {
+  margin: 10px 0;
+  width: 100%;
+}
+#articleDetail .title {
+  font-size: 20px;
+  line-height: 22px;
+  word-break: break-word;
+  color: #333;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 10px 0 12px;
+}
+#articleDetail .at {
+  font-size: 12px;
+  margin: 5px 0 10px;
+}
+#articleDetail .at .author {
+  display: inline-block;
+  padding-right: 10px;
+  color: #999;
+}
+#articleDetail .at .createTime {
+  display: inline-block;
+  color: #999;
+}
+#articleDetail .content {
+  font-size: 15px;
+}
+#articleDetail .content p {
+  margin: 0;
+  line-height: 1.5;
+}
+#articleDetail .content img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+}
+#articleDetail .ql-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+#articleDetail .content_bottom {
+  text-align: center;
+}
+#articleDetail .content_bottom .report {
+  font-size: 12px;
+}
+#articleDetail .content_bottom .like {
+  font-size: 16px;
+}
+#articleDetail .content_bottom .like,
+#articleDetail .content_bottom .report {
+  max-width: 120px;
+  min-width: 96px;
+  height: 36px;
+  line-height: 36px;
+  margin: 20px;
+  border: 1px solid #e5e5e5;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  text-align: center;
+  display: inline-block;
+}
+#articleDetail .content_bottom .like .noLike,
+#articleDetail .content_bottom .report .noLike {
+  background: url("../images/praise.png") no-repeat left center;
+  background-size: 20px;
+  display: inline-block;
+  padding-left: 25px;
+  color: #888;
+}
+#articleDetail .content_bottom .like .likeActive,
+#articleDetail .content_bottom .report .likeActive {
+  background: url("../images/praiseActive.png") no-repeat left center;
+  background-size: 20px;
+  display: inline-block;
+  padding-left: 25px;
+  color: #e5352b;
+  border-color: #e5352b;
+}
+#articleDetail .content_bottom .like .i_report,
+#articleDetail .content_bottom .report .i_report {
+  background: url("../images/iconreport.png") no-repeat left 10px;
+  background-size: 20px;
+  display: inline-block;
+  padding-left: 25px;
+  color: #888;
+}
+#articleDetail .content_bottom .like img,
+#articleDetail .content_bottom .report img {
+  width: 16px;
+  height: 16px;
+  margin-left: 20px;
+  margin-top: 6px;
+}
+#articleDetail .content_bottom .like span,
+#articleDetail .content_bottom .report span {
+  vertical-align: bottom;
+  padding-left: 5px;
+  line-height: 33px;
+}
+#articleDetail .commentList .am-list-footer {
+  background: #f4f4f4;
+}
+#articleDetail .commentList .list-view-section-body {
+  padding: 0 15px;
+  border-top: 1px #e5e5e5 solid;
+}
+#articleDetail .commentList .list-view-section-body > div:last-child .line_public::after {
+  display: none;
+}
+#articleDetail .commentList .listCont .am-list-content {
+  color: #666 !important;
+  font-size: 13px;
+  line-height: 17px;
+}
+#articleDetail .commentList .listCont .am-list-content span {
+  line-height: 28px;
+}
+#articleDetail .commentList .listCont .am-list-brief {
+  font-size: 15px;
+  word-break: break-all;
+  overflow: visible;
+  text-overflow: unset;
+  white-space: normal;
+  color: #333;
+  line-height: 20px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+#articleDetail .commentList .listCont .releaseTime {
+  font-size: 12px;
+  color: #333;
+}
+#articleDetail .commentList .listCont .am-list-item {
+  -webkit-align-items: inherit;
+  -moz-align-items: inherit;
+  -ms-align-items: inherit;
+  -o-align-items: inherit;
+  -khtml-align-items: inherit;
+  align-items: inherit;
+  padding: 15px 0;
+}
+#articleDetail .commentList .listCont .am-list-item img {
+  width: 36px;
+  height: 36px;
+  vertical-align: top;
+  border-radius: 50%;
+}
+#articleDetail .commentList .listCont .am-list-item .am-list-line-multiple {
+  padding: 0;
+}
+#articleDetail .download_box {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 54px;
+  background: #000;
+  z-index: 99;
+  padding: 0;
+}
+#articleDetail .download_img_box {
+  display: inline-block;
+  position: absolute;
+  left: 15px;
+  top: 8px;
+}
+#articleDetail .download_describe {
+  display: inline-block;
+  margin-left: 62px;
+  margin-top: 8px;
+}
+#articleDetail .download_describe p {
+  margin: 0;
+  color: #fff;
+}
+#articleDetail .download_describe .downloadTitle {
+  font-size: 16px;
+  line-height: 22px;
+}
+#articleDetail .download_describe .downloadIntro {
+  font-size: 12px;
+  line-height: 17px;
+}
+#articleDetail .download_button {
+  display: inline-block;
+  background: #4285F4;
+  color: white;
+  width: 78px;
+  height: 32px;
+  border-radius: 23px;
+  font-size: 15px;
+  line-height: 32px;
+  text-align: center;
+  position: absolute;
+  top: 12px;
+  right: 15px;
+}
+#articleDetail .download_img {
+  width: 38px;
+  height: 38px;
+  vertical-align: middle;
+}
+#articleDetail .commit {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99;
+  width: 100%;
+}
+#articleDetail .commit .am-list-item {
+  padding: 10px 15px;
+  min-height: auto;
+}
+#articleDetail .commit .am-textarea-item {
+  background-color: #fff;
+}
+#articleDetail .commit .am-textarea-control {
+  background-color: #f3f3f3;
+  border-radius: 4px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+#articleDetail .commit .am-textarea-control textarea {
+  font-size: 13px;
+  line-height: 22px;
+  height: 22px;
+  max-height: 51px;
+  overflow-y: auto;
+  padding: 0 10px;
+  width: 100%;
+  box-sizing: border-box;
+  color: #333;
+}
+#articleDetail .commit {
+  background: white;
+}
+#articleDetail .commit #textAndReport .am-textarea-item {
+  width: calc(100% - 80px);
+  display: inline-block;
+  box-sizing: border-box;
+}
+#articleDetail .commit #textNo .am-textarea-item {
+  width: calc(100% - 80px);
+  display: inline-block;
+  box-sizing: border-box;
+}
+#articleDetail .commit .pent {
+  display: inline-block;
+}
+#articleDetail .commit .pent img {
+  width: 20px;
+  vertical-align: middle;
+}
+#articleDetail .commit .report {
+  display: inline-block;
+}
+#articleDetail .commit .report img {
+  margin-left: 5px;
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+  transform: translateY(2px);
+}
+#articleDetail .commit .share {
+  display: inline-block;
+  margin-left: 15px;
+}
+#articleDetail .commit .share img {
+  margin-left: 5px;
+  width: 18px;
+  vertical-align: middle;
+  padding-top: 2px;
+}
+#articleDetail .positionBox {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 10000;
+  width: 100%;
+  background: #f9f9f9;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 15px;
+}
+#articleDetail .positionBox .am-list-header {
+  padding: 20px 15px;
+  color: #333;
+  font-size: 15px;
+  text-align: center;
+}
+#articleDetail .positionBox .am-list-content {
+  color: #666 !important;
+}
+#articleDetail .positionBox .am-list-item {
+  padding: 0 15px;
+  background: #f9f9f9;
+  min-height: 50px;
+}
+#articleDetail .positionBox .am-list {
+  position: relative;
+}
+#articleDetail .positionBox .am-list:after {
+  content: '';
+  position: absolute;
+  background-color: #e5e5e5;
+  display: block;
+  z-index: 1;
+  top: auto;
+  right: 15px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1PX;
+  -webkit-transform-origin: 0 0;
+  -ms-transform-origin: 0 0;
+  transform-origin: 0 0;
+  -webkit-transform: scaleY(0.5);
+  -ms-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+#articleDetail .positionBox .cancelReport {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 999999;
+}
+#articleDetail .positionBox .cancelReport i {
+  background: url("../images/close_r.png") no-repeat;
+  background-size: 14px;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+#articleDetail .positionBox .am-list-item:last-child .am-list-line {
+  border-bottom: 0 !important;
+}
+#articleDetail .positionBox .am-list-line {
+  position: relative;
+  border-bottom: 1px solid #e5e5e5 !important;
+}
+#articleDetail .positionBox .checked {
+  background: #fff;
+}
+#articleDetail .positionBox .am-button {
+  height: 50px !important;
+  line-height: 50px !important;
+}
+#articleDetail .positionBox .am-button::before {
+  border-color: #fff !important;
+}
+#articleDetail .positionBox .am-button-primary {
+  background-color: #fff;
+  color: #4285f4;
+}
+#articleDetail .postionBox_mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 500px;
+  background: black;
+  z-index: 9999;
+  opacity: 0.5;
+}
+#articleDetail .commit_button {
+  width: 60px !important;
+  display: inline-block;
+  height: 68%;
+  line-height: 38px !important;
+  background: #4380EB !important;
+  font-size: 15px;
+  vertical-align: middle;
+  position: absolute;
+  color: white;
+  border-radius: 3px;
+}
+#articleDetail .commit_button span {
+  vertical-align: middle;
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+}
+#articleDetail .comments_send {
+  padding: 10px 15px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+#articleDetail .comments_send .am-list-item {
+  padding: 0;
+}
+#articleDetail .comments_send .am-list-item {
+  min-height: 38px !important;
+  margin-right: 15px;
+}
+#articleDetail .comments_send .pent,
+#articleDetail .comments_send .share {
+  margin-top: 9px;
+}
+#articleDetail .commit_title {
+  font-size: 16px;
+  border-left: 5px solid #82A6F5;
+  padding-left: 5px;
+}
