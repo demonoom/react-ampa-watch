@@ -104,6 +104,10 @@ export default class loveRewards extends React.Component {
         })
     }
     addSteps = () => {
+        if (this.state.defaultSteps == 10000) {
+            Toast.info("到达最大值", 1, null, false)
+            return
+        }
         this.state.defaultSteps += 1000;
         this.setState({
             defaultSteps: this.state.defaultSteps
@@ -111,8 +115,8 @@ export default class loveRewards extends React.Component {
     }
     //减少答题数
     deAnswer = () => {
-        if (this.state.defaultAnswerValue == 0) {
-            Toast.info("不能再低了哦", 1, null, false)
+        if (this.state.defaultAnswerValue == 1) {
+            Toast.info("到达最小值", 1, null, false)
             return
         }
         this.state.defaultAnswerValue -= 1;
@@ -120,29 +124,30 @@ export default class loveRewards extends React.Component {
             defaultAnswerValue: this.state.defaultAnswerValue
         })
     }
-
     addAnswer = () => {
         this.state.defaultAnswerValue += 1;
         this.setState({
             defaultAnswerValue: this.state.defaultAnswerValue
         })
     }
+
+    //正确率
     deRight = () => {
-        if (this.state.defaultRight == 0) {
-            Toast.info("不能再低了哦", 1, null, false)
+        if (this.state.defaultRight == 40) {
+            Toast.info("到达最小值", 1, null, false)
             return
         }
-        this.state.defaultRight -= 1;
+        this.state.defaultRight -= 10;
         this.setState({
             defaultRight: this.state.defaultRight
         })
     }
     addRight = () => {
         if (this.state.defaultRight == 100) {
-            Toast.info("不能再高了哦", 1, null, false)
+            Toast.info("到达最大值", 1, null, false)
             return
         }
-        this.state.defaultRight += 1;
+        this.state.defaultRight += 10;
         this.setState({
             defaultRight: this.state.defaultRight
         })

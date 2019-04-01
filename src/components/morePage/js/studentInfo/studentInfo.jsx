@@ -297,7 +297,7 @@ export default class studentInfo extends React.Component {
                         <div className="am-list-extra">
                             {this.state.watchData.student ? this.state.watchData.student.schoolName : ""}
                         </div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className="am-list-arrow"></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public activeDiv'>
@@ -306,7 +306,7 @@ export default class studentInfo extends React.Component {
                         <div className="am-list-extra">
                             {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
                         </div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className="am-list-arrow"></div>
                     </div>
                 </div>
             </div>
