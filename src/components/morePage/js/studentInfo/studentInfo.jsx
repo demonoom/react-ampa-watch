@@ -66,7 +66,8 @@ export default class studentInfo extends React.Component {
                         sexValue: [result.response.childSex],
                         photoAddr: result.response.student ? result.response.student.avatar : "",
                         userName: result.response.student ? result.response.student.userName : "",
-                        birthTime: WebServiceUtil.formatYMD(result.response.bindTime),
+                        birthTime: result.response.birthTime,
+                        sendData: result.response.birthTime,
                     })
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -109,7 +110,6 @@ export default class studentInfo extends React.Component {
 
     updatePhoneNumber = () => {
         $(".am-modal-input input").focus();
-        $(".am-modal-input input").attr("type", "number");
         this.showModal();
     }
 
@@ -155,20 +155,26 @@ export default class studentInfo extends React.Component {
         });
     }
 
-    //修改头像
+    //修改头像---调用客户端
     updatePhoto = () => {
-        var data = {
-            method: 'selectedImage'
-        };
-        Bridge.callHandler(data, (photoAddr) => {
-            this.setState({ photoAddr: photoAddr }, () => {
-                this.upadteAvatar(photoAddr);
-                setTimeout(() => {
-                    this.getWatch2gById(this.state.watchId)
-                }, 300)
-            });
-        }, function (error) {
-        });
+        var str = "http://60.205.86.217/upload8/2018-11-02/16/7503db83-ebba-45c2-814d-f13db9a62d1c.jpeg";
+        this.setState({
+            photoAddr: str
+        }, () => {
+            this.upadteAvatar(str);
+        })
+        // var data = {
+        //     method: 'selectedImage'
+        // };
+        // Bridge.callHandler(data, (photoAddr) => {
+        //     this.setState({ photoAddr: photoAddr }, () => {
+        //         this.upadteAvatar(photoAddr);
+        //         setTimeout(() => {
+        //             this.getWatch2gById(this.state.watchId)
+        //         }, 300)
+        //     });
+        // }, function (error) {
+        // });
     }
 
     //修改图像
@@ -202,6 +208,7 @@ export default class studentInfo extends React.Component {
             "phoneNumber": this.state.phoneNumber[0],
             "actionName": "watchAction",
         };
+        console.log(param)
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -229,9 +236,23 @@ export default class studentInfo extends React.Component {
             }, 300)
         })
     }
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
+
     render () {
         return (
             <div id="studentInfo" className='bg_gray publicList_50'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">学生名片</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                     <div className="am-list-line photo">
                         <div className="am-list-content">宝贝头像</div>

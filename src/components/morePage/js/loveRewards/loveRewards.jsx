@@ -188,11 +188,24 @@ export default class loveRewards extends React.Component {
             }
         });
     }
+
+    //返回
+    toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
     render () {
         return (
             <div id="loveRewards" className='bg_gray'>
                 <div>
-                    <div>爱心奖励设置</div>
+                    <div className="am-navbar">
+                        <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                        <span className="am-navbar-title">爱心奖励设置</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
                     <div onClick={this.toSetSteps}>
                         每日运动目标<span>{this.state.defaultSteps}步</span>
                     </div>
