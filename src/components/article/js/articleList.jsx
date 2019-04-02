@@ -598,6 +598,12 @@ export default class articleList extends React.Component {
         };
         return (
             <div id="articleList" style={{height: document.body.clientHeight}}>
+                <div className="am-navbar-blue">
+                    <div className="am-navbar am-navbar-light">
+                        <div className="am-navbar-title">发现</div>
+                    </div>
+
+                </div>
                 <div style={{display: this.state.isDisPlay == 1 ? "block" : "none"}} className="UserGuide">
                     <img className="userguide1" src={require('../images/UserGuide1.png')} width='54'></img>
                     <img onClick={this.closeUserGuide} className="userguide2" width="110"
@@ -607,7 +613,7 @@ export default class articleList extends React.Component {
 
                 {/*mask*/}
 
-                <div>
+                <div className="articleList-cont">
                     <div className="initImage" style={
                         this.state.initLoading ? {display: 'block'} : {display: 'none'}
                     }>
@@ -638,7 +644,7 @@ export default class articleList extends React.Component {
                             </Carousel>
                         )}
                         renderFooter={() => (
-                            <div style={{paddingTop: 5, paddingBottom: 46, textAlign: 'center'}}>
+                            <div style={{paddingTop: 5, paddingBottom: 5, textAlign: 'center'}}>
                                 {this.state.show_bottom_text ? this.state.isLoading ? '正在加载...' : '已经全部加载完毕' : ''}
                             </div>)}
                         renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
