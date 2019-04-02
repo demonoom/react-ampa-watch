@@ -15,7 +15,8 @@ export default class schoolPush extends React.Component {
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
-            userId: 0
+            userId: 0,
+            hidePage:false
         };
     }
 
@@ -46,6 +47,15 @@ export default class schoolPush extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
+                    if(result.response.length == 0){
+                        this.setState({
+                            hidePage:true
+                        })
+                    }else {
+                        this.setState({
+                            hidePage:false
+                        })
+                    }
                     var arr = result.response;
                     var pager = result.pager;
                     var isLoading = false;
@@ -283,7 +293,8 @@ export default class schoolPush extends React.Component {
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont">
+                <div style={{ display: this.state.hidePage ? "block" : "none" }}>空页面</div>
+                <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
                     <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
