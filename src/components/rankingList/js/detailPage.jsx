@@ -43,6 +43,8 @@ export default class detailPage extends React.Component {
         calm = this;
         this.state = {
             faceChartDiv: [],
+            faceChartDivLove: [],
+            faceChartDivStep: [],
             detailData: {},
             clientHeight: document.body.clientHeight,
             dataLegend: [
@@ -61,10 +63,12 @@ export default class detailPage extends React.Component {
         var userId = locationSearch.split("&")[0].split('=')[1];
         var today = locationSearch.split("&")[1].split('=')[1];
         var tagType = locationSearch.split("&")[2].split('=')[1];
+        var num = locationSearch.split("&")[3].split('=')[1];
         this.setState({
             userId,
             today,
-            tagType
+            tagType,
+            num
         })
         this.getUserById(userId);
         if (tagType == "love") {
@@ -174,7 +178,7 @@ export default class detailPage extends React.Component {
                     this.setState({
                         detailData: result.response
                     })
-                    _this.buildFaceLineChart(response.answerRight);
+                    _this.buildFaceLineChartLove(response.answerRight);
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -203,7 +207,7 @@ export default class detailPage extends React.Component {
                     this.setState({
                         detailData: result.response
                     })
-                    _this.buildFaceLineChart(response.answerRight);
+                    _this.buildFaceLineChartStep(response.answerRight);
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -216,7 +220,7 @@ export default class detailPage extends React.Component {
     }
 
     /**
-    * 情况统计
+    * 答题情况统计
     * @param braceletSportSteps
     */
     buildFaceLineChart = (braceletHeartSteps) => {
@@ -270,6 +274,91 @@ export default class detailPage extends React.Component {
             dataLegend: [{ name: '答对次数', icon: 'rect', value: AnswRightTotal },
             { name: '答题次数', icon: 'rect', value: AnswTotal },
             { name: '总数', icon: 'rect', value: sumNumberTotal }]
+        });
+    }
+
+    /**
+    * 运动情况统计
+    * @param braceletSportSteps
+    */
+    buildFaceLineChartStep = (braceletHeartSteps) => {
+        var _this = this;
+        var xClazzNameArray = [];
+        var AnswerRight = [];
+        var AnswerTotal = [];
+        var SubjectTotal = [];
+        var sumNumberTotal = 0;
+        var AnswRightTotal = 0;
+        var AnswTotal = 0;
+        braceletHeartSteps.forEach((braceletHeartStepObj) => {
+            var second = braceletHeartStepObj.x.split(" ")[1];
+            var second2 = braceletHeartStepObj.x.split(" ")[0];
+            second2 = second2.split("-")[2];
+            if (this.state.today == 1) {
+                xClazzNameArray.push(second + ":00");
+            } else {
+                xClazzNameArray.push(second2 + "日");
+            }
+            var answerRight = braceletHeartStepObj.y1;
+            AnswRightTotal += braceletHeartStepObj.y1;
+            AnswerRight.push(answerRight);
+            xClazzNameArray = unique(xClazzNameArray)
+
+        });
+        var stepOption = _this.buildFaceOptionStep(xClazzNameArray, AnswerRight)
+        var faceChartDivStep = <div>
+            <div style={{ width: '100%', height: '250px' }} className="echarts_wrap">
+                <ReactEcharts
+                    option={stepOption}
+                    style={{ height: '100%', width: '100%' }}
+                    className='' />
+            </div>
+        </div>;
+        _this.setState({
+            faceChartDivStep,
+            dataLegend: [{ name: '运动步数', icon: 'rect', value: AnswRightTotal }]
+        });
+    }
+    /**
+    * 运动情况统计
+    * @param braceletSportSteps
+    */
+    buildFaceLineChartLove = (braceletHeartSteps) => {
+        var _this = this;
+        var xClazzNameArray = [];
+        var AnswerRight = [];
+        var AnswerTotal = [];
+        var SubjectTotal = [];
+        var sumNumberTotal = 0;
+        var AnswRightTotal = 0;
+        var AnswTotal = 0;
+        braceletHeartSteps.forEach((braceletHeartStepObj) => {
+            var second = braceletHeartStepObj.x.split(" ")[1];
+            var second2 = braceletHeartStepObj.x.split(" ")[0];
+            second2 = second2.split("-")[2];
+            if (this.state.today == 1) {
+                xClazzNameArray.push(second + ":00");
+            } else {
+                xClazzNameArray.push(second2 + "日");
+            }
+            var answerRight = braceletHeartStepObj.y1;
+            AnswRightTotal += braceletHeartStepObj.y1;
+            AnswerRight.push(answerRight);
+            xClazzNameArray = unique(xClazzNameArray)
+
+        });
+        var stepOption = _this.buildFaceOptionLove(xClazzNameArray, AnswerRight)
+        var faceChartDivLove = <div>
+            <div style={{ width: '100%', height: '250px' }} className="echarts_wrap">
+                <ReactEcharts
+                    option={stepOption}
+                    style={{ height: '100%', width: '100%' }}
+                    className='' />
+            </div>
+        </div>;
+        _this.setState({
+            faceChartDivLove,
+            dataLegend: [{ name: '爱心总数', icon: 'rect', value: AnswRightTotal }]
         });
     }
 
@@ -445,6 +534,265 @@ export default class detailPage extends React.Component {
             ]
         };
     }
+    /**
+    * 创建折线图的option
+    */
+    buildFaceOptionLove = (xClazzNameArray, AnswerRight) => {
+        return {
+            title: {
+                text: '今日爱心统计',
+                textStyle: {
+                    fontSize: 15,
+                    fontWeight: 'normal',
+                    color: '#fff'          // 主标题文字颜色
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'line',         // 默认为直线，可选为：'line' | 'shadow'
+                    lineStyle: {          // 直线指示器样式设置
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                    },
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                },
+            },
+            grid: {
+                left: '5',
+                right: '5',
+                top: '35',
+                bottom: '35',//距离下边的距离
+                containLabel: true
+            },
+            legend: {
+                show: true,
+                itemWidth: 20,
+                itemHeight: 6,
+                data: [{
+                    name: '爱心总数', icon: 'rect'
+                }
+                ],
+                formatter: function (name) {
+                    var total = 0;
+                    var target;
+                    for (var i = 0, l = calm.state.dataLegend.length; i < l; i++) {
+                        total += calm.state.dataLegend[i].value;
+                        if (calm.state.dataLegend[i].name == name) {
+                            target = calm.state.dataLegend[i].value;
+                        }
+                    }
+                    return name + '(' + target + ')';
+                },
+                y: 'bottom',
+                x: 'center',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#F1F1F3'
+                }
+            },
+            // toolbox: {
+            //     left: 'center',
+            //     feature: {
+            //         dataZoom: {
+            //             yAxisIndex: 'none'
+            //         },
+            //         restore: {},
+            //         saveAsImage: {}
+            //     }
+            // },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xClazzNameArray,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    },
+
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    minInterval: 1,
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.2)'
+                        }
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    },
+                }
+            ],
+
+            series: [
+                {
+                    name: '爱心数',
+                    type: 'line',
+                    // areaStyle: {},
+                    // stack: '总量',
+                    data: AnswerRight,
+                    itemStyle: {
+                        //通常情况下：
+                        normal: {
+                            // color:'rgba(130,231,128,0.4)',
+                            color: '#82e780',
+                            label: { show: false },
+                            lineStyle: {
+                                color: '#82e780'
+                            }
+                        }
+                    },
+                },
+            ]
+        };
+    }
+    /**
+    * 创建折线图的option
+    */
+    buildFaceOptionStep = (xClazzNameArray, AnswerRight) => {
+        return {
+            title: {
+                text: '今日运动统计',
+                textStyle: {
+                    fontSize: 15,
+                    fontWeight: 'normal',
+                    color: '#fff'          // 主标题文字颜色
+                },
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'line',         // 默认为直线，可选为：'line' | 'shadow'
+                    lineStyle: {          // 直线指示器样式设置
+                        color: '#fff',
+                        width: 1,
+                        type: 'solid'
+                    },
+                    label: {
+                        backgroundColor: '#6a7985'
+                    }
+                },
+            },
+            grid: {
+                left: '5',
+                right: '5',
+                top: '35',
+                bottom: '35',//距离下边的距离
+                containLabel: true
+            },
+            legend: {
+                show: true,
+                itemWidth: 20,
+                itemHeight: 6,
+                data: [{
+                    name: '运动步数', icon: 'rect'
+                },
+
+                ],
+                formatter: function (name) {
+                    var total = 0;
+                    var target;
+                    for (var i = 0, l = calm.state.dataLegend.length; i < l; i++) {
+                        total += calm.state.dataLegend[i].value;
+                        if (calm.state.dataLegend[i].name == name) {
+                            target = calm.state.dataLegend[i].value;
+                        }
+                    }
+                    return name + '(' + target + ')';
+                },
+                y: 'bottom',
+                x: 'center',
+                textStyle: {
+                    fontSize: 12,
+                    color: '#F1F1F3'
+                }
+            },
+            // toolbox: {
+            //     left: 'center',
+            //     feature: {
+            //         dataZoom: {
+            //             yAxisIndex: 'none'
+            //         },
+            //         restore: {},
+            //         saveAsImage: {}
+            //     }
+            // },
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xClazzNameArray,
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    },
+
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    minInterval: 1,
+                    splitLine: {
+                        show: true,
+                        lineStyle: {
+                            color: 'rgba(255,255,255,0.2)'
+                        }
+                    },
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            color: '#fff',
+                            width: 1,
+                            type: 'solid'
+                        },
+                    },
+                }
+            ],
+
+            series: [
+                {
+                    name: '运动步数',
+                    type: 'line',
+                    // areaStyle: {},
+                    // stack: '总量',
+                    data: AnswerRight,
+                    itemStyle: {
+                        //通常情况下：
+                        normal: {
+                            // color:'rgba(130,231,128,0.4)',
+                            color: '#82e780',
+                            label: { show: false },
+                            lineStyle: {
+                                color: '#82e780'
+                            }
+                        }
+                    },
+                },
+            ]
+        };
+    }
 
     //返回
     toBack = () => {
@@ -507,19 +855,22 @@ export default class detailPage extends React.Component {
 
                                 </div>
                                 <div className="chartCont line_public">
-                                    {calm.state.faceChartDiv}
+                                    {
+                                        this.state.tagType == "love" ? calm.state.faceChartDivLove : this.state.tagType == "step" ? calm.state.faceChartDivStep : calm.state.faceChartDiv
+                                    }
                                 </div>
                                 <div className='textDetail'>
+                                    {
+                                        this.state.tagType == "answer" ? <div className="line_public item p15">
+                                            准确率<span>{this.state.detailData.rigthAccuay ? Math.ceil(this.state.detailData.rigthAccuay * 100) : "0"}% </span>
+                                        </div> : ""
+                                    }
                                     <div className="line_public item p15">
-                                        准确率<span>{this.state.detailData.rigthAccuay ? Math.ceil(this.state.detailData.rigthAccuay * 100) : "0"}% </span>
-                                    </div>
-                                    <div className="line_public item p15">
-                                        全班排名<span>{this.state.detailData.totalClassTop ? this.state.detailData.totalClassTop : "0"}</span>
+                                        全班排名<span>{Number(this.state.num) + 1}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </PullToRefresh>
                 </div>
 
