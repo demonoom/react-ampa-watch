@@ -136,10 +136,11 @@ export default class watchContacts extends React.Component {
                             <div className='item'>
                                 <img src={v.guardian.avatar} alt="" />
                                 <div className="line_public my_flex">
-                                    <div>
+                                    <div className='textCont'>
                                         <div className='my_flex relateName'>
                                             <span className='relate text_hidden'>{v.familyRelate}</span>
-                                            <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                            <span className='code'></span>
+                                            <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
                                         </div>
                                         <div className='tel'>{v.guardian.colAccount}</div>
                                     </div>
