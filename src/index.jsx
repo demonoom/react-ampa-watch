@@ -177,6 +177,12 @@ const articleDetail = (location, cb) => {
     }, 'articleDetail')
 };
 
+const pCenter = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/PersonalCenter/js/pCenter').default)
+    }, 'pCenter')
+};
+
 
 import './index.less';
 
@@ -255,6 +261,7 @@ ReactDOM.render(
             <Route path="articleDetail" getComponent={articleDetail}/>
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
+            <Route path="pCenter" getComponent={pCenter}/>
         </Route>
     </Router>, document.getElementById('example')
 );
