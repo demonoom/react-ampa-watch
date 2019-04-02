@@ -326,6 +326,20 @@ export default class teHomework extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+
+    //跳转绑定页面
+    toJupmBind = () => {
+        var url = WebServiceUtil.mobileServiceURL + "addWatchInfo?userId=" + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            navType: 2,
+            url: url,
+            backAlertInfo: "是否放弃本次编辑？"
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
     render () {
         const row = (rowData, sectionID, rowID) => {
             var arr = [];
@@ -431,7 +445,7 @@ export default class teHomework extends React.Component {
                     <span className="am-navbar-title">教师作业</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display: this.state.toBind ? "block" : "none" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
@@ -445,7 +459,7 @@ export default class teHomework extends React.Component {
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                 </div>
-                <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
+                <div className="commonLocation-cont" style={{ display: this.state.toBind ? "none" : "block" }}>
                     <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
                         <InputItem
                             className="content"
