@@ -145,7 +145,7 @@ export default class watchContacts extends React.Component {
                                         <div className='tel'>{v.guardian.colAccount}</div>
                                     </div>
                                     <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                         style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                         style={{ display: v.bindType == 1 ? "block" : "block" }}
                                     >删除</div>
                                 </div>
                             </div>
