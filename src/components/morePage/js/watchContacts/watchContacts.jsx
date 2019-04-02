@@ -1,4 +1,5 @@
 import React from "react";
+import QRCode from 'qrcode.react';
 import {
     InputItem, Toast, DatePicker, Popover,
     Modal, Picker, List, Tabs
@@ -27,15 +28,15 @@ export default class watchContacts extends React.Component {
         this.setState({
             watchId, bindType
         })
-        this.getWatch2gById(watchId)
+        this.getBindedGuardianByWatch2gId(watchId)
 
     }
     componentDidMount () {
     }
     //根据手表ID获取手表信息
-    getWatch2gById = (watchId) => {
+    getBindedGuardianByWatch2gId = (watchId) => {
         var param = {
-            "method": 'getWatch2gById',
+            "method": 'getBindedGuardianByWatch2gId',
             "watchId": watchId,
             "actionName": "watchAction"
         };
@@ -84,12 +85,13 @@ export default class watchContacts extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    Toast.info('解绑成功', 1, null, false);
+                    Toast.info('删除成功', 1, null, false);
                     var data = {
                         method: 'unBindSuccess',
                     };
                     Bridge.callHandler(data, null, function (error) {
                     });
+                    this.getBindedGuardianByWatch2gId(this.state.watchId)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -128,28 +130,32 @@ export default class watchContacts extends React.Component {
                     </div>
                 </div>
                 <div className="contactCont overScroll">
-                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}></div>
-                {
-                    this.state.watchContactsData.map((v, i) => {
-                        console.log(v, "V")
-                        return (
-                            <div className='item'>
-                                <img src={v.guardian.avatar} alt="" />
-                                <div className="line_public my_flex">
-                                    <div>
-                                        <div className='my_flex relateName'>
-                                            <span className='relate text_hidden'>{v.familyRelate}</span>
-                                            <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    {
+                        this.state.watchContactsData.map((v, i) => {
+                            return (
+                                <div className='item'>
+                                    <img src={v.guardian.avatar} alt="" />
+                                    <div className="line_public my_flex">
+                                        <div>
+                                            <div className='my_flex relateName'>
+                                                <span
+                                                // className='relate text_hidden'
+                                                >{v.familyRelate}</span>
+                                                <span className='tag' style={{ display: v.bindType == 1 ? "inline-block" : "none" }}>管理员</span>
+                                            </div>
+                                            <div className='tel'>{v.guardian.colAccount}</div>
                                         </div>
-                                        <div className='tel'>{v.guardian.colAccount}</div>
-                                        <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                            style={{ display: v.bindType == 1 ? "none" : "block" }}
-                                        >删除</div>
                                     </div>
-                                    </div>
-                                    <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                         style={{ display: v.bindType == 1 ? "none" : "block" }}
-                                    >删除</div>
+                                    {
+                                        this.state.bindType == 2 ?
+                                            ""
+                                            :
+                                            <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                                style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                            >删除</div>
+                                    }
+
                                 </div>
                             )
                         })
