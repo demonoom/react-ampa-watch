@@ -521,6 +521,14 @@ export default class articleDetail extends React.Component {
         });
     }
 
+    popView = () => {
+        this.state.map.destroy();
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, null);
+    };
+
     render() {
         const data_report = [
             {value: 0, label: '广告及垃圾信息'},
@@ -552,7 +560,7 @@ export default class articleDetail extends React.Component {
         return (
             <div id="articleDetail" style={{height: document.body.clientHeight}}>
                 <div className="am-navbar">
-                    <span className="am-navbar-left"><i className="icon-back"></i></span>
+                    <span className="am-navbar-left"  onClick={this.popView}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">发现详情</span>
                     <span className="am-navbar-right"></span>
                 </div>

@@ -276,6 +276,7 @@ export default class articleList extends React.Component {
             let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
+                selfBack: true,
                 url: url
             };
             Bridge.callHandler(data, null, function (error) {
@@ -405,6 +406,7 @@ export default class articleList extends React.Component {
             let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
+                selfBack: true,
                 url: url
             };
             Bridge.callHandler(data, null, function (error) {
