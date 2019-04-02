@@ -21,12 +21,13 @@ export default class bindAndUnbind extends React.Component {
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var userId = locationSearch.split("&")[1].split('=')[1];
         var macAddr = locationSearch.split("&")[2].split('=')[1];
+        var watchName = locationSearch.split("&")[3].split('=')[1];
         console.log(macAddr, "macAddr")
         this.setState({
             userId,
             watchId,
-            macAddr
-
+            macAddr,
+            watchName
         })
 
 
@@ -108,15 +109,13 @@ export default class bindAndUnbind extends React.Component {
                 <div className="commonLocation-cont">
                     <div className='icon_code'>
                         <div id="qrcode"></div>
-                        <div className='dec'>手表一的二维码</div>
+                        <div className='dec'>{this.state.watchName}的二维码</div>
                     </div>
                     <div className='submitBtn' onClick={this.showAlert}>解除绑定</div>
                 </div>
             </div>
         )
     }
-
-
 
 }
 

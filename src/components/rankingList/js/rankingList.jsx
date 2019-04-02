@@ -82,11 +82,11 @@ export default class rankingList extends React.Component {
     */
     getWatch2gLoveCountRankingByStudentId (userId, start, end) {
         var _this = this;
-        _this.initDataLove.splice(0);
-        _this.state.dataSourceLove = [];
-        _this.state.dataSourceLove = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+        // _this.initDataLove.splice(0);
+        // _this.state.dataSourceLove = [];
+        // _this.state.dataSourceLove = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoLove;
         var param = {
@@ -97,7 +97,7 @@ export default class rankingList extends React.Component {
             "pageNo": PageNo,
             "actionName": "watchAction",
         };
-
+        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
@@ -146,11 +146,11 @@ export default class rankingList extends React.Component {
     */
     getWatch2gSportStepTopByStudentId (userId, start, end) {
         var _this = this;
-        _this.initDataStep.splice(0);
-        _this.state.dataSourceStep = [];
-        _this.state.dataSourceStep = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+        // _this.initDataStep.splice(0);
+        // _this.state.dataSourceStep = [];
+        // _this.state.dataSourceStep = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoStep;
         var param = {
@@ -158,22 +158,18 @@ export default class rankingList extends React.Component {
             "startTime": start,
             "endTime": end,
             "studentId": userId,
-            "pageNo": PageNo,
+            "pageNo": this.state.defaultPageNoStep,
             "actionName": "watchAction",
         };
-
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
                     result.response.forEach((v, i) => {
-                        console.log(v, "opop")
                         if (this.state.studentId == v.user.colUid) {
                             this.setState({
                                 ownDataStep: v,
                                 numStep: i
                             }, () => {
-                                console.log(this.state.ownDataStep)
-                                console.log(this.state.numStep)
                             })
                         }
                     })
@@ -199,7 +195,6 @@ export default class rankingList extends React.Component {
                         isLoadingLeftStep: isLoading,
                         refreshingStep: false
                     }, () => {
-                        console.log(this.state.dataSourceStep, "dataSourceStep")
                     })
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -337,7 +332,6 @@ export default class rankingList extends React.Component {
                                 calm.setState({
                                     guardianData: v,
                                 }, () => {
-                                    console.log(this.state.guardianData, "guardianData1")
                                 })
                             }
                         })
@@ -367,11 +361,11 @@ export default class rankingList extends React.Component {
     */
     getStudentAnswerRightCountTop (userId, start, end) {
         var _this = this;
-        _this.initData.splice(0);
-        _this.state.dataSource = [];
-        _this.state.dataSource = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+        // _this.initData.splice(0);
+        // _this.state.dataSource = [];
+        // _this.state.dataSource = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
         const dataBlob = {};
         var PageNo = this.state.defaultPageNo;
         var param = {
@@ -382,7 +376,7 @@ export default class rankingList extends React.Component {
             "pageNo": PageNo,
             "actionName": "watchAction",
         };
-
+        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
@@ -431,21 +425,23 @@ export default class rankingList extends React.Component {
     *  ListView数据全部渲染完毕的回调
     */
     onEndReached = (event) => {
+        console.log("chufa")
         var _this = this;
         var currentPageNo = this.state.defaultPageNo;
         if (!this.state.isLoadingLeft && !this.state.hasMore) {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo });
-        if (this.state.flag == 1) {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-
-        } else {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-        }
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(this.initData),
+        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo },()=>{
+            if (_this.state.flag == 1) {
+                _this.getStudentAnswerRightCountTop(_this.state.studentId, start, end);
+    
+            } else {
+                _this.getStudentAnswerRightCountTop(_this.state.studentId, weekStart, end);
+            }
+        });
+        _this.setState({
+            dataSource: _this.state.dataSource.cloneWithRows(_this.initData),
             isLoadingLeft: true,
         });
     };
@@ -454,19 +450,21 @@ export default class rankingList extends React.Component {
     *  ListView数据全部渲染完毕的回调
     */
     onEndReachedLove = (event) => {
+        console.log("chufa")
         var _this = this;
         var currentPageNo = this.state.defaultPageNoLove;
         if (!this.state.isLoadingLeftLove && !this.state.hasMore) {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo });
-        if (this.state.flag == 1) {
-            _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo }, () => {
+            if (this.state.flag == 1) {
+                _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
-        } else {
-            _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
-        }
+            } else {
+                _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+            }
+        });
         this.setState({
             dataSourceLove: this.state.dataSourceLove.cloneWithRows(this.initDataLove),
             isLoadingLeftLove: true,
@@ -477,19 +475,22 @@ export default class rankingList extends React.Component {
     *  ListView数据全部渲染完毕的回调
     */
     onEndReachedStep = (event) => {
+        console.log("chufa")
         var _this = this;
         var currentPageNo = this.state.defaultPageNoStep;
         if (!this.state.isLoadingLeftStep && !this.state.hasMore) {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo });
-        if (this.state.flag == 1) {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo }, () => {
+            if (this.state.flag == 1) {
+                _this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
-        } else {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-        }
+            } else {
+                _this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+            }
+        });
+
         this.setState({
             dataSourceStep: this.state.dataSourceStep.cloneWithRows(this.initDataStep),
             isLoadingLeftStep: true,
@@ -555,9 +556,8 @@ export default class rankingList extends React.Component {
 
     //toDetail
     toDetail = (tagType) => {
-        console.log(tagType, "tagType")
         if (tagType == "love") {
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagLove+"&tagType="+tagType+"&num="+this.state.numLove;
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagLove + "&tagType=" + tagType + "&num=" + this.state.numLove;
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -565,8 +565,8 @@ export default class rankingList extends React.Component {
             Bridge.callHandler(data, null, function (error) {
                 window.location.href = url;
             });
-        }else if(tagType == "step"){
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagStep+"&tagType="+tagType+"&num="+this.state.numStep;
+        } else if (tagType == "step") {
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagStep + "&tagType=" + tagType + "&num=" + this.state.numStep;
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -574,8 +574,8 @@ export default class rankingList extends React.Component {
             Bridge.callHandler(data, null, function (error) {
                 window.location.href = url;
             });
-        }else {
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag+"&tagType="+tagType+"&num="+this.state.num;
+        } else {
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag + "&tagType=" + tagType + "&num=" + this.state.num;
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -660,7 +660,6 @@ export default class rankingList extends React.Component {
     onSelect = (opt) => {
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
-                console.log(v, "rtyuio")
                 this.setState({
                     guardians: v.guardians,
                     studentId: v.studentId

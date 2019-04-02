@@ -376,7 +376,7 @@ export default class morePage extends React.Component {
 
     //跳转解绑页面
     toUnbind = () => {
-        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr+"&watchName="+this.state.watchName
         var data = {
             method: 'openNewPage',
             selfBack: true,
