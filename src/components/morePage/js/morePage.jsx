@@ -30,8 +30,10 @@ export default class morePage extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
+        var version = locationSearch.split("&")[1].split('=')[1];
         this.setState({
             userId,
+            version
         })
         var pro = {
             "command": "guardianLogin",
@@ -202,7 +204,7 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr+"&bindType="+this.state.guardianData.bindType
+        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr + "&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             url: url
@@ -279,70 +281,8 @@ export default class morePage extends React.Component {
         });
     };
 
-    /**
-   * 删除弹出框
-   */
-    showAlert = (event) => {
-        event.stopPropagation();
-        var phoneType = navigator.userAgent;
-        var phone;
-        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
-            phone = 'ios'
-        } else {
-            phone = 'android'
-        }
-        const alertInstance = alert('您确定解绑吗?', '', [
-            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => this.unbindGuardian() },
-        ], phone);
-    };
 
-    /**
-   * 退出弹出框
-   */
-    showAlertLogout = (event) => {
-        event.stopPropagation();
-        var phoneType = navigator.userAgent;
-        var phone;
-        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
-            phone = 'ios'
-        } else {
-            phone = 'android'
-        }
-        const alertInstance = alert('您确定退出登录吗?', '', [
-            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => this.logout() },
-        ], phone);
-    };
 
-    //解绑监护人
-    unbindGuardian = () => {
-        var param = {
-            "method": 'unbindGuardian',
-            "watch2gId": this.state.watchId,
-            "guardianId": this.state.userId,
-            "actionName": "watchAction"
-        };
-
-        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: (result) => {
-                if (result.success) {
-                    Toast.info('解绑成功', 1, null, false);
-                    var data = {
-                        method: 'unBindSuccess',
-                    };
-                    Bridge.callHandler(data, null, function (error) {
-                    });
-                    this.getWatch2gsByGuardianUserId(this.state.userId);
-                } else {
-                    Toast.fail(result.msg, 1, null, false);
-                }
-            },
-            onError: function (error) {
-                Toast.info('请求失败');
-            }
-        });
-    }
 
     //解绑手表
     deleteWatch2g = () => {
@@ -381,15 +321,6 @@ export default class morePage extends React.Component {
 
     };
 
-    //退出登录
-    logout = () => {
-        var data = {
-            method: 'loginout',
-        };
-        console.log(data, "data")
-        Bridge.callHandler(data, null, function (error) {
-        });
-    }
 
     //toJupmBind
     toJupmBind = () => {
@@ -407,7 +338,7 @@ export default class morePage extends React.Component {
 
     //跳转学生名片
     toStudentInfo = () => {
-        var url = WebServiceUtil.mobileServiceURL + "studentInfo?watchId=" + this.state.watchId+"&bindType=" + this.state.guardianData.bindType
+        var url = WebServiceUtil.mobileServiceURL + "studentInfo?watchId=" + this.state.watchId + "&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -420,7 +351,7 @@ export default class morePage extends React.Component {
 
     //跳转手表通讯录
     toWatchContacts = () => {
-        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId+"&bindType=" + this.state.guardianData.bindType
+        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId + "&bindType=" + this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -433,6 +364,31 @@ export default class morePage extends React.Component {
     //爱心奖励设置
     toSetStar = () => {
         var url = WebServiceUtil.mobileServiceURL + "loveRewards?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&bindType=" + this.state.guardianData.bindType
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url,
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+
+    //跳转解绑页面
+    toUnbind = () => {
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr
+        var data = {
+            method: 'openNewPage',
+            selfBack: true,
+            url: url,
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+    //跳转设置页面
+    toSetting = () => {
+        var url = WebServiceUtil.mobileServiceURL + "setting?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr + "&version=" + this.state.version
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -536,9 +492,9 @@ export default class morePage extends React.Component {
                         </div>
                     </div>
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.showAlert}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
                         <div className="am-list-line">
-                            <div className="am-list-content">解绑</div>
+                            <div className="am-list-content">绑定与解绑</div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
@@ -547,9 +503,9 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.showAlertLogout}>
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
                         <div className="am-list-line">
-                            <div className="am-list-content">退出登录</div>
+                            <div className="am-list-content">设置</div>
                         </div>
                     </div>
                 </div>

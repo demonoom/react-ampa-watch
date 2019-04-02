@@ -60,16 +60,34 @@ export default class detailPage extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
         var today = locationSearch.split("&")[1].split('=')[1];
+        var tagType = locationSearch.split("&")[2].split('=')[1];
         this.setState({
             userId,
-            today
+            today,
+            tagType
         })
-        this.getUserById(userId)
-        if (today == 1) {
-            this.getStudentAnswerDetail(userId, start);
+        this.getUserById(userId);
+        if (tagType == "love") {
+            if (today == 1) {
+                this.getLoveCountDetail(userId, start);
+            } else {
+                this.getLoveCountDetail(userId, weekStart);
+            }
+        } else if (tagType == "step") {
+            console.log("step")
+            if (today == 1) {
+                this.getSportStepDetail(userId, start);
+            } else {
+                this.getSportStepDetail(userId, weekStart);
+            }
         } else {
-            this.getStudentAnswerDetail(userId, weekStart);
+            if (today == 1) {
+                this.getStudentAnswerDetail(userId, start);
+            } else {
+                this.getStudentAnswerDetail(userId, weekStart);
+            }
         }
+
     }
 
     componentWillUnmount () {
@@ -109,7 +127,7 @@ export default class detailPage extends React.Component {
 
 
     /**
-    * 获取表情数据折线图
+    * 获取答题数据折线图
     */
     getStudentAnswerDetail (userId, start) {
         var _this = this;
@@ -122,6 +140,64 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
+                if (result.response) {
+                    var response = result.response;
+                    this.setState({
+                        detailData: result.response
+                    })
+                    _this.buildFaceLineChart(response.answerRight);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+
+            },
+            onError: function (error) {
+                // Toast.fail(error, 1);
+            }
+        });
+    }
+    //获取爱心
+    getLoveCountDetail (userId, start) {
+        var _this = this;
+        var param = {
+            "method": "getLoveCountDetail",
+            "userId": userId,
+            "startTime": start,
+            "endTime": end,
+            "actionName": "watchAction",
+        }
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "result")
+                if (result.response) {
+                    var response = result.response;
+                    this.setState({
+                        detailData: result.response
+                    })
+                    _this.buildFaceLineChart(response.answerRight);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+
+            },
+            onError: function (error) {
+                // Toast.fail(error, 1);
+            }
+        });
+    }
+    //获取运动
+    getSportStepDetail (userId, start) {
+        var _this = this;
+        var param = {
+            "method": "getSportStepDetail",
+            "userId": userId,
+            "startTime": start,
+            "endTime": end,
+            "actionName": "watchAction",
+        }
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result, "result")
                 if (result.response) {
                     var response = result.response;
                     this.setState({
