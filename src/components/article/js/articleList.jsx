@@ -271,9 +271,9 @@ export default class articleList extends React.Component {
 
     };
 
-    toDetail(id, articleTitle) {
+    toDetail(id, articleTitle, isDiscuss) {
         if (id) {
-            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar);
+            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -400,9 +400,9 @@ export default class articleList extends React.Component {
         })
     }
 
-    carouselOnClick = (id, articleTitle) => {
+    carouselOnClick = (id, articleTitle, isDiscuss) => {
         if (id) {
-            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar);
+            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -591,7 +591,7 @@ export default class articleList extends React.Component {
 
             return (
                 <div className={this.state.index == 2 ? 'list_item' : ''}
-                     onClick={this.state.index == 2 ? '' : rowData.response instanceof Array ? '' : this.toDetail.bind(this, rowData.articleId, rowData.articleTitle)}>
+                     onClick={this.state.index == 2 ? '' : rowData.response instanceof Array ? '' : this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
                     {dom}
                 </div>
             )
@@ -627,7 +627,7 @@ export default class articleList extends React.Component {
                                         src={val.cover}
                                         alt=""
                                         style={{width: '100%', verticalAlign: 'top'}}
-                                        onClick={this.carouselOnClick.bind(this, val.articleId, val.articleTitle)}
+                                        onClick={this.carouselOnClick.bind(this, val.articleId, val.articleTitle, val.isDiscuss)}
                                         onLoad={() => {
                                             // fire window resize event to change height
                                             window.dispatchEvent(new Event('resize'));
