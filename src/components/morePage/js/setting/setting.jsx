@@ -92,7 +92,7 @@ export default class setting extends React.Component {
                     <div onClick={this.toClearCache} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
                         <div className="am-list-line">
                             <div className="am-list-content">清除缓存</div>
-                            <div className="am-list-extra">{this.state.version}</div>
+                            <div className="am-list-extra"></div>
                         </div>
                     </div>
                     <div className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
