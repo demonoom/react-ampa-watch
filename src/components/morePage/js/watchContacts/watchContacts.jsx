@@ -112,8 +112,14 @@ export default class watchContacts extends React.Component {
 
     //二维码
     toShowCode = (macAddr) => {
+        $('.codePop').show();
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);
+    }
+
+    //关闭弹窗
+    toClosePop= () => {
+        $('.codePop').hide();
     }
     render () {
         return (
@@ -163,7 +169,18 @@ export default class watchContacts extends React.Component {
                     }
                 </div>
                 <div className='addBtn' onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人</div>
-                <div id="qrcode"></div>
+                <div className='codePop'>
+                    <div className="am-navbar">
+                        <span className="am-navbar-left" onClick={this.toClosePop}><i className="icon-back"></i></span>
+                        <span className="am-navbar-title">添加联系人</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
+                    <div className='commonLocation-cont'>
+                        <div className="grayBorder"></div>
+                        <div id="qrcode"></div>
+                    </div>
+
+                </div>
             </div>
         )
     }
