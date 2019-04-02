@@ -51,6 +51,9 @@ export default class articleDetail extends React.Component {
         var artId = searchArray[0].split('=')[1];
         var type = searchArray[1].split('=')[1];
         var articleTitle = searchArray[2].split('=')[1];
+        var userId = searchArray[3].split('=')[1];
+        var userName = searchArray[3].split('=')[1];
+        var avatar = searchArray[3].split('=')[1];
         console.log(articleTitle, 'articleTitle');
         console.log(decodeURI(articleTitle), 'decodeURI(articleTitle)');
         document.title = decodeURI(articleTitle);
@@ -68,6 +71,9 @@ export default class articleDetail extends React.Component {
         this.setState({
             artId: artId,
             type: type,
+            userId: userId,
+            userName,
+            avatar
         }, () => {
             let p1 = new Promise((resolve, reject) => {
                 this.getArticleInfoById(function () {
@@ -425,8 +431,8 @@ export default class articleDetail extends React.Component {
                     Toast.info('评论成功!', 1);
                     var commitObj = {
                         discussUser: {
-                            userName: this.state.user.userName,
-                            avatar: this.state.user.avatar,
+                            userName: this.state.userName,
+                            avatar: this.state.avatar,
                         },
                         discussContent: this.state.commitText,
                         createTime: new Date().getTime(),
@@ -556,9 +562,7 @@ export default class articleDetail extends React.Component {
                                 onFocus={this.textareaFocus.bind(this)}
                                 onBlur={this.textareaBlur.bind(this)}
                             />
-                            <div style={
-                                this.state.textareaFocus ? {display: 'inline-block'} : {display: 'none'}
-                            }>
+                            <div>
                                 <a className='commit_button' type="primary"
                                    onClick={this.saveDiscussInfo.bind(this)}><span>发送</span></a>
                             </div>

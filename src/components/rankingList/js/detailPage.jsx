@@ -866,7 +866,7 @@ export default class detailPage extends React.Component {
                                         </div> : ""
                                     }
                                     <div className="line_public item p15">
-                                        全班排名<span>{Number(this.state.num) + 1}</span>
+                                        全班排名<span>{Number(this.state.num)}</span>
                                     </div>
                                 </div>
                             </div>

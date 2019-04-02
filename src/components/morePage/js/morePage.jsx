@@ -376,7 +376,7 @@ export default class morePage extends React.Component {
 
     //跳转解绑页面
     toUnbind = () => {
-        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr+"&watchName="+this.state.watchName
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr+"&watchName="+this.state.watchName
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -388,7 +388,7 @@ export default class morePage extends React.Component {
     }
     //跳转设置页面
     toSetting = () => {
-        var url = WebServiceUtil.mobileServiceURL + "setting?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId + "&macAddr=" + this.state.macAddr + "&version=" + this.state.version
+        var url = WebServiceUtil.mobileServiceURL + "setting?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&version=" + this.state.version
         var data = {
             method: 'openNewPage',
             selfBack: true,

@@ -36,7 +36,7 @@ export default class bindAndUnbind extends React.Component {
         this.showCode(this.state.macAddr)
 
     }
-    
+
 
     /**
    * 删除弹出框
@@ -64,7 +64,6 @@ export default class bindAndUnbind extends React.Component {
             "guardianId": this.state.userId,
             "actionName": "watchAction"
         };
-
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
@@ -72,9 +71,17 @@ export default class bindAndUnbind extends React.Component {
                     var data = {
                         method: 'unBindSuccess',
                     };
+                    console.log(data, "data")
                     Bridge.callHandler(data, null, function (error) {
                     });
-                    this.getWatch2gsByGuardianUserId(this.state.userId);
+                    setTimeout(() => {
+                        var data = {
+                            method: 'finishForRefresh',
+                        };
+                        console.log(data, "data")
+                        Bridge.callHandler(data, null, function (error) {
+                        });
+                    }, 500)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -89,8 +96,8 @@ export default class bindAndUnbind extends React.Component {
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);
     }
-     //返回
-     toBack = () => {
+    //返回
+    toBack = () => {
         var data = {
             method: 'popView',
         };
