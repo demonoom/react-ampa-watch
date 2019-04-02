@@ -491,13 +491,8 @@ export default class morePage extends React.Component {
                             <div className="am-list-content">推送监护人</div>
                         </div>
                     </div>
-<<<<<<< HEAD
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
-=======
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.showAlert}>
->>>>>>> 39e2d4d2246ad182560b8513d3a7fb257afc4e94
                         <div className="am-list-line">
                             <div className="am-list-content">绑定与解绑</div>
                         </div>
@@ -508,11 +503,7 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-<<<<<<< HEAD
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
-=======
-                    <div className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.showAlertLogout}>
->>>>>>> 39e2d4d2246ad182560b8513d3a7fb257afc4e94
                         <div className="am-list-line">
                             <div className="am-list-content">设置</div>
                         </div>
