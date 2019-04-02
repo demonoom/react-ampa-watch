@@ -487,7 +487,7 @@ export default class articleList extends React.Component {
                                 <div className="title minHeight">{rowData.articleTitle}</div>
                                 <div className="bottom">
                                     <div className="read">{rowData.readCount}阅读</div>
-                                    <div className="like">{rowData.likeCount}点赞</div>
+                                    {/*<div className="like">{rowData.likeCount}点赞</div>*/}
                                     <div className="time">{time}</div>
                                 </div>
                             </div>
@@ -508,7 +508,7 @@ export default class articleList extends React.Component {
                             <div className="images">{imageDom}</div>
                             <div className="bottom">
                                 <div className="read">{rowData.readCount}阅读</div>
-                                <div className="like">{rowData.likeCount}点赞</div>
+                                {/*<div className="like">{rowData.likeCount}点赞</div>*/}
                                 <div className="time">{time}</div>
                             </div>
                         </div>
@@ -529,7 +529,7 @@ export default class articleList extends React.Component {
                                 </div>
                                 <div className="bottom">
                                     <div className="read">{rowData.readCount}阅读</div>
-                                    <div className="like">{rowData.likeCount}点赞</div>
+                                    {/*<div className="like">{rowData.likeCount}点赞</div>*/}
                                     <div className="time">{time}</div>
                                 </div>
                             </div>
@@ -538,7 +538,7 @@ export default class articleList extends React.Component {
                                 <div className="title">{rowData.articleTitle}</div>
                                 <div className="bottom">
                                     <div className="read">{rowData.readCount}阅读</div>
-                                    <div className="like">{rowData.likeCount}点赞</div>
+                                    {/*<div className="like">{rowData.likeCount}点赞</div>*/}
                                     <div className="time">{time}</div>
                                 </div>
                             </div>
