@@ -2,6 +2,7 @@ import React from "react";
 import {
     Toast, Modal, Popover, NavBar, Icon
 } from 'antd-mobile';
+import '../../css/bindAndUnbind.less'
 const Item = Popover.Item;
 const alert = Modal.alert;
 var calm;
@@ -91,9 +92,18 @@ export default class bindAndUnbind extends React.Component {
 
     render () {
         return (
-            <div id="bindAndUnbind" className='bg_gray publicList_50'>
-                <div id="qrcode"></div>
-                <div onClick={this.showAlert}>解绑</div>
+            <div id="bindAndUnbind" className='bg_gray'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">设置</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className="commonLocation-cont">
+                    <div className='icon_code'>
+                        <div id="qrcode"></div>
+                    </div>
+                    <div className='submitBtn' onClick={this.showAlert}>解除绑定</div>
+                </div>
             </div>
         )
     }
