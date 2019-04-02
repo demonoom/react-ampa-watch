@@ -103,7 +103,7 @@ export default class bindAndUnbind extends React.Component {
             <div id="bindAndUnbind" className='bg_gray'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">设置</span>
+                    <span className="am-navbar-title">绑定与解绑</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont">
