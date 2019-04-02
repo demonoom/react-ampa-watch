@@ -307,6 +307,19 @@ export default class schoolPush extends React.Component {
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                 </div>
+                {/*绑定后空页面*/}
+                <div className="commonLocation-cont">
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
                     <ListView
                         ref={el => this.lv = el}
