@@ -112,28 +112,32 @@ export default class watchContacts extends React.Component {
 
     //二维码
     toShowCode = (macAddr) => {
+        $('.codePop').show();
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);
+    }
+
+    //关闭弹窗
+    toClosePop= () => {
+        $('.codePop').hide();
     }
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
-                <div className="contactBg">
-                    <div className="am-navbar am-navbar-blue whiteBack">
-                        <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                        <span className="am-navbar-title">手表通讯录</span>
-                        <span className="am-navbar-right"></span>
-                    </div>
-                    <div className="p15">
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">手表通讯录</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className="commonLocation-cont overScroll">
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    <div className="contactBg">
                         <div className='mainItem'>
                             <div className="icon_bg"><img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
                             <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
                             <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
                         </div>
                     </div>
-                </div>
-                <div className="contactCont overScroll">
-                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     {
                         this.state.watchContactsData.map((v, i) => {
                             return (
@@ -146,7 +150,7 @@ export default class watchContacts extends React.Component {
                                                 {/* <span className='code'></span> */}
                                                 <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
                                             </div>
-                                            <div className='tel'>{v.guardian.colAccount}</div>
+                                            <div className='tel text_hidden'>{v.guardian.colAccount}</div>
                                         </div>
                                     </div>
                                     {
@@ -157,14 +161,24 @@ export default class watchContacts extends React.Component {
                                                 style={{ display: v.bindType == 1 ? "none" : "block" }}
                                             >删除</div>
                                     }
-
                                 </div>
                             )
                         })
                     }
                 </div>
-                <div onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人</div>
-                <div id="qrcode"></div>
+                <div className='addBtn' onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人</div>
+                <div className='codePop'>
+                    <div className="am-navbar">
+                        <span className="am-navbar-left" onClick={this.toClosePop}><i className="icon-back"></i></span>
+                        <span className="am-navbar-title">添加联系人</span>
+                        <span className="am-navbar-right"></span>
+                    </div>
+                    <div className='commonLocation-cont'>
+                        <div className="grayBorder"></div>
+                        <div id="qrcode"></div>
+                    </div>
+
+                </div>
             </div>
         )
     }
