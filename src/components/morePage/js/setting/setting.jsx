@@ -108,7 +108,8 @@ export default class setting extends React.Component {
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPCenter}>
                         <div className="am-list-line">
                             <div className="am-list-content">个人信息设置</div>
-                            <div className="am-list-extra">{this.state.version}</div>
+                            <div className="am-list-extra"></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv'>

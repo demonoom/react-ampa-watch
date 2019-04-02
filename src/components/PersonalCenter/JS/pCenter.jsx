@@ -188,21 +188,33 @@ export default class pCenter extends React.Component {
 
     build=(data)=>{
         var contentDom = <div>
-            <div onClick={this.changeHeader}>
-                <img src={data.user.avatar} alt=""/> 修改头像
+            <div onClick={this.changeHeader} className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                <div className="am-list-line photo">
+                    <div className="am-list-content">修改头像</div>
+                    <img src={data.user.avatar} alt=""/>
+                    <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                </div>
             </div>
-
-            <div onClick={this.changeName}>
-                <span>名字</span> <span>{data.user.userName}</span>
+            <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.changeName}>
+                <div className="am-list-line">
+                    <div className="am-list-content">名字</div>
+                    <div className="am-list-extra">
+                        {data.user.userName}
+                    </div>
+                    <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                </div>
             </div>
-
-            <div onClick={this.changeIntroduce}>
-                <span>个性签名</span>
-                {
-                    data.introduction ? <span>{data.introduction}.</span>:
-                        <span>这个人很懒什么也没有留下...</span>
-                }
-
+            <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.changeIntroduce}>
+                <div className="am-list-line">
+                    <div className="am-list-content">个性签名</div>
+                    <div className="am-list-extra">
+                        {
+                            data.introduction ? <span>{data.introduction}.</span>:
+                                <span>这个人很懒什么也没有留下...</span>
+                        }
+                    </div>
+                    <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                </div>
             </div>
         </div>
         this.setState({contentDom})
@@ -211,7 +223,12 @@ export default class pCenter extends React.Component {
     render() {
 
         return (
-            <div>
+            <div id='studentInfo' className='bg_gray publicList_50'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">个人信息</span>
+                    <span className="am-navbar-right"></span>
+                </div>
                 {this.state.contentDom}
 
             </div>
