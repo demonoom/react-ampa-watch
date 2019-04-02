@@ -169,9 +169,8 @@ export default class clockList extends React.Component {
                     <span className="am-navbar-title">闹钟列表</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}>遮罩层</div>
                 <div className="commonLocation-cont overScroll">
-                    <div className="mask transparent"></div>
+                    <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className='grayBorder'></div>
                     <div className="publicList_50">
                         {
