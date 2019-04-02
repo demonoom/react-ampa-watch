@@ -1,0 +1,106 @@
+import React from "react";
+import {
+    Toast, Modal, Popover, NavBar, Icon
+} from 'antd-mobile';
+const Item = Popover.Item;
+const alert = Modal.alert;
+var calm;
+export default class bindAndUnbind extends React.Component {
+    constructor(props) {
+        super(props);
+        calm = this;
+        this.state = {
+
+        };
+    }
+
+    componentWillMount () {
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var watchId = locationSearch.split("&")[0].split('=')[1];
+        var userId = locationSearch.split("&")[1].split('=')[1];
+        var macAddr = locationSearch.split("&")[2].split('=')[1];
+        console.log(macAddr, "macAddr")
+        this.setState({
+            userId,
+            watchId,
+            macAddr
+
+        })
+
+
+    }
+    componentDidMount () {
+        this.showCode(this.state.macAddr)
+
+    }
+    
+
+    /**
+   * 删除弹出框
+   */
+    showAlert = (event) => {
+        event.stopPropagation();
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+        const alertInstance = alert('您确定解绑吗?', '', [
+            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
+            { text: '确定', onPress: () => this.unbindGuardian() },
+        ], phone);
+    };
+
+    //解绑监护人
+    unbindGuardian = () => {
+        var param = {
+            "method": 'unbindGuardian',
+            "watch2gId": this.state.watchId,
+            "guardianId": this.state.userId,
+            "actionName": "watchAction"
+        };
+
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.success) {
+                    Toast.info('解绑成功', 1, null, false);
+                    var data = {
+                        method: 'unBindSuccess',
+                    };
+                    Bridge.callHandler(data, null, function (error) {
+                    });
+                    this.getWatch2gsByGuardianUserId(this.state.userId);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
+
+    showCode (macAddr) {
+        $("#qrcode").html("");
+        $('#qrcode').qrcode(macAddr);
+    }
+
+
+    render () {
+        return (
+            <div id="bindAndUnbind" className='bg_gray publicList_50'>
+                <div id="qrcode"></div>
+                <div onClick={this.showAlert}>解绑</div>
+            </div>
+        )
+    }
+
+
+
+}
+
+
+

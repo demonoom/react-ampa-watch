@@ -154,6 +154,16 @@ const loveRewards = (location, cb) => {
         cb(null, require('./components/morePage/js/loveRewards/loveRewards').default)
     }, 'loveRewards')
 };
+const bindAndUnbind = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/bindAndUnbind/bindAndUnbind').default)
+    }, 'bindAndUnbind')
+};
+const setting = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/setting/setting').default)
+    }, 'setting')
+};
 
 const articleList = (location, cb) => {
     require.ensure([], require => {
@@ -187,7 +197,7 @@ class Index extends React.Component {
                     </li>
                     <li>
                         <Link
-                            to="/morePage?userId=23836"
+                            to="/morePage?userId=23836&version=1.0.0"
                             style={{fontSize: '24px'}}>morePage</Link>
                     </li>
                     <li>
@@ -243,6 +253,8 @@ ReactDOM.render(
             <Route path="loveRewards" getComponent={loveRewards}/>
             <Route path="articleList" getComponent={articleList}/>
             <Route path="articleDetail" getComponent={articleDetail}/>
+            <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
+            <Route path="setting" getComponent={setting}/>
         </Route>
     </Router>, document.getElementById('example')
 );
