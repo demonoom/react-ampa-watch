@@ -495,9 +495,10 @@ export default class morePage extends React.Component {
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
                         <div className="am-list-line">
                             <div className="am-list-content">绑定与解绑</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_watch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
                         <div className="am-list-line">
                             <div className="am-list-content">添加手表</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
@@ -506,6 +507,7 @@ export default class morePage extends React.Component {
                     <div className='icon_setting am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
                         <div className="am-list-line">
                             <div className="am-list-content">设置</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div className="grayBorder"></div>
