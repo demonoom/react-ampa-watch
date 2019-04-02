@@ -16,10 +16,9 @@ export default class schoolPush extends React.Component {
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
             userId: 0,
-            hidePage:false
+            hidePage: false
         };
     }
-
     componentWillMount () {
 
     }
@@ -47,13 +46,13 @@ export default class schoolPush extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    if(result.response.length == 0){
+                    if (result.response.length == 0) {
                         this.setState({
-                            hidePage:true
+                            hidePage: true
                         })
-                    }else {
+                    } else {
                         this.setState({
-                            hidePage:false
+                            hidePage: false
                         })
                     }
                     var arr = result.response;
@@ -75,7 +74,7 @@ export default class schoolPush extends React.Component {
                         refreshing: false
                     })
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
 
@@ -135,7 +134,7 @@ export default class schoolPush extends React.Component {
                         dataSource: dataSource.cloneWithRows(this.initData),
                     })
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -157,7 +156,7 @@ export default class schoolPush extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -179,7 +178,7 @@ export default class schoolPush extends React.Component {
                 if (result.success) {
                     this.getTopicByIdRequest(topicId, index);
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
 
             },
@@ -212,7 +211,7 @@ export default class schoolPush extends React.Component {
                         })
                     }
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -223,8 +222,8 @@ export default class schoolPush extends React.Component {
 
 
 
-     //返回
-     toBack = () => {
+    //返回
+    toBack = () => {
         var data = {
             method: 'popView',
         };
@@ -285,7 +284,7 @@ export default class schoolPush extends React.Component {
                                         zanArr.map((v, i) => {
                                             return (
                                                 <div>
-                                                    <span>{v.user.userName}{i ==zanArr.length -1 ? "":"," }</span>
+                                                    <span>{v.user.userName}{i == zanArr.length - 1 ? "" : ","}</span>
                                                 </div>
                                             )
                                         })
@@ -305,7 +304,7 @@ export default class schoolPush extends React.Component {
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont"  style={{ display: this.state.toBind ? "block" : "none" }}>
+                <div className="commonLocation-cont" style={{ display: !this.state.toBind || this.state.hidePage ? "none" : "block" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
@@ -319,7 +318,20 @@ export default class schoolPush extends React.Component {
                         <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
                     </div>
                 </div>
-                <div className="commonLocation-cont" style={{ display: this.state.toBind ? "none" : "block" }}>
+                {/*绑定后空页面*/}
+                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="commonLocation-cont" style={{ display: this.state.toBind || this.state.hidePage ? "none" : "block" }}>
                     <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource

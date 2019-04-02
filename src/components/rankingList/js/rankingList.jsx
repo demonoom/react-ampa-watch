@@ -81,6 +81,7 @@ export default class rankingList extends React.Component {
     *  查询爱心排行榜
     */
     getWatch2gLoveCountRankingByStudentId (userId, start, end) {
+        console.log(start, "start")
         var _this = this;
         // _this.initDataLove.splice(0);
         // _this.state.dataSourceLove = [];
@@ -101,15 +102,12 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.user.colUid) {
-                            this.setState({
-                                ownDataLove: v,
-                                numLove: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownDataLove: result.user,
+                        numLove: result.user.rank
+                    }, () => {
                     })
+
                     var arr = result.response;
                     var pager = result.pager;
                     for (let i = 0; i < arr.length; i++) {
@@ -164,14 +162,10 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.user.colUid) {
-                            this.setState({
-                                ownDataStep: v,
-                                numStep: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownDataStep: result.user,
+                        numStep: result.user.rank
+                    }, () => {
                     })
                     var arr = result.response;
                     var pager = result.pager;
@@ -380,14 +374,10 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.col_uid) {
-                            this.setState({
-                                ownData: v,
-                                num: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownData: result.user,
+                        num: result.user.rank
+                    }, () => {
                     })
                     var arr = result.response;
                     var pager = result.pager;
@@ -432,10 +422,10 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo },()=>{
+        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo }, () => {
             if (_this.state.flag == 1) {
                 _this.getStudentAnswerRightCountTop(_this.state.studentId, start, end);
-    
+
             } else {
                 _this.getStudentAnswerRightCountTop(_this.state.studentId, weekStart, end);
             }
@@ -503,7 +493,9 @@ export default class rankingList extends React.Component {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
-                flagLove: 1
+                flagLove: 1,
+                flagStep: 1,
+                flag: 1
             })
             this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
@@ -511,7 +503,9 @@ export default class rankingList extends React.Component {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
-                flagStep: 1
+                flagLove: 1,
+                flagStep: 1,
+                flag: 1
             })
             this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
@@ -519,6 +513,8 @@ export default class rankingList extends React.Component {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
+                flagLove: 1,
+                flagStep: 1,
                 flag: 1
             })
             this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
@@ -531,7 +527,9 @@ export default class rankingList extends React.Component {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
-                flagLove: 0
+                flagLove: 0,
+                flagStep: 0,
+                flag: 0
             })
             this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
 
@@ -539,7 +537,9 @@ export default class rankingList extends React.Component {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
-                flagStep: 0
+                flagLove: 0,
+                flagStep: 0,
+                flag: 0
             })
             this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
 
@@ -547,6 +547,8 @@ export default class rankingList extends React.Component {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
+                flagLove: 0,
+                flagStep: 0,
                 flag: 0
             })
             this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
@@ -954,7 +956,7 @@ export default class rankingList extends React.Component {
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numStep) + 1}名</span>
                                     <span className='userName text_hidden'>{this.state.ownDataStep ? this.state.ownDataStep.user.userName : ""}</span>
-                                    <span className='questionNum'>{this.state.ownDataStep ? this.state.ownDataStep.rank : "0"}步</span>
+                                    <span className='questionNum'>{this.state.ownDataStep ? this.state.ownDataStep.count : "0"}步</span>
                                 </div>
                             </div>
                         </div>
@@ -1014,7 +1016,7 @@ export default class rankingList extends React.Component {
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numLove) + 1}名</span>
                                     <span className='userName text_hidden'>{this.state.ownDataLove ? this.state.ownDataLove.user.userName : ""}</span>
-                                    <span className='questionNum'>{this.state.ownDataLove ? this.state.ownDataLove.rank : "0"}颗</span>
+                                    <span className='questionNum'>{this.state.ownDataLove ? this.state.ownDataLove.count : "0"}颗</span>
                                 </div>
                             </div>
                         </div>
