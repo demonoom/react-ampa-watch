@@ -519,7 +519,7 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
                         <div className="am-list-line">
                             <div className="am-list-content">找手表</div>
@@ -530,12 +530,12 @@ export default class morePage extends React.Component {
                             <div className="am-list-content">推送天气</div>
                         </div>
                     </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushContacts}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
                         <div className="am-list-line">
                             <div className="am-list-content">推送监护人</div>
                         </div>
                     </div>
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.showAlert}>
                         <div className="am-list-line">
                             <div className="am-list-content">解绑</div>
@@ -547,11 +547,12 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.showAlertLogout}>
+                    <div className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.showAlertLogout}>
                         <div className="am-list-line">
                             <div className="am-list-content">退出登录</div>
                         </div>
                     </div>
+                    <div className="grayBorder"></div>
                 </div>
                 {/*绑定后未验证空页面*/}
                 <div className="personEmptyCont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
