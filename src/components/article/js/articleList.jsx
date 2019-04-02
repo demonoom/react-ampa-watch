@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Toast, DatePicker, PullToRefresh, ListView, Button, List, Picker, Tag, Tabs
+    Toast, DatePicker, PullToRefresh, ListView, Button, List, Picker, Tag, Tabs, Carousel
 } from 'antd-mobile';
 import '../css/articleList.less';
 
@@ -35,6 +35,8 @@ export default class articleList extends React.Component {
             defaultPageNoForCircle: 1,
             // 显示发布菜单
             showPubliFlag: false,
+            carouselData: [],
+            imgHeight: 176,
         }
     }
 
@@ -44,36 +46,26 @@ export default class articleList extends React.Component {
         var _this = this;
         Bridge.setShareAble("false");
         document.title = '文章列表';
-        var phoneType = navigator.userAgent;
-        var phone;
-        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
-            var phone = 'ios';
-            var locationHref = window.location.href;
-            var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-            var searchArray = locationSearch.split("&");
-            var userId = searchArray[0].split('=')[1];
-            var machineType = searchArray[1] ? searchArray[1].split('=')[1] : '';
-            var version = searchArray[2] ? searchArray[2].split('=')[1] : '';
-            var isDisPlay = searchArray[3] ? searchArray[3].split('=')[1] : '';
-        } else {
-            var phone = 'android';
-            var locationHref = window.location.href;
-            var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-            var searchArray = locationSearch.split("&");
-            var userId = searchArray[0].split('=')[1];
-            var isDisPlay = searchArray[1] ? searchArray[1].split('=')[1] : '';
-        }
+        var locationHref = window.location.href;
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var userId = searchArray[0].split('=')[1];
+        var passward = searchArray[1].split('=')[1];
         this.setState({
-            userId: userId,
-            machineType: machineType,
-            version: version,
-            isDisPlay: isDisPlay
+            userId,
+            passward
         }, () => {
+            var p1 = new Promise((reslove, reject) => {
+                this.getWatchArticleInfoListByStatusAndIsTop()
+            });
             var p2 = new Promise((reslove, reject) => {
                 this.getArticleRecommenLittleVideoList(false, () => {
                     reslove('getArticleRecommenLittleVideoList');
                 });
-            })
+            });
+            var p3 = new Promise(() => {
+                this.LittleAntLogin()
+            });
             Promise.all([p2]).then((result) => {
                 //
                 this.setState({
@@ -114,6 +106,54 @@ export default class articleList extends React.Component {
     }
 
     /**
+     * 蚂蚁账户登录
+     * public LittleVideoUser LittleAntLogin(String colAccount, String colPasswd)
+     * @constructor
+     */
+    LittleAntLogin() {
+        var _this = this;
+        var param = {
+            "method": 'LittleAntLogin',
+            "colAccount": this.state.userId,
+            "colPasswd": this.state.passward,
+        };
+        console.log(param);
+        WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
+            onResponse: result => {
+                if (result.success) {
+                    _this.setState({
+                        uid: result.response.uid,
+                        userName: result.response.userName,
+                        avatar: result.response.avatar
+                    })
+                }
+
+            },
+            onError: function (error) {
+                Toast.fail(error, 1);
+            }
+        });
+    }
+
+    getWatchArticleInfoListByStatusAndIsTop() {
+        var _this = this;
+        var param = {
+            "method": 'getWatchArticleInfoListByStatusAndIsTop',
+        };
+        WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
+            onResponse: result => {
+                if (result.success) {
+                    _this.setState({carouselData: result.response})
+                }
+
+            },
+            onError: function (error) {
+                Toast.fail(error, 1);
+            }
+        });
+    }
+
+    /**
      * 按查询条件获取列表
      * **/
     getArticleInfoListByType(clearFlag, reslove) {
@@ -122,10 +162,8 @@ export default class articleList extends React.Component {
             "method": 'getWatchArticleInfoListByStatus',
             "pageNo": this.state.defaultPageNo,
         };
-        console.log(param);
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
-                console.log(result);
                 if (result.success) {
                     this.state.rsCount = result.pager.rsCount;
                     // this.setState({
@@ -144,16 +182,9 @@ export default class articleList extends React.Component {
                     var initLength = this.initDataSource.length;
                     this.initDataSource = this.initDataSource.concat(result.response);
                     if (this.state.recommended_video.response.length > 0 && result.response.length > 0) {
-                        console.log(2);
                         //往文章数组里面添加一组小视频数据
                         this.initDataSource.splice((result.response.length / 2) + initLength, 0, this.state.recommended_video);
                     } else {
-                        console.log(1);
-                        // this.setState({
-                        //     recommended_video: {
-                        //         response: []
-                        //     }
-                        // })
                         this.state.recommended_video = {response: []}
                     }
                     // Toast.info('设置数据之前');
@@ -242,7 +273,7 @@ export default class articleList extends React.Component {
 
     toDetail(id, articleTitle) {
         if (id) {
-            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle);
+            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar);
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -326,7 +357,6 @@ export default class articleList extends React.Component {
 
     //跳转至朋友圈详情
     toThemeTaskDetail(cid, rowData) {
-        console.log(rowData.type);
         var url = WebServiceUtil.mobileServiceURL + "themeTaskDetail?userId=" + this.state.userId + "&cfid=" + cid + "&type=" + rowData.type;
         var data = {
             method: 'openNewPage',
@@ -340,7 +370,6 @@ export default class articleList extends React.Component {
 
     playVideo(url, event) {
         event.stopPropagation();
-        console.log(url);
         var data = {
             method: 'playChatVideo',
             playUrl: url
@@ -349,7 +378,6 @@ export default class articleList extends React.Component {
         }, function (error) {
             Toast.info('開啓視頻失敗!');
         });
-        // console.log(e,'eeeeeeeeeeee');
         // e.nativeEvent.stopImmediatePropagation();
     }
 
@@ -367,10 +395,24 @@ export default class articleList extends React.Component {
     }
 
     closeUserGuide = () => {
-        console.log("dianjile")
         this.setState({
             isDisPlay: 0
         })
+    }
+
+    carouselOnClick = (id, articleTitle) => {
+        if (id) {
+            let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar);
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        } else {
+            Toast.fail('id参数有误', 2);
+        }
     }
 
 
@@ -457,10 +499,8 @@ export default class articleList extends React.Component {
                 </div>
             } else {
                 var image = rowData.articleImgArray ? rowData.articleImgArray : [];
-                // console.log(rowData,'整体循环中的rowData')
                 if (rowData.response instanceof Array) {  //为自媒体推荐视频
                     var videoDom = [];
-                    // console.log(rowData,'自媒体视频循环中listVideoInfo')
                     for (var i = 0; i < rowData.response.length; i++) {
                         videoDom.push(
                             <div className="video_row"
@@ -566,15 +606,37 @@ export default class articleList extends React.Component {
                 </div>
 
                 {/*mask*/}
+
                 <div>
                     <div className="initImage" style={
                         this.state.initLoading ? {display: 'block'} : {display: 'none'}
                     }>
                         <img src={require('../images/articleListLoading.png')} alt=""/>
                     </div>
+
                     <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
+                        renderHeader={() => (
+                            <Carousel
+                                autoplay={false}
+                                infinite
+                            >
+                                {this.state.carouselData.map(val => (
+                                    <img
+                                        src={val.cover}
+                                        alt=""
+                                        style={{width: '100%', verticalAlign: 'top'}}
+                                        onClick={this.carouselOnClick.bind(this, val.articleId, val.articleTitle)}
+                                        onLoad={() => {
+                                            // fire window resize event to change height
+                                            window.dispatchEvent(new Event('resize'));
+                                            this.setState({imgHeight: 'auto'});
+                                        }}
+                                    />
+                                ))}
+                            </Carousel>
+                        )}
                         renderFooter={() => (
                             <div style={{paddingTop: 5, paddingBottom: 46, textAlign: 'center'}}>
                                 {this.state.show_bottom_text ? this.state.isLoading ? '正在加载...' : '已经全部加载完毕' : ''}
