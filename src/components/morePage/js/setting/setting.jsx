@@ -83,6 +83,18 @@ export default class setting extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         })
     }
+
+
+    toPCenter = ()=>{
+        var url = WebServiceUtil.mobileServiceURL + "pCenter?userid=" + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
     render () {
         return (
             <div id="setting" className='bg_gray publicList_50' >
@@ -93,6 +105,12 @@ export default class setting extends React.Component {
                 </div>
                 <div className='commonLocation-cont'>
                     <div className='grayBorder'></div>
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPCenter}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">个人信息设置</div>
+                            <div className="am-list-extra">{this.state.version}</div>
+                        </div>
+                    </div>
                     <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">版本号</div>

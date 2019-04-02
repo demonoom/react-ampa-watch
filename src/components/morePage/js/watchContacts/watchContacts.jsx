@@ -106,6 +106,7 @@ export default class watchContacts extends React.Component {
         var data = {
             method: 'popView',
         };
+        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }

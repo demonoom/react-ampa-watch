@@ -867,7 +867,7 @@ export default class rankingList extends React.Component {
                     >
                         <div className='questionCont'>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
@@ -928,7 +928,7 @@ export default class rankingList extends React.Component {
 
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
@@ -988,7 +988,7 @@ export default class rankingList extends React.Component {
                         </div>
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
