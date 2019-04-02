@@ -156,16 +156,14 @@ export default class loveRewards extends React.Component {
     }
 
     toSaveSteps = () => {
-        console.log("steps")
+       
         this.setWatch2gLoveOptionById(this.state.defaultSteps)
     }
     toSaveAnswerSum = () => {
-        console.log("answer")
         this.setWatch2gLoveOptionById(this.state.defaultAnswerValue)
 
     }
     toSaveRight = () => {
-        console.log("right")
         this.setWatch2gLoveOptionById(this.state.defaultRight)
     }
 
@@ -181,6 +179,9 @@ export default class loveRewards extends React.Component {
                 console.log(result, "result")
                 if (result.success && result.response) {
                     Toast.info("保存成功", 1, null, false);
+                    $(".right").hide();
+                    $(".steps").hide();
+                    $(".answers").hide();
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -246,7 +247,7 @@ export default class loveRewards extends React.Component {
                         <div className="targetIcon icon-step"></div>
                     </div>
                     <div className="operation">
-                        <span onClick={this.toDeSteps}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.toDeSteps} className="icon-operation icon-Reduction" ></span>
                         <span onClick={this.addSteps} className="icon-operation icon-plusSign"></span>
                     </div>
                     <div className="tags">完成每日目标宝贝可获得2爱心</div>
@@ -266,7 +267,7 @@ export default class loveRewards extends React.Component {
                         <div className="targetIcon icon-Questions"></div>
                     </div>
                     <div className="operation">
-                        <span onClick={this.deAnswer}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.deAnswer} className="icon-operation icon-Reduction" ></span>
                         <span onClick={this.addAnswer} className="icon-operation icon-plusSign"></span>
                     </div>
                     <div className="tags">完成每日目标宝贝可获得2爱心</div>
@@ -285,7 +286,7 @@ export default class loveRewards extends React.Component {
                         <div className="targetIcon icon-TargetRight"></div>
                     </div>
                     <div className="operation">
-                        <span onClick={this.deRight}  className="icon-operation icon-Reduction" ></span>
+                        <span onClick={this.deRight} className="icon-operation icon-Reduction" ></span>
                         <span onClick={this.addRight} className="icon-operation icon-plusSign"></span>
                     </div>
                     <div className="tags">完成每日目标宝贝可获得2爱心</div>

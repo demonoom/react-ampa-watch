@@ -557,7 +557,7 @@ export default class rankingList extends React.Component {
     toDetail = (tagType) => {
         console.log(tagType, "tagType")
         if (tagType == "love") {
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagLove+"&tagType="+tagType;
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagLove+"&tagType="+tagType+"&num="+this.state.numLove;
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -566,7 +566,7 @@ export default class rankingList extends React.Component {
                 window.location.href = url;
             });
         }else if(tagType == "step"){
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagStep+"&tagType="+tagType;
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagStep+"&tagType="+tagType+"&num="+this.state.numStep;
             var data = {
                 method: 'openNewPage',
                 url: url
@@ -575,7 +575,7 @@ export default class rankingList extends React.Component {
                 window.location.href = url;
             });
         }else {
-            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag+"&tagType="+tagType;
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag+"&tagType="+tagType+"&num="+this.state.num;
             var data = {
                 method: 'openNewPage',
                 url: url
