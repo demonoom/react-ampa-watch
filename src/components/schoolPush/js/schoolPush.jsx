@@ -293,7 +293,20 @@ export default class schoolPush extends React.Component {
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div style={{ display: this.state.hidePage ? "block" : "none" }}>空页面</div>
+                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    还没有任何信息<br />
+                                    请先绑定手表二维码
+                                    </span>
+                            </div>
+                        </div>
+                        <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
+                    </div>
+                </div>
                 <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
                     <ListView
                         ref={el => this.lv = el}
