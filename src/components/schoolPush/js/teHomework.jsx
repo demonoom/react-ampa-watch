@@ -447,7 +447,7 @@ export default class teHomework extends React.Component {
                 </div>
                 {/*绑定后空页面*/}
                 <div className="commonLocation-cont">
-                    <div className="emptyCont emptyContBind">
+                    <div className="emptyCont emptyContNone">
                         <div className="p38 my_flex">
                             <div>
                                 <i></i>
