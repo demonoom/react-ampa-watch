@@ -42,6 +42,7 @@ export default class studentInfo extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var bindType = locationSearch.split("&")[1].split('=')[1];
+      
         this.setState({
             watchId,bindType
         })
@@ -49,6 +50,12 @@ export default class studentInfo extends React.Component {
 
     }
     componentDidMount () {
+        if(this.state.bindType == 2){
+            $("#sexValue .am-list-arrow").removeClass("am-list-arrow-horizontal")
+        }
+        if(this.state.bindType == 2){
+            $("#birthValue .am-list-arrow").removeClass("am-list-arrow-horizontal")
+        }
     }
     //根据手表ID获取手表信息
     getWatch2gById = (watchId) => {
@@ -242,7 +249,7 @@ export default class studentInfo extends React.Component {
                     <div className="am-list-line photo">
                         <div className="am-list-content">宝贝头像</div>
                         <img src={this.state.photoAddr} alt="" />
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUpdateUserName}>
@@ -260,7 +267,7 @@ export default class studentInfo extends React.Component {
                         <div className="am-list-extra">
                             {this.state.phoneNumber}
                         </div>
-                        <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                     </div>
                 </div>
                 <div className='am-list-item am-list-item-middle line_public activeDiv'>
@@ -273,7 +280,7 @@ export default class studentInfo extends React.Component {
                     </div>
                 </div>
                 <div className="grayBorder"></div>
-                <div className='line_public15'>
+                <div id="sexValue" className='line_public15'>
                     <Picker
                         data={sexData}
                         value={this.state.sexValue}
@@ -286,7 +293,7 @@ export default class studentInfo extends React.Component {
                         <List.Item arrow="horizontal">性别</List.Item>
                     </Picker>
                 </div>
-                <div className='icon_birth line_public15'>
+                <div  id="birthValue" className='icon_birth line_public15'>
                     <DatePicker
                         mode="date"
                         title=""

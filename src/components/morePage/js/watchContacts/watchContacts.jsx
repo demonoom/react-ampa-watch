@@ -25,17 +25,17 @@ export default class watchContacts extends React.Component {
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var bindType = locationSearch.split("&")[1].split('=')[1];
         this.setState({
-            watchId,bindType
+            watchId, bindType
         })
-        this.getWatch2gById(watchId)
+        this.getBindedGuardianByWatch2gId(watchId)
 
     }
     componentDidMount () {
     }
     //根据手表ID获取手表信息
-    getWatch2gById = (watchId) => {
+    getBindedGuardianByWatch2gId = (watchId) => {
         var param = {
-            "method": 'getWatch2gById',
+            "method": 'getBindedGuardianByWatch2gId',
             "watchId": watchId,
             "actionName": "watchAction"
         };
@@ -84,12 +84,13 @@ export default class watchContacts extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
-                    Toast.info('解绑成功', 1, null, false);
+                    Toast.info('删除成功', 1, null, false);
                     var data = {
                         method: 'unBindSuccess',
                     };
                     Bridge.callHandler(data, null, function (error) {
                     });
+                    this.getBindedGuardianByWatch2gId(this.state.watchId)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -109,7 +110,11 @@ export default class watchContacts extends React.Component {
         });
     }
 
-
+    //二维码
+    toShowCode = (macAddr) => {
+        $("#qrcode").html("");
+        $('#qrcode').qrcode(macAddr);
+    }
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
@@ -128,31 +133,37 @@ export default class watchContacts extends React.Component {
                     </div>
                 </div>
                 <div className="contactCont overScroll">
-                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}>遮罩层</div>
-                {
-                    this.state.watchContactsData.map((v, i) => {
-                        console.log(v, "V")
-                        return (
-                            <div className='item'>
-                                <img src={v.guardian.avatar} alt="" />
-                                <div className="line_public my_flex">
-                                    <div className='textCont'>
-                                        <div className='my_flex relateName'>
-                                            <span className='relate text_hidden'>{v.familyRelate}</span>
-                                            <span className='code'></span>
-                                            <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    {
+                        this.state.watchContactsData.map((v, i) => {
+                            return (
+                                <div className='item'>
+                                    <img src={v.guardian.avatar} alt="" />
+                                    <div className="line_public my_flex">
+                                        <div className='textCont'>
+                                            <div className='my_flex relateName'>
+                                                <span className='relate text_hidden'>{v.familyRelate}</span>
+                                                {/* <span className='code'></span> */}
+                                                <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
+                                            </div>
+                                            <div className='tel'>{v.guardian.colAccount}</div>
                                         </div>
-                                        <div className='tel'>{v.guardian.colAccount}</div>
                                     </div>
-                                    <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                         style={{ display: v.bindType == 1 ? "block" : "block" }}
-                                    >删除</div>
+                                    {
+                                        this.state.bindType == 2 ?
+                                            ""
+                                            :
+                                            <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                                style={{ display: v.bindType == 1 ? "none" : "block" }}
+                                            >删除</div>
+                                    }
                                 </div>
-                            </div>
-                        )
-                    })
-                }
+                            )
+                        })
+                    }
                 </div>
+                <div className='addBtn' onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人</div>
+                <div id="qrcode"></div>
             </div>
         )
     }

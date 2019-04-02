@@ -202,7 +202,7 @@ export default class morePage extends React.Component {
 
     //推送闹钟
     toPushClock = () => {
-        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr;
+        var url = WebServiceUtil.mobileServiceURL + "clockList?userId=" + this.state.userId + "&watchId=" + this.state.watchId + "&macAddr=" + this.state.macAddr+"&bindType="+this.state.guardianData.bindType
         var data = {
             method: 'openNewPage',
             url: url
@@ -493,7 +493,7 @@ export default class morePage extends React.Component {
                         onClick={this.toStudentInfo} className='icon_card am-list-item am-list-item-middle line_public15 activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">学生名片</div>
-                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div
@@ -502,13 +502,13 @@ export default class morePage extends React.Component {
                     >
                         <div className="am-list-line">
                             <div className="am-list-content">手表通讯录</div>
-                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_clock am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushClock}>
                         <div className="am-list-line">
                             <div className="am-list-content">设置闹钟</div>
-                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div
@@ -516,7 +516,7 @@ export default class morePage extends React.Component {
                         onClick={this.toSetStar} className='icon_heart am-list-item am-list-item-middle line_public activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">爱心奖励</div>
-                            <div className={this.state.guardianData.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
