@@ -88,7 +88,14 @@ export default class bindAndUnbind extends React.Component {
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);
     }
-
+     //返回
+     toBack = () => {
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
+    }
 
     render () {
         return (
