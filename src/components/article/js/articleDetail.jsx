@@ -45,17 +45,16 @@ export default class articleDetail extends React.Component {
     componentDidMount() {
         Bridge.setShareAble("false");
         // document.title = '校园自媒体';
-        var locationHref = window.location.href;
+        var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var artId = searchArray[0].split('=')[1];
         var type = searchArray[1].split('=')[1];
         var articleTitle = searchArray[2].split('=')[1];
         var userId = searchArray[3].split('=')[1];
-        var userName = searchArray[3].split('=')[1];
-        var avatar = searchArray[3].split('=')[1];
-        console.log(articleTitle, 'articleTitle');
-        console.log(decodeURI(articleTitle), 'decodeURI(articleTitle)');
+        var userName = searchArray[4].split('=')[1];
+        var avatar = searchArray[5].split('=')[1];
+        var isDiscuss = searchArray[6].split('=')[1];
         document.title = decodeURI(articleTitle);
         var phoneType = navigator.userAgent;
         if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
@@ -73,7 +72,8 @@ export default class articleDetail extends React.Component {
             type: type,
             userId: userId,
             userName,
-            avatar
+            avatar,
+            isDiscuss
         }, () => {
             let p1 = new Promise((resolve, reject) => {
                 this.getArticleInfoById(function () {
@@ -411,7 +411,11 @@ export default class articleDetail extends React.Component {
 
     //评论
     saveDiscussInfo() {
-        console.log(theLike.state.commitText, 'commitText');
+        // console.log(isDiscuss, 'isDiscuss');   //1可以 0不可
+        if (theLike.state.isDiscuss == '0') {
+            Toast.info('当前文章已关闭评论功能!', 1)
+            return;
+        }
         // Toast.info('触发')
         if (theLike.state.commitText == '') {
             Toast.info('请输入评论内容!', 1)
