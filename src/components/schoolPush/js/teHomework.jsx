@@ -18,7 +18,8 @@ export default class teHomework extends React.Component {
             isLoadingLeft: true,
             sendValue: "",
             content: "",
-            showSend: false
+            showSend: false,
+            hidePage: false
         };
     }
 
@@ -81,6 +82,15 @@ export default class teHomework extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
+                    if (result.response.length == 0) {
+                        this.setState({
+                            hidePage: true
+                        })
+                    } else {
+                        this.setState({
+                            hidePage: false
+                        })
+                    }
                     var arr = result.response;
                     var pager = result.pager;
                     var isLoading = false;
@@ -389,7 +399,7 @@ export default class teHomework extends React.Component {
                                         <div className="msgItem" onClick={this.toShanchu.bind(this, v, rowID)}>
                                             {
                                                 v.user.userName == v.toUser.userName ?
-                                                    <span> 
+                                                    <span>
                                                         <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span>
                                                     </span>
                                                     :
@@ -421,7 +431,34 @@ export default class teHomework extends React.Component {
                     <span className="am-navbar-title">教师作业</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    还没有任何信息<br />
+                                    请先绑定手表二维码
+                                    </span>
+                            </div>
+                        </div>
+                        <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
+                    </div>
+                </div>
+                {/*绑定后空页面*/}
                 <div className="commonLocation-cont">
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                   暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
                     <div style={{ display: this.state.showSend ? "flex" : "none" }} className='commentInput my_flex'>
                         <InputItem
                             className="content"

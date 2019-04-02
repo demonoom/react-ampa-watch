@@ -38,14 +38,30 @@ export default class rankingList extends React.Component {
         const dataSource = new ListView.DataSource({
             rowHasChanged: (row1, row2) => row1 !== row2,
         });
+        const dataSourceLove = new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
+        });
+        const dataSourceStep = new ListView.DataSource({
+            rowHasChanged: (row1, row2) => row1 !== row2,
+        });
 
         this.initData = [];
+        this.initDataLove = [];
+        this.initDataStep = [];
         this.state = {
             dataSource: dataSource.cloneWithRows(this.initData),
+            dataSourceLove: dataSourceLove.cloneWithRows(this.initDataLove),
+            dataSourceStep: dataSourceStep.cloneWithRows(this.initDataStep),
             defaultPageNo: 1,
+            defaultPageNoLove: 1,
+            defaultPageNoStep: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
+            isLoadingLeftLove: true,
+            isLoadingLeftStep: true,
             flag: 1,
+            flagLove: 1,
+            flagStep: 1,
             ownData: {},
             watchName: "",
             num: "",
@@ -55,8 +71,139 @@ export default class rankingList extends React.Component {
                 { title: '爱心' },
             ],
             guardianData: {},
-            watchData:[]
+            guardianDataLove: {},
+            guardianDataStep: {},
+            watchData: [],
+            iniTab: 0
         };
+    }
+    /**
+    *  查询爱心排行榜
+    */
+    getWatch2gLoveCountRankingByStudentId (userId, start, end) {
+        var _this = this;
+        // _this.initDataLove.splice(0);
+        // _this.state.dataSourceLove = [];
+        // _this.state.dataSourceLove = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
+        const dataBlob = {};
+        var PageNo = this.state.defaultPageNoLove;
+        var param = {
+            "method": 'getWatch2gLoveCountRankingByStudentId',
+            "startTime": start,
+            "endTime": end,
+            "studentId": userId,
+            "pageNo": PageNo,
+            "actionName": "watchAction",
+        };
+        console.log(param, "param")
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' && result.success == true) {
+                    result.response.forEach((v, i) => {
+                        if (this.state.studentId == v.user.colUid) {
+                            this.setState({
+                                ownDataLove: v,
+                                numLove: i
+                            }, () => {
+                            })
+                        }
+                    })
+                    var arr = result.response;
+                    var pager = result.pager;
+                    for (let i = 0; i < arr.length; i++) {
+                        var topic = arr[i];
+                        dataBlob[`${i}`] = topic;
+                    }
+                    var isLoading = false;
+                    if (arr.length > 0) {
+                        if (pager.pageCount == 1 && pager.rsCount < 30) {
+                            isLoading = false;
+                        } else {
+                            isLoading = true;
+                        }
+                    } else {
+                        isLoading = false;
+                    }
+                    _this.initDataLove = _this.initDataLove.concat(arr);
+                    _this.setState({
+                        dataSourceLove: _this.state.dataSourceLove.cloneWithRows(_this.initDataLove),
+                        isLoadingLeftLove: isLoading,
+                        refreshingLove: false
+                    })
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                // message.error(error);
+            }
+        });
+    }
+    /**
+    *  查询运动排行榜
+    */
+    getWatch2gSportStepTopByStudentId (userId, start, end) {
+        var _this = this;
+        // _this.initDataStep.splice(0);
+        // _this.state.dataSourceStep = [];
+        // _this.state.dataSourceStep = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
+        const dataBlob = {};
+        var PageNo = this.state.defaultPageNoStep;
+        var param = {
+            "method": 'getWatch2gSportStepTopByStudentId',
+            "startTime": start,
+            "endTime": end,
+            "studentId": userId,
+            "pageNo": this.state.defaultPageNoStep,
+            "actionName": "watchAction",
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                if (result.msg == '调用成功' && result.success == true) {
+                    result.response.forEach((v, i) => {
+                        if (this.state.studentId == v.user.colUid) {
+                            this.setState({
+                                ownDataStep: v,
+                                numStep: i
+                            }, () => {
+                            })
+                        }
+                    })
+                    var arr = result.response;
+                    var pager = result.pager;
+                    for (let i = 0; i < arr.length; i++) {
+                        var topic = arr[i];
+                        dataBlob[`${i}`] = topic;
+                    }
+                    var isLoading = false;
+                    if (arr.length > 0) {
+                        if (pager.pageCount == 1 && pager.rsCount < 30) {
+                            isLoading = false;
+                        } else {
+                            isLoading = true;
+                        }
+                    } else {
+                        isLoading = false;
+                    }
+                    _this.initDataStep = _this.initDataStep.concat(arr);
+                    _this.setState({
+                        dataSourceStep: _this.state.dataSourceStep.cloneWithRows(_this.initDataStep),
+                        isLoadingLeftStep: isLoading,
+                        refreshingStep: false
+                    }, () => {
+                    })
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                // message.error(error);
+            }
+        });
     }
     componentWillMount () {
         var locationHref = decodeURI(window.location.href);
@@ -139,7 +286,18 @@ export default class rankingList extends React.Component {
                                                     calm.getStudentAnswerRightCountTop(calm.state.studentId, start, end);
                                                 } else {
                                                     calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
-            
+                                                }
+                                                if (this.state.flagLove == 1) {
+                                                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+                                                } else {
+                                                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+
+                                                }
+                                                if (this.state.flagStep == 1) {
+                                                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+                                                } else {
+                                                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+
                                                 }
                                             });
                                         })
@@ -174,7 +332,6 @@ export default class rankingList extends React.Component {
                                 calm.setState({
                                     guardianData: v,
                                 }, () => {
-                                    console.log(this.state.guardianData, "guardianData1")
                                 })
                             }
                         })
@@ -204,11 +361,11 @@ export default class rankingList extends React.Component {
     */
     getStudentAnswerRightCountTop (userId, start, end) {
         var _this = this;
-        _this.initData.splice(0);
-        _this.state.dataSource = [];
-        _this.state.dataSource = new ListView.DataSource({
-            rowHasChanged: (row1, row2) => row1 !== row2,
-        });
+        // _this.initData.splice(0);
+        // _this.state.dataSource = [];
+        // _this.state.dataSource = new ListView.DataSource({
+        //     rowHasChanged: (row1, row2) => row1 !== row2,
+        // });
         const dataBlob = {};
         var PageNo = this.state.defaultPageNo;
         var param = {
@@ -219,7 +376,7 @@ export default class rankingList extends React.Component {
             "pageNo": PageNo,
             "actionName": "watchAction",
         };
-
+        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
@@ -268,54 +425,166 @@ export default class rankingList extends React.Component {
     *  ListView数据全部渲染完毕的回调
     */
     onEndReached = (event) => {
+        console.log("chufa")
         var _this = this;
         var currentPageNo = this.state.defaultPageNo;
         if (!this.state.isLoadingLeft && !this.state.hasMore) {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo });
-        if (this.state.flag == 1) {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-
-        } else {
-            _this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-        }
-        this.setState({
-            dataSource: this.state.dataSource.cloneWithRows(this.initData),
+        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo },()=>{
+            if (_this.state.flag == 1) {
+                _this.getStudentAnswerRightCountTop(_this.state.studentId, start, end);
+    
+            } else {
+                _this.getStudentAnswerRightCountTop(_this.state.studentId, weekStart, end);
+            }
+        });
+        _this.setState({
+            dataSource: _this.state.dataSource.cloneWithRows(_this.initData),
             isLoadingLeft: true,
         });
     };
 
-    //今日
-    clickToday = () => {
-        $(".today").addClass("active")
-        $(".week").removeClass("active")
+    /**
+    *  ListView数据全部渲染完毕的回调
+    */
+    onEndReachedLove = (event) => {
+        console.log("chufa")
+        var _this = this;
+        var currentPageNo = this.state.defaultPageNoLove;
+        if (!this.state.isLoadingLeftLove && !this.state.hasMore) {
+            return;
+        }
+        currentPageNo += 1;
+        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo }, () => {
+            if (this.state.flag == 1) {
+                _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+            } else {
+                _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+            }
+        });
         this.setState({
-            flag: 1
-        })
-        this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+            dataSourceLove: this.state.dataSourceLove.cloneWithRows(this.initDataLove),
+            isLoadingLeftLove: true,
+        });
+    };
+
+    /**
+    *  ListView数据全部渲染完毕的回调
+    */
+    onEndReachedStep = (event) => {
+        console.log("chufa")
+        var _this = this;
+        var currentPageNo = this.state.defaultPageNoStep;
+        if (!this.state.isLoadingLeftStep && !this.state.hasMore) {
+            return;
+        }
+        currentPageNo += 1;
+        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo }, () => {
+            if (this.state.flag == 1) {
+                _this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+            } else {
+                _this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+            }
+        });
+
+        this.setState({
+            dataSourceStep: this.state.dataSourceStep.cloneWithRows(this.initDataStep),
+            isLoadingLeftStep: true,
+        });
+    };
+
+    //今日
+    clickToday = (flagType) => {
+        if (flagType == "love") {
+            $(".today").addClass("active")
+            $(".week").removeClass("active")
+            this.setState({
+                flagLove: 1
+            })
+            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+        } else if (flagType == "step") {
+            $(".today").addClass("active")
+            $(".week").removeClass("active")
+            this.setState({
+                flagStep: 1
+            })
+            this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+        } else {
+            $(".today").addClass("active")
+            $(".week").removeClass("active")
+            this.setState({
+                flag: 1
+            })
+            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+        }
+
     }
     //本周
-    toClickWeek = () => {
-        $(".week").addClass("active")
-        $(".today").removeClass("active")
-        this.setState({
-            flag: 0
-        })
-        this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+    toClickWeek = (flagType) => {
+        if (flagType == "love") {
+            $(".week").addClass("active")
+            $(".today").removeClass("active")
+            this.setState({
+                flagLove: 0
+            })
+            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+
+        } else if (flagType == "step") {
+            $(".week").addClass("active")
+            $(".today").removeClass("active")
+            this.setState({
+                flagStep: 0
+            })
+            this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+
+        } else {
+            $(".week").addClass("active")
+            $(".today").removeClass("active")
+            this.setState({
+                flag: 0
+            })
+            this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+        }
+
     }
 
     //toDetail
-    toDetail = () => {
-        var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag;
-        var data = {
-            method: 'openNewPage',
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
+    toDetail = (tagType) => {
+        if (tagType == "love") {
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagLove + "&tagType=" + tagType + "&num=" + this.state.numLove;
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        } else if (tagType == "step") {
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flagStep + "&tagType=" + tagType + "&num=" + this.state.numStep;
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        } else {
+            var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.flag + "&tagType=" + tagType + "&num=" + this.state.num;
+            var data = {
+                method: 'openNewPage',
+                url: url
+            };
+            Bridge.callHandler(data, null, function (error) {
+                window.location.href = url;
+            });
+        }
+
     }
 
     //跳转绑定页面
@@ -340,7 +609,15 @@ export default class rankingList extends React.Component {
                     { title: '答题' },
                     { title: '运动排行榜' },
                     { title: '爱心' },
-                ]
+                ],
+                iniTab: 1
+            }, () => {
+                if (this.state.flagStep == 1) {
+                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+                } else {
+                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+
+                }
             })
         } else if (v.title == "爱心") {
             this.setState({
@@ -348,7 +625,15 @@ export default class rankingList extends React.Component {
                     { title: '答题' },
                     { title: '运动' },
                     { title: '爱心排行榜' },
-                ]
+                ],
+                iniTab: 2
+            }, () => {
+                if (this.state.flagLove == 1) {
+                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+                } else {
+                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+
+                }
             })
         } else if (v.title == "答题") {
             this.setState({
@@ -356,16 +641,25 @@ export default class rankingList extends React.Component {
                     { title: '答题排行榜' },
                     { title: '运动' },
                     { title: '爱心' },
-                ]
+                ],
+                iniTab: 0
+            }, () => {
+                if (this.state.flag == 1) {
+                    this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+                } else {
+                    this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+
+                }
             })
         }
+
+
     }
 
     //选择
     onSelect = (opt) => {
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
-                console.log(v, "rtyuio")
                 this.setState({
                     guardians: v.guardians,
                     studentId: v.studentId
@@ -375,7 +669,6 @@ export default class rankingList extends React.Component {
                             this.setState({
                                 guardianData: v,
                             }, () => {
-                                console.log(this.state.guardianData, "guardianData2")
                                 this.setState({
                                     visible: false,
                                     watchId: opt.props.macId,
@@ -386,6 +679,18 @@ export default class rankingList extends React.Component {
                                         this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
                                     } else {
                                         this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+
+                                    }
+                                    if (this.state.flagLove == 1) {
+                                        this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+                                    } else {
+                                        this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+
+                                    }
+                                    if (this.state.flagStep == 1) {
+                                        this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+                                    } else {
+                                        this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
 
                                     }
                                 });
@@ -420,23 +725,7 @@ export default class rankingList extends React.Component {
         });
     };
 
-    onRefresh = () => {
-        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
-        divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
-            if (this.state.flag == 1) {
-                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-
-            } else {
-                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-            }
-        });
-
-    }
-
     render () {
-        console.log(this.state.guardianData.valid, "valid")
-        console.log(this.state.guardianData.bindType, "bindType")
         const row = (rowData, sectionID, rowID) => {
             return (
                 <div className='item'>
@@ -447,6 +736,34 @@ export default class rankingList extends React.Component {
                         <div className='num' style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
                         <div className='userName text_hidden'>{rowData.user.userName}</div>
                         <span className='color_9 text_hidden'>答对{rowData.count}道题</span>
+                    </div>
+                </div>
+            );
+        };
+        const rowLove = (rowData, sectionID, rowID) => {
+            return (
+                <div className='item'>
+                    <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
+                        <img src={rowData.user.avatar} />
+                    </div>
+                    <div className="line_public itemCont my_flex">
+                        <div className='num' style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
+                        <div className='userName text_hidden'>{rowData.user.userName}</div>
+                        <span className='color_9 text_hidden'>{rowData.rank}颗</span>
+                    </div>
+                </div>
+            );
+        };
+        const rowStep = (rowData, sectionID, rowID) => {
+            return (
+                <div className='item'>
+                    <div className='imgDiv' style={{ display: rowID < 3 ? "block" : "none" }}>
+                        <img src={rowData.user.avatar} />
+                    </div>
+                    <div className="line_public itemCont my_flex">
+                        <div className='num' style={{ display: rowID < 3 ? "none" : "block" }}>第{Number(rowID) + 1}名</div>
+                        <div className='userName text_hidden'>{rowData.user.userName}</div>
+                        <span className='color_9 text_hidden'>{rowData.rank}步</span>
                     </div>
                 </div>
             );
@@ -501,7 +818,7 @@ export default class rankingList extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="commonLocation-cont" style={{ display:calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false? "none" : "block" }}>
+                <div className="commonLocation-cont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
@@ -517,7 +834,7 @@ export default class rankingList extends React.Component {
                 <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block", height: "100%" }}>
                     <Tabs tabs={this.state.tabs}
                         onChange={this.onTabsChange}
-                        initalPage={'t2'}
+                        initialPage={this.state.iniTab}
                         swipeable={false}
                     >
                         <div className='questionCont'>
@@ -550,8 +867,8 @@ export default class rankingList extends React.Component {
                                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                                     renderHeader={() => (
                                         <div className='dateBtn'>
-                                            <span className='today active' onClick={this.clickToday}>今日</span>
-                                            <span className="week" onClick={this.toClickWeek}>本周</span>
+                                            <span className='today active' onClick={this.clickToday.bind(this, "")}>今日</span>
+                                            <span className="week" onClick={this.toClickWeek.bind(this, "")}>本周</span>
                                         </div>
                                     )}
                                     renderFooter={() => (
@@ -570,13 +887,9 @@ export default class rankingList extends React.Component {
                                     style={{
                                         height: this.state.clientHeight - 50 - 64,
                                     }}
-                                // pullToRefresh={<PullToRefresh
-                                //     onRefresh={this.onRefresh}
-                                //     distanceToRefresh={30}
-                                // />}
                                 />
                             </PullToRefresh>
-                            <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail}>
+                            <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "answer")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.num) + 1}名</span>
                                     <span className='userName text_hidden'>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
@@ -584,12 +897,127 @@ export default class rankingList extends React.Component {
                                 </div>
                             </div>
                         </div>
-                        <div style={{ height: document.body.clientHeight - 64 }}>
-                            2
+
+                        <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
+                            <PullToRefresh
+                                damping={130}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingStep}
+                                onRefresh={() => {
+                                    this.setState({ refreshingStep: true });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingStep: false }, () => {
+                                            if (this.state.flagStep == 1) {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            >
+                                <ListView
+                                    ref={el => this.lv = el}
+                                    dataSource={this.state.dataSourceStep}    //数据类型是 ListViewDataSource
+                                    renderHeader={() => (
+                                        <div className='dateBtn'>
+                                            <span className='today active' onClick={this.clickToday.bind(this, "step")}>今日</span>
+                                            <span className="week" onClick={this.toClickWeek.bind(this, "step")}>本周</span>
+                                        </div>
+                                    )}
+                                    renderFooter={() => (
+                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                            {this.state.isLoadingLeftStep ? '正在加载' : '已经全部加载完毕'}
+                                        </div>)}
+                                    renderRow={rowStep}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                    className="am-list"
+                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                    onEndReached={this.onEndReachedStep}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                    style={{
+                                        height: this.state.clientHeight - 50 - 64,
+                                    }}
+                                />
+                            </PullToRefresh>
+                            <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "step")}>
+                                <div className='inner my_flex'>
+                                    <span className='num'>第{Number(this.state.numStep) + 1}名</span>
+                                    <span className='userName text_hidden'>{this.state.ownDataStep ? this.state.ownDataStep.user.userName : ""}</span>
+                                    <span className='questionNum'>{this.state.ownDataStep ? this.state.ownDataStep.rank : "0"}步</span>
+                                </div>
                             </div>
-                        <div style={{ height: document.body.clientHeight - 64 }}>
-                            3
+                        </div>
+                        <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
+                            <PullToRefresh
+                                damping={130}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingLove}
+                                onRefresh={() => {
+                                    this.setState({ refreshingLove: true });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingLove: false }, () => {
+                                            if (this.state.flagLove == 1) {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            >
+                                <ListView
+                                    ref={el => this.lv = el}
+                                    dataSource={this.state.dataSourceLove}    //数据类型是 ListViewDataSource
+                                    renderHeader={() => (
+                                        <div className='dateBtn'>
+                                            <span className='today active' onClick={this.clickToday.bind(this, "love")}>今日</span>
+                                            <span className="week" onClick={this.toClickWeek.bind(this, "love")}>本周</span>
+                                        </div>
+                                    )}
+                                    renderFooter={() => (
+                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                            {this.state.isLoadingLeftLove ? '正在加载' : '已经全部加载完毕'}
+                                        </div>)}
+                                    renderRow={rowLove}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                    className="am-list"
+                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                    onEndReached={this.onEndReachedLove}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                    style={{
+                                        height: this.state.clientHeight - 50 - 64,
+                                    }}
+                                />
+                            </PullToRefresh>
+                            <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "love")}>
+                                <div className='inner my_flex'>
+                                    <span className='num'>第{Number(this.state.numLove) + 1}名</span>
+                                    <span className='userName text_hidden'>{this.state.ownDataLove ? this.state.ownDataLove.user.userName : ""}</span>
+                                    <span className='questionNum'>{this.state.ownDataLove ? this.state.ownDataLove.rank : "0"}颗</span>
+                                </div>
                             </div>
+                        </div>
                     </Tabs>
                 </div>
             </div>

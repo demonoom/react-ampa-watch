@@ -4,28 +4,16 @@
     color: #666;
     display: block;
   }
-  .contactCont{
-    height: calc(~"100% - 195px");
-    position: relative;
-  }
   .contactBg{
     position: relative;
-    height: 195px;
-    background: url("../../images/icon_contactBg.png") no-repeat;
-    width: 100%;
-    background-size: 100% 100%;
+    height: 155px;
+    padding: 15px;
+    box-sizing: border-box;
     .am-navbar{
       background: none !important;
       &::after{
         display: none;
       }
-    }
-    .p15{
-      position: absolute;
-      bottom: 16px;
-      left: 0;
-      width: 100%;
-      box-sizing: border-box;
     }
   }
   .tag{
@@ -35,37 +23,49 @@
     padding: 0 5px;
     margin-left: 10px;
     font-size: 12px;
-    height: 18px;
+    line-height: 20px;
+    height: 20px;
+    box-sizing: border-box;
   }
   .mainItem{
-    background-color: white;
-    height: 99px;
     border-radius: 12px;
     padding:0 7px 0 117px;
     position: relative;
+    background: url("../../images/icon_contactBg.png") no-repeat;
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+    box-sizing: border-box;
+    box-shadow: 0 4px 7px rgba(29, 29, 29,.13);
     .icon_bg{
-      width: 110px;
-      background: url("../../images/icon_mainContact.png") no-repeat;
+      width: 113px;
       height: 100%;
-      background-size: 100% 100%;
       position: absolute;
-      left: 7px;
+      left: 0;
       top: 0;
+      background: url("../../images/icon_mainContact.png") no-repeat left center;
+      background-size: cover;
     }
     img{
       position: absolute;
-      left: 21px;
-      top: 20px;
-      width: 60px;
-      height: 60px;
+      left: 24px;
+      top: 22px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
     }
     .relate{
       padding-top: 25px;
+      font-size: 18px;
+      color: white;
+      max-width: calc(~"100% - 15px");
 
     }
     .tel{
       padding-top: 12px;
+      font-size: 16px;
+      color: white;
+      max-width: calc(~"100% - 15px");
     }
   }
   .item{
@@ -73,13 +73,26 @@
     height: 64px;
     position: relative;
     padding-left: 70px;
+    &:last-child{
+      .line_public::after{
+        display: none;
+      }
+    }
     .line_public{
       height: 100%;
       align-items: center;
       padding-right: 15px;
+     .textCont{
+       width: calc(~'100% - 95px');
+      }
     }
-    .rightCont{
-
+    .code{
+      background: url("../../images/icon_code.png") no-repeat center center;
+      background-size: 17px;
+      width: 17px;
+      height: 20px;
+      margin-left: 10px;
+      display: inline-block;
     }
     .relateName{
       height: 20px;
@@ -99,7 +112,8 @@
       border-radius: 4px;
       width: 44px;
       text-align: center;
-      padding: 4px 0;
+      line-height: 28px;
+      //height: 30px;
       font-size: 14px;
       box-sizing: border-box;
       position: absolute;
@@ -112,10 +126,48 @@
       transform: translateY(-50%);
     }
     .relate{
-      max-width: calc(~"100% - 155px");
+      line-height: 20px;
+      max-width: calc(~'100% - 70px');
     }
     .tel{
       padding-top: 9px;
     }
   }
+  .codePop{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 55;
+    background-color: white;
+    display: none;
+    .commonLocation-cont .icon_code{
+      width: 208px;
+      height: 208px;
+      background: url("../../images/pic_bind.png") no-repeat;
+      background-size: 100%;
+      position: absolute;
+      left: 50%;
+      top: 16%;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      transform: translateX(-50%);
+      canvas{
+        width: 157px;
+        height: 157px;
+        position: absolute;
+        top: 22px;
+        left: 22px;
+        border-radius: 10px;
+      }
+    }
+  }
+  //@media screen and(min-width: 768px){
+  //  #qrcode canvas{
+  //    width: 250px;
+  //  }
+  //}
 }

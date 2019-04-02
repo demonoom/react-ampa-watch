@@ -1,6 +1,6 @@
 import React from "react";
 import {
-    List,Toast,Modal, Switch, Flex
+    List, Toast, Modal, Switch, Flex
 } from 'antd-mobile';
 import { WatchWebsocketConnection } from '../../../../helpers/watch_websocket_connection';
 import '../../css/clockList.less'
@@ -37,10 +37,12 @@ export default class clockList extends React.Component {
         var ident = searchArray[0].split('=')[1];
         var watchId = searchArray[1].split('=')[1];
         var macAddr = searchArray[2].split('=')[1];
+        var bindType = searchArray[3].split('=')[1];
         this.setState({
             watchId,
             ident,
-            macAddr
+            macAddr,
+            bindType
         })
         this.getClockList(watchId);
         this.watchListener();
@@ -54,7 +56,7 @@ export default class clockList extends React.Component {
             onError: function (errorMsg) {
 
             }, onWarn: function (warnMsg) {
-                Toast.info(warnMsg,1,null,false)
+                Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
                 console.log(info, "info")
             }
@@ -63,7 +65,7 @@ export default class clockList extends React.Component {
 
     //跳转闹钟列表
     toAddClockList = () => {
-        var url = WebServiceUtil.mobileServiceURL + "addClock?watchId=" + this.state.watchId+"&userId="+this.state.ident+"&macAddr="+this.state.macAddr;
+        var url = WebServiceUtil.mobileServiceURL + "addClock?watchId=" + this.state.watchId + "&userId=" + this.state.ident + "&macAddr=" + this.state.macAddr;
         var data = {
             method: 'openNewPage',
             url: url
@@ -83,14 +85,14 @@ export default class clockList extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if(result.response){
+                if (result.response) {
                     this.setState({
                         clockList: result.response,
                     })
-                }else {
-                    Toast.fail(result.msg,1,null,false);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
                 }
-                
+
             },
             onError: function (error) {
 
@@ -131,7 +133,7 @@ export default class clockList extends React.Component {
                     console.log(commandJson, "commandJson")
                     ms.send(commandJson);
                 } else {
-                    Toast.fail(result.msg,1,null,false);
+                    Toast.fail(result.msg, 1, null, false);
                 }
             },
             onError: function (error) {
@@ -141,7 +143,7 @@ export default class clockList extends React.Component {
     }
     //跳转编辑页面
     toUpdate = (data) => {
-        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id+"&macAddr="+this.state.macAddr+"&ident="+this.state.ident;
+        var url = WebServiceUtil.mobileServiceURL + "updateClock?watchId=" + this.state.watchId + "&id=" + data.id + "&macAddr=" + this.state.macAddr + "&ident=" + this.state.ident;
         var data = {
             method: 'openNewPage',
             url: url
@@ -151,8 +153,8 @@ export default class clockList extends React.Component {
         });
     }
 
-      //返回
-      toBack = () => {
+    //返回
+    toBack = () => {
         var data = {
             method: 'popView',
         };
@@ -168,16 +170,17 @@ export default class clockList extends React.Component {
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
+                    <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className='grayBorder'></div>
                     <div className="publicList_50">
                         {
                             this.state.clockList.map((v, i) => {
                                 return (
                                     <div className='line_public15 bg_white clockItem'>
-                                    <span onClick={this.toUpdate.bind(this, v)}>
-                                        <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
-                                        <span>{v.clockType}</span>
-                                    </span>
+                                        <span onClick={this.toUpdate.bind(this, v)}>
+                                            <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
+                                            <span>{v.clockType}</span>
+                                        </span>
                                         <Switch
                                             checked={v.valid == 1 ? "true" : false}
                                             onChange={this.offChange.bind(this, i, v.valid, v)}

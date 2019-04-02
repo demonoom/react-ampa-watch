@@ -15,7 +15,8 @@ export default class schoolPush extends React.Component {
             defaultPageNo: 1,
             clientHeight: document.body.clientHeight,
             isLoadingLeft: true,
-            userId: 0
+            userId: 0,
+            hidePage:false
         };
     }
 
@@ -46,6 +47,15 @@ export default class schoolPush extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {
+                    if(result.response.length == 0){
+                        this.setState({
+                            hidePage:true
+                        })
+                    }else {
+                        this.setState({
+                            hidePage:false
+                        })
+                    }
                     var arr = result.response;
                     var pager = result.pager;
                     var isLoading = false;
@@ -283,7 +293,34 @@ export default class schoolPush extends React.Component {
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    还没有任何信息<br />
+                                    请先绑定手表二维码
+                                    </span>
+                            </div>
+                        </div>
+                        <div className='submitBtn' onClick={this.toJupmBind}>马上绑定</div>
+                    </div>
+                </div>
+                {/*绑定后空页面*/}
                 <div className="commonLocation-cont">
+                    <div className="emptyCont emptyContBind">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "none" : "block" }}>
                     <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
