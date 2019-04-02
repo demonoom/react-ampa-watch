@@ -177,7 +177,6 @@ export default class watchContacts extends React.Component {
                         <div className="grayBorder"></div>
                         <div className='icon_code'>
                             <div id="qrcode"></div>
-                            <div className='dec'>{this.state.watchName}的二维码</div>
                         </div>
                     </div>
 

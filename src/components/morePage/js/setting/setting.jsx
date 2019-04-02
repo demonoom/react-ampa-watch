@@ -66,6 +66,7 @@ export default class setting extends React.Component {
     }
     //清除缓存
     toClearCache = () => {
+        console.log("opopop")
         var data = {
             method: 'clearCache',
         };
@@ -92,19 +93,19 @@ export default class setting extends React.Component {
                         </div>
                         <div className='commonLocation-cont'>
                             <div className='grayBorder'></div>
-                            <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
+                            <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
                                 <div className="am-list-line">
                                     <div className="am-list-content">版本号</div>
                                     <div className="am-list-extra">{this.state.version}</div>
                                 </div>
                             </div>
-                            <div onClick={this.toClearCache} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
+                            <div onClick={this.toClearCache} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                                 <div className="am-list-line">
                                     <div className="am-list-content">清除缓存</div>
                                     <div className="am-list-extra"></div>
                                 </div>
                             </div>
-                            <div className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
+                            <div className='am-list-item am-list-item-middle line_public activeDiv'>
                                 <div className="am-list-line">
                                     <div className="am-list-content">关于</div>
                                     <div className="am-list-extra"></div>

@@ -320,7 +320,7 @@ export default class schoolPush extends React.Component {
                 </div>
                 {/*绑定后空页面*/}
                 <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
-                    <div className="emptyCont emptyContBind">
+                    <div className="emptyCont emptyContNone">
                         <div className="p38 my_flex">
                             <div>
                                 <i></i>

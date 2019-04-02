@@ -419,9 +419,9 @@ export default class teHomework extends React.Component {
                                                     :
                                                     <span>
                                                         <span>
-                                                            <span className='blueTxt'>{v.user.userName}</span>
-                                                            <span>回复</span>
-                                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
+                                                            <span className='blueTxt'>{v.user.userName}</span>：
+                                                            {/* <span>回复</span> */}
+                                                            {/* <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>： */}
                                                             <span>{v.content}</span>
                                                         </span>
                                                     </span>
@@ -461,7 +461,7 @@ export default class teHomework extends React.Component {
                 </div>
                 {/*绑定后空页面*/}
                 <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "block" : "none" }}>
-                    <div className="emptyCont emptyContBind">
+                    <div className="emptyCont emptyContNone">
                         <div className="p38 my_flex">
                             <div>
                                 <i></i>
