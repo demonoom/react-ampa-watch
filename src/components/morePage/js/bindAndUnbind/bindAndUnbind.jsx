@@ -108,6 +108,7 @@ export default class bindAndUnbind extends React.Component {
                 <div className="commonLocation-cont">
                     <div className='icon_code'>
                         <div id="qrcode"></div>
+                        <div className='dec'>手表一的二维码</div>
                     </div>
                     <div className='submitBtn' onClick={this.showAlert}>解除绑定</div>
                 </div>

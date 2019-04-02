@@ -643,7 +643,7 @@ export default class detailPage extends React.Component {
 
             series: [
                 {
-                    name: '爱心数',
+                    name: '爱心总数',
                     type: 'line',
                     // areaStyle: {},
                     // stack: '总量',

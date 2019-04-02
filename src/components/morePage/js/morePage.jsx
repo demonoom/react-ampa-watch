@@ -481,12 +481,12 @@ export default class morePage extends React.Component {
                             <div className="am-list-content">找手表</div>
                         </div>
                     </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_shut am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
                         <div className="am-list-line">
                             <div className="am-list-content">推送天气</div>
                         </div>
                     </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_listen am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
                         <div className="am-list-line">
                             <div className="am-list-content">推送监护人</div>
                         </div>
