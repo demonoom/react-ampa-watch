@@ -1,5 +1,4 @@
 import React from "react";
-import QRCode from 'qrcode.react';
 import {
     InputItem, Toast, DatePicker, Popover,
     Modal, Picker, List, Tabs
@@ -110,8 +109,12 @@ export default class watchContacts extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
-
-
+    
+    //二维码
+    toShowCode = (macAddr)=>{
+        $("#qrcode").html("");
+        $('#qrcode').qrcode(macAddr);
+    }
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
@@ -161,6 +164,8 @@ export default class watchContacts extends React.Component {
                         })
                     }
                 </div>
+                <div onClick={this.toShowCode.bind(this,this.state.watchData.macAddress)}>添加联系人</div>
+                <div id="qrcode"></div>
             </div>
         )
     }
