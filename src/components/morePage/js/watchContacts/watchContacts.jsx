@@ -124,22 +124,20 @@ export default class watchContacts extends React.Component {
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
-                <div className="contactBg">
-                    <div className="am-navbar am-navbar-blue whiteBack">
-                        <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                        <span className="am-navbar-title">手表通讯录</span>
-                        <span className="am-navbar-right"></span>
-                    </div>
-                    <div className="p15">
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">手表通讯录</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className="commonLocation-cont overScroll">
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    <div className="contactBg">
                         <div className='mainItem'>
                             <div className="icon_bg"><img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
                             <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
                             <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
                         </div>
                     </div>
-                </div>
-                <div className="contactCont overScroll">
-                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     {
                         this.state.watchContactsData.map((v, i) => {
                             return (
@@ -152,7 +150,7 @@ export default class watchContacts extends React.Component {
                                                 {/* <span className='code'></span> */}
                                                 <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
                                             </div>
-                                            <div className='tel'>{v.guardian.colAccount}</div>
+                                            <div className='tel text_hidden'>{v.guardian.colAccount}</div>
                                         </div>
                                     </div>
                                     {
