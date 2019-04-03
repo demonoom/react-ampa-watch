@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-    Toast, DatePicker, ListView, TextareaItem, Button, List, Picker, Tag, Radio
+    Toast, ListView, TextareaItem, Button, List,
 } from 'antd-mobile';
 import '../css/articleDetail.less';
 
-const RadioItem = Radio.RadioItem;
 const Item = List.Item;
 const Brief = Item.Brief;
 
@@ -46,6 +45,7 @@ export default class articleDetail extends React.Component {
         Bridge.setShareAble("false");
         // document.title = '校园自媒体';
         var locationHref = decodeURI(window.location.href);
+        console.log(locationHref);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var searchArray = locationSearch.split("&");
         var artId = searchArray[0].split('=')[1];
@@ -92,10 +92,6 @@ export default class articleDetail extends React.Component {
                         scrollTo: $('.list-view-section-body')[0].offsetTop,
                         initTextarea: $('#text')[0].clientHeight,
                     },
-                    //     ()=>{
-                    //     var top = $('.list-view-section-body')[0].offsetTop;
-                    //     // Toast.info(top);
-                    // }
                 );
 
             }).catch((error) => {
@@ -103,16 +99,6 @@ export default class articleDetail extends React.Component {
             })
         })
 
-
-        // $("#text").keydown(function (event) {
-        //     // $("#text").val(event.keyCode);
-        //     // return;
-        //     if (event.keyCode == 13) {
-        //         // alert('你按下了Enter');
-        //         theLike.saveDiscussInfo();
-        //
-        //     }
-        // });
         window.addEventListener('resize', this.onWindwoResize);
 
     }
@@ -295,7 +281,6 @@ export default class articleDetail extends React.Component {
         };
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
-                console.log(result, "detail");
                 if (result.success) {
                     this.setState({
                         data: result.response,
@@ -337,68 +322,6 @@ export default class articleDetail extends React.Component {
             onResponse: result => {
                 if (result.success) {
                     //文章阅读量+1
-                } else {
-                    Toast.info('+1?');
-                }
-            },
-            onError: function (error) {
-                Toast.fail(error, 1);
-            }
-        });
-    }
-
-
-    //点赞
-
-    likeFlag() {
-        this.setState({
-            likeFlag: !this.state.likeFlag
-        }, () => {
-            var param = {
-                "method": 'changeArticleLikeCount',
-                "userId": this.state.userId,
-                "articleId": this.state.artId,
-                "changeType": this.state.likeFlag ? 0 : 1,//  0点赞 1 取消
-            };
-            WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
-                onResponse: result => {
-                    if (result.success) {
-                        // this.state.data.likeCount = result.response;
-                        var data = this.state.data;
-                        data.likeCount = result.response;
-                        this.setState({
-                            data: data
-                        })
-
-                    } else {
-                        Toast.info('+1?');
-                    }
-                },
-                onError: function (error) {
-                    Toast.fail(error, 1);
-                }
-            });
-        })
-    }
-
-    //点击收藏
-    changePent() {
-        var userFavoriteInfoJson = {
-            userId: this.state.userId,
-            targetId: this.state.artId,
-            targetType: 0
-        }
-        var param = {
-            "method": 'changeUserFavoriteInfo',
-            "userFavoriteInfoJson": userFavoriteInfoJson,
-            "changeType": this.state.collection ? 1 : 0,
-        };
-        WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
-            onResponse: result => {
-                if (result.success) {
-                    this.setState({
-                        collection: !this.state.collection
-                    })
                 } else {
                     Toast.info('+1?');
                 }
@@ -486,57 +409,7 @@ export default class articleDetail extends React.Component {
         })
     }
 
-
-    onChange_report = (value) => {
-        this.setState({
-            value,
-        });
-    };
-
-    reportSubmit() {
-        this.setState({
-            reportFlag: false,
-            reportButtonFlag: false,
-        }, () => {
-            Toast.success('感谢您的举报,我们会在24小时之内反馈您结果!', 1);
-        })
-    }
-
-    cancelBox = () => {
-        this.setState({
-            reportFlag: true,
-            reportButtonFlag: false,
-        })
-    }
-
-    toShare = () => {
-        var data = {
-            method: 'shareWechat',
-            shareUrl: window.location.href,
-            shareTitle: $('.content').text(),
-            shareUserName: this.state.data.articleTitle,
-        };
-        Bridge.callHandler(data, null, function (error) {
-            Toast.info('分享文章失败')
-        });
-    }
-
-    popView = () => {
-        var data = {
-            method: 'popView',
-        };
-        Bridge.callHandler(data, null, null);
-    };
-
     render() {
-        const data_report = [
-            {value: 0, label: '广告及垃圾信息'},
-            {value: 1, label: '抄袭或未授权转载'},
-            {value: 3, label: '欺诈、色情或发布敏感信息'},
-            {value: 4, label: '违法犯罪'},
-            {value: 5, label: '不实信息'},
-            {value: 6, label: '其他'},
-        ];
         const row = (rowData, sectionID, rowID) => {
             var time = this.timeDifference(rowData.createTime);
             return (
@@ -549,20 +422,12 @@ export default class articleDetail extends React.Component {
                             <Brief>{rowData.discussContent}</Brief>
                             <span className="releaseTime">{time}</span>
                         </Item>
-                        {/*<Item extra={WebServiceUtil.formatYMD(rowData.createTime)} align="top" thumb={rowData.discussUser.avatar} multipleLine>*/}
-                        {/*{rowData.discussUser.userName} <Brief>{rowData.discussContent}</Brief>*/}
-                        {/*</Item>*/}
                     </List>
                 </div>
             )
         };
         return (
             <div id="articleDetail" style={{height: document.body.clientHeight}}>
-                <div className="am-navbar">
-                    <span className="am-navbar-left"  onClick={this.popView}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">发现详情</span>
-                    <span className="am-navbar-right"></span>
-                </div>
                 <div className="inner-cont">
                     <div className="inner">
                         <div className="commit">
@@ -582,13 +447,6 @@ export default class articleDetail extends React.Component {
                                     <a className='commit_button' type="primary"
                                        onClick={this.saveDiscussInfo.bind(this)}><span>发送</span></a>
                                 </div>
-
-                                {/*<div style={*/}
-                                {/*this.state.reportFlag?{display:'inline-block'}:{display:'none'}*/}
-                                {/*} className="report" onClick={this.toReport.bind(this)}>*/}
-                                {/*<img onClick={this.toReport.bind(this)} src={require("../images/report.png")} alt=""/>*/}
-                                {/*</div>*/}
-                                {/*<Button type="primary" onClick={this.saveDiscussInfo.bind(this)}>评论</Button>*/}
                             </div>
                         </div>
                         <ListView
@@ -637,32 +495,6 @@ export default class articleDetail extends React.Component {
                                 height: document.body.clientHeight - 53,
                             }}
                         />
-
-                        {/*举报 start*/}
-                        <div className="positionBox" style={
-                            this.state.reportButtonFlag ? {display: 'block'} : {display: 'none'}
-                        }>
-                            <div className="cancelReport" onClick={this.cancelBox}><i onClick={this.cancelBox}></i></div>
-                            <List renderHeader={() => '请选择举报原因'}>
-                                {data_report.map(i => (
-                                    <RadioItem className={this.state.value === i.value ? 'checked' : ''} key={i.value}
-                                               checked={this.state.value === i.value}
-                                               onChange={() => this.onChange_report(i.value)}>
-                                        {i.label}
-                                    </RadioItem>
-                                ))}
-                            </List>
-                            <Button type="primary" onClick={this.reportSubmit.bind(this)}>提交</Button>
-                        </div>
-                        <div className="postionBox_mask"
-                             style={
-                                 this.state.reportButtonFlag ? {
-                                     display: 'block',
-                                     height: this.state.clientHeight
-                                 } : {display: 'none', height: this.state.clientHeight}
-                             }
-                             onClick={this.cancelBox}></div>
-                        {/*举报 end*/}
                     </div>
                 </div>
             </div>

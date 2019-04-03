@@ -48,6 +48,7 @@ export default class articleList extends React.Component {
         document.title = '文章列表';
         var locationHref = window.location.href;
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        console.log(locationSearch);
         var searchArray = locationSearch.split("&");
         var userId = searchArray[0].split('=')[1];
         var passward = searchArray[1].split('=')[1];
@@ -117,9 +118,10 @@ export default class articleList extends React.Component {
             "colAccount": this.state.userId,
             "colPasswd": this.state.passward,
         };
-        console.log(param);
+        console.log(param, 'LittleAntLogin');
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
+                console.log(result, 'LittleAntLogin');
                 if (result.success) {
                     _this.setState({
                         uid: result.response.uid,
@@ -239,33 +241,15 @@ export default class articleList extends React.Component {
         });
     };
 
-    onRefresh = (str) => {
+    onRefresh = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
 
-        if (str == 'left') {
-            divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-            // divPull[0].style.height = document.body.clientHeight
-        } else if (str == 'right') {
-            divPull[1].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-            // divPull[1].style.height = document.body.clientHeight
-        } else if (str == 'rightright') {
-            //圈子的下拉刷新
-            divPull[2].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-            this.initDataSource = [];
-            this.setState({
-                defaultPageNoForCircle: 1, refreshing: true
-            }, () => {
+        divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
 
-            });
-            return;
-        }
         this.setState({
             defaultPageNo: 1, refreshing: true
         }, () => {
-            // this.getLittleVideoUserById();
             this.getArticleRecommenLittleVideoList(true);
-            // Toast.info('重新绑定事件'+this.state.index);
-
         });
 
 
@@ -406,7 +390,7 @@ export default class articleList extends React.Component {
             let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
-                selfBack: true,
+                navType: 2,
                 url: url
             };
             Bridge.callHandler(data, null, function (error) {
@@ -588,6 +572,7 @@ export default class articleList extends React.Component {
                         <div className="am-navbar-title">发现</div>
                     </div>
                 </div>
+
                 <div style={{display: this.state.isDisPlay == 1 ? "block" : "none"}} className="UserGuide">
                     <img className="userguide1" src={require('../images/UserGuide1.png')} width='54'></img>
                     <img onClick={this.closeUserGuide} className="userguide2" width="110"
@@ -646,7 +631,7 @@ export default class articleList extends React.Component {
                             }
                         }
                         pullToRefresh={<PullToRefresh
-                            onRefresh={this.onRefresh.bind(this, 'left')}
+                            onRefresh={this.onRefresh.bind(this)}
                             distanceToRefresh={80}
                         />}
                     />
