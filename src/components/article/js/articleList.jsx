@@ -620,14 +620,14 @@ export default class articleList extends React.Component {
                     }>
                         <img src={require('../images/articleListLoading.png')} alt=""/>
                     </div>
-
-                    <ListView
+                      <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                         renderHeader={() => (
                             <Carousel
                                 autoplay={true}
                                 infinite
+                                className="Carousel-banner"
                             >
                                 {this.state.carouselData.map(val => (
                                     <div>
@@ -642,7 +642,7 @@ export default class articleList extends React.Component {
                                                 this.setState({imgHeight: 'auto'});
                                             }}
                                         />
-                                        <span>{val.articleTitle}</span>
+                                        <span className="Carousel-title text_hidden">{val.articleTitle}</span>
                                     </div>
                                 ))}
                             </Carousel>
