@@ -358,9 +358,9 @@ export default class updateLocation extends React.Component {
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.popView}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">修改新地址</span>
-                    <span className="am-navbar-right am-navbar-del">
+                    <span className="am-navbar-right am-navbar-del" onClick={this.deleteWatch2gHomePointModel}>
                         <span style={{display: (this.state.type == 1 || this.state.type == 2) ? 'none' : ''}}
-                              onClick={this.deleteWatch2gHomePointModel}>删除</span>
+                             >删除</span>
                     </span>
                 </div>
                 <div className="commonLocation-cont">
