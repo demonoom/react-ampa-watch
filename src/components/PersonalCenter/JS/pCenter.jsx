@@ -65,7 +65,8 @@ export default class pCenter extends React.Component {
     }
 
     changeName = ()=>{
-        // Toast.info('修改名字');
+        console.log("ioio")
+        //Toast.info('修改名字');
         this.showText(1,this.state.resDic.user.userName);
     }
 
@@ -107,7 +108,7 @@ export default class pCenter extends React.Component {
                     });
                 }
             },
-        ], 'default', "",defaultSting)
+        ], 'default', "","")
     }
 
     serverChangeName=(name)=>{
@@ -191,7 +192,9 @@ export default class pCenter extends React.Component {
             <div onClick={this.changeHeader} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                 <div className="am-list-line photo">
                     <div className="am-list-content">修改头像</div>
-                    <img src={data.user.avatar} alt=""/>
+                    <img src={data.user.avatar}
+                         // onError={this.src='http://60.205.86.217/upload8/2018-11-08/10/f43b56b7-5a6f-4aa8-8468-fdd24f438a58.jpg?size=100x100'} alt=""
+                    />
                     <div className="am-list-arrow am-list-arrow-horizontal"></div>
                 </div>
             </div>
@@ -218,6 +221,15 @@ export default class pCenter extends React.Component {
             </div>
         </div>
         this.setState({contentDom})
+    }
+
+
+    toBack = () =>{
+        var data = {
+            method: 'popView',
+        };
+        Bridge.callHandler(data, null, function (error) {
+        });
     }
 
     render() {
