@@ -446,7 +446,7 @@ export default class morePage extends React.Component {
                         }
                     </div>
                 </div>
-                <div className='moreList' style={{ display: "none" }}>
+                <div className='moreList overScroll' style={{ display: "none" }}>
                     <div className="grayBorder"></div>
                     <div
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
