@@ -451,6 +451,7 @@ export default class morePage extends React.Component {
                     <div
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
                         onClick={this.toStudentInfo} className='icon_card am-list-item am-list-item-middle line_public15 activeDiv'>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">学生名片</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
@@ -460,12 +461,14 @@ export default class morePage extends React.Component {
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
                         onClick={this.toWatchContacts} className='icon_contact am-list-item am-list-item-middle line_public15 activeDiv'
                     >
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">手表通讯录</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_clock am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushClock}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">设置闹钟</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
@@ -474,6 +477,7 @@ export default class morePage extends React.Component {
                     <div
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
                         onClick={this.toSetStar} className='icon_heart am-list-item am-list-item-middle line_public activeDiv'>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">爱心奖励</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
@@ -481,34 +485,40 @@ export default class morePage extends React.Component {
                     </div>
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">找手表</div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">推送天气</div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">推送监护人</div>
                         </div>
                     </div>
                     <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">绑定与解绑</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">添加手表</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className='icon_setting am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
+                    <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
+                        <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">设置</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
