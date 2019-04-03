@@ -799,6 +799,7 @@ export default class detailPage extends React.Component {
         var data = {
             method: 'popView',
         };
+        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
@@ -839,7 +840,7 @@ export default class detailPage extends React.Component {
                             <div className='grayBorder'></div>
                             <div className='bg_white'>
                                 <div className='myDetail line_public p15'>
-                                    <img src={this.state.users ? this.state.users.avatar : ""} />
+                                    <img onError={this.src = ""} src={this.state.users ? this.state.users.avatar : ""} />
                                     <div className='textCont'>
                                         <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
                                         <span className='time'>
@@ -866,7 +867,7 @@ export default class detailPage extends React.Component {
                                         </div> : ""
                                     }
                                     <div className="line_public item p15">
-                                        全班排名<span>{Number(this.state.num) + 1}</span>
+                                        全班排名<span>{Number(this.state.num)}</span>
                                     </div>
                                 </div>
                             </div>

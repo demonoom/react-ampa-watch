@@ -37,8 +37,8 @@ export default class setting extends React.Component {
 
 
     /**
- * 退出弹出框
- */
+    * 退出弹出框
+    */
     showAlertLogout = (event) => {
         event.stopPropagation();
         var phoneType = navigator.userAgent;
@@ -66,6 +66,7 @@ export default class setting extends React.Component {
     }
     //清除缓存
     toClearCache = () => {
+        console.log("opopop")
         var data = {
             method: 'clearCache',
         };
@@ -82,36 +83,55 @@ export default class setting extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         })
     }
-    render() {
-                return (
-            <div id = "setting" className = 'bg_gray publicList_50' >
-                        <div className="am-navbar">
-                            <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                            <span className="am-navbar-title">设置</span>
-                            <span className="am-navbar-right"></span>
+
+
+    toPCenter = ()=>{
+        var url = WebServiceUtil.mobileServiceURL + "pCenter?userid=" + this.state.userId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+    render () {
+        return (
+            <div id="setting" className='bg_gray publicList_50' >
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">设置</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                <div className='commonLocation-cont'>
+                    <div className='grayBorder'></div>
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPCenter}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">个人信息设置</div>
+                            <div className="am-list-extra"></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
-                        <div className='commonLocation-cont'>
-                            <div className='grayBorder'></div>
-                            <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
-                                <div className="am-list-line">
-                                    <div className="am-list-content">版本号</div>
-                                    <div className="am-list-extra">{this.state.version}</div>
-                                </div>
-                            </div>
-                            <div onClick={this.toClearCache} className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetting}>
-                                <div className="am-list-line">
-                                    <div className="am-list-content">清除缓存</div>
-                                    <div className="am-list-extra"></div>
-                                </div>
-                            </div>
-                            <div className='am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
-                                <div className="am-list-line">
-                                    <div className="am-list-content">关于</div>
-                                    <div className="am-list-extra"></div>
-                                </div>
-                            </div>
-                            <div className='submitBtn' onClick={this.showAlertLogout}>退出登录</div>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">版本号</div>
+                            <div className="am-list-extra">{this.state.version}</div>
                         </div>
+                    </div>
+                    <div onClick={this.toClearCache} className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">清除缓存</div>
+                            <div className="am-list-extra"></div>
+                        </div>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">关于</div>
+                            <div className="am-list-extra"></div>
+                        </div>
+                    </div>
+                    <div className='submitBtn' onClick={this.showAlertLogout}>退出登录</div>
+                </div>
             </div>
         )
     }

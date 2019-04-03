@@ -74,19 +74,25 @@ export default class rankingList extends React.Component {
             guardianDataLove: {},
             guardianDataStep: {},
             watchData: [],
-            iniTab: 0
+            iniTab: 0,
+            freshFlag: true,
+            freshFlagLove: true,
+            freshFlagStep: true,
         };
     }
     /**
     *  查询爱心排行榜
     */
     getWatch2gLoveCountRankingByStudentId (userId, start, end) {
+        console.log(start, "start")
         var _this = this;
-        // _this.initDataLove.splice(0);
-        // _this.state.dataSourceLove = [];
-        // _this.state.dataSourceLove = new ListView.DataSource({
-        //     rowHasChanged: (row1, row2) => row1 !== row2,
-        // });
+        if (this.state.freshFlagLove == false) {
+            _this.initDataLove.splice(0);
+            _this.state.dataSourceLove = [];
+            _this.state.dataSourceLove = new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            });
+        }
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoLove;
         var param = {
@@ -101,15 +107,12 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.user.colUid) {
-                            this.setState({
-                                ownDataLove: v,
-                                numLove: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownDataLove: result.user,
+                        numLove: result.user.rank
+                    }, () => {
                     })
+
                     var arr = result.response;
                     var pager = result.pager;
                     for (let i = 0; i < arr.length; i++) {
@@ -146,11 +149,13 @@ export default class rankingList extends React.Component {
     */
     getWatch2gSportStepTopByStudentId (userId, start, end) {
         var _this = this;
-        // _this.initDataStep.splice(0);
-        // _this.state.dataSourceStep = [];
-        // _this.state.dataSourceStep = new ListView.DataSource({
-        //     rowHasChanged: (row1, row2) => row1 !== row2,
-        // });
+        if (this.state.freshFlagStep == false) {
+            _this.initDataStep.splice(0);
+            _this.state.dataSourceStep = [];
+            _this.state.dataSourceStep = new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            });
+        }
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoStep;
         var param = {
@@ -164,14 +169,10 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.user.colUid) {
-                            this.setState({
-                                ownDataStep: v,
-                                numStep: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownDataStep: result.user,
+                        numStep: result.user.rank
+                    }, () => {
                     })
                     var arr = result.response;
                     var pager = result.pager;
@@ -361,11 +362,13 @@ export default class rankingList extends React.Component {
     */
     getStudentAnswerRightCountTop (userId, start, end) {
         var _this = this;
-        // _this.initData.splice(0);
-        // _this.state.dataSource = [];
-        // _this.state.dataSource = new ListView.DataSource({
-        //     rowHasChanged: (row1, row2) => row1 !== row2,
-        // });
+        if (this.state.freshFlag == false) {
+            _this.initData.splice(0);
+            _this.state.dataSource = [];
+            _this.state.dataSource = new ListView.DataSource({
+                rowHasChanged: (row1, row2) => row1 !== row2,
+            });
+        }
         const dataBlob = {};
         var PageNo = this.state.defaultPageNo;
         var param = {
@@ -380,14 +383,10 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
-                    result.response.forEach((v, i) => {
-                        if (this.state.studentId == v.col_uid) {
-                            this.setState({
-                                ownData: v,
-                                num: i
-                            }, () => {
-                            })
-                        }
+                    this.setState({
+                        ownData: result.user,
+                        num: result.user.rank
+                    }, () => {
                     })
                     var arr = result.response;
                     var pager = result.pager;
@@ -432,10 +431,10 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo },()=>{
+        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo,freshFlag:true }, () => {
             if (_this.state.flag == 1) {
                 _this.getStudentAnswerRightCountTop(_this.state.studentId, start, end);
-    
+
             } else {
                 _this.getStudentAnswerRightCountTop(_this.state.studentId, weekStart, end);
             }
@@ -457,7 +456,7 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo }, () => {
+        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo ,freshFlagLove:true}, () => {
             if (this.state.flag == 1) {
                 _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
@@ -482,7 +481,7 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo }, () => {
+        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo ,freshFlagStep:true}, () => {
             if (this.state.flag == 1) {
                 _this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
@@ -503,25 +502,40 @@ export default class rankingList extends React.Component {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
-                flagLove: 1
+                flagLove: 1,
+                flagStep: 1,
+                flag: 1,
+                freshFlagLove: false
+            }, () => {
+                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
             })
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
         } else if (flagType == "step") {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
-                flagStep: 1
+                flagLove: 1,
+                flagStep: 1,
+                flag: 1,
+                freshFlagStep: false
+            }, () => {
+                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
             })
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
         } else {
             $(".today").addClass("active")
             $(".week").removeClass("active")
             this.setState({
-                flag: 1
+                flagLove: 1,
+                flagStep: 1,
+                flag: 1,
+                freshFlag: false
+            }, () => {
+                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
             })
-            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
         }
 
     }
@@ -531,25 +545,39 @@ export default class rankingList extends React.Component {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
-                flagLove: 0
+                flagLove: 0,
+                flagStep: 0,
+                flag: 0,
+                freshFlagLove: false
+            }, () => {
+                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
             })
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
 
         } else if (flagType == "step") {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
-                flagStep: 0
+                flagLove: 0,
+                flagStep: 0,
+                flag: 0,
+                freshFlagStep: false
+            }, () => {
+                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+
             })
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
 
         } else {
             $(".week").addClass("active")
             $(".today").removeClass("active")
             this.setState({
-                flag: 0
+                flagLove: 0,
+                flagStep: 0,
+                flag: 0,
+                freshFlag: false
+            }, () => {
+                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+
             })
-            this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
         }
 
     }
@@ -839,7 +867,7 @@ export default class rankingList extends React.Component {
                     >
                         <div className='questionCont'>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
@@ -849,7 +877,7 @@ export default class rankingList extends React.Component {
                                 direction='down'
                                 refreshing={this.state.refreshing}
                                 onRefresh={() => {
-                                    this.setState({ refreshing: true });
+                                    this.setState({ refreshing: true, freshFlag: false });
                                     setTimeout(() => {
                                         this.setState({ refreshing: false }, () => {
                                             if (this.state.flag == 1) {
@@ -891,7 +919,7 @@ export default class rankingList extends React.Component {
                             </PullToRefresh>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "answer")}>
                                 <div className='inner my_flex'>
-                                    <span className='num'>第{Number(this.state.num) + 1}名</span>
+                                    <span className='num'>第{Number(this.state.num)}名</span>
                                     <span className='userName text_hidden'>{this.state.ownData.user ? this.state.ownData.user.userName : ""}</span>
                                     <span className='questionNum'>答对{this.state.ownData.count ? this.state.ownData.count : "0"}道题</span>
                                 </div>
@@ -900,7 +928,7 @@ export default class rankingList extends React.Component {
 
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
@@ -910,7 +938,7 @@ export default class rankingList extends React.Component {
                                 direction='down'
                                 refreshing={this.state.refreshingStep}
                                 onRefresh={() => {
-                                    this.setState({ refreshingStep: true });
+                                    this.setState({ refreshingStep: true, freshFlagStep: false });
                                     setTimeout(() => {
                                         this.setState({ refreshingStep: false }, () => {
                                             if (this.state.flagStep == 1) {
@@ -952,15 +980,15 @@ export default class rankingList extends React.Component {
                             </PullToRefresh>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "step")}>
                                 <div className='inner my_flex'>
-                                    <span className='num'>第{Number(this.state.numStep) + 1}名</span>
+                                    <span className='num'>第{Number(this.state.numStep)}名</span>
                                     <span className='userName text_hidden'>{this.state.ownDataStep ? this.state.ownDataStep.user.userName : ""}</span>
-                                    <span className='questionNum'>{this.state.ownDataStep ? this.state.ownDataStep.rank : "0"}步</span>
+                                    <span className='questionNum'>{this.state.ownDataStep ? this.state.ownDataStep.count : "0"}步</span>
                                 </div>
                             </div>
                         </div>
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
                             <PullToRefresh
-                                damping={130}
+                                damping={190}
                                 ref={el => this.ptr = el}
                                 style={{
                                     height: this.state.clientHeight - 114,
@@ -970,7 +998,7 @@ export default class rankingList extends React.Component {
                                 direction='down'
                                 refreshing={this.state.refreshingLove}
                                 onRefresh={() => {
-                                    this.setState({ refreshingLove: true });
+                                    this.setState({ refreshingLove: true, freshFlagLove: false });
                                     setTimeout(() => {
                                         this.setState({ refreshingLove: false }, () => {
                                             if (this.state.flagLove == 1) {
@@ -1012,9 +1040,9 @@ export default class rankingList extends React.Component {
                             </PullToRefresh>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "love")}>
                                 <div className='inner my_flex'>
-                                    <span className='num'>第{Number(this.state.numLove) + 1}名</span>
+                                    <span className='num'>第{Number(this.state.numLove)}名</span>
                                     <span className='userName text_hidden'>{this.state.ownDataLove ? this.state.ownDataLove.user.userName : ""}</span>
-                                    <span className='questionNum'>{this.state.ownDataLove ? this.state.ownDataLove.rank : "0"}颗</span>
+                                    <span className='questionNum'>{this.state.ownDataLove ? this.state.ownDataLove.count : "0"}颗</span>
                                 </div>
                             </div>
                         </div>
