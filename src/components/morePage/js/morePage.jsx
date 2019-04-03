@@ -108,7 +108,7 @@ export default class morePage extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
+                if (result.success) {
                     this.setState({
                         watchId: result.response.id
                     })
@@ -513,7 +513,7 @@ export default class morePage extends React.Component {
                     <div className="grayBorder"></div>
                 </div>
                 {/*绑定后未验证空页面*/}
-                <div className="personEmptyCont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
+                <div className="personEmptyCont" style={{ display: !calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2)==false) ? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
