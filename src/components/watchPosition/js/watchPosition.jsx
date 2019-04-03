@@ -14,6 +14,8 @@ const Loading = <div className="emptyLoading">
 
 const Item = Popover.Item;
 
+let clickTime = null;
+
 //消息通信js
 window.ms = null;
 
@@ -188,6 +190,10 @@ export default class watchPosition extends React.Component {
             "command": "watch2GLocaltionRequest",
             "data": {"macAddress": this.state.mac, "guardianId": this.state.userId}
         };
+        /*if (clickTime === null) {
+
+        }
+        clickTime = (new Date()).getTime();*/
         ms.send(obj);
         if (!this.state.toBind && !this.state.toConfirm) {
             Toast.loading('正在获取位置信息...', 5, () => {
@@ -202,7 +208,7 @@ export default class watchPosition extends React.Component {
         ms.msgWsListener = {
             onError: function (errorMsg) {
             }, onWarn: function (warnMsg) {
-                if (warnMsg === '手表不在线！') {
+                if (warnMsg === '手表不在线！' && !_this.state.toBind && !_this.state.toConfirm) {
                     Toast.fail(warnMsg, 1, null, false);
                     _this.setState({jumpClass: 'user-positioning'});
                 }
