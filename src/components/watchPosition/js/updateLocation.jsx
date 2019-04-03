@@ -7,6 +7,7 @@ import '../css/addNewLocation.less'
 const Item = List.Item;
 const Brief = Item.Brief;
 const prompt = Modal.prompt;
+const alert = Modal.alert;
 
 export default class updateLocation extends React.Component {
     constructor(props) {
@@ -67,19 +68,19 @@ export default class updateLocation extends React.Component {
                     _this.setState({
                         defaultPos:
                             <Item arrow="horizontal"
-                            className="line_public"
-                            multipleLine
-                            onClick={() => {
-                                _this.intoMap({
-                                    location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
-                                })
-                            }}
-                            platform="android"
-                        >
-                            <i className="icon-search-map"></i>
-                            <div className="name">当前位置</div>
-                            <Brief>{data.regeocode.formatted_address}</Brief>
-                        </Item>
+                                  className="line_public"
+                                  multipleLine
+                                  onClick={() => {
+                                      _this.intoMap({
+                                          location: posTude.split(',')[1] + ',' + posTude.split(',')[0]
+                                      })
+                                  }}
+                                  platform="android"
+                            >
+                                <i className="icon-search-map"></i>
+                                <div className="name">当前位置</div>
+                                <Brief>{data.regeocode.formatted_address}</Brief>
+                            </Item>
                     })
                 } else {
                     Toast.fail('未知的错误', 2, null, false)
@@ -265,6 +266,21 @@ export default class updateLocation extends React.Component {
         });
     };
 
+    deleteWatch2gHomePointModel = () => {
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
+        var _this = this;
+        const alertInstance = alert('您确定要删除该地点吗?', '', [
+            {text: '取消', onPress: () => console.log('cancel'), style: 'default'},
+            {text: '确定', onPress: () => _this.deleteWatch2gHomePoint()},
+        ], phone);
+    };
+
     /**
      * 手表删除家
      * public boolean deleteWatch2gHomePoint(String id)
@@ -344,7 +360,7 @@ export default class updateLocation extends React.Component {
                     <span className="am-navbar-title">修改新地址</span>
                     <span className="am-navbar-right am-navbar-del">
                         <span style={{display: (this.state.type == 1 || this.state.type == 2) ? 'none' : ''}}
-                              onClick={this.deleteWatch2gHomePoint}>删除</span>
+                              onClick={this.deleteWatch2gHomePointModel}>删除</span>
                     </span>
                 </div>
                 <div className="commonLocation-cont">
