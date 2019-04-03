@@ -4,6 +4,7 @@ import {
     Modal, Picker, List, Tabs
 } from 'antd-mobile';
 import '../../css/watchContacts.less'
+
 const Item = Popover.Item;
 const alert = Modal.alert;
 //消息通信js
@@ -19,7 +20,7 @@ export default class watchContacts extends React.Component {
         };
     }
 
-    componentWillMount () {
+    componentWillMount() {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
@@ -30,8 +31,10 @@ export default class watchContacts extends React.Component {
         this.getBindedGuardianByWatch2gId(watchId)
 
     }
-    componentDidMount () {
+
+    componentDidMount() {
     }
+
     //根据手表ID获取手表信息
     getBindedGuardianByWatch2gId = (watchId) => {
         var param = {
@@ -44,8 +47,9 @@ export default class watchContacts extends React.Component {
                 if (result.success) {
                     this.setState({
                         watchData: result.response,
-                        watchContactsData: result.response.guardians,
-                    })
+                        // watchContactsData: result.response.guardians,
+                    });
+                    this.buildWatchContactsData(result.response.guardians)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -54,10 +58,50 @@ export default class watchContacts extends React.Component {
                 Toast.info('请求失败');
             }
         });
-    }
+    };
+
+    buildWatchContactsData = (data) => {
+        var watchContactsData = [];
+        data.map((v, i) => {
+            watchContactsData.push(
+                <div className='item'>
+                    <img
+                        className="imgChild"
+                        // onError={(e) => {
+                        //     e.target.onerror = null;
+                        //     e.target.src = "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
+                        // }}
+                        src={v.guardian.avatar + "?size=100x100"}
+                        // src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
+                        alt=""/>
+                    <div className="line_public my_flex">
+                        <div className='textCont'>
+                            <div className='my_flex relateName'>
+                                <span className='relate text_hidden'>{v.familyRelate}</span>
+                                {/* <span className='code'></span> */}
+                                <span className='tag'
+                                      style={{display: v.bindType == 1 ? "block" : "none"}}>管理员</span>
+                            </div>
+                            <div className='tel text_hidden'>{v.guardian.colAccount}</div>
+                        </div>
+                    </div>
+                    {
+                        this.state.bindType == 2 ?
+                            ""
+                            :
+                            <div className='deleteBtn'
+                                 onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
+                                 style={{display: v.bindType == 1 ? "none" : "block"}}
+                            >删除</div>
+                    }
+                </div>
+            )
+        });
+        this.setState({watchContactsData})
+    };
 
     //删除弹出框
-    showAlertDelete (wId, ident) {
+    showAlertDelete(wId, ident) {
         var _this = this;
         var phoneType = navigator.userAgent;
         var phone;
@@ -67,11 +111,12 @@ export default class watchContacts extends React.Component {
             phone = 'android'
         }
         const alertInstance = alert('您确定删除?', '', [
-            { text: '取消', onPress: () => console.log('cancel'), style: 'default' },
-            { text: '确定', onPress: () => calm.toDelete(wId, ident) },
+            {text: '取消', onPress: () => console.log('cancel'), style: 'default'},
+            {text: '确定', onPress: () => calm.toDelete(wId, ident)},
         ], phone);
 
     }
+
     //删除
     toDelete = (wid, ident) => {
         var param = {
@@ -99,31 +144,30 @@ export default class watchContacts extends React.Component {
                 Toast.info('请求失败');
             }
         });
-    }
+    };
 
     //返回
     toBack = () => {
         var data = {
             method: 'popView',
         };
-        console.log(data, "data")
         Bridge.callHandler(data, null, function (error) {
         });
-    }
+    };
 
     //二维码
     toShowCode = (macAddr) => {
         $('.codePop').show();
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);
-    }
+    };
 
     //关闭弹窗
     toClosePop = () => {
         $('.codePop').hide();
     }
 
-    render () {
+    render() {
         return (
             <div id="watchContacts" className='bg_gray'>
                 <div className="am-navbar">
@@ -132,54 +176,28 @@ export default class watchContacts extends React.Component {
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
-                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    <div className='mask transparent'
+                         style={{display: this.state.bindType == 2 ? "block" : "none"}}></div>
                     <div className="contactBg">
                         <div className='mainItem'>
                             <div className="icon_bg">
                                 <img
                                     className="imgP"
-                                    onError={(e) => { e.target.onerror = null; e.target.src = "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100" }}
+                                    onError={(e) => {
+                                        e.target.onerror = null;
+                                        e.target.src = "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
+                                    }}
                                     src={this.state.watchData.student ? this.state.watchData.student.avatar + "?size=100x100" : ""}
                                     // src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
-                                    alt="" /></div>
+                                    alt=""/></div>
                             <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
                             <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
                         </div>
                     </div>
-                    {
-                        this.state.watchContactsData.map((v, i) => {
-                            return (
-                                <div className='item'>
-                                    <img
-                                        className="imgChild"
-                                        onError={(e) => { e.target.onerror = null; e.target.src = "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100" }}
-                                        src={v.guardian.avatar + "?size=100x100"}
-                                        // src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
-                                        alt="" />
-                                    <div className="line_public my_flex">
-                                        <div className='textCont'>
-                                            <div className='my_flex relateName'>
-                                                <span className='relate text_hidden'>{v.familyRelate}</span>
-                                                {/* <span className='code'></span> */}
-                                                <span className='tag' style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
-                                            </div>
-                                            <div className='tel text_hidden'>{v.guardian.colAccount}</div>
-                                        </div>
-                                    </div>
-                                    {
-                                        this.state.bindType == 2 ?
-                                            ""
-                                            :
-                                            <div className='deleteBtn' onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
-                                                style={{ display: v.bindType == 1 ? "none" : "block" }}
-                                            >删除</div>
-                                    }
-                                </div>
-                            )
-                        })
-                    }
+                    <div>{this.state.watchContactsData}</div>
                 </div>
-                <div className='addBtn' onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人</div>
+                <div className='addBtn' onClick={this.toShowCode.bind(this, this.state.watchData.macAddress)}>添加联系人
+                </div>
                 <div className='codePop'>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toClosePop}><i className="icon-back"></i></span>
