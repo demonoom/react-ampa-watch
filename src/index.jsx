@@ -179,7 +179,7 @@ const articleDetail = (location, cb) => {
 
 const pCenter = (location, cb) => {
     require.ensure([], require => {
-        cb(null, require('./components/PersonalCenter/js/pCenter').default)
+        cb(null, require('./components/PersonalCenter/JS/pCenter').default)
     }, 'pCenter')
 };
 
