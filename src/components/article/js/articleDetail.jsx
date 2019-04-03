@@ -417,7 +417,10 @@ export default class articleDetail extends React.Component {
                     rowData.demoFlag ? {display: 'none'} : {}
                 }>
                     <List className="listCont line_public ">
-                        <Item align="top" thumb={rowData.discussUser ? rowData.discussUser.avatar : ""} multipleLine>
+                        <Item align="top" multipleLine>
+                            <img
+                                src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif?size=100x100"
+                                alt=""/>
                             <span>{rowData.discussUser ? rowData.discussUser.userName : ""}</span>
                             <Brief>{rowData.discussContent}</Brief>
                             <span className="releaseTime">{time}</span>
