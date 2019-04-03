@@ -31,6 +31,13 @@ export default class watchContacts extends React.Component {
 
     }
     componentDidMount () {
+        // $(".imgP")[0].addEventListener("error", () => {
+        //     console.log("errorerror")
+        // })
+        console.log($(".imgChild"), "opopo")
+        $("#watchContacts .imgChild")[0].addEventListener("error", ()=>{
+            console.log("imgChilderror")
+        })
     }
     //根据手表ID获取手表信息
     getBindedGuardianByWatch2gId = (watchId) => {

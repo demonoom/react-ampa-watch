@@ -1,0 +1,295 @@
+#rankingList .am-tabs-default-bar-top {
+  background: -webkit-linear-gradient(72deg, #28c4fd 0%, #0092fc 100%) !important;
+  background: linear-gradient(18deg, #28c4fd 0%, #0092fc 100%) !important;
+  color: #fff;
+  padding: 20px 15px 0;
+}
+#rankingList .am-tabs-default-bar-tab-active,
+#rankingList .am-tabs-default-bar-tab {
+  color: white;
+  height: 44px;
+  line-height: 44px;
+}
+#rankingList .am-tabs-default-bar-top .am-tabs-default-bar-tab {
+  border: 0;
+}
+#rankingList .am-tabs-default-bar-tab-active {
+  font-size: 16px;
+}
+#rankingList .am-tabs-default-bar-top .am-tabs-default-bar-tab::after,
+#rankingList .am-tabs-default-bar-underline {
+  display: none;
+}
+#rankingList .am-list-body {
+  background-color: #ededed;
+}
+#rankingList .am-tabs-default-bar-top .am-tabs-default-bar-content {
+  width: calc(100% - 100px);
+}
+#rankingList .am-tabs-default-bar-tab-active::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  border-bottom: 6px solid #EDEDED;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#rankingList .watchSelect {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  z-index: 50;
+  color: #fff;
+}
+#rankingList .watchSelect.left {
+  right: auto;
+  left: 30px;
+}
+#rankingList .watchSelect.left .watchName {
+  padding-left: 5px;
+}
+#rankingList .watchSelect .watchName {
+  padding-right: 5px;
+  font-size: 14px;
+  max-width: 50px;
+}
+#rankingList .watchSelect .icon-back {
+  height: 100%;
+  margin-right: 0;
+}
+#rankingList .questionCont {
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+}
+#rankingList .questionCont .am-list-header {
+  height: 42px;
+  position: relative;
+  padding: 12px 0 0 0 ;
+}
+#rankingList .questionCont .dateBtn {
+  position: absolute;
+  right: 15px;
+  top: 12px;
+  width: 100px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+#rankingList .questionCont .dateBtn span {
+  background-color: #E5E5E5;
+  color: #3672ED;
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+#rankingList .questionCont .dateBtn span.active {
+  background-color: #0096FF;
+  color: white;
+}
+#rankingList .questionCont .list-view-section-body {
+  padding: 142px 0 0;
+  margin: 0 15px;
+  position: relative;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2),
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) {
+  width: 33.3%;
+  position: absolute;
+  top: 0;
+  height: 130px;
+  margin-bottom: 12px;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .imgDiv,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .imgDiv,
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .imgDiv {
+  width: 50px;
+  height: 60px;
+  box-sizing: border-box;
+  padding-top: 14px;
+  padding-left: 4px;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  z-index: 50;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .imgDiv img,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .imgDiv img,
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .imgDiv img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .userName,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .userName,
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .userName {
+  padding-bottom: 1px;
+  text-align: center;
+  width: 100%;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .color_9,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .color_9,
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .color_9 {
+  font-size: 13px;
+  text-align: center;
+  width: 100%;
+  line-height: 1;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .itemCont,
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .itemCont,
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .itemCont {
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  border-radius: 5px 5px 0 0;
+  background-color: white;
+  width: 100%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child {
+  left: 33.3%;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .imgDiv {
+  background: url("../../images/num1.png") no-repeat;
+  background-size: cover;
+  top: 0;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .itemCont {
+  height: 97px;
+  padding-top: 30px;
+}
+#rankingList .questionCont .list-view-section-body .item:first-child .userName {
+  padding-bottom: 5px;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) {
+  left: 0;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .imgDiv {
+  background: url("../../images/num2.png") no-repeat;
+  background-size: cover;
+  top: 13px;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(2) .itemCont {
+  height: 78px;
+  padding-top: 24px;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) {
+  right: 0;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .imgDiv {
+  background: url("../../images/num3.png") no-repeat;
+  background-size: cover;
+  top: 20px;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(3) .itemCont {
+  height: 69px;
+  padding-top: 21px;
+}
+#rankingList .questionCont .list-view-section-body .item:nth-child(4) {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+}
+#rankingList .questionCont .list-view-section-body .item .itemCont {
+  height: 44px;
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 15px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+}
+#rankingList .questionCont .list-view-section-body .item .num {
+  width: 65px;
+}
+#rankingList .questionCont .list-view-section-body .item .color_9 {
+  width: 110px;
+  text-align: right;
+}
+#rankingList .questionCont .list-view-section-body .item .userName {
+  width: calc(100% - 175px);
+}
+#rankingList .questionCont .myGrade {
+  height: 65px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+#rankingList .questionCont .myGrade:before {
+  content: '';
+  width: 0;
+  height: 0;
+  border-width: 0 0 15px 15px;
+  border-style: solid;
+  border-color: #0076C8 transparent;
+  /*透明 透明 透明 黄*/
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+#rankingList .questionCont .myGrade:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-width: 15px  0 0 15px;
+  border-style: solid;
+  border-color: transparent #0076C8 ;
+  /*透明 透明 透明 黄*/
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+#rankingList .questionCont .myGrade .inner {
+  background-color: #0096FF;
+  margin-top: 15px;
+  height: 50px;
+  color: white;
+  padding-left: 30px;
+  padding-right: 15px;
+  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+}
+#rankingList .questionCont .myGrade .inner .num {
+  width: 65px;
+}
+#rankingList .questionCont .myGrade .inner .userName {
+  width: calc(100% - 195px);
+}
+#rankingList .questionCont .myGrade .inner .questionNum {
+  width: 130px;
+  padding-right: 23px;
+  background: url("../../images/icon_rightArrow.jpg") no-repeat right center;
+  background-size: 8px;
+  box-sizing: border-box;
+  text-align: right;
+}
+@media only screen and (max-width: 320px) {
+  #rankingList .am-tabs-default-bar-tab {
+    font-size: 13px;
+  }
+  #rankingList .am-tabs-default-bar-tab-active {
+    font-size: 14px;
+  }
+  #rankingList .am-tabs-default-bar-top .am-tabs-default-bar-content {
+    width: calc(100% - 80px);
+  }
+  #rankingList .watchSelect .watchName {
+    font-size: 12px;
+  }
+}

@@ -238,6 +238,9 @@ export default class rankingList extends React.Component {
         //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
         window.addEventListener('resize', this.onWindowResize)
         this.watchListener();
+        $(".am-pull-to-refresh-content-wrapper").css({
+            minHeight: this.state.clientHeight - 114
+        })
     }
 
     componentWillUnmount () {
@@ -431,7 +434,7 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo,freshFlag:true }, () => {
+        _this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo, freshFlag: true }, () => {
             if (_this.state.flag == 1) {
                 _this.getStudentAnswerRightCountTop(_this.state.studentId, start, end);
 
@@ -456,7 +459,7 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo ,freshFlagLove:true}, () => {
+        this.setState({ isLoadingLeftLove: true, defaultPageNoLove: currentPageNo, freshFlagLove: true }, () => {
             if (this.state.flag == 1) {
                 _this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
@@ -481,7 +484,7 @@ export default class rankingList extends React.Component {
             return;
         }
         currentPageNo += 1;
-        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo ,freshFlagStep:true}, () => {
+        this.setState({ isLoadingLeftStep: true, defaultPageNoStep: currentPageNo, freshFlagStep: true }, () => {
             if (this.state.flag == 1) {
                 _this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
@@ -631,6 +634,9 @@ export default class rankingList extends React.Component {
 
     //tabs 改变
     onTabsChange = (v) => {
+        $(".am-pull-to-refresh-content-wrapper").css({
+            minHeight: this.state.clientHeight - 114
+        })
         if (v.title == "运动") {
             this.setState({
                 tabs: [
@@ -753,6 +759,44 @@ export default class rankingList extends React.Component {
         });
     };
 
+
+    onRefreshAnswer = () => {
+        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
+        divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
+        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
+        });
+        if (this.state.flag == 1) {
+            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+        } else {
+            this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+        }
+    }
+    onRefreshStep = () => {
+        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
+        divPull[1].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
+        this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true }, () => {
+        });
+        if (this.state.flagStep == 1) {
+            this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+        } else {
+            this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+        }
+    }
+    onRefreshLove = () => {
+        var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
+        divPull[2].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
+        this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true }, () => {
+        });
+        if (this.state.flagLove == 1) {
+            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+        } else {
+            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+        }
+    }
+
     render () {
         const row = (rowData, sectionID, rowID) => {
             return (
@@ -866,30 +910,33 @@ export default class rankingList extends React.Component {
                         swipeable={false}
                     >
                         <div className='questionCont'>
-                            <PullToRefresh
-                                damping={190}
-                                ref={el => this.ptr = el}
-                                style={{
-                                    height: this.state.clientHeight - 114,
-                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
-                                }}
-                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
-                                direction='down'
-                                refreshing={this.state.refreshing}
-                                onRefresh={() => {
-                                    this.setState({ refreshing: true, freshFlag: false });
-                                    setTimeout(() => {
-                                        this.setState({ refreshing: false }, () => {
-                                            if (this.state.flag == 1) {
-                                                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+                            <div style={{
+                                display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
+                            }}>
+                                {/* <PullToRefresh
+                                    damping={190}
+                                    ref={el => this.ptr = el}
+                                    style={{
+                                        height: this.state.clientHeight - 114,
+                                        overflow: "auto"
+                                    }}
+                                    indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                    direction='down'
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={() => {
+                                        this.setState({ refreshing: true, freshFlag: false });
+                                        setTimeout(() => {
+                                            this.setState({ refreshing: false }, () => {
+                                                if (this.state.flag == 1) {
+                                                    this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
 
-                                            } else {
-                                                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-                                            }
-                                        });
-                                    }, 1000);
-                                }}
-                            >
+                                                } else {
+                                                    this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                                                }
+                                            });
+                                        }, 1000);
+                                    }}
+                                > */}
                                 <ListView
                                     ref={el => this.lv = el}
                                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
@@ -915,8 +962,13 @@ export default class rankingList extends React.Component {
                                     style={{
                                         height: this.state.clientHeight - 50 - 64,
                                     }}
+                                    pullToRefresh={<PullToRefresh
+                                        onRefresh={this.onRefreshAnswer}
+                                        distanceToRefresh={100}
+                                    />}
                                 />
-                            </PullToRefresh>
+                                {/* </PullToRefresh> */}
+                            </div>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "answer")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.num)}名</span>
@@ -925,32 +977,10 @@ export default class rankingList extends React.Component {
                                 </div>
                             </div>
                         </div>
-
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
-                            <PullToRefresh
-                                damping={190}
-                                ref={el => this.ptr = el}
-                                style={{
-                                    height: this.state.clientHeight - 114,
-                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
-                                }}
-                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
-                                direction='down'
-                                refreshing={this.state.refreshingStep}
-                                onRefresh={() => {
-                                    this.setState({ refreshingStep: true, freshFlagStep: false });
-                                    setTimeout(() => {
-                                        this.setState({ refreshingStep: false }, () => {
-                                            if (this.state.flagStep == 1) {
-                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
-
-                                            } else {
-                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
-                                            }
-                                        });
-                                    }, 1000);
-                                }}
-                            >
+                            <div style={{
+                                display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
+                            }}>
                                 <ListView
                                     ref={el => this.lv = el}
                                     dataSource={this.state.dataSourceStep}    //数据类型是 ListViewDataSource
@@ -976,8 +1006,37 @@ export default class rankingList extends React.Component {
                                     style={{
                                         height: this.state.clientHeight - 50 - 64,
                                     }}
+                                    pullToRefresh={<PullToRefresh
+                                        onRefresh={this.onRefreshStep}
+                                        distanceToRefresh={100}
+                                    />}
                                 />
-                            </PullToRefresh>
+                            </div>
+                            {/* <PullToRefresh
+                                damping={190}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingStep}
+                                onRefresh={() => {
+                                    this.setState({ refreshingStep: true, freshFlagStep: false });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingStep: false }, () => {
+                                            if (this.state.flagStep == 1) {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            >
+
+                            </PullToRefresh> */}
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "step")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numStep)}名</span>
@@ -987,30 +1046,9 @@ export default class rankingList extends React.Component {
                             </div>
                         </div>
                         <div className='questionCont' style={{ height: document.body.clientHeight - 64 }}>
-                            <PullToRefresh
-                                damping={190}
-                                ref={el => this.ptr = el}
-                                style={{
-                                    height: this.state.clientHeight - 114,
-                                    display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
-                                }}
-                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
-                                direction='down'
-                                refreshing={this.state.refreshingLove}
-                                onRefresh={() => {
-                                    this.setState({ refreshingLove: true, freshFlagLove: false });
-                                    setTimeout(() => {
-                                        this.setState({ refreshingLove: false }, () => {
-                                            if (this.state.flagLove == 1) {
-                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
-
-                                            } else {
-                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
-                                            }
-                                        });
-                                    }, 1000);
-                                }}
-                            >
+                            <div style={{
+                                display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
+                            }}>
                                 <ListView
                                     ref={el => this.lv = el}
                                     dataSource={this.state.dataSourceLove}    //数据类型是 ListViewDataSource
@@ -1036,8 +1074,36 @@ export default class rankingList extends React.Component {
                                     style={{
                                         height: this.state.clientHeight - 50 - 64,
                                     }}
+                                    pullToRefresh={<PullToRefresh
+                                        onRefresh={this.onRefreshLove}
+                                        distanceToRefresh={100}
+                                    />}
                                 />
-                            </PullToRefresh>
+                            </div>
+                            {/* <PullToRefresh
+                                damping={190}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingLove}
+                                onRefresh={() => {
+                                    this.setState({ refreshingLove: true, freshFlagLove: false });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingLove: false }, () => {
+                                            if (this.state.flagLove == 1) {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            > */}
+                            {/* </PullToRefresh> */}
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "love")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numLove)}名</span>
@@ -1048,7 +1114,7 @@ export default class rankingList extends React.Component {
                         </div>
                     </Tabs>
                 </div>
-            </div>
+            </div >
         )
     }
 }
