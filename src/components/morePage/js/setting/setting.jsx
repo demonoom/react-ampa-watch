@@ -117,7 +117,7 @@ export default class setting extends React.Component {
                         </div>
                         <div className='am-list-item am-list-item-middle line_public15'>
                             <div className="am-list-line">
-                                <div className="am-list-content">版本号</div>
+                                <div className="am-list-content">版本信息</div>
                                 <div className="am-list-extra">{this.state.version}</div>
                             </div>
                         </div>
