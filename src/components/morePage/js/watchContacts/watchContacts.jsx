@@ -134,7 +134,7 @@ export default class watchContacts extends React.Component {
                     <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className="contactBg">
                         <div className='mainItem'>
-                            <div className="icon_bg"><img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
+                            <div className="icon_bg"><img onError={(e) => {e.target.onerror = null;e.target.src="../../../images/bindPic.png"}} src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
                             <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
                             <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
                         </div>
@@ -143,7 +143,7 @@ export default class watchContacts extends React.Component {
                         this.state.watchContactsData.map((v, i) => {
                             return (
                                 <div className='item'>
-                                    <img src={v.guardian.avatar} alt="" />
+                                    <img onError={(e) => {e.target.onerror = null;e.target.src="../../../images/bindPic.png"}}  src={v.guardian.avatar} alt="" />
                                     <div className="line_public my_flex">
                                         <div className='textCont'>
                                             <div className='my_flex relateName'>
