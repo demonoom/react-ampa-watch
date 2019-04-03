@@ -768,12 +768,14 @@ export default class rankingList extends React.Component {
         divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
         this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
         });
-        if (this.state.flag == 1) {
-            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-
-        } else {
-            this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-        }
+        setTimeout(()=>{
+            if (this.state.flag == 1) {
+                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+    
+            } else {
+                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+            }
+        },600)
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
@@ -943,6 +945,7 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshAnswer}
+                                        refreshing={this.state.refreshing}
                                         distanceToRefresh={100}
                                     />}
                                 />
@@ -986,6 +989,7 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshStep}
+                                        refreshing={this.state.refreshingStep}
                                         distanceToRefresh={100}
                                     />}
                                 />
@@ -1029,6 +1033,7 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshLove}
+                                        refreshing={this.state.refreshingLove}
                                         distanceToRefresh={100}
                                     />}
                                 />
