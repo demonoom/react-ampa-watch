@@ -65,10 +65,10 @@ export default class watchContacts extends React.Component {
                 <div className="icon_bg">
                     <img
                         className="imgP"
-                        // onError={(e) => {
-                        //     e.target.onerror = null;
-                        //     e.target.src = "http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
-                        // }}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png?size=100x100"
+                        }}
                         src={data.student ? data.student.avatar + "?size=100x100" : ""}
                         alt="" /></div>
                 <span className='text_hidden relate'>{data.watchName}</span>
@@ -87,6 +87,10 @@ export default class watchContacts extends React.Component {
                 <div className='item'>
                     <img
                         className="imgChild"
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
+                        }}
                         src={v.guardian.avatar + "?size=100x100"}
                         alt="" />
                     <div className="line_public my_flex">
