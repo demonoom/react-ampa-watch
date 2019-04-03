@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Toast, PullToRefresh, ListView, Button, List, Picker, Tag, Tabs, Carousel
+    Toast, ListView, Button, List, Picker, Tag, Tabs, Carousel, PullToRefresh
 } from 'antd-mobile';
 import '../css/articleList.less';
 
@@ -8,8 +8,6 @@ var dataSource = new ListView.DataSource({
     rowHasChanged: (row1, row2) => row1 !== row2,
 });
 
-var AscrollView;
-var BscrollView;
 var that;
 
 export default class articleList extends React.Component {
@@ -41,10 +39,7 @@ export default class articleList extends React.Component {
     }
 
     componentDidMount() {
-        AscrollView = $('.am-list-view-scrollview').eq(0);
-        BscrollView = $('.am-list-view-scrollview').eq(1);
         var _this = this;
-        Bridge.setShareAble("false");
         document.title = '文章列表';
         var locationHref = window.location.href;
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
@@ -67,12 +62,11 @@ export default class articleList extends React.Component {
                 this.LittleAntLogin()
             });
             Promise.all([p2]).then((result) => {
-                //
                 this.setState({
                     initLoading: false,
                 })
             })
-        })
+        });
 
         $(document).on('scroll', '.am-list-view-scrollview', (e) => {
             if (e.target.scrollTop >= 200) {
@@ -88,7 +82,6 @@ export default class articleList extends React.Component {
 
             } else {
                 if (this.state.scrollFlag) {
-                    // Toast.info('关闭了显示',1)
                     this.setState({
                         scrollFlag: false,
                     })
@@ -117,8 +110,10 @@ export default class articleList extends React.Component {
             "colAccount": this.state.userId,
             "colPasswd": this.state.passward,
         };
+        console.log(param);
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
+                console.log(result);
                 if (result.success) {
                     _this.setState({
                         uid: result.response.uid,
@@ -134,6 +129,9 @@ export default class articleList extends React.Component {
         });
     }
 
+    /**
+     * 获取轮播图
+     */
     getWatchArticleInfoListByStatusAndIsTop() {
         var _this = this;
         var param = {
@@ -153,7 +151,7 @@ export default class articleList extends React.Component {
     }
 
     /**
-     * 按查询条件获取列表
+     * 获取发现列表
      * **/
     getArticleInfoListByType(clearFlag, reslove) {
         var _this = this;
@@ -165,10 +163,6 @@ export default class articleList extends React.Component {
             onResponse: result => {
                 if (result.success) {
                     this.state.rsCount = result.pager.rsCount;
-                    // this.setState({
-                    //    dex: parseInt(result.response.length / 2)
-                    // })
-
 
                     if (clearFlag) {    //拉动刷新  获取数据之后再清除原有数据
                         _this.initDataSource.splice(0);
@@ -226,15 +220,7 @@ export default class articleList extends React.Component {
             isLoading: true,
             defaultPageNo: currentPageNo,
         }, () => {
-            if (this.state.index == 2) {
-                this.setState({
-                    defaultPageNoForCircle: this.state.defaultPageNoForCircle + 1
-                }, () => {
-
-                })
-            } else {
-                this.getArticleRecommenLittleVideoList();
-            }
+            this.getArticleRecommenLittleVideoList();
         });
     };
 
@@ -266,20 +252,6 @@ export default class articleList extends React.Component {
         } else {
             Toast.fail('id参数有误', 2);
         }
-    }
-
-    //播放视频
-    toPlayVideo(videoIndex, recommended_video, recommended_pageCount, recommended_pageNo) {
-        var data = {
-            method: 'playArticleVideo',
-            videos: recommended_video,
-            position: videoIndex,
-            pageNo: recommended_pageNo,
-            pageCount: recommended_pageCount
-        };
-        Bridge.callHandler(data, null, function (error) {
-            console.log('开启小视频失败')
-        });
     }
 
     //计算时间差
@@ -359,9 +331,7 @@ export default class articleList extends React.Component {
         }
     }
 
-
     render() {
-        var _this = this;
         const row = (rowData) => {
             var dom = "";
             var time = this.timeDifference(rowData.createTime);
@@ -398,36 +368,14 @@ export default class articleList extends React.Component {
                     </div>
                 </div>
             } else {                //图片没有
-                var videoFlag = false;
-                if (videoFlag) { //有视频
-                    dom = <div className="item line_public">
-                        <div className="title">{rowData.articleTitle}</div>
-                        <div className="images">
-                            <div className="videoBox">
-                                <div onClick={this.toDetail.bind(this, rowData.articleId, rowData.articleTitle)}
-                                     className="videoMask"></div>
-                                <img onClick={this.toDetail.bind(this, rowData.articleId, rowData.articleTitle)}
-                                     className="playImg"
-                                     src={require('../images/videoClick.png')} alt=""/>
-                                <video src="http://www.w3school.com.cn/example/html5/mov_bbb.mp4"></video>
-                            </div>
-                        </div>
-                        <div className="bottom">
-                            <div className="read">{rowData.readCount}阅读</div>
-                            {/*<div className="like">{rowData.likeCount}点赞</div>*/}
-                            <div className="time">{time}</div>
-                        </div>
+                dom = <div className="item line_public">
+                    <div className="title">{rowData.articleTitle}</div>
+                    <div className="bottom">
+                        <div className="read">{rowData.readCount}阅读</div>
+                        {/*<div className="like">{rowData.likeCount}点赞</div>*/}
+                        <div className="time">{time}</div>
                     </div>
-                } else {  //图片没有 视频也没有
-                    dom = <div className="item line_public">
-                        <div className="title">{rowData.articleTitle}</div>
-                        <div className="bottom">
-                            <div className="read">{rowData.readCount}阅读</div>
-                            {/*<div className="like">{rowData.likeCount}点赞</div>*/}
-                            <div className="time">{time}</div>
-                        </div>
-                    </div>
-                }
+                </div>
             }
 
 
@@ -452,8 +400,6 @@ export default class articleList extends React.Component {
                          src={require('../images/UserGuide2.png')}></img>
                     <img className="userguide3" src={require('../images/UserGuide3.png')} width="270"></img>
                 </div>
-
-                {/*mask*/}
 
                 <div className="articleList-cont">
                     <div className="initImage" style={
