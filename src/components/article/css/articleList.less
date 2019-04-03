@@ -959,10 +959,39 @@
     height: calc(~"100% - 64px");
     overflow-y: auto;
     overflow-x: hidden;
+    .am-list-view-scrollview, .am-list-view-scrollview-content, .am-pull-to-refresh-content-wrapper{
+      height: 100% !important;
+    }
+    .am-pull-to-refresh-content-wrapper{
+      min-height: 100% !important;
+    }
   }
-  .am-carousel-wrap{
-    text-align: right;
-    padding-right: 15px;
-    box-sizing: border-box;
+  .Carousel-banner{
+    height: 200px !important;
+    .slider-list .slider-slide img{
+      height: 200px !important;
+      object-fit: fill;
+    }
+    .Carousel-title{
+      width: 70%;
+      background: -webkit-gradient(linear,left right,left right,from(rgba(0,0,0,.6)),to(transparent));
+      background: -webkit-linear-gradient(right,rgba(0,0,0,.6),transparent);
+      background: -o-linear-gradient(right,rgba(0,0,0,.6) 0,transparent 100%);
+      background: linear-gradient(90deg,rgba(0,0,0,.6),transparent);
+      color: #fff;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      line-height: 30px;
+      padding-left: 15px;
+      box-sizing: border-box;
+    }
+    .am-carousel-wrap{
+      text-align: right;
+      position: absolute;
+      bottom: 5px;
+      right: 15px;
+      width: 30%;
+    }
   }
 }
