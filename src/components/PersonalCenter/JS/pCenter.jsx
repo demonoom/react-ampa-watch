@@ -122,6 +122,13 @@ export default class pCenter extends React.Component {
             onResponse: (result) => {
                 if (result.success) {
                     if (result.response) {
+                        var data = {
+                            method: 'upDataUserInfo'
+                        };
+                        console.log(data);
+                        Bridge.callHandler(data, null, function (error) {
+
+                        });
                         _this.requesetPData();
                     } else {
 
@@ -173,6 +180,13 @@ export default class pCenter extends React.Component {
             onResponse: (result) => {
                 if (result.success) {
                     if (result.response) {
+                        var data = {
+                            method: 'upDataUserInfo'
+                        };
+                        console.log(data);
+                        Bridge.callHandler(data, null, function (error) {
+
+                        });
                         _this.requesetPData();
                     } else {
 

@@ -168,7 +168,7 @@ export default class rankingList extends React.Component {
                                                     calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
                                                 }
                                                 if (calm.state.flagLove == 1) {
-                                                    calm.f(calm.state.studentId, start, end);
+                                                    calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, start, end);
                                                 } else {
                                                     calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, weekStart, end);
 
