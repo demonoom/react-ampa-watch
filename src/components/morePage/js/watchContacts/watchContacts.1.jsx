@@ -31,6 +31,13 @@ export default class watchContacts extends React.Component {
 
     }
     componentDidMount () {
+        // $(".imgP")[0].addEventListener("error", () => {
+        //     console.log("errorerror")
+        // })
+        console.log($(".imgChild"), "opopo")
+        $("#watchContacts .imgChild")[0].addEventListener("error", ()=>{
+            console.log("imgChilderror")
+        })
     }
     //根据手表ID获取手表信息
     getBindedGuardianByWatch2gId = (watchId) => {
@@ -190,12 +197,8 @@ export default class watchContacts extends React.Component {
                         <div className="grayBorder"></div>
                         <div className='icon_code'>
                             <div id="qrcode"></div>
-                            <div className='dec'>{this.state.watchData.watchName}的二维码</div>
                         </div>
-                        <div className="warning">
-                            <span>提示</span>
-                            扫码下载APP并安装后再次扫描该二维码在管理员同意后即可绑定手表加入家庭。
-                        </div>
+                        <div>{this.state.watchData.watchName}的二维码</div>
                     </div>
 
                 </div>

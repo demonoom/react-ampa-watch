@@ -380,7 +380,7 @@ export default class morePage extends React.Component {
 
     //跳转解绑页面
     toUnbind = () => {
-        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&watchName=" + this.state.watchName
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&watchName=" + this.state.watchName+"&sId="+this.state.studentId
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -446,7 +446,7 @@ export default class morePage extends React.Component {
                         }
                     </div>
                 </div>
-                <div className='moreList' style={{ display: "none" }}>
+                <div className='moreList overScroll' style={{ display: "none" }}>
                     <div className="grayBorder"></div>
                     <div
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}

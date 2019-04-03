@@ -80,120 +80,9 @@ export default class rankingList extends React.Component {
             freshFlagStep: true,
         };
     }
-
-    componentWillMount () {
-        var locationHref = decodeURI(window.location.href);
-        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var searchArray = locationSearch.split("&");
-        var userId = searchArray[0].split('=')[1];
-        this.setState({
-            userId
-        })
-        var pro = {
-            "command": "guardianLogin",
-            "data": {
-                "userId": userId,
-                "machineType": "0",
-                "version": '1.0',
-            }
-        };
-        ms = new WatchWebsocketConnection();
-        ms.connect(pro);
-    }
-    componentDidMount () {
-        Bridge.setShareAble("false");
-        var locationHref = decodeURI(window.location.href);
-        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
-        var searchArray = locationSearch.split("&");
-        var userId = searchArray[0].split('=')[1];
-        this.setState({
-            userId
-        })
-        this.getWatch2gsByGuardianUserId(userId)
-        //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
-        window.addEventListener('resize', this.onWindowResize)
-        this.watchListener();
-        $(".am-pull-to-refresh-content-wrapper").css({
-            minHeight: this.state.clientHeight - 114
-        })
-    }
-
-    componentWillUnmount () {
-        //解除监听
-        window.removeEventListener('resize', this.onWindowResize)
-    }
     /**
-       * 视窗改变时改变高度
-       */
-    onWindowResize () {
-        setTimeout(() => {
-            calm.setState({ clientHeight: document.body.clientHeight });
-        }, 100)
-    }
-
-
-    //消息监听
-    watchListener () {
-        ms.msgWsListener = {
-            onError: function (errorMsg) {
-
-            }, onWarn: function (warnMsg) {
-                console.log(warnMsg, "warnMsg")
-                Toast.info(warnMsg, 1, null, false)
-            }, onMessage: function (info) {
-                console.log(info, "infoWatch")
-                if (info.command == "userOperateResponse") {
-                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
-                    calm.state.watchData.forEach((value, i) => {
-                        if (value.id == info.data.watchId) {
-                            calm.setState({
-                                guardians: value.guardians,
-                                studentId: value.studentId
-                            }, () => {
-                                calm.state.guardians.forEach((v, i) => {
-                                    if (v.guardian.colUid == calm.state.userId) {
-                                        calm.setState({
-                                            guardianData: v,
-                                        }, () => {
-                                            calm.setState({
-                                                visible: false,
-                                                phoneNumber: value.phoneNumber,
-                                                watchId: value.id,
-                                                watchName: value.watchName,
-                                                macAddr: value.macAddress
-                                            }, () => {
-                                                if (calm.state.flag == 1) {
-                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, start, end);
-                                                } else {
-                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
-                                                }
-                                                if (calm.state.flagLove == 1) {
-                                                    calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, start, end);
-                                                } else {
-                                                    calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, weekStart, end);
-
-                                                }
-                                                if (calm.state.flagStep == 1) {
-                                                    calm.getWatch2gSportStepTopByStudentId(calm.state.studentId, start, end);
-                                                } else {
-                                                    calm.getWatch2gSportStepTopByStudentId(calm.state.studentId, weekStart, end);
-
-                                                }
-                                            });
-                                        })
-                                    }
-                                })
-                            })
-                        }
-                    })
-                }
-            }
-        };
-    }
-
-    /**
-  *  查询爱心排行榜
-  */
+    *  查询爱心排行榜
+    */
     getWatch2gLoveCountRankingByStudentId (userId, start, end) {
         console.log(start, "start")
         var _this = this;
@@ -316,6 +205,114 @@ export default class rankingList extends React.Component {
                 // message.error(error);
             }
         });
+    }
+    componentWillMount () {
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var userId = searchArray[0].split('=')[1];
+        this.setState({
+            userId
+        })
+        var pro = {
+            "command": "guardianLogin",
+            "data": {
+                "userId": userId,
+                "machineType": "0",
+                "version": '1.0',
+            }
+        };
+        ms = new WatchWebsocketConnection();
+        ms.connect(pro);
+    }
+    componentDidMount () {
+        Bridge.setShareAble("false");
+        var locationHref = decodeURI(window.location.href);
+        var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
+        var searchArray = locationSearch.split("&");
+        var userId = searchArray[0].split('=')[1];
+        this.setState({
+            userId
+        })
+        this.getWatch2gsByGuardianUserId(userId)
+        //添加对视窗大小的监听,在屏幕转换以及键盘弹起时重设各项高度
+        window.addEventListener('resize', this.onWindowResize)
+        this.watchListener();
+        $(".am-pull-to-refresh-content-wrapper").css({
+            minHeight: this.state.clientHeight - 114
+        })
+    }
+
+    componentWillUnmount () {
+        //解除监听
+        window.removeEventListener('resize', this.onWindowResize)
+    }
+    /**
+       * 视窗改变时改变高度
+       */
+    onWindowResize () {
+        setTimeout(() => {
+            calm.setState({ clientHeight: document.body.clientHeight });
+        }, 100)
+    }
+
+    //消息监听
+    watchListener () {
+        ms.msgWsListener = {
+            onError: function (errorMsg) {
+
+            }, onWarn: function (warnMsg) {
+                console.log(warnMsg, "warnMsg")
+                Toast.info(warnMsg, 1, null, false)
+            }, onMessage: function (info) {
+                console.log(info, "infoWatch")
+                if (info.command == "userOperateResponse") {
+                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
+                    calm.state.watchData.forEach((value, i) => {
+                        if (value.id == info.data.watchId) {
+                            calm.setState({
+                                guardians: value.guardians,
+                                studentId: value.studentId
+                            }, () => {
+                                calm.state.guardians.forEach((v, i) => {
+                                    if (v.guardian.colUid == calm.state.userId) {
+                                        calm.setState({
+                                            guardianData: v,
+                                        }, () => {
+                                            calm.setState({
+                                                visible: false,
+                                                phoneNumber: value.phoneNumber,
+                                                watchId: value.id,
+                                                watchName: value.watchName,
+                                                macAddr: value.macAddress
+                                            }, () => {
+                                                if (calm.state.flag == 1) {
+                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, start, end);
+                                                } else {
+                                                    calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
+                                                }
+                                                if (this.state.flagLove == 1) {
+                                                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+                                                } else {
+                                                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+
+                                                }
+                                                if (this.state.flagStep == 1) {
+                                                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+                                                } else {
+                                                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+
+                                                }
+                                            });
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
+            }
+        };
     }
 
     //获取手表列表
@@ -768,14 +765,12 @@ export default class rankingList extends React.Component {
         divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
         this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
         });
-        setTimeout(()=>{
-            if (this.state.flag == 1) {
-                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-    
-            } else {
-                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-            }
-        },600)
+        if (this.state.flag == 1) {
+            this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+        } else {
+            this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+        }
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
@@ -918,6 +913,30 @@ export default class rankingList extends React.Component {
                             <div style={{
                                 display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
                             }}>
+                                {/* <PullToRefresh
+                                    damping={190}
+                                    ref={el => this.ptr = el}
+                                    style={{
+                                        height: this.state.clientHeight - 114,
+                                        overflow: "auto"
+                                    }}
+                                    indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                    direction='down'
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={() => {
+                                        this.setState({ refreshing: true, freshFlag: false });
+                                        setTimeout(() => {
+                                            this.setState({ refreshing: false }, () => {
+                                                if (this.state.flag == 1) {
+                                                    this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+                                                } else {
+                                                    this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                                                }
+                                            });
+                                        }, 1000);
+                                    }}
+                                > */}
                                 <ListView
                                     ref={el => this.lv = el}
                                     dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
@@ -945,10 +964,10 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshAnswer}
-                                        refreshing={this.state.refreshing}
                                         distanceToRefresh={100}
                                     />}
                                 />
+                                {/* </PullToRefresh> */}
                             </div>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "answer")}>
                                 <div className='inner my_flex'>
@@ -989,11 +1008,35 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshStep}
-                                        refreshing={this.state.refreshingStep}
                                         distanceToRefresh={100}
                                     />}
                                 />
                             </div>
+                            {/* <PullToRefresh
+                                damping={190}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingStep}
+                                onRefresh={() => {
+                                    this.setState({ refreshingStep: true, freshFlagStep: false });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingStep: false }, () => {
+                                            if (this.state.flagStep == 1) {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            >
+
+                            </PullToRefresh> */}
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "step")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numStep)}名</span>
@@ -1033,11 +1076,34 @@ export default class rankingList extends React.Component {
                                     }}
                                     pullToRefresh={<PullToRefresh
                                         onRefresh={this.onRefreshLove}
-                                        refreshing={this.state.refreshingLove}
                                         distanceToRefresh={100}
                                     />}
                                 />
                             </div>
+                            {/* <PullToRefresh
+                                damping={190}
+                                ref={el => this.ptr = el}
+                                style={{
+                                    height: this.state.clientHeight - 114,
+                                }}
+                                indicator={this.state.down ? {} : { deactivate: '上拉可以刷新' }}
+                                direction='down'
+                                refreshing={this.state.refreshingLove}
+                                onRefresh={() => {
+                                    this.setState({ refreshingLove: true, freshFlagLove: false });
+                                    setTimeout(() => {
+                                        this.setState({ refreshingLove: false }, () => {
+                                            if (this.state.flagLove == 1) {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        });
+                                    }, 1000);
+                                }}
+                            > */}
+                            {/* </PullToRefresh> */}
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "love")}>
                                 <div className='inner my_flex'>
                                     <span className='num'>第{Number(this.state.numLove)}名</span>

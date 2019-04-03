@@ -22,12 +22,14 @@ export default class bindAndUnbind extends React.Component {
         var userId = locationSearch.split("&")[1].split('=')[1];
         var macAddr = locationSearch.split("&")[2].split('=')[1];
         var watchName = locationSearch.split("&")[3].split('=')[1];
+        var studentId = locationSearch.split("&")[4].split('=')[1];
         console.log(macAddr, "macAddr")
         this.setState({
             userId,
             watchId,
             macAddr,
-            watchName
+            watchName,
+            studentId
         })
 
 
@@ -70,6 +72,7 @@ export default class bindAndUnbind extends React.Component {
                     Toast.info('解绑成功', 1, null, false);
                     var data = {
                         method: 'unBindSuccess',
+                        studentId:this.state.studentId
                     };
                     console.log(data, "data")
                     Bridge.callHandler(data, null, function (error) {
