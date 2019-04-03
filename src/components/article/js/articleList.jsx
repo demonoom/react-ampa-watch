@@ -276,7 +276,6 @@ export default class articleList extends React.Component {
             let url = encodeURI(WebServiceUtil.mobileServiceURL + "articleDetail?vId=" + id + "&type=1&articleTitle=" + articleTitle + "&uid=" + this.state.uid + "&userName=" + this.state.userName + "&avatar=" + this.state.avatar + "&isDiscuss=" + isDiscuss);
             var data = {
                 method: 'openNewPage',
-                selfBack: true,
                 url: url
             };
             Bridge.callHandler(data, null, function (error) {
@@ -621,27 +620,30 @@ export default class articleList extends React.Component {
                     }>
                         <img src={require('../images/articleListLoading.png')} alt=""/>
                     </div>
-
-                    <ListView
+                      <ListView
                         ref={el => this.lv = el}
                         dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
                         renderHeader={() => (
                             <Carousel
-                                autoplay={false}
+                                autoplay={true}
                                 infinite
+                                className="Carousel-banner"
                             >
                                 {this.state.carouselData.map(val => (
-                                    <img
-                                        src={val.cover}
-                                        alt=""
-                                        style={{width: '100%', verticalAlign: 'top'}}
-                                        onClick={this.carouselOnClick.bind(this, val.articleId, val.articleTitle, val.isDiscuss)}
-                                        onLoad={() => {
-                                            // fire window resize event to change height
-                                            window.dispatchEvent(new Event('resize'));
-                                            this.setState({imgHeight: 'auto'});
-                                        }}
-                                    />
+                                    <div>
+                                        <img
+                                            src={val.cover}
+                                            alt=""
+                                            style={{width: '100%', verticalAlign: 'top'}}
+                                            onClick={this.carouselOnClick.bind(this, val.articleId, val.articleTitle, val.isDiscuss)}
+                                            onLoad={() => {
+                                                // fire window resize event to change height
+                                                window.dispatchEvent(new Event('resize'));
+                                                this.setState({imgHeight: 'auto'});
+                                            }}
+                                        />
+                                        <span className="Carousel-title text_hidden">{val.articleTitle}</span>
+                                    </div>
                                 ))}
                             </Carousel>
                         )}

@@ -148,7 +148,6 @@ export default class watchTrail extends React.Component {
     };
 
     popView = () => {
-        this.state.map.destroy();
         var data = {
             method: 'popView',
         };

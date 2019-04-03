@@ -157,7 +157,9 @@ export default class updateLocation extends React.Component {
     buildPosList = (data) => {
         var _this = this;
         var posList = [];
-        data.map((v) => {
+        data.filter((v) => {
+            return typeof (v.location) === 'string'
+        }).map((v) => {
             posList.push(
                 <Item
                     arrow="horizontal"
