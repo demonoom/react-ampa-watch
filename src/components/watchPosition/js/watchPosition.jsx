@@ -1,6 +1,6 @@
 import React from "react";
 import {Map, Marker} from "react-amap";
-import {Toast, NavBar, Icon, Popover} from 'antd-mobile';
+import {Toast, NavBar, Popover} from 'antd-mobile';
 import {WatchWebsocketConnection} from '../../../helpers/watch_websocket_connection'
 
 import '../css/watchPosition.less'
@@ -36,7 +36,6 @@ export default class watchPosition extends React.Component {
             selected: '',
             watchName: '',
             popoverLay: [],
-            loadPosition: false,
             jumpClass: 'user-positioning',
             watch2gs: [],
             familyRelate: ''
@@ -92,11 +91,11 @@ export default class watchPosition extends React.Component {
                         _this.buildStuList(result.response)
                     }
                 } else {
-                    // Toast.fail(result.msg, 1, null, false);
+
                 }
             },
             onError: function (error) {
-                Toast.warn('保存失败');
+
             }
         });
     };
@@ -152,11 +151,11 @@ export default class watchPosition extends React.Component {
                         }
                     }
                 } else {
-                    // Toast.fail(result.msg, 1, null, false);
+
                 }
             },
             onError: function (error) {
-                Toast.warn('保存失败');
+
             }
         });
     };
@@ -192,12 +191,9 @@ export default class watchPosition extends React.Component {
         ms.send(obj);
         if (!this.state.toBind && !this.state.toConfirm) {
             Toast.loading('正在获取位置信息...', 5, () => {
-                if (this.state.loadPosition) {
-                    Toast.offline('手表不在线')
-                }
                 this.setState({jumpClass: 'user-positioning'});
-            });
-            this.setState({loadPosition: true, jumpClass: 'user-positioning-jump'});
+            }, false);
+            this.setState({jumpClass: 'user-positioning-jump'});
         }
     };
 
@@ -205,14 +201,18 @@ export default class watchPosition extends React.Component {
         var _this = this;
         ms.msgWsListener = {
             onError: function (errorMsg) {
-
             }, onWarn: function (warnMsg) {
+                if (warnMsg === '手表不在线！') {
+                    Toast.fail(warnMsg, 1, null, false);
+                    _this.setState({jumpClass: 'user-positioning'});
+                }
 
             }, onMessage: function (info) {
                 if (info.command === 'sendWatch2GLocaltionData') {
                     if (info.data.macAddress == _this.state.mac && info.data.guardianId == _this.state.userId) {
                         if ((info.data.longitude == '0.0' && info.data.latitude == '0.0') || (isNaN(info.data.longitude) && isNaN(info.data.latitude))) {
                             Toast.fail('手表不在线', 1, null, false);
+                            _this.setState({jumpClass: 'user-positioning'});
                             return
                         }
                         // var position = {
@@ -220,8 +220,6 @@ export default class watchPosition extends React.Component {
                         //     "latitude": info.data.latitude,
                         // };
                         // _this.setState({position})
-
-                        _this.setState({loadPosition: false});
 
                         if (!!_this.state.map) {
                             _this.state.map.panTo([info.data.longitude, info.data.latitude]);
