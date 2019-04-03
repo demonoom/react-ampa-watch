@@ -211,6 +211,7 @@ export default class loveRewards extends React.Component {
                     </div>
                     <div className="commonLocation-cont">
                         <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                        <div className="WhiteSpace"></div>
                         <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetSteps}>
                             <div className="am-list-line">
                                 <div className="am-list-content">每日运动目标</div>
