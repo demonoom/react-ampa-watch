@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Toast, DatePicker, PullToRefresh, ListView, Button, List, Picker, Tag, Tabs, Carousel
+    Toast, PullToRefresh, ListView, Button, List, Picker, Tag, Tabs, Carousel
 } from 'antd-mobile';
 import '../css/articleList.less';
 
@@ -420,25 +420,8 @@ export default class articleList extends React.Component {
 
     render() {
         var _this = this;
-        const row = (rowData, sectionID, rowID) => {
+        const row = (rowData) => {
             var tagClass = '';
-            switch (rowData.mastery) {
-                case 0:
-                    tagClass = 'tag-WrongTopic-red';
-                    break;
-                case 1:
-                    tagClass = 'tag-WrongTopic-yellow';
-                    break;
-                case 2:
-                    tagClass = 'tag-WrongTopic-blue';
-                    break;
-                case 3:
-                    tagClass = 'tag-WrongTopic-green';
-                    break;
-                default:
-                    tagClass = '未匹配到';
-                    break;
-            }
             var dom = "";
             var time = this.timeDifference(rowData.createTime);
             if (this.state.index == 2) {
@@ -604,7 +587,6 @@ export default class articleList extends React.Component {
                     <div className="am-navbar am-navbar-light">
                         <div className="am-navbar-title">发现</div>
                     </div>
-
                 </div>
                 <div style={{display: this.state.isDisPlay == 1 ? "block" : "none"}} className="UserGuide">
                     <img className="userguide1" src={require('../images/UserGuide1.png')} width='54'></img>
