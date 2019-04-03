@@ -203,6 +203,7 @@ export default class pCenter extends React.Component {
 
     build=(data)=>{
         var contentDom = <div>
+            <div className='grayBorder'></div>
             <div onClick={this.changeHeader} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                 <div className="am-list-line photo">
                     <div className="am-list-content">修改头像</div>

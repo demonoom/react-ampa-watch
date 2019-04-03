@@ -168,7 +168,7 @@ export default class rankingList extends React.Component {
                                                     calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
                                                 }
                                                 if (calm.state.flagLove == 1) {
-                                                    calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, start, end);
+                                                    calm.f(calm.state.studentId, start, end);
                                                 } else {
                                                     calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, weekStart, end);
 
@@ -197,13 +197,7 @@ export default class rankingList extends React.Component {
     getWatch2gLoveCountRankingByStudentId (userId, start, end) {
         console.log(start, "start")
         var _this = this;
-        if (this.state.freshFlagLove == false) {
-            _this.initDataLove.splice(0);
-            _this.state.dataSourceLove = [];
-            _this.state.dataSourceLove = new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            });
-        }
+
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoLove;
         var param = {
@@ -218,6 +212,13 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
+                    if (this.state.freshFlagLove == false) {
+                        _this.initDataLove.splice(0);
+                        _this.state.dataSourceLove = [];
+                        _this.state.dataSourceLove = new ListView.DataSource({
+                            rowHasChanged: (row1, row2) => row1 !== row2,
+                        });
+                    }
                     this.setState({
                         ownDataLove: result.user,
                         numLove: result.user.rank
@@ -260,13 +261,7 @@ export default class rankingList extends React.Component {
     */
     getWatch2gSportStepTopByStudentId (userId, start, end) {
         var _this = this;
-        if (this.state.freshFlagStep == false) {
-            _this.initDataStep.splice(0);
-            _this.state.dataSourceStep = [];
-            _this.state.dataSourceStep = new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            });
-        }
+
         const dataBlob = {};
         var PageNo = this.state.defaultPageNoStep;
         var param = {
@@ -280,6 +275,13 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
+                    if (this.state.freshFlagStep == false) {
+                        _this.initDataStep.splice(0);
+                        _this.state.dataSourceStep = [];
+                        _this.state.dataSourceStep = new ListView.DataSource({
+                            rowHasChanged: (row1, row2) => row1 !== row2,
+                        });
+                    }
                     this.setState({
                         ownDataStep: result.user,
                         numStep: result.user.rank
@@ -368,13 +370,7 @@ export default class rankingList extends React.Component {
     */
     getStudentAnswerRightCountTop (userId, start, end) {
         var _this = this;
-        if (this.state.freshFlag == false) {
-            _this.initData.splice(0);
-            _this.state.dataSource = [];
-            _this.state.dataSource = new ListView.DataSource({
-                rowHasChanged: (row1, row2) => row1 !== row2,
-            });
-        }
+
         const dataBlob = {};
         var PageNo = this.state.defaultPageNo;
         var param = {
@@ -389,6 +385,13 @@ export default class rankingList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.msg == '调用成功' && result.success == true) {
+                    if (this.state.freshFlag == false) {
+                        _this.initData.splice(0);
+                        _this.state.dataSource = [];
+                        _this.state.dataSource = new ListView.DataSource({
+                            rowHasChanged: (row1, row2) => row1 !== row2,
+                        });
+                    }
                     this.setState({
                         ownData: result.user,
                         num: result.user.rank
@@ -766,40 +769,46 @@ export default class rankingList extends React.Component {
     onRefreshAnswer = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
+        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true,freshFlag:false }, () => {
+            setTimeout(()=>{
+                if (this.state.flag == 1) {
+                    this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+                } else {
+                    this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                }
+            },600)
         });
-        setTimeout(()=>{
-            if (this.state.flag == 1) {
-                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-    
-            } else {
-                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
-            }
-        },600)
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[1].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true }, () => {
-        });
-        if (this.state.flagStep == 1) {
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+        this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true,freshFlagStep:false  }, () => {
+            setTimeout(()=>{
+                if (this.state.flagStep == 1) {
+                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
-        } else {
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
-        }
+                } else {
+                    this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+                }
+            },600)
+        });
+
     }
     onRefreshLove = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[2].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true }, () => {
-        });
-        if (this.state.flagLove == 1) {
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+        this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true,freshFlagLove:false  }, () => {
+            setTimeout(()=>{
+                if (this.state.flagLove == 1) {
+                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
-        } else {
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
-        }
+                } else {
+                    this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+                }
+            },600)
+        });
+
     }
 
     render () {
