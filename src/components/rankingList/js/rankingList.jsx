@@ -768,38 +768,43 @@ export default class rankingList extends React.Component {
         divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
         this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true }, () => {
         });
-        setTimeout(()=>{
+        setTimeout(() => {
             if (this.state.flag == 1) {
                 this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
-    
+
             } else {
                 this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
             }
-        },600)
+        }, 600)
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[1].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
         this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true }, () => {
         });
-        if (this.state.flagStep == 1) {
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+        setTimeout(() => {
+            if (this.state.flagStep == 1) {
+                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
-        } else {
-            this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
-        }
+            } else {
+                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+            }
+        }, 600)
+
     }
     onRefreshLove = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[2].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
         this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true }, () => {
         });
-        if (this.state.flagLove == 1) {
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+        setTimeout(() => {
+            if (this.state.flagLove == 1) {
+                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+            } else {
+                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+            }
+        }, 600)
 
-        } else {
-            this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
-        }
     }
 
     render () {
