@@ -20,12 +20,8 @@ export default class morePage extends React.Component {
             selected: '',
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
-            guardianData: {
-                bindType: 2,
-                valid: 2
-            },
+            guardianData: {},
             watchData: [],
-            toBind: false
         };
     }
 
