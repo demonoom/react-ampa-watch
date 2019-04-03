@@ -779,7 +779,6 @@ export default class rankingList extends React.Component {
                 }
             },600)
         });
-
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
