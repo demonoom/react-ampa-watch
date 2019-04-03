@@ -422,7 +422,8 @@ export default class articleDetail extends React.Component {
                                 e.target.onerror = null;
                                 e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
                             }}
-                            src={rowData.discussUser.avatar + WebServiceUtil.SMALL_IMG} alt=""/> : ""} multipleLine>
+                            src={rowData.discussUser.avatar + '?' + WebServiceUtil.SMALL_IMG} alt=""/> : ""}
+                              multipleLine>
                             <span>{rowData.discussUser ? rowData.discussUser.userName : ""}</span>
                             <Brief>{rowData.discussContent}</Brief>
                             <span className="releaseTime">{time}</span>
