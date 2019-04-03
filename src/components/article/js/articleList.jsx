@@ -603,7 +603,6 @@ export default class articleList extends React.Component {
                     <div className="am-navbar am-navbar-light">
                         <div className="am-navbar-title">发现</div>
                     </div>
-
                 </div>
                 <div style={{display: this.state.isDisPlay == 1 ? "block" : "none"}} className="UserGuide">
                     <img className="userguide1" src={require('../images/UserGuide1.png')} width='54'></img>
