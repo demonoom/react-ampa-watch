@@ -18,11 +18,10 @@ export default class morePage extends React.Component {
             watchName: "",
             visible: false,
             selected: '',
-            guardianData: {},
             guardians: [],
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
             guardianData: {},
-            watchData: []
+            watchData: [],
         };
     }
 
@@ -65,6 +64,8 @@ export default class morePage extends React.Component {
                     if (result.response.length == 0) {
                         this.setState({
                             toBind: true,
+                        },()=>{
+                            $(".moreList").show();
                         })
                     } else {
                         result.response[0].guardians.forEach((v, i) => {
@@ -72,7 +73,8 @@ export default class morePage extends React.Component {
                                 this.setState({
                                     guardianData: v,
                                 }, () => {
-                                    console.log(this.state.guardianData)
+                                    console.log(this.state.guardianData,"opiop")
+                                    $(".moreList").show();
                                 })
                             }
                         })
@@ -108,7 +110,7 @@ export default class morePage extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
+                if (result.success) {
                     this.setState({
                         watchId: result.response.id
                     })
@@ -169,6 +171,7 @@ export default class morePage extends React.Component {
                                         calm.setState({
                                             guardianData: v,
                                         }, () => {
+                                            $(".moreList").show();
                                             calm.setState({
                                                 visible: false,
                                                 phoneNumber: value.phoneNumber,
@@ -256,6 +259,7 @@ export default class morePage extends React.Component {
                             this.setState({
                                 guardianData: v,
                             }, () => {
+                                $(".moreList").show();
                                 this.setState({
                                     visible: false,
                                     phoneNumber: opt.props.phoneNumber,
@@ -376,7 +380,7 @@ export default class morePage extends React.Component {
 
     //跳转解绑页面
     toUnbind = () => {
-        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr+"&watchName="+this.state.watchName
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&watchName=" + this.state.watchName
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -442,7 +446,7 @@ export default class morePage extends React.Component {
                         }
                     </div>
                 </div>
-                <div className='moreList'>
+                <div className='moreList' style={{ display: "none" }}>
                     <div className="grayBorder"></div>
                     <div
                         style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
@@ -511,21 +515,22 @@ export default class morePage extends React.Component {
                         </div>
                     </div>
                     <div className="grayBorder"></div>
-                </div>
-                {/*绑定后未验证空页面*/}
-                <div className="personEmptyCont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
-                    <div className="emptyCont emptyContBind">
-                        <div className="p38 my_flex">
-                            <div>
-                                <i></i>
-                                <span>
-                                    申请已提交<br />
-                                    请等待管理员（{this.state.guardianData.familyRelate} ）验证通过
+                    {/*绑定后未验证空页面*/}
+                    <div className="personEmptyCont" style={{ display: calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false) ? "none" : "block" }}>
+                        <div className="emptyCont emptyContBind">
+                            <div className="p38 my_flex">
+                                <div>
+                                    <i></i>
+                                    <span>
+                                        申请已提交<br />
+                                        请等待管理员（{this.state.guardianData.familyRelate} ）验证通过
                                     </span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         )
     }

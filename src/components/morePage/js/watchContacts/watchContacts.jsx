@@ -41,7 +41,7 @@ export default class watchContacts extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                if (result.success && result.response) {
+                if (result.success) {
                     this.setState({
                         watchData: result.response,
                         watchContactsData: result.response.guardians,
@@ -122,6 +122,7 @@ export default class watchContacts extends React.Component {
     toClosePop= () => {
         $('.codePop').hide();
     }
+  
     render () {
         return (
             <div id="watchContacts" className='bg_gray'>
@@ -134,7 +135,12 @@ export default class watchContacts extends React.Component {
                     <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className="contactBg">
                         <div className='mainItem'>
-                            <div className="icon_bg"><img src={this.state.watchData.student ? this.state.watchData.student.avatar : ""} alt="" /></div>
+                            <div className="icon_bg">
+                                <img 
+                                    onError={(e) => {e.target.onerror = null;e.target.src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"}} 
+                                    // src={this.state.watchData.student ? this.state.watchData.student.avatar +"?size=100x100" : ""} 
+                                    src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
+                                    alt="" /></div>
                             <span className='text_hidden relate'>{this.state.watchData.watchName}</span>
                             <span className='text_hidden tel'>{this.state.watchData.phoneNumber}</span>
                         </div>
@@ -143,7 +149,11 @@ export default class watchContacts extends React.Component {
                         this.state.watchContactsData.map((v, i) => {
                             return (
                                 <div className='item'>
-                                    <img src={v.guardian.avatar} alt="" />
+                                    <img  
+                                        onError = {(e) => {e.target.onerror = null;e.target.src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"}}
+                                        // src={v.guardian.avatar+"?size=100x100"} 
+                                        src="http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg?size=100x100"
+                                        alt="" />
                                     <div className="line_public my_flex">
                                         <div className='textCont'>
                                             <div className='my_flex relateName'>
@@ -178,6 +188,11 @@ export default class watchContacts extends React.Component {
                         <div className="grayBorder"></div>
                         <div className='icon_code'>
                             <div id="qrcode"></div>
+                            <div className='dec'>{this.state.watchData.watchName}的二维码</div>
+                        </div>
+                        <div className="warning">
+                            <span>提示</span>
+                            扫码下载APP并安装后再次扫描该二维码在管理员同意后即可绑定手表加入家庭。
                         </div>
                     </div>
 
