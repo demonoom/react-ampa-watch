@@ -451,7 +451,7 @@ export default class articleList extends React.Component {
                         }
                         pullToRefresh={<PullToRefresh
                             onRefresh={this.onRefresh.bind(this)}
-                            distanceToRefresh={80}
+                            distanceToRefresh={130}
                         />}
                     />
                 </div>

@@ -1,5 +1,5 @@
-@import "~slick-carousel/slick/slick.css";
-@import "~slick-carousel/slick/slick-theme.css";
+//@import "~slick-carousel/slick/slick.css";
+//@import "~slick-carousel/slick/slick-theme.css";
 
 html, body {
   background-color: #fff !important;
@@ -33,6 +33,30 @@ ul, li {
   list-style: none;
 }
 
+/* 公共空页面图end */
+/* 这是针对缺省样式 (必须的) */
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 9px;
+  -webkit-border-radius: 9px;
+
+}
+/* 滑块颜色 */
+::-webkit-scrollbar-button {
+  background-color: initial;
+}
+@media only screen and (max-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 4px !important;
+    height: 6px!important;
+  }
+}
+@media only screen and (min-width: 768px) {
+  ::-webkit-scrollbar {
+    width: 8px !important;
+    height: 12px!important;
+  }
+}
 #example, .container {
   height: 100%;
 }

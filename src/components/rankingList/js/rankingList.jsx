@@ -168,7 +168,7 @@ export default class rankingList extends React.Component {
                                                     calm.getStudentAnswerRightCountTop(calm.state.studentId, weekStart, end);
                                                 }
                                                 if (calm.state.flagLove == 1) {
-                                                    calm.f(calm.state.studentId, start, end);
+                                                    calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, start, end);
                                                 } else {
                                                     calm.getWatch2gLoveCountRankingByStudentId(calm.state.studentId, weekStart, end);
 
@@ -779,7 +779,6 @@ export default class rankingList extends React.Component {
                 }
             },600)
         });
-
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
