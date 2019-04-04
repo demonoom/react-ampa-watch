@@ -401,6 +401,10 @@ export default class rankingList extends React.Component {
                     }, () => {
                     })
                     var arr = result.response;
+                    arr = arr.concat(arr);
+                    arr = arr.concat(arr);
+                    arr = arr.concat(arr);
+                    arr = arr.concat(arr);
                     var pager = result.pager;
                     for (let i = 0; i < arr.length; i++) {
                         var topic = arr[i];
