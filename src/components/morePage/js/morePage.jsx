@@ -89,7 +89,6 @@ export default class morePage extends React.Component {
                             macAddr: result.response[0].macAddress,
                             studentId: result.response[0].studentId,
                         }, () => {
-                            console.log(this.state.manageData,"manageData")
                             this.getWatch2gById(this.state.watchId)
                             this.getWatchId(this.state.macAddr)
                             this.WatchList(this.state.watchData)
