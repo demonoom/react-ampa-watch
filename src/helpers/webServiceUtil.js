@@ -1,11 +1,11 @@
 var isDebug = true;
-var localDomain = "192.168.50.15";   //请求地址
+var localDomain = "192.168.50.34";   //请求地址
 var isDebugLocal = true;
 var localUrl = "192.168.50.29";    //跳转地址本地地址
 var isSafeDebug = true;     //false则为隐藏主页列表，本地调试改为true
 
 
-//云校本地测试webService地址
+//云校本地测试webService34
 var elearningWebserviceURLOfLocal = "http://" + localDomain + ":9007/elearning/elearningControl/";
 //云校的远程服务器地址
 var elearningWebserviceURLOfRemote = "http://www.maaee.com/elearning/elearningControl/";

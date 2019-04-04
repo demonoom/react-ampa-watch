@@ -233,6 +233,7 @@ export default class articleList extends React.Component {
             defaultPageNo: 1, refreshing: true
         }, () => {
             this.getArticleRecommenLittleVideoList(true);
+            this.getWatchArticleInfoListByStatusAndIsTop()
         });
 
 
@@ -416,6 +417,7 @@ export default class articleList extends React.Component {
                                 autoplayInterval={4000}
                                 infinite
                                 className="Carousel-banner"
+                                style={{display: this.state.carouselData.length === 0 ? 'none' : ''}}
                             >
                                 {this.state.carouselData.map(val => (
                                     <div>
@@ -451,7 +453,7 @@ export default class articleList extends React.Component {
                         }
                         pullToRefresh={<PullToRefresh
                             onRefresh={this.onRefresh.bind(this)}
-                            distanceToRefresh={130}
+                            distanceToRefresh={90}
                         />}
                     />
                 </div>
