@@ -1,4 +1,160 @@
-#morePage p {
-  height: 30px;
-  line-height: 30px;
+#morePage {
+  width: 100%;
+  height: 100%;
+}
+#morePage .activeDiv {
+  display: none;
+}
+#morePage .activeDiv.icon_setting {
+  display: flex;
+}
+#morePage .activeDiv.icon_addWatch {
+  display: flex;
+}
+#morePage .activeDiv i {
+  display: block;
+  width: 55px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#morePage .personEmptyCont {
+  height: calc(100% - 200px);
+  position: relative;
+}
+#morePage .personEmptyCont .emptyCont .my_flex {
+  height: 90%;
+}
+#morePage .moreList {
+  height: calc(100% - 180px);
+}
+#morePage .moreList .am-list-item {
+  padding-left: 0;
+}
+#morePage .moreList .am-list-item .am-list-line {
+  padding-left: 55px;
+}
+#morePage .moreList .line_public15::after {
+  left: 55px;
+}
+#morePage .moreList .icon_card i {
+  background: url("../../images/icon_moreCard.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_contact i {
+  background: url("../../images/icon_moreContact.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_clock i {
+  background: url("../../images/icon_moreClock.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_heart i {
+  background: url("../../images/icon_moreHeart.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_listen i {
+  background: url("../../images/icon_moreListen.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_find i {
+  background: url("../../images/icon_moreFind.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_shut i {
+  background: url("../../images/icon_moreShut.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_bind i {
+  background: url("../../images/icon_moreBind.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_watch i,
+#morePage .moreList .icon_addWatch i {
+  background: url("../../images/icon_moreWatch.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_update i {
+  background: url("../../images/icon_moreUpdate.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .moreList .icon_setting i {
+  background: url("../../images/icon_moreSetting.png") no-repeat 15px center;
+  background-size: 30px;
+}
+#morePage .watchSelect {
+  position: absolute;
+  left: 0;
+  top: 5px;
+  z-index: 50;
+  color: #fff;
+}
+#morePage .watchSelect .watchName {
+  padding-left: 5px;
+  font-size: 14px;
+  max-width: 50px;
+}
+#morePage .watchSelect .icon-back {
+  height: 100%;
+  margin-right: 0;
+}
+#morePage .personMsg {
+  width: 100%;
+  height: 180px;
+  box-sizing: border-box;
+  background: url("../../images/personBg.png") no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  color: white;
+  position: relative;
+}
+#morePage .personMsg .icon_add {
+  text-align: right;
+  font-size: 15px;
+  position: absolute;
+  right: 0;
+  line-height: 44px;
+  height: 44px;
+  padding: 15px 15px 0;
+  top: 5px;
+}
+#morePage .personMsg img {
+  border: 1px #fff solid;
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 5px;
+}
+#morePage .personMsg .wrap {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 15px;
+  position: absolute;
+  left: 50%;
+  top: 55px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#morePage .personMsg .wrap .text_hidden {
+  display: block;
+}
+#morePage .personMsg .wrap .relation {
+  padding-top: 5px;
+  font-size: 12px;
+}
+@media screen and (min-width: 768px) {
+  #morePage .personMsg {
+    height: 250px;
+  }
+  #morePage .personMsg .wrap {
+    top: 85px;
+  }
+  #morePage .moreList {
+    height: calc(100% - 250px);
+  }
 }
