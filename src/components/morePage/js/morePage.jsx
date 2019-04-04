@@ -22,6 +22,7 @@ export default class morePage extends React.Component {
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
             guardianData: {},
             watchData: [],
+            manageData:[]
         };
     }
 
@@ -82,6 +83,7 @@ export default class morePage extends React.Component {
                             watchData: result.response,
                             childSex: result.response[0].childSex,
                             watchName: result.response[0].watchName,
+                            manageData: result.response[0].guardians[0],
                             phoneNumber: result.response[0].phoneNumber,
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
@@ -164,7 +166,8 @@ export default class morePage extends React.Component {
                         if (value.id == info.data.watchId) {
                             calm.setState({
                                 guardians: value.guardians,
-                                studentId: value.studentId
+                                studentId: value.studentId,
+                                manageData:value.guardians[0],
                             }, () => {
                                 calm.state.guardians.forEach((v, i) => {
                                     if (v.guardian.colUid == calm.state.userId) {
@@ -252,7 +255,8 @@ export default class morePage extends React.Component {
             if (v.id == opt.props.macId) {
                 this.setState({
                     guardians: v.guardians,
-                    studentId: v.studentId
+                    studentId: v.studentId,
+                    manageData:v.guardians[0],
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
                         if (v.guardian.colUid == this.state.userId) {
@@ -533,7 +537,7 @@ export default class morePage extends React.Component {
                                     <i></i>
                                     <span>
                                         申请已提交<br />
-                                        请等待管理员（{this.state.guardianData.familyRelate} ）验证通过
+                                        请等待管理员（{this.state.manageData.familyRelate} ）验证通过
                                     </span>
                                 </div>
                             </div>
