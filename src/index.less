@@ -541,8 +541,8 @@ img{
 .icon-back {
   background: url("components/watchPosition/img/icon-back2.png") no-repeat center;
   background-size: 100% 100%;
-  width: 13px;
-  height: 23px;
+  width: 9px;
+  height: 16px;
   margin-right: 3px;
 }
 .am-navbar-blue{
@@ -576,8 +576,8 @@ img{
     .icon-back {
       background: url("components/images/icon_backWhite.png") no-repeat center;
       background-size: 100% 100%;
-      width: 13px;
-      height: 23px;
+      width: 9px;
+      height: 16px;
       margin-right: 3px;
     }
     .am-navbar-title{
@@ -671,9 +671,17 @@ img{
 
 
 /*切换手表下拉*/
-.am-popover-inner{
+.am-popover-inner-wrapper{
   max-height: 117px;
   overflow-y: auto !important;
+  padding: 0 6px;
+  .am-popover-item-content{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+  }
 }
 /*list高度为50*/
 .publicList_50{
