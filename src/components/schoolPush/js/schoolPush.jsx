@@ -283,9 +283,7 @@ export default class schoolPush extends React.Component {
                                     {
                                         zanArr.map((v, i) => {
                                             return (
-                                                <div>
-                                                    <span>{v.user.userName}{i == zanArr.length - 1 ? "" : ","}</span>
-                                                </div>
+                                                <span>{v.user.userName}{i == zanArr.length - 1 ? "" : ","}</span>
                                             )
                                         })
                                     }
