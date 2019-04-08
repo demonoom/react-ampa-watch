@@ -109,7 +109,7 @@ export default class pCenter extends React.Component {
                 }
             },
         ], 'default', "","")
-        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+        if (navigator.userAgent.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
             document.getElementsByClassName('am-modal-input')[0].getElementsByTagName('input')[0].focus();
         }
     }
