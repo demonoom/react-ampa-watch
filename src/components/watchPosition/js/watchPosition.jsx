@@ -495,7 +495,7 @@ export default class watchPosition extends React.Component {
                             render={this.rendersclPoint}
                         />
                         <div onClick={this.getPosition} id="getPosition" className="customLayer">
-                            <i className="icon-positioning"></i>张倩
+                            <i className="icon-positioning"></i>
                         </div>
                         <div className="orbital-position">
                             <div onClick={this.getTrail} id="getTrail" className="customLayer line_public">
