@@ -158,6 +158,12 @@ export default class articleDetail extends React.Component {
 
     }
 
+    textareaClick() {
+        if (this.state.isDiscuss == '0') {
+            Toast.info('当前文章已关闭评论功能!', 1);
+        }
+    }
+
 
     /**
      * 获取评论列表
@@ -422,7 +428,9 @@ export default class articleDetail extends React.Component {
                                 e.target.onerror = null;
                                 e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
                             }}
-                            src={rowData.discussUser.avatar + '?' + WebServiceUtil.SMALL_IMG} alt=""/> : ""}
+                            // src={rowData.discussUser.avatar + '?' + WebServiceUtil.SMALL_IMG} alt=""/> : ""}
+                            src='http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                            alt=""/> : ""}
                               multipleLine>
                             <span>{rowData.discussUser ? rowData.discussUser.userName : ""}</span>
                             <Brief>{rowData.discussContent}</Brief>
@@ -437,10 +445,10 @@ export default class articleDetail extends React.Component {
                 <div className="inner-cont">
                     <div className="inner">
                         <div className="commit">
-                            <div id={this.state.reportFlag ? 'textAndReport' : 'textNo'} className="comments_send">
+                            <div id={this.state.reportFlag ? 'textAndReport' : 'textNo'} className="comments_send" onClick={this.textareaClick.bind(this)}>
                                 <TextareaItem
                                     id="text"
-                                    placeholder="请输入评论内容"
+                                    placeholder={this.state.isDiscuss == '0' ? '该文章暂时无法发表评论' : '请输入评论内容'}
                                     data-seed="logId"
                                     ref={el => this.autoFocusInst = el}
                                     autoHeight
@@ -448,6 +456,7 @@ export default class articleDetail extends React.Component {
                                     onChange={this.commitChange.bind(this)}
                                     onFocus={this.textareaFocus.bind(this)}
                                     onBlur={this.textareaBlur.bind(this)}
+                                    disabled={this.state.isDiscuss == '0' ? true : false}
                                 />
                                 <div>
                                     <a className='commit_button' type="primary"
