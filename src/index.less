@@ -446,10 +446,14 @@ img{
     min-height: auto !important;
   }
   .am-list-item .am-input-control input{
-    padding: 7px 0 !important;
-    line-height: 1.5 !important;
+    padding:9px 0 10px !important;
+    line-height: 1 !important;
     color: #333 !important;
     font-size: 15px !important;
+    &::-webkit-input-placeholder{
+      padding-top:1.5px;//解决placeholder偏高的问题
+      line-height: 1;
+    }
   }
 }
 .color_3  .am-list-item .am-list-line .am-list-extra,.am-list-item .am-list-line .am-list-extra.color_3{
