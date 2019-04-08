@@ -78,6 +78,7 @@ export default class rankingList extends React.Component {
             freshFlag: true,
             freshFlagLove: true,
             freshFlagStep: true,
+            manageData: []
         };
     }
 
@@ -148,7 +149,8 @@ export default class rankingList extends React.Component {
                         if (value.id == info.data.watchId) {
                             calm.setState({
                                 guardians: value.guardians,
-                                studentId: value.studentId
+                                studentId: value.studentId,
+                                manageData: value.guardians[0],
                             }, () => {
                                 calm.state.guardians.forEach((v, i) => {
                                     if (v.guardian.colUid == calm.state.userId) {
@@ -348,6 +350,7 @@ export default class rankingList extends React.Component {
                             watchData: result.response,
                             studentId: result.response[0].student.colUid,
                             watchName: result.response[0].watchName,
+                            manageData: result.response[0].guardians[0],
                             watchId: result.response[0].id,
                             macAddr: result.response[0].macAddress,
                         }, () => {
@@ -702,7 +705,8 @@ export default class rankingList extends React.Component {
             if (v.id == opt.props.macId) {
                 this.setState({
                     guardians: v.guardians,
-                    studentId: v.studentId
+                    studentId: v.studentId,
+                    manageData:v.guardians[0],
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
                         if (v.guardian.colUid == this.state.userId) {
@@ -769,44 +773,44 @@ export default class rankingList extends React.Component {
     onRefreshAnswer = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[0].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true,freshFlag:false }, () => {
-            setTimeout(()=>{
+        this.setState({ defaultPageNo: 1, refreshing: true, isLoadingLeft: true, freshFlag: false }, () => {
+            setTimeout(() => {
                 if (this.state.flag == 1) {
                     this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
 
                 } else {
                     this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
                 }
-            },600)
+            }, 600)
         });
     }
     onRefreshStep = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[1].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true,freshFlagStep:false  }, () => {
-            setTimeout(()=>{
+        this.setState({ defaultPageNoStep: 1, refreshingStep: true, isLoadingLeftStep: true, freshFlagStep: false }, () => {
+            setTimeout(() => {
                 if (this.state.flagStep == 1) {
                     this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
 
                 } else {
                     this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
                 }
-            },600)
+            }, 600)
         });
 
     }
     onRefreshLove = () => {
         var divPull = document.getElementsByClassName('am-pull-to-refresh-content');
         divPull[2].style.transform = "translate3d(0px, 30px, 0px)";   //设置拉动后回到的位置
-        this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true,freshFlagLove:false  }, () => {
-            setTimeout(()=>{
+        this.setState({ defaultPageNoLove: 1, refreshingLove: true, isLoadingLeftLove: true, freshFlagLove: false }, () => {
+            setTimeout(() => {
                 if (this.state.flagLove == 1) {
                     this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
 
                 } else {
                     this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
                 }
-            },600)
+            }, 600)
         });
 
     }
@@ -911,7 +915,7 @@ export default class rankingList extends React.Component {
                                 <i></i>
                                 <span>
                                     申请已提交<br />
-                                    请等待管理员（{this.state.guardianData.familyRelate}）验证通过
+                                    请等待管理员（{this.state.manageData.familyRelate}）验证通过
                                     </span>
                             </div>
                         </div>
