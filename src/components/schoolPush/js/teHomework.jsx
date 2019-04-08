@@ -400,7 +400,7 @@ export default class teHomework extends React.Component {
                                             this.setState({
                                                 showSend: false
                                             })
-                                        }}>{v.user.userName}{i == zanArr.length - 1 ? "" : ","}</span>
+                                        }}>{v.user.userName}{i == zanArr.length - 1 ? "" : ", "}</span>
                                     )
                                 })
                             }
@@ -414,12 +414,12 @@ export default class teHomework extends React.Component {
                                             {
                                                 v.user.userName == v.toUser.userName ?
                                                     <span>
-                                                        <span className='blueTxt'>{v.user.userName}</span>：<span>{v.content}</span>
+                                                        <span className='blueTxt'>{v.user.userName}</span>:&nbsp;<span>{v.content}</span>
                                                     </span>
                                                     :
                                                     <span>
                                                         <span>
-                                                            <span className='blueTxt'>{v.user.userName}</span>：
+                                                            <span className='blueTxt'>{v.user.userName}</span>:&nbsp;
                                                             {/* <span>回复</span> */}
                                                             {/* <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>： */}
                                                             <span>{v.content}</span>
