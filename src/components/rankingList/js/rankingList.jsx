@@ -706,7 +706,7 @@ export default class rankingList extends React.Component {
                 this.setState({
                     guardians: v.guardians,
                     studentId: v.studentId,
-                    manageData:v.guardians[0],
+                    manageData: v.guardians[0],
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
                         if (v.guardian.colUid == this.state.userId) {
@@ -931,37 +931,58 @@ export default class rankingList extends React.Component {
                             <div style={{
                                 display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
                             }}>
-                                <ListView
-                                    ref={el => this.lv = el}
-                                    dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
-                                    renderHeader={() => (
-                                        <div className='dateBtn'>
-                                            <span className='today active' onClick={this.clickToday.bind(this, "")}>今日</span>
-                                            <span className="week" onClick={this.toClickWeek.bind(this, "")}>本周</span>
-                                        </div>
-                                    )}
-                                    renderFooter={() => (
-                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
-                                            {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
-                                        </div>)}
-                                    renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
-                                    className="am-list"
-                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
-                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
-                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
-                                    onEndReached={this.onEndReached}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
-                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
-                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
-                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                <PullToRefresh
+                                    damping={60}
                                     style={{
-                                        height: this.state.clientHeight - 50 - 64,
+                                        overflow: 'auto',
                                     }}
-                                    pullToRefresh={<PullToRefresh
-                                        onRefresh={this.onRefreshAnswer}
-                                        refreshing={this.state.refreshing}
-                                        distanceToRefresh={100}
-                                    />}
-                                />
+                                    indicator={{}}
+                                    direction={'down'}
+                                    refreshing={this.state.refreshing}
+                                    onRefresh={() => {
+                                        this.setState({ refreshing: true });
+                                        setTimeout(() => {
+                                            if (this.state.flag == 1) {
+                                                this.getStudentAnswerRightCountTop(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getStudentAnswerRightCountTop(this.state.studentId, weekStart, end);
+                                            }
+                                        }, 1000);
+                                    }}
+                                >
+                                    <ListView
+                                        ref={el => this.lv = el}
+                                        dataSource={this.state.dataSource}    //数据类型是 ListViewDataSource
+                                        renderHeader={() => (
+                                            <div className='dateBtn'>
+                                                <span className='today active' onClick={this.clickToday.bind(this, "")}>今日</span>
+                                                <span className="week" onClick={this.toClickWeek.bind(this, "")}>本周</span>
+                                            </div>
+                                        )}
+                                        renderFooter={() => (
+                                            <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                                {this.state.isLoadingLeft ? '正在加载' : '已经全部加载完毕'}
+                                            </div>)}
+                                        renderRow={row}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                        className="am-list"
+                                        pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                        //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                        scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                        onEndReached={this.onEndReached}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                        onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                        initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                        scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                        style={{
+                                            height: this.state.clientHeight - 50 - 64,
+                                        }}
+                                    // pullToRefresh={<PullToRefresh
+                                    //     onRefresh={this.onRefreshAnswer}
+                                    //     refreshing={this.state.refreshing}
+                                    //     distanceToRefresh={100}
+                                    // />}
+                                    />
+                                </PullToRefresh>
                             </div>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "answer")}>
                                 <div className='inner my_flex'>
@@ -975,37 +996,58 @@ export default class rankingList extends React.Component {
                             <div style={{
                                 display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
                             }}>
-                                <ListView
-                                    ref={el => this.lv = el}
-                                    dataSource={this.state.dataSourceStep}    //数据类型是 ListViewDataSource
-                                    renderHeader={() => (
-                                        <div className='dateBtn'>
-                                            <span className='today active' onClick={this.clickToday.bind(this, "step")}>今日</span>
-                                            <span className="week" onClick={this.toClickWeek.bind(this, "step")}>本周</span>
-                                        </div>
-                                    )}
-                                    renderFooter={() => (
-                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
-                                            {this.state.isLoadingLeftStep ? '正在加载' : '已经全部加载完毕'}
-                                        </div>)}
-                                    renderRow={rowStep}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
-                                    className="am-list"
-                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
-                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
-                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
-                                    onEndReached={this.onEndReachedStep}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
-                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
-                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
-                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                <PullToRefresh
+                                    damping={60}
                                     style={{
-                                        height: this.state.clientHeight - 50 - 64,
+                                        overflow: 'auto',
                                     }}
-                                    pullToRefresh={<PullToRefresh
-                                        onRefresh={this.onRefreshStep}
-                                        refreshing={this.state.refreshingStep}
-                                        distanceToRefresh={100}
-                                    />}
-                                />
+                                    indicator={{}}
+                                    direction={'down'}
+                                    refreshing={this.state.refreshingStep}
+                                    onRefresh={() => {
+                                        this.setState({ refreshingStep: true });
+                                        setTimeout(() => {
+                                            if (this.state.flagStep == 1) {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gSportStepTopByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        }, 1000);
+                                    }}
+                                >
+                                    <ListView
+                                        ref={el => this.lv = el}
+                                        dataSource={this.state.dataSourceStep}    //数据类型是 ListViewDataSource
+                                        renderHeader={() => (
+                                            <div className='dateBtn'>
+                                                <span className='today active' onClick={this.clickToday.bind(this, "step")}>今日</span>
+                                                <span className="week" onClick={this.toClickWeek.bind(this, "step")}>本周</span>
+                                            </div>
+                                        )}
+                                        renderFooter={() => (
+                                            <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                                {this.state.isLoadingLeftStep ? '正在加载' : '已经全部加载完毕'}
+                                            </div>)}
+                                        renderRow={rowStep}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                        className="am-list"
+                                        pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                        //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                        scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                        onEndReached={this.onEndReachedStep}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                        onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                        initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                        scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                        style={{
+                                            height: this.state.clientHeight - 50 - 64,
+                                        }}
+                                    // pullToRefresh={<PullToRefresh
+                                    //     onRefresh={this.onRefreshStep}
+                                    //     refreshing={this.state.refreshingStep}
+                                    //     distanceToRefresh={100}
+                                    // />}
+                                    />
+                                </PullToRefresh>
                             </div>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "step")}>
                                 <div className='inner my_flex'>
@@ -1019,37 +1061,58 @@ export default class rankingList extends React.Component {
                             <div style={{
                                 display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"
                             }}>
-                                <ListView
-                                    ref={el => this.lv = el}
-                                    dataSource={this.state.dataSourceLove}    //数据类型是 ListViewDataSource
-                                    renderHeader={() => (
-                                        <div className='dateBtn'>
-                                            <span className='today active' onClick={this.clickToday.bind(this, "love")}>今日</span>
-                                            <span className="week" onClick={this.toClickWeek.bind(this, "love")}>本周</span>
-                                        </div>
-                                    )}
-                                    renderFooter={() => (
-                                        <div style={{ paddingTop: 6, textAlign: 'center' }}>
-                                            {this.state.isLoadingLeftLove ? '正在加载' : '已经全部加载完毕'}
-                                        </div>)}
-                                    renderRow={rowLove}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
-                                    className="am-list"
-                                    pageSize={30}    //每次事件循环（每帧）渲染的行数
-                                    //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
-                                    scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
-                                    onEndReached={this.onEndReachedLove}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
-                                    onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
-                                    initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
-                                    scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                <PullToRefresh
+                                    damping={60}
                                     style={{
-                                        height: this.state.clientHeight - 50 - 64,
+                                        overflow: 'auto',
                                     }}
-                                    pullToRefresh={<PullToRefresh
-                                        onRefresh={this.onRefreshLove}
-                                        refreshing={this.state.refreshingLove}
-                                        distanceToRefresh={100}
-                                    />}
-                                />
+                                    indicator={{}}
+                                    direction={'down'}
+                                    refreshing={this.state.refreshingLove}
+                                    onRefresh={() => {
+                                        this.setState({ refreshingLove: true });
+                                        setTimeout(() => {
+                                            if (this.state.flagLove == 1) {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, start, end);
+
+                                            } else {
+                                                this.getWatch2gLoveCountRankingByStudentId(this.state.studentId, weekStart, end);
+                                            }
+                                        }, 1000);
+                                    }}
+                                >
+                                    <ListView
+                                        ref={el => this.lv = el}
+                                        dataSource={this.state.dataSourceLove}    //数据类型是 ListViewDataSource
+                                        renderHeader={() => (
+                                            <div className='dateBtn'>
+                                                <span className='today active' onClick={this.clickToday.bind(this, "love")}>今日</span>
+                                                <span className="week" onClick={this.toClickWeek.bind(this, "love")}>本周</span>
+                                            </div>
+                                        )}
+                                        renderFooter={() => (
+                                            <div style={{ paddingTop: 6, textAlign: 'center' }}>
+                                                {this.state.isLoadingLeftLove ? '正在加载' : '已经全部加载完毕'}
+                                            </div>)}
+                                        renderRow={rowLove}   //需要的参数包括一行数据等,会返回一个可渲染的组件为这行数据渲染  返回renderable
+                                        className="am-list"
+                                        pageSize={30}    //每次事件循环（每帧）渲染的行数
+                                        //useBodyScroll  //使用 html 的 body 作为滚动容器   bool类型   不应这么写  否则无法下拉刷新
+                                        scrollRenderAheadDistance={200}   //当一个行接近屏幕范围多少像素之内的时候，就开始渲染这一行
+                                        onEndReached={this.onEndReachedLove}  //当所有的数据都已经渲染过，并且列表被滚动到距离最底部不足onEndReachedThreshold个像素的距离时调用
+                                        onEndReachedThreshold={10}  //调用onEndReached之前的临界值，单位是像素  number类型
+                                        initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
+                                        scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
+                                        style={{
+                                            height: this.state.clientHeight - 50 - 64,
+                                        }}
+                                    // pullToRefresh={<PullToRefresh
+                                    //     onRefresh={this.onRefreshLove}
+                                    //     refreshing={this.state.refreshingLove}
+                                    //     distanceToRefresh={100}
+                                    // />}
+                                    />
+                                </PullToRefresh>
                             </div>
                             <div className='myGrade' style={{ display: this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }} onClick={this.toDetail.bind(this, "love")}>
                                 <div className='inner my_flex'>
