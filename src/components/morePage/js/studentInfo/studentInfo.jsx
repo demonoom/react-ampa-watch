@@ -42,18 +42,18 @@ export default class studentInfo extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var bindType = locationSearch.split("&")[1].split('=')[1];
-      
+
         this.setState({
-            watchId,bindType
+            watchId, bindType
         })
         this.getWatch2gById(watchId)
 
     }
     componentDidMount () {
-        if(this.state.bindType == 2){
+        if (this.state.bindType == 2) {
             $("#sexValue .am-list-arrow").removeClass("am-list-arrow-horizontal")
         }
-        if(this.state.bindType == 2){
+        if (this.state.bindType == 2) {
             $("#birthValue .am-list-arrow").removeClass("am-list-arrow-horizontal")
         }
     }
@@ -117,11 +117,11 @@ export default class studentInfo extends React.Component {
 
 
     updatePhoneNumber = () => {
-        $(".am-modal-input input").focus();
         this.showModal();
     }
 
     showModal () {
+        $(".am-modal-input input").focus();
         prompt('请输入手表号码', '', [
             {
                 text: '取消', onPress: value => {
@@ -134,7 +134,6 @@ export default class studentInfo extends React.Component {
             },
             {
                 text: '确定', onPress: value => {
-                    console.log(value, "value")
                     this.setState({
                         phoneNumber: value,
                         RelationClassName: 'color_3'
@@ -185,7 +184,7 @@ export default class studentInfo extends React.Component {
         });
     }
 
-    
+
 
     //修改手表信息
     updateWatch2g = () => {
@@ -194,7 +193,7 @@ export default class studentInfo extends React.Component {
             "birthTime": this.state.sendData,
             "watch2gId": this.state.watchId,
             "childSex": this.state.sexValue[0],
-            "avatar":this.state.photoAddr,
+            "avatar": this.state.photoAddr,
             "phoneNumber": this.state.phoneNumber,
             "actionName": "watchAction",
         };
@@ -244,86 +243,86 @@ export default class studentInfo extends React.Component {
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
-                <div className='mask transparent' style={{display:this.state.bindType == 2 ? "block":"none"}}></div>
-                <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
-                    <div className="am-list-line photo">
-                        <div className="am-list-content">宝贝头像</div>
-                        <img src={this.state.photoAddr} alt="" />
-                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
-                    </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUpdateUserName}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">宝贝名字</div>
-                        <div className="am-list-extra">
-                            {this.state.userName}
+                    <div className='mask transparent' style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
+                    <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                        <div className="am-list-line photo">
+                            <div className="am-list-content">宝贝头像</div>
+                            <img src={this.state.photoAddr} alt="" />
+                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
-                        <div className="am-list-arrow"></div>
                     </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.updatePhoneNumber}>
-                    <div className="am-list-line">
-                        <div className="am-list-content">手表号码</div>
-                        <div className="am-list-extra">
-                            {this.state.phoneNumber}
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUpdateUserName}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">宝贝名字</div>
+                            <div className="am-list-extra">
+                                {this.state.userName}
+                            </div>
+                            <div className="am-list-arrow"></div>
                         </div>
-                        <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                     </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public activeDiv'>
-                    <div className="am-list-line">
-                        <div className="am-list-content">学生账号</div>
-                        <div className="am-list-extra">
-                            {this.state.watchData.student ? this.state.watchData.student.colUid : ""}
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.updatePhoneNumber}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">手表号码</div>
+                            <div className="am-list-extra">
+                                {this.state.phoneNumber}
+                            </div>
+                            <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
-                        <div className="am-list-arrow"></div>
                     </div>
-                </div>
-                <div className="grayBorder"></div>
-                <div id="sexValue" className='line_public15'>
-                    <Picker
-                        data={sexData}
-                        value={this.state.sexValue}
-                        cols={1}
-                        extra="请输入性别"
-                        onChange={this.onSexChange}
-                        onOk={this.clickSure}
-                        onDismiss={this.onCancel}
-                    >
-                        <List.Item arrow="horizontal">性别</List.Item>
-                    </Picker>
-                </div>
-                <div  id="birthValue" className='icon_birth line_public15'>
-                    <DatePicker
-                        mode="date"
-                        title=""
-                        extra={this.state.birthTime}
-                        maxDate={new Date(nowTimeStamp + 1e7)}
-                        value={this.state.date}
-                        onOk={this.sureBirthTime}
-                        onChange={this.birChange}
-                    >
-                        <List.Item arrow="horizontal">生日</List.Item>
-                    </DatePicker>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
-                    <div className="am-list-line">
-                        <div className="am-list-content">学校</div>
-                        <div className="am-list-extra">
-                            {this.state.watchData.student ? this.state.watchData.student.schoolName : ""}
+                    <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">学生账号</div>
+                            <div className="am-list-extra">
+                                {this.state.watchData.student ? this.state.watchData.student.colUid : ""}
+                            </div>
+                            <div className="am-list-arrow"></div>
                         </div>
-                        <div className="am-list-arrow"></div>
                     </div>
-                </div>
-                <div className='am-list-item am-list-item-middle line_public activeDiv'>
-                    <div className="am-list-line">
-                        <div className="am-list-content">班级</div>
-                        <div className="am-list-extra">
-                            {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
+                    <div className="grayBorder"></div>
+                    <div id="sexValue" className='line_public15'>
+                        <Picker
+                            data={sexData}
+                            value={this.state.sexValue}
+                            cols={1}
+                            extra="请输入性别"
+                            onChange={this.onSexChange}
+                            onOk={this.clickSure}
+                            onDismiss={this.onCancel}
+                        >
+                            <List.Item arrow="horizontal">性别</List.Item>
+                        </Picker>
+                    </div>
+                    <div id="birthValue" className='icon_birth line_public15'>
+                        <DatePicker
+                            mode="date"
+                            title=""
+                            extra={this.state.birthTime}
+                            maxDate={new Date(nowTimeStamp + 1e7)}
+                            value={this.state.date}
+                            onOk={this.sureBirthTime}
+                            onChange={this.birChange}
+                        >
+                            <List.Item arrow="horizontal">生日</List.Item>
+                        </DatePicker>
+                    </div>
+                    <div className='am-list-item am-list-item-middle line_public15 activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">学校</div>
+                            <div className="am-list-extra">
+                                {this.state.watchData.student ? this.state.watchData.student.schoolName : ""}
+                            </div>
+                            <div className="am-list-arrow"></div>
                         </div>
-                        <div className="am-list-arrow"></div>
                     </div>
-                </div>
+                    <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                        <div className="am-list-line">
+                            <div className="am-list-content">班级</div>
+                            <div className="am-list-extra">
+                                {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
+                            </div>
+                            <div className="am-list-arrow"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
