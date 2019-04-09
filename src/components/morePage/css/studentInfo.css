@@ -1,0 +1,52 @@
+#studentInfo .am-list-item .photo {
+  padding: 13px 15px 13px 0;
+}
+#studentInfo .am-list-item .photo img {
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+#studentInfo .phoneDiv {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  height: 100%;
+  z-index: 1000;
+  -webkit-transform: translateZ(1px);
+  transform: translateZ(1px);
+}
+#studentInfo .am-modal-transparent {
+  width: 270px;
+  position: relative;
+  background-color: #fff;
+  border: 0;
+  background-clip: padding-box;
+  text-align: center;
+  overflow: hidden;
+}
+#studentInfo .am-modal {
+  position: relative;
+}
+#studentInfo .am-modal-content {
+  position: relative;
+  background-color: #fff;
+  border: 0;
+  background-clip: padding-box;
+  text-align: center;
+  height: 100%;
+  overflow: hidden;
+}
+#studentInfo .am-modal-header {
+  padding: 6px 15px 15px;
+}
+#studentInfo .am-modal-title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1;
+  color: #000;
+  text-align: center;
+}

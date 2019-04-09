@@ -117,7 +117,9 @@ export default class studentInfo extends React.Component {
 
 
     updatePhoneNumber = () => {
-        this.showModal();
+        this.inputPhoneRef.focus();
+        $(".phoneDiv").show();
+        // this.showModal();
     }
 
     showModal () {
@@ -234,6 +236,31 @@ export default class studentInfo extends React.Component {
         });
     }
 
+
+    //phoneNumber
+    phoneNumber = (value) => {
+        this.setState({
+            phoneNumber: value.trim(),
+        });
+    }
+
+    surePhoneNumber = () => {
+        this.setState({
+            phoneNumber: this.state.phoneNumber
+        }, () => {
+            this.updateWatch2g();
+            $(".phoneDiv").hide();
+        });
+    }
+    cancelPhoneNumber = () => {
+        this.setState({
+            phoneNumber: this.state.phoneNumber
+        }, () => {
+            $(".phoneDiv").hide();
+        });
+    }
+
+
     render () {
         return (
             <div id="studentInfo" className='bg_gray publicList_50'>
@@ -321,6 +348,30 @@ export default class studentInfo extends React.Component {
                                 {this.state.watchData.student ? this.state.watchData.student.clazzList[0].grade.name + this.state.watchData.student.clazzList[0].name : ""}
                             </div>
                             <div className="am-list-arrow"></div>
+                        </div>
+                    </div>
+                    <div className="phoneDiv" style={{ display: "none" }}>
+                        <div className="am-modal am-modal-transparent">
+                            <div className="am-modal-content">
+                                <div className="am-modal-header">
+                                    <div className="am-modal-title">
+                                        请输入手表号码
+                                    </div>
+                                </div>
+                                <div className="am-modal-body">
+                                    <InputItem
+                                        value={this.state.phoneNumber}
+                                        onChange={this.phoneNumber}
+                                        type="phone"
+                                        placeholder="请输入手表号码"
+                                        ref={el => this.inputPhoneRef = el}
+                                    ></InputItem>
+                                </div>
+                                <div className="am-modal-footer">
+                                    <span onClick={this.cancelPhoneNumber}>取消</span>
+                                    <span onClick={this.surePhoneNumber}>确定</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
