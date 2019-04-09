@@ -200,7 +200,7 @@ export default class morePage extends React.Component {
     //找手表
     toFindWatch = () => {
         var commandJson = {
-            "command": "searchWatch2GAction", data: {
+            "command": "findWatch2GAction", data: {
                 "macAddress": this.state.macAddr
             }
         };
