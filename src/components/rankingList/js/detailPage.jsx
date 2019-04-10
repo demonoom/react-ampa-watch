@@ -98,7 +98,7 @@ export default class detailPage extends React.Component {
             down: {
                 auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
                 callback: this.downCallback, //下拉刷新的回调
-                htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif" /></p><p class="downwarp-tip"></p>'
+                htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
             },
         });
 

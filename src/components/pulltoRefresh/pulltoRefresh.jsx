@@ -833,7 +833,7 @@ export default class pulltoRefresh extends React.Component {
                                     height: '44px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    padding: '15px 15px 0 15px'
+                                    padding: '15px 0 0 15px'
                                 }}
                                 >
                                     <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
