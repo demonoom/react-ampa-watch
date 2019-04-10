@@ -1,6 +1,3 @@
-#rankingList ::-webkit-scrollbar {
-  display: none;
-}
 #rankingList .am-tabs-default-bar-top {
   background: -webkit-linear-gradient(72deg, #28c4fd 0%, #0092fc 100%) !important;
   background: linear-gradient(18deg, #28c4fd 0%, #0092fc 100%) !important;

@@ -20,7 +20,7 @@
   top: 0;
 }
 #morePage .personEmptyCont {
-  height: calc(100% - 200px);
+  height: calc(100% - 130px);
   position: relative;
 }
 #morePage .personEmptyCont .emptyCont .my_flex {

@@ -1,5 +1,6 @@
 import React from "react";
 import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
+import ReactPullToRefresh from "react-pull-to-refresh"
 import "../css/morePage.less"
 import {
     Toast, Modal, Popover, NavBar, Icon
@@ -22,7 +23,7 @@ export default class morePage extends React.Component {
             bindType: "",  //bindType==1  是主监护人  2是副监护人   //valid==1是正常  == 2是未通过
             guardianData: {},
             watchData: [],
-            manageData:[]
+            manageData: []
         };
     }
 
@@ -50,6 +51,7 @@ export default class morePage extends React.Component {
     }
     componentDidMount () {
         this.watchListener();
+        $(".pullToRefresh .loading").html("松开即可刷新")
     }
     //获取手表列表
     getWatch2gsByGuardianUserId = (userId) => {
@@ -65,7 +67,7 @@ export default class morePage extends React.Component {
                     if (result.response.length == 0) {
                         this.setState({
                             toBind: true,
-                        },()=>{
+                        }, () => {
                             $(".moreList").show();
                         })
                     } else {
@@ -74,7 +76,7 @@ export default class morePage extends React.Component {
                                 this.setState({
                                     guardianData: v,
                                 }, () => {
-                                    console.log(this.state.guardianData,"opiop")
+                                    console.log(this.state.guardianData, "opiop")
                                     $(".moreList").show();
                                 })
                             }
@@ -167,7 +169,7 @@ export default class morePage extends React.Component {
                             calm.setState({
                                 guardians: value.guardians,
                                 studentId: value.studentId,
-                                manageData:value.guardians[0],
+                                manageData: value.guardians[0],
                             }, () => {
                                 calm.state.guardians.forEach((v, i) => {
                                     if (v.guardian.colUid == calm.state.userId) {
@@ -256,7 +258,7 @@ export default class morePage extends React.Component {
                 this.setState({
                     guardians: v.guardians,
                     studentId: v.studentId,
-                    manageData:v.guardians[0],
+                    manageData: v.guardians[0],
                 }, () => {
                     this.state.guardians.forEach((v, i) => {
                         if (v.guardian.colUid == this.state.userId) {
@@ -384,7 +386,7 @@ export default class morePage extends React.Component {
 
     //跳转解绑页面
     toUnbind = () => {
-        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&watchName=" + this.state.watchName+"&sId="+this.state.studentId
+        var url = WebServiceUtil.mobileServiceURL + "bindAndUnbind?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&watchName=" + this.state.watchName + "&sId=" + this.state.studentId
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -407,144 +409,163 @@ export default class morePage extends React.Component {
         });
     }
 
+    handleRefresh = (resolve, reject) => {
+        $(".pullToRefresh .loading").html("正在刷新")
+        $(".pullToRefresh .loading").append(<img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif?size=100x100"></img>)
+        $(".pullToRefresh").css("top", 0)
+        setTimeout(() => {
+            $(".pullToRefresh").css("top", "-23px");
+            $(".loading").html("松开即可刷新");
+        }, 1000)
+    }
+
     render () {
         return (
             <div id="morePage" className='bg_gray publicList_50'>
-                <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
-                    <Popover mask
-                        overlayClassName="fortest"
-                        placement="bottomLeft"
-                        overlayStyle={{ color: 'currentColor' }}
-                        visible={this.state.visible}
-                        overlay={this.state.watchListData}
-                        align={{
-                            overflow: { adjustY: 0, adjustX: 0 },
-                            offset: [10, 0],
-                        }}
-                        onVisibleChange={this.handleVisibleChange}
-                        onSelect={this.onSelect}
-                    >
-                        <div style={{
-                            height: '44px',
-                            lineHeight: '44px',
-                            padding: '15px 15px 0',
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
+                <ReactPullToRefresh
+                    onRefresh={this.handleRefresh}
+                    className="pullToRefresh"
+                    style={{
+                        textAlign: 'center',
+                        position: "relative",
+                        top:"-23px",
+                        left: 0,
+                    }}>
+                    <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
+                        <Popover mask
+                            overlayClassName="fortest"
+                            placement="bottomLeft"
+                            overlayStyle={{ color: 'currentColor' }}
+                            visible={this.state.visible}
+                            overlay={this.state.watchListData}
+                            align={{
+                                overflow: { adjustY: 0, adjustX: 0 },
+                                offset: [10, 0],
+                            }}
+                            onVisibleChange={this.handleVisibleChange}
+                            onSelect={this.onSelect}
                         >
-                            <span className="icon-back"></span>
-                            <span className='text_hidden watchName'>{this.state.watchName}</span>
-                        </div>
-                    </Popover>
-                </div>
-                <div className='personMsg'>
-                    <div className="topPadding"></div>
-                    <span className='icon_add' onClick={this.toJupmBind}
-                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}
-                    >添加手表</span>
-                    <div className="wrap">
-                        <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
-                        {
+                            <div style={{
+                                height: '44px',
+                                lineHeight: '44px',
+                                padding: '15px 15px 0',
+                                display: 'flex',
+                                alignItems: 'center',
+                            }}
+                            >
+                                <span className="icon-back"></span>
+                                <span className='text_hidden watchName'>{this.state.watchName}</span>
+                            </div>
+                        </Popover>
+                    </div>
+                    <div className='personMsg'>
+                        <div className="topPadding"></div>
+                        <span className='icon_add' onClick={this.toJupmBind}
+                            style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}
+                        >添加手表</span>
+                        <div className="wrap">
+                            <img src={this.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"} alt="" />
+                            {
 
-                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
-                        }
-                    </div>
-                </div>
-                <div className='moreList overScroll' style={{ display: "none" }}>
-                    <div className="grayBorder"></div>
-                    <div
-                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
-                        onClick={this.toStudentInfo} className='icon_card am-list-item am-list-item-middle line_public15 activeDiv'>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">学生名片</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                                this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
+                            }
                         </div>
                     </div>
-                    <div
-                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
-                        onClick={this.toWatchContacts} className='icon_contact am-list-item am-list-item-middle line_public15 activeDiv'
-                    >
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">手表通讯录</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                    <div className='moreList overScroll' style={{ display: "none" }}>
+                        <div className="grayBorder"></div>
+                        <div
+                            style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                            onClick={this.toStudentInfo} className='icon_card am-list-item am-list-item-middle line_public15 activeDiv'>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">学生名片</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_clock am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushClock}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">设置闹钟</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div
+                            style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                            onClick={this.toWatchContacts} className='icon_contact am-list-item am-list-item-middle line_public15 activeDiv'
+                        >
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">手表通讯录</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div
-                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
-                        onClick={this.toSetStar} className='icon_heart am-list-item am-list-item-middle line_public activeDiv'>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">爱心奖励</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_clock am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushClock}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">设置闹钟</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">找手表</div>
+                        <div
+                            style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                            onClick={this.toSetStar} className='icon_heart am-list-item am-list-item-middle line_public activeDiv'>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">爱心奖励</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">推送天气</div>
+                        <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">找手表</div>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">推送监护人</div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">推送天气</div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">绑定与解绑</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public activeDiv' onClick={this.pushContacts}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">推送监护人</div>
+                            </div>
                         </div>
-                    </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">添加手表</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}></div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">绑定与解绑</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">设置</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">添加手表</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div className="grayBorder"></div>
-                    {/*绑定后未验证空页面*/}
-                    <div className="personEmptyCont" style={{ display: calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false) ? "none" : "block" }}>
-                        <div className="emptyCont emptyContBind">
-                            <div className="p38 my_flex">
-                                <div>
-                                    <i></i>
-                                    <span>
-                                        申请已提交<br />
-                                        请等待管理员（{this.state.manageData.familyRelate} ）验证通过
+                        <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
+                            <i></i>
+                            <div className="am-list-line">
+                                <div className="am-list-content">设置</div>
+                                <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                            </div>
+                        </div>
+                        <div className="grayBorder"></div>
+                        {/*绑定后未验证空页面*/}
+                        <div className="personEmptyCont" style={{ display: calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false) ? "none" : "block" }}>
+                            <div className="emptyCont emptyContBind">
+                                <div className="p38 my_flex">
+                                    <div>
+                                        <i></i>
+                                        <span>
+                                            申请已提交<br />
+                                            请等待管理员（{this.state.manageData.familyRelate} ）验证通过
                                     </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </ReactPullToRefresh>
             </div>
         )
     }

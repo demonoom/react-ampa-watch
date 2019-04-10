@@ -182,6 +182,11 @@ const pCenter = (location, cb) => {
         cb(null, require('./components/PersonalCenter/JS/pCenter').default)
     }, 'pCenter')
 };
+const pulltoRefresh = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/pulltoRefresh/pulltoRefresh').default)
+    }, 'pulltoRefresh')
+};
 
 
 import './index.less';
@@ -220,6 +225,11 @@ class Index extends React.Component {
                         <Link
                             to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
+                    </li>
+                    <li>
+                        <Link
+                            to="/pulltoRefresh?userId=23836"
+                            style={{fontSize: '24px'}}>pulltoRefresh</Link>
                     </li>
                 </ul>
             </div>
@@ -262,6 +272,7 @@ ReactDOM.render(
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
             <Route path="pCenter" getComponent={pCenter}/>
+            <Route path="pulltoRefresh" getComponent={pulltoRefresh}/>
         </Route>
     </Router>, document.getElementById('example')
 );

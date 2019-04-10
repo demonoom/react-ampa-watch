@@ -70,22 +70,23 @@ export default class detailPage extends React.Component {
             tagType,
             num
         })
+        console.log(today,"today")
         this.getUserById(userId);
         if (tagType == "love") {
-            if (today == 1) {
+            if (today == 0) {
                 this.getLoveCountDetail(userId, start);
             } else {
                 this.getLoveCountDetail(userId, weekStart);
             }
         } else if (tagType == "step") {
             console.log("step")
-            if (today == 1) {
+            if (today == 0) {
                 this.getSportStepDetail(userId, start);
             } else {
                 this.getSportStepDetail(userId, weekStart);
             }
         } else {
-            if (today == 1) {
+            if (today == 0) {
                 this.getStudentAnswerDetail(userId, start);
             } else {
                 this.getStudentAnswerDetail(userId, weekStart);
@@ -294,7 +295,7 @@ export default class detailPage extends React.Component {
             var second = braceletHeartStepObj.x.split(" ")[1];
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
-            if (this.state.today == 1) {
+            if (this.state.today == 0) {
                 xClazzNameArray.push(second + ":00");
             } else {
                 xClazzNameArray.push(second2 + "日");
@@ -336,7 +337,7 @@ export default class detailPage extends React.Component {
             var second = braceletHeartStepObj.x.split(" ")[1];
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
-            if (this.state.today == 1) {
+            if (this.state.today == 0) {
                 xClazzNameArray.push(second + ":00");
             } else {
                 xClazzNameArray.push(second2 + "日");
@@ -808,7 +809,7 @@ export default class detailPage extends React.Component {
             <div id='detailPage'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情" : "本周排行榜详情"}</span>
+                    <span className="am-navbar-title">{this.state.today == 0 ? "今日排行榜详情" : "本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
@@ -825,7 +826,7 @@ export default class detailPage extends React.Component {
                             this.setState({ refreshing: true });
                             setTimeout(() => {
                                 this.setState({ refreshing: false }, () => {
-                                    if (this.state.today == 1) {
+                                    if (this.state.today == 0) {
                                         this.getStudentAnswerDetail(this.state.userId, start);
                                     } else {
                                         this.getStudentAnswerDetail(this.state.userId, weekStart);
@@ -845,7 +846,7 @@ export default class detailPage extends React.Component {
                                         <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
                                         <span className='time'>
                                             {
-                                                this.state.today == 1 ?
+                                                this.state.today == 0 ?
                                                     <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
                                                     :
                                                     <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
