@@ -85,12 +85,6 @@ export default class pulltoRefresh extends React.Component {
         ms.connect(pro);
     }
     componentDidMount () {
-        if (this.state.toBind && this.state.toBindValue == 1) {
-
-        } else {
-          
-        }
-
         this.watchListener();
     }
 
@@ -104,6 +98,98 @@ export default class pulltoRefresh extends React.Component {
                 Toast.info(warnMsg, 1, null, false)
             }, onMessage: function (info) {
                 console.log(info, "infoWatch")
+                if (info.command == "userOperateResponse") {
+                    calm.getWatch2gsByGuardianUserId(calm.state.userId);
+                    calm.state.watchData.forEach((value, i) => {
+                        if (value.id == info.data.watchId) {
+                            calm.setState({
+                                guardians: value.guardians,
+                                studentId: value.studentId,
+                                manageData: value.guardians[0],
+                            }, () => {
+                                calm.state.guardians.forEach((v, i) => {
+                                    if (v.guardian.colUid == calm.state.userId) {
+                                        calm.setState({
+                                            guardianData: v,
+                                        }, () => {
+                                            calm.setState({
+                                                visible: false,
+                                                phoneNumber: value.phoneNumber,
+                                                watchId: value.id,
+                                                watchName: value.watchName,
+                                                macAddr: value.macAddress
+                                            }, () => {
+                                                if (this.state.clickDayStatus == 0) {
+                                                    mescroll.destroy();
+                                                    mescroll = new MeScroll("mescroll", {
+                                                        //上拉加载的配置项
+                                                        up: {
+                                                            callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                                                            isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                                                            noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                                                            empty: {
+                                                                icon: "../res/img/mescroll-empty.png", //图标,默认null
+                                                                tip: "暂无相关数据~", //提示
+                                                                btntext: "去逛逛 >", //按钮,默认""
+                                                                btnClick: function () {//点击按钮的回调,默认null
+                                                                    alert("点击了按钮,具体逻辑自行实现");
+                                                                }
+                                                            },
+                                                            page: {
+                                                                num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+                                                                size: 30, //每页数据条数,默认10
+                                                            },
+                                                            htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
+                                                            clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
+                                                            toTop: { //配置回到顶部按钮
+                                                                src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                                                //offset : 1000
+                                                            },
+                                                            lazyLoad: {
+                                                                use: true // 是否开启懒加载,默认false
+                                                            }
+                                                        }
+                                                    });
+                                                } else {
+                                                    mescroll.destroy();
+                                                    mescroll = new MeScroll("mescroll", {
+                                                        //上拉加载的配置项
+                                                        up: {
+                                                            callback: this.getListDataWeek, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                                                            isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                                                            noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                                                            empty: {
+                                                                icon: "../res/img/mescroll-empty.png", //图标,默认null
+                                                                tip: "暂无相关数据~", //提示
+                                                                btntext: "去逛逛 >", //按钮,默认""
+                                                                btnClick: function () {//点击按钮的回调,默认null
+                                                                    alert("点击了按钮,具体逻辑自行实现");
+                                                                }
+                                                            },
+                                                            page: {
+                                                                num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+                                                                size: 30, //每页数据条数,默认10
+                                                            },
+                                                            htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
+                                                            clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
+                                                            toTop: { //配置回到顶部按钮
+                                                                src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                                                //offset : 1000
+                                                            },
+                                                            lazyLoad: {
+                                                                use: true // 是否开启懒加载,默认false
+                                                            }
+                                                        }
+                                                    });
+                                                }
+                                            });
+                                        })
+                                    }
+                                })
+                            })
+                        }
+                    })
+                }
             }
         };
     }
@@ -191,11 +277,11 @@ export default class pulltoRefresh extends React.Component {
             var pd = curPageData[i];
             var str = `
             <div class="imgDiv">
-                <img src=${pd.user.avatar} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
+                <img src=${pd.user ? pd.user.avatar:""} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
             </div>
             <div class="line_public itemCont my_flex">
-                <div class='num'>第${(page.num - 1)*30 + i+1}名</div>
-                <div class='userName text_hidden'>${pd.user.userName}</div>
+                <div class='num'>第${(page.num - 1)*page.size + i+1}名</div>
+                <div class='userName text_hidden'>${pd.user ? pd.user.userName : ""}</div>
                 <span class='color_9 text_hidden'>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
             </div>
             `
@@ -204,7 +290,6 @@ export default class pulltoRefresh extends React.Component {
             listDom.appendChild(liDom);
         }
     }
-        ;
     /*联网加载列表数据
      在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
      请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
@@ -777,9 +862,9 @@ export default class pulltoRefresh extends React.Component {
                         </div>
                         <div className='myGrade' onClick={this.toDetail}>
                             <div className='inner my_flex'>
-                                <span className='num'>第{this.state.userData ? this.state.userData.rank : ""}名</span>
+                                <span className='num'>第{this.state.userData ? this.state.userData.rank : "0"}名</span>
                                 <span className='userName text_hidden'>{this.state.userData == undefined ?  "":this.state.userData.user ? this.state.userData.user.userName:""}</span>
-                                <span className='questionNum'>{this.state.userData ? this.state.userData.count : ""}{pType == 0 ? "题" : pType == 1 ? "颗" : "步"}</span>
+                                <span className='questionNum'>{this.state.userData ? this.state.userData.count : "0"}{pType == 0 ? "题" : pType == 1 ? "颗" : "步"}</span>
                             </div>
                         </div>
                     </div>
