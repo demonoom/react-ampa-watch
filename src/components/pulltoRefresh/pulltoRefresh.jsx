@@ -146,7 +146,7 @@ export default class pulltoRefresh extends React.Component {
             // 3.使配置的noMoreSize生效
 
             //设置列表数据
-            this.setListData(curPageData);
+            this.setListData(curPageData,page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
             mescroll.endErr();
@@ -176,7 +176,7 @@ export default class pulltoRefresh extends React.Component {
             // 3.使配置的noMoreSize生效
 
             //设置列表数据
-            this.setListData(curPageData);
+            this.setListData(curPageData,page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
             mescroll.endErr();
@@ -184,7 +184,8 @@ export default class pulltoRefresh extends React.Component {
     }
 
     /*设置列表数据*/
-    setListData = (curPageData) => {
+    setListData = (curPageData,page) => {
+        console.log(page,"page")
         var listDom = document.getElementById("dataList");
         for (var i = 0; i < curPageData.length; i++) {
             var pd = curPageData[i];
@@ -193,7 +194,7 @@ export default class pulltoRefresh extends React.Component {
                 <img src=${pd.user.avatar} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
             </div>
             <div class="line_public itemCont my_flex">
-                <div class='num'>第${i + 1}名</div>
+                <div class='num'>第${(page.num - 1)*30 + i+1}名</div>
                 <div class='userName text_hidden'>${pd.user.userName}</div>
                 <span class='color_9 text_hidden'>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
             </div>
