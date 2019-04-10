@@ -1,5 +1,5 @@
 import React from "react";
-import "./pull.css"
+import "./pull.less"
 import { WatchWebsocketConnection } from '../../helpers/watch_websocket_connection';
 import { Tabs, WhiteSpace, Toast, Modal, PullToRefresh, ListView, NavBar, Popover } from 'antd-mobile';
 const Item = Popover.Item;
@@ -190,9 +190,14 @@ export default class pulltoRefresh extends React.Component {
         for (var i = 0; i < curPageData.length; i++) {
             var pd = curPageData[i];
             var str = `
-            <span>第${i + 1}名</span>
-            <span>${pd.user.userName}</span>
-            <span>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
+            <div class="imgDiv">
+                <img src="" />
+            </div>
+            <div class="line_public itemCont my_flex">
+                <div class='num'>第${i + 1}名</div>
+                <div class='userName text_hidden'>${pd.user.userName}</div>
+                <span class='color_9 text_hidden'>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
+            </div>
             `
             var liDom = document.createElement("li");
             liDom.innerHTML = str;
@@ -677,7 +682,7 @@ export default class pulltoRefresh extends React.Component {
     render () {
         console.log(this.state.toBind, "uuu")
         return (
-            <div>
+            <div id='pullToRefresh' className='bg_gray'>
                 {/* 没有绑定空页面--start */}
                 <div className="am-navbar-blue" style={{ display: this.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2)) ? "block" : "none" }}>
                     <NavBar
@@ -716,66 +721,70 @@ export default class pulltoRefresh extends React.Component {
                 </div>
                 {/*绑定后未验证空页面---end*/}
                 
-                <div style={{ display:this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block"}}>
-                    <div className="header">
-                        <div className="nav" style={{ display: "flex" }}>
-                            {
-                                this.state.tabs.map((v, i) => {
-                                    return (
-                                        <p style={{ "flex": 1, "textAlign": "center" }} onClick={this.clickP.bind(this, v)} className={v.isActive ? "active" : ""} i={v.label}>{v.title}</p>
-                                    )
-                                })
-                            }
+                <div className='pageWrap' style={{ display:this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block"}}>
+                    <div className="am-tabs-tab-bar-wrap">
+                        <div className="am-tabs-default-bar-top am-tabs-default-bar">
+                            <div className="am-tabs-default-bar-content">
+                                {
+                                    this.state.tabs.map((v, i) => {
+                                        return (
+                                            <div onClick={this.clickP.bind(this, v)} className={v.isActive ? "am-tabs-default-bar-tab-active" : "am-tabs-default-bar-tab"} i={v.label}>{v.title}</div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                        <div className="am-navbar-blue watchSelect" style={{display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "block" : "none" }}>
+                            <Popover mask
+                                     overlayClassName="fortest"
+                                     overlayStyle={{ color: 'currentColor' }}
+                                     visible={this.state.visible}
+                                     overlay={this.state.watchListData}
+                                     awatchSelectlign={{
+                                         overflow: { adjustY: 0, adjustX: 0 },
+                                         offset: [10, 0],
+                                     }}
+                                     onVisibleChange={(visible) => {
+                                         this.setState({
+                                             visible,
+                                         });
+                                     }}
+                                     onSelect={this.onSelect}
+                            >
+                                <div style={{
+                                    height: '44px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    padding: '15px 15px 0 15px'
+                                }}
+                                >
+                                    <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
+                                </div>
+                            </Popover>
                         </div>
                     </div>
-                    <div id="mescroll" className="mescroll" style={{ top: "50px" }}>
-                        <ul id="dataList" className="data-list">
-                        </ul>
-                    </div>
-                </div>
-                <div style={{ position: "absolute", top: "0px", right: "10px", zIndex: "11111", background: "blue", display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "block" : "none" }}>
-                    <Popover mask
-                        overlayClassName="fortest"
-                        overlayStyle={{ color: 'currentColor' }}
-                        visible={this.state.visible}
-                        overlay={this.state.watchListData}
-                        awatchSelectlign={{
-                            overflow: { adjustY: 0, adjustX: 0 },
-                            offset: [10, 0],
-                        }}
-                        onVisibleChange={(visible) => {
-                            this.setState({
-                                visible,
-                            });
-                        }}
-                        onSelect={this.onSelect}
-                    >
-                        <div style={{
-                            height: '44px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            padding: '15px 15px 0 15px'
-                        }}
-                        >
-                            <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
+                    <div className="questionCont">
+                        <div id="mescroll" className="mescroll list-view-section-body">
+                            <div className='dateBtn' style={{display: this.state.toBind || this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"  }}>
+                                {
+                                    this.state.days.map((v, i) => {
+                                        return (
+                                            <span onClick={this.clickDay.bind(this, v)} className={v.isActive ? "active" : ""}>{v.title}</span>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <ul id="dataList" className="data-list">
+                            </ul>
                         </div>
-                    </Popover>
-                </div>
-                <div onClick={this.toDetail} style={{ position: "absolute", bottom: "10px", left: "0px", zIndex: "11111", background: "red",display: this.state.toBind|| this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }}>
-                    <span>
-                        {this.state.userData == undefined ?  "":this.state.userData.user ? this.state.userData.user.userName:""}
-                        <span>第{this.state.userData ? this.state.userData.rank : ""}名</span>
-                        <span>{this.state.userData ? this.state.userData.count : ""}{pType == 0 ? "题" : pType == 1 ? "颗" : "步"}</span>
-                    </span>
-                </div>
-                <div style={{ position: "absolute", top: "0px", left: "0px", zIndex: "11111",display: this.state.toBind || this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"  }}>
-                    {
-                        this.state.days.map((v, i) => {
-                            return (
-                                <span onClick={this.clickDay.bind(this, v)} className={v.isActive ? "active" : ""}>{v.title}</span>
-                            )
-                        })
-                    }
+                        <div className='myGrade' onClick={this.toDetail}>
+                            <div className='inner my_flex'>
+                                <span className='num'>第{this.state.userData ? this.state.userData.rank : ""}名</span>
+                                <span className='userName text_hidden'>{this.state.userData == undefined ?  "":this.state.userData.user ? this.state.userData.user.userName:""}</span>
+                                <span className='questionNum'>{this.state.userData ? this.state.userData.count : ""}{pType == 0 ? "题" : pType == 1 ? "颗" : "步"}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         )
