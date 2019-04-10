@@ -9,6 +9,8 @@
         background: linear-gradient(18deg, #28c4fd 0%, #0092fc 100%) !important;
         color: #fff;
         padding: 20px 15px 0;
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .am-tabs-default-bar-tab-active,
@@ -19,6 +21,7 @@
         width: 33.33%;
         position: relative;
         padding: 0;
+        text-align: center;
     }
 
     .am-tabs-default-bar-top .am-tabs-default-bar-tab {
@@ -107,7 +110,7 @@
             line-height: 30px;
             border-radius: 5px;
             overflow: hidden;
-
+            z-index: 50;
             span {
                 background-color: #E5E5E5;
                 color: #3672ED;
@@ -126,6 +129,9 @@
         .list-view-section-body {
             position: relative;
             height: calc(~"100% - 40px");
+            &::-webkit-scrollbar{
+                display: none;
+            }
         .data-list{
             padding: 185px 0 0;
             position: relative;
@@ -246,6 +252,11 @@
                 overflow: hidden;
             }
 
+            li:last-child{
+                .line_public{
+                    display: none;
+                }
+            }
             li {
                 .imgDiv{
                     display: none;
@@ -338,6 +349,9 @@
                     text-align: right;
                 }
             }
+        }
+        .mescroll-totop{
+
         }
     }
 
