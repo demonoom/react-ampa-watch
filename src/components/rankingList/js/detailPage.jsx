@@ -106,22 +106,24 @@ export default class detailPage extends React.Component {
     downCallback=()=>{
         if (this.state.tagType == "love") {
             if (this.state.today == 0) {
-                this.getLoveCountDetail(this.state.userId, weekStart);
-            } else {
                 this.getLoveCountDetail(this.state.userId, start);
+            } else {
+                this.getLoveCountDetail(this.state.userId, weekStart);
             }
         } else if (this.state.tagType == "step") {
             console.log("step")
             if (this.state.today == 0) {
-                this.getSportStepDetail(this.state.userId, weekStart);
-            } else {
                 this.getSportStepDetail(this.state.userId, start);
+            } else {
+                this.getSportStepDetail(this.state.userId, weekStart);
+
             }
         } else {
             if (this.state.today == 0) {
-                this.getStudentAnswerDetail(this.state.userId, weekStart);
-            } else {
                 this.getStudentAnswerDetail(this.state.userId, start);
+            } else {
+                this.getStudentAnswerDetail(this.state.userId, weekStart);
+
             }
         }
     }
