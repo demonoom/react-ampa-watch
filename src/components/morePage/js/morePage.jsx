@@ -1,6 +1,5 @@
 import React from "react";
 import { WatchWebsocketConnection } from '../../../helpers/watch_websocket_connection';
-import ReactPullToRefresh from "react-pull-to-refresh"
 import "../css/morePage.less"
 import {
     Toast, Modal, Popover, NavBar, Icon
@@ -422,15 +421,7 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray publicList_50'>
-                <ReactPullToRefresh
-                    onRefresh={this.handleRefresh}
-                    className="pullToRefresh"
-                    style={{
-                        textAlign: 'center',
-                        position: "relative",
-                        top:"-23px",
-                        left: 0,
-                    }}>
+               
                     <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
                         <Popover mask
                             overlayClassName="fortest"
@@ -565,7 +556,6 @@ export default class morePage extends React.Component {
                             </div>
                         </div>
                     </div>
-                </ReactPullToRefresh>
             </div>
         )
     }
