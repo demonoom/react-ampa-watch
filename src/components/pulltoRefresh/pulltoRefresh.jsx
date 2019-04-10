@@ -43,7 +43,7 @@ export default class pulltoRefresh extends React.Component {
             manageData: [],
             toBind: false,
             toBindValue: 0,
-            clickDayStatus:0,
+            clickDayStatus: 0,
             tabs: [
                 {
                     title: "答题排行榜", label: 0, isActive: true
@@ -124,7 +124,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                            htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -158,7 +158,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                            htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -233,7 +233,7 @@ export default class pulltoRefresh extends React.Component {
             // 2.比传入的totalPage, totalSize, hasNext具有更高的判断优先级
             // 3.使配置的noMoreSize生效
             //设置列表数据
-            this.setListData(curPageData,page);
+            this.setListData(curPageData, page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
             mescroll.endErr();
@@ -261,7 +261,7 @@ export default class pulltoRefresh extends React.Component {
             // 3.使配置的noMoreSize生效
 
             //设置列表数据
-            this.setListData(curPageData,page);
+            this.setListData(curPageData, page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
             mescroll.endErr();
@@ -269,16 +269,16 @@ export default class pulltoRefresh extends React.Component {
     }
 
     /*设置列表数据*/
-    setListData = (curPageData,page) => {
+    setListData = (curPageData, page) => {
         var listDom = document.getElementById("dataList");
         for (var i = 0; i < curPageData.length; i++) {
             var pd = curPageData[i];
             var str = `
             <div class="imgDiv">
-                <img src=${pd.user ? pd.user.avatar:""} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
+                <img src=${pd.user ? pd.user.avatar : ""} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
             </div>
             <div class="line_public itemCont my_flex">
-                <div class='num'>第${(page.num - 1)*page.size + i+1}名</div>
+                <div class='num'>第${(page.num - 1) * page.size + i + 1}名</div>
                 <div class='userName text_hidden'>${pd.user ? pd.user.userName : ""}</div>
                 <span class='color_9 text_hidden'>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
             </div>
@@ -323,14 +323,21 @@ export default class pulltoRefresh extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (data) => {
-                this.setState({
-                    userData: data.user
-                })
-                var listData = [];
-                listData = data.response;
-                successCallback(listData)
+                if (data.success) {
+                    this.setState({
+                        userData: data.user
+                    })
+                    var listData = [];
+                    listData = data.response;
+                    successCallback(listData)
+                }else {
+                    Toast.fail(data.msg,1,null,false);
+                }
+
             },
-            onError: errorCallback
+            onError: (error) => {
+                Toast.info('请求失败');
+            }
         });
     }
     /*
@@ -368,14 +375,21 @@ export default class pulltoRefresh extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (data) => {
-                this.setState({
-                    userData: data.user
-                })
-                var listData = [];
-                listData = data.response;
-                successCallback(listData)
+                if (data.success) {
+                    this.setState({
+                        userData: data.user
+                    })
+                    var listData = [];
+                    listData = data.response;
+                    successCallback(listData)
+                }else {
+                    Toast.fail(data.msg,1,null,false);
+                }
+
             },
-            onError: errorCallback
+            onError: (error) => {
+                Toast.info('请求失败');
+            }
         });
     }
 
@@ -468,10 +482,10 @@ export default class pulltoRefresh extends React.Component {
                             macAddr: result.response[0].macAddress,
                         }, () => {
                             this.WatchList(this.state.watchData)
-                              //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+                            //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
                             mescroll = new MeScroll("mescroll", {
                                 down: {
-                                    htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                                 },
                                 //上拉加载的配置项
                                 up: {
@@ -543,7 +557,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -577,7 +591,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -622,7 +636,7 @@ export default class pulltoRefresh extends React.Component {
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 down: {
-                    htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                 },
                 //上拉加载的配置项
                 up: {
@@ -661,7 +675,7 @@ export default class pulltoRefresh extends React.Component {
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 down: {
-                    htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
                 },
                 //上拉加载的配置项
                 up: {
@@ -711,7 +725,7 @@ export default class pulltoRefresh extends React.Component {
 
     //toDetail
     toDetail = () => {
-        if ( pType == 1) {
+        if (pType == 1) {
             var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.clickDayStatus + "&tagType=love&num=" + this.state.userData.rank;
             var data = {
                 method: 'openNewPage',
@@ -767,7 +781,7 @@ export default class pulltoRefresh extends React.Component {
                 {/* 没有绑定空页面---end */}
 
                 {/*绑定后未验证空页面---start*/}
-                <div className="commonLocation-cont"  style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
+                <div className="commonLocation-cont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
@@ -781,8 +795,8 @@ export default class pulltoRefresh extends React.Component {
                     </div>
                 </div>
                 {/*绑定后未验证空页面---end*/}
-                
-                <div className='pageWrap' style={{ display:this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block"}}>
+
+                <div className='pageWrap' style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}>
                     <div className="am-tabs-tab-bar-wrap">
                         <div className="am-tabs-default-bar-top am-tabs-default-bar">
                             <div className="am-tabs-default-bar-content">
@@ -795,22 +809,22 @@ export default class pulltoRefresh extends React.Component {
                                 }
                             </div>
                         </div>
-                        <div className="am-navbar-blue watchSelect" style={{display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "block" : "none" }}>
+                        <div className="am-navbar-blue watchSelect" style={{ display: !this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "block" : "none" }}>
                             <Popover mask
-                                     overlayClassName="fortest"
-                                     overlayStyle={{ color: 'currentColor' }}
-                                     visible={this.state.visible}
-                                     overlay={this.state.watchListData}
-                                     awatchSelectlign={{
-                                         overflow: { adjustY: 0, adjustX: 0 },
-                                         offset: [10, 0],
-                                     }}
-                                     onVisibleChange={(visible) => {
-                                         this.setState({
-                                             visible,
-                                         });
-                                     }}
-                                     onSelect={this.onSelect}
+                                overlayClassName="fortest"
+                                overlayStyle={{ color: 'currentColor' }}
+                                visible={this.state.visible}
+                                overlay={this.state.watchListData}
+                                awatchSelectlign={{
+                                    overflow: { adjustY: 0, adjustX: 0 },
+                                    offset: [10, 0],
+                                }}
+                                onVisibleChange={(visible) => {
+                                    this.setState({
+                                        visible,
+                                    });
+                                }}
+                                onSelect={this.onSelect}
                             >
                                 <div style={{
                                     height: '44px',
@@ -826,7 +840,7 @@ export default class pulltoRefresh extends React.Component {
                     </div>
                     <div className="questionCont">
                         <div id="mescroll" className="mescroll list-view-section-body">
-                            <div className='dateBtn' style={{display: this.state.toBind || this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block"  }}>
+                            <div className='dateBtn' style={{ display: this.state.toBind || this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }}>
                                 {
                                     this.state.days.map((v, i) => {
                                         return (
@@ -841,7 +855,7 @@ export default class pulltoRefresh extends React.Component {
                         <div className='myGrade' onClick={this.toDetail}>
                             <div className='inner my_flex'>
                                 <span className='num'>第{this.state.userData ? this.state.userData.rank : "0"}名</span>
-                                <span className='userName text_hidden'>{this.state.userData == undefined ?  "":this.state.userData.user ? this.state.userData.user.userName:""}</span>
+                                <span className='userName text_hidden'>{this.state.userData == undefined ? "" : this.state.userData.user ? this.state.userData.user.userName : ""}</span>
                                 <span className='questionNum'>{this.state.userData ? this.state.userData.count : "0"}{pType == 0 ? "题" : pType == 1 ? "颗" : "步"}</span>
                             </div>
                         </div>
