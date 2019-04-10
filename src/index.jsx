@@ -119,11 +119,11 @@ const teHomework= (location, cb) => {
     }, 'teHomework')
 };
 //排行榜
-const rankingList= (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/rankingList/js/rankingList').default)
-    }, 'rankingList')
-};
+// const rankingList= (location, cb) => {
+//     require.ensure([], require => {
+//         cb(null, require('./components/rankingList/js/rankingList').default)
+//     }, 'rankingList')
+// };
 
 const detailPage= (location, cb) => {
     require.ensure([], require => {
@@ -182,15 +182,13 @@ const pCenter = (location, cb) => {
         cb(null, require('./components/PersonalCenter/JS/pCenter').default)
     }, 'pCenter')
 };
-const pulltoRefresh = (location, cb) => {
+const rankingList = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/pulltoRefresh/pulltoRefresh').default)
-    }, 'pulltoRefresh')
+    }, 'rankingList')
 };
 
-
 import './index.less';
-
 class Index extends React.Component {
     render() {
         return (
@@ -226,11 +224,11 @@ class Index extends React.Component {
                             to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link
                             to="/pulltoRefresh?userId=23836"
                             style={{fontSize: '24px'}}>pulltoRefresh</Link>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         );
@@ -272,7 +270,7 @@ ReactDOM.render(
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
             <Route path="pCenter" getComponent={pCenter}/>
-            <Route path="pulltoRefresh" getComponent={pulltoRefresh}/>
+            {/* <Route path="pulltoRefresh" getComponent={pulltoRefresh}/> */}
         </Route>
     </Router>, document.getElementById('example')
 );

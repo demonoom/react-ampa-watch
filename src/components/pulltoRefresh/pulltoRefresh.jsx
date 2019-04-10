@@ -146,7 +146,7 @@ export default class pulltoRefresh extends React.Component {
                                                             htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
                                                             clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
                                                             toTop: { //配置回到顶部按钮
-                                                                src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                                                src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                                 //offset : 1000
                                                             },
                                                             lazyLoad: {
@@ -180,7 +180,7 @@ export default class pulltoRefresh extends React.Component {
                                                             htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
                                                             clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
                                                             toTop: { //配置回到顶部按钮
-                                                                src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                                                src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                                 //offset : 1000
                                                             },
                                                             lazyLoad: {
@@ -219,25 +219,19 @@ export default class pulltoRefresh extends React.Component {
     getListData = (page) => {
         //联网加载数据
         this.getListDataFromNet(pType, page.num, page.size, (curPageData) => {
-            console.log("uiop", curPageData)
-            //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
             //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
-            console.log("pType=" + pType + ", page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
             //方法一(推荐): 后台接口有返回列表的总页数 totalPage
             //mescroll.endByPage(curPageData.length, totalPage); //必传参数(当前页的数据个数, 总页数)
-
             //方法二(推荐): 后台接口有返回列表的总数据量 totalSize
             // mescroll.endBySize(curPageData.length, totalSize); //必传参数(当前页的数据个数, 总数据量)
             //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
             //mescroll.endSuccess(curPageData.length, hasNext); //必传参数(当前页的数据个数, 是否有下一页true/false)
-
-            //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
+            //方法四 (推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
             mescroll.endSuccess(curPageData.length);
             //提示:curPageData.length必传的原因:
             // 1.判断是否有下一页的首要依据: 当传的值小于page.size时,则一定会认为无更多数据.
             // 2.比传入的totalPage, totalSize, hasNext具有更高的判断优先级
             // 3.使配置的noMoreSize生效
-
             //设置列表数据
             this.setListData(curPageData,page);
         }, function () {
@@ -249,10 +243,8 @@ export default class pulltoRefresh extends React.Component {
     getListDataWeek = (page) => {
         //联网加载数据
         this.getListDataFromNetWeek(pType, page.num, page.size, (curPageData) => {
-            console.log("uiop", curPageData)
             //联网成功的回调,隐藏下拉刷新和上拉加载的状态;
             //mescroll会根据传的参数,自动判断列表如果无任何数据,则提示空;列表无下一页数据,则提示无更多数据;
-            console.log("pType=" + pType + ", page.num=" + page.num + ", page.size=" + page.size + ", curPageData.length=" + curPageData.length);
             //方法一(推荐): 后台接口有返回列表的总页数 totalPage
             //mescroll.endByPage(curPageData.length, totalPage); //必传参数(当前页的数据个数, 总页数)
 
@@ -261,7 +253,7 @@ export default class pulltoRefresh extends React.Component {
             //方法三(推荐): 您有其他方式知道是否有下一页 hasNext
             //mescroll.endSuccess(curPageData.length, hasNext); //必传参数(当前页的数据个数, 是否有下一页true/false)
 
-            //方法四 (不推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
+            //方法四 (推荐),会存在一个小问题:比如列表共有20条数据,每页加载10条,共2页.如果只根据当前页的数据个数判断,则需翻到第三页才会知道无更多数据,如果传了hasNext,则翻到第二页即可显示无更多数据.
             mescroll.endSuccess(curPageData.length);
             //提示:curPageData.length必传的原因:
             // 1.判断是否有下一页的首要依据: 当传的值小于page.size时,则一定会认为无更多数据.
@@ -278,7 +270,6 @@ export default class pulltoRefresh extends React.Component {
 
     /*设置列表数据*/
     setListData = (curPageData,page) => {
-        console.log(page,"page")
         var listDom = document.getElementById("dataList");
         for (var i = 0; i < curPageData.length; i++) {
             var pd = curPageData[i];
@@ -297,10 +288,8 @@ export default class pulltoRefresh extends React.Component {
             listDom.appendChild(liDom);
         }
     }
-    /*联网加载列表数据
-     在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
-     请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
-     实际项目以您服务器接口返回的数据为准,无需本地处理分页.
+    /*
+    获取数据
      * */
     getListDataFromNet = (pType, pageNum, pageSize, successCallback, errorCallback) => {
         if (pType == 0) {
@@ -332,24 +321,20 @@ export default class pulltoRefresh extends React.Component {
                 "actionName": "watchAction",
             };
         }
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (data) => {
                 this.setState({
                     userData: data.user
                 })
                 var listData = [];
-                console.log(data, "data")
                 listData = data.response;
                 successCallback(listData)
             },
             onError: errorCallback
         });
     }
-    /*联网加载列表数据
-     在您的实际项目中,请参考官方写法: http://www.mescroll.com/api.html#tagUpCallback
-     请忽略getListDataFromNet的逻辑,这里仅仅是在本地模拟分页数据,本地演示用
-     实际项目以您服务器接口返回的数据为准,无需本地处理分页.
+    /*
+    获取本周数据
      * */
     getListDataFromNetWeek = (pType, pageNum, pageSize, successCallback, errorCallback) => {
         if (pType == 0) {
@@ -381,7 +366,6 @@ export default class pulltoRefresh extends React.Component {
                 "actionName": "watchAction",
             };
         }
-        console.log(param, "param")
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (data) => {
                 this.setState({
@@ -395,6 +379,7 @@ export default class pulltoRefresh extends React.Component {
         });
     }
 
+    //点击顶部
     clickP = (v) => {
         pType = v.label;
         //重置列表数据
@@ -628,7 +613,6 @@ export default class pulltoRefresh extends React.Component {
 
     //点击今日本周
     clickDay = (v) => {
-        console.log(v,"v")
         this.setState({
             clickDayStatus: v.label
         })
@@ -758,7 +742,6 @@ export default class pulltoRefresh extends React.Component {
 
     }
     render () {
-        console.log(this.state.toBind, "uuu")
         return (
             <div id='pullToRefresh' className='bg_gray'>
                 {/* 没有绑定空页面--start */}
