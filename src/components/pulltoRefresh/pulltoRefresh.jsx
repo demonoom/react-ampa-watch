@@ -394,7 +394,7 @@ export default class pulltoRefresh extends React.Component {
                               //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
                             mescroll = new MeScroll("mescroll", {
                                 down: {
-                                    htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif" /></p><p class="downwarp-tip"></p>'
+                                    htmlContent:'<p class=""></p><p class="downwarp-tip"></p><img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif" />'
                                 },
                                 //上拉加载的配置项
                                 up: {
@@ -603,14 +603,6 @@ export default class pulltoRefresh extends React.Component {
                     callback: this.getListDataWeek, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
                     isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                     noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                    empty: {
-                        icon: "../res/img/mescroll-empty.png", //图标,默认null
-                        tip: "暂无相关数据~", //提示
-                        btntext: "去逛逛 >", //按钮,默认""
-                        btnClick: function () {//点击按钮的回调,默认null
-                            alert("点击了按钮,具体逻辑自行实现");
-                        }
-                    },
                     page: {
                         num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
                         size: 30, //每页数据条数,默认10
@@ -618,7 +610,7 @@ export default class pulltoRefresh extends React.Component {
                     htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
                     clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
                     toTop: { //配置回到顶部按钮
-                        src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                        src: "../images/icon_toTop.png", //默认滚动到1000px显示,可配置offset修改
                         //offset : 1000
                     },
                     lazyLoad: {
