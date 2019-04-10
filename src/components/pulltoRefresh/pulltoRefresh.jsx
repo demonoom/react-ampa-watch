@@ -388,6 +388,9 @@ export default class pulltoRefresh extends React.Component {
                             this.WatchList(this.state.watchData)
                               //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
                             mescroll = new MeScroll("mescroll", {
+                                down: {
+                                    htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif" /></p><p class="downwarp-tip"></p>'
+                                },
                                 //上拉加载的配置项
                                 up: {
                                     callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
@@ -543,6 +546,7 @@ export default class pulltoRefresh extends React.Component {
         })
         //今日
         if (v.label == 0) {
+            mescroll.clearDataList();
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 //上拉加载的配置项
@@ -586,6 +590,7 @@ export default class pulltoRefresh extends React.Component {
         }
         //本周
         if (v.label == 1) {
+            mescroll.clearDataList();
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 //上拉加载的配置项

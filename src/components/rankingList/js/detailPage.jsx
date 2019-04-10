@@ -5,6 +5,7 @@ import {
 } from 'antd-mobile';
 import '../css/detailPage.less';
 import '../css/macarons';
+window.mescroll = null;
 var calm;
 var myDate = new Date();
 //获取当前年
@@ -92,7 +93,37 @@ export default class detailPage extends React.Component {
                 this.getStudentAnswerDetail(userId, weekStart);
             }
         }
+           //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+           mescroll = new MeScroll("mescroll", {
+            down: {
+                auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                callback: this.downCallback, //下拉刷新的回调
+                htmlContent:'<p class=""><img src="http://60.205.86.217/upload9/2019-02-18/15/ed0364c4-ea9f-41fb-ba9f-5ce9b60802d0.gif" /></p><p class="downwarp-tip"></p>'
+            },
+        });
 
+    }
+    downCallback=()=>{
+        if (this.state.tagType == "love") {
+            if (this.state.today == 0) {
+                this.getLoveCountDetail(this.state.userId, weekStart);
+            } else {
+                this.getLoveCountDetail(this.state.userId, start);
+            }
+        } else if (this.state.tagType == "step") {
+            console.log("step")
+            if (this.state.today == 0) {
+                this.getSportStepDetail(this.state.userId, weekStart);
+            } else {
+                this.getSportStepDetail(this.state.userId, start);
+            }
+        } else {
+            if (this.state.today == 0) {
+                this.getStudentAnswerDetail(this.state.userId, weekStart);
+            } else {
+                this.getStudentAnswerDetail(this.state.userId, start);
+            }
+        }
     }
 
     componentWillUnmount () {
@@ -146,6 +177,7 @@ export default class detailPage extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -175,6 +207,7 @@ export default class detailPage extends React.Component {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -204,6 +237,7 @@ export default class detailPage extends React.Component {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -238,9 +272,9 @@ export default class detailPage extends React.Component {
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
             if (this.state.today == 1) {
-                xClazzNameArray.push(second + ":00");
-            } else {
                 xClazzNameArray.push(second2 + "日");
+            } else {
+                xClazzNameArray.push(second + ":00");
             }
             var answerRight = braceletHeartStepObj.y1;
             AnswRightTotal += braceletHeartStepObj.y1;
@@ -812,8 +846,11 @@ export default class detailPage extends React.Component {
                     <span className="am-navbar-title">{this.state.today == 0 ? "今日排行榜详情" : "本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont overScroll">
-                    <PullToRefresh
+
+                <div id="mescroll" class="mescroll">
+                    <ul id="newsList" class="news-list">
+                    <div className="commonLocation-cont overScroll">
+                    {/* <PullToRefresh
                         damping={130}
                         ref={el => this.ptr = el}
                         style={{
@@ -834,7 +871,7 @@ export default class detailPage extends React.Component {
                                 });
                             }, 1000);
                         }}
-                    >
+                    > */}
                         <div style={{
                             height: calm.state.clientHeight - 64,
                         }}>
@@ -873,9 +910,12 @@ export default class detailPage extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </PullToRefresh>
+                    {/* </PullToRefresh> */}
                 </div>
 
+			        </ul>
+		        </div>
+             
             </div>
         )
     }
