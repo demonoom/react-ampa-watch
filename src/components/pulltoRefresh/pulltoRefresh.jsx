@@ -1,7 +1,7 @@
 import React from "react";
 import "./pull.less"
 import { WatchWebsocketConnection } from '../../helpers/watch_websocket_connection';
-import { Tabs, WhiteSpace, Toast, Modal, PullToRefresh, ListView, NavBar, Popover } from 'antd-mobile';
+import { Toast, Modal, NavBar, Popover } from 'antd-mobile';
 const Item = Popover.Item;
 const alert = Modal.alert;
 var calm;
@@ -185,13 +185,12 @@ export default class pulltoRefresh extends React.Component {
 
     /*设置列表数据*/
     setListData = (curPageData) => {
-
         var listDom = document.getElementById("dataList");
         for (var i = 0; i < curPageData.length; i++) {
             var pd = curPageData[i];
             var str = `
             <div class="imgDiv">
-                <img src="" />
+                <img src=${pd.user.avatar} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
             </div>
             <div class="line_public itemCont my_flex">
                 <div class='num'>第${i + 1}名</div>
@@ -416,7 +415,7 @@ export default class pulltoRefresh extends React.Component {
                                     htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
                                     clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
                                     toTop: { //配置回到顶部按钮
-                                        src: "../res/img/mescroll-totop.png", //默认滚动到1000px显示,可配置offset修改
+                                        src: "http://60.205.86.217/upload8/2018-10-30/13/bb67bfb7-f04f-42f5-8435-fc8659c96cc1.jpeg", //默认滚动到1000px显示,可配置offset修改
                                         //offset : 1000
                                     },
                                     lazyLoad: {
@@ -546,6 +545,7 @@ export default class pulltoRefresh extends React.Component {
 
     //点击今日本周
     clickDay = (v) => {
+        console.log(v,"v")
         this.setState({
             clickDayStatus: v.label
         })
