@@ -2,8 +2,9 @@ import React from "react";
 import ReactEcharts from 'echarts-for-react';
 import icon_refresh from '../../images/icon_refresh.gif'
 import {
-    PullToRefresh
+    PullToRefresh,Toast,Modal
 } from 'antd-mobile';
+const alert = Modal.alert;
 import '../css/detailPage.less';
 import '../css/macarons';
 window.mescroll = null;
@@ -72,7 +73,6 @@ export default class detailPage extends React.Component {
             tagType,
             num
         })
-        console.log(today,"today")
         this.getUserById(userId);
         if (tagType == "love") {
             if (today == 0) {
@@ -81,7 +81,6 @@ export default class detailPage extends React.Component {
                 this.getLoveCountDetail(userId, weekStart);
             }
         } else if (tagType == "step") {
-            console.log("step")
             if (today == 0) {
                 this.getSportStepDetail(userId, start);
             } else {
@@ -104,6 +103,7 @@ export default class detailPage extends React.Component {
         });
 
     }
+    //下拉刷新
     downCallback=()=>{
         if (this.state.tagType == "love") {
             if (this.state.today == 0) {
@@ -112,7 +112,6 @@ export default class detailPage extends React.Component {
                 this.getLoveCountDetail(this.state.userId, weekStart);
             }
         } else if (this.state.tagType == "step") {
-            console.log("step")
             if (this.state.today == 0) {
                 this.getSportStepDetail(this.state.userId, start);
             } else {
@@ -159,7 +158,8 @@ export default class detailPage extends React.Component {
                 }
             },
             onError: function (error) {
-                // message.error(error);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -192,7 +192,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -208,7 +209,6 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.response) {
                     mescroll.endSuccess();
                     var response = result.response;
@@ -222,7 +222,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -238,7 +239,6 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.response) {
                     mescroll.endSuccess();
                     var response = result.response;
@@ -252,7 +252,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -291,11 +292,6 @@ export default class detailPage extends React.Component {
             xClazzNameArray = unique(xClazzNameArray)
 
         });
-        // console.log(xClazzNameArray,'AnswerTotal')
-        // xClazzNameArray=["25日","26日","27日","28日","29日"];
-        // AnswerRight=["22.00","11.00"]
-        // AnswerTotal=["0.00", "20.00", "0.00", "3.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
-        // SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
         var faceChartDiv = <div
         // style={{display:braceletHeartSteps.length == 0 ? "none":"block"}} 
@@ -837,7 +833,6 @@ export default class detailPage extends React.Component {
         var data = {
             method: 'popView',
         };
-        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
