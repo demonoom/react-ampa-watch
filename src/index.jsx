@@ -32,7 +32,6 @@ const schoolInfo = (location, cb) => {
     }, 'schoolInfo')
 };
 
-
 const verifyStuInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
@@ -171,6 +170,12 @@ const articleList = (location, cb) => {
     }, 'articleList')
 };
 
+const  articleList2 = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/article/js/articleList2').default)
+    }, 'articleList')
+};
+
 const articleDetail = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/article/js/articleDetail').default)
@@ -266,6 +271,7 @@ ReactDOM.render(
             <Route path="watchContacts" getComponent={watchContacts}/>
             <Route path="loveRewards" getComponent={loveRewards}/>
             <Route path="articleList" getComponent={articleList}/>
+            <Route path="articleList2" getComponent={articleList2}/>
             <Route path="articleDetail" getComponent={articleDetail}/>
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>

@@ -334,6 +334,7 @@ export default class articleList extends React.Component {
 
     render() {
         const row = (rowData) => {
+            console.log(rowData, 'rowData');
             var dom = "";
             var time = this.timeDifference(rowData.createTime);
             var image = rowData.articleImgArray ? rowData.articleImgArray : [];
