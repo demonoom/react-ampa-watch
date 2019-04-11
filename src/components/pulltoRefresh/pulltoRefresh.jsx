@@ -220,6 +220,7 @@ export default class pulltoRefresh extends React.Component {
             this.setListData(curPageData, page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+            Toast.fail("请求失败",1,null,false);
             mescroll.endErr();
         });
     }
@@ -319,8 +320,8 @@ export default class pulltoRefresh extends React.Component {
                 }
 
             },
-            onError: (error) => {
-                Toast.info('请求失败');
+            onError: ()=>{
+                errorCallback
             }
         });
     }
@@ -371,8 +372,8 @@ export default class pulltoRefresh extends React.Component {
                 }
 
             },
-            onError: (error) => {
-                Toast.info('请求失败');
+            onError: ()=>{
+                errorCallback
             }
         });
     }
@@ -497,8 +498,8 @@ export default class pulltoRefresh extends React.Component {
                     Toast.fail(result.msg, 1, null, false);
                 }
             },
-            onError: function (error) {
-                Toast.info('请求失败');
+            onError: ()=>{
+                errorCallback
             }
         });
     }
