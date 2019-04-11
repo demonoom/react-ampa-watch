@@ -3,6 +3,7 @@ import icon_topTop from "../../images/icon_toTop.png";
 import {Toast, Carousel} from "antd-mobile";
 
 import '../css/articleList2.less'
+import icon_refresh from "../../images/icon_refresh.gif";
 
 window.mescroll = null;
 export default class articleList2 extends React.Component {
@@ -32,7 +33,7 @@ export default class articleList2 extends React.Component {
         //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
         mescroll = new MeScroll("mescroll", {
             down: {
-                htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
             },
             up: {
                 callback: _this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }

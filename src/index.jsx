@@ -270,8 +270,8 @@ ReactDOM.render(
             <Route path="studentInfo" getComponent={studentInfo}/>
             <Route path="watchContacts" getComponent={watchContacts}/>
             <Route path="loveRewards" getComponent={loveRewards}/>
-            <Route path="articleList" getComponent={articleList}/>
-            <Route path="articleList2" getComponent={articleList2}/>
+            {/*<Route path="articleList" getComponent={articleList}/>*/}
+            <Route path="articleList" getComponent={articleList2}/>
             <Route path="articleDetail" getComponent={articleDetail}/>
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
