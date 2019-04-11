@@ -132,14 +132,6 @@ export default class pulltoRefresh extends React.Component {
                                                             callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
                                                             isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                                                             noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                                                            empty: {
-                                                                icon: "../res/img/mescroll-empty.png", //图标,默认null
-                                                                tip: "暂无相关数据~", //提示
-                                                                btntext: "去逛逛 >", //按钮,默认""
-                                                                btnClick: function () {//点击按钮的回调,默认null
-                                                                    alert("点击了按钮,具体逻辑自行实现");
-                                                                }
-                                                            },
                                                             page: {
                                                                 num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
                                                                 size: 30, //每页数据条数,默认10
@@ -150,9 +142,6 @@ export default class pulltoRefresh extends React.Component {
                                                                 src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                                 //offset : 1000
                                                             },
-                                                            lazyLoad: {
-                                                                use: true // 是否开启懒加载,默认false
-                                                            }
                                                         }
                                                     });
                                                 } else {
@@ -166,14 +155,6 @@ export default class pulltoRefresh extends React.Component {
                                                             callback: this.getListDataWeek, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
                                                             isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                                                             noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                                                            empty: {
-                                                                icon: "../res/img/mescroll-empty.png", //图标,默认null
-                                                                tip: "暂无相关数据~", //提示
-                                                                btntext: "去逛逛 >", //按钮,默认""
-                                                                btnClick: function () {//点击按钮的回调,默认null
-                                                                    alert("点击了按钮,具体逻辑自行实现");
-                                                                }
-                                                            },
                                                             page: {
                                                                 num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
                                                                 size: 30, //每页数据条数,默认10
@@ -184,9 +165,6 @@ export default class pulltoRefresh extends React.Component {
                                                                 src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                                 //offset : 1000
                                                             },
-                                                            lazyLoad: {
-                                                                use: true // 是否开启懒加载,默认false
-                                                            }
                                                         }
                                                     });
                                                 }
@@ -237,6 +215,7 @@ export default class pulltoRefresh extends React.Component {
             this.setListData(curPageData, page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+            Toast.info("请求失败", 1, null, false);
             mescroll.endErr();
         });
     }
@@ -265,6 +244,7 @@ export default class pulltoRefresh extends React.Component {
             this.setListData(curPageData, page);
         }, function () {
             //联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+            Toast.info("请求失败", 1, null, false);
             mescroll.endErr();
         });
     }
@@ -331,13 +311,14 @@ export default class pulltoRefresh extends React.Component {
                     var listData = [];
                     listData = data.response;
                     successCallback(listData)
-                }else {
-                    Toast.fail(data.msg,1,null,false);
+                } else {
+                    Toast.info(data.msg, 1, null, false);
                 }
 
             },
-            onError: (error) => {
-                Toast.info('请求失败');
+            onError: () => {
+                Toast.info("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -383,22 +364,28 @@ export default class pulltoRefresh extends React.Component {
                     var listData = [];
                     listData = data.response;
                     successCallback(listData)
-                }else {
-                    Toast.fail(data.msg,1,null,false);
+                } else {
+                    Toast.info(data.msg, 1, null, false);
                 }
 
             },
-            onError: (error) => {
-                Toast.info('请求失败');
+            onError: () => {
+                Toast.info("请求失败", 1, null, false);
+                endErr
             }
         });
     }
 
     //点击顶部
     clickP = (v) => {
-        pType = v.label;
-        //重置列表数据
-        mescroll.resetUpScroll();
+        if (pType == v.label) {
+
+        } else {
+            pType = v.label;
+            //重置列表数据
+            mescroll.resetUpScroll();
+        }
+        // pType = v.label;
         if (v.label == 0) {
             this.setState({
                 tabs: [
@@ -503,19 +490,17 @@ export default class pulltoRefresh extends React.Component {
                                         src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                         //offset : 1000
                                     },
-                                    lazyLoad: {
-                                        use: true // 是否开启懒加载,默认false
-                                    }
                                 }
                             });
                         })
                     }
                 } else {
-                    Toast.fail(result.msg, 1, null, false);
+                    Toast.info(result.msg, 1, null, false);
                 }
             },
-            onError: function (error) {
-                Toast.info('请求失败');
+            onError: () => {
+                Toast.info("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -565,14 +550,6 @@ export default class pulltoRefresh extends React.Component {
                                                 callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
                                                 isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
                                                 noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                                                empty: {
-                                                    icon: "../res/img/mescroll-empty.png", //图标,默认null
-                                                    tip: "暂无相关数据~", //提示
-                                                    btntext: "去逛逛 >", //按钮,默认""
-                                                    btnClick: function () {//点击按钮的回调,默认null
-                                                        alert("点击了按钮,具体逻辑自行实现");
-                                                    }
-                                                },
                                                 page: {
                                                     num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
                                                     size: 30, //每页数据条数,默认10
@@ -583,9 +560,6 @@ export default class pulltoRefresh extends React.Component {
                                                     src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                     //offset : 1000
                                                 },
-                                                lazyLoad: {
-                                                    use: true // 是否开启懒加载,默认false
-                                                }
                                             }
                                         });
                                     } else {
@@ -609,9 +583,6 @@ export default class pulltoRefresh extends React.Component {
                                                     src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
                                                     //offset : 1000
                                                 },
-                                                lazyLoad: {
-                                                    use: true // 是否开启懒加载,默认false
-                                                }
                                             }
                                         });
                                     }
@@ -628,86 +599,74 @@ export default class pulltoRefresh extends React.Component {
 
     //点击今日本周
     clickDay = (v) => {
-        this.setState({
-            clickDayStatus: v.label
-        })
-        //今日
-        if (v.label == 0) {
-            mescroll.clearDataList();
-            mescroll.destroy();
-            mescroll = new MeScroll("mescroll", {
-                down: {
-                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
-                },
-                //上拉加载的配置项
-                up: {
-                    callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
-                    isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
-                    noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                    page: {
-                        num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
-                        size: 30, //每页数据条数,默认10
-                    },
-                    htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
-                    clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
-                    toTop: { //配置回到顶部按钮
-                        src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
-                        //offset : 1000
-                    },
-                    lazyLoad: {
-                        use: true // 是否开启懒加载,默认false
-                    }
-                }
-            });
+        if (this.state.clickDayStatus == v.label) {
+
+        } else {
             this.setState({
-                days: [
-                    {
-                        title: "今日", label: 0, isActive: true
-                    },
-                    {
-                        title: "本周", label: 1, isActive: false
-                    }
-                ]
+                clickDayStatus: v.label
             })
-        }
-        //本周
-        if (v.label == 1) {
-            mescroll.clearDataList();
-            mescroll.destroy();
-            mescroll = new MeScroll("mescroll", {
-                down: {
-                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
-                },
-                //上拉加载的配置项
-                up: {
-                    callback: this.getListDataWeek, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
-                    isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
-                    noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
-                    page: {
-                        num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
-                        size: 30, //每页数据条数,默认10
+            //今日
+            if (v.label == 0) {
+                mescroll.clearDataList();
+                mescroll.destroy();
+                mescroll = new MeScroll("mescroll", {
+                    down: {
+                        htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                     },
-                    htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
-                    clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
-                    toTop: { //配置回到顶部按钮
-                        src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
-                        //offset : 1000
-                    },
-                    lazyLoad: {
-                        use: true // 是否开启懒加载,默认false
+                    //上拉加载的配置项
+                    up: {
+                        callback: this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                        isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                        noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                        page: {
+                            num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+                            size: 30, //每页数据条数,默认10
+                        },
+                        htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
+                        clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
+                        toTop: { //配置回到顶部按钮
+                            src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
+                            //offset : 1000
+                        }
                     }
-                }
-            });
-            this.setState({
-                days: [
-                    {
-                        title: "今日", label: 0, isActive: false
+                });
+            }
+            //本周
+            if (v.label == 1) {
+                mescroll.clearDataList();
+                mescroll.destroy();
+                mescroll = new MeScroll("mescroll", {
+                    down: {
+                        htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                     },
-                    {
-                        title: "本周", label: 1, isActive: true
+                    //上拉加载的配置项
+                    up: {
+                        callback: this.getListDataWeek, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
+                        isBounce: false, //此处禁止ios回弹,解析(务必认真阅读,特别是最后一点): http://www.mescroll.com/qa.html#q10
+                        noMoreSize: 4, //如果列表已无数据,可设置列表的总数量要大于半页才显示无更多数据;避免列表数据过少(比如只有一条数据),显示无更多数据会不好看; 默认5
+                        page: {
+                            num: 0, //当前页 默认0,回调之前会加1; 即callback(page)会从1开始
+                            size: 30, //每页数据条数,默认10
+                        },
+                        htmlNodata: '<p class="upwarp-nodata">亲,没有更多数据了~</p>',
+                        clearEmptyId: "dataList", //相当于同时设置了clearId和empty.warpId; 简化写法;默认null; 注意vue中不能配置此项
+                        toTop: { //配置回到顶部按钮
+                            src: icon_topTop, //默认滚动到1000px显示,可配置offset修改
+                            //offset : 1000
+                        },
                     }
-                ]
-            })
+                });
+                this.setState({
+                    days: [
+                        {
+                            title: "今日", label: 0, isActive: false
+                        },
+                        {
+                            title: "本周", label: 1, isActive: true
+                        }
+                    ]
+                })
+            }
         }
     }
     //跳转绑定页面
