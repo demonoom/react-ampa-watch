@@ -1,6 +1,7 @@
 import React from "react";
 import "./pull.less"
 import icon_topTop from "../images/icon_toTop.png";
+import icon_refresh from '../images/icon_refresh.gif';
 import { WatchWebsocketConnection } from '../../helpers/watch_websocket_connection';
 import { Toast, Modal, NavBar, Popover } from 'antd-mobile';
 const Item = Popover.Item;
@@ -124,7 +125,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                            htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -158,7 +159,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                            htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -485,7 +486,7 @@ export default class pulltoRefresh extends React.Component {
                             //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
                             mescroll = new MeScroll("mescroll", {
                                 down: {
-                                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                                 },
                                 //上拉加载的配置项
                                 up: {
@@ -557,7 +558,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -591,7 +592,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                                                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -636,7 +637,7 @@ export default class pulltoRefresh extends React.Component {
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 down: {
-                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                 },
                 //上拉加载的配置项
                 up: {
@@ -675,7 +676,7 @@ export default class pulltoRefresh extends React.Component {
             mescroll.destroy();
             mescroll = new MeScroll("mescroll", {
                 down: {
-                    htmlContent: '<p class=""><img src="http://60.205.86.217/upload9/2019-04-10/16/c9aa71f0-cc32-4d82-9954-a076ef4161d0.gif" /></p><p class="downwarp-tip"></p>'
+                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
                 },
                 //上拉加载的配置项
                 up: {
