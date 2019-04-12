@@ -630,6 +630,17 @@ export default class pulltoRefresh extends React.Component {
                         }
                     }
                 });
+
+                this.setState({
+                    days: [
+                        {
+                            title: "今日", label: 0, isActive: true
+                        },
+                        {
+                            title: "本周", label: 1, isActive: false
+                        }
+                    ]
+                })
             }
             //本周
             if (v.label == 1) {
@@ -683,7 +694,7 @@ export default class pulltoRefresh extends React.Component {
         });
     }
 
-    //toDetail
+    //跳转折线图详情页
     toDetail = () => {
         if (pType == 1) {
             var url = WebServiceUtil.mobileServiceURL + "detailPage?userid=" + this.state.studentId + "&flag=" + this.state.clickDayStatus + "&tagType=love&num=" + this.state.userData.rank;
