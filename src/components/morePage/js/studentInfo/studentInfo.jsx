@@ -145,6 +145,7 @@ export default class studentInfo extends React.Component {
                 }
             },
         ], 'default', "")
+        var phoneType = navigator.userAgent;
         if (navigator.userAgent.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
             document.getElementsByClassName('am-modal-input')[0].getElementsByTagName('input')[0].focus();
         }
@@ -199,7 +200,6 @@ export default class studentInfo extends React.Component {
             "phoneNumber": this.state.phoneNumber,
             "actionName": "watchAction",
         };
-        console.log(param)
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success) {

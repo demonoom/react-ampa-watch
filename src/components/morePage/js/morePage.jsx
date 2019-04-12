@@ -75,7 +75,6 @@ export default class morePage extends React.Component {
                                 this.setState({
                                     guardianData: v,
                                 }, () => {
-                                    console.log(this.state.guardianData, "opiop")
                                     $(".moreList").show();
                                 })
                             }
@@ -183,8 +182,6 @@ export default class morePage extends React.Component {
                                                 watchName: value.watchName,
                                                 macAddr: value.macAddress
                                             }, () => {
-                                                console.log(calm.state.watchId, "watchId")
-                                                console.log(calm.state.watchName, "name")
                                                 calm.getWatch2gById(calm.state.watchId)
                                             });
                                         })
@@ -251,7 +248,6 @@ export default class morePage extends React.Component {
 
     //选择
     onSelect = (opt) => {
-        console.log(opt)
         this.state.watchData.forEach((v, i) => {
             if (v.id == opt.props.macId) {
                 this.setState({

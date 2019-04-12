@@ -94,7 +94,7 @@ export default class bindAndUnbind extends React.Component {
             }
         });
     }
-
+    //展示当前手表的二维码
     showCode (macAddr) {
         $("#qrcode").html("");
         $('#qrcode').qrcode(macAddr);

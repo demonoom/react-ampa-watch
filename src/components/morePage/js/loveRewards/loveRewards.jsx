@@ -29,7 +29,7 @@ export default class loveRewards extends React.Component {
         this.getWatch2gLoveOptionByStudentId(studentId)
 
     }
-
+    //获取默认爱心数／步数／答题率
     getWatch2gLoveOptionByStudentId = (studentId) => {
         var param = {
             "method": 'getWatch2gLoveOptionByStudentId',
@@ -59,23 +59,23 @@ export default class loveRewards extends React.Component {
     componentDidMount () {
     }
 
+    //设置步数
     toSetSteps = () => {
         $(".steps").show();
         this.setState({
             defaultId: this.state.data[0].id
         }, () => {
-            console.log(this.state.defaultId)
         })
     }
+    //设置每日答题数
     toSetAnswer = () => {
         $(".answers").show()
         this.setState({
             defaultId: this.state.data[1].id
         }, () => {
-
-            console.log(this.state.defaultId)
         })
     }
+    //设置每日答题率
     toSetRight = () => {
         $(".right").show()
         this.setState({
@@ -84,17 +84,20 @@ export default class loveRewards extends React.Component {
             console.log(this.state.defaultId)
         })
     }
-
+    //关闭步数页面
     toCloseSteps = () => {
         $(".steps").hide();
     }
+    //关闭答题数
     toCloseAnswer = () => {
         $(".answers").hide()
     }
+    //关闭答题率页面
     toCloseRight = () => {
         $(".right").hide()
     }
 
+    //减少步数按钮
     toDeSteps = () => {
         if (this.state.defaultSteps == 3000) {
             Toast.info("不能再低了哦", 1, null, false)
@@ -105,6 +108,7 @@ export default class loveRewards extends React.Component {
             defaultSteps: this.state.defaultSteps
         })
     }
+    //增加步数按钮
     addSteps = () => {
         if (this.state.defaultSteps == 10000) {
             Toast.info("到达最大值", 1, null, false)
@@ -126,6 +130,7 @@ export default class loveRewards extends React.Component {
             defaultAnswerValue: this.state.defaultAnswerValue
         })
     }
+    //增加答题数按钮
     addAnswer = () => {
         this.state.defaultAnswerValue += 1;
         this.setState({
@@ -133,7 +138,7 @@ export default class loveRewards extends React.Component {
         })
     }
 
-    //正确率
+    //减少正确率按钮
     deRight = () => {
         if (this.state.defaultRight == 40) {
             Toast.info("到达最小值", 1, null, false)
@@ -144,6 +149,7 @@ export default class loveRewards extends React.Component {
             defaultRight: this.state.defaultRight
         })
     }
+    //增加正确率按钮
     addRight = () => {
         if (this.state.defaultRight == 100) {
             Toast.info("到达最大值", 1, null, false)
@@ -155,18 +161,21 @@ export default class loveRewards extends React.Component {
         })
     }
 
+    //保存步数
     toSaveSteps = () => {
        
         this.setWatch2gLoveOptionById(this.state.defaultSteps)
     }
+    //保存答题数
     toSaveAnswerSum = () => {
         this.setWatch2gLoveOptionById(this.state.defaultAnswerValue)
 
     }
+    //保存答题率
     toSaveRight = () => {
         this.setWatch2gLoveOptionById(this.state.defaultRight)
     }
-
+    //设置爱心数据
     setWatch2gLoveOptionById = (optionValue) => {
         var param = {
             "method": 'setWatch2gLoveOptionById',

@@ -22,7 +22,6 @@ export default class setting extends React.Component {
         var userId = locationSearch.split("&")[1].split('=')[1];
         var macAddr = locationSearch.split("&")[2].split('=')[1];
         var version = locationSearch.split("&")[3].split('=')[1];
-        console.log(macAddr, "macAddr")
         this.setState({
             userId,
             watchId,
@@ -67,7 +66,6 @@ export default class setting extends React.Component {
     }
     //清除缓存
     toClearCache = () => {
-        console.log("opopop")
         var data = {
             method: 'clearCache',
         };
@@ -85,7 +83,7 @@ export default class setting extends React.Component {
         })
     }
 
-
+    //跳转个人中心设置页面
     toPCenter = () => {
         var url = WebServiceUtil.mobileServiceURL + "pCenter?userid=" + this.state.userId;
         var data = {

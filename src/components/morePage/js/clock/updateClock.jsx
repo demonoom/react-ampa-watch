@@ -106,7 +106,6 @@ export default class updateClock extends React.Component {
             }
         };
         ms = new WatchWebsocketConnection();
-        console.log(pro, "pro")
         ms.connect(pro);
     }
     componentDidMount () {

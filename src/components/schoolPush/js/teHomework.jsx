@@ -362,7 +362,7 @@ export default class teHomework extends React.Component {
             })
             return (
                 <div className='line_public homeItem' >
-                    <img src={rowData.fromUser.avatar} onClick={() => {
+                    <img  onError={(e) => {e.target.onerror = null;e.target.src="http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"}}  src={rowData.fromUser.avatar} onClick={() => {
                         this.setState({
                             showSend: false
                         })
