@@ -416,7 +416,7 @@ export default class morePage extends React.Component {
 
     render () {
         return (
-            <div id="morePage" className='bg_gray publicList_50'>
+            <div id="morePage" className='bg_gray publicList_50 androidPage'>
                
                     <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
                         <Popover mask
@@ -432,13 +432,7 @@ export default class morePage extends React.Component {
                             onVisibleChange={this.handleVisibleChange}
                             onSelect={this.onSelect}
                         >
-                            <div style={{
-                                height: '44px',
-                                lineHeight: '44px',
-                                padding: '15px 15px 0',
-                                display: 'flex',
-                                alignItems: 'center',
-                            }}
+                            <div className='watchSelectBtn'
                             >
                                 <span className="icon-back"></span>
                                 <span className='text_hidden watchName'>{this.state.watchName}</span>

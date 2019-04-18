@@ -1,6 +1,13 @@
 #morePage {
     width: 100%;
     height: 100%;
+    .watchSelectBtn{
+        height: 44px;
+        line-height: 44px;
+        padding: 15px 15px 0;
+        display: flex;
+        align-items: center;
+    }
     .activeDiv {
         display: none;
 
@@ -176,7 +183,15 @@
         }
     }
 
+    &.androidPage{
+        .watchSelectBtn{
+            padding-top: 0;
+        }
+        .personMsg .icon_add{
+            padding-top: 0;
+        }
 
+    }
     @media screen and (min-width: 768px) {
         .personMsg {
             height: 250px;
