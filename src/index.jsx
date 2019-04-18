@@ -148,6 +148,11 @@ const watchContacts = (location, cb) => {
         cb(null, require('./components/morePage/js/watchContacts/watchContacts').default)
     }, 'watchContacts')
 };
+const contactDetail = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/watchContacts/contactDetail').default)
+    }, 'contactDetail')
+};
 const loveRewards = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/morePage/js/loveRewards/loveRewards').default)
@@ -269,6 +274,7 @@ ReactDOM.render(
             <Route path="verifyBinding" getComponent={verifyBinding}/>
             <Route path="studentInfo" getComponent={studentInfo}/>
             <Route path="watchContacts" getComponent={watchContacts}/>
+            <Route path="contactDetail" getComponent={contactDetail}/>
             <Route path="loveRewards" getComponent={loveRewards}/>
             {/*<Route path="articleList" getComponent={articleList}/>*/}
             <Route path="articleList" getComponent={articleList2}/>

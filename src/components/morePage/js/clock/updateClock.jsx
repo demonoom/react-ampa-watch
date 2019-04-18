@@ -291,16 +291,7 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("修改成功",1,null,false);
-                    var commandJson = {
-                        "command": "watch2GClock",
-                        data: {
-                            "macAddress": this.state.macAddr,
-                            "clockStatus":2,
-                            "watch2gClock": result.response,
-                        }
-                    };
-                    console.log(commandJson, "commandJson")
-                    ms.send(commandJson);
+                    this.useabledData(this.state.watchId,2)
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
@@ -331,16 +322,7 @@ export default class updateClock extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("删除成功",1,null,false)
-                    var commandJson = {
-                        "command": "watch2GClock",
-                        data: {
-                            "macAddress": this.state.macAddr,
-                            "clockStatus": 0,
-                            "watch2gClock": this.state.initClockData,
-                        }
-                    };
-                    console.log(commandJson, "commandJson")
-                    ms.send(commandJson);
+                    this.useabledData(this.state.watchId,0)
                     //关闭当前窗口，并刷新上一个页面
                     setTimeout(function () {
                         var data = {
@@ -387,6 +369,38 @@ export default class updateClock extends React.Component {
             method: 'popView',
         };
         Bridge.callHandler(data, null, function (error) {
+        });
+    }
+
+
+     //获取有用的列表
+     useabledData=(watchId,isOpen)=>{
+        var param = {
+            "method": 'getWatch2gClocksByWatchId',
+            "watchId":watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"result")
+                if (result.success && result.response) {
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus": isOpen,
+                            "watch2gClock": result.response,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
         });
     }
     render () {

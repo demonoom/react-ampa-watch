@@ -35,7 +35,7 @@ export default class addWatchInfo extends React.Component {
         calm = this;
         this.state = {
             inputDisableFlag: true,
-            macAddress: "",
+            macAddress: "11111113",
             stuName: "",
             extraClassName: "",
             RelationClassName: "",
@@ -193,7 +193,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("5678");
+        this.getWatch2gByMacAddress("11111113");
         var data = {
             method: 'watchBinding'
         };
