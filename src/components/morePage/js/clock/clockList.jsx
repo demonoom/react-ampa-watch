@@ -192,6 +192,7 @@ export default class clockList extends React.Component {
                     <span className="am-navbar-title">闹钟列表</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                
                 <div className="commonLocation-cont overScroll">
                     <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className='grayBorder'></div>
@@ -203,18 +204,20 @@ export default class clockList extends React.Component {
                                         <span onClick={this.toUpdate.bind(this, v)}>
                                             <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                             <span>{v.clockType}</span>
+                                        </span> 
+                                        <span style={{ display: this.state.bindType == 2 ? "none" : "block" }} >
+                                            <Switch
+                                                checked={v.valid == 1 ? "true" : false}
+                                                onChange={this.offChange.bind(this, i, v.valid, v)}
+                                            />
                                         </span>
-                                        <Switch
-                                            checked={v.valid == 1 ? "true" : false}
-                                            onChange={this.offChange.bind(this, i, v.valid, v)}
-                                        />
                                     </div>
                                 )
                             })
                         }
                     </div>
 
-                    <div className='addBtn' onClick={this.toAddClockList}></div>
+                    <div style={{ display: this.state.bindType == 2 ? "none" : "block" }} className='addBtn' onClick={this.toAddClockList}></div>
                 </div>
             </div>
         )

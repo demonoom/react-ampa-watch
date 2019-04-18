@@ -26,7 +26,7 @@ export default class contactDetail extends React.Component {
         var watchId = locationSearch.split("&")[2].split('=')[1];
         var loginIdent = locationSearch.split("&")[3].split('=')[1];
         this.setState({
-            guardianId, watchId, loginIdent
+            guardianId, bindType,watchId, loginIdent
         })
         this.getWatch2gGuardianByGuardianId(watchId, guardianId)
 
@@ -48,7 +48,6 @@ export default class contactDetail extends React.Component {
                 if (result.success) {
                     this.setState({
                         personData: result.response,
-                        bindType:result.response.bindType
                     })
                     this.buildPerson(result.response)
                 } else {
@@ -211,7 +210,6 @@ export default class contactDetail extends React.Component {
 
 
     render () {
-        console.log(this.state.bindType, "this.state.personData.bindType")
         return (
             <div id="studentInfo" className='bg_gray publicList_50'>
                 <div className="am-navbar">
@@ -224,7 +222,7 @@ export default class contactDetail extends React.Component {
                     {
                         this.state.personDetail
                     }
-                    <div className='am-list-item am-list-item-middle line_public' style={{display: (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 2 || this.state.bindType == 1 ? "none":"flex"}}>
+                    <div className='am-list-item am-list-item-middle line_public' style={{display: (this.state.loginIdent == this.state.guardianId) ? "none":"flex"}}>
                         <div className="am-list-line">
                             <div className="am-list-content">设为紧急联系人</div>
                             <Switch
@@ -241,8 +239,8 @@ export default class contactDetail extends React.Component {
                             ""
                     }
                     {
-                        (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 1 ?
-                            <div className='submitBtn'>删除</div>
+                        (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 1?
+                            <div className='submitBtn' onClick={this.showAlertDelete.bind(this,this.state.watchId,this.state.guardianId)}>删除</div>
                             :
                             ""
                     }
