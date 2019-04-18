@@ -167,22 +167,40 @@ export default class contactDetail extends React.Component {
     buildPerson = (v) => {
         console.log(v, "v")
         var personDetail = <div>
-            <div>头像
+            <div className='am-list-item am-list-item-middle line_public15'>
+                <div className="am-list-line photo">
+                <div className="am-list-content">头像</div>
                 <img
                     onError={(e) => {
                         e.target.onerror = null;
                         e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
                     }}
                     src={v.guardian.avatar} alt="" />
+                </div>
             </div>
-            <div>关系
-                <span>{v.familyRelate}</span>
+            <div className='am-list-item am-list-item-middle line_public15'>
+                <div className="am-list-line">
+                    <div className="am-list-content">关系</div>
+                    <div className="am-list-extra">
+                        {v.familyRelate}
+                    </div>
+                </div>
             </div>
-            <div>类型
-                <span>{v.bindType == 1 ? "管理员" : "家庭成员"}</span>
+            <div className='am-list-item am-list-item-middle line_public15'>
+                <div className="am-list-line">
+                    <div className="am-list-content">类型</div>
+                    <div className="am-list-extra">
+                        {v.bindType == 1 ? "管理员" : "家庭成员"}
+                    </div>
+                </div>
             </div>
-            <div>手机号码
-                <span>{v.guardian.phoneNumber}</span>
+            <div className='am-list-item am-list-item-middle line_public15'>
+                <div className="am-list-line">
+                    <div className="am-list-content">手机号码</div>
+                    <div className="am-list-extra">
+                        {v.guardian.phoneNumber}
+                    </div>
+                </div>
             </div>
         </div>
         this.setState({
@@ -194,33 +212,36 @@ export default class contactDetail extends React.Component {
     render () {
         console.log(this.state.personData.bindType, "this.state.personData.bindType")
         return (
-            <div id="contactDetail" className='bg_gray'>
+            <div id="studentInfo" className='bg_gray publicList_50'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                     <span className="am-navbar-title">详细资料</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div className="grayBorder"></div>
                 <div>
                     {
                         this.state.personDetail
                     }
-                    <div style={{display: (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 2 ? "none":"block"}}>
-                        <span>设为紧急联系人</span>
-                        <Switch
-                            checked={this.state.isSOS}
-                            onChange={this.offChange.bind(this)}
-                        />
+                    <div className='am-list-item am-list-item-middle line_public' style={{display: (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 2 ? "none":"flex"}}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">设为紧急联系人</div>
+                            <Switch
+                                checked={this.state.isSOS}
+                                onChange={this.offChange.bind(this)}
+                            />
+                        </div>
                     </div>
                     {
 
                         this.state.loginIdent == this.state.guardianId ?
-                            <span onClick={this.toUpdatePersonData}>编辑个人资料</span>
+                            <div className='submitBtn' onClick={this.toUpdatePersonData}>编辑个人资料</div>
                             :
                             ""
                     }
                     {
                         (this.state.loginIdent != this.state.guardianId) && this.state.bindType == 1 ?
-                            <span>删除</span>
+                            <div className='submitBtn'>删除</div>
                             :
                             ""
                     }
