@@ -98,6 +98,7 @@ export default class watchContacts extends React.Component {
         data.map((v, i) => {
             watchContactsData.push(
                 <div className='item' onClick={this.toContactDetail.bind(this,v)}>
+                    <i className='icon_arrow'></i>
                     <img
                         className="imgChild"
                         onError={(e) => {
@@ -113,11 +114,13 @@ export default class watchContacts extends React.Component {
                                 {/* <span className='code'></span> */}
                                 <span className='tag'
                                     style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
+                                <span className='tag redTag'
+                                      style={{ display: v.bindType == 1 ? "block" : "none" }}>SOS</span>
                             </div>
                             <div className='tel text_hidden'>{v.guardian.colAccount}</div>
                         </div>
                     </div>
-                    {
+                   {/* {
                         this.state.bindType == 2 ?
                             ""
                             :
@@ -125,7 +128,7 @@ export default class watchContacts extends React.Component {
                                 onClick={this.showAlertDelete.bind(this, v.watch2gId, v.guardian.colUid)}
                                 style={{ display: v.bindType == 1 ? "none" : "block" }}
                             >删除</div>
-                    }
+                    }*/}
                 </div>
             )
         });
