@@ -416,7 +416,7 @@ export default class morePage extends React.Component {
 
     render () {
         return (
-            <div id="morePage" className='bg_gray publicList_50 androidPage'>
+            <div id="morePage" className='bg_gray publicList_50'>
                
                     <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
                         <Popover mask
