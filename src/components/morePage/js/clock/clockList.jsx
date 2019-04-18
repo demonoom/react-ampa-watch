@@ -122,16 +122,7 @@ export default class clockList extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.success && result.response) {
-                    var commandJson = {
-                        "command": "watch2GClock",
-                        data: {
-                            "macAddress": this.state.macAddr,
-                            "clockStatus": isOpen == 1 ? 0 : 1,
-                            "watch2gClock": data,
-                        }
-                    };
-                    console.log(commandJson, "commandJson")
-                    ms.send(commandJson);
+                   this.useabledData(this.state.watchId,isOpen)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -161,6 +152,38 @@ export default class clockList extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+
+
+    //获取有用的列表
+    useabledData=(watchId,isOpen)=>{
+        var param = {
+            "method": 'getWatch2gClocksByWatchId',
+            "watchId":watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"result")
+                if (result.success && result.response) {
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus": isOpen == 1 ? 0 : 1,
+                            "watch2gClock": result.response,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
+        });
+    }
     render () {
         return (
             <div id="clockList" className='bg_gray'>
@@ -176,7 +199,7 @@ export default class clockList extends React.Component {
                         {
                             this.state.clockList.map((v, i) => {
                                 return (
-                                    <div className='line_public15 bg_white clockItem'>
+                                    <div className='line_public15 bg_white clockItem my_flex'>
                                         <span onClick={this.toUpdate.bind(this, v)}>
                                             <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                             <span>{v.clockType}</span>

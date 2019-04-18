@@ -25,8 +25,9 @@ export default class watchContacts extends React.Component {
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var watchId = locationSearch.split("&")[0].split('=')[1];
         var bindType = locationSearch.split("&")[1].split('=')[1];
+        var loginIdent = locationSearch.split("&")[2].split('=')[1];
         this.setState({
-            watchId, bindType
+            watchId, bindType,loginIdent
         })
         this.getBindedGuardianByWatch2gId(watchId)
 
@@ -80,11 +81,23 @@ export default class watchContacts extends React.Component {
         })
     }
 
+    //跳转通讯录详情
+    toContactDetail=(data)=>{
+        var url = WebServiceUtil.mobileServiceURL + "contactDetail?id=" + data.guardianId+"&bindType="+data.bindType+"&watchId="+this.state.watchId+"&loginIdent="+this.state.loginIdent
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+
     buildWatchContactsData = (data) => {
         var watchContactsData = [];
         data.map((v, i) => {
             watchContactsData.push(
-                <div className='item'>
+                <div className='item' onClick={this.toContactDetail.bind(this,v)}>
                     <img
                         className="imgChild"
                         onError={(e) => {
