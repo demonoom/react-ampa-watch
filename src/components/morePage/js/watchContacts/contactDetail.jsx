@@ -97,7 +97,14 @@ export default class contactDetail extends React.Component {
                     };
                     Bridge.callHandler(data, null, function (error) {
                     });
-                    this.getBindedGuardianByWatch2gId(this.state.watchId)
+                    setTimeout(function () {
+                        var data = {
+                            method: 'finishForRefresh',
+                        };
+                        Bridge.callHandler(data, null, function (error) {
+                            console.log(error);
+                        });
+                    }, 800)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
