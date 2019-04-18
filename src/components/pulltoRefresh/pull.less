@@ -1,6 +1,12 @@
 /*页面*/
 #pullToRefresh {
     overflow: hidden;
+    .watchSelectBtn{
+        height: 44px;
+        display: flex;
+        align-items: center;
+        padding: 15px 0 0 15px;
+    }
     .am-tabs-tab-bar-wrap{
         position: relative;
     }
@@ -91,9 +97,7 @@
         width: 100%;
         height: 100%;
     }
-    .questionCont {
-        position: relative;
-        height: calc(~"100% - 64px");
+    .commonLocation-cont {
         box-sizing: border-box;
         .am-list-header {
             height: 42px;
@@ -368,5 +372,17 @@
         .watchSelect .watchName {
             font-size: 12px;
         }
+    }
+}
+
+.androidPage #pullToRefresh{
+    .am-tabs-default-bar-top{
+        padding-top: 0;
+    }
+    .watchSelect{
+        top: 0;
+    }
+    .watchSelectBtn{
+        padding-top: 0;
     }
 }
