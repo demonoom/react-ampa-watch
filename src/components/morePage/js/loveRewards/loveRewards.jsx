@@ -212,7 +212,7 @@ export default class loveRewards extends React.Component {
     render () {
         return (
             <div id="loveRewards" className='bg_gray publicList_50'>
-                <div>
+                <div className='bg_gray'>
                     <div className="am-navbar">
                         <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
                         <span className="am-navbar-title">爱心奖励设置</span>

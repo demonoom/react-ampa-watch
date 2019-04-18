@@ -31,8 +31,15 @@ export default class teHomework extends React.Component {
         var locationHref = decodeURI(window.location.href);
         var locationSearch = locationHref.substr(locationHref.indexOf("?") + 1);
         var userId = locationSearch.split("&")[0].split('=')[1];
+        var phoneType = navigator.userAgent;
+        var phone;
+        if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+            phone = 'ios'
+        } else {
+            phone = 'android'
+        }
         this.setState({
-            userId
+            userId,phone
         })
         this.getWatch2gsByGuardianUserId(userId);
 
@@ -500,7 +507,7 @@ export default class teHomework extends React.Component {
                         initialListSize={30}   //指定在组件刚挂载的时候渲染多少行数据，用这个属性来确保首屏显示合适数量的数据
                         scrollEventThrottle={20}     //控制在滚动过程中，scroll事件被调用的频率
                         style={{
-                            height: this.state.clientHeight - 64,
+                            height: this.state.phone == "ios" ?  this.state.clientHeight - 64 : this.state.clientHeight - 44,
                         }}
                     />
                 </div>
