@@ -192,8 +192,18 @@ export default class clockList extends React.Component {
                     <span className="am-navbar-title">闹钟列表</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                
                 <div className="commonLocation-cont overScroll">
+                    <div className="emptyCont emptyContNone" style={{display:this.state.clockList.length == 0 ? "block":"none"}}>
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className='grayBorder'></div>
                     <div className="publicList_50">
@@ -205,12 +215,11 @@ export default class clockList extends React.Component {
                                             <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                             <span>{v.clockType}</span>
                                         </span> 
-                                        <span style={{ display: this.state.bindType == 2 ? "none" : "block" }} >
                                             <Switch
+                                             style={{ display: this.state.bindType == 2 ? "none" : "block" }} 
                                                 checked={v.valid == 1 ? "true" : false}
                                                 onChange={this.offChange.bind(this, i, v.valid, v)}
                                             />
-                                        </span>
                                     </div>
                                 )
                             })
