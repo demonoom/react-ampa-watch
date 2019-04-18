@@ -2,6 +2,7 @@ import React from "react";
 import {
     Switch,
     Modal,
+    Toast
 } from 'antd-mobile';
 
 const alert = Modal.alert;
