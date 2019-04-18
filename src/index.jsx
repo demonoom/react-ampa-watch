@@ -198,6 +198,17 @@ const rankingList = (location, cb) => {
     }, 'rankingList')
 };
 
+/**
+ * androidPage
+ * @type {string}
+ */
+var phoneType = navigator.userAgent;
+if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
+    
+} else {
+    $('#example').addClass('androidPage')
+}
+
 import './index.less';
 class Index extends React.Component {
     render() {
