@@ -356,7 +356,7 @@ export default class morePage extends React.Component {
 
     //跳转手表通讯录
     toWatchContacts = () => {
-        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId + "&bindType=" + this.state.guardianData.bindType
+        var url = WebServiceUtil.mobileServiceURL + "watchContacts?watchId=" + this.state.watchId + "&bindType=" + this.state.guardianData.bindType+"&loginIdent="+this.state.userId
         var data = {
             method: 'openNewPage',
             selfBack: true,
