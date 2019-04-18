@@ -15,6 +15,7 @@ html, body {
   -moz-user-select:none;/*火狐*/
   -ms-user-select:none; /*IE10*/
   user-select:none;
+
 }
 input,textarea{
   -webkit-user-select:auto;
@@ -243,23 +244,23 @@ img{
       background-size: cover;
     }
   }
-    div{
-      text-align: center;
-    }
-    i{
-      display: block;
-      background: url("components/images/icon_empty.png") no-repeat center center;
-      width: 157px;
-      height: 131px;
-      background-size: cover;
-      margin: 0 auto;
-    }
-    span{
-      line-height: 30px;
-      font-size: 16px;
-      padding-top: 20px;
-      display: block;
-    }
+  div{
+    text-align: center;
+  }
+  i{
+    display: block;
+    background: url("components/images/icon_empty.png") no-repeat center center;
+    width: 157px;
+    height: 131px;
+    background-size: cover;
+    margin: 0 auto;
+  }
+  span{
+    line-height: 30px;
+    font-size: 16px;
+    padding-top: 20px;
+    display: block;
+  }
   .my_flex{
     flex-direction: column;
     height: calc(~"100% - 114px");
@@ -388,7 +389,7 @@ img{
   }
   .am-list-item .am-list-line{
     padding: 17px 8px 6px 37px;
-}
+  }
   .am-list-item .am-list-line .am-list-extra{
     flex-basis: auto;
     text-align: left;
@@ -445,10 +446,14 @@ img{
     min-height: auto !important;
   }
   .am-list-item .am-input-control input{
-    padding: 7px 0 !important;
-    line-height: 1.5 !important;
+    padding:9px 0 10px !important;
+    line-height: 1 !important;
     color: #333 !important;
     font-size: 15px !important;
+    &::-webkit-input-placeholder{
+      padding-top:1.5px;//解决placeholder偏高的问题
+      line-height: 1;
+    }
   }
 }
 .color_3  .am-list-item .am-list-line .am-list-extra,.am-list-item .am-list-line .am-list-extra.color_3{
@@ -471,7 +476,7 @@ img{
   font-size: 0;
 }
 .innerCont{
- padding-top: 22px;
+  padding-top: 22px;
 }
 /* 返回navbar */
 
@@ -536,8 +541,8 @@ img{
 .icon-back {
   background: url("components/watchPosition/img/icon-back2.png") no-repeat center;
   background-size: 100% 100%;
-  width: 13px;
-  height: 23px;
+  width: 9px;
+  height: 16px;
   margin-right: 3px;
 }
 .am-navbar-blue{
@@ -558,7 +563,7 @@ img{
     color: #fff;
   }
   .am-navbar-left{
-    font-size: 15px;
+    font-size: 14px;
   }
   .icon-back{
     background: url("components/watchPosition/img/icon-back.png") no-repeat center;
@@ -571,8 +576,8 @@ img{
     .icon-back {
       background: url("components/images/icon_backWhite.png") no-repeat center;
       background-size: 100% 100%;
-      width: 13px;
-      height: 23px;
+      width: 9px;
+      height: 16px;
       margin-right: 3px;
     }
     .am-navbar-title{
@@ -666,9 +671,17 @@ img{
 
 
 /*切换手表下拉*/
-.am-popover-inner{
+.am-popover-inner-wrapper{
   max-height: 117px;
   overflow-y: auto !important;
+  padding: 0 6px;
+  .am-popover-item-content{
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    white-space: nowrap;
+  }
 }
 /*list高度为50*/
 .publicList_50{
@@ -685,4 +698,16 @@ img{
       }
     }
   }
+}
+
+/*下拉刷新回到顶部及gif图*/
+.mescroll-totop{
+  width: 59px;
+  height: 60px;
+  bottom: 50px;
+}
+.downwarp-content img{
+  width: 25px;
+  height: 43px;
+  margin-bottom: 5px;
 }

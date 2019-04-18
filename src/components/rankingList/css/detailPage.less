@@ -1,6 +1,10 @@
 #detailPage{
   width: 100%;
   height: 100%;
+  overflow:hidden;
+  ::-webkit-scrollbar{
+    display: none;
+  }
   .chartCont{
     padding: 15px;
   }
@@ -15,7 +19,7 @@
     box-sizing: border-box;
   }
   .myDetail{
-    padding: 24px 15px 24px 85px;
+    padding: 21px 15px 21px 85px;
     position: relative;
     img{
       position: absolute;
@@ -35,6 +39,7 @@
       overflow: hidden;
       height: 25px;
       line-height: 25px;
+      padding-bottom: 4px;
       .userName{
         font-size: 17px;
         width: calc(~"100% - 120px");

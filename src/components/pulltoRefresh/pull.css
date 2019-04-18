@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+body {
+  background-color: white;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: #18B4FE;
+}
+/*模拟的标题*/
+.header {
+  z-index: 9990;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  line-height: 16px;
+  padding-top: 12px;
+  text-align: center;
+  background-color: white;
+}
+.header .btn-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 12px;
+}
+.header .btn-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px 6px;
+}
+.header .tip {
+  margin-top: 4px;
+  font-size: 12px;
+  color: gray;
+}
+/*菜单*/
+.header .nav {
+  margin-top: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.header .nav p {
+  display: inline-block;
+  width: 22%;
+  padding: 5px 0;
+}
+.header .nav .active {
+  border-bottom: 1px solid #FF6990;
+  color: #FF6990;
+}
+/*列表*/
+.mescroll {
+  position: fixed;
+  top: 84px;
+  bottom: 0;
+  height: auto;
+}
+/*展示上拉加载的数据列表*/
+.data-list li {
+  position: relative;
+  padding: 10px 8px 10px 120px;
+  border-bottom: 1px solid #eee;
+}
+.data-list .pd-img {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  width: 80px;
+  height: 80px;
+}
+.data-list .pd-name {
+  font-size: 16px;
+  line-height: 20px;
+  height: 40px;
+  overflow: hidden;
+}
+.data-list .pd-price {
+  margin-top: 8px;
+  color: red;
+}
+.data-list .pd-sold {
+  font-size: 12px;
+  margin-top: 8px;
+  color: gray;
+}
+.active {
+  color: red;
+  font-weight: 900;
+}

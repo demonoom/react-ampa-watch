@@ -71,7 +71,7 @@
 #rankingList .questionCont .am-list-header {
   height: 42px;
   position: relative;
-  padding: 12px 0 0 0 ;
+  padding: 12px 0 0 0;
 }
 #rankingList .questionCont .dateBtn {
   position: absolute;
@@ -246,9 +246,9 @@
   content: '';
   width: 0;
   height: 0;
-  border-width: 15px  0 0 15px;
+  border-width: 15px 0 0 15px;
   border-style: solid;
-  border-color: transparent #0076C8 ;
+  border-color: transparent #0076C8;
   /*透明 透明 透明 黄*/
   position: absolute;
   top: 0px;
@@ -279,7 +279,7 @@
   box-sizing: border-box;
   text-align: right;
 }
-@media only screen and (max-width: 320px) {
+@media only screen and (max-width: 370px) {
   #rankingList .am-tabs-default-bar-tab {
     font-size: 13px;
   }

@@ -193,7 +193,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("23456");
+        // this.getWatch2gByMacAddress("5678");
         var data = {
             method: 'watchBinding'
         };
@@ -332,6 +332,8 @@ export default class addWatchInfo extends React.Component {
         Bridge.callHandler(data, null, function (error) {
         });
     }
+
+    //退出弹框
     showAlertExit () {
         var _this = this;
         var phoneType = navigator.userAgent;
@@ -428,7 +430,7 @@ export default class addWatchInfo extends React.Component {
         })
     }
 
-    //第三个div
+    //第三个div上一步
     preThirPage = () => {
 
         $(".thirDiv").hide();
@@ -458,7 +460,7 @@ export default class addWatchInfo extends React.Component {
             $(".regiForDiv").show();
         }
     }
-
+    //有学生账号和学生账号的切换
     onTabsChange = (v) => {
         this.setState({inputDisableFlag: !this.state.inputDisableFlag});
         if (v.label == "has") {

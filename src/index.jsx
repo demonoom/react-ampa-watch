@@ -32,7 +32,6 @@ const schoolInfo = (location, cb) => {
     }, 'schoolInfo')
 };
 
-
 const verifyStuInfo = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/addWatchInfo/js/verifyStuInfo').default)
@@ -119,11 +118,11 @@ const teHomework= (location, cb) => {
     }, 'teHomework')
 };
 //排行榜
-const rankingList= (location, cb) => {
-    require.ensure([], require => {
-        cb(null, require('./components/rankingList/js/rankingList').default)
-    }, 'rankingList')
-};
+// const rankingList= (location, cb) => {
+//     require.ensure([], require => {
+//         cb(null, require('./components/rankingList/js/rankingList').default)
+//     }, 'rankingList')
+// };
 
 const detailPage= (location, cb) => {
     require.ensure([], require => {
@@ -171,6 +170,12 @@ const articleList = (location, cb) => {
     }, 'articleList')
 };
 
+const  articleList2 = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/article/js/articleList2').default)
+    }, 'articleList')
+};
+
 const articleDetail = (location, cb) => {
     require.ensure([], require => {
         cb(null, require('./components/article/js/articleDetail').default)
@@ -182,10 +187,13 @@ const pCenter = (location, cb) => {
         cb(null, require('./components/PersonalCenter/JS/pCenter').default)
     }, 'pCenter')
 };
-
+const rankingList = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/pulltoRefresh/pulltoRefresh').default)
+    }, 'rankingList')
+};
 
 import './index.less';
-
 class Index extends React.Component {
     render() {
         return (
@@ -221,6 +229,11 @@ class Index extends React.Component {
                             to="/rankingList?stuId=23991"
                             style={{fontSize: '24px'}}>排行榜</Link>
                     </li>
+                    {/* <li>
+                        <Link
+                            to="/pulltoRefresh?userId=23836"
+                            style={{fontSize: '24px'}}>pulltoRefresh</Link>
+                    </li> */}
                 </ul>
             </div>
         );
@@ -257,11 +270,13 @@ ReactDOM.render(
             <Route path="studentInfo" getComponent={studentInfo}/>
             <Route path="watchContacts" getComponent={watchContacts}/>
             <Route path="loveRewards" getComponent={loveRewards}/>
-            <Route path="articleList" getComponent={articleList}/>
+            {/*<Route path="articleList" getComponent={articleList}/>*/}
+            <Route path="articleList" getComponent={articleList2}/>
             <Route path="articleDetail" getComponent={articleDetail}/>
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
             <Route path="pCenter" getComponent={pCenter}/>
+            {/* <Route path="pulltoRefresh" getComponent={pulltoRefresh}/> */}
         </Route>
     </Router>, document.getElementById('example')
 );

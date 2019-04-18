@@ -1,10 +1,13 @@
 import React from "react";
 import ReactEcharts from 'echarts-for-react';
+import icon_refresh from '../../images/icon_refresh.gif'
 import {
-    PullToRefresh
+    PullToRefresh,Toast,Modal
 } from 'antd-mobile';
+const alert = Modal.alert;
 import '../css/detailPage.less';
 import '../css/macarons';
+window.mescroll = null;
 var calm;
 var myDate = new Date();
 //获取当前年
@@ -72,26 +75,57 @@ export default class detailPage extends React.Component {
         })
         this.getUserById(userId);
         if (tagType == "love") {
-            if (today == 1) {
+            if (today == 0) {
                 this.getLoveCountDetail(userId, start);
             } else {
                 this.getLoveCountDetail(userId, weekStart);
             }
         } else if (tagType == "step") {
-            console.log("step")
-            if (today == 1) {
+            if (today == 0) {
                 this.getSportStepDetail(userId, start);
             } else {
                 this.getSportStepDetail(userId, weekStart);
             }
         } else {
-            if (today == 1) {
+            if (today == 0) {
                 this.getStudentAnswerDetail(userId, start);
             } else {
                 this.getStudentAnswerDetail(userId, weekStart);
             }
         }
+           //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
+           mescroll = new MeScroll("mescroll", {
+            down: {
+                auto: false, //是否在初始化完毕之后自动执行下拉回调callback; 默认true
+                callback: this.downCallback, //下拉刷新的回调
+                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+            },
+        });
 
+    }
+    //下拉刷新
+    downCallback=()=>{
+        if (this.state.tagType == "love") {
+            if (this.state.today == 0) {
+                this.getLoveCountDetail(this.state.userId, start);
+            } else {
+                this.getLoveCountDetail(this.state.userId, weekStart);
+            }
+        } else if (this.state.tagType == "step") {
+            if (this.state.today == 0) {
+                this.getSportStepDetail(this.state.userId, start);
+            } else {
+                this.getSportStepDetail(this.state.userId, weekStart);
+
+            }
+        } else {
+            if (this.state.today == 0) {
+                this.getStudentAnswerDetail(this.state.userId, start);
+            } else {
+                this.getStudentAnswerDetail(this.state.userId, weekStart);
+
+            }
+        }
     }
 
     componentWillUnmount () {
@@ -124,7 +158,8 @@ export default class detailPage extends React.Component {
                 }
             },
             onError: function (error) {
-                // message.error(error);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -145,6 +180,7 @@ export default class detailPage extends React.Component {
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -156,7 +192,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -172,8 +209,8 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -185,7 +222,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -201,8 +239,8 @@ export default class detailPage extends React.Component {
         }
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.response) {
+                    mescroll.endSuccess();
                     var response = result.response;
                     this.setState({
                         detailData: result.response
@@ -214,7 +252,8 @@ export default class detailPage extends React.Component {
 
             },
             onError: function (error) {
-                // Toast.fail(error, 1);
+                Toast.fail("请求失败", 1, null, false);
+                mescroll.endErr();
             }
         });
     }
@@ -237,9 +276,9 @@ export default class detailPage extends React.Component {
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
             if (this.state.today == 1) {
-                xClazzNameArray.push(second + ":00");
-            } else {
                 xClazzNameArray.push(second2 + "日");
+            } else {
+                xClazzNameArray.push(second + ":00");
             }
             var answerRight = braceletHeartStepObj.y1;
             AnswRightTotal += braceletHeartStepObj.y1;
@@ -253,11 +292,6 @@ export default class detailPage extends React.Component {
             xClazzNameArray = unique(xClazzNameArray)
 
         });
-        // console.log(xClazzNameArray,'AnswerTotal')
-        // xClazzNameArray=["25日","26日","27日","28日","29日"];
-        // AnswerRight=["22.00","11.00"]
-        // AnswerTotal=["0.00", "20.00", "0.00", "3.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
-        // SubjectTotal = ["1.00", "3.00", "8.00", "16.00", "50.00", "22.00", "40.00", "33.00", "10.00", "20.00", "10.00", "0.00", "10.00", "0.00", "30.00"]
         var stepOption = _this.buildFaceOption(xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal)
         var faceChartDiv = <div
         // style={{display:braceletHeartSteps.length == 0 ? "none":"block"}} 
@@ -294,7 +328,7 @@ export default class detailPage extends React.Component {
             var second = braceletHeartStepObj.x.split(" ")[1];
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
-            if (this.state.today == 1) {
+            if (this.state.today == 0) {
                 xClazzNameArray.push(second + ":00");
             } else {
                 xClazzNameArray.push(second2 + "日");
@@ -336,7 +370,7 @@ export default class detailPage extends React.Component {
             var second = braceletHeartStepObj.x.split(" ")[1];
             var second2 = braceletHeartStepObj.x.split(" ")[0];
             second2 = second2.split("-")[2];
-            if (this.state.today == 1) {
+            if (this.state.today == 0) {
                 xClazzNameArray.push(second + ":00");
             } else {
                 xClazzNameArray.push(second2 + "日");
@@ -799,20 +833,23 @@ export default class detailPage extends React.Component {
         var data = {
             method: 'popView',
         };
-        console.log(data,"data")
         Bridge.callHandler(data, null, function (error) {
         });
     }
     render () {
         return (
-            <div id='detailPage'>
+            <div id='detailPage' className='bg_gray'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">{this.state.today == 1 ? "今日排行榜详情" : "本周排行榜详情"}</span>
+                    <span className="am-navbar-title">{this.state.today == 0 ? "今日排行榜详情" : "本周排行榜详情"}</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont overScroll">
-                    <PullToRefresh
+
+
+                    <div className="commonLocation-cont overScroll">
+                        <div id="mescroll" className="mescroll">
+                            <div id="newsList" className="news-list">
+                    {/* <PullToRefresh
                         damping={130}
                         ref={el => this.ptr = el}
                         style={{
@@ -825,7 +862,7 @@ export default class detailPage extends React.Component {
                             this.setState({ refreshing: true });
                             setTimeout(() => {
                                 this.setState({ refreshing: false }, () => {
-                                    if (this.state.today == 1) {
+                                    if (this.state.today == 0) {
                                         this.getStudentAnswerDetail(this.state.userId, start);
                                     } else {
                                         this.getStudentAnswerDetail(this.state.userId, weekStart);
@@ -833,7 +870,7 @@ export default class detailPage extends React.Component {
                                 });
                             }, 1000);
                         }}
-                    >
+                    > */}
                         <div style={{
                             height: calm.state.clientHeight - 64,
                         }}>
@@ -845,7 +882,7 @@ export default class detailPage extends React.Component {
                                         <span className='userName text_hidden'>{this.state.users ? this.state.users.userName : ""}</span>
                                         <span className='time'>
                                             {
-                                                this.state.today == 1 ?
+                                                this.state.today == 0 ?
                                                     <span>{WebServiceUtil.formatMDHM(Date.parse(new Date()))}</span>
                                                     :
                                                     <span>{WebServiceUtil.fun_date(-7)}-{WebServiceUtil.formatMD3(Date.parse(new Date()))}</span>
@@ -872,9 +909,12 @@ export default class detailPage extends React.Component {
                                 </div>
                             </div>
                         </div>
-                    </PullToRefresh>
+                    {/* </PullToRefresh> */}
                 </div>
 
+			        </div>
+		        </div>
+             
             </div>
         )
     }
