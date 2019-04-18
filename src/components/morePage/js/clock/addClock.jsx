@@ -253,16 +253,7 @@ export default class addClock extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("保存成功",1,null,false);
-                    var commandJson = {
-                        "command": "watch2GClock",
-                        data: {
-                            "macAddress": this.state.macAddr,
-                            "clockStatus": 1,
-                            "watch2gClock": result.response,
-                        }
-                    };
-                    console.log(commandJson, "commandJson")
-                    ms.send(commandJson);
+                    this.useabledData(this.state.watchId,1)
                     setTimeout(function () {
                         var data = {
                             method: 'finishForRefresh',
@@ -286,6 +277,37 @@ export default class addClock extends React.Component {
             method: 'popView',
         };
         Bridge.callHandler(data, null, function (error) {
+        });
+    }
+
+     //获取有用的列表
+     useabledData=(watchId,isOpen)=>{
+        var param = {
+            "method": 'getWatch2gClocksByWatchId',
+            "watchId":watchId,
+            "actionName": "watchAction"
+        };
+        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
+            onResponse: (result) => {
+                console.log(result,"result")
+                if (result.success && result.response) {
+                    var commandJson = {
+                        "command": "watch2GClock",
+                        data: {
+                            "macAddress": this.state.macAddr,
+                            "clockStatus": isOpen == 1 ? 0 : 1,
+                            "watch2gClock": result.response,
+                        }
+                    };
+                    console.log(commandJson, "commandJson")
+                    ms.send(commandJson);
+                } else {
+                    Toast.fail(result.msg, 1, null, false);
+                }
+            },
+            onError: function (error) {
+                Toast.info('请求失败');
+            }
         });
     }
     render () {
