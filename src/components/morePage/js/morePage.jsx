@@ -557,7 +557,7 @@ export default class morePage extends React.Component {
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_reply am-list-item am-list-item-middle line_public15 activeDiv'  onClick={this.toSetQuickReply}>
                         <i></i>
                         <div className="am-list-line">
-                            <div className="am-list-content">快捷回复设置</div>
+                            <div className="am-list-content">自定义回复设置</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>

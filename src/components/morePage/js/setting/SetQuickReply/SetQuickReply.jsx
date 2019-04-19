@@ -194,7 +194,7 @@ export default class SetQuickReply extends React.Component {
             <div id="setQuickReply" className='bg_gray'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">手表自定义回复</span>
+                    <span className="am-navbar-title">自定义回复设置</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 {/*空页面*/}
