@@ -2,6 +2,7 @@ import React from "react";
 import {
     Toast, Modal, Popover, NavBar, Icon
 } from 'antd-mobile';
+import './setQuickReply.less'
 const prompt = Modal.prompt;
 
 const Item = Popover.Item;
@@ -60,7 +61,14 @@ export default class SetQuickReply extends React.Component {
         var listArr = [];
         data.forEach((v, i) => {
             listArr.push(
-                <div>content  <span onClick={this.showAlert.bind(this, v.id)}>删除</span></div>
+                <div class='am-list-item am-list-item-middle line_public15'>
+                    <div class="am-list-line">
+                        <div class='am-list-content'>
+                            content
+                        </div>
+                        <div class='deleteBtn' onClick={this.showAlert.bind(this, v.id)}>删除</div>
+                    </div>
+                </div>
             )
         });
         this.setState({
@@ -183,10 +191,30 @@ export default class SetQuickReply extends React.Component {
 
     render () {
         return (
-            <div id="SetQuickReply" className='bg_gray publicList_50' >
-                <div>
-                    <div>content  <span onClick={this.showAlert.bind(this)}>删除</span></div>
-                    {this.state.quickReplyData}
+            <div id="setQuickReply" className='bg_gray'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">手表自定义回复</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                {/*空页面*/}
+                <div style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont emptyContNone">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='commonLocation-cont overScroll'>
+                    <div className='grayBorder'></div>
+                    <div className="publicList_50">
+                        {this.state.quickReplyData}
+                    </div>
                 </div>
                 <div className='addBtn' onClick={this.toAddQuickReply}></div>
             </div>
