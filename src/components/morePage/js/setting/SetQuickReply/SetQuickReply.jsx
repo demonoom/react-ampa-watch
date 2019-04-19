@@ -34,7 +34,7 @@ export default class SetQuickReply extends React.Component {
 
     }
 
-    //删除闹钟
+    //获取列表数据
     getQuickContent = () => {
         var param = {
             "method": "getWatch2GQuickMessageList",
@@ -45,6 +45,11 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.success) {
+                    if(result.response.length == 0){
+                        this.setState({
+                            hidePage:true
+                        })
+                    }
                     this.buildList(result.response)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -64,7 +69,7 @@ export default class SetQuickReply extends React.Component {
                 <div class='am-list-item am-list-item-middle line_public15'>
                     <div class="am-list-line">
                         <div class='am-list-content'>
-                            content
+                            {v.content}
                         </div>
                         <div class='deleteBtn' onClick={this.showAlert.bind(this, v.id)}>删除</div>
                     </div>
