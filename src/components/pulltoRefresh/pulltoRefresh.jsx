@@ -752,7 +752,7 @@ export default class pulltoRefresh extends React.Component {
                 {/* 没有绑定空页面---end */}
 
                 {/*绑定后未验证空页面---start*/}
-                <div className="commonLocation-cont" style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
+                <div style={{ display: calm.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false ? "none" : "block" }}>
                     <div className="emptyCont emptyContBind">
                         <div className="p38 my_flex">
                             <div>
