@@ -309,7 +309,7 @@ export default class schoolPush extends React.Component {
                     <span className="am-navbar-title">校内通知</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont" style={{ display: !this.state.toBind || this.state.hidePage ? "none" : "block" }}>
+                <div style={{ display: !this.state.toBind || this.state.hidePage ? "none" : "block" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
@@ -324,7 +324,7 @@ export default class schoolPush extends React.Component {
                     </div>
                 </div>
                 {/*绑定后空页面*/}
-                <div className="commonLocation-cont"  style={{ display: this.state.hidePage ? "block" : "none" }}>
+                <div style={{ display: this.state.hidePage ? "block" : "none" }}>
                     <div className="emptyCont emptyContNone">
                         <div className="p38 my_flex">
                             <div>
