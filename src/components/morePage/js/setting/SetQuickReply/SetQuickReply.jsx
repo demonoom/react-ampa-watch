@@ -185,7 +185,7 @@ export default class SetQuickReply extends React.Component {
         return (
             <div id="SetQuickReply" className='bg_gray publicList_50' >
                 <div>
-                    <div>content  <span onClick={this.showAlert.bind(this)}>删除222</span></div>
+                    <div>content  <span onClick={this.showAlert.bind(this)}>删除</span></div>
                     {this.state.quickReplyData}
                 </div>
                 <div className='addBtn' onClick={this.toAddQuickReply}></div>

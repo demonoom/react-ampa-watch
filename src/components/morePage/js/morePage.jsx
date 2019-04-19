@@ -475,6 +475,19 @@ export default class morePage extends React.Component {
     }
 
 
+    // 跳转快捷回复
+    toSetQuickReply = () => {
+        var url = WebServiceUtil.mobileServiceURL + "SetQuickReply?watchId=" + this.state.watchId+"&studentId=" + this.state.studentId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
+
+
     render () {
         return (
             <div id="morePage" className='bg_gray publicList_50'>
@@ -601,6 +614,13 @@ export default class morePage extends React.Component {
                             <div className="am-list-content">推送快捷回复</div>
                         </div>
                     </div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv'  onClick={this.toSetQuickReply}>
+                        <div className="am-list-line">
+                            <div className="am-list-content">快捷回复设置</div>
+                            <div className="am-list-extra"></div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toOpenGPS}>
                         <i></i>
                         <div className="am-list-line">
@@ -615,6 +635,7 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
+                    
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
                         <i></i>
                         <div className="am-list-line">
@@ -629,6 +650,8 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
+
+                   
                     <div className="grayBorder"></div>
                     {/*绑定后未验证空页面*/}
                     <div className="personEmptyCont" style={{ display: calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false) ? "none" : "block" }}>

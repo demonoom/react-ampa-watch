@@ -96,17 +96,7 @@ export default class setting extends React.Component {
             window.location.href = url;
         });
     }
-    // 跳转快捷回复
-    toSetQuickReply = () => {
-        var url = WebServiceUtil.mobileServiceURL + "SetQuickReply?watchId=" + this.state.watchId+"&studentId=" + this.state.studentId;
-        var data = {
-            method: 'openNewPage',
-            url: url
-        };
-        Bridge.callHandler(data, null, function (error) {
-            window.location.href = url;
-        });
-    }
+    
 
     render () {
         return (
@@ -125,13 +115,7 @@ export default class setting extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetQuickReply}>
-                        <div className="am-list-line">
-                            <div className="am-list-content">快捷回复设置</div>
-                            <div className="am-list-extra"></div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                        </div>
-                    </div>
+                 
                     <div className='am-list-item am-list-item-middle line_public15'>
                         <div className="am-list-line">
                             <div className="am-list-content">版本信息</div>
