@@ -66,12 +66,12 @@ export default class SetQuickReply extends React.Component {
         var listArr = [];
         data.forEach((v, i) => {
             listArr.push(
-                <div class='am-list-item am-list-item-middle line_public15'>
-                    <div class="am-list-line">
-                        <div class='am-list-content'>
+                <div className='am-list-item am-list-item-middle line_public15'>
+                    <div className="am-list-line">
+                        <div className='am-list-content'>
                             {v.content}
                         </div>
-                        <div class='deleteBtn' onClick={this.showAlert.bind(this, v.id)}>删除</div>
+                        <div className='deleteBtn' onClick={this.showAlert.bind(this, v.id)}>删除</div>
                     </div>
                 </div>
             )
@@ -111,7 +111,7 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1, null, false)
-                    this.useabledData(this.state.watchId, 0)
+                    this.getQuickContent();
                     //关闭当前窗口，并刷新上一个页面
                     setTimeout(function () {
                         var data = {
@@ -182,7 +182,7 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("添加成功", 1, null, false)
-                    //关闭当前窗口，并刷新上一个页面
+                    this.getQuickContent();
 
                 } else {
                     Toast.fail(result.msg, 1, null, false);

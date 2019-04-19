@@ -427,8 +427,8 @@ export default class teHomework extends React.Component {
                                                     <span>
                                                         <span>
                                                             <span className='blueTxt'>{v.user.userName}</span>:&nbsp;
-                                                            {/* <span>回复</span> */}
-                                                            {/* <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>： */}
+                                                            <span>回复</span>
+                                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
                                                             <span>{v.content}</span>
                                                         </span>
                                                     </span>

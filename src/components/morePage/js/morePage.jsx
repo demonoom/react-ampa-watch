@@ -444,8 +444,8 @@ export default class morePage extends React.Component {
     //toPushQuickReply推送快捷回复
     toPushQuickReply = () => {
         var commandJson = {
-            "command": "TestPushReply", data: {
-                "watch2gId": this.state.watchId
+            "command": "watch2GQucikPushAction", data: {
+                "studentId": this.state.studentId
             }
         };
         console.log(commandJson, "commandJson")
