@@ -83,7 +83,7 @@ export default class watchContacts extends React.Component {
 
     //跳转通讯录详情
     toContactDetail=(data)=>{
-        var url = WebServiceUtil.mobileServiceURL + "contactDetail?id=" + data.guardianId+"&bindType="+data.bindType+"&watchId="+this.state.watchId+"&loginIdent="+this.state.loginIdent
+        var url = WebServiceUtil.mobileServiceURL + "contactDetail?id=" + data.guardianId+"&bindType="+this.state.bindType+"&watchId="+this.state.watchId+"&loginIdent="+this.state.loginIdent
         var data = {
             method: 'openNewPage',
             url: url

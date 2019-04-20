@@ -797,19 +797,14 @@ export default class pulltoRefresh extends React.Component {
                                 }}
                                 onSelect={this.onSelect}
                             >
-                                <div style={{
-                                    height: '44px',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    padding: '15px 0 0 15px'
-                                }}
+                                <div className='watchSelectBtn'
                                 >
                                     <span className='watchName text_hidden'>{this.state.watchName}</span> <i className="icon-back"></i>
                                 </div>
                             </Popover>
                         </div>
                     </div>
-                    <div className="questionCont">
+                    <div className="commonLocation-cont">
                         <div id="mescroll" className="mescroll list-view-section-body">
                             <div className='dateBtn' style={{ display: this.state.toBind || this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2 ? "none" : "block" }}>
                                 {

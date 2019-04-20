@@ -193,6 +193,17 @@ export default class clockList extends React.Component {
                     <span className="am-navbar-right"></span>
                 </div>
                 <div className="commonLocation-cont overScroll">
+                    <div className="emptyCont emptyContNone" style={{display:this.state.clockList.length == 0 ? "block":"none"}}>
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="mask transparent" style={{ display: this.state.bindType == 2 ? "block" : "none" }}></div>
                     <div className='grayBorder'></div>
                     <div className="publicList_50">
@@ -203,18 +214,19 @@ export default class clockList extends React.Component {
                                         <span onClick={this.toUpdate.bind(this, v)}>
                                             <span className='time'>{WebServiceUtil.formatHM(v.noticeTime)}</span>
                                             <span>{v.clockType}</span>
-                                        </span>
-                                        <Switch
-                                            checked={v.valid == 1 ? "true" : false}
-                                            onChange={this.offChange.bind(this, i, v.valid, v)}
-                                        />
+                                        </span> 
+                                            <Switch
+                                             style={{ display: this.state.bindType == 2 ? "none" : "block" }} 
+                                                checked={v.valid == 1 ? "true" : false}
+                                                onChange={this.offChange.bind(this, i, v.valid, v)}
+                                            />
                                     </div>
                                 )
                             })
                         }
                     </div>
 
-                    <div className='addBtn' onClick={this.toAddClockList}></div>
+                    <div style={{ display: this.state.bindType == 2 ? "none" : "block" }} className='addBtn' onClick={this.toAddClockList}></div>
                 </div>
             </div>
         )
