@@ -181,7 +181,7 @@ export default class contactDetail extends React.Component {
                 <img
                     onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
+                        e.target.src =  require("../../../images/default_parents.png")
                     }}
                     src={v.guardian.avatar} alt="" />
                 </div>
@@ -206,7 +206,11 @@ export default class contactDetail extends React.Component {
                 <div className="am-list-line">
                     <div className="am-list-content">手机号码</div>
                     <div className="am-list-extra">
-                        {v.guardian.phoneNumber}
+                    {
+                       v.guardian.colUtype == "PAREN" ? v.guardian.colAccount:
+                       v.guardian.phoneNumber
+
+                    }
                     </div>
                 </div>
             </div>
@@ -230,7 +234,7 @@ export default class contactDetail extends React.Component {
                     {
                         this.state.personDetail
                     }
-                    <div className='am-list-item am-list-item-middle line_public' style={{display: (this.state.loginIdent == this.state.guardianId) ? "none":"flex"}}>
+                    {/* <div className='am-list-item am-list-item-middle line_public' style={{display: (this.state.loginIdent == this.state.guardianId) ? "none":"flex"}}>
                         <div className="am-list-line">
                             <div className="am-list-content">设为紧急联系人</div>
                             <Switch
@@ -238,7 +242,7 @@ export default class contactDetail extends React.Component {
                                 onChange={this.offChange.bind(this)}
                             />
                         </div>
-                    </div>
+                    </div> */}
                     {
 
                         this.state.loginIdent == this.state.guardianId ?

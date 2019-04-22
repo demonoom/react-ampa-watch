@@ -256,7 +256,7 @@ export default class pulltoRefresh extends React.Component {
             var pd = curPageData[i];
             var str = `
             <div class="imgDiv">
-                <img src=${pd.user ? pd.user.avatar : ""} onerror="onerror=null;src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'" />
+                <img src=${pd.user ? pd.user.avatar : ""} onerror="onerror=null;src='${require("../images/def_boy.png")}'" />
             </div>
             <div class="line_public itemCont my_flex">
                 <div class='num'>第${(page.num - 1) * page.size + i + 1}名</div>
