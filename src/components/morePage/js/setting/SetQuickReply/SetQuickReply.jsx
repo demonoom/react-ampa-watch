@@ -113,14 +113,14 @@ export default class SetQuickReply extends React.Component {
                     Toast.info("删除成功", 1, null, false)
                     this.getQuickContent();
                     //关闭当前窗口，并刷新上一个页面
-                    setTimeout(function () {
-                        var data = {
-                            method: 'finishForRefresh',
-                        };
-                        Bridge.callHandler(data, null, function (error) {
-                            console.log(error);
-                        });
-                    }, 1000)
+                    // setTimeout(function () {
+                    //     var data = {
+                    //         method: 'finishForRefresh',
+                    //     };
+                    //     Bridge.callHandler(data, null, function (error) {
+                    //         console.log(error);
+                    //     });
+                    // }, 1000)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }

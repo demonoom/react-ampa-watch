@@ -557,7 +557,7 @@ export default class morePage extends React.Component {
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_reply am-list-item am-list-item-middle line_public15 activeDiv'  onClick={this.toSetQuickReply}>
                         <i></i>
                         <div className="am-list-line">
-                            <div className="am-list-content">自定义回复设置</div>
+                            <div className="am-list-content">自定义回复</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
@@ -571,12 +571,7 @@ export default class morePage extends React.Component {
                         </div>
                     </div>
                     {/* <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div> */}
-                    {/* <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">找手表</div>
-                        </div>
-                    </div>
+                    {/*
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.pushWeather}>
                         <i></i>
                         <div className="am-list-line">
@@ -628,6 +623,12 @@ export default class morePage extends React.Component {
                         </div>
                     </div> */}
                     <div className="grayBorder"></div>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_find am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toFindWatch}>
+                        <i></i>
+                        <div className="am-list-line">
+                            <div className="am-list-content">找手表</div>
+                        </div>
+                    </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
                         <i></i>
                         <div className="am-list-line">
