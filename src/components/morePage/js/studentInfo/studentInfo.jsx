@@ -32,7 +32,8 @@ export default class studentInfo extends React.Component {
         calm = this;
         this.state = {
             watchData: [],
-            photoAddr: ""
+            photoAddr: "",
+            chiSex: ""
 
         };
     }
@@ -72,6 +73,7 @@ export default class studentInfo extends React.Component {
                         studentId: result.response.studentId,
                         phoneNumber: result.response.phoneNumber,
                         sexValue: [result.response.childSex],
+                        chiSex: result.response.childSex,
                         photoAddr: result.response.student ? result.response.student.avatar : "",
                         userName: result.response.student ? result.response.student.userName : "",
                         birthTime: result.response.birthTime,
@@ -274,7 +276,12 @@ export default class studentInfo extends React.Component {
                     <div onClick={this.updatePhoto} className='am-list-item am-list-item-middle line_public15 activeDiv'>
                         <div className="am-list-line photo">
                             <div className="am-list-content">宝贝头像</div>
-                            <img src={this.state.photoAddr} alt="" />
+                            <img src={this.state.photoAddr} alt=""
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.src = this.state.chiSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"
+                                }}
+                            />
                             <div className={this.state.bindType == 2 ? "am-list-arrow" : "am-list-arrow am-list-arrow-horizontal"}></div>
                         </div>
                     </div>
