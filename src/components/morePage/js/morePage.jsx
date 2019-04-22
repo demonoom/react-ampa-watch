@@ -626,13 +626,8 @@ export default class morePage extends React.Component {
                         <div className="am-list-line">
                             <div className="am-list-content">开启GPS</div>
                         </div>
-<<<<<<< HEAD
                     </div> */}
                     <div className="grayBorder"></div>
-=======
-                    </div>
-                    <div className="grayBorder" style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "block" }}></div>
->>>>>>> 82ee68b13b93ffbd275d0c70b783e143162edd40
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
                         <i></i>
                         <div className="am-list-line">
