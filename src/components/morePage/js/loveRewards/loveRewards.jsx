@@ -86,14 +86,17 @@ export default class loveRewards extends React.Component {
     }
     //关闭步数页面
     toCloseSteps = () => {
+        this.getWatch2gLoveOptionByStudentId(this.state.studentId)
         $(".steps").hide();
     }
     //关闭答题数
     toCloseAnswer = () => {
+        this.getWatch2gLoveOptionByStudentId(this.state.studentId)
         $(".answers").hide()
     }
     //关闭答题率页面
     toCloseRight = () => {
+        this.getWatch2gLoveOptionByStudentId(this.state.studentId)
         $(".right").hide()
     }
 
@@ -163,7 +166,6 @@ export default class loveRewards extends React.Component {
 
     //保存步数
     toSaveSteps = () => {
-       
         this.setWatch2gLoveOptionById(this.state.defaultSteps)
     }
     //保存答题数
@@ -203,11 +205,13 @@ export default class loveRewards extends React.Component {
 
     //返回
     toBack = () => {
+
         var data = {
             method: 'popView',
         };
         Bridge.callHandler(data, null, function (error) {
         });
+
     }
     render () {
         return (
