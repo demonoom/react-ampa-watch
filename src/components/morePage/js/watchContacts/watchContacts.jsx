@@ -103,7 +103,7 @@ export default class watchContacts extends React.Component {
                         className="imgChild"
                         onError={(e) => {
                             e.target.onerror = null;
-                            e.target.src = "http://www.maaee.com/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100"
+                            e.target.src = require("../../../images/default_parents.png")
                         }}
                         src={v.guardian.avatar + "?size=100x100"}
                         alt="" />
@@ -114,8 +114,9 @@ export default class watchContacts extends React.Component {
                                 {/* <span className='code'></span> */}
                                 <span className='tag'
                                     style={{ display: v.bindType == 1 ? "block" : "none" }}>管理员</span>
-                                <span className='tag redTag'
-                                      style={{ display: v.bindType == 1 ? "block" : "none" }}>SOS</span>
+                                {/* <span className='tag redTag'
+                                      style={{ display: v.bindType == 1 ? "block" : "none" }}>SOS
+                                      </span> */}
                             </div>
                             <div className='tel text_hidden'>{v.guardian.colAccount}</div>
                         </div>

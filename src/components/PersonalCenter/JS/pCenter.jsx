@@ -256,7 +256,7 @@ export default class pCenter extends React.Component {
             <div id='studentInfo' className='bg_gray publicList_50'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">个人信息</span>
+                    <span className="am-navbar-title">编辑个人信息</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 {this.state.contentDom}

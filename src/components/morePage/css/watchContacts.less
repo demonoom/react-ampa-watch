@@ -20,11 +20,12 @@
     color: #17ACF7;
     border: 1px #17ACF7 solid;
     border-radius: 4px;
-    padding: 0 5px;
+    padding: 0 5px 0;
     margin-left: 10px;
-    font-size: 12px;
-    line-height: 20px;
+    font-size: 11px;
+    line-height: 18px;
     height: 20px;
+    display: block;
     box-sizing: border-box;
     &.redTag{
       color: #f00;
@@ -148,7 +149,6 @@
       transform: translateY(-50%);
     }
     .relate{
-      line-height: 20px;
       max-width: calc(~'100% - 110px');
     }
     .tel{
@@ -216,4 +216,8 @@
       top: 25%;
     }
   }
+}
+.androidPage #watchContacts .tag{
+  padding: 1px 5px 0;
+  line-height: 18px;
 }

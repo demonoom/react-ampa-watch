@@ -19,8 +19,8 @@ html, body {
 }
 input,textarea{
   -webkit-user-select:auto;
+  caret-color: #16acf7;
 }
-
 body {
   overflow: hidden;
   height: 100%;
@@ -352,6 +352,7 @@ img{
 }
 .am-list-item .am-list-line .am-list-content{
   color: #333 !important;
+
 }
 .am-modal-title,.am-modal-button-group-h .am-modal-button:first-child{
   color: #333 !important;
@@ -458,7 +459,7 @@ img{
 }
 /*添加按钮*/
 .addBtn{
-  position: fixed;
+  position: absolute;
   width: 45px;
   height: 45px;
   right: 20px;
@@ -605,12 +606,12 @@ img{
     left: 50%;
     top:50%;
     transform: translate(-50%, -50%);
-    .loading-icon{
+    /*.loading-icon{
       background: url("components/watchPosition/img/loading-icon.gif") no-repeat;
       width: 122px;
       height:62px;
       background-size: 100% 100%;
-    }
+    }*/
   }
 }
 .am-toast.am-toast-nomask{
@@ -719,6 +720,18 @@ img{
   .emptyCont{
     height: calc(~"100% - 44px") !important;
     top:44px !important;
+  }
+  .am-navbar-title{
+    display: block!important;
+    text-align: center;
+    line-height: 47px;
+  }
+  .am-list-item .am-list-line .am-list-content, .am-list-item .am-list-line .am-list-extra{
+    padding-top: 8px;
+    padding-bottom: 6px;
+  }
+  #addNewLocation .setPosCont .search-item input{
+    line-height: 42px;
   }
 }
 
