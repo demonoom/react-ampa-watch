@@ -76,6 +76,7 @@ export default class morePage extends React.Component {
                                     guardianData: v,
                                 }, () => {
                                     $(".moreList").show();
+                                    console.log(this.state.guardianData,"guardianData234")
                                 })
                             }
                         })
@@ -491,7 +492,6 @@ export default class morePage extends React.Component {
     render () {
         return (
             <div id="morePage" className='bg_gray publicList_50'>
-
                 <div className='watchSelect am-navbar-blue' style={{ display: this.state.toBind ? "none" : "block" }}>
                     <Popover mask
                         overlayClassName="fortest"
@@ -522,7 +522,7 @@ export default class morePage extends React.Component {
                         <img src={this.state.childSex == "女" ? require("../../images/def_girl.png") : require("../../images/def_boy.png")} alt="" />
                         {
 
-                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.phoneNumber} )</div></div>
+                            this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "待绑定" : <div><span className='text_hidden'>{this.state.watchName}</span><div className='text_hidden relation'>我与宝贝的关系：{this.state.guardianData.familyRelate} ( {this.state.guardianData.guardian ? this.state.guardianData.guardian.colAccount : ""} )</div></div>
                         }
                     </div>
                 </div>
