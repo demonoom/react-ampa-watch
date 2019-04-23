@@ -168,6 +168,11 @@ const setting = (location, cb) => {
         cb(null, require('./components/morePage/js/setting/setting').default)
     }, 'setting')
 };
+const SetQuickReply = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/setting/SetQuickReply/SetQuickReply').default)
+    }, 'SetQuickReply')
+};
 
 const articleList = (location, cb) => {
     require.ensure([], require => {
@@ -293,6 +298,7 @@ ReactDOM.render(
             <Route path="bindAndUnbind" getComponent={bindAndUnbind}/>
             <Route path="setting" getComponent={setting}/>
             <Route path="pCenter" getComponent={pCenter}/>
+            <Route path="SetQuickReply" getComponent={SetQuickReply}/>
             {/* <Route path="pulltoRefresh" getComponent={pulltoRefresh}/> */}
         </Route>
     </Router>, document.getElementById('example')

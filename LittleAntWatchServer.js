@@ -12,7 +12,7 @@ var path = require('path');
 
 var argv = minimist(process.argv.slice(2), {
     default: {
-        as_uri: debug ? "http://localhost:8091/" : 'https://localhost:9091/'
+        as_uri: debug ? "http://localhost:8089/" : 'https://localhost:9091/'
     }
 });
 
