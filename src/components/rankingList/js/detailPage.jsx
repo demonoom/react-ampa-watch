@@ -402,7 +402,7 @@ export default class detailPage extends React.Component {
     buildFaceOption = (xClazzNameArray, AnswerRight, AnswerTotal, SubjectTotal) => {
         return {
             title: {
-                text: '今日答题统计',
+                text: '答题统计',
                 textStyle: {
                     fontSize: 15,
                     fontWeight: 'normal',
@@ -574,7 +574,7 @@ export default class detailPage extends React.Component {
     buildFaceOptionLove = (xClazzNameArray, AnswerRight) => {
         return {
             title: {
-                text: '今日爱心统计',
+                text: '爱心统计',
                 textStyle: {
                     fontSize: 15,
                     fontWeight: 'normal',
@@ -703,7 +703,7 @@ export default class detailPage extends React.Component {
     buildFaceOptionStep = (xClazzNameArray, AnswerRight) => {
         return {
             title: {
-                text: '今日运动统计',
+                text: '运动统计',
                 textStyle: {
                     fontSize: 15,
                     fontWeight: 'normal',
