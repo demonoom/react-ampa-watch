@@ -136,7 +136,7 @@ export default class teHomework extends React.Component {
         }
         currentPageNo += 1;
         this.setState({ isLoadingLeft: true, defaultPageNo: currentPageNo });
-        this.requestData(this.state.userId);
+        this.requestData(this.state.studentId);
         this.setState({
             dataSource: this.state.dataSource.cloneWithRows(this.initData),
             isLoadingLeft: true,
