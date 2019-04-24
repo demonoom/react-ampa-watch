@@ -12,6 +12,7 @@ export default class articleList2 extends React.Component {
         this.state = {
             dataList: [],
             carouselData: [],
+            firstAjax: true
         }
     }
 
@@ -194,10 +195,15 @@ export default class articleList2 extends React.Component {
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
                 if (result.success) {
-                    setTimeout(() => {
-                        successCallback(result.response)
-                    }, 500)
-                    // successCallback(result.response)
+                    //firstAjax用于区分第一次请求与否，解决两个接口造成loading下移的问题
+                    if (!this.state.firstAjax) {
+                        setTimeout(() => {
+                            successCallback(result.response)
+                        }, 500)
+                    } else {
+                        successCallback(result.response);
+                        this.setState({firstAjax: false})
+                    }
                 }
 
             },
