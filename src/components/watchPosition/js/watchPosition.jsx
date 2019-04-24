@@ -69,7 +69,8 @@ export default class watchPosition extends React.Component {
     }
 
     componentDidMount() {
-        this.getWatch2gsByGuardianUserId()
+        this.getWatch2gsByGuardianUserId();
+        $('body').addClass('jindian');
     }
 
     /**
