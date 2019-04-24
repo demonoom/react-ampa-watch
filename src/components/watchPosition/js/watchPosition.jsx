@@ -8,7 +8,7 @@ import '../css/watchPosition.less'
 const Loading = <div className="emptyLoading">
     <div className="loading-cont">
         <div className="loading-icon"></div>
-        <div>正在生成地图...</div>
+        {/*<div>正在生成地图...</div>*/}
     </div>
 </div>;
 
@@ -482,17 +482,17 @@ export default class watchPosition extends React.Component {
                         touchZoomCenter='1'
                     >
                         <Marker
-                            position={this.state.position}
-                            render={this.renderMarker}
-                            events={markerEvents}
-                        />
-                        <Marker
                             position={this.state.homePoint}
                             render={this.renderhomePoint}
                         />
                         <Marker
                             position={this.state.sclPoint}
                             render={this.rendersclPoint}
+                        />
+                        <Marker
+                            position={this.state.position}
+                            render={this.renderMarker}
+                            events={markerEvents}
                         />
                         <div onClick={this.getPosition} id="getPosition" className="customLayer">
                             <i className="icon-positioning"></i>
