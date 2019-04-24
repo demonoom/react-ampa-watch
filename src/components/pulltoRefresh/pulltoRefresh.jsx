@@ -125,7 +125,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                                                            htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -148,7 +148,7 @@ export default class pulltoRefresh extends React.Component {
                                                     mescroll.destroy();
                                                     mescroll = new MeScroll("mescroll", {
                                                         down: {
-                                                            htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                                                            htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                                                         },
                                                         //上拉加载的配置项
                                                         up: {
@@ -261,7 +261,7 @@ export default class pulltoRefresh extends React.Component {
             <div class="line_public itemCont my_flex">
                 <div class='num'>第${(page.num - 1) * page.size + i + 1}名</div>
                 <div class='userName text_hidden'>${pd.user ? pd.user.userName : ""}</div>
-                <span class='color_9 text_hidden'>共${pType == 0 ? pd.count + "道" : pType == 1 ? pd.rank + "颗" : pd.rank + "步"}</span>
+                <span class='color_9 text_hidden'>${pType == 0 ? "总答题" + pd.count + "道" : pType == 1 ?"共" + pd.rank + "颗" :"共" + pd.rank + "步"}</span>
             </div>
             `
             var liDom = document.createElement("li");
@@ -473,7 +473,7 @@ export default class pulltoRefresh extends React.Component {
                             //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,刷新列表数据;
                             mescroll = new MeScroll("mescroll", {
                                 down: {
-                                    htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                                    htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                                 },
                                 //上拉加载的配置项
                                 up: {
@@ -543,7 +543,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                                                htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -566,7 +566,7 @@ export default class pulltoRefresh extends React.Component {
                                         mescroll.destroy();
                                         mescroll = new MeScroll("mescroll", {
                                             down: {
-                                                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                                                htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                                             },
                                             //上拉加载的配置项
                                             up: {
@@ -648,7 +648,7 @@ export default class pulltoRefresh extends React.Component {
                 mescroll.destroy();
                 mescroll = new MeScroll("mescroll", {
                     down: {
-                        htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                        htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
                     },
                     //上拉加载的配置项
                     up: {
