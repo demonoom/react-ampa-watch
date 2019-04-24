@@ -2,6 +2,7 @@ import React from "react";
 import {
     Toast, Modal, Popover, NavBar, Icon
 } from 'antd-mobile';
+import './setQuickReply.less'
 const prompt = Modal.prompt;
 
 const Item = Popover.Item;
@@ -33,7 +34,7 @@ export default class SetQuickReply extends React.Component {
 
     }
 
-    //删除闹钟
+    //获取列表数据
     getQuickContent = () => {
         var param = {
             "method": "getWatch2GQuickMessageList",
@@ -44,6 +45,11 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 console.log(result, "result")
                 if (result.success) {
+                    if(result.response.length == 0){
+                        this.setState({
+                            hidePage:true
+                        })
+                    }
                     this.buildList(result.response)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -60,7 +66,14 @@ export default class SetQuickReply extends React.Component {
         var listArr = [];
         data.forEach((v, i) => {
             listArr.push(
-                <div>content  <span onClick={this.showAlert.bind(this, v.id)}>删除</span></div>
+                <div className='am-list-item am-list-item-middle line_public15'>
+                    <div className="am-list-line">
+                        <div className='am-list-content'>
+                            {v.content}
+                        </div>
+                        <div className='deleteBtn' onClick={this.showAlert.bind(this, v.id)}>删除</div>
+                    </div>
+                </div>
             )
         });
         this.setState({
@@ -98,16 +111,16 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1, null, false)
-                    this.useabledData(this.state.watchId, 0)
+                    this.getQuickContent();
                     //关闭当前窗口，并刷新上一个页面
-                    setTimeout(function () {
-                        var data = {
-                            method: 'finishForRefresh',
-                        };
-                        Bridge.callHandler(data, null, function (error) {
-                            console.log(error);
-                        });
-                    }, 1000)
+                    // setTimeout(function () {
+                    //     var data = {
+                    //         method: 'finishForRefresh',
+                    //     };
+                    //     Bridge.callHandler(data, null, function (error) {
+                    //         console.log(error);
+                    //     });
+                    // }, 1000)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -169,7 +182,7 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("添加成功", 1, null, false)
-                    //关闭当前窗口，并刷新上一个页面
+                    this.getQuickContent();
 
                 } else {
                     Toast.fail(result.msg, 1, null, false);
@@ -183,10 +196,30 @@ export default class SetQuickReply extends React.Component {
 
     render () {
         return (
-            <div id="SetQuickReply" className='bg_gray publicList_50' >
-                <div>
-                    <div>content  <span onClick={this.showAlert.bind(this)}>删除</span></div>
-                    {this.state.quickReplyData}
+            <div id="setQuickReply" className='bg_gray'>
+                <div className="am-navbar">
+                    <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
+                    <span className="am-navbar-title">自定义回复设置</span>
+                    <span className="am-navbar-right"></span>
+                </div>
+                {/*空页面*/}
+                <div style={{ display: this.state.hidePage ? "block" : "none" }}>
+                    <div className="emptyCont emptyContNone">
+                        <div className="p38 my_flex">
+                            <div>
+                                <i></i>
+                                <span>
+                                    暂无数据
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className='commonLocation-cont overScroll'>
+                    <div className='grayBorder'></div>
+                    <div className="publicList_50">
+                        {this.state.quickReplyData}
+                    </div>
                 </div>
                 <div className='addBtn' onClick={this.toAddQuickReply}></div>
             </div>

@@ -128,12 +128,12 @@ export default class setting extends React.Component {
                             <div className="am-list-extra"></div>
                         </div>
                     </div>
-                    <div className='am-list-item am-list-item-middle line_public activeDiv'>
+                    {/* <div className='am-list-item am-list-item-middle line_public activeDiv'>
                         <div className="am-list-line">
                             <div className="am-list-content">关于</div>
                             <div className="am-list-extra"></div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='submitBtn' onClick={this.showAlertLogout}>退出登录</div>
                 </div>
             </div>

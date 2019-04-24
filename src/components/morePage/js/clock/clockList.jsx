@@ -225,8 +225,8 @@ export default class clockList extends React.Component {
                         }
                     </div>
 
-                    <div style={{ display: this.state.bindType == 2 ? "none" : "block" }} className='addBtn' onClick={this.toAddClockList}></div>
                 </div>
+                    <div style={{ display: this.state.bindType == 2 ? "none" : "block" }} className='addBtn' onClick={this.toAddClockList}></div>
             </div>
         )
     }
