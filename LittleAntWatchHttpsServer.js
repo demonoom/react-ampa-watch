@@ -3,7 +3,7 @@ var cookieParser = require('cookie-parser')
 var express = require('express');
 var session = require('express-session')
 var minimist = require('minimist');
-var debug = false; 
+var debug = false;
 var http = require('http');
 var https = require('https');
 var fs = require("fs");
@@ -12,7 +12,7 @@ var path = require('path');
 
 var argv = minimist(process.argv.slice(2), {
     default: {
-        as_uri: debug ? "http://localhost:8091/" : 'https://localhost:9091/'
+        as_uri: debug ? "http://localhost:8089/" : 'https://localhost:9091/'
     }
 });
 

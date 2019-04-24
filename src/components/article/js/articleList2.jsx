@@ -12,6 +12,7 @@ export default class articleList2 extends React.Component {
         this.state = {
             dataList: [],
             carouselData: [],
+            firstAjax: true
         }
     }
 
@@ -33,7 +34,7 @@ export default class articleList2 extends React.Component {
         //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
         mescroll = new MeScroll("mescroll", {
             down: {
-                htmlContent:'<p class=""><img src='+icon_refresh+'/></p><p class="downwarp-tip"></p>'
+                htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>',
             },
             up: {
                 callback: _this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
@@ -130,7 +131,8 @@ export default class articleList2 extends React.Component {
             var time = this.timeDifference(rowData.createTime);
             var image = rowData.articleImgArray ? rowData.articleImgArray : [];
             if (image.length == 1) {  //图片一张
-                dom = <div className="item line_public" onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
+                dom = <div className="item line_public"
+                           onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
                     <div className="leftBox">
                         <div className="title minHeight">{rowData.articleTitle}</div>
                         <div className="bottom">
@@ -149,7 +151,8 @@ export default class articleList2 extends React.Component {
                         className="image3"
                     ></span></div>)
                 }
-                dom = <div className="item line_public" onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
+                dom = <div className="item line_public"
+                           onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
                     <div className="title">{rowData.articleTitle}</div>
                     <div className="images">{imageDom}</div>
                     <div className="bottom">
@@ -158,7 +161,8 @@ export default class articleList2 extends React.Component {
                     </div>
                 </div>
             } else {                //图片没有
-                dom = <div className="item line_public" onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
+                dom = <div className="item line_public"
+                           onClick={_this.toDetail.bind(this, rowData.articleId, rowData.articleTitle, rowData.isDiscuss)}>
                     <div className="title">{rowData.articleTitle}</div>
                     <div className="bottom">
                         <div className="read">{rowData.readCount}阅读</div>
@@ -191,7 +195,15 @@ export default class articleList2 extends React.Component {
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
                 if (result.success) {
-                    successCallback(result.response)
+                    //firstAjax用于区分第一次请求与否，解决两个接口造成loading下移的问题
+                    if (!this.state.firstAjax) {
+                        setTimeout(() => {
+                            successCallback(result.response)
+                        }, 500)
+                    } else {
+                        successCallback(result.response);
+                        this.setState({firstAjax: false})
+                    }
                 }
 
             },
@@ -212,7 +224,6 @@ export default class articleList2 extends React.Component {
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
                 if (result.success) {
-                    console.log(result.response);
                     _this.setState({carouselData: result.response})
                 }
 

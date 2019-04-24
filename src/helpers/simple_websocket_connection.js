@@ -49,7 +49,7 @@ export function SimpleWebsocketConnection() {
                 }
             }
         };
-        // 打开WebSocket 
+        // 打开WebSocket
         connection.ws.onclose = function (event) {
             connection.connecting = false;
             connection.connected = false;

@@ -37,7 +37,7 @@ export default class schoolPush extends React.Component {
         this.setState({
             userId,phone
         })
-        this.getWatch2gsByGuardianUserId(userId)
+        this.requestData(userId)
     }
 
 
@@ -188,38 +188,6 @@ export default class schoolPush extends React.Component {
                     Toast.fail(result.msg, 1, null, false);
                 }
 
-            },
-            onError: function (error) {
-                Toast.info('请求失败');
-            }
-        });
-    }
-
-    //获取手表列表
-    getWatch2gsByGuardianUserId = (userId) => {
-        var param = {
-            "method": 'getWatch2gsByGuardianUserId',
-            "userId": userId,
-            "pageNo": -1,
-            "actionName": "watchAction"
-        };
-        WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
-            onResponse: (result) => {
-                if (result.success && result.response) {
-                    if (result.response.length == 0) {
-                        this.setState({
-                            toBind: true,
-                        })
-                    } else {
-                        this.setState({
-                            studentId: result.response[0].student.colUid
-                        }, () => {
-                            this.requestData(this.state.studentId);
-                        })
-                    }
-                } else {
-                    Toast.fail(result.msg, 1, null, false);
-                }
             },
             onError: function (error) {
                 Toast.info('请求失败');

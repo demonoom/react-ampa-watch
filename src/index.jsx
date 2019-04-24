@@ -209,7 +209,7 @@ const rankingList = (location, cb) => {
  */
 var phoneType = navigator.userAgent;
 if (phoneType.indexOf('iPhone') > -1 || phoneType.indexOf('iPad') > -1) {
-    
+
 } else {
     $('#example').addClass('androidPage')
 }

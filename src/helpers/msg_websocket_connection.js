@@ -7,7 +7,7 @@ export function MsgConnection() {
     this.msgWsListener = null;
     this.REMOTE_URL = "ws://www.maaee.com:8887/Excoord_MessageServer/message";
     this.LOCAL_URL = "ws://192.168.50.71:8887/Excoord_MessageServer/message";
-    this.LOCAL_URL_LIVE = "ws://192.168.43.210:8889/Excoord_MessageServer/message";
+    this.LOCAL_URL_LIVE = "ws://192.168.50.71:8889/Excoord_MessageServer/message";
     this.WS_URL = isDebug ? (isDebugLocal ? this.LOCAL_URL_LIVE : this.LOCAL_URL) : this.REMOTE_URL;
     this.ws = null;
     this.PING_COMMAND = "ping_0123456789_abcdefg";
@@ -53,7 +53,7 @@ export function MsgConnection() {
                 }
             }
         };
-        // 打开WebSocket 
+        // 打开WebSocket
         connection.ws.onclose = function (event) {
             connection.connecting = false;
             connection.connected = false;
