@@ -37,7 +37,7 @@ export default class SetQuickReply extends React.Component {
     //获取列表数据
     getQuickContent = (studentId) => {
         var param = {
-            "method": "getWatch2GQuickMessageList",
+            "method": "getWatch2GQuickMessageListByUserId",
             "actionName": "watch2GQuickMessageAction",
             "userId":studentId,
             "pageNo": -1
