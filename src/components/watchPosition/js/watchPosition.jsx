@@ -7,8 +7,6 @@ import '../css/watchPosition.less'
 
 const Loading = <div className="emptyLoading">
     <div className="loading-cont">
-        <div className="loading-icon"></div>
-        <div>正在生成地图...</div>
     </div>
 </div>;
 
@@ -71,7 +69,8 @@ export default class watchPosition extends React.Component {
     }
 
     componentDidMount() {
-        this.getWatch2gsByGuardianUserId()
+        this.getWatch2gsByGuardianUserId();
+        $('body').addClass('jindian');
     }
 
     /**
@@ -196,7 +195,7 @@ export default class watchPosition extends React.Component {
         clickTime = (new Date()).getTime();*/
         ms.send(obj);
         if (!this.state.toBind && !this.state.toConfirm) {
-            Toast.loading('正在获取位置信息...', 5, () => {
+            Toast.info('正在获取位置信息...', 5, () => {
                 this.setState({jumpClass: 'user-positioning'});
             }, false);
             this.setState({jumpClass: 'user-positioning-jump'});
@@ -482,17 +481,17 @@ export default class watchPosition extends React.Component {
                         touchZoomCenter='1'
                     >
                         <Marker
-                            position={this.state.position}
-                            render={this.renderMarker}
-                            events={markerEvents}
-                        />
-                        <Marker
                             position={this.state.homePoint}
                             render={this.renderhomePoint}
                         />
                         <Marker
                             position={this.state.sclPoint}
                             render={this.rendersclPoint}
+                        />
+                        <Marker
+                            position={this.state.position}
+                            render={this.renderMarker}
+                            events={markerEvents}
                         />
                         <div onClick={this.getPosition} id="getPosition" className="customLayer">
                             <i className="icon-positioning"></i>
