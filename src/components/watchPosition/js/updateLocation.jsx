@@ -176,7 +176,9 @@ export default class updateLocation extends React.Component {
                 </Item>
             )
         });
-        this.setState({posList})
+        this.setState({posList}, () => {
+            $('.setPosCont').hide();
+        })
     };
 
     intoMap = (obj) => {
