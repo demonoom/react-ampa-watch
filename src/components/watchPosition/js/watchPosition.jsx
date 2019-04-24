@@ -38,7 +38,9 @@ export default class watchPosition extends React.Component {
             popoverLay: [],
             jumpClass: 'user-positioning',
             watch2gs: [],
-            familyRelate: ''
+            familyRelate: '',
+            watchAvatar:'http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png',
+            childSex:'男'
         };
     }
 
@@ -101,13 +103,17 @@ export default class watchPosition extends React.Component {
         });
     };
 
+    /**
+     * watchAvatar
+     * @param data
+     */
     buildStuList = (data) => {
         if (data.length == 0) {
             this.setState({toBind: true});
             return
         }
         this.setState({
-            watch2gs: data, familyRelate: data[0].guardians.filter((v) => {
+            childSex:data[0].childSex,watchAvatar:data[0].student.avatar,watch2gs: data, familyRelate: data[0].guardians.filter((v) => {
                 return v.bindType == 1
             })[0].familyRelate
         });
@@ -232,6 +238,10 @@ export default class watchPosition extends React.Component {
                         }
                         if (!!_this.state.marker) {
                             _this.state.marker.setPosition([info.data.longitude, info.data.latitude]);
+                            setTimeout(function () {
+                                Toast.hide();
+                                _this.setState({jumpClass: 'user-positioning'});
+                            },500)
                         }
                     }
                 } else if (info.command === 'userOperateResponse') {
@@ -256,7 +266,11 @@ export default class watchPosition extends React.Component {
      */
     renderMarker() {
         return <div className={watchPositionThis.state.jumpClass}><img style={{borderRadius: '50%'}}
-                                                                       src='http://www.maaee.com:80/Excoord_For_Education/userPhoto/default_avatar.png?size=100x100'
+                                                                       src={watchPositionThis.state.watchAvatar+'?size=100x100'}
+                                                                       onError={(e) => {
+                                                                           e.target.onerror = null;
+                                                                           e.target.src = watchPositionThis.state.childSex == "女" ? "http://60.205.86.217/upload9/2019-03-27/11/33ac8e20-5699-4a94-a80c-80adb4f050e3.png" : "http://60.205.86.217/upload9/2019-03-27/11/e4119535-3a05-4656-9b9f-47baa348392e.png"
+                                                                       }}
                                                                        alt=""/></div>
     }
 
@@ -343,6 +357,8 @@ export default class watchPosition extends React.Component {
             macId: opt.props.macId,
             homePointFlag: false,
             sclPointFlag: false,
+            watchAvatar:optObj.student.avatar,
+            childSex:optObj.childSex
         }, () => {
             this.watch2GLocaltionRequest();
         });
@@ -401,9 +417,12 @@ export default class watchPosition extends React.Component {
 
         const events = {
             created: (ins) => {
+                var _this = this;
                 this.setState({map: ins});
                 ins.setZoom(17);
-                this.watch2GLocaltionRequest();
+                setTimeout(function () {
+                    _this.watch2GLocaltionRequest();
+                },300)
             },
             moveend: () => {
                 Toast.hide();
