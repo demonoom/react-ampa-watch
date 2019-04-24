@@ -328,7 +328,9 @@ export default class updateLocation extends React.Component {
     setPosModelDown = () => {
         var _this = this;
         $('.setPosModel').slideUp(function () {
-            _this.setState({posList: [], searchValue: ''})
+            _this.setState({posList: [], searchValue: ''}, () => {
+                $('.setPosCont').show();
+            })
         });
     };
 
