@@ -74,7 +74,10 @@
     width: 40px;
     height: 53px;
     background-size: 100% 100%;
-    margin: -54px 0 0 -9px;
+    position: relative;
+    left: -9px;
+    top: -54px;
+    /*margin: -54px 0 0 -9px;*/
     img{
       width: 26px;
       height: 26px;
@@ -82,8 +85,7 @@
       position: absolute;
       left: 7px;
       top: 7px;
-      object-fit:contain;
-      margin-left:-9px
+      object-fit:contain
     }
   }
   .user-positioning-jump{
@@ -182,4 +184,7 @@
 }
 .androidPage #watchPosition .emptyCont-bg{
   top: 44px;
+}
+.jindian .am-toast.am-toast-nomask{
+  top: 50% !important;
 }
