@@ -7,8 +7,6 @@ import '../css/watchPosition.less'
 
 const Loading = <div className="emptyLoading">
     <div className="loading-cont">
-        <div className="loading-icon"></div>
-        {/*<div>正在生成地图...</div>*/}
     </div>
 </div>;
 
@@ -196,7 +194,7 @@ export default class watchPosition extends React.Component {
         clickTime = (new Date()).getTime();*/
         ms.send(obj);
         if (!this.state.toBind && !this.state.toConfirm) {
-            Toast.loading('正在获取位置信息...', 5, () => {
+            Toast.info('正在获取位置信息...', 5, () => {
                 this.setState({jumpClass: 'user-positioning'});
             }, false);
             this.setState({jumpClass: 'user-positioning-jump'});
