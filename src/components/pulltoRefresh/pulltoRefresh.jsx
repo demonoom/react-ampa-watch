@@ -778,7 +778,7 @@ export default class pulltoRefresh extends React.Component {
                                 {
                                     this.state.tabs.map((v, i) => {
                                         return (
-                                            <div onClick={this.clickP.bind(this, v)} className={v.isActive ? "am-tabs-default-bar-tab-active" : "am-tabs-default-bar-tab"} i={v.label}>{v.title}</div>
+                                            <div onClick={this.clickP.bind(this, v)} className={v.isActive ? "am-tabs-default-bar-tab-active text_hidden" : "am-tabs-default-bar-tab text_hidden"} i={v.label}>{v.title}</div>
                                         )
                                     })
                                 }
