@@ -33,7 +33,7 @@ export default class articleList2 extends React.Component {
         //创建MeScroll对象,内部已默认开启下拉刷新,自动执行up.callback,重置列表数据;
         mescroll = new MeScroll("mescroll", {
             down: {
-                htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>'
+                htmlContent: '<p class=""><img src=' + icon_refresh + '/></p><p class="downwarp-tip"></p>',
             },
             up: {
                 callback: _this.getListData, //上拉回调,此处可简写; 相当于 callback: function (page) { getListData(page); }
@@ -197,6 +197,7 @@ export default class articleList2 extends React.Component {
                     setTimeout(() => {
                         successCallback(result.response)
                     }, 500)
+                    // successCallback(result.response)
                 }
 
             },
@@ -217,7 +218,6 @@ export default class articleList2 extends React.Component {
         WebServiceUtil.requestArPaymentApi(JSON.stringify(param), {
             onResponse: result => {
                 if (result.success) {
-                    console.log(result.response);
                     _this.setState({carouselData: result.response})
                 }
 
