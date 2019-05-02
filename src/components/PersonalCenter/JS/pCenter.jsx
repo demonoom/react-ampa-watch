@@ -22,7 +22,6 @@ export default class pCenter extends React.Component {
         this.setState({
             userId,
         })
-        console.log(userId,'yyyyyy');
         myUserid=userId;
         this.requesetPData();
     }
@@ -65,8 +64,6 @@ export default class pCenter extends React.Component {
     }
 
     changeName = ()=>{
-        console.log("ioio")
-        //Toast.info('修改名字');
         this.showText(1,this.state.resDic.user.userName);
     }
 
@@ -96,7 +93,6 @@ export default class pCenter extends React.Component {
             },
             {
                 text: '确定', onPress: value => {
-                    console.log(value, "value")
                     this.setState({
                     }, () => {
                         if (type == 1 && value.length>0){
@@ -128,7 +124,6 @@ export default class pCenter extends React.Component {
                         var data = {
                             method: 'upDataUserInfo'
                         };
-                        console.log(data);
                         Bridge.callHandler(data, null, function (error) {
 
                         });
@@ -186,7 +181,6 @@ export default class pCenter extends React.Component {
                         var data = {
                             method: 'upDataUserInfo'
                         };
-                        console.log(data);
                         Bridge.callHandler(data, null, function (error) {
 
                         });

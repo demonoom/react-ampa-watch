@@ -44,7 +44,6 @@ export default class SetQuickReply extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success) {
                     if(result.response.length == 0){
                         this.setState({

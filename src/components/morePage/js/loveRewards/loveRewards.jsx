@@ -39,7 +39,6 @@ export default class loveRewards extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success && result.response) {
                     this.setState({
                         data: result.response,
@@ -81,7 +80,6 @@ export default class loveRewards extends React.Component {
         this.setState({
             defaultId: this.state.data[2].id
         }, () => {
-            console.log(this.state.defaultId)
         })
     }
     //关闭步数页面
@@ -187,7 +185,6 @@ export default class loveRewards extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success && result.response) {
                     Toast.info("保存成功", 1, null, false);
                     $(".right").hide();

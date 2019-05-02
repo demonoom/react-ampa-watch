@@ -76,7 +76,6 @@ export default class morePage extends React.Component {
                                     guardianData: v,
                                 }, () => {
                                     $(".moreList").show();
-                                    console.log(this.state.guardianData,"guardianData234")
                                 })
                             }
                         })
