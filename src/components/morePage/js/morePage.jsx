@@ -393,7 +393,7 @@ export default class morePage extends React.Component {
     }
     //跳转设置页面
     toSetting = () => {
-        var url = WebServiceUtil.mobileServiceURL + "setting?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&version=" + this.state.version+ "&studentId=" + this.state.studentId
+        var url = WebServiceUtil.mobileServiceURL + "setting?watchId=" + this.state.watchId + "&studentId=" + this.state.userId + "&macAddr=" + this.state.macAddr + "&version=" + this.state.version + "&studentId=" + this.state.studentId
         var data = {
             method: 'openNewPage',
             selfBack: true,
@@ -477,7 +477,7 @@ export default class morePage extends React.Component {
 
     // 跳转快捷回复
     toSetQuickReply = () => {
-        var url = WebServiceUtil.mobileServiceURL + "SetQuickReply?watchId=" + this.state.watchId+"&studentId=" + this.state.studentId;
+        var url = WebServiceUtil.mobileServiceURL + "SetQuickReply?watchId=" + this.state.watchId + "&studentId=" + this.state.studentId;
         var data = {
             method: 'openNewPage',
             url: url
@@ -485,6 +485,11 @@ export default class morePage extends React.Component {
         Bridge.callHandler(data, null, function (error) {
             window.location.href = url;
         });
+    }
+
+    //跳转刷新手表页面
+    toRefreshWatch=()=>{
+
     }
 
 
@@ -553,7 +558,7 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_reply am-list-item am-list-item-middle line_public15 activeDiv'  onClick={this.toSetQuickReply}>
+                    <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_reply am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toSetQuickReply}>
                         <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">自定义回复</div>
@@ -635,13 +640,21 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    
+
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toUnbind}>
                         <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content">绑定与解绑</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
+                    </div>
+                    <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.toRefreshWatch}>
+                        <i></i>
+                        <div className="am-list-line">
+                            <div className="am-list-content"> 刷新手表</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+
                     </div>
                     <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
                         <i></i>
@@ -651,7 +664,7 @@ export default class morePage extends React.Component {
                         </div>
                     </div>
 
-                   
+
                     <div className="grayBorder"></div>
                     {/*绑定后未验证空页面*/}
                     <div className="personEmptyCont" style={{ display: calm.state.toBind || ((this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) == false) ? "none" : "block" }}>

@@ -50,6 +50,11 @@ const morePage = (location, cb) => {
         cb(null, require('./components/morePage/js/morePage').default)
     }, 'morePage')
 };
+const refreshWatch = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/refreshWatch/refreshWatch').default)
+    }, 'morePage')
+};
 
 const validationMes = (location, cb) => {
     require.ensure([], require => {
@@ -299,6 +304,7 @@ ReactDOM.render(
             <Route path="setting" getComponent={setting}/>
             <Route path="pCenter" getComponent={pCenter}/>
             <Route path="SetQuickReply" getComponent={SetQuickReply}/>
+            <Route path="refreshWatch" getComponent={refreshWatch}/>
             {/* <Route path="pulltoRefresh" getComponent={pulltoRefresh}/> */}
         </Route>
     </Router>, document.getElementById('example')
