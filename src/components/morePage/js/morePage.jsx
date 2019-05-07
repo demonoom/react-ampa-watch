@@ -652,6 +652,16 @@ export default class morePage extends React.Component {
                             <div className="am-list-content">找手表</div>
                         </div>
                     </div>
+                    <div
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }}
+                        className='icon_refresh am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushPage}>
+                        <i></i>
+                        <div className="am-list-line">
+                            <div className="am-list-content">刷新手表信息</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+
+                    </div>
                     <div style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "flex" : "none" }} className='icon_addWatch am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toJupmBind}>
                         <i></i>
                         <div className="am-list-line">
@@ -674,16 +684,7 @@ export default class morePage extends React.Component {
                     {/*        <div className="am-list-arrow am-list-arrow-horizontal"></div>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-                    <div 
-                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} 
-                        className='icon_refresh am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toPushPage}>
-                        <i></i>
-                        <div className="am-list-line">
-                            <div className="am-list-content">刷新手表信息</div>
-                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
-                        </div>
 
-                    </div>
                     <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
                         <i></i>
                         <div className="am-list-line">
