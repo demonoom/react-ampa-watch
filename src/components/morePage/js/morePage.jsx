@@ -489,7 +489,26 @@ export default class morePage extends React.Component {
 
     //跳转刷新手表页面
     toRefreshWatch=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "refreshWatch";
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
+    }
 
+    //跳转刷新手表页面
+    toPushPage=()=>{
+        var url = WebServiceUtil.mobileServiceURL + "pushPage?userId="+calm.state.userId+"&watchId="+calm.state.watchId+"&macAddr="+calm.state.macAddr+"&studentId="+calm.state.studentId;
+        var data = {
+            method: 'openNewPage',
+            url: url
+        };
+        Bridge.callHandler(data, null, function (error) {
+            window.location.href = url;
+        });
     }
 
 
@@ -648,10 +667,19 @@ export default class morePage extends React.Component {
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
                     </div>
-                    <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.toRefreshWatch}>
+                    <div className='icon_bind am-list-item am-list-item-middle line_public15 activeDiv' onClick={this.toRefreshWatch}>
                         <i></i>
                         <div className="am-list-line">
                             <div className="am-list-content"> 刷新手表</div>
+                            <div className="am-list-arrow am-list-arrow-horizontal"></div>
+                        </div>
+                    </div>
+                    <div 
+                        style={{ display: this.state.toBind || (this.state.guardianData.valid == 2 && this.state.guardianData.bindType == 2) ? "none" : "flex" }} 
+                        className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.toPushPage}>
+                        <i></i>
+                        <div className="am-list-line">
+                            <div className="am-list-content">手表基础数据绑定</div>
                             <div className="am-list-arrow am-list-arrow-horizontal"></div>
                         </div>
 

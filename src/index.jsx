@@ -208,6 +208,12 @@ const rankingList = (location, cb) => {
     }, 'rankingList')
 };
 
+const pushPage = (location, cb) => {
+    require.ensure([], require => {
+        cb(null, require('./components/morePage/js/pushPage/pushPage').default)
+    }, 'pushPage')
+};
+
 /**
  * androidPage
  * @type {string}
@@ -305,6 +311,7 @@ ReactDOM.render(
             <Route path="pCenter" getComponent={pCenter}/>
             <Route path="SetQuickReply" getComponent={SetQuickReply}/>
             <Route path="refreshWatch" getComponent={refreshWatch}/>
+            <Route path="pushPage" getComponent={pushPage}/>
             {/* <Route path="pulltoRefresh" getComponent={pulltoRefresh}/> */}
         </Route>
     </Router>, document.getElementById('example')
