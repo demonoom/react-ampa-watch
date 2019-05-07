@@ -63,7 +63,7 @@ export default class pushPage extends React.Component {
     //推送课程表
     toPushSchedule = () => {
         var commandJson = {
-            "command": "TestPushTimeTable", data: {
+            "command": "PushTimeTable", data: {
                 "watch2gId": this.state.watchId
             }
         };
