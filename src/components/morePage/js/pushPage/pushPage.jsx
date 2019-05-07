@@ -70,7 +70,26 @@ export default class pushPage extends React.Component {
         console.log(commandJson, "commandJson")
         ms.send(commandJson);
     }
-
+    //打电话
+    callWatch = () => {
+        var commandJson = {
+            "command": "watch2GCallAction", data: {
+                "watch2gId": this.state.watchId
+            }
+        };
+        console.log(commandJson, "commandJson")
+        ms.send(commandJson);
+    }
+    //监听
+    moniterWatch = () => {
+        var commandJson = {
+            "command": "watch2GMonitorAction", data: {
+                "watch2gId": this.state.watchId
+            }
+        };
+        console.log(commandJson, "commandJson")
+        ms.send(commandJson);
+    }
 
     /**
      * 推送天气
@@ -125,6 +144,18 @@ export default class pushPage extends React.Component {
                 <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.toPushSchedule}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送课程表</div>
+                        <div className="am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.callWatch}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">打电话</div>
+                        <div className="am-list-arrow-horizontal"></div>
+                    </div>
+                </div>
+                <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.moniterWatch}>
+                    <div className="am-list-line">
+                        <div className="am-list-content">监听</div>
                         <div className="am-list-arrow-horizontal"></div>
                     </div>
                 </div>

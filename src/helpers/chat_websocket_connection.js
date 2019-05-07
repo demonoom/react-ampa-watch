@@ -1,4 +1,4 @@
-import React from 'react';
+    nimport React from 'react';
 
 var isDebug = false;
 var isDebugLocal = false;
