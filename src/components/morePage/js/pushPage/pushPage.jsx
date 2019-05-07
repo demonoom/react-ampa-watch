@@ -106,6 +106,7 @@ export default class pushPage extends React.Component {
                     <span className="am-navbar-title">刷新手表信息</span>
                     <span className="am-navbar-right"></span>
                 </div>
+                <div className="grayBorder"></div>
                 <div className='icon_bind am-list-item am-list-item-middle line_public15' onClick={this.pushWeather}>
                     <div className="am-list-line">
                         <div className="am-list-content">推送天气</div>
