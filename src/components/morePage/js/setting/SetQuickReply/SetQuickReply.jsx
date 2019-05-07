@@ -27,7 +27,7 @@ export default class SetQuickReply extends React.Component {
             studentId,
             watchId,
         })
-        this.getQuickContent()
+        this.getQuickContent(studentId)
 
     }
     componentDidMount () {
@@ -35,15 +35,15 @@ export default class SetQuickReply extends React.Component {
     }
 
     //获取列表数据
-    getQuickContent = () => {
+    getQuickContent = (studentId) => {
         var param = {
-            "method": "getWatch2GQuickMessageList",
+            "method": "getWatch2GQuickMessageListByUserId",
             "actionName": "watch2GQuickMessageAction",
+            "userId":studentId,
             "pageNo": -1
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result, "result")
                 if (result.success) {
                     if(result.response.length == 0){
                         this.setState({
@@ -111,16 +111,16 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("删除成功", 1, null, false)
-                    this.getQuickContent();
+                    this.getQuickContent(this.state.studentId);
                     //关闭当前窗口，并刷新上一个页面
-                    setTimeout(function () {
-                        var data = {
-                            method: 'finishForRefresh',
-                        };
-                        Bridge.callHandler(data, null, function (error) {
-                            console.log(error);
-                        });
-                    }, 1000)
+                    // setTimeout(function () {
+                    //     var data = {
+                    //         method: 'finishForRefresh',
+                    //     };
+                    //     Bridge.callHandler(data, null, function (error) {
+                    //         console.log(error);
+                    //     });
+                    // }, 1000)
                 } else {
                     Toast.fail(result.msg, 1, null, false);
                 }
@@ -182,7 +182,7 @@ export default class SetQuickReply extends React.Component {
             onResponse: (result) => {
                 if (result.success && result.response) {
                     Toast.info("添加成功", 1, null, false)
-                    this.getQuickContent();
+                    this.getQuickContent(this.state.studentId);
 
                 } else {
                     Toast.fail(result.msg, 1, null, false);

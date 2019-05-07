@@ -101,11 +101,11 @@ module.exports = {
         }),
 
         //将开发模式变为生产模式
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"',
-            },
-        }),
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         NODE_ENV: '"production"',
+        //     },
+        // }),
         //抽取CSS文件插件
         new ExtractTextPlugin({filename: '[name].css?v=' + version, allChunks: true}),
 

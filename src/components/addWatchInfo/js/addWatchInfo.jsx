@@ -193,7 +193,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("234234");
+        // this.getWatch2gByMacAddress("2222222");
         var data = {
             method: 'watchBinding'
         };

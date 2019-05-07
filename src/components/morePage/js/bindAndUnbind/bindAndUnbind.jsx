@@ -23,7 +23,6 @@ export default class bindAndUnbind extends React.Component {
         var macAddr = locationSearch.split("&")[2].split('=')[1];
         var watchName = locationSearch.split("&")[3].split('=')[1];
         var studentId = locationSearch.split("&")[4].split('=')[1];
-        console.log(macAddr, "macAddr")
         this.setState({
             userId,
             watchId,

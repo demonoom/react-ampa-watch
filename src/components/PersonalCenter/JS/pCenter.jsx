@@ -22,7 +22,6 @@ export default class pCenter extends React.Component {
         this.setState({
             userId,
         })
-        console.log(userId,'yyyyyy');
         myUserid=userId;
         this.requesetPData();
     }
@@ -65,8 +64,6 @@ export default class pCenter extends React.Component {
     }
 
     changeName = ()=>{
-        console.log("ioio")
-        //Toast.info('修改名字');
         this.showText(1,this.state.resDic.user.userName);
     }
 
@@ -96,7 +93,6 @@ export default class pCenter extends React.Component {
             },
             {
                 text: '确定', onPress: value => {
-                    console.log(value, "value")
                     this.setState({
                     }, () => {
                         if (type == 1 && value.length>0){
@@ -128,7 +124,6 @@ export default class pCenter extends React.Component {
                         var data = {
                             method: 'upDataUserInfo'
                         };
-                        console.log(data);
                         Bridge.callHandler(data, null, function (error) {
 
                         });
@@ -186,7 +181,6 @@ export default class pCenter extends React.Component {
                         var data = {
                             method: 'upDataUserInfo'
                         };
-                        console.log(data);
                         Bridge.callHandler(data, null, function (error) {
 
                         });
@@ -256,7 +250,7 @@ export default class pCenter extends React.Component {
             <div id='studentInfo' className='bg_gray publicList_50'>
                 <div className="am-navbar">
                     <span className="am-navbar-left" onClick={this.toBack}><i className="icon-back"></i></span>
-                    <span className="am-navbar-title">个人信息</span>
+                    <span className="am-navbar-title">编辑个人信息</span>
                     <span className="am-navbar-right"></span>
                 </div>
                 {this.state.contentDom}

@@ -382,7 +382,6 @@ export default class updateClock extends React.Component {
         };
         WebServiceUtil.requestLittleAntApi(JSON.stringify(param), {
             onResponse: (result) => {
-                console.log(result,"result")
                 if (result.success && result.response) {
                     var commandJson = {
                         "command": "watch2GClock",
@@ -392,7 +391,6 @@ export default class updateClock extends React.Component {
                             "watch2gClock": result.response,
                         }
                     };
-                    console.log(commandJson, "commandJson")
                     ms.send(commandJson);
                 } else {
                     Toast.fail(result.msg, 1, null, false);
