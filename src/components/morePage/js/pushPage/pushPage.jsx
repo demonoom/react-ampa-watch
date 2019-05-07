@@ -20,6 +20,9 @@ export default class pushPage extends React.Component {
         var watchId = locationSearch.split("&")[1].split('=')[1];
         var macAddr = locationSearch.split("&")[2].split('=')[1];
         var studentId = locationSearch.split("&")[3].split('=')[1];
+        this.setState({
+            userId,watchId,macAddr,studentId
+        })
         var pro = {
             "command": "guardianLogin",
             "data": {

@@ -684,7 +684,6 @@ export default class morePage extends React.Component {
                     {/*        <div className="am-list-arrow am-list-arrow-horizontal"></div>*/}
                     {/*    </div>*/}
                     {/*</div>*/}
-
                     <div className='icon_setting am-list-item am-list-item-middle line_public activeDiv' onClick={this.toSetting}>
                         <i></i>
                         <div className="am-list-line">
