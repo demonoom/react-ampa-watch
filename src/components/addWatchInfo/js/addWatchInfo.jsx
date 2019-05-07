@@ -119,19 +119,19 @@ export default class addWatchInfo extends React.Component {
         /**
      * 防止软键盘挡住页面
      */
-        // var winHeight = $(window).height(); // 获取当前页面高度
-        // $(window).resize(function () {
-        //     var resizeHeight = $(this).height();
-        //     if (winHeight - resizeHeight > 50) {
-        //         // 软键盘弹出
-        //         $('.commonLocation-cont').css('top', '-100px');
-        //         $(".button_preNext").hide();
-        //     } else {
-        //         //软键盘收起
-        //         $('.commonLocation-cont').css('top', '0');
-        //         $(".button_preNext").show();
-        //     }
-        // });
+        var winHeight = $(window).height(); // 获取当前页面高度
+        $(window).resize(function () {
+            var resizeHeight = $(this).height();
+            if (winHeight - resizeHeight > 50) {
+                // 软键盘弹出
+                $('.commonLocation-cont').css('top', '-100px');
+                $(".button_preNext").hide();
+            } else {
+                //软键盘收起
+                $('.commonLocation-cont').css('top', '0');
+                $(".button_preNext").show();
+            }
+        });
         // var winHeight = $(window).height(); // 获取当前页面高度  
         // $(window).resize(function () {
         //     var resizeHeight = $(this).height();
@@ -193,7 +193,7 @@ export default class addWatchInfo extends React.Component {
      * 调用客户端
      */
     scanCode = () => {
-        // this.getWatch2gByMacAddress("11111113");
+        // this.getWatch2gByMacAddress("234234");
         var data = {
             method: 'watchBinding'
         };

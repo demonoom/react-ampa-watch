@@ -32,9 +32,12 @@
     .personEmptyCont {
         height: calc(~"100% - 130px");
         position: relative;
-
+        .emptyCont{
+            height: 100% !important;
+            top: 0 !important;
+        }
         .emptyCont .my_flex {
-            height: 90%;
+            height: 100%;
         }
     }
 
@@ -68,6 +71,10 @@
             background-size: 30px;
         }
 
+        .icon_reply i{
+            background: url("../../images/icon_moreReply.png") no-repeat 15px center;
+            background-size: 30px;
+        }
         .icon_heart i {
             background: url("../../images/icon_moreHeart.png") no-repeat 15px center;
             background-size: 30px;
@@ -209,6 +216,9 @@
     .personMsg .icon_add{
         padding-top: 0;
         top: 0;
+    }
+    .personMsg .wrap{
+        top: 50px;
     }
 
 }

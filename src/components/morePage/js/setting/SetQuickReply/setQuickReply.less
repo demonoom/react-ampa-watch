@@ -1,0 +1,28 @@
+#setQuickReply{
+  .am-list-item .am-list-line .am-list-content{
+    width: calc(~"100% - 50px");
+    flex: initial;
+  }
+  .am-list-item:last-child::after{
+    display: none;
+  }
+  .deleteBtn{
+    color: #17ACF7;
+    border: 1px #17ACF7 solid;
+    border-radius: 4px;
+    width: 44px;
+    text-align: center;
+    line-height: 28px;
+    //height: 30px;
+    font-size: 14px;
+    box-sizing: border-box;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+}

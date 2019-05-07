@@ -427,8 +427,8 @@ export default class teHomework extends React.Component {
                                                     <span>
                                                         <span>
                                                             <span className='blueTxt'>{v.user.userName}</span>:&nbsp;
-                                                            {/* <span>回复</span> */}
-                                                            {/* <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>： */}
+                                                            <span>回复</span>
+                                                            <span className='blueTxt'>{v.toUser ? v.toUser.userName : ""}</span>：
                                                             <span>{v.content}</span>
                                                         </span>
                                                     </span>
@@ -452,7 +452,7 @@ export default class teHomework extends React.Component {
                     <span className="am-navbar-title">教师作业</span>
                     <span className="am-navbar-right"></span>
                 </div>
-                <div className="commonLocation-cont" style={{ display: !this.state.toBind || this.state.hidePage ? "none" : "block" }}>
+                <div style={{ display: !this.state.toBind || this.state.hidePage ? "none" : "block" }}>
                     <div className="emptyCont">
                         <div className="p38 my_flex">
                             <div>
@@ -467,7 +467,7 @@ export default class teHomework extends React.Component {
                     </div>
                 </div>
                 {/*绑定后空页面*/}
-                <div className="commonLocation-cont" style={{ display: this.state.hidePage ? "block" : "none" }}>
+                <div style={{ display: this.state.hidePage ? "block" : "none" }}>
                     <div className="emptyCont emptyContNone">
                         <div className="p38 my_flex">
                             <div>
