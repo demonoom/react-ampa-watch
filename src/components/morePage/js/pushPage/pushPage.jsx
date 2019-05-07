@@ -34,7 +34,9 @@ export default class pushPage extends React.Component {
         ms = new WatchWebsocketConnection();
         ms.connect(pro);
     }
-
+    componentDidMount () {
+        this.watchListener();
+    }
     //消息监听
     watchListener () {
         ms.msgWsListener = {
